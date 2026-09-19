@@ -11,7 +11,7 @@
   }
   function journal(p){
     if(p.events.length>MAX_EVENTS)throw Error('Run capture exceeded 100 events.');
-    const j=clean({id:p.journalId,runId:p.runId||null,agentId:p.agentId,startedAt:p.startedAt,events:p.events,status:'UNKNOWN'});
+    const j=clean({id:p.journalId,requestId:p.requestId||null,runId:p.runId||null,agentId:p.agentId,startedAt:p.startedAt,events:p.events,status:'UNKNOWN'});
     if(new TextEncoder().encode(JSON.stringify(j)).length>MAX_BYTES)throw Error('Run capture exceeded 1 MiB.');
     return j;
   }
