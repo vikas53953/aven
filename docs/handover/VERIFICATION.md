@@ -25,8 +25,12 @@ Publication is the owner's authorized initial source/document archive, with the
 above limitation recorded. It is not a validated product release. Before later
 feature delivery, update the gate's Codex runtime and run the full pipeline again.
 
-## Local admission integration — 19 September 2026
+## Initial local admission integration — 19 September 2026
 
-Current WSL evidence supersedes the initial snapshot only for this changed slice: **75 tests, 74 passes, zero failures, one existing Playwright skip**; syntax checks pass. Twelve storage/API and five browser-state/backup tests are included. The deterministic suspended-owner regression fails against the archived candidate and passes against active source. Current desktop/narrow browser fixtures verify replay, Stop, queue FIFO, explicit recovery, another-tab preservation, draft retention and reload result reconciliation. Source hashes and fixture screenshots are in [the admission evidence](../evidence/admission-2026-09-19/README.md).
+At this initial checkpoint, WSL evidence superseded the publication snapshot for this changed slice: **75 tests, 74 passes, zero failures, one existing Playwright skip**; syntax checks pass. Twelve storage/API and five browser-state/backup tests are included. The deterministic suspended-owner regression fails against the archived candidate and passes against active source. Current desktop/narrow browser fixtures verify replay, Stop, queue FIFO, explicit recovery, another-tab preservation, draft retention and reload result reconciliation. Source hashes and fixture screenshots are in [the admission evidence](../evidence/admission-2026-09-19/README.md).
 
 The ship contract is local-only: no pipeline, push, merge, publish or deploy was authorized or performed. The historical pipeline limitation above was not repaired or retried. Windows/DPAPI/native adapter behavior remains unverified from WSL. No live provider/device, credential access or owner visual approval occurred. Independent review remains pending.
+
+## Independent-review corrections — 19 September 2026
+
+Current full suite with mounted browser checks enabled: **83 tests, 82 passed, zero failed, one existing Playwright adapter skip**. Seven mounted chrome-devtools-axi cases and six browser-state tests pass; syntax, seven served-source hashes, actual 1440×1000 / 390×844 viewports and narrow keyboard retry are checked. The two review findings were reproduced before correction. See [latest recovery evidence](../evidence/admission-2026-09-19/review-fixes/README.md). Backend fencing is unchanged. Evidence-versus-receipt ambiguity is documented as nonblocking; Windows and owner UI acceptance remain unverified. Independent re-review is required; no self-approval or remote delivery occurred.

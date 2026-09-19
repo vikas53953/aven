@@ -33,7 +33,13 @@ start({ root, port: 8768, sandbox: { close() {}, status: () => ({}), inventory: 
   },
   chatResponder: async ({ mode, signal }) => {
     calls++; stats();
-    await new Promise(r => { const timer = setTimeout(r, settings().delayMs ?? 500); signal.addEventListener('abort', () => { clearTimeout(timer); r(); }, { once: true }); });
+    await new Promise(resolve => {
+      const deadline = Date.now() + (settings().delayMs ?? 500);
+      let timer;
+      const finish = () => { clearTimeout(timer); signal.removeEventListener('abort', finish); resolve(); };
+      const check = () => { if (signal.aborted || Date.now() >= deadline && !settings().hold) finish(); else timer = setTimeout(check, 25); };
+      signal.addEventListener('abort', finish, { once: true }); check();
+    });
     if (signal.aborted) throw Error('fixture cancelled');
     return { text: 'Local admission fixture response.\n\n```text\n' + raw + '\n```', mode, model: 'fixture', evidence: [] };
   }

@@ -5,6 +5,8 @@ Requires Node **24.16 or newer** (built-in `node:sqlite`) and TypeScript; run `n
 
 ## Durable chat admission
 
+The root browser requires Web Locks for admission writes on its loopback secure context. A lock protects the complete active capture and explicit receipt reconciliation across tabs; no elapsed timer steals ownership. Reloaded pending conversations can reconcile independently while unrelated capture and queues remain unchanged. Successful saved-request retry updates its original result message, retaining annotations and raw evidence. See [review corrections](../docs/evidence/admission-2026-09-19/review-fixes/README.md).
+
 `POST /api/chat` accepts `requestId` and `idempotencyKey` together (1–100 ASCII letters, digits, hyphens or underscores). Reuse both only for the same logical submission and identical chat, coworker name, mode and message context. A deliberate new turn needs new identity even when its text matches. Requests without both fields remain supported for legacy clients, with **no replay protection across identity-free submissions**.
 
 The local SQLite receipt commits before responder invocation. One global admitted receipt keeps chats serial across service processes sharing the runtime directory. An exact duplicate returns JSON `{duplicate:true, receipt}` without streaming or invoking the responder; reuse with changed content returns 409. There is no expiring lease or automatic takeover of a paused owner. Receipts are retained; deleting them loses replay protection.

@@ -1,12 +1,12 @@
 # Durable chat admission — 19 September 2026
 
-Local implementation on the audited Git baseline, awaiting independent review. Backend checkpoint: `eb02372`; browser checkpoint: `ff9f0f0`. This evidence is a dated snapshot, not owner approval or live telemetry.
+Initial integration evidence on the audited Git baseline. Independent review subsequently required corrections; see the [current correction evidence](review-fixes/README.md). The initial evidence below is retained as history. Backend checkpoint: `eb02372`; browser checkpoint: `ff9f0f0`. This evidence is a dated snapshot, not owner approval or live telemetry.
 
 The active API now persists a receipt before invoking the responder. One stable request/key and exact outgoing context admit one responder call. SQLite serializes the full admission transaction; no expired lease permits takeover of a paused owner. The admitted row keeps the global serial limit across service processes sharing this store. Explicit recovery releases a stranded slot as UNKNOWN only when the owning process is gone, or this service no longer handles it. Recovery never redispatches the original request.
 
 The browser saves identity and the exact request snapshot before dispatch. Retry uses that snapshot; a deliberate new turn gets new identity. “Check saved run” reads state, “Recover interrupted run” explicitly reconciles owner loss, and a missing receipt permits an explicit retry of the same saved request. Final reconciliation preserves one result and keeps existing queued work paused. A second tab leaves an owned journal intact. An imported copy cannot inherit the original chat's pending admission.
 
-## Current checks
+## Initial integration checks
 
 - `TMPDIR="$PWD/.audit/tmp" node --test --test-concurrency=1 intentgraph/*.test.cjs`: **75 tests, 74 pass, 0 fail, 1 skip**. The existing Playwright 1.49 adapter test skips because its matching browser is absent. The separate Chrome used below is not claimed to satisfy that adapter test.
 - `npm run check --prefix intentgraph` and `node --check` on the four changed browser scripts passed.

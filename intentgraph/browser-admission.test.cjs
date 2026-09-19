@@ -73,3 +73,19 @@ test('backup round trip preserves pending identity; Add restore cannot inherit o
   assert.equal(copy.queuePaused, true); assert.equal(copy.pendingQueue.length, 1);
   assert.equal(admission.pending(copy), null);
 });
+
+test('same-request results retain identity, annotations and distinct captured evidence across repeated outcomes', () => {
+  const { chat, submission } = fixture();
+  const captured = { id: 'captured', createdAt: '2026-09-19T00:00:00Z', role: 'assistant', requestId: submission.body.requestId, status: 'UNKNOWN', text: 'outage', annotations: [{ id: 'note', evidenceHash: 'hash', text: 'Retain' }], events: [{ type: 'tool_result', output: 'before\r\n' }], evidence: [{ output: 'before\r\n' }] };
+  chat.messages.push(structuredClone(captured));
+  const success = { id: 'new-id', role: 'assistant', createdAt: 'later', requestId: submission.body.requestId, runId: 'new-run', text: 'completed', status: 'SUCCESS', events: [{ type: 'tool_result', output: 'after\n' }], evidence: [{ output: 'after\n' }] };
+  const result = admission.reconcileResult(chat, success);
+  admission.reconcileResult(chat, success);
+  assert.equal(chat.messages.length, 2); assert.equal(result.id, captured.id); assert.equal(result.createdAt, captured.createdAt);
+  assert.equal(result.status, 'SUCCESS'); assert.equal(result.runId, 'new-run');
+  assert.deepEqual(result.annotations, captured.annotations);
+  assert.deepEqual(result.events, [...captured.events, ...success.events]);
+  assert.deepEqual(result.evidence, [...captured.evidence, ...success.evidence]);
+  admission.reconcileResult(chat, { ...success, id: 'other', requestId: 'different-request' });
+  assert.equal(chat.messages.length, 3, 'different request identity cannot overwrite the captured result');
+});

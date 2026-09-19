@@ -19,18 +19,37 @@
     const message=chat.messages.find(m=>m.role==='user'&&m.submission?.body?.chatId===chat.id&&m.submission.body.requestId===chat.pendingAdmission);
     return message&&valid(message.submission,chat.id)?{message,submission:message.submission}:null;
   }
+  function resultFor(chat,result){
+    return chat.messages.find(m=>m.role==='assistant'&&result.requestId&&m.requestId===result.requestId)
+      ||chat.messages.find(m=>m.role==='assistant'&&!m.requestId&&result.runId&&m.runId===result.runId);
+  }
+  function reconcileResult(chat,result){
+    const existing=resultFor(chat,result);
+    if(!existing){chat.messages.push(result);return result;}
+    // An authoritative outcome updates this request's existing message. Retain
+    // annotations and exact earlier captures, even if the new reply omits them.
+    const retained={id:existing.id,createdAt:existing.createdAt||result.createdAt};
+    for(const key of ['events','evidence']){
+      const seen=new Set();retained[key]=[];
+      for(const item of [...(existing[key]||[]),...(result[key]||[])]){
+        const identity=JSON.stringify(item);if(seen.has(identity))continue;
+        seen.add(identity);retained[key].push(item);
+      }
+    }
+    Object.assign(existing,result,retained);return existing;
+  }
   function applyReceipt(chat,submission,receipt,record){
     if(receipt.chatId!==chat.id||receipt.requestId!==submission.body.requestId||!['settled','unknown'].includes(receipt.state))throw Error('The saved receipt is not a completed local admission.');
     if(record&&(record.chatId!==chat.id||record.runId!==receipt.runId||record.requestId!==receipt.requestId))throw Error('Saved run does not match this request.');
-    const existing=chat.messages.find(m=>m.role==='assistant'&&(m.requestId===receipt.requestId||m.runId===receipt.runId));
+    const existing=resultFor(chat,receipt);
     const reply=record?.reply;
     const result={id:existing?.id||crypto.randomUUID(),role:'assistant',agentId:submission.agentId,requestId:receipt.requestId,runId:receipt.runId,status:receipt.outcome,mode:submission.body.mode,text:reply?.text||'Remote completion is unknown. Review captured evidence before continuing. No request was retried.',source:reply?.source||'Saved local run',model:reply?.model,usage:reply?.usage,events:record?.events||existing?.events||[],evidence:reply?.evidence||existing?.evidence||[],createdAt:existing?.createdAt||receipt.updatedAt};
-    if(existing)Object.assign(existing,result);else chat.messages.push(result);
+    const reconciled=reconcileResult(chat,result);
     submission.state='settled';submission.receipt=receipt;
     delete chat.pendingAdmission;delete chat.runJournal;delete chat.queueDispatching;delete chat.replyError;delete chat.captureWarning;
     chat.queuePaused=!!chat.pendingQueue?.length;chat.queuePauseReason=chat.queuePaused?'Saved run reviewed. Resume queued work explicitly.':'';
-    return result;
+    return reconciled;
   }
-  const api={valid,prepare,pending,applyReceipt};
+  const api={valid,prepare,pending,applyReceipt,reconcileResult};
   if(typeof module!=='undefined')module.exports=api;else root.AvenAdmission=api;
 })(typeof window!=='undefined'?window:globalThis);

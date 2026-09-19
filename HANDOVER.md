@@ -19,9 +19,9 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 18 identifies UI build `ux-minimal-ui-v9.2-admission`. It preserves the v9.1
+- HLD 19 identifies UI build `ux-minimal-ui-v9.3-recovery`. It preserves the v9.1
   minimal UI/history/reaction behavior and adds durable, fenced chat admission.
-  Stable request identity, explicit receipt recovery and serial execution are integrated;
+  Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
   broader provider/workflow/automation/terminal/Git candidates remain separate.
 - A central 115-feature comparison register, independent audit, post-fix review and
   candidate evidence preserve implementation and acceptance history.
@@ -36,7 +36,7 @@ The screened initial snapshot is the shared source in https://github.com/vikas53
 The current milestone is a **local-only** reliability change, ready for independent
 review after its branch is committed. It has not been pushed, merged, published or
 deployed. The older non-Git folder remains untouched. See the
-[dated admission evidence](docs/evidence/admission-2026-09-19/README.md).
+[latest recovery evidence](docs/evidence/admission-2026-09-19/review-fixes/README.md).
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
@@ -54,7 +54,7 @@ Authoritative references:
 - [Central feature register](outputs/01a0a3bc-a376-74e1-8d48-e4029c2cb5a2/Aven-UI-UX-Feature-Register.xlsx)
 - [Independent audit](outputs/01a0a816-e452-75f2-9363-0f859011a90e/Aven-Independent-Audit.xlsx)
 - [Post-fix review](outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/report/Aven-Post-Fix-Review.xlsx)
-- [19 September admission supplement](docs/evidence/admission-2026-09-19/feature-verdicts.json)
+- [19 September recovery supplement](docs/evidence/admission-2026-09-19/review-fixes/feature-verdicts.json)
 - [16 September effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
@@ -112,8 +112,8 @@ Do not configure secrets in committed files. A source checkout starts without th
 original user's browser storage, runtime profiles or credentials.
 
 Historical publication checks on 19 September reported 58 passes with no skips.
-After admission integration, the current WSL suite reports **75 tests: 74 passed,
-zero failed, one existing Playwright adapter skip**. Syntax and current loopback
+After admission integration, the current WSL suite reports **83 tests: 82 passed,
+zero failed, one existing Playwright adapter skip**, including seven mounted browser regressions. Syntax and current loopback
 desktop/narrow browser checks pass. These tests use local fixtures/mocks and confer
 no Windows, live-infrastructure or owner visual acceptance. See
 [verification](docs/handover/VERIFICATION.md).
