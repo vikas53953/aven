@@ -1,6 +1,6 @@
 # Aven — current source and handover
 
-Start with [HANDOVER.md](HANDOVER.md) for completed/current/pending work, workflow, verification and publication limits. This is the 19 September 2026 source snapshot. The sections below preserve historical project documentation; their dated status counts are not the current acceptance ledger.
+Start with [HANDOVER.md](HANDOVER.md) for completed/current/pending work, workflow, verification and publication limits. [vikas53953/aven](https://github.com/vikas53953/aven) is the shared source and documentation home. This is the 19 September 2026 source snapshot. The sections below preserve historical project documentation; their dated status counts are not the current acceptance ledger.
 
 # Netrok Muse â€” local visual prototype
 

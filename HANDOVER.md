@@ -29,12 +29,13 @@ Netrok Muse still appears in filenames.
 
 ## What we are doing now
 
-Preparing a screened GitHub snapshot and a reusable project handover. No product
+Publishing a screened snapshot and reusable handover to the public repository
+https://github.com/vikas53953/aven, as authorized by the owner. No product
 features were changed by the publication preparation. The original source folder
 was not a Git repository; its files were preserved. This snapshot is a separate
 copy so Firstmate and other tasks must not edit both copies independently.
 
-Once published, designate one Git checkout as the working source and register that
+Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
 runtime state automatically. Reconcile any newer local changes first.
 
