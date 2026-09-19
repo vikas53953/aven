@@ -2,6 +2,7 @@
 
 const fsp = require('node:fs/promises');
 const path = require('node:path');
+const { validIdentity } = require('./reliability.cjs');
 
 const CHAT_ID_RE = /^[a-zA-Z0-9_-]{1,100}$/;
 const RUN_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -184,6 +185,7 @@ function createChatReadApi(options = {}) {
 
   function routeKind(pathname) {
     if (pathname === '/api/chat/status') return { type: 'status' };
+    if (pathname === '/api/chat/receipt') return { type: 'receipt' };
     if (pathname === '/api/chat/runs') return { type: 'list' };
     if (pathname.startsWith('/api/chat/runs/')) {
       const suffix = pathname.slice('/api/chat/runs/'.length);
@@ -245,6 +247,14 @@ function createChatReadApi(options = {}) {
       const chatId = parsed.searchParams.get('chatId');
       if (!validChatId(chatId) || parsed.searchParams.getAll('chatId').length !== 1) {
         sendError(res, 400, 'Invalid chat id');
+        return true;
+      }
+      if (kind.type === 'receipt') {
+        const requestId = parsed.searchParams.get('requestId');
+        if (!validIdentity(requestId) || parsed.searchParams.getAll('requestId').length !== 1) { sendError(res, 400, 'Invalid request id'); return true; }
+        const receipt = options.getReceipt?.(chatId, requestId);
+        if (!receipt) { sendError(res, 404, 'Receipt not found'); return true; }
+        sendJson(res, 200, { receipt });
         return true;
       }
       if (kind.type === 'list') {

@@ -1,7 +1,19 @@
 # IntentGraph local runtime
 
 Start from the project directory with `./Start-IntentGraph.ps1`, then open http://127.0.0.1:8768/.
-Requires Node 20+ and TypeScript; run `npm install --prefix intentgraph` on a fresh machine. This workspace already resolves TypeScript locally.
+Requires Node **24.16 or newer** (built-in `node:sqlite`) and TypeScript; run `npm ci --prefix intentgraph` on a fresh machine. The service and PowerShell launcher check the Node prerequisite before dispatch. Windows startup and SQLite behavior remain unverified from WSL.
+
+## Durable chat admission
+
+`POST /api/chat` accepts `requestId` and `idempotencyKey` together (1–100 ASCII letters, digits, hyphens or underscores). Reuse both only for the same logical submission and identical chat, coworker name, mode and message context. A deliberate new turn needs new identity even when its text matches. Requests without both fields remain supported for legacy clients, with **no replay protection across identity-free submissions**.
+
+The local SQLite receipt commits before responder invocation. One global admitted receipt keeps chats serial across service processes sharing the runtime directory. An exact duplicate returns JSON `{duplicate:true, receipt}` without streaming or invoking the responder; reuse with changed content returns 409. There is no expiring lease or automatic takeover of a paused owner. Receipts are retained; deleting them loses replay protection.
+
+`GET /api/chat/receipt?chatId=…&requestId=…` returns scoped, sanitized admission state, outcome, run ID, evidence availability and whether explicit recovery is possible. It never mutates ownership. `POST /api/chat/recover` with the exact `chatId`, `requestId` and `runId` releases a stranded serial slot as UNKNOWN only after the original process is confirmed gone (or this service has stopped handling the run). It never dispatches the original request. A live/inaccessible/reused PID is conservatively treated as owned; elapsed time is insufficient. Both routes retain the existing loopback origin and `X-Aven-Chat: text-only` controls, which are not customer authentication.
+
+Evidence is flushed before terminal receipt settlement and final delivery. Storage errors fail closed before admission; completion-save errors remain visible and retain an unresolved receipt. A run evidence file alone does not establish settled admission. Cancellation and owner-loss recovery retain UNKNOWN rather than claiming remote work stopped. This receipt database is **not** a LangGraph checkpoint or resumable tool execution.
+
+Back up `.intentgraph/runtime/chat-admission.sqlite` and `chat-admission.initialized` together while the service is stopped, plus `.intentgraph/evidence/runs` if run readback is required. A missing database with an existing initialization marker prevents startup; replacing/removing an open store prevents new admission. Do not delete the marker to bypass recovery. This local receipt work has no live-provider, device, Windows, owner-UI or production-durability approval.
 
 ## What is implemented
 

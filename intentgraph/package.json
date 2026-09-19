@@ -10,10 +10,10 @@
   "scripts": {
     "service": "node server.cjs",
     "query": "node cli.cjs query",
-    "check": "node --check indexer.cjs && node --check engine.cjs && node --check server.cjs && node --check cli.cjs && node --check agent-runtime.cjs"
+    "check": "node --check indexer.cjs && node --check engine.cjs && node --check server.cjs && node --check cli.cjs && node --check agent-runtime.cjs && node --check reliability-storage.cjs && node --check reliability.cjs && node --check chat-read-api.cjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24.16.0"
   },
   "dependencies": {
     "@langchain/langgraph": "1.4.15",

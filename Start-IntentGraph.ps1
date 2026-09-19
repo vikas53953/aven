@@ -12,6 +12,8 @@ if (-not $intentReady) {
         throw 'Port 8768 is already in use. Its process was left running.'
     }
     $intentNode = (Get-Command node -ErrorAction Stop).Source
+    & $intentNode -e "require(process.argv[1]).assertRuntime()" (Join-Path $intentProject 'intentgraph/reliability-storage.cjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Durable chat admission requires Node.js 24.16 or newer.' }
     $intentRuntime = Join-Path $intentProject '.intentgraph/runtime'
     New-Item -ItemType Directory -Path $intentRuntime -Force | Out-Null
     $intentProcess = Start-Process -FilePath $intentNode -ArgumentList @('intentgraph/server.cjs') -WorkingDirectory $intentProject -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $intentRuntime 'server.log') -RedirectStandardError (Join-Path $intentRuntime 'server-error.log')
