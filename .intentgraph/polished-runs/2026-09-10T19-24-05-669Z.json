@@ -1,0 +1,255 @@
+{
+  "startedAt": "2026-09-10T19:24:05.669Z",
+  "checks": [
+    {
+      "name": "P1/P7: accepted placement and six viewport widths",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "P2/P3: create, cancel, attachments, search and isolated storage",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "P4: agent document save/cancel/escape and ownership",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "P6: deterministic sample states, cancellation and context changes",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "P5/P7: settings, keyboard, themes and contrast matrix",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "P7: narrow dialogs, focus containment and resizing",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "Protected accepted wireframe sources unchanged",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    },
+    {
+      "name": "No page errors or external runtime requests",
+      "status": "PASS",
+      "detail": "Executed successfully."
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop",
+      "path": ".intentgraph/polished-desktop.png"
+    },
+    {
+      "name": "1920",
+      "path": ".intentgraph/polished-1920.png"
+    },
+    {
+      "name": "1440",
+      "path": ".intentgraph/polished-1440.png"
+    },
+    {
+      "name": "1024",
+      "path": ".intentgraph/polished-1024.png"
+    },
+    {
+      "name": "768",
+      "path": ".intentgraph/polished-768.png"
+    },
+    {
+      "name": "390",
+      "path": ".intentgraph/polished-390.png"
+    },
+    {
+      "name": "320",
+      "path": ".intentgraph/polished-320.png"
+    },
+    {
+      "name": "organization",
+      "path": ".intentgraph/polished-organization.png"
+    },
+    {
+      "name": "agent-document",
+      "path": ".intentgraph/polished-agent-document.png"
+    },
+    {
+      "name": "browser-error",
+      "path": ".intentgraph/polished-browser-error.png"
+    },
+    {
+      "name": "plugins-error",
+      "path": ".intentgraph/polished-plugins-error.png"
+    },
+    {
+      "name": "computer-error",
+      "path": ".intentgraph/polished-computer-error.png"
+    },
+    {
+      "name": "settings-dark",
+      "path": ".intentgraph/polished-settings-dark.png"
+    },
+    {
+      "name": "dark",
+      "path": ".intentgraph/polished-dark.png"
+    },
+    {
+      "name": "settings-light",
+      "path": ".intentgraph/polished-settings-light.png"
+    },
+    {
+      "name": "light",
+      "path": ".intentgraph/polished-light.png"
+    },
+    {
+      "name": "narrow-conversation",
+      "path": ".intentgraph/polished-narrow-conversation.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "candidateStart": {
+    "polished.html": "3b9feebb5d6e0ed96e0ce05fdbe1a35690ff53d16ebc7dc6d7cf6d0ac1bd4cca",
+    "polished.css": "8383d645a0d63f0e61a427288d67d5b0757227bf2fdbf6e2cb2d48968b9a08b3",
+    "polished.js": "b063b6588bcc0cc03e6297a21103430b699ae7a1761f81d8802671747d4ae219",
+    "prototype-review.html": "e6e511bb36eb1116df6c8f6cad3b71f02db2780d7aeb2cb7a275bcc10a97cbfe"
+  },
+  "contrast": [
+    {
+      "theme": "dark",
+      "label": "body",
+      "foreground": "rgb(238, 242, 245)",
+      "background": "rgb(15, 18, 22)",
+      "ratio": 16.68,
+      "target": 4.5
+    },
+    {
+      "theme": "dark",
+      "label": "muted",
+      "foreground": "rgb(152, 163, 174)",
+      "background": "rgb(21, 26, 32)",
+      "ratio": 6.82,
+      "target": 4.5
+    },
+    {
+      "theme": "dark",
+      "label": "helper",
+      "foreground": "rgb(132, 145, 157)",
+      "background": "rgb(21, 26, 32)",
+      "ratio": 5.43,
+      "target": 4.5
+    },
+    {
+      "theme": "dark",
+      "label": "action",
+      "foreground": "rgb(7, 23, 43)",
+      "background": "rgb(128, 183, 255)",
+      "ratio": 8.69,
+      "target": 4.5
+    },
+    {
+      "theme": "dark",
+      "label": "selected",
+      "foreground": "rgb(238, 242, 245)",
+      "background": "rgb(35, 59, 88)",
+      "ratio": 10.15,
+      "target": 4.5
+    },
+    {
+      "theme": "dark",
+      "label": "focus",
+      "foreground": "rgb(138, 193, 255)",
+      "background": "rgb(21, 26, 32)",
+      "ratio": 9.29,
+      "target": 3
+    },
+    {
+      "theme": "dark",
+      "label": "disabled",
+      "foreground": "rgb(83, 96, 109)",
+      "background": "rgb(21, 26, 32)",
+      "ratio": 2.72,
+      "target": "record only"
+    },
+    {
+      "theme": "light",
+      "label": "body",
+      "foreground": "rgb(21, 32, 42)",
+      "background": "rgb(241, 244, 247)",
+      "ratio": 14.96,
+      "target": 4.5
+    },
+    {
+      "theme": "light",
+      "label": "muted",
+      "foreground": "rgb(91, 104, 117)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 5.7,
+      "target": 4.5
+    },
+    {
+      "theme": "light",
+      "label": "helper",
+      "foreground": "rgb(102, 116, 128)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 4.8,
+      "target": 4.5
+    },
+    {
+      "theme": "light",
+      "label": "action",
+      "foreground": "rgb(255, 255, 255)",
+      "background": "rgb(23, 104, 206)",
+      "ratio": 5.37,
+      "target": 4.5
+    },
+    {
+      "theme": "light",
+      "label": "selected",
+      "foreground": "rgb(21, 32, 42)",
+      "background": "rgb(226, 239, 255)",
+      "ratio": 14.17,
+      "target": 4.5
+    },
+    {
+      "theme": "light",
+      "label": "focus",
+      "foreground": "rgb(20, 92, 178)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 6.56,
+      "target": 3
+    },
+    {
+      "theme": "light",
+      "label": "disabled",
+      "foreground": "rgb(155, 166, 176)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 2.48,
+      "target": "record only"
+    }
+  ],
+  "reducedMotion": [
+    {
+      "transition": "1e-06s",
+      "animation": "1e-06s"
+    },
+    {
+      "transition": "1e-06s",
+      "animation": "1e-06s"
+    }
+  ],
+  "finishedAt": "2026-09-10T19:24:39.645Z",
+  "candidateEnd": {
+    "polished.html": "3b9feebb5d6e0ed96e0ce05fdbe1a35690ff53d16ebc7dc6d7cf6d0ac1bd4cca",
+    "polished.css": "8383d645a0d63f0e61a427288d67d5b0757227bf2fdbf6e2cb2d48968b9a08b3",
+    "polished.js": "b063b6588bcc0cc03e6297a21103430b699ae7a1761f81d8802671747d4ae219",
+    "prototype-review.html": "e6e511bb36eb1116df6c8f6cad3b71f02db2780d7aeb2cb7a275bcc10a97cbfe"
+  },
+  "candidateStable": true
+}

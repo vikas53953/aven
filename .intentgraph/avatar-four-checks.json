@@ -1,0 +1,175 @@
+{
+  "generatedAt": "2026-09-11T16:22:46.949Z",
+  "url": "http://localhost:8767/avatar-system/four-preview.html",
+  "pass": true,
+  "passed": 32,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "legacy hash polished.html",
+      "pass": true,
+      "detail": "actual=4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc expected=4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc"
+    },
+    {
+      "name": "legacy hash polished.css",
+      "pass": true,
+      "detail": "actual=a665c974bdb95112968a140d85e4f9207b14397cde25505a0147203cc78c705c expected=a665c974bdb95112968a140d85e4f9207b14397cde25505a0147203cc78c705c"
+    },
+    {
+      "name": "legacy hash polished.js",
+      "pass": true,
+      "detail": "actual=ce2665803e7982fdc1118664910b89a2bbb409705021180d57e2ec4fc06a942b expected=ce2665803e7982fdc1118664910b89a2bbb409705021180d57e2ec4fc06a942b"
+    },
+    {
+      "name": "legacy hash polished-avatars.js",
+      "pass": true,
+      "detail": "actual=b4d0daff1007ff5f9fb5f99e5b6162d18b47952d371d6ec5d42a66e721d73188 expected=b4d0daff1007ff5f9fb5f99e5b6162d18b47952d371d6ec5d42a66e721d73188"
+    },
+    {
+      "name": "page errors 1440px",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "four gallery SVGs",
+      "pass": true,
+      "detail": "count=4"
+    },
+    {
+      "name": "twelve application-size SVGs",
+      "pass": true,
+      "detail": "count=12"
+    },
+    {
+      "name": "four expected roles",
+      "pass": true,
+      "detail": "roles=cloud,firewall,router,switch"
+    },
+    {
+      "name": "editable SVG named parts",
+      "pass": true,
+      "detail": "[{\"role\":\"cloud\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"router\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"firewall\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"switch\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"cloud\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"cloud\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"cloud\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"router\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"router\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"router\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"firewall\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"firewall\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"firewall\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"switch\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"switch\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]},{\"role\":\"switch\",\"parts\":[\"appendages\",\"body\",\"character\",\"details\",\"eyebrows\",\"eyes\",\"feet\",\"mouth\"]}]"
+    },
+    {
+      "name": "no raster/embed/external SVG assets",
+      "pass": true,
+      "detail": "{\"forbidden\":[],\"externalAttrs\":[]}"
+    },
+    {
+      "name": "all 16 still render",
+      "pass": true,
+      "detail": "[{\"role\":\"cloud\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"router\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"firewall\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"switch\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"cloud\",\"width\":24,\"height\":24,\"display\":\"block\"},{\"role\":\"cloud\",\"width\":48,\"height\":48,\"display\":\"block\"},{\"role\":\"cloud\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"router\",\"width\":24,\"height\":24,\"display\":\"block\"},{\"role\":\"router\",\"width\":48,\"height\":48,\"display\":\"block\"},{\"role\":\"router\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"firewall\",\"width\":24,\"height\":24,\"display\":\"block\"},{\"role\":\"firewall\",\"width\":48,\"height\":48,\"display\":\"block\"},{\"role\":\"firewall\",\"width\":96,\"height\":96,\"display\":\"block\"},{\"role\":\"switch\",\"width\":24,\"height\":24,\"display\":\"block\"},{\"role\":\"switch\",\"width\":48,\"height\":48,\"display\":\"block\"},{\"role\":\"switch\",\"width\":96,\"height\":96,\"display\":\"block\"}]"
+    },
+    {
+      "name": "reference PNG loaded",
+      "pass": true,
+      "detail": "naturalWidth=848"
+    },
+    {
+      "name": "no animation on 16 static SVGs",
+      "pass": true,
+      "detail": "{\"motionIds\":[\"active-art\"],\"activeAnimations\":1,\"staticAnimations\":0,\"animationChecked\":true}"
+    },
+    {
+      "name": "only #active-art animates",
+      "pass": true,
+      "detail": "{\"motionIds\":[\"active-art\"],\"activeAnimations\":1,\"staticAnimations\":0,\"animationChecked\":true}"
+    },
+    {
+      "name": "role and five emotion controls",
+      "pass": true,
+      "detail": "{\"roles\":4,\"emotions\":5}"
+    },
+    {
+      "name": "keyboard role button selects Router",
+      "pass": true,
+      "detail": "Router"
+    },
+    {
+      "name": "keyboard emotion button selects Listening",
+      "pass": true,
+      "detail": "Listening expression"
+    },
+    {
+      "name": "hover greets from idle",
+      "pass": true,
+      "detail": "Hover expression"
+    },
+    {
+      "name": "pointer leave returns idle",
+      "pass": true,
+      "detail": "Idle expression"
+    },
+    {
+      "name": "focus greets from idle",
+      "pass": true,
+      "detail": "Hover expression"
+    },
+    {
+      "name": "blur returns idle",
+      "pass": true,
+      "detail": "Idle expression"
+    },
+    {
+      "name": "success state is shown",
+      "pass": true,
+      "detail": "Success expression"
+    },
+    {
+      "name": "success returns to idle",
+      "pass": true,
+      "detail": "Idle expression"
+    },
+    {
+      "name": "animation toggle off stops active motion",
+      "pass": true,
+      "detail": "{\"className\":\"\",\"animations\":0,\"note\":\"Animation is off. Expressions remain still.\"}"
+    },
+    {
+      "name": "animation toggle on resumes active motion",
+      "pass": true,
+      "detail": "{\"className\":\"motion-active\",\"animations\":1}"
+    },
+    {
+      "name": "reduced motion disables active motion",
+      "pass": true,
+      "detail": "{\"className\":\"\",\"animations\":0,\"note\":\"Reduced motion is active. Expressions remain still.\"}"
+    },
+    {
+      "name": "offscreen preview pauses motion",
+      "pass": true,
+      "detail": "{\"className\":\"\",\"animations\":0,\"stageRect\":{\"top\":832,\"bottom\":1040,\"viewportHeight\":600}}"
+    },
+    {
+      "name": "no storage writes",
+      "pass": true,
+      "detail": "{\"localStorageLength\":0,\"sessionStorageLength\":0,\"writes\":[]}"
+    },
+    {
+      "name": "page errors 390px",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "no horizontal overflow at 390px",
+      "pass": true,
+      "detail": "{\"innerWidth\":390,\"documentScrollWidth\":390,\"bodyScrollWidth\":390,\"overflows\":[]}"
+    },
+    {
+      "name": "page errors 320px",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "no horizontal overflow at 320px",
+      "pass": true,
+      "detail": "{\"innerWidth\":320,\"documentScrollWidth\":320,\"bodyScrollWidth\":320,\"overflows\":[]}"
+    }
+  ],
+  "evidence": [
+    "avatar-four-desktop.png",
+    "avatar-four-390.png",
+    "avatar-four-320.png"
+  ],
+  "visualOwnerApproval": "pending; runtime QA cannot attest human visual approval"
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "checks": [
+    "transport",
+    "cap",
+    "queue",
+    "prepared"
+  ],
+  "at": "2026-09-15T19:36:23.693Z"
+}

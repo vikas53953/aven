@@ -1,0 +1,55 @@
+{
+  "files": [
+    "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/candidate/polished-workspace-tools.js",
+    "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/artifact-duplication.test.cjs",
+    "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/evidence-comparison.json",
+    "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/replacements.json"
+  ],
+  "replacementsPath": "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/replacements.json",
+  "tests": [
+    {
+      "name": "candidate syntax",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --check fixes/artifacts/candidate/polished-workspace-tools.js",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "isolated Chromium baseline/candidate comparison",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe fixes/artifacts/artifact-duplication.test.cjs",
+      "exitCode": 1,
+      "result": "EXPECTED baseline defect captured; candidate passed",
+      "before": {
+        "cases": 17,
+        "passed": 12,
+        "failedDefectCases": ["mirror", "empty-vs-missing", "actual-backend-shaped-mirror", "order-and-one-to-one", "merge-provenance"],
+        "blockedRequests": 0,
+        "pageErrors": 0
+      },
+      "after": {
+        "cases": 17,
+        "passed": 17,
+        "blockedRequests": 0,
+        "pageErrors": 0
+      },
+      "evidencePath": "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/evidence-comparison.json"
+    },
+    {
+      "name": "replacement manifest exactness",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe fixes/artifacts/artifact-duplication.test.cjs (manifest assertion)",
+      "exitCode": 0,
+      "result": "PASS: 2 exact baseline blocks and candidate replacements"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/vikasmit/Downloads/vikas problems/netrok-muse/outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/artifacts/evidence-comparison.json",
+      "capturedResults": "Baseline rendered the mirrored result twice (2 cards) and candidate rendered it once (1 card); the actual-backend-shaped fixture also changed 2 to 1. Empty output remained one artifact while missing output remained absent. Distinct source, run, parent run/target, command, output, provenance, stable ID, timestamp, swapped identity, repeated invocation, ordering, and ambiguous no-identity fixtures passed candidate expectations."
+    }
+  ],
+  "limitations": [
+    "The harness used isolated Chromium contexts and reset local storage per fixture; provider, device, backend API, and user storage traffic were not used.",
+    "The default comparison intentionally exits 1 because the baseline defect is expected; all 17 candidate fixtures passed with zero blocked-request or page-error violations.",
+    "No-ID records reconcile only when the event/evidence match is unambiguous and has at least two matching provenance dimensions; ambiguous repeats remain visible to avoid erasing genuine results.",
+    "--integrated is supported by the harness for post-merge verification of the current project module without a candidate overlay. No live product, documentation, or workbook files were edited."
+  ]
+}

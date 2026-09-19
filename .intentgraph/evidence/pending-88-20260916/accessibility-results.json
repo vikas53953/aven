@@ -1,0 +1,702 @@
+{
+  "startedAt": "2026-09-15T19:45:18.036Z",
+  "scope": "UX058, UX091-096 selected criteria; isolated Chromium; no WCAG conformance claim",
+  "checks": [
+    {
+      "id": "UX091",
+      "name": "Keyboard-only operation, focus return, and escape exits",
+      "status": "PASS",
+      "focusResults": [
+        {
+          "menuFocus": "message-emoji-button"
+        },
+        {
+          "afterArrowRight": "React with 👎"
+        },
+        {
+          "tabFocus": {
+            "element": "commands-button",
+            "outlineWidth": "2px",
+            "outlineStyle": "solid",
+            "outlineColor": "rgb(241, 241, 241)"
+          }
+        }
+      ],
+      "menu": {
+        "left": 1131.40625,
+        "top": 275.734375,
+        "right": 1367.40625,
+        "bottom": 547.734375,
+        "width": 236,
+        "height": 272,
+        "within": true
+      },
+      "boundedFocusOutline": true
+    },
+    {
+      "id": "UX092",
+      "name": "Accessible names, roles, selected state, and active-run status",
+      "status": "PASS",
+      "semantics": {
+        "menuRole": "menu",
+        "rowRole": "group",
+        "reactionButtons": [
+          {
+            "label": "React with 👍",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "React with 👎",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "React with ❤️",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "React with 😂",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "React with 🎉",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "React with 😮",
+            "role": "menuitemradio",
+            "pressed": null,
+            "checked": "false",
+            "title": ""
+          },
+          {
+            "label": "More reactions",
+            "role": "menuitem",
+            "pressed": null,
+            "checked": null,
+            "title": "More reactions"
+          }
+        ],
+        "actionButtons": [
+          {
+            "label": "Reply",
+            "role": "menuitem",
+            "disabled": false
+          },
+          {
+            "label": "Edit and resend",
+            "role": "menuitem",
+            "disabled": false
+          },
+          {
+            "label": "Revert to this message",
+            "role": "menuitem",
+            "disabled": false
+          },
+          {
+            "label": "Fork from this message",
+            "role": "menuitem",
+            "disabled": false
+          },
+          {
+            "label": "Copy link to message",
+            "role": "menuitem",
+            "disabled": false
+          },
+          {
+            "label": "Copy message",
+            "role": "menuitem",
+            "disabled": false
+          }
+        ],
+        "statusRole": "status",
+        "selectedTab": "Coworker workspace"
+      },
+      "modeSemantics": {
+        "exists": true,
+        "role": "combobox",
+        "name": "Mode",
+        "labelText": "Mode Read-only investigationPlan · no tools",
+        "value": "inspect",
+        "disabled": false
+      },
+      "evidenceActions": [
+        "Annotate evidence",
+        "Compare diagnostic runs"
+      ],
+      "activeRun": {
+        "workingVisible": true,
+        "workingRole": "status",
+        "workingText": "Firewall is working…",
+        "chatStatusRole": "status",
+        "chatStatusText": "Steering applies at the next step.",
+        "modeDisabled": true
+      },
+      "mockedRequest": {
+        "url": "http://127.0.0.1:8768/api/chat",
+        "method": "POST",
+        "mode": "inspect",
+        "messageCount": 3
+      },
+      "gaps": [],
+      "limitation": "The active run uses a held local NDJSON fixture on localhost:8768; provider/device traffic remains blocked."
+    },
+    {
+      "id": "UX058",
+      "name": "New coworker local welcome disclosure and request exclusion",
+      "status": "PASS",
+      "welcome": {
+        "visible": true,
+        "text": "Local welcome · not a model response",
+        "role": null
+      },
+      "header": "Local audit coworker",
+      "mockedRequest": {
+        "url": "http://127.0.0.1:8768/api/chat",
+        "method": "POST",
+        "messageCount": 1
+      },
+      "payloadMessages": [
+        {
+          "role": "user",
+          "content": "Confirm local welcome exclusion"
+        }
+      ],
+      "gaps": [],
+      "limitation": "This verifies the local UI marker and request shaping in one isolated browser; it does not assert any model behavior."
+    },
+    {
+      "id": "UX094",
+      "name": "Reduced motion and forced-colors fallback",
+      "status": "PASS",
+      "reduced": {
+        "matches": true,
+        "nodes": [
+          {
+            "selector": "rail",
+            "transition": "1e-06s",
+            "animation": "1e-06s"
+          },
+          {
+            "selector": "right-pane",
+            "transition": "1e-06s",
+            "animation": "1e-06s"
+          },
+          {
+            "selector": "group-chevron",
+            "transition": "1e-06s",
+            "animation": "1e-06s"
+          },
+          {
+            "selector": "message user",
+            "transition": "1e-06s",
+            "animation": "1e-06s"
+          }
+        ]
+      },
+      "forced": {
+        "scrollbarWidth": "auto",
+        "scrollbarColor": "auto"
+      },
+      "gaps": {
+        "transitionGap": [],
+        "animationGap": [],
+        "forcedColors": ""
+      }
+    },
+    {
+      "id": "UX095",
+      "name": "Hover, focus, touch menus, and viewport bounds",
+      "status": "PASS",
+      "desktopBounds": {
+        "left": 1131.40625,
+        "top": 275.734375,
+        "right": 1367.40625,
+        "bottom": 547.734375,
+        "width": 236,
+        "height": 272,
+        "within": true
+      },
+      "touchBounds": {
+        "left": 126,
+        "top": 213.078125,
+        "right": 362,
+        "bottom": 485.078125,
+        "width": 236,
+        "height": 272,
+        "within": true
+      },
+      "pickerBounds": {
+        "left": 1085.40625,
+        "top": 275.734375,
+        "right": 1367.40625,
+        "bottom": 616.734375,
+        "width": 282,
+        "height": 341,
+        "within": true
+      },
+      "touchCount": 7,
+      "moreCount": 10,
+      "keyboardMenuReturned": true,
+      "touch": {
+        "emulated": true,
+        "width": 390
+      },
+      "gaps": []
+    },
+    {
+      "id": "UX096",
+      "name": "Responsive pane layout, touch widths, and horizontal overflow",
+      "status": "PASS",
+      "sizes": [
+        {
+          "width": 320,
+          "pageScrollWidth": 320,
+          "bodyScrollWidth": 320,
+          "sidebar": {
+            "scrollWidth": 55,
+            "clientWidth": 55,
+            "rect": {
+              "x": 5,
+              "y": 104,
+              "width": 55,
+              "height": 529,
+              "top": 104,
+              "right": 60,
+              "bottom": 633,
+              "left": 5
+            },
+            "problemNodes": []
+          },
+          "pane": null,
+          "within": true
+        },
+        {
+          "width": 390,
+          "pageScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "sidebar": {
+            "scrollWidth": 55,
+            "clientWidth": 55,
+            "rect": {
+              "x": 5,
+              "y": 104,
+              "width": 55,
+              "height": 529,
+              "top": 104,
+              "right": 60,
+              "bottom": 633,
+              "left": 5
+            },
+            "problemNodes": []
+          },
+          "pane": null,
+          "within": true
+        },
+        {
+          "width": 760,
+          "pageScrollWidth": 760,
+          "bodyScrollWidth": 760,
+          "sidebar": {
+            "scrollWidth": 55,
+            "clientWidth": 55,
+            "rect": {
+              "x": 5,
+              "y": 104,
+              "width": 55,
+              "height": 585,
+              "top": 104,
+              "right": 60,
+              "bottom": 689,
+              "left": 5
+            },
+            "problemNodes": []
+          },
+          "pane": null,
+          "within": true
+        },
+        {
+          "width": 1440,
+          "pageScrollWidth": 1440,
+          "bodyScrollWidth": 1440,
+          "sidebar": {
+            "scrollWidth": 51,
+            "clientWidth": 51,
+            "rect": {
+              "x": 7,
+              "y": 116,
+              "width": 51,
+              "height": 530,
+              "top": 116,
+              "right": 58,
+              "bottom": 646,
+              "left": 7
+            },
+            "problemNodes": []
+          },
+          "pane": null,
+          "within": true
+        }
+      ],
+      "paneBounds": {
+        "x": 16,
+        "y": 0,
+        "width": 374,
+        "height": 844
+      },
+      "paneOverflow": false,
+      "gaps": []
+    },
+    {
+      "id": "UX093",
+      "name": "Contrast matrix and 200 percent scaling/reflow",
+      "status": "PASS",
+      "matrix": [
+        {
+          "selector": "body",
+          "label": "body text",
+          "foreground": "rgb(241, 241, 241)",
+          "background": "8,8,8",
+          "ratio": 17.73,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "dark"
+        },
+        {
+          "selector": "#surface",
+          "label": "conversation heading",
+          "foreground": "rgb(241, 241, 241)",
+          "background": "8,8,8",
+          "ratio": 17.73,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "dark"
+        },
+        {
+          "selector": ".sidebar-group-toggle",
+          "label": "sidebar label",
+          "foreground": "rgb(147, 147, 147)",
+          "background": "17,17,17",
+          "ratio": 6.15,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "dark"
+        },
+        {
+          "selector": "#save-settings",
+          "label": "primary control",
+          "foreground": "rgb(17, 17, 17)",
+          "background": "240,240,240",
+          "ratio": 16.57,
+          "minimum": 3,
+          "kind": "control",
+          "theme": "dark"
+        },
+        {
+          "selector": "#cancel-settings",
+          "label": "secondary control",
+          "foreground": "rgb(241, 241, 241)",
+          "background": "24,24,24",
+          "ratio": 15.72,
+          "minimum": 3,
+          "kind": "control",
+          "theme": "dark"
+        },
+        {
+          "selector": ".message.user",
+          "label": "user message",
+          "foreground": "rgb(241, 241, 241)",
+          "background": "24,24,24",
+          "ratio": 15.72,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "dark"
+        },
+        {
+          "selector": ".message.user .message-label",
+          "label": "user message label",
+          "foreground": "rgb(160, 160, 160)",
+          "background": "24,24,24",
+          "ratio": 6.79,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "dark"
+        },
+        {
+          "selector": "body",
+          "label": "body text",
+          "foreground": "rgb(23, 23, 23)",
+          "background": "244,244,244",
+          "ratio": 16.3,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "light"
+        },
+        {
+          "selector": "#surface",
+          "label": "conversation heading",
+          "foreground": "rgb(23, 23, 23)",
+          "background": "244,244,244",
+          "ratio": 16.3,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "light"
+        },
+        {
+          "selector": ".sidebar-group-toggle",
+          "label": "sidebar label",
+          "foreground": "rgb(112, 112, 112)",
+          "background": "255,255,255",
+          "ratio": 4.95,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "light"
+        },
+        {
+          "selector": "#save-settings",
+          "label": "primary control",
+          "foreground": "rgb(255, 255, 255)",
+          "background": "17,17,17",
+          "ratio": 18.88,
+          "minimum": 3,
+          "kind": "control",
+          "theme": "light"
+        },
+        {
+          "selector": "#cancel-settings",
+          "label": "secondary control",
+          "foreground": "rgb(23, 23, 23)",
+          "background": "240,240,240",
+          "ratio": 15.73,
+          "minimum": 3,
+          "kind": "control",
+          "theme": "light"
+        },
+        {
+          "selector": ".message.user",
+          "label": "user message",
+          "foreground": "rgb(23, 23, 23)",
+          "background": "229,229,229",
+          "ratio": 14.23,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "light"
+        },
+        {
+          "selector": ".message.user .message-label",
+          "label": "user message label",
+          "foreground": "rgb(80, 103, 129)",
+          "background": "229,229,229",
+          "ratio": 4.63,
+          "minimum": 4.5,
+          "kind": "text",
+          "theme": "light"
+        }
+      ],
+      "fontScale": {
+        "nodes": 43,
+        "samples": [
+          {
+            "tag": "BODY",
+            "className": "",
+            "before": 14
+          },
+          {
+            "tag": "BUTTON",
+            "className": "icon-button rail-action",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "icon-button rail-action",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "nav-button",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "agent-open direct-open",
+            "before": 28
+          },
+          {
+            "tag": "SPAN",
+            "className": "network-avatar avatar-small",
+            "before": 56
+          },
+          {
+            "tag": "BUTTON",
+            "className": "agent-open direct-open",
+            "before": 28
+          },
+          {
+            "tag": "SPAN",
+            "className": "network-avatar avatar-small",
+            "before": 56
+          },
+          {
+            "tag": "BUTTON",
+            "className": "sidebar-row team-row project-row",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "nav-button",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "nav-button",
+            "before": 28
+          },
+          {
+            "tag": "BUTTON",
+            "className": "nav-button",
+            "before": 28
+          }
+        ],
+        "controls": [
+          {
+            "selector": "#toggle",
+            "visible": true,
+            "left": 8,
+            "right": 33.5,
+            "top": 10,
+            "bottom": 44
+          },
+          {
+            "selector": "#quick-create",
+            "visible": true,
+            "left": 37.5,
+            "right": 63,
+            "top": 10,
+            "bottom": 44
+          },
+          {
+            "selector": "#account-button",
+            "visible": true,
+            "left": 8,
+            "right": 63,
+            "top": 850,
+            "bottom": 890
+          },
+          {
+            "selector": "#draft",
+            "visible": true,
+            "left": 95,
+            "right": 617,
+            "top": 715.2,
+            "bottom": 767.2
+          },
+          {
+            "selector": "#send",
+            "visible": true,
+            "left": 586,
+            "right": 617,
+            "top": 767.2,
+            "bottom": 798.2
+          },
+          {
+            "selector": "#thread-actions",
+            "visible": true,
+            "left": 601,
+            "right": 628,
+            "top": 48,
+            "bottom": 75
+          }
+        ],
+        "scale": 2,
+        "pageWidth": 640,
+        "bodyWidth": 640,
+        "viewport": 640,
+        "sidebarWidth": 55,
+        "sidebarClientWidth": 55
+      },
+      "zoomState": {
+        "scale": 2,
+        "zoom": "2",
+        "pageWidth": 640,
+        "bodyWidth": 320,
+        "viewport": 640
+      },
+      "gaps": [],
+      "limitation": "Native text-only OS scaling was unavailable; status is based on the test-only 200% computed font-size stress plus a separately recorded page-scale/CSS-zoom surrogate."
+    }
+  ],
+  "externalRequests": [],
+  "mockedRequests": [
+    {
+      "url": "http://127.0.0.1:8768/api/chat",
+      "method": "POST",
+      "body": {
+        "chatId": "review",
+        "agentName": "Firewall",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Check the interfaces"
+          },
+          {
+            "role": "assistant",
+            "content": "The output is retained below."
+          },
+          {
+            "role": "user",
+            "content": "Run isolated status fixture"
+          }
+        ],
+        "mode": "inspect"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8768/api/chat",
+      "method": "POST",
+      "body": {
+        "chatId": "6f47f538-12ad-4c07-93ac-4c3f5bc228b1",
+        "agentName": "Local audit coworker",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Confirm local welcome exclusion"
+          }
+        ],
+        "mode": "inspect"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "evidence": [
+    "accessibility-dark-1440.png",
+    "accessibility-light-1440.png",
+    "accessibility-message-menu-1440.png",
+    "accessibility-font-scale-200.png",
+    "accessibility-zoom-200.png",
+    "accessibility-active-run-1440.png",
+    "accessibility-local-welcome-1440.png",
+    "accessibility-touch-390.png"
+  ],
+  "methods": {
+    "touch": "Chromium hasTouch/isMobile emulation, not a physical device",
+    "zoom": "Chromium page-scale plus test-only CSS zoom surrogate; not text-only OS zoom",
+    "contrast": "computed foreground/background colors with WCAG 2.x relative luminance formula",
+    "backend": "Only the local /api/chat route on localhost:8768 is a held Playwright fixture; all other non-8767 requests are aborted."
+  },
+  "finishedAt": "2026-09-15T19:45:32.461Z",
+  "pass": true
+}

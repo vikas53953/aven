@@ -1,0 +1,89 @@
+{
+  "baselineLedger": {
+    "path": "completion/baseline-ledger.json",
+    "sha256": "457effc017703f9bec31f17000dee22b8c8f3cfd449986bb880951d87f1f403f"
+  },
+  "sourceSHA": {
+    "intentgraph/adapters/index.cjs": "a07f0ddad0403f181f3da4dfaed43609ddf2a040e9e244e611e66cf030cebc5e",
+    "intentgraph/execution-service.cjs": "02d59d4f205fd2af2d196b0fcfbdbbff66649b298b6255ec9fa052d7c06ddc14",
+    "intentgraph/agent-runtime.cjs": "be188a28902527bba7242ddb75c18a8aceeacf5cfc68964c19ec79048392c92c",
+    "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+  },
+  "touchedFiles": [
+    "completion/workflows/candidate/approval-workflow.cjs",
+    "completion/workflows/candidate/approval-workflow.test.cjs",
+    "completion/workflows/candidate/clarification-runtime.cjs",
+    "completion/workflows/candidate/clarification-runtime.test.cjs",
+    "completion/workflows/candidate/clarification-server-adapter.cjs",
+    "completion/workflows/candidate/clarification-server-adapter.test.cjs",
+    "completion/workflows/candidate/polished-approval-workflow.js",
+    "completion/workflows/candidate/polished-approval-workflow.browser.test.cjs",
+    "completion/workflows/candidate/normal-chat-workflow.fixture.test.cjs",
+    "completion/workflows/candidate/agent-runtime-clarification.test.cjs",
+    "completion/workflows/replacements.json",
+    "completion/workflows/README.md",
+    "completion/workflows/evidence.json",
+    "completion/workflows/row-results.json"
+  ],
+  "candidateSHA": {
+    "completion/workflows/candidate/approval-workflow.cjs": "f75eddd2665a84b0e37e678bea740444056ff75a8317c24236e025d7d7b3649d",
+    "completion/workflows/candidate/approval-workflow.test.cjs": "bf183935f88b956898c85c6cc7338ee45d4cd03c58aed67b25da424c24a3abcc",
+    "completion/workflows/candidate/clarification-runtime.cjs": "ceef4ba90270eeda9af8336c926622ca485af7d5276c5727f7ac97801e4fa0ef",
+    "completion/workflows/candidate/clarification-runtime.test.cjs": "74792fa29d07ebc31a9cc52934752a7611cd93c96c32c92f3da33fed120593fd",
+    "completion/workflows/candidate/clarification-server-adapter.cjs": "f0abdc98d22cee2504a2f7d47fc0963b2706ab66dd636bc17b6029652c7e162c",
+    "completion/workflows/candidate/clarification-server-adapter.test.cjs": "8b24f16f2d298a4bfc557e6f0e7d463d04eade4e7db3edead81319b0543231af",
+    "completion/workflows/candidate/polished-approval-workflow.js": "88f05b07fc4738b04d805fabd184caaa153b60cd602fc6bb3de6b9ad40d2868e",
+    "completion/workflows/candidate/polished-approval-workflow.browser.test.cjs": "0b8771d4dd310bd57d03c7d958d2782c4063777b29e40f36b15581b26936c02d",
+    "completion/workflows/replacements.json": "66900ad28c1c7ceb95649dbf405805dceb341f2b724359b7c2f96390c80e68a8",
+    "completion/workflows/README.md": "17fbadf28f3e0254f39abaef72d6444e5b2fa885d2da263d415893ddf0ae3598",
+    "completion/workflows/evidence.json": "66217791d12e3c98e95c3950b486eccb55dcd1127849bae3ec8c3124e04773e0",
+    "completion/workflows/row-results.json": "50be030ee544d0f6e75d6dc20269ecd4e0e1a1fa1f7b6453456fe188ee6254da",
+    "completion/workflows/candidate/normal-chat-workflow.fixture.test.cjs": "a94767898c4cd91999d706dd871b52f0f76ea9eec5bb0b024590e79171407174",
+    "completion/workflows/candidate/agent-runtime-clarification.test.cjs": "cfab8db5537d48f4cee5b94579f7374d107849f2b1667370db870357fd4ad866"
+  },
+  "exactBeforeAfter": [
+    {
+      "file": "intentgraph/approval-workflow.cjs",
+      "before": null,
+      "after": "new candidate file: completion/workflows/candidate/approval-workflow.cjs",
+      "replacement": null
+    },
+    {
+      "file": "intentgraph/approval-workflow.test.cjs",
+      "before": null,
+      "after": "new candidate file: completion/workflows/candidate/approval-workflow.test.cjs",
+      "replacement": null
+    },
+    {
+      "file": "intentgraph/clarification-runtime.cjs",
+      "before": null,
+      "after": "new candidate file: completion/workflows/candidate/clarification-runtime.cjs; accepts structured model/tool pending questions and resumes the same run",
+      "replacement": null
+    },
+    {
+      "file": "intentgraph/clarification-server-adapter.cjs",
+      "before": null,
+      "after": "new candidate file: completion/workflows/candidate/clarification-server-adapter.cjs; transport boundary for local workflow routes",
+      "replacement": null
+    },
+    {
+      "file": "polished-approval-workflow.js",
+      "before": null,
+      "after": "new candidate file: completion/workflows/candidate/polished-approval-workflow.js; visible pending/review/approved mock cards",
+      "replacement": null
+    },
+    {
+      "file": "intentgraph/server.cjs + intentgraph/agent-runtime.cjs + polished.html + polished.js",
+      "before": "exact old substrings are recorded in completion/workflows/replacements.json",
+      "after": "24 exact candidate replacement hunks; root review/application required",
+      "replacement": "completion/workflows/replacements.json"
+    }
+  ],
+  "liveProductFilesEdited": false,
+  "overlapFilesReadOnly": [
+    "intentgraph/adapters/index.cjs",
+    "intentgraph/execution-service.cjs",
+    "intentgraph/agent-runtime.cjs",
+    "intentgraph/server.cjs"
+  ]
+}

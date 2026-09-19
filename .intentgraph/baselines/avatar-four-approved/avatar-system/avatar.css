@@ -1,0 +1,24 @@
+.cw-avatar{display:block;overflow:visible;flex:none}
+.cw-happy-eyes,.cw-big-smile{display:none}
+.cw-character{transform-origin:50px 58px}
+.cw-eyes{transform-box:fill-box;transform-origin:center}
+.cw-appendages{transform-origin:50px 39px}
+/* Expressions are presentation only; they carry no operational result. */
+[data-emotion="hover"] .cw-smile,[data-emotion="success"] .cw-smile{display:none}
+[data-emotion="hover"] .cw-big-smile,[data-emotion="success"] .cw-big-smile{display:inline}
+[data-emotion="success"] .cw-open-eyes{display:none}
+[data-emotion="success"] .cw-happy-eyes{display:inline}
+[data-emotion="listening"] .cw-eyes{transform:scaleY(1.08)}
+[data-emotion="thinking"] .cw-eyes{transform:translateX(2px)}
+.motion-active[data-emotion="idle"] .cw-eyes{animation:cw-blink 6.4s ease-in-out infinite}
+.motion-active[data-emotion="hover"] .cw-character{transform:rotate(-2deg);transition:transform 220ms ease}
+.motion-active[data-emotion="listening"] .cw-appendages{animation:cw-attentive 2.8s ease-in-out infinite}
+.motion-active[data-emotion="listening"] .cw-character{animation:cw-breathe 4.8s ease-in-out infinite}
+.motion-active[data-emotion="thinking"] .cw-character{animation:cw-consider 3.8s ease-in-out infinite}
+.motion-active[data-emotion="success"] .cw-character{animation:cw-pleased 500ms ease-out 1}
+@keyframes cw-blink{0%,94%,98%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes cw-attentive{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}
+@keyframes cw-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+@keyframes cw-consider{0%,100%{transform:rotate(0)}45%,65%{transform:rotate(1.5deg)}}
+@keyframes cw-pleased{0%,100%{transform:translateY(0)}45%{transform:translateY(-1.5px)}}
+@media(prefers-reduced-motion:reduce){.cw-avatar *{animation:none!important;transition:none!important}.cw-character,.cw-appendages{transform:none!important}}

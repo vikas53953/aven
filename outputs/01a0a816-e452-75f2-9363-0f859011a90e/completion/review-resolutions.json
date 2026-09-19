@@ -1,0 +1,17 @@
+{
+  "stage": "candidate review; final integration pending",
+  "resolutions": [
+    {
+      "finding": "GLUE-004",
+      "status": "withdrawn by independent reviewer",
+      "reason": "Original claimRun and settleRun both passed the same explicit service PID owner; the ledger constructor default did not cause the alleged mismatch.",
+      "followup": "Latest reliability package additionally uses one explicit serverOwnerId throughout. Final assembled code must preserve it."
+    },
+    {
+      "finding": "GLUE-007",
+      "status": "candidate fix received; integrated verification pending",
+      "reason": "New reliability storage uses SQLite BEGIN IMMEDIATE rather than stale-file read/unlink acquisition. Worker reports deterministic two-process single-owner test; root reviewed transaction source.",
+      "followup": "Do not integrate an older file-lock implementation. Approval workflow has a separate stale-unlink implementation reported to its owner."
+    }
+  ]
+}

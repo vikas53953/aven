@@ -1,0 +1,399 @@
+{
+  "generatedAt": "2026-09-16T05:56:26.382Z",
+  "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\history-candidate",
+  "scope": "isolated Chromium; loopback fixture API; no provider/device calls",
+  "rows": [
+    {
+      "id": "UX-001",
+      "status": "PASS",
+      "evidence": [
+        "scroll surfaces wake and remain scrollable: PASS"
+      ],
+      "limitation": "This fixture does not measure OS scrollbar fade timing or physical touch input."
+    },
+    {
+      "id": "UX-002",
+      "status": "PASS",
+      "evidence": [
+        "page and sidebar stay within viewport while raw output remains exact: PASS"
+      ],
+      "limitation": "OS clipboard integration is intercepted in the isolated browser."
+    },
+    {
+      "id": "UX-003",
+      "status": "PASS",
+      "evidence": [
+        "account menu is keyboard reachable without a caret: PASS"
+      ],
+      "limitation": "No assistive technology certification."
+    },
+    {
+      "id": "UX-004",
+      "status": "PASS",
+      "evidence": [
+        "profile rename synchronizes selected coworker header: PASS"
+      ],
+      "limitation": "Scoped to selected profile and two local coworkers."
+    },
+    {
+      "id": "UX-005",
+      "status": "PASS",
+      "evidence": [
+        "reaction row opens and supports keyboard selection: PASS"
+      ],
+      "limitation": "Narrow reference geometry is outside this scoped check."
+    },
+    {
+      "id": "UX-006",
+      "status": "PASS",
+      "evidence": [
+        "one reaction replaces, clears and survives reload: PASS"
+      ],
+      "limitation": "Local browser storage only."
+    },
+    {
+      "id": "UX-007",
+      "status": "PASS",
+      "evidence": [
+        "coworker-first direct entry leaves existing history reachable: PASS"
+      ],
+      "limitation": "Bounded to the seeded coworker/history set."
+    },
+    {
+      "id": "UX-008",
+      "status": "PASS",
+      "evidence": [
+        "short saved conversation retains coworker header: PASS"
+      ],
+      "limitation": "No live provider stream in this fixture."
+    },
+    {
+      "id": "UX-009",
+      "status": "PASS",
+      "evidence": [
+        "sidebar preview is plain text and full title is accessible: PASS"
+      ],
+      "limitation": "Extreme title matrix is outside this check."
+    },
+    {
+      "id": "UX-010",
+      "status": "PASS",
+      "evidence": [
+        "pinned chats stay grouped, legacy pins survive reload, and failed save is safe: PASS"
+      ],
+      "limitation": "Canonical render ordering is checked in the DOM; the injected quota error verifies the previous pin state remains persisted."
+    },
+    {
+      "id": "UX-011",
+      "status": "PASS",
+      "evidence": [
+        "conversation rename leaves coworker identity unchanged: PASS"
+      ],
+      "limitation": "Scoped to direct conversation rename."
+    },
+    {
+      "id": "UX-012",
+      "status": "PASS",
+      "evidence": [
+        "direct chats and grouped conversations stay distinct: PASS"
+      ],
+      "limitation": "No exhaustive implication study."
+    },
+    {
+      "id": "UX-013",
+      "status": "PASS",
+      "evidence": [
+        "collapsed rail leaves composer usable: PASS"
+      ],
+      "limitation": "Pointer resize matrix is not included here."
+    },
+    {
+      "id": "UX-014",
+      "status": "PASS",
+      "evidence": [
+        "back and forward preserve chat drafts: PASS"
+      ],
+      "limitation": "Single local navigation sequence."
+    },
+    {
+      "id": "UX-015",
+      "status": "PASS",
+      "evidence": [
+        "search result keyboard activation opens exact message context: PASS"
+      ],
+      "limitation": "Scoped to a unique saved phrase."
+    },
+    {
+      "id": "UX-016",
+      "status": "PASS",
+      "evidence": [
+        "search coworker and conversation filters narrow results: PASS"
+      ],
+      "limitation": "Duplicate-term disambiguation remains fixture-scoped."
+    },
+    {
+      "id": "UX-017",
+      "status": "PASS",
+      "evidence": [
+        "find visits repeated matches while preserving draft: PASS"
+      ],
+      "limitation": "The fixture contains three repeated user terms and one saved evidence term."
+    },
+    {
+      "id": "UX-018",
+      "status": "PASS",
+      "evidence": [
+        "command palette traverses with keyboard and Escape restores opener: PASS"
+      ],
+      "limitation": "Unavailable-command filtering is limited to the current local registry."
+    },
+    {
+      "id": "UX-024",
+      "status": "PASS",
+      "evidence": [
+        "reply identifies source and cancel retains draft: PASS"
+      ],
+      "limitation": "Mouse path only."
+    },
+    {
+      "id": "UX-035",
+      "status": "PASS",
+      "evidence": [
+        "tool transcript distinguishes event and raw result: PASS"
+      ],
+      "limitation": "Saved fixture only; no provider stream."
+    },
+    {
+      "id": "UX-041",
+      "status": "PASS",
+      "evidence": [
+        "markdown renders safe headings/lists/table/code: PASS"
+      ],
+      "limitation": "Representative fixture only."
+    },
+    {
+      "id": "UX-042",
+      "status": "PASS",
+      "evidence": [
+        "raw CLI copy preserves tabs and newlines: PASS"
+      ],
+      "limitation": "OS clipboard remains intercepted."
+    },
+    {
+      "id": "UX-043",
+      "status": "PASS",
+      "evidence": [
+        "copy failure reports failure: PASS"
+      ],
+      "limitation": "Browser clipboard rejection is injected."
+    },
+    {
+      "id": "UX-044",
+      "status": "PASS",
+      "evidence": [
+        "timestamps expose accessible labels: PASS"
+      ],
+      "limitation": "Timezone matrix is not included."
+    },
+    {
+      "id": "UX-045",
+      "status": "PASS",
+      "evidence": [
+        "latest control appears after leaving bottom: PASS"
+      ],
+      "limitation": "No live streaming output."
+    },
+    {
+      "id": "UX-046",
+      "status": "PASS",
+      "evidence": [
+        "revert and undo restore saved history: PASS"
+      ],
+      "limitation": "Busy/queued protection is separately bounded."
+    },
+    {
+      "id": "UX-047",
+      "status": "PASS",
+      "evidence": [
+        "fork retains provenance and survives revisit without mutating parent: PASS"
+      ],
+      "limitation": "Reload and fork-origin target are exercised against the seeded local history."
+    },
+    {
+      "id": "UX-048",
+      "status": "PASS",
+      "evidence": [
+        "message link contains exact local chat and message: PASS"
+      ],
+      "limitation": "Missing/archived destination messages are not exercised here."
+    },
+    {
+      "id": "UX-049",
+      "status": "PASS",
+      "evidence": [
+        "more-reactions picker opens without moving message: PASS"
+      ],
+      "limitation": "Picker search is not part of this build."
+    },
+    {
+      "id": "UX-050",
+      "status": "PASS",
+      "evidence": [
+        "archive hides composer and restore preserves history: PASS"
+      ],
+      "limitation": "Local history only."
+    },
+    {
+      "id": "UX-051",
+      "status": "PASS",
+      "evidence": [
+        "workspace export includes history, exact evidence and pin metadata: PASS"
+      ],
+      "limitation": "Workspace export is all-local scope; OS download path is temporary; pinnedAt is checked for a newly pinned and legacy pinned chat."
+    },
+    {
+      "id": "UX-052",
+      "status": "PASS",
+      "evidence": [
+        "invalid import is safe and valid add restore preserves unrelated work, pins and queues: PASS"
+      ],
+      "limitation": "Invalid JSON and valid Add mode are exercised in one isolated browser; imported pinnedAt is checked after the migration/restore transaction."
+    },
+    {
+      "id": "UX-053",
+      "status": "DEFERRED",
+      "evidence": [
+        "Baseline ledger records this capability as explicitly deferred pending identity/ownership contracts."
+      ],
+      "limitation": "Cross-device service is not present in this build."
+    },
+    {
+      "id": "UX-054",
+      "status": "PASS",
+      "evidence": [
+        "legacy avatar alias migrates visually and chosen avatar persists after reload: PASS"
+      ],
+      "limitation": "Legacy mesh is normalized by the avatar adapter and the selected replacement is verified after reload."
+    },
+    {
+      "id": "UX-055",
+      "status": "PASS",
+      "evidence": [
+        "long coworker name remains selected-only: PASS"
+      ],
+      "limitation": "Only one long label is exercised."
+    },
+    {
+      "id": "UX-057",
+      "status": "PASS",
+      "evidence": [
+        "muted runs stay quiet and enabled finished runs link to the exact result: PASS"
+      ],
+      "limitation": "The local NDJSON fixture injects finished run events; waiting/error alert event variants remain owned by the automation alert core."
+    },
+    {
+      "id": "UX-058",
+      "status": "PASS",
+      "evidence": [
+        "new coworker shows a local welcome and persists its first chat: PASS"
+      ],
+      "limitation": "Local-only creation fixture; no model request is made."
+    },
+    {
+      "id": "UX-059",
+      "status": "PASS",
+      "evidence": [
+        "theme save/cancel preserves readable controls and evidence in both modes: PASS"
+      ],
+      "limitation": "Light and dark computed foreground/background colors are captured for the conversation and saved evidence block."
+    },
+    {
+      "id": "UX-062",
+      "status": "PASS",
+      "evidence": [
+        "privacy page names local and sent data: PASS"
+      ],
+      "limitation": "Destructive recovery paths are separately bounded."
+    },
+    {
+      "id": "UX-063",
+      "status": "DEFERRED",
+      "evidence": [
+        "Baseline ledger records this capability as explicitly deferred pending identity/ownership contracts."
+      ],
+      "limitation": "Authenticated account lifecycle is not present in this build."
+    },
+    {
+      "id": "UX-064",
+      "status": "PASS",
+      "evidence": [
+        "help and feedback remain local: PASS"
+      ],
+      "limitation": "Storage failure for feedback is not injected."
+    },
+    {
+      "id": "UX-065",
+      "status": "PASS",
+      "evidence": [
+        "documented shortcuts match working palette controls: PASS"
+      ],
+      "limitation": "Cmd modifier and unavailable command matrix are not repeated."
+    },
+    {
+      "id": "UX-069",
+      "status": "PASS",
+      "evidence": [
+        "pane resize persists and close returns focus: PASS"
+      ],
+      "limitation": "One keyboard resize step."
+    },
+    {
+      "id": "UX-073",
+      "status": "PASS",
+      "evidence": [
+        "annotation success binds to evidence identity: PASS"
+      ],
+      "limitation": "Stale-result rejection, discard and save-failure are not generated here."
+    },
+    {
+      "id": "UX-083",
+      "status": "PASS",
+      "evidence": [
+        "feed entry opens relevant saved run: PASS"
+      ],
+      "limitation": "Fixture has no provider/device run."
+    },
+    {
+      "id": "UX-084",
+      "status": "PASS",
+      "evidence": [
+        "ideas can be created, saved, archived and recovered locally: PASS"
+      ],
+      "limitation": "The fixture exercises the actual workspace-tools Add, Save, reload, Archive and Restore controls with local storage only."
+    },
+    {
+      "id": "UX-087",
+      "status": "PASS",
+      "evidence": [
+        "notification setting exposes the enabled state after a linked completion: PASS"
+      ],
+      "limitation": "Muted and enabled delivery plus exact finished-result linking are exercised in UX-057; waiting/error variants remain owned by the automation alert core."
+    },
+    {
+      "id": "UX-111",
+      "status": "PASS",
+      "evidence": [
+        "opening another chat does not cancel active work and unread state still persists: PASS"
+      ],
+      "limitation": "The held loopback NDJSON response proves the request completes after switching chats; no provider call is made."
+    },
+    {
+      "id": "UX-112",
+      "status": "PASS",
+      "evidence": [
+        "unsupported language is disabled and cannot appear applied: PASS"
+      ],
+      "limitation": "Additional translations are not implemented."
+    }
+  ]
+}

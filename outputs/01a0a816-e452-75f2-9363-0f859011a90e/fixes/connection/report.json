@@ -1,0 +1,149 @@
+{
+  "files": [
+    "polished.js",
+    "polished-diagnostics.js"
+  ],
+  "replacementsPath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\connection\\replacements.json",
+  "tests": [
+    {
+      "command": "UX102 baseline false status",
+      "exitCode": 0,
+      "result": "EXPECTED_FAIL",
+      "detail": "Baseline reproduces hard-coded configured identity beside configured:false."
+    },
+    {
+      "command": "UX102 candidate false status",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "About state=Not connected · Unavailable (not configured; reachability unverified); API status calls=1."
+    },
+    {
+      "command": "UX102 candidate true status",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "About state=FixtureProvider · FixtureModel (configured; reachability unverified); API status calls=1."
+    },
+    {
+      "command": "UX102 candidate malformed status",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "About state=Unavailable · local status unavailable; API status calls=1."
+    },
+    {
+      "command": "UX102 candidate endpoint failure",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "About state=Unavailable · local status unavailable; API status calls=1."
+    },
+    {
+      "command": "UX102 candidate stale success then failure",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "About state=Unavailable · local status unavailable; API status calls=2."
+    },
+    {
+      "command": "UX102 candidate closed About callback",
+      "exitCode": 0,
+      "result": "PASS",
+      "detail": "Delayed status from a closed About instance did not update the newly opened instance."
+    }
+  ],
+  "evidence": {
+    "cases": [
+      {
+        "name": "UX102 baseline false status",
+        "mode": "baseline",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate false status",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate true status",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate malformed status",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate endpoint failure",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate stale success then failure",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          },
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      },
+      {
+        "name": "UX102 candidate closed About callback",
+        "mode": "candidate",
+        "api": [
+          {
+            "method": "GET",
+            "path": "/api/chat/status"
+          }
+        ],
+        "blocked": [],
+        "pageErrors": []
+      }
+    ],
+    "blockedRequests": [],
+    "pageErrors": []
+  },
+  "limitations": [
+    "Local status is fixture-backed and reachability remains explicitly unverified.",
+    "This isolated test covers the static About/diagnostics surface; it does not exercise a real provider or device."
+  ]
+}

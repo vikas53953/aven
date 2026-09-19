@@ -1,0 +1,24 @@
+{
+  "at": "2026-09-15T19:40:24.634Z",
+  "passed": true,
+  "features": [
+    "UX-016",
+    "UX-044",
+    "UX-045",
+    "UX-047"
+  ],
+  "checks": [
+    "coworker/conversation/type filters",
+    "exact saved message and focus",
+    "clear/empty results",
+    "archived messages remain read-only",
+    "local day grouping and accessible full timestamp",
+    "fork prefix/raw provenance/no requests",
+    "parent unchanged and origin survives reload",
+    "fork storage failure rollback",
+    "new output preserves older scroll position",
+    "keyboard jump to latest",
+    "390px search bounds"
+  ],
+  "scope": "Isolated browser with mocked chat; no provider or device calls."
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-17",
+  "commands": [
+    {
+      "name": "git-backend",
+      "command": "bundled node --test completion/round2/terminal-git/git/intentgraph/git-workspace.test.cjs",
+      "result": "PASS",
+      "tests": 10,
+      "passed": 10,
+      "failed": 0,
+      "scope": "temporary repositories; mock remotes; no user repository or external publish"
+    },
+    {
+      "name": "git-browser",
+      "command": "bundled node --test completion/round2/terminal-git/git/git-ui.test.cjs",
+      "result": "PASS",
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "scope": "headless Chrome; mocked API; verifies unknown commit metadata and no created claim"
+    },
+    {
+      "name": "exact-manifest",
+      "command": "bundled node completion/round2/terminal-git/validate-manifest.cjs",
+      "result": "PASS",
+      "sourceFiles": 2,
+      "replacements": 6
+    },
+    {
+      "name": "terminal-frozen-evidence",
+      "command": "completion/terminal frozen evidence",
+      "result": "PASS",
+      "serverCases": 5,
+      "browserChecks": 6,
+      "externalCalls": 0
+    },
+    {
+      "name": "terminal-assembled-server",
+      "command": "AVEN_PRODUCT_ROOT=completion/assembled-candidate AVEN_TERMINAL_SERVER_PATH=<root>/intentgraph/server.cjs bundled node --test completion/round2/terminal-git/terminal/terminal.server.test.cjs",
+      "result": "PASS",
+      "serverCases": 5,
+      "passed": 5,
+      "failed": 0,
+      "scope": "assembled server with injected network facade; disposable fixture copied polished-reliability.js"
+    }
+  ],
+  "rootAssemblyCommand": "set AVEN_PRODUCT_ROOT=<new assembly>; bundled node completion/round2/terminal-git/verify-round2.cjs",
+  "unverified": [
+    "Root assembly integration and served-source verification",
+    "Screen-reader certification",
+    "Real remote/provider/device or OS-shell behavior"
+  ]
+}

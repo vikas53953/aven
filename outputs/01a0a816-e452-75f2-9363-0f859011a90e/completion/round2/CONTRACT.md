@@ -1,0 +1,13 @@
+# Missing-feature completion, 2026-09-17
+
+Root owns architecture, shared composition, full-app integration, independent review, final 115-row verdicts and Excel. Existing packages are frozen inputs; do not change them or live product files. Each executor owns only its round2/<assignment>/ directory. Include exact source hashes and incremental replacement manifests against the corresponding frozen candidate input (identify that input). Never execute shared merge/build scripts. Root composes all changes and resolves overlapping server/UI seams.
+
+Six assignments: workspace UX023/026/082; runtime UX027/037; workflows UX033/074; approval bridge UX080/114; terminal/Git UX071/075; automation UX086/088/089. Requirements come from ../baseline-ledger.json. Preserve minimal chat: diagnostics off by default via Settings, raw artifacts collapsed, explanations visible, Agent/Plan in plus menu, context indicator beside Send.
+
+Deliver working implementations, meaningful tests, original-acceptance verdicts and limitations. Old isolated PASS is useful evidence but does not establish current integrated behavior. No mock-only production execution, fake availability, invented topology, or silent scope reductions. Report required shared interfaces to root before changing their assumptions. All communication through agents.send_message to root, no descendants or Codex task messages.
+
+Tests use injected adapters, temporary repositories and isolated storage only. No real provider/device calls, credential lookup, external publishing, user history/settings mutation, or uncontrolled shell/device execution as tests. Root grants one browser fixture lease at a time. Run server/unit tests without browser while waiting. Close owned fixtures and servers; never terminate unrelated processes.
+
+Review gates: syntax/module tests; HTTP contract tests against composed server; actual isolated browser workflows; root review of original acceptance; independent approval/Git security review; hash-guarded backup/live apply; served-source verification; architecture/HLD; final 115-row workbook preserving original audit. Built, isolated-tested, integrated-tested, and live remain distinct.
+
+UX114 must implement a real existing-adapter bridge with server-owned scoped connections, exact Origin/header/session/generation checks, revocation, direct-action bypass denial, manual review-only sessions without model dispatch, one-time immutable digest/scope/mode/expiry binding, no persisted tokens or arbitrary fill secrets, truthful current-value/impact/rollback information and UNKNOWN on any post-consumption uncertainty. Browser context is adapter-owned headless and must be labeled accurately. Do not claim network mutation or rollback support that does not exist.

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "candidate": "automation/candidate",
+  "scope": "Candidate-only Aven workspace flow; local storage and injected adapter only.",
+  "externalCalls": false,
+  "liveProductFilesEdited": false,
+  "rows": [
+    {
+      "id": "UX-085",
+      "status": "implemented-candidate",
+      "evidence": "Final Chromium fixture opened Goals, blocked a checked step without retained evidence, completed g1 through the real Use this evidence action, and verified Manually completed remained after reload. polished-workspace-tools.js passes the retained workspace data into AvenAutomation.goalCompletionCheck and persists the evidence reference.",
+      "limitation": "Evidence is bounded to messages already retained in this local workspace; no provider or device execution is implied."
+    },
+    {
+      "id": "UX-086",
+      "status": "implemented-candidate",
+      "evidence": "Pure and final Chromium fixtures cover Asia/Kolkata daily time, future-time wrong-weekday weekly scheduling, disabled jobs, selected-only Run now on a paused future job, adapter success/failure, scheduler in-flight disable/delete, replay dedup, save failure, history, and explicit enable.",
+      "limitation": "The scheduler is bounded to the open Aven page and the existing saved-conversation CHAT_API adapter; no external scheduler, provider or device call is made."
+    },
+    {
+      "id": "UX-087",
+      "status": "implemented-candidate",
+      "evidence": "AvenAutomation notificationEvent/recordNotification defines completion, failure and input_required semantics with stable-ID dedup and mute state; polished.js records input, completion and failure events, persists history-agent alerts, and renders alert actions. Pure fixture verifies mute and duplicate delivery.",
+      "limitation": "Pure tests cover mute and duplicate delivery; the Chromium smoke flow does not inject a live completion/failure stream."
+    },
+    {
+      "id": "UX-088",
+      "status": "implemented-candidate",
+      "evidence": "PLUGIN_REGISTRY renders capabilities, required access, availability and connection health; unavailable entries are disabled and selectPlugin rejects catalyst-center. Final Chromium flow loaded the reachable Automation & procedures pane; pure fixture verified unavailable selection is rejected.",
+      "limitation": "No installation, credentials, provider call or device connection is attempted."
+    },
+    {
+      "id": "UX-089",
+      "status": "implemented-candidate",
+      "evidence": "WORKFLOW_REGISTRY renders version, purpose, inputs, required access, evidence requirements and procedure; stale workflow versions are rejected and schedules persist workflowId/workflowVersion. Pure backup tests preserve and remap automation state while pausing imported schedules for review.",
+      "limitation": "The registry is a local static v1 catalog; no external procedure capability is asserted."
+    }
+  ]
+}

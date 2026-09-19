@@ -1,0 +1,26 @@
+{
+  "name": "netrok-muse-intentgraph",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Bounded local IntentGraph index, evidence, and checkpoint service",
+  "main": "server.cjs",
+  "bin": {
+    "intentgraph": "cli.cjs"
+  },
+  "scripts": {
+    "service": "node server.cjs",
+    "query": "node cli.cjs query",
+    "check": "node --check indexer.cjs && node --check engine.cjs && node --check server.cjs && node --check cli.cjs && node --check agent-runtime.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@langchain/langgraph": "1.4.15",
+    "@langchain/openai": "1.5.13",
+    "langchain": "1.5.11",
+    "playwright": "1.49.0",
+    "typescript": "^5.9.3",
+    "zod": "4.2.0"
+  }
+}

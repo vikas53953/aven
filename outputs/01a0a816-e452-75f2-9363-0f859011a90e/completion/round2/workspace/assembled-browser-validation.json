@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "assembled candidate actual user paths UX023/UX026/UX082",
+  "command": "node round2/workspace/assembled-ux023-026-082.browser.test.cjs",
+  "exitCode": 0,
+  "result": {
+    "passed": true,
+    "rows": ["UX-023", "UX-026", "UX-082"],
+    "externalCalls": 0,
+    "chatPayloadStableId": true,
+    "topologyEvidence": true,
+    "recognitionStarts": 2,
+    "recognitionAborts": 1,
+    "consoleErrors": []
+  },
+  "fixture": "Loopback static server from completion/assembled-candidate; page fetch and SpeechRecognition injected in page init. No microphone, provider, network, credentials or saved user state used.",
+  "assertions": [
+    "Use stable ID edge-42 changes the draft and the exact @device:edge-42 token appears in the next /api/chat request body.",
+    "Disconnected @device:unknown-id-device is shown disconnected and never available.",
+    "Web Speech starts only after click, shows recording, accumulates multi-batch results, permits draft editing, and cancel aborts once.",
+    "Network sandbox renders returned source/freshness, explicit IDs, inferred-link provenance, and missing-ID unavailable/nonselectable evidence without generated device targets."
+  ]
+}

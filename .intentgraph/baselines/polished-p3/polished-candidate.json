@@ -1,0 +1,36 @@
+{
+  "candidateId": "P3-3f556d1045c5",
+  "capturedAt": "2026-09-11T04:02:33.754Z",
+  "baseline": "F08 / feedback-08.md",
+  "sources": [
+    {
+      "path": "polished.html",
+      "sha256": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+      "bytes": 11869
+    },
+    {
+      "path": "polished.css",
+      "sha256": "a872ba3a08590f68dcd771164955b5c4af97e6bb10e7d865847be9e585d00b7d",
+      "bytes": 48391
+    },
+    {
+      "path": "polished.js",
+      "sha256": "3b1d3b6206a6786a3dda61c1041c91e539034211c090beca4eb5daec8a65950f",
+      "bytes": 68069
+    },
+    {
+      "path": "polished-avatars.js",
+      "sha256": "02d0dcf13d292ace6f37a355a54191f9a600ca5708505d74d92073c200a842ab",
+      "bytes": 4144
+    },
+    {
+      "path": "prototype-review.html",
+      "sha256": "21b2669507cb4c82bb9c64775a50201d84d78b9a9e2cf3768d8194ff9f9f4dfb",
+      "bytes": 6666
+    }
+  ],
+  "tests": ".intentgraph/p3-test-results.json",
+  "independentReview": ".intentgraph/p3-independent-results.json",
+  "userApproval": "pending",
+  "scope": "Local frontend prototype. Avatar uploads stay in this browser; Generate makes procedural variations. No live AI, authentication or browser/computer execution."
+}

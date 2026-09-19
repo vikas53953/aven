@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-09-16T07:02:02.685Z",
+  "source": {
+    "baseline": "baseline-ledger.json",
+    "acceptance": "acceptance.txt",
+    "baselineSha256": "457effc017703f9bec31f17000dee22b8c8f3cfd449986bb880951d87f1f403f"
+  },
+  "baselineIntegrity": {
+    "expectedRows": 115,
+    "actualRows": 115,
+    "uniqueRows": 115,
+    "missingIds": [],
+    "extraIds": [],
+    "duplicateIds": [],
+    "originalAndAuditPreserved": true
+  },
+  "acceptanceCoverage": {
+    "expectedRows": 115,
+    "registerLines": 115,
+    "parsedIds": 115,
+    "exactMatches": 115,
+    "droppedAcceptances": [],
+    "extraAcceptances": [],
+    "mismatches": [],
+    "parseErrors": []
+  },
+  "assignmentCoverage": {
+    "originalRows": 115,
+    "assignedRows": 115,
+    "unassignedRows": [],
+    "rootOwnedRows": [
+      "UX-053",
+      "UX-063",
+      "UX-077",
+      "UX-079",
+      "UX-090",
+      "UX-104",
+      "UX-106"
+    ],
+    "historyExclusions": [
+      "UX-056",
+      "UX-060",
+      "UX-061",
+      "UX-083",
+      "UX-084",
+      "UX-111",
+      "UX-112"
+    ],
+    "explicitExclusions": [
+      "UX-056",
+      "UX-060",
+      "UX-061"
+    ],
+    "newUiRows": [
+      "UI-01",
+      "UI-02",
+      "UI-03",
+      "UI-04",
+      "UI-05"
+    ]
+  },
+  "conflicts": [
+    {
+      "type": "reassigned-fix",
+      "ids": [
+        "UX-076"
+      ],
+      "previousOwner": "provider",
+      "owner": "workspace",
+      "resolution": "Exact device selection is implemented with stable mentions and inventory UI; provider executor retains model/provider selection."
+    },
+    {
+      "type": "reassigned-fix",
+      "ids": [
+        "UX-049"
+      ],
+      "previousOwner": "history",
+      "owner": "minimal_ui",
+      "resolution": "Independent navigation tests found missing reaction search and keyboard focus. Minimal UI executor owns the fix; history evidence remains a secondary audit."
+    },
+    {
+      "type": "intentional-scope-split",
+      "ids": [
+        "UX-034"
+      ],
+      "owners": [
+        "minimal_ui",
+        "workflows"
+      ],
+      "detail": "Plan and inspect modes have separate presentation and backend slices."
+    },
+    {
+      "type": "explicit-root-override",
+      "ids": [
+        "UX-053",
+        "UX-063"
+      ],
+      "candidates": [
+        "history",
+        "root"
+      ],
+      "resolution": "Root ownership is explicit for these deferred/unassigned rows; history range membership is retained as a conflict record only."
+    },
+    {
+      "type": "reassigned",
+      "ids": [
+        "UX-085",
+        "UX-086",
+        "UX-087",
+        "UX-088",
+        "UX-089"
+      ],
+      "previousOwner": "workspace",
+      "owner": "complete_automation",
+      "resolution": "The parent update moves UX-085..089 to complete_automation; workspace retains its other rows."
+    },
+    {
+      "type": "cross-cutting-slice",
+      "ids": [
+        "UX-069",
+        "UX-073",
+        "UX-087"
+      ],
+      "detail": "UX-069 carries the workspace focus slice; UX-073 carries a history slice alongside workflows; UX-087 carries an alerts slice alongside complete_automation."
+    },
+    {
+      "type": "explicit-assignment-update",
+      "ids": [
+        "UX-083",
+        "UX-084",
+        "UX-111",
+        "UX-112"
+      ],
+      "previousOwner": null,
+      "owner": "complete_history",
+      "resolution": "The parent packet explicitly assigns these four rows to complete_history."
+    }
+  ],
+  "conclusion": {
+    "status": "complete",
+    "droppedAcceptances": "none",
+    "note": "All original rows have an explicit owner mapping; no verdicts were changed."
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "at": "2026-09-16T04:20:22.700Z",
+  "build": "ux-audit-fixes-v8",
+  "tests": [
+    {
+      "command": "creation/creation-audit.cjs --integrated",
+      "exitCode": 0,
+      "result": "5 creation scenarios passed: failures at all three persisted keys, saved-state preservation, pending recovery and same-name retry."
+    },
+    {
+      "command": "connection/candidate/ux102-about-connection.test.cjs --integrated",
+      "exitCode": 0,
+      "result": "6 About connection cases passed."
+    },
+    {
+      "command": "artifacts/artifact-duplication.test.cjs --integrated",
+      "exitCode": 0,
+      "result": "17 artifact cases passed; exact output and distinct result preservation."
+    },
+    {
+      "command": "header/rename-header-test.cjs --integrated",
+      "exitCode": 0,
+      "result": "13 rename/navigation/reload checks passed."
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --check polished.js",
+      "exitCode": 0,
+      "result": "Syntax: polished.js: passed; log fixes/syntax-polished-js.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --check polished-diagnostics.js",
+      "exitCode": 0,
+      "result": "Syntax: polished-diagnostics.js: passed; log fixes/syntax-polished-diagnostics-js.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --check polished-workspace-tools.js",
+      "exitCode": 0,
+      "result": "Syntax: polished-workspace-tools.js: passed; log fixes/syntax-polished-workspace-tools-js.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --check polished-backup.js",
+      "exitCode": 0,
+      "result": "Syntax: polished-backup.js: passed; log fixes/syntax-polished-backup-js.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --test .intentgraph/runtime/verify-backup-schema.cjs",
+      "exitCode": 0,
+      "result": "Backup schema and recovery: passed; log fixes/backup-schema-and-recovery.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe .intentgraph/runtime/verify-workspace-tools.cjs",
+      "exitCode": 0,
+      "result": "Workspace tools: passed; log fixes/workspace-tools.txt"
+    },
+    {
+      "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe .intentgraph/runtime/verify-evidence-tools.cjs",
+      "exitCode": 0,
+      "result": "Evidence tools: passed; log fixes/evidence-tools.txt"
+    },
+    {
+      "command": "node --test --test-concurrency=1 intentgraph/adapters.test.cjs intentgraph/agent-runtime.test.cjs intentgraph/agent-stream.test.cjs intentgraph/backend.test.cjs intentgraph/catalyst.test.cjs intentgraph/chat-runtime.test.cjs intentgraph/chat.test.cjs intentgraph/coordination.test.cjs intentgraph/delivery.test.cjs intentgraph/execution-service.test.cjs intentgraph/network-execution.test.cjs intentgraph/sandbox-routes.test.cjs intentgraph/steering.test.cjs intentgraph/trace.test.cjs",
+      "exitCode": 0,
+      "result": "ℹ tests 58; ℹ pass 58; ℹ fail 0; ℹ cancelled 0; ℹ skipped 0; ℹ duration_ms 48913.5077"
+    },
+    {
+      "command": "verify-atlas.cjs",
+      "exitCode": 0,
+      "result": "HLD 16 loaded; Current view displays patched build; Target view selects; All 9 walkthrough steps render"
+    },
+    {
+      "command": "verify-served-build.cjs",
+      "exitCode": 0,
+      "result": "All four served UI assets match local patched file hashes."
+    },
+    {
+      "command": "Direct browser UI verification",
+      "exitCode": 0,
+      "result": "Build v8 and About state observed; existing Artifacts reduced from46 mirrored entries to23 outputs. Local configuration read only."
+    },
+    {
+      "command": "Independent review",
+      "exitCode": 0,
+      "result": "APPROVED for the four scoped repairs; see fixes/independent-review.json."
+    }
+  ],
+  "originalWorkbooksUnchanged": true,
+  "baselinePreserved": true,
+  "limitations": [
+    "These four repairs do not complete the remaining115-feature backlog.",
+    "Failure tests use isolated browser storage and mocked status endpoints. No new provider or device request was made.",
+    "Recovery preserves saved state. Newly typed unsaved changes during a persistent storage failure are not guaranteed.",
+    "Artifact reconciliation is scoped to unambiguous persisted JSON mirrors; unknown/ambiguous repeated outputs remain visible.",
+    "No live filesystem write, cross-device transaction or product-owner acceptance is asserted."
+  ]
+}

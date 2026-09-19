@@ -1,0 +1,90 @@
+{
+  "candidateOnly": true,
+  "node": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+  "runtimeSupport": {
+    "nodeVersion": "v24.19.0",
+    "sqlite": "node:sqlite DatabaseSync"
+  },
+  "sourceSHA256": {
+    "polished.html": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+    "polished.js": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+    "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+  },
+  "commands": [
+    {
+      "id": "module-reliability",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test tests/reliability.test.cjs",
+      "exitCode": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "stdout": "13 tests; 13 pass; 0 fail. Includes FIFO claims, durable replay/fingerprint conflict, owner and terminal guards, WAITING pause/resume, scoped recovery, queue retention, fail-closed storage, stale-lock and two-process SQLite CAS."
+    },
+    {
+      "id": "replacement-integrity",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe tests/verify-replacements.cjs",
+      "exitCode": 0,
+      "replacementCount": 36,
+      "compiled": [
+        "polished.js",
+        "intentgraph/server.cjs"
+      ],
+      "missingAnchors": [],
+      "stdout": "36 replacement anchors present against the frozen v8 baseline; current polished.html/js hashes match the verified root ui-release checkpoint and patched polished.js and intentgraph/server.cjs compile."
+    },
+    {
+      "id": "server-overlay",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test tests/server-overlay.test.cjs",
+      "exitCode": 0,
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "stdout": "9 tests; 9 pass; 0 fail. Includes capability preflight/default per-chat status and explicit single-flight opt-out, sequential/concurrent duplicate HTTP dispatch, same-key different-body conflict, per-chat parallel cancellation, nested failure/WAITING outcome, explicit dead-owner recovery route, actual child-process restart, graceful same-process restart fencing, steering, and storage failure before provider."
+    },
+    {
+      "id": "browser-overlay",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test tests/browser-overlay.test.cjs",
+      "exitCode": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "stdout": "8 tests; 8 pass; 0 fail in installed Chrome. Includes IME Enter, draft switch/reload and 5k text, duplicate NDJSON, FIFO/502 no-retry, 500-message scroll, structured waiting question, capability-endpoint handshake plus per-chat parallel send label/queue drain, reload-scoped local recovery with zero dispatch, and live other-tab lease preservation."
+    },
+    {
+      "id": "syntax",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --check candidate/polished-reliability.js; C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --check candidate/intentgraph/reliability.cjs; C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --check candidate/intentgraph/reliability-storage.cjs",
+      "exitCode": 0,
+      "stdout": "All candidate JavaScript files parse."
+    }
+  ],
+  "externalCalls": 0,
+  "externalCallEvidence": "All provider and device paths were injected local mocks bound to 127.0.0.1; no external provider/device request was made.",
+  "liveProductEdits": 0,
+  "liveSavedStateWrites": 0,
+  "browserListenerAfterTests": {
+    "port": 8768,
+    "active": false
+  },
+  "limitations": [
+    "Packaged app process restart and real provider/device completion ambiguity remain unverified; the explicit local recovery route and dead-owner gating are covered in the overlay fixture."
+  ],
+  "capturedAt": "2026-09-16T07:28:54.681Z",
+  "sourceValidation": {
+    "baselineSHA256": {
+      "polished.html": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+      "polished.js": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+      "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+    },
+    "currentSHA256": {
+      "polished.html": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "polished.js": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+    },
+    "sourceModes": {
+      "polished.html": "frozen-baseline-for-root-ui-release-checkpoint",
+      "polished.js": "frozen-baseline-for-root-ui-release-checkpoint",
+      "intentgraph/server.cjs": "baseline-current"
+    },
+    "checkpoint": "../ui-release/integration.json"
+  }
+}

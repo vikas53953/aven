@@ -1,0 +1,88 @@
+{
+  "candidate": "P1-9c459aadeb52",
+  "capturedAt": "2026-09-10T19:29:41.029Z",
+  "scope": "Local prototype; user experience approval pending",
+  "checks": [
+    {
+      "name": "P1/P7: accepted placement and six viewport widths",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "P2/P3: create, cancel, attachments, search and isolated storage",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "P4: agent document save/cancel/escape and ownership",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "P6: deterministic sample states, cancellation and context changes",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "P5/P7: settings, keyboard, themes and contrast matrix",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "P7: narrow dialogs, focus containment and resizing",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "Protected accepted wireframe sources unchanged",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "No page errors or external runtime requests",
+      "status": "PASS",
+      "detail": "Executed successfully.",
+      "evidence": ".intentgraph/polished-test-results.json"
+    },
+    {
+      "name": "Independent experience review",
+      "status": "PASS",
+      "detail": "Inspected visual and local journeys; channel Cancel and evidence-page findings corrected and independently rechecked. No remaining blocker in the reviewed scope. This is not user acceptance.",
+      "evidence": ".intentgraph/polished-independent-review.md"
+    },
+    {
+      "name": "Your visual decision",
+      "status": "PENDING",
+      "detail": "Proposed styling, original avatar treatment and working brand await your feedback."
+    }
+  ],
+  "captures": [
+    {
+      "label": "Desktop",
+      "path": ".intentgraph/polished-desktop.png"
+    },
+    {
+      "label": "Light theme",
+      "path": ".intentgraph/polished-light.png"
+    },
+    {
+      "label": "Narrow conversation",
+      "path": ".intentgraph/polished-narrow-conversation.png"
+    },
+    {
+      "label": "Accepted wireframe",
+      "path": ".intentgraph/polished-baseline-1440.png"
+    },
+    {
+      "label": "Candidate manifest",
+      "path": ".intentgraph/polished-candidate.json"
+    }
+  ]
+}

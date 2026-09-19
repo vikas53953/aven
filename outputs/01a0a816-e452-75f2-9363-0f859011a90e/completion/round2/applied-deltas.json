@@ -1,0 +1,41 @@
+{
+  "at": "2026-09-17T04:19:32.905Z",
+  "changes": [
+    {
+      "owner": "workspace-round2",
+      "file": "workspace-capabilities.js",
+      "before": "e30510bec8e817bfe2f5ea876ab8d0f6d178c40a49846bfb24b6f4ec7ac2ad3b",
+      "after": "3d35d56b45b15b29137fcaa6a18661fc6af3c6e40451787610f398df491a37ad"
+    },
+    {
+      "owner": "workspace-round2",
+      "file": "workspace-capabilities.js",
+      "before": "3d35d56b45b15b29137fcaa6a18661fc6af3c6e40451787610f398df491a37ad",
+      "after": "a9419984ed3fb2e0429e218ac4bdbbc1bd3d93ced26bf59491952c56b2566112"
+    },
+    {
+      "owner": "workspace-round2",
+      "file": "workspace-capabilities.js",
+      "before": "a9419984ed3fb2e0429e218ac4bdbbc1bd3d93ced26bf59491952c56b2566112",
+      "after": "d5701fdabe7301a44dac2d8dbfdeaa1f557700512d69af9dd9fccedacc675c09"
+    },
+    {
+      "owner": "workspace-round2",
+      "file": "workspace-capabilities.js",
+      "before": "d5701fdabe7301a44dac2d8dbfdeaa1f557700512d69af9dd9fccedacc675c09",
+      "after": "99b78d8dc2fed244bc100592a5a90339435a2bcf84217dc530eeaa0061659165"
+    },
+    {
+      "owner": "workspace-round2",
+      "file": "polished.js",
+      "before": "04fe46776fc1b71beb7f97d2f784a5440f31d124e5c6567480303d9a98018262",
+      "after": "e9829902831751471e7639cfb752ee5591906d8eb9848e06bd2ba8428bc4ecc5"
+    },
+    {
+      "owner": "workspace-round2",
+      "file": "polished.js",
+      "before": "e9829902831751471e7639cfb752ee5591906d8eb9848e06bd2ba8428bc4ecc5",
+      "after": "813885043def3d8109fceea24451fee6b9e8c06c9565a32dac21ba11dda1b8a6"
+    }
+  ]
+}

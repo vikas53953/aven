@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-15T07:04:14.304Z",
+  "passed": true,
+  "checks": [
+    "migration/reload preserves chats draft queues",
+    "stable coworker title after hi",
+    "no wordmark",
+    "reaction persists",
+    "revert no execution",
+    "undo after reload",
+    "archived chats in Settings restore",
+    "team creation opens conversation",
+    "team member inheritance",
+    "persistent team collapse",
+    "busy archive guard",
+    "profile rename sync",
+    "390px menu bounds",
+    "no browser errors"
+  ]
+}

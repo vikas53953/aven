@@ -1,0 +1,16 @@
+{
+  "algorithm": "sha256",
+  "frozenCandidate": {
+    "completion/workflows/candidate/approval-workflow.cjs": "f75eddd2665a84b0e37e678bea740444056ff75a8317c24236e025d7d7b3649d",
+    "completion/workflows/candidate/approval-workflow.test.cjs": "bf183935f88b956898c85c6cc7338ee45d4cd03c58aed67b25da424c24a3abcc",
+    "completion/workflows/candidate/polished-approval-workflow.js": "88f05b07fc4738b04d805fabd184caaa153b60cd602fc6bb3de6b9ad40d2868e"
+  },
+  "frozenLiveInterfaces": {
+    "intentgraph/adapters/index.cjs": "a07f0ddad0403f181f3da4dfaed43609ddf2a040e9e244e611e66cf030cebc5e",
+    "intentgraph/execution-service.cjs": "02d59d4f205fd2af2d196b0fcfbdbbff66649b298b6255ec9fa052d7c06ddc14",
+    "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+  },
+  "baselineLedger": {
+    "completion/baseline-ledger.json": "457effc017703f9bec31f17000dee22b8c8f3cfd449986bb880951d87f1f403f"
+  }
+}

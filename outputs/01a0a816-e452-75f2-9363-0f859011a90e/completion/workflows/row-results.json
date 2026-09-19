@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "id": "UX-033",
+      "status": "implemented-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; candidate/agent-runtime-clarification.test.cjs, normal-chat-workflow.fixture.test.cjs, approval-workflow.test.cjs, and clarification-server-adapter.test.cjs: typed model pending-question, normal /api/chat pause/resume, visible card state, one-answer mapping, stale rejection, cancel, explicit refresh abandon, ownership, persistence, resumed event capture, and visible Stop state; SQLite authoritative CAS, persisted run ownership, and restart invalidation tests; waiting response preserves whitelisted model/source/provenance metadata without auth tokens",
+      "limitation": "The exact server mount is supplied as a candidate replacement hunk; no live provider, device, or network call was made."
+    },
+    {
+      "id": "UX-034",
+      "status": "implemented-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; replacements.json agent-runtime hunk; agent-runtime-clarification.test.cjs: typed ask_clarification tool and validated JSON content pending_question model contract; candidate tests: plan mode marks execution unavailable and rejects approval/execution; agent-runtime model-factory test reaches typed pending state",
+      "limitation": "Provider selection and capability validation remain root/provider-owned; the candidate runtime hunk only extracts a structured model pending question."
+    },
+    {
+      "id": "UX-072",
+      "status": "implemented-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and polished-approval-workflow.browser.test.cjs: exact target, diff, impact, rollback, scopeDigest/actionDigest and stale replacement",
+      "limitation": "Network configuration impact is represented as review data; no device write or rollback was attempted."
+    },
+    {
+      "id": "UX-073",
+      "status": "partial-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/polished-approval-workflow.browser.test.cjs: immutable review receipts retain proposal scope/action identity across reload and browser review card shows the same digests",
+      "limitation": "Inline evidence annotation remains outside this workflow card slice."
+    },
+    {
+      "id": "UX-074",
+      "status": "implemented-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and clarification-server-adapter.test.cjs: digest-bound decision and execution tokens, one-time consume, deny/cancel, expiry, unknown completion, explicit approved/mock receipt; SQLite BEGIN IMMEDIATE CAS prevents stale-owner duplicate approval/executor crossing",
+      "limitation": "Executor is restricted to an explicitly marked mock boundary; no real write success is claimed."
+    },
+    {
+      "id": "UX-075",
+      "status": "missing",
+      "evidence": "completion/baseline-ledger.json UX-075 acceptance/dependency; candidate workflow API exposes no stage, commit, push, publish, or hidden Git operation",
+      "limitation": "Git stage/commit/PR controls are not implemented in this candidate slice. The baseline marks the row Missing and recommends deferral until configuration-as-code is a primary workflow; the separate repo/diff-bound contract remains a parent-owned follow-up."
+    },
+    {
+      "id": "UX-080",
+      "status": "implemented-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and polished-approval-workflow.browser.test.cjs: affected target/scope, impact, rollback limits, and no chat-revert substitute",
+      "limitation": "Rollback remains descriptive review data; no network state-changing operation was invoked."
+    },
+    {
+      "id": "UX-114",
+      "status": "partial-candidate",
+      "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; candidate/polished-approval-workflow.js; replacements.json: persisted ownership, receipt, and shared scope/action digest through review, approval, execution, and UI; normal HTTP fixture preserves same run/chat and selection; authoritative SQLite reopen, failed-commit, repeated-reload, and cross-owner tests; pending response metadata is safe and tokenless persisted state restores as review-only",
+      "limitation": "The candidate UI/API shares exact scope and digests through its own explicit mock boundary. Existing execution-service/adapters are not wired to this approval store in this candidate, so no real adapter execution claim is made; root must compose the existing approved execution contract before promotion."
+    }
+  ]
+}

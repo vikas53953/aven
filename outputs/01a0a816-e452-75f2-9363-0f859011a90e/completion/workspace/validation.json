@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "scope": "workspace capability candidate",
+  "tests": [
+    {
+      "command": "node --check workspace/candidate/workspace-capabilities.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node workspace/candidate/workspace-capabilities.test.cjs",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "cases": 37,
+        "blockedRequests": 0,
+        "externalCalls": 0
+      }
+    },
+    {
+      "command": "node workspace/candidate/workspace-capabilities.browser.test.cjs",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "cases": 25,
+        "blockedRequests": 0,
+        "externalCalls": 0
+      }
+    },
+    {
+      "command": "node workspace/candidate/agent-runtime.stable-id.test.cjs",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "cases": 9,
+        "ambiguousRejected": true,
+        "selectedDeviceId": "bb754801-8895-41e8-8ca5-27ee415c9c42",
+        "mismatchRejected": true,
+        "externalCalls": 0
+      }
+    },
+    {
+      "command": "temporary fixture: node --test agent-runtime.test.cjs with all runtime replacements",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "tests": 8,
+        "failed": 0,
+        "externalCalls": 0
+      }
+    },
+    {
+      "command": "node workspace/candidate/workspace-capabilities.server.test.cjs",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "cases": 18,
+        "blockedRequests": 0,
+        "externalCalls": 0,
+        "adapterCalls": 1
+      }
+    },
+    {
+      "command": "npm run check (intentgraph)",
+      "exitCode": 0
+    },
+    {
+      "name": "replacement manifest exactness",
+      "result": "PASS",
+      "sourceSHAByFile": {
+        "polished.html": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+        "polished.js": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+        "polished-workspace-tools.js": "350E57DFAB400803800577CACC19692456A23E87A296601EC6B819845FDD9850",
+        "intentgraph/server.cjs": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF"
+      },
+      "candidateSHAByFile": {
+        "polished.html": "6C3B36EE43F277B9FCE5F1ADD3D3A9885CB37D7766EB8D0328597ACD50BFF8E4",
+        "polished.js": "34AD3665704D835BA536ED06727B411A097D4E34D865A4B3607ABCB16AFEF446",
+        "polished-workspace-tools.js": "19159680C5524647753538CEE579CDB33B6DBD4533DBA4683E0F9F6C479DD82B",
+        "intentgraph/server.cjs": "CEFFD9443A6392F23C3E136DF02826FD176E137FB8F07A72B827C6C333E955E7",
+        "intentgraph/agent-runtime.cjs": "FBEF7BF304F72C4E99CE1289FBC67CB662A4E36DBBAB86A64CA14037E1C90765",
+        "intentgraph/agent-runtime.test.cjs": "2D29BBB96C5B0E1A71C9BC21C99973C03B9FDA816C93C64DE36B386A674F5B66"
+      },
+      "replacementAnchors": 28,
+      "replacementHashesVerified": true,
+      "serverOriginGuardUnchanged": true,
+      "actionTokenExposedToWorkspaceRead": false
+    }
+  ],
+  "blockedPolicy": "Tests use injected adapters, temporary server fixtures, synthetic DOM and local File objects only. No provider, credential, external network, OS device, browser, computer or terminal operation is invoked.",
+  "limitations": [
+    "The browser and computer panes require the local service and an explicitly connected adapter session; no live session is claimed.",
+    "The terminal contract remains explicitly unavailable because the current execution adapter exposes no terminal operation.",
+    "No live device selection or OS inventory call was made; runtime validation is covered with injected duplicate-alias inventory and command mocks.",
+    "The candidate full-shell check is an in-memory polished shell assembled from exact replacements; packaged desktop launch remains unverified."
+  ]
+}

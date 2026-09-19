@@ -1,0 +1,10 @@
+{
+  "at": "2026-09-15T08:29:45.811Z",
+  "passed": true,
+  "checks": [
+    "backup failure preserves raw conversations/draft/queue",
+    "chat persistence failure preserves original raw state",
+    "failure never stamps reaction migration complete"
+  ],
+  "scope": "Isolated mocked browser storage failures"
+}

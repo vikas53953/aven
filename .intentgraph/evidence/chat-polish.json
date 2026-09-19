@@ -1,0 +1,16 @@
+{
+  "at": "2026-09-15T04:06:36.426Z",
+  "passed": true,
+  "checks": [
+    "one terminal despite duplicate event/final/fenced/table output",
+    "explanation collapsed",
+    "hover and keyboard focus metadata",
+    "exact copy payload",
+    "Direct and Projects exclusive navigation",
+    "mixed agent routing",
+    "move only selected conversation",
+    "reload ownership",
+    "390px overflow",
+    "no page errors"
+  ]
+}

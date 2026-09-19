@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-09-16T00:00:00+05:30",
+  "scope": "Pending-88 Preserve / verify rows; current source; isolated local fixtures only; no provider/device execution",
+  "summary": {
+    "pass": 24,
+    "partial": 0,
+    "gap": 0
+  },
+  "rows": [
+    {
+      "id": "UX-008",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/ux-fixes-2026-09-15/history-regression.json (stable coworker title after hi); .intentgraph/runtime/verify-direct-teams.cjs:8,12",
+      "source": "polished.js:734-737,777-778"
+    },
+    {
+      "id": "UX-010",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/project-navigation.json (pin/reload/order)",
+      "source": "polished.js:745-747"
+    },
+    {
+      "id": "UX-011",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (chatTitle changed; coworkerName unchanged)",
+      "source": "polished.js:739-740"
+    },
+    {
+      "id": "UX-013",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/accessibility-results.json (UX096 PASS at 320/390/760/1440; page/body bounds); .intentgraph/evidence/project-navigation.json (persistent collapse)",
+      "source": "polished.css:450-465,542-544"
+    },
+    {
+      "id": "UX-015",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/ux-fixes-2026-09-15/history-navigation.json (saved phrase, coworker/conversation filters, exact result navigation)",
+      "source": "polished.js:786-815"
+    },
+    {
+      "id": "UX-019",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (emptyDisabled=true, multilineHeld=true, imeHeld=true, calls=0)",
+      "source": "polished.js:519,711"
+    },
+    {
+      "id": "UX-020",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/ux-pipeline-2026-09-16/navigation.json (back/forward preserves two drafts and reload)",
+      "source": "polished.js:80,516,777"
+    },
+    {
+      "id": "UX-028",
+      "result": "PASS",
+      "evidence": "isolated run `node .intentgraph/runtime/verify-agent-stream-ui.cjs`; .intentgraph/evidence/chat-polish.json (one terminal despite duplicate event/final)",
+      "source": "polished.js:642-681"
+    },
+    {
+      "id": "UX-030",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (storage failure: 0 calls, queue retained; recovery: 1 call); .intentgraph/runtime/verify-queue-terminal.cjs:49-75",
+      "source": "polished.js:509-515,670-682"
+    },
+    {
+      "id": "UX-031",
+      "result": "PASS",
+      "evidence": ".intentgraph/runtime/verify-queue-terminal.cjs:49-75,120-128 (FIFO/edit/remove/resume/reload pause)",
+      "source": "polished.js:489-507"
+    },
+    {
+      "id": "UX-032",
+      "result": "PASS",
+      "evidence": "25/25 local fixture tests passed, including `intentgraph/steering.test.cjs:166-191` (next model boundary, applied once); .intentgraph/runtime/verify-queue-terminal.cjs:77-118",
+      "source": "polished.js:642-668"
+    },
+    {
+      "id": "UX-035",
+      "result": "PASS",
+      "evidence": ".intentgraph/runtime/verify-queue-terminal.cjs:77-118 (tool input/result/status/raw output distinct); isolated stream UI passed",
+      "source": "polished.js:441-448"
+    },
+    {
+      "id": "UX-042",
+      "result": "PASS",
+      "evidence": ".intentgraph/runtime/verify-queue-terminal.cjs:77-118 (exact raw whitespace/copy); .intentgraph/evidence/ux-fixes-2026-09-15/root-review.json",
+      "source": "polished.js:317-319,415-428"
+    },
+    {
+      "id": "UX-043",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (clipboard denial reports failure); .intentgraph/evidence/message-tools.json (answer/question copy)",
+      "source": "polished.js:333-334,428"
+    },
+    {
+      "id": "UX-046",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/ux-fixes-2026-09-15/history-regression.json (revert no execution, undo after reload); .intentgraph/runtime/verify-edit-rendering.cjs:1-16 (queued edit disabled)",
+      "source": "polished.js:389-411"
+    },
+    {
+      "id": "UX-050",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/project-navigation.json (archive/restore/reload and busy guard); .intentgraph/evidence/ux-fixes-2026-09-15/history-navigation.json (archived read-only)",
+      "source": "polished.js:98-101,816-817"
+    },
+    {
+      "id": "UX-054",
+      "result": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json (all avatar choices/custom color/photo/migration/reload; no external requests); .intentgraph/runtime/verify-backup-schema.cjs:4,15-28",
+      "source": "polished.js:541-570; polished-avatars.js"
+    },
+    {
+      "id": "UX-055",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/ux-fixes-2026-09-15/root-identity-review.json (profile identity/rename sync); .intentgraph/avatar-family-app-qa-results.json (long-name responsive fixture)",
+      "source": "polished.js:541-545,782"
+    },
+    {
+      "id": "UX-078",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (Markdown has run-42 and command/target); .intentgraph/evidence/ux-fixes-2026-09-15/local-data-ui.json (raw export)",
+      "source": "polished.js:823-830"
+    },
+    {
+      "id": "UX-079",
+      "result": "PASS",
+      "evidence": "preserved-audit.json: top-level SUCCESS with nested FAILURE renders FAILURE; run state outcome precedence verified",
+      "source": "polished.js:679,424",
+      "acceptance": "Derive displayed run status from all evidence/tool statuses, or explicitly mark health UNKNOWN when envelope and device evidence disagree; fixture with top-level SUCCESS plus nested FAILURE must never render Run details \u00c2\u00b7 SUCCESS."
+    },
+    {
+      "id": "UX-101",
+      "result": "PASS",
+      "evidence": ".intentgraph/runtime/verify-backup-schema.cjs:4-28 (current six backup/transaction/size tests); .intentgraph/evidence/ux-fixes-2026-09-15/local-data-ui.json (roundtrip/Add/replace/reload); .intentgraph/evidence/ux-fixes-2026-09-15/history-regression.json (revert/avatar/history)",
+      "source": "polished-backup.js; polished.js:821-856"
+    },
+    {
+      "id": "UX-106",
+      "result": "PASS",
+      "evidence": "25/25 local fixture tests passed: agent-runtime/chat-runtime/network-execution/sandbox-routes/steering suites (allowlist, exact target, failed transport, read-only origin/header); no provider/device calls",
+      "source": "intentgraph/agent-runtime.cjs:205-210,237-329; intentgraph/server.cjs:295-311; polished.js:590-613"
+    },
+    {
+      "id": "UX-111",
+      "result": "PASS",
+      "evidence": ".intentgraph/evidence/pending-88-20260916/preserved-audit.json (beforeOpen=true, afterOpen=false; no request path)",
+      "source": "polished.js:739,777,745"
+    },
+    {
+      "id": "UX-115",
+      "result": "PASS",
+      "evidence": "isolated `verify-chat-read-api.cjs` passed (original raw provenance/read-back; secret fields stripped); .intentgraph/evidence/pending-88-20260916/run-recovery.json (reload/deep links/durable capture)",
+      "source": "intentgraph/chat-read-api.cjs; polished-run-state.js:12-24; polished.js:852-856"
+    }
+  ]
+}

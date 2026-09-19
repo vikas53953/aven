@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 2,
+  "assignment": "UX071 + UX075",
+  "scope": "Round-2 fixes against the frozen completion/git candidate; completion/terminal is reused unchanged.",
+  "frozenInput": "completion/git",
+  "sourceFiles": {
+    "intentgraph/git-workspace.cjs": {
+      "input": "completion/git/intentgraph/git-workspace.cjs",
+      "inputBytes": 46001,
+      "inputSHA256": "9598E8BA01BF8D7A8372EB0EDCC635F50EE0462CA58024C9276574DC8B57718E",
+      "output": "completion/round2/terminal-git/git/intentgraph/git-workspace.cjs",
+      "outputBytes": 46356,
+      "outputSHA256": "CC4DD031C44058BF87B84FEA733846FCE961CACA1DECB89453D6D376E011AFD3"
+    },
+    "polished-git.js": {
+      "input": "completion/git/polished-git.js",
+      "inputBytes": 17264,
+      "inputSHA256": "27898A8A885108FEC9CA006D9870BEA5675EA7118B139DB3376831F21843D6D1",
+      "output": "completion/round2/terminal-git/git/polished-git.js",
+      "outputBytes": 18027,
+      "outputSHA256": "15665315F7B28E40A09825BB5AA67A8D5652AADA39DD2E0C51D05D4FBCAC3AA5"
+    }
+  },
+  "replacements": [
+    {
+      "sequence": 1,
+      "file": "intentgraph/git-workspace.cjs",
+      "anchor": "this.gitPath",
+      "old": "    this.gitPath = options.gitPath || process.env.AVEN_GIT_PATH || 'git';\n    this.ghPath = options.ghPath || process.env.AVEN_GH_PATH || 'gh';",
+      "new": "    // Executables are injected by the trusted host/runtime. Do not let a\n    // process environment variable redirect Git or gh to an arbitrary file.\n    // The product host supplies the bundled executable through options.\n    this.gitPath = options.gitPath || 'git';\n    this.ghPath = options.ghPath || 'gh';"
+    },
+    {
+      "sequence": 2,
+      "file": "intentgraph/git-workspace.cjs",
+      "anchor": "async _snapshot(identity)",
+      "old": "  async _snapshot(identity) {\n    const status = await this._status(identity);\n    const tracked = parseNulRawNames(await this._run(['ls-files', '-z', '--'], identity.root));\n    const untracked = parseNulRawNames(await this._run(['ls-files', '--others', '--exclude-standard', '-z', '--'], identity.root));\n    await this._assertNoFilters(identity, [...new Set([...tracked, ...untracked, ...status.map((entry) => entry.path)])]);",
+      "new": "  async _snapshot(identity) {\n    const tracked = parseNulRawNames(await this._run(['ls-files', '-z', '--'], identity.root));\n    const untracked = parseNulRawNames(await this._run(['ls-files', '--others', '--exclude-standard', '-z', '--'], identity.root));\n    // Reject clean/process filters before status or diff can refresh/transform\n    // any path. This is the first repository-content operation after identity.\n    await this._assertNoFilters(identity, [...new Set([...tracked, ...untracked])]);\n    const status = await this._status(identity);"
+    },
+    {
+      "sequence": 3,
+      "file": "intentgraph/git-workspace.cjs",
+      "anchor": "const transportConfig",
+      "old": "    const transportConfig = await this._tryRun(['config', '--local', '--get-regexp', '^(core\\.(sshcommand|gitproxy)|https?\\.proxy|url\\..*\\.insteadof|remote\\..*\\.(uploadpack|receivepack))$'], identity.root);",
+      "new": "    const transportConfig = await this._tryRun(['config', '--local', '--get-regexp', '^(core\\.(sshcommand|gitproxy)|https?\\..*\\.(proxy|sslverify|extraheader)|https?\\.(proxy|sslverify|extraheader)|url\\..*\\.insteadof|remote\\..*\\.(uploadpack|receivepack))$'], identity.root);"
+    },
+    {
+      "sequence": 4,
+      "file": "polished-git.js",
+      "anchor": "if (!response.ok)",
+      "old": "      if (!response.ok) { const error = new Error(result.reasons?.[0] || result.error || 'Git workspace request failed.'); error.code = result.error; throw error; }",
+      "new": "      if (!response.ok) {\n        const error = new Error(result.reasons?.[0] || result.error || 'Git workspace request failed.');\n        error.code = result.error;\n        error.unknown = result.unknown === true;\n        error.retry = result.retry;\n        error.commitOid = result.commitOid;\n        error.orphanObject = result.orphanObject;\n        throw error;\n      }"
+    },
+    {
+      "sequence": 5,
+      "file": "polished-git.js",
+      "anchor": "function clearReviews()",
+      "old": "    function clearReviews() { state.review = null; state.commitReview = null; state.prReview = null; patchReview.hidden = true; commitReview.hidden = true; prReview.hidden = true; publishPr.disabled = true; }",
+      "new": "    function clearReviews() { state.review = null; state.commitReview = null; state.prReview = null; patchReview.hidden = true; commitReview.hidden = true; prReview.hidden = true; publishPr.disabled = true; }\n\n    function commitUnknownMessage(result) {\n      const commitOid = result?.commitOid;\n      const objectNote = result?.orphanObject === true ? ' The commit object may be orphaned.' : '';\n      return `Commit outcome is unknown; do not retry automatically.${commitOid ? ` Commit object: ${commitOid}.` : ''}${objectNote}`;\n    }"
+    },
+    {
+      "sequence": 6,
+      "file": "polished-git.js",
+      "anchor": "async function createCommit()",
+      "old": "    async function createCommit() {\n      if (!state.commitReview) return;\n      state.busy = true;\n      commitConfirm.disabled = true;\n      try { const result = await request('/commit', { token: state.commitReview.token, message: state.commitReview.message }); state.commitReview = null; commitReview.hidden = true; await refresh(); setStatus(`Local commit created at ${result.commitOid.slice(0, 12)}. No hooks or signing were run.`); }\n      catch (error) { state.commitReview = null; commitReview.hidden = true; setStatus(error.message, 'error'); }\n      finally { state.busy = false; commitConfirm.disabled = false; }\n    }",
+      "new": "    async function createCommit() {\n      if (!state.commitReview) return;\n      state.busy = true;\n      commitConfirm.disabled = true;\n      try {\n        const result = await request('/commit', { token: state.commitReview.token, message: state.commitReview.message });\n        state.commitReview = null; commitReview.hidden = true;\n        await refresh();\n        if (result?.state === 'unknown') setStatus(commitUnknownMessage(result), 'error');\n        else setStatus(`Local commit created at ${result.commitOid.slice(0, 12)}. No hooks or signing were run.`);\n      } catch (error) {\n        state.commitReview = null; commitReview.hidden = true;\n        setStatus(error.unknown || error.code === 'unknown' ? commitUnknownMessage(error) : error.message, 'error');\n      }\n      finally { state.busy = false; commitConfirm.disabled = false; }\n    }"
+    }
+  ],
+  "testArtifacts": {
+    "backend": "completion/round2/terminal-git/git/intentgraph/git-workspace.test.cjs",
+    "backendSHA256": "5839F1206DD85ECBF3C5B1A0DEB24AB5552AD00B21148F1FF606ABB8E7A8AB5E",
+    "browser": "completion/round2/terminal-git/git/git-ui.test.cjs",
+    "browserSHA256": "584D3B5BB3344D3C5EDF8429789F17B4CF2A59C013B7E1CF7C1E9BEE6C8AC216",
+    "terminalFixture": "completion/round2/terminal-git/terminal/terminal.server.test.cjs",
+    "terminalFixtureSHA256": "D98BD41D17B6E9C8E2C226D66E3FC26E2C9A7D836C21A1894B31947D11B2990E",
+    "assemblyRunner": "completion/round2/terminal-git/verify-round2.cjs"
+  },
+  "validation": {
+    "backend": "10 passed, 0 failed (temporary repositories and mock remotes only)",
+    "browser": "1 passed, 0 failed (headless Chrome; mocked HTTP API)",
+    "syntax": "backend, UI, and assembly runner --check passed",
+    "terminalReuse": "completion/terminal frozen server 5/5 and browser 6/6 evidence retained"
+  },
+  "unverified": [
+    "No user repository was staged, committed, pushed, or published.",
+    "No real Git remote, provider credential, network device, or arbitrary OS shell was used.",
+    "Screen-reader certification remains outside the isolated browser fixture."
+  ]
+}

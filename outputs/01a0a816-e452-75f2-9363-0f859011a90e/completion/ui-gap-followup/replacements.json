@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-09-16T07:45:49.666Z",
+  "baseline": "ui-release/candidate (ux-minimal-ui-v9.1)",
+  "sourcePath": "ui-release/candidate/polished.js",
+  "sourceSha256": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+  "candidatePath": "ui-gap-followup/candidate/polished.js",
+  "candidateSha256": "2a9649792fb68b2e6d15f3c253e497a989c44d1b4e643b9ef09062622979fb15",
+  "replacements": [
+    {
+      "file": "polished.js",
+      "old": "const shortcuts=localActions().filter(a=>a.shortcut).map(a=>[a.shortcut,a.label]);",
+      "new": "const shortcuts=localActions().filter(a=>a.shortcut&&!a.reason).map(a=>[a.shortcut,a.label]);",
+      "acceptance": "UX-065"
+    },
+    {
+      "file": "polished.js",
+      "old": "function openEvidencePane(kind,c,m){",
+      "new": "function openEvidencePane(kind,c,m,opener=null){",
+      "acceptance": "UX-069"
+    },
+    {
+      "file": "polished.js",
+      "old": "\n    resetToolContext();if(byId('right-pane').hidden)paneOpener=document.activeElement;",
+      "new": "\n    resetToolContext();if(byId('right-pane').hidden)paneOpener=opener||document.activeElement;",
+      "acceptance": "UX-069"
+    },
+    {
+      "file": "polished.js",
+      "old": "run:()=>openEvidencePane('annotate',c,m)}",
+      "new": "run:()=>openEvidencePane('annotate',c,m,opener)}",
+      "acceptance": "UX-069"
+    },
+    {
+      "file": "polished.js",
+      "old": "run:()=>openEvidencePane('compare',c,m)}",
+      "new": "run:()=>openEvidencePane('compare',c,m,opener)}",
+      "acceptance": "UX-069"
+    }
+  ],
+  "sequentialSteps": [
+    {
+      "acceptance": "UX-065",
+      "file": "polished.js",
+      "occurrences": 1,
+      "beforeSha256": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "afterSha256": "b8e01c6b272e67ae7e1276617a737dd40b99781fe65c82938d4ce497ecc37be1"
+    },
+    {
+      "acceptance": "UX-069",
+      "file": "polished.js",
+      "occurrences": 1,
+      "beforeSha256": "b8e01c6b272e67ae7e1276617a737dd40b99781fe65c82938d4ce497ecc37be1",
+      "afterSha256": "02e52f1c4e9163ae64ef6cedd84c3c8c4d3bb591cebe9c154d819a114da2847b"
+    },
+    {
+      "acceptance": "UX-069",
+      "file": "polished.js",
+      "occurrences": 1,
+      "beforeSha256": "02e52f1c4e9163ae64ef6cedd84c3c8c4d3bb591cebe9c154d819a114da2847b",
+      "afterSha256": "28952f8504071e10e4354ef111cba72b1d5e5b7245d4d4e40459e3aef3f5270e"
+    },
+    {
+      "acceptance": "UX-069",
+      "file": "polished.js",
+      "occurrences": 1,
+      "beforeSha256": "28952f8504071e10e4354ef111cba72b1d5e5b7245d4d4e40459e3aef3f5270e",
+      "afterSha256": "3b4a3bf8ff69a1e8ce3c4d2ae8a303dca750d403fe8128139573ef04a7cab79f"
+    },
+    {
+      "acceptance": "UX-069",
+      "file": "polished.js",
+      "occurrences": 1,
+      "beforeSha256": "3b4a3bf8ff69a1e8ce3c4d2ae8a303dca750d403fe8128139573ef04a7cab79f",
+      "afterSha256": "2a9649792fb68b2e6d15f3c253e497a989c44d1b4e643b9ef09062622979fb15"
+    }
+  ],
+  "touchedFiles": [
+    "polished.js"
+  ],
+  "liveFilesModified": [],
+  "scope": "UX-065 unavailable shortcut advertising and Ctrl/Cmd+F binding; UX-069 evidence pane focus return"
+}

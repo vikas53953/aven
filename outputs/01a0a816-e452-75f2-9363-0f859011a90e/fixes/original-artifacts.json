@@ -1,0 +1,14 @@
+[
+  {
+    "file": "Aven-Independent-Audit.xlsx",
+    "sha256": "3FC2940D99C2E99B3D8631C62B9CED8CD89CAB0B3A56CA90E7C5925991686D99"
+  },
+  {
+    "file": "integrated-audit.json",
+    "sha256": "13A988F541761D0174512091C5EAD042C8B8F88C31E30426039FBB83F0210394"
+  },
+  {
+    "file": "source-register.json",
+    "sha256": "B5ADDA883F2BDF3F2BEDE28D5A5A7F3A034BBDC890568931B71C549AA1C82356"
+  }
+]

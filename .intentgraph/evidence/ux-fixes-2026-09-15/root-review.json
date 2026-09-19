@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-15T08:23:30.062Z",
+  "passed": true,
+  "checks": [
+    "selected profile identity",
+    "seven horizontal reaction controls",
+    "replace/toggle/More/reload and keyboard focus",
+    "draft retained",
+    "raw CLI exact text and writeText input; Windows clipboard CRLF normalization",
+    "wheel/keyboard/touch-emulated scroll",
+    "idle scrollbar transparent",
+    "reduced motion and forced colors",
+    "page/sidebar bounds at 1440/1024/768/390",
+    "local notes saved and excluded from mock chat payload",
+    "no page errors"
+  ],
+  "blockedRequests": [],
+  "scope": "Isolated Chromium fixture with mocked chat; no provider/device requests; no physical touch-device or owner acceptance"
+}

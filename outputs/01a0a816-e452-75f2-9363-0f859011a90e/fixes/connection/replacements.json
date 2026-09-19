@@ -1,0 +1,52 @@
+[
+  {
+    "file": "polished.js",
+    "old": "  function renderLocalDiagnostics(container){return AvenDiagnostics.render(container,{build:UI_BUILD,chatId:currentChat()?.id,onDownload:downloadLocal});}",
+    "new": "  function renderLocalDiagnostics(container,onStatus){return AvenDiagnostics.render(container,{build:UI_BUILD,chatId:currentChat()?.id,onDownload:downloadLocal,onStatus});}"
+  },
+  {
+    "file": "polished.js",
+    "old": "<dt>Chat connection</dt><dd>OpenCode · MiMo V2.5 (configured)</dd>",
+    "new": "<dt>Chat connection</dt><dd id=\"about-chat-connection\">Unknown · local status not checked</dd>"
+  },
+  {
+    "file": "polished.js",
+    "old": "<p class=\"setting-help\">This identifies the loaded UI. It does not confirm provider or device health. Export and recovery are available under Settings → Privacy &amp; data.</p>",
+    "new": "<p class=\"setting-help\">This identifies the loaded UI. Connection details update from the local status check; they do not confirm provider or device reachability. Export and recovery are available under Settings → Privacy &amp; data.</p>"
+  },
+  {
+    "file": "polished.js",
+    "old": "const diagnostics=document.createElement('section');byId('info-dialog-body').append(diagnostics);renderLocalDiagnostics(diagnostics);",
+    "new": "const connectionRow=byId('about-chat-connection');const diagnostics=document.createElement('section');byId('info-dialog-body').append(diagnostics);renderLocalDiagnostics(diagnostics,snapshot=>{const row=connectionRow;if(!row?.isConnected)return;if(snapshot?.state==='unavailable'){row.textContent='Unavailable · local status unavailable';return;}if(snapshot?.state==='checking'||snapshot?.state==='unknown'){row.textContent='Unknown · local status not checked';return;}const provider=typeof snapshot?.provider==='string'&&snapshot.provider.trim()?snapshot.provider:'Unavailable';const model=typeof snapshot?.model==='string'&&snapshot.model.trim()?snapshot.model:'Unavailable';row.textContent=provider+' · '+model+' ('+(snapshot?.configured===true?'configured':'not configured')+'; reachability unverified)';});"
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": "function render(container,{build,chatId,onDownload}={})",
+    "new": "function render(container,{build,chatId,onDownload,onStatus}={})"
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": "OpenCode Go / MiMo V2.5 is the current runtime. Provider switching is not available. Refresh reads local configuration and historical checks; device reachability remains unverified.",
+    "new": "Refresh reads local configuration and historical checks. Provider and model are shown from that local status only; device reachability remains unverified."
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": "status.textContent='Reading local configuration…';try{const value=await get('status');",
+    "new": "status.textContent='Reading local configuration…';onStatus?.({state:'checking'});try{const value=await get('status');"
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": "const value=await get('status');safe={",
+    "new": "const value=await get('status');if(!value||typeof value!=='object'||typeof value.configured!=='boolean')throw Error('Invalid local status');safe={"
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": "report.hidden=false;copy.disabled=false;status.textContent=",
+    "new": "report.hidden=false;copy.disabled=false;onStatus?.({...safe,state:'checked'});status.textContent="
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "old": ";}catch{status.textContent='Local status unavailable.",
+    "new": ";}catch{onStatus?.({state:'unavailable'});status.textContent='Local status unavailable."
+  }
+]

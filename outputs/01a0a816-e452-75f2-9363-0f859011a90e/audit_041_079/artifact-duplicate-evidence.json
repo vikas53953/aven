@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-16T03:21:09.088Z",
+  "passed": true,
+  "occurrences": 2,
+  "finding": "same output persisted in events and evidence is rendered twice by artifactEntries because seen is identity-based."
+}

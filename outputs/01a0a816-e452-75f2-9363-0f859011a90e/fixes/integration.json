@@ -1,0 +1,130 @@
+{
+  "appliedAt": "2026-09-16T04:08:19.040Z",
+  "changes": [
+    {
+      "owner": "creation",
+      "file": "polished.js",
+      "oldSha256": "bbbea8db9bbe114c191bdca808da232d7b69dfe70172da8274de1210116665b9",
+      "newSha256": "d2d3314bff32764bffac3bec0d8e74b384fde88d97d7f23aa42f0658460bf497"
+    },
+    {
+      "owner": "creation",
+      "file": "polished.js",
+      "oldSha256": "5c7ed2b22b9df6bfd83194cac4af0454675337857e2d2a0b38c13790ecf65891",
+      "newSha256": "1f43776581d01bdc014a4516aa9be4c5c3e221464bed2054a8bab644eaf8ae06"
+    },
+    {
+      "owner": "creation",
+      "file": "polished.js",
+      "oldSha256": "615a28767bc2fc2355ca98c6764af4be9acf176bfe65d19f5cb772c2d135e9fc",
+      "newSha256": "e888afb45075c149f2cd0f30600fb55d8c8ee2490346c6855461fdcad79a8de9"
+    },
+    {
+      "owner": "creation",
+      "file": "polished.js",
+      "oldSha256": "48389da55872bd273a21a1c2baeeca900e304ef6a88df9c2c457f9e126932db0",
+      "newSha256": "a38b6518d6d2054859267a0bfaf2e24cf671b76242145bbf6db9453404e7bc08"
+    },
+    {
+      "owner": "creation",
+      "file": "polished.js",
+      "oldSha256": "9972779ffe3cbcb3c5dad007093db7017cbb4bb0a9c2b3c3e0c5a2b6b35543ee",
+      "newSha256": "c723335f6db5b0d796153267d29b2fe5a2f589d4045d2a2298279529e8efdc7a"
+    },
+    {
+      "owner": "connection",
+      "file": "polished.js",
+      "oldSha256": "35204449a264b34db1f8d4ae41e6bef78bd0602cec59b4fa8436bc6656b48db2",
+      "newSha256": "98f90bd3cb1a1eae862ffd1b8c2df1d1b5e17f83b7c679647285038ce7e8b3aa"
+    },
+    {
+      "owner": "connection",
+      "file": "polished.js",
+      "oldSha256": "746ed7da0c54ddfb5adbf7e4d776b8c9538b985f01e892029b9ae344aed1d9e2",
+      "newSha256": "c020a6f1090fa88a0db9f5770e77d3fe9bcefa560a339c1119f20093ad16f574"
+    },
+    {
+      "owner": "connection",
+      "file": "polished.js",
+      "oldSha256": "6d8576e1ed29431106611b5f09af37303a6501ba75a984395621fd77033857b8",
+      "newSha256": "fae49fb3ab6b6827f4370039d9aa39da56494d1619015ab472b5bae6322b4a15"
+    },
+    {
+      "owner": "connection",
+      "file": "polished.js",
+      "oldSha256": "7090d0c3ac8c8ca4fa080f6546cf08eca0ef57d1bcb4b7f5b434254eceac2bfe",
+      "newSha256": "fb030675283430e6f229e78fce32691e95dd2f9cf15ab511f2a41827b3d39deb"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "fad309ad419f7b43385dd45174cf57b8ff6d0cfa3d31aa984aae41a43ed8b58f",
+      "newSha256": "79fbe02d18790ae901372e20d7e26ff25ed64438473289437fbf1f303a1704a6"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "fb00a8e241078a415c319ce670c9b19e0f1f134afd355dbf42adf4f75f8c469b",
+      "newSha256": "6abae01dfcadc34dcb498d42674e7ee6a6838323d35d99d47bd0358763a4a684"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "c60dda8a300b6f8419232732a01ed19dd75e37ab6265680238d6d5366cfe2188",
+      "newSha256": "3d637a4998573fcb8639c65a8f307932a7c1e9b4929e83200b235d4b2b0d6f3a"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "0cf05ca982bbbad99b269980ebd2717e5aa5aee3ab466f26543669093d80b019",
+      "newSha256": "ec1c195cdfd85b6951cb3b9a1effe16aa96962afb2dfe2cd84a972f20b8a3914"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "01be5fbcb0579b1c243099b0c11a83e9c73c295f7b652735e977d797af84c310",
+      "newSha256": "3a1548d98d66b93dbb36063ecfc3304e0ab34c5934fe11f3d9c07c51115575e4"
+    },
+    {
+      "owner": "connection",
+      "file": "polished-diagnostics.js",
+      "oldSha256": "cf4d5ede0306586219319ec077bbcda8e20d40d5d1d410fff0626f7e5789feb9",
+      "newSha256": "ede8f5f22850d69bf41a62b5938530117438f6f7f5f9e1f95404633195d1a105"
+    },
+    {
+      "owner": "artifacts",
+      "file": "polished-workspace-tools.js",
+      "oldSha256": "385d475aba31faeab7cb2f0d4d8ab07539a58a244096b2522957ac0af213dea3",
+      "newSha256": "f1ba2ed4488e3fa2fc3bd7050d332fc712532a8efdc4b0f5022a1d5b5dc0b3fe"
+    },
+    {
+      "owner": "artifacts",
+      "file": "polished-workspace-tools.js",
+      "oldSha256": "b9673f78dbcf46596e2a376e85e8abc30263a0ebbdbb10e18bcba2bde67bdc5e",
+      "newSha256": "f1cff5a92354fb16356189b50a3c2e685c4e94937081dde0adb4954b8131fe14"
+    },
+    {
+      "owner": "header",
+      "file": "polished.js",
+      "oldSha256": "1fb45ee7cd81b4f4723cc3a6913647f38d57cae465ccc1e2b860bb5de47ff32c",
+      "newSha256": "2b5ab0525e1b869b4f95330e7d430b3825f4872172c4c8a9ddb2d5bb6fcfa0a2"
+    }
+  ],
+  "files": [
+    {
+      "file": "polished.js",
+      "before": "82666c61754b7e32ab13b78dcbf64018b68c2d28244b876f2d9b3f881f491b0a",
+      "after": "fa55b7fae0a590ac17b0e40bd25d5c7ec96638f9709d1201ff1253868d3b179a"
+    },
+    {
+      "file": "polished-diagnostics.js",
+      "before": "ec276ce3431347de09f51be4fa3fc1c167fd8e1a594782e4095da7c067d6a9b2",
+      "after": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "before": "5395bd4fac4a25fe5f63c8e05d1c8db18e66d2bdb7435b7024bf8f1aa77e6ef6",
+      "after": "350e57dfab400803800577cacc19692456a23e87a296601ec6b819845fdd9850"
+    }
+  ]
+}

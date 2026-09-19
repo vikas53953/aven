@@ -1,0 +1,29 @@
+{
+  "cisco_ios": [
+    "show version",
+    "show ip interface brief",
+    "show interfaces status",
+    "show vlan brief",
+    "show ip route",
+    "show interfaces",
+    "show interfaces description",
+    "show ip bgp summary",
+    "show ip bgp",
+    "show ip ospf neighbor",
+    "show ip route summary",
+    "show inventory",
+    "show ip arp",
+    "show mac address-table",
+    "show cdp neighbors",
+    "show cdp neighbors detail",
+    "show lldp neighbors",
+    "show lldp neighbors detail",
+    "show interfaces trunk",
+    "show spanning-tree",
+    "show etherchannel summary",
+    "show ip protocols",
+    "show ip ospf interface brief",
+    "show processes cpu sorted",
+    "show clock"
+  ]
+}

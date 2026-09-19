@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-15T19:40:29.203Z",
+  "passed": true,
+  "features": [
+    "UX-017",
+    "UX-024",
+    "UX-108"
+  ],
+  "checks": [
+    "find occurrences across formatted text and escaped punctuation",
+    "find navigation and draft preservation",
+    "reply select/cancel/reload never submits",
+    "explicit send carries bounded quote",
+    "queued quote survives reload and dispatch",
+    "context preview/payload 24-message limit and welcome exclusion",
+    "oversized quoted prompt preserves draft/history with no request",
+    "missing quote target explained",
+    "no page errors"
+  ],
+  "scope": "Isolated Chromium with mocked chat; no provider/device requests"
+}

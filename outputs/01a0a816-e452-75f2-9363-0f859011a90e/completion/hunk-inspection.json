@@ -1,0 +1,156 @@
+[
+  {
+    "owner": "reliability",
+    "status": "inspected",
+    "hunks": 32
+  },
+  {
+    "owner": "provider",
+    "file": "intentgraph/server.cjs",
+    "status": "overlap",
+    "preview": "      const mode = body?.mode === undefined ? 'inspect' : body.mode;\n      if(!body || Object.keys(b"
+  },
+  {
+    "owner": "provider",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),agentId,mo"
+  },
+  {
+    "owner": "provider",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "body:JSON.stringify({chatId:c.id,agentName:agent.name.slice(0,80),messages,mode:modeFor(requestMode)"
+  },
+  {
+    "owner": "provider",
+    "status": "inspected",
+    "hunks": 29
+  },
+  {
+    "owner": "workflows",
+    "file": "intentgraph/server.cjs",
+    "status": "overlap",
+    "preview": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, close"
+  },
+  {
+    "owner": "workflows",
+    "file": "intentgraph/server.cjs",
+    "status": "overlap",
+    "preview": "        const responder=options.chatResponder||require('./agent-runtime.cjs').respond;\n        const"
+  },
+  {
+    "owner": "workflows",
+    "file": "intentgraph/agent-runtime.cjs",
+    "status": "overlap",
+    "preview": "async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory,"
+  },
+  {
+    "owner": "workflows",
+    "file": "intentgraph/agent-runtime.cjs",
+    "status": "overlap",
+    "preview": "    let finalMessage = null;\n    const stream = agent.streamEvents({ messages: toMessages(messages) "
+  },
+  {
+    "owner": "workflows",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "      if(!response.ok)throw Error(result.error||'Connection unavailable.');if(typeof result.text!=='"
+  },
+  {
+    "owner": "workflows",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "if(chatRequests.size||c.queuePaused||c.pendingQueue?.length){"
+  },
+  {
+    "owner": "workflows",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return "
+  },
+  {
+    "owner": "workflows",
+    "status": "inspected",
+    "hunks": 21
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.html",
+    "status": "overlap",
+    "preview": "                  <span class=\"composer-note\" id=\"composer-note\">OpenCode · MiMo V2.5</span>\r\n"
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "  const defaultPrefs={theme:'system',accent:'black',language:'system',density:'comfortable',displayN"
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "    return {messages,characters,omitted:eligible.length-messages.length,total:eligible.length};\r\n"
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "    updateContextPreview();\r\n    const modePicker=byId('chat-mode');if(modePicker){modePicker.value="
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "    const status=byId('chat-status');status.replaceChildren();const error=chatErrors.get(c.id)||c.re"
+  },
+  {
+    "owner": "minimal-ui",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "  function renderSettingsPage(){all('[data-category]').forEach(b=>b.setAttribute('aria-current',Stri"
+  },
+  {
+    "owner": "minimal-ui",
+    "status": "inspected",
+    "hunks": 26
+  },
+  {
+    "owner": "workspace",
+    "file": "polished-workspace-tools.js",
+    "status": "overlap",
+    "preview": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifa"
+  },
+  {
+    "owner": "workspace",
+    "file": "polished-workspace-tools.js",
+    "status": "overlap",
+    "preview": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; car"
+  },
+  {
+    "owner": "workspace",
+    "status": "inspected",
+    "hunks": 28
+  },
+  {
+    "owner": "automation",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "activeDoc=null,composition=false;"
+  },
+  {
+    "owner": "automation",
+    "file": "polished.js",
+    "status": "overlap",
+    "preview": "  function renderSettingsPage(){all('[data-category]').forEach(b=>b.setAttribute('aria-current',Stri"
+  },
+  {
+    "owner": "automation",
+    "status": "inspected",
+    "hunks": 26
+  },
+  {
+    "owner": "history",
+    "status": "pending"
+  }
+]

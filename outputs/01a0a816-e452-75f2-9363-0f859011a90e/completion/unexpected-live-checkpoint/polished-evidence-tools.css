@@ -1,0 +1,76 @@
+.aven-evidence-tools-frame {
+  min-width: 0;
+}
+
+.aven-evidence-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.aven-evidence-compare-side,
+.aven-evidence-selected {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.aven-evidence-raw-output {
+  max-width: 100%;
+  min-height: 2.5em;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.aven-evidence-metadata {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 10px;
+}
+
+.aven-evidence-metadata dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.aven-evidence-metadata dt {
+  font-weight: 600;
+}
+
+.aven-evidence-note {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  resize: vertical;
+}
+
+.aven-evidence-compare-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-block: 12px;
+}
+
+.aven-evidence-compare-controls label,
+.aven-evidence-select-label,
+.aven-evidence-note-label {
+  display: grid;
+  gap: 6px;
+}
+
+.aven-evidence-compare-controls select,
+.aven-evidence-record-select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .aven-evidence-compare-grid,
+  .aven-evidence-compare-controls {
+    grid-template-columns: 1fr;
+  }
+}

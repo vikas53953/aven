@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-15T19:38:35.389Z",
+  "passed": true,
+  "features": [
+    "UX-021",
+    "UX-022"
+  ],
+  "checks": [
+    "explicit send contains exact text",
+    "no background network/persisted unsent contents",
+    "unsupported image prevents send and is removable",
+    "drop and clipboard each create usable attachment",
+    "reload reattach and clear",
+    "oversize recovery",
+    "320px no overflow"
+  ],
+  "scope": "Isolated browser, mocked model"
+}

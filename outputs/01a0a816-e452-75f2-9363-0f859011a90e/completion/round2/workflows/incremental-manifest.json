@@ -1,0 +1,45 @@
+{
+  "assignment": "workflows",
+  "scope": ["UX-033", "UX-074"],
+  "frozenInput": "completion/workflows/candidate",
+  "liveProductFilesEdited": false,
+  "sharedIntegrationEdited": false,
+  "changes": [
+    {
+      "path": "completion/round2/workflows/gap-assessment.md",
+      "kind": "assessment",
+      "purpose": "Record the remaining end-to-end model/tool -> HTTP -> UI evidence gap and the parent-owned bridge boundary."
+    },
+    {
+      "path": "completion/round2/workflows/workflow-round2.test.cjs",
+      "kind": "supplemental-test",
+      "purpose": "Exercise structured model content and ask_clarification tool output through the HTTP adapter into the browser card, and assert immutable receipt/replay guards."
+    },
+    {
+      "path": "completion/round2/workflows/assembled-http-acceptance.test.cjs",
+      "kind": "assembled-http-test",
+      "purpose": "Run the parent-owned assembled server with injected adapters and prove model/tool clarification, same-run answer, WAITING -> SUCCESS settlement, replay rejection, and explicit abandon/fresh request."
+    },
+    {
+      "path": "completion/round2/workflows/assembled-browser-acceptance.test.cjs",
+      "kind": "assembled-browser-test",
+      "purpose": "Under the root browser lease, render the actual assembled HTTP pending response, answer one card, and resume the same run."
+    },
+    {
+      "path": "completion/round2/workflows/assembled-browser-full-flow.test.cjs",
+      "kind": "assembled-browser-full-flow-test",
+      "purpose": "Exercise the assembled polished page through send -> model clarification -> UI answer -> held same-run resume, Send during resume into the queue, queued follow-up dispatch, Stop during resume, and reload review-only abandon."
+    }
+  ],
+  "deferredToParent": [
+    "Apply completion/workflows/replacements.json to the parent-owned assembled candidate.",
+    "Re-run assembled-browser-full-flow.test.cjs after the parent rebuilds the running/queue guard and review local-reliability recovery after reload.",
+    "Wire the separate existing-adapter approval bridge before claiming real UX-074 execution."
+  ],
+  "verification": {
+    "workflow-round2.test.cjs": "PASS: 2 tests",
+    "assembled-http-acceptance.test.cjs": "PASS: 2 tests",
+    "assembled-browser-acceptance.test.cjs": "PASS: synthetic card plus assembled HTTP response; full polished-page coverage is recorded separately",
+    "assembled-browser-full-flow.test.cjs": "PASS: 3 tests; held-resume Send -> queue -> resumed result -> queued result, Stop during resume, and reload review-only -> abandon -> fresh same-chat request"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "scope": "UX079/UX106 health status boundary; candidate-only runtime and minimal UI changes.",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse",
+  "touchedFiles": [
+    "candidate/intentgraph/agent-runtime.cjs",
+    "candidate/intentgraph/catalyst.cjs",
+    "candidate/intentgraph/vault.cjs",
+    "candidate/intentgraph/network-commands.json",
+    "candidate/polished.js",
+    "candidate/minimal-ui-health/polished.js",
+    "candidate/frozen-v8/polished.js"
+  ],
+  "unchangedCopies": [
+    "candidate/intentgraph/catalyst.cjs",
+    "candidate/intentgraph/vault.cjs",
+    "candidate/intentgraph/network-commands.json",
+    "candidate/intentgraph/network-execution.cjs",
+    "candidate/intentgraph/adapters/index.cjs",
+    "candidate/intentgraph/agent-runtime.test.cjs",
+    "candidate/intentgraph/chat-runtime.cjs",
+    "candidate/intentgraph/chat-runtime.test.cjs"
+  ],
+  "sourceHashes": {
+    "liveAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "frozenAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "latestMinimalUiCandidate": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD",
+    "frozenV8PolishedJs": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+    "livePolishedJs": "560374B9C20BA04546EB238558D8E45ACD2353F8F69DF73824D8356E902DA17A",
+    "livePolishedHtml": "42C1417D125D2C727D343A33832F5348FD3C06117F24509C17933DFD524D54B2"
+  },
+  "candidateHashes": {
+    "agentRuntime": "A9997E0D0D79DF141AA14BB1913551485E517E5819D19004D9B7B1C68B2BDFCD",
+    "frozenV8PolishedJs": "33ACF1B4D94AF51DDAFEF6A3383F097C543182E8365EC002C275B417F682D11A",
+    "preservedMinimalUiPolishedJs": "65D85ADE51321FC84139B3DABCACB44D30FECDDD38AD69B8A6A46E11B512561C"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "status": "BLOCKED",
+  "reason": "Error: EPERM, Permission denied: \\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-Xvjbwv '\\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-Xvjbwv'\n    at Object.rmSync (node:fs:1283:18)\n    at main (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\integration-flow-tests\\integration-flow-tests.cjs:1127:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\assembled-candidate"
+}

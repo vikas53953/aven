@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "id": "UX-034",
+      "status": "partial-candidate",
+      "evidence": "Candidate plus menu exposes concise Agent and Plan radio items, persists the selected chat mode, and keeps modeFor/requestChatReply semantics unchanged; minimal-ui/browser-evidence.json checks both selections.",
+      "limitation": "No backend or live provider request was made, so runtime enforcement of Plan's no-tool boundary remains a parent acceptance gate."
+    },
+    {
+      "id": "UX-091",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes plus-menu Enter/ArrowDown/Space/Escape navigation, focus return, and keyboard settings cancel/save; focus-visible rules and native controls remain in the candidate CSS/HTML.",
+      "limitation": "Focused primary paths only; no broad assistive-technology certification."
+    },
+    {
+      "id": "UX-092",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes menuitemradio roles and selected state, context indicator accessible label, and labeled presentation controls.",
+      "limitation": "No full screen-reader or active-run accessibility certification was performed."
+    },
+    {
+      "id": "UX-093",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes main answer contrast at or above 4.5:1, 200% root text stress, and narrow 320px reflow with no horizontal overflow.",
+      "limitation": "Contrast measurement and 200% text-scale checks are outside this focused fixture."
+    },
+    {
+      "id": "UX-094",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes reduced-motion media emulation with decorative animation effectively canceled; source replacements leave existing motion rules intact.",
+      "limitation": "Reduced-motion media emulation was not run in this focused pass."
+    },
+    {
+      "id": "UX-095",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes compact composer/context/send target geometry at 24px or larger; existing native menu/details controls remain pointer and keyboard operable.",
+      "limitation": "Touch-specific menu geometry and full Escape/focus-return traversal were not certified."
+    },
+    {
+      "id": "UX-096",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes the 320px responsive pane flow, visible right pane, Escape close, and no horizontal overflow.",
+      "limitation": "Other panes and zoomed layouts are parent acceptance coverage."
+    },
+    {
+      "id": "UX-097",
+      "status": "PASS",
+      "evidence": "quality-evidence.json passes unavailable context wording with no fabricated percentage, visible FAILURE cues, and active-run minimal defaults; root-ui-boundaries.json independently confirms raw active output stays hidden while Stop remains visible.",
+      "limitation": "The complete product inventory of unavailable actions was not exercised."
+    },
+    {
+      "id": "UX-103",
+      "status": "implemented-candidate",
+      "evidence": "The candidate uses Agent, Plan, Evidence, Investigation activity, Run details and Context capacity labels consistently at the seams it owns; no storage schema is changed.",
+      "limitation": "Full application terminology review remains outside this slice."
+    },
+    {
+      "id": "UX-105",
+      "status": "partial-candidate",
+      "evidence": "The candidate has a 23-check isolated browser PASS, exact sequential replacement verification, and desktop/mobile screenshots in this directory.",
+      "limitation": "Owner visual acceptance and parent integration remain separate gates."
+    }
+  ],
+  "liveProductFilesEdited": false,
+  "externalCalls": false
+}

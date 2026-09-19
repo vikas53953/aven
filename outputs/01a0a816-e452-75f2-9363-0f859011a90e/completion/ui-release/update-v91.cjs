@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'../../../..'),file=path.join(root,'docs/architecture/architecture.json');
+const data=JSON.parse(fs.readFileSync(file,'utf8'));
+if(data.revision!=='HLD 17')throw Error('Unexpected HLD revision');
+const ui=data.layers.find(x=>x.id==='ui');
+ui.current=ui.current.replace('ux-minimal-ui-v9','ux-minimal-ui-v9.1').replace('integrated in v9;','integrated in v9.1;');
+if(!ui.current.includes('Long generated code'))ui.current+=' Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration.';
+if(!data.changes.some(x=>x[1]==='Minimal UI v9.1 code folding'))data.changes.unshift(['2026-09-16','Minimal UI v9.1 code folding','Long generated code starts collapsed. Three root browser boundary checks passed: final failures stay visible with raw output hidden; active Stop remains available; long code is collapsed with exact source retained. Evidence: completion/ui-release/boundaries-v9.1.json and integration.json. The live browser shows a collapsed 113-line HTML block. Backend integration remains pending.']);
+fs.writeFileSync(file,JSON.stringify(data,null,2)+'\n');
+console.log('HLD 17 updated for v9.1');

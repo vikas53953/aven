@@ -1,0 +1,26 @@
+{
+  "change": "Owner-authorized Catalyst read-only connector",
+  "limitations": [
+    "Shared credentials may change",
+    "Inventory only; no device configuration",
+    "Prototype chat does not autonomously invoke this connector"
+  ],
+  "hashes": {
+    "intentgraph/delivery.cjs": "FA324AD5FE87BB1A55A8918A845981B5C06048162568275178D1A65018ED7E82",
+    "intentgraph/server.cjs": "F2E31D3A7419D02BE3BD1C8B7A1DE81FB4426DA15C841A07BD6333CB950D2C92",
+    "polished.css": "52BBE3E047DE1A0763904A4A31EA21B7D84991ADF5B850B3C8C1CFA0868B3264",
+    "polished.js": "C8E5A3CCAF3E902630967CAA33BDA4400878CF22A666F38742497E600B80E75B",
+    "polished.html": "2F5A2C82AE5053646379F61D94F2FEFD1144EA7394521C6F98716627DF6550BC",
+    "intentgraph/catalyst.cjs": "BE0CBCDE226A55F59B6158F3CAD84ABF46292FB3C7606FA86D5696D5D1EA26CB"
+  },
+  "baselineBackup": ".intentgraph/runtime/delivery-config.before-catalyst.json",
+  "testsPassed": 16,
+  "liveDevices": [
+    "sw1",
+    "sw2",
+    "sw3",
+    "sw4"
+  ],
+  "baselineAction": "Root reviewed connector and routes; protected source baseline regenerated after verified service restart",
+  "recordedAt": "2026-09-13T16:03:44.3870286Z"
+}

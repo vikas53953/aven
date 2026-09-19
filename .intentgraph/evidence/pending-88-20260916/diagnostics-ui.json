@@ -1,0 +1,15 @@
+{
+  "at": "2026-09-15T19:05:05.895Z",
+  "passed": true,
+  "checks": [
+    "user-triggered projected configuration snapshot",
+    "failed refresh hides old result",
+    "safe support copy",
+    "empty saved-run view",
+    "local feedback download only",
+    "English fallback explicit",
+    "no cosmetic provider switch",
+    "320px bounds"
+  ],
+  "scope": "Mocked local API; no health or provider call"
+}

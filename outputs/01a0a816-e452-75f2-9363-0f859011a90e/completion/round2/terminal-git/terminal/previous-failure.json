@@ -1,0 +1,8 @@
+{
+  "status": "FAILED_BEFORE_FIX",
+  "scope": "assembled terminal.server.test.cjs fixture",
+  "observed": "Five terminal server cases failed before dispatch because the temporary intentgraph copy could not resolve ../polished-reliability.js from reliability.cjs.",
+  "cause": "Fixture copied the product intentgraph directory but not the top-level shared reliability dependency required by the assembled server.",
+  "fix": "Copy workspace/polished-reliability.js into the temporary product root before loading the candidate server.",
+  "preserved": true
+}

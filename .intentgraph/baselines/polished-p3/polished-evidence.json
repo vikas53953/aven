@@ -1,0 +1,105 @@
+{
+  "candidate": "P3-3f556d1045c5",
+  "capturedAt": "2026-09-11T04:02:33.754Z",
+  "scope": "Local frontend prototype. Avatar uploads stay in this browser; Generate makes procedural variations. No live AI, authentication or browser/computer execution.",
+  "checks": [
+    {
+      "name": "P3 preservation: migration backup, local records, drafts and idempotent reload",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 composer, title, search, attachments and quiet navigation affordances",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 creation: fields, ownership, channel membership and right-side profile entrypoint",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 profile and avatar journey: local styles, generate, invalid/valid upload, isolation and reload",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 context actions: pin, unread, section/project move, hide, delete and restore",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 agent details: SOUL/MEMORY, document isolation, files and deterministic tool states",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 account menu, honest local actions, feedback and staged Agent behavior settings",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 theme, contrast, responsive bounds, sidebar resize and group state preservation",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 protected wireframe sources and candidate stability",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "P3 no page errors or external runtime requests",
+      "status": "PASS",
+      "detail": "Executed against this stable candidate; local interactions only.",
+      "evidence": ".intentgraph/p3-test-results.json"
+    },
+    {
+      "name": "Independent profile, identity and visual review",
+      "status": "PASS",
+      "detail": "See the separate reviewer’s exact checked scope and screenshots.",
+      "evidence": ".intentgraph/p3-independent-results.json"
+    },
+    {
+      "name": "Your visual decision",
+      "status": "PENDING",
+      "detail": "All requested local controls are ready to review. Final appearance and experience remain your decision.",
+      "evidence": ".intentgraph/feedback-08.md"
+    }
+  ],
+  "captures": [
+    {
+      "label": "Main view",
+      "path": ".intentgraph/p3-theme-dark.png"
+    },
+    {
+      "label": "Light appearance",
+      "path": ".intentgraph/p3-theme-light.png"
+    },
+    {
+      "label": "Create agent",
+      "path": ".intentgraph/p3-create-agent.png"
+    },
+    {
+      "label": "Profile and avatars",
+      "path": ".intentgraph/p3-independent-profile.png"
+    },
+    {
+      "label": "Feedback task list",
+      "path": ".intentgraph/feedback-08.md"
+    },
+    {
+      "label": "Candidate manifest",
+      "path": ".intentgraph/polished-candidate.json"
+    }
+  ]
+}

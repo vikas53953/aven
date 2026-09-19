@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-16T07:35:03.705Z",
+  "policy": "raw UTF-8 bytes; unique anchors; sequential per-file application; frozen source hash required",
+  "files": {
+    "polished.html": {
+      "baselineSHA256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "candidateSHA256": "F24F4F65A6FE9DBE6DED8C49A9B223428867E6791D5C0EA5EF52B1C716D14D5F",
+      "baselineBytes": 15856,
+      "candidateBytes": 15994,
+      "applied": [
+        {
+          "sequence": 1,
+          "label": "load Git pane styles",
+          "offset": 562,
+          "oldBytes": 78,
+          "newBytes": 151
+        },
+        {
+          "sequence": 2,
+          "label": "load Git pane controls",
+          "offset": 15771,
+          "oldBytes": 70,
+          "newBytes": 135
+        }
+      ]
+    },
+    "polished.js": {
+      "baselineSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "candidateSHA256": "164AB622A6BBD42598439EE89840601D995F200802E2C75FB18731231F0D07F2",
+      "baselineBytes": 187901,
+      "candidateBytes": 188260,
+      "applied": [
+        {
+          "sequence": 3,
+          "label": "mount Git pane from Settings",
+          "offset": 178636,
+          "oldBytes": 32,
+          "newBytes": 332
+        },
+        {
+          "sequence": 4,
+          "label": "render Git pane for Git category",
+          "offset": 180505,
+          "oldBytes": 83,
+          "newBytes": 128
+        },
+        {
+          "sequence": 5,
+          "label": "add Git Settings category",
+          "offset": 181360,
+          "oldBytes": 29,
+          "newBytes": 43
+        }
+      ]
+    },
+    "intentgraph/server.cjs": {
+      "baselineSHA256": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "candidateSHA256": "0C029EB547DECA74E4D91B4A832475FA39D822662FE026FB84453BB26C7BC9B9",
+      "baselineBytes": 23374,
+      "candidateBytes": 23727,
+      "applied": [
+        {
+          "sequence": 6,
+          "label": "load Git backend",
+          "offset": 331,
+          "oldBytes": 61,
+          "newBytes": 147
+        },
+        {
+          "sequence": 7,
+          "label": "construct Git API beside chat API",
+          "offset": 6296,
+          "oldBytes": 206,
+          "newBytes": 404
+        },
+        {
+          "sequence": 8,
+          "label": "route Git requests before chat",
+          "offset": 9129,
+          "oldBytes": 51,
+          "newBytes": 98
+        },
+        {
+          "sequence": 9,
+          "label": "expose Git workspace for injected tests",
+          "offset": 22236,
+          "oldBytes": 122,
+          "newBytes": 144
+        }
+      ]
+    }
+  }
+}

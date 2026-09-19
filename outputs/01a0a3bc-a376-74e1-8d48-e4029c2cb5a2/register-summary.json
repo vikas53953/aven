@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-15",
+  "features": 115,
+  "states": {
+    "Needs fix": 9,
+    "Present": 22,
+    "Partial": 43,
+    "Not verified": 7,
+    "Missing": 26,
+    "Placeholder": 8
+  },
+  "phases": {
+    "1 Basics": 7,
+    "Keep": 25,
+    "2 Chat": 30,
+    "3 Trusted work": 38,
+    "4 Extend": 15
+  },
+  "sourceRow": 129
+}

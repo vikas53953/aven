@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "url": "http://localhost:8767/polished.html",
+  "secureContext": true,
+  "checks": 26,
+  "tested": [
+    "integrated Open local folder wiring",
+    "read-only picker and no early write permission",
+    "real Web Crypto SHA-256",
+    "exact before/after review text",
+    "edit invalidates review",
+    "pending-write pane-close guard",
+    "exact-byte verified save",
+    "external conflict prevents overwrite",
+    "post-save close focus",
+    "320px review stacking",
+    "no external requests"
+  ],
+  "api": [
+    "AvenFiles.render()",
+    "hasUnsavedChanges()",
+    "isBusy()",
+    "destroy()"
+  ],
+  "sourceEdits": [],
+  "findings": [],
+  "limitation": "Mock File System Access handles are page-local and memory-only; no user disk or provider/device path was exercised."
+}

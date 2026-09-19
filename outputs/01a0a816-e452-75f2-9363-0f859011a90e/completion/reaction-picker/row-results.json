@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "id": "UX049",
+      "status": "PASS",
+      "evidence": "browser-evidence.json: UX049-search, UX049-keyboard, UX049-persistence, and UX049-responsive all pass; pageErrors, blockedRequests, and apiCalls are empty.",
+      "limitation": "Chromium local fixture covers the built-in reaction set, keyboard focus, reload persistence, and one compact viewport; screen-reader certification, visual reference comparison, and multi-device synchronization remain outside this check."
+    }
+  ]
+}

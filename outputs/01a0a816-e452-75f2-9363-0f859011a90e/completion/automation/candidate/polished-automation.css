@@ -1,0 +1,316 @@
+.aven-automation-view,
+.aven-automation-view * {
+  box-sizing: border-box;
+}
+
+.aven-automation-view {
+  width: min(100%, 960px);
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 20px clamp(14px, 3vw, 32px) 32px;
+  color: var(--text, #171717);
+  background: var(--surface, transparent);
+}
+
+.aven-automation-view h2,
+.aven-automation-view h3,
+.aven-automation-view h4,
+.aven-automation-view p {
+  min-width: 0;
+}
+
+.aven-automation-header,
+.aven-automation-card-top,
+.aven-automation-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: 0;
+}
+
+.aven-automation-header {
+  border-bottom: 1px solid var(--border, #d5d5d5);
+  padding-bottom: 14px;
+}
+
+.aven-automation-eyebrow {
+  margin: 0 0 5px;
+  color: var(--faint, #707070);
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.aven-automation-header h2 {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.15;
+}
+
+.aven-automation-description,
+.aven-automation-help,
+.aven-automation-meta,
+.aven-automation-status,
+.aven-automation-warning,
+.aven-automation-form-status {
+  color: var(--muted, #575757);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.aven-automation-description {
+  max-width: 690px;
+  margin: 7px 0 0;
+}
+
+.aven-automation-count {
+  flex: none;
+  color: var(--faint, #707070);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.aven-automation-status {
+  min-height: 18px;
+  margin: 10px 0 0;
+}
+
+.aven-automation-toolbar,
+.aven-automation-card-actions,
+.aven-automation-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aven-automation-toolbar {
+  justify-content: flex-end;
+  margin: 8px 0 12px;
+}
+
+.aven-automation-view button {
+  min-height: 32px;
+  max-width: 100%;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 7px;
+  padding: 7px 10px;
+  color: var(--text, #171717);
+  background: var(--surface-2, #f0f0f0);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.aven-automation-view button:hover:not(:disabled),
+.aven-automation-view button:focus-visible {
+  background: var(--surface-3, #e5e5e5);
+}
+
+.aven-automation-view button:focus-visible,
+.aven-automation-view input:focus-visible,
+.aven-automation-view select:focus-visible {
+  outline: 2px solid var(--focus, var(--text, #171717));
+  outline-offset: 2px;
+}
+
+.aven-automation-view button:disabled {
+  cursor: default;
+  opacity: .45;
+}
+
+.aven-automation-view .button-primary {
+  border-color: var(--accent, var(--text, #171717));
+  color: var(--on-accent, #fff);
+  background: var(--accent, var(--text, #171717));
+}
+
+.aven-automation-view .button-quiet {
+  border-color: transparent;
+  color: var(--muted, #575757);
+  background: transparent;
+}
+
+.aven-automation-section {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin-top: 18px;
+}
+
+.aven-automation-section > h3 {
+  margin: 0;
+  color: var(--faint, #707070);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.aven-automation-section-header h3 {
+  margin: 0;
+  color: var(--faint, #707070);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.aven-automation-card,
+.aven-automation-form,
+.aven-automation-registry-card,
+.aven-automation-alert {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--border, #d5d5d5);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--surface-2, #f0f0f0);
+}
+
+.aven-automation-card h3,
+.aven-automation-registry-card h4 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.aven-automation-card p,
+.aven-automation-registry-card p,
+.aven-automation-alert p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.aven-automation-body {
+  color: var(--text, #171717);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.aven-automation-badge {
+  flex: none;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--muted, #575757);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.aven-automation-badge.is-enabled {
+  border-color: var(--success, #4b7657);
+  color: var(--success, #4b7657);
+}
+
+.aven-automation-warning {
+  color: var(--danger, #9b3b3b);
+}
+
+.aven-automation-form {
+  margin-bottom: 12px;
+}
+
+.aven-automation-form h3 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.aven-automation-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.aven-automation-field {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.aven-automation-label {
+  color: var(--muted, #575757);
+  font-size: 11px;
+}
+
+.aven-automation-view input[type="text"],
+.aven-automation-view input[type="time"],
+.aven-automation-view select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: var(--text, #171717);
+  background: var(--surface, #fff);
+  font: inherit;
+  font-size: 12px;
+}
+
+.aven-automation-form-actions {
+  justify-content: flex-end;
+  padding-top: 10px;
+  border-top: 1px solid var(--border, #d5d5d5);
+}
+
+.aven-automation-registry-list,
+.aven-automation-alert-list {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.aven-automation-plugin-select,
+.aven-automation-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted, #575757);
+  font-size: 11px;
+}
+
+.aven-automation-plugin-select input,
+.aven-automation-toggle input {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent, var(--text, #171717));
+}
+
+.aven-automation-history {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid var(--border, #d5d5d5);
+  padding-top: 8px;
+}
+
+.aven-automation-history-row {
+  margin: 0;
+  color: var(--muted, #575757);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.aven-automation-empty {
+  margin: 0;
+  padding: 12px 0;
+  color: var(--muted, #575757);
+  font-size: 12px;
+}
+
+@media (max-width: 620px) {
+  .aven-automation-view { padding: 16px 12px 24px; }
+  .aven-automation-form-grid { grid-template-columns: minmax(0, 1fr); }
+  .aven-automation-card,
+  .aven-automation-form,
+  .aven-automation-registry-card,
+  .aven-automation-alert { padding: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aven-automation-view * { scroll-behavior: auto; }
+}

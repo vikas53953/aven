@@ -1,0 +1,219 @@
+{
+  "phase": "gallery",
+  "startedAt": "2026-09-12T16:18:34.019Z",
+  "base": "http://127.0.0.1:8767",
+  "viewportRuns": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 920
+      },
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "gallery": {
+          "x": 33,
+          "y": 692.328125,
+          "width": 324,
+          "height": 628,
+          "top": 692.328125,
+          "right": 357,
+          "bottom": 1320.328125,
+          "left": 33
+        },
+        "sizeStrip": {
+          "x": 33,
+          "y": 2400.296875,
+          "width": 324,
+          "height": 268,
+          "top": 2400.296875,
+          "right": 357,
+          "bottom": 2668.296875,
+          "left": 33
+        },
+        "stage": {
+          "x": 33,
+          "y": 1973.703125,
+          "width": 324,
+          "height": 230,
+          "top": 1973.703125,
+          "right": 357,
+          "bottom": 2203.703125,
+          "left": 33
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 920
+      },
+      "metrics": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "bodyScrollWidth": 320,
+        "bodyClientWidth": 320,
+        "gallery": {
+          "x": 33,
+          "y": 722.421875,
+          "width": 254,
+          "height": 660,
+          "top": 722.421875,
+          "right": 287,
+          "bottom": 1382.421875,
+          "left": 33
+        },
+        "sizeStrip": {
+          "x": 33,
+          "y": 2543.78125,
+          "width": 254,
+          "height": 252,
+          "top": 2543.78125,
+          "right": 287,
+          "bottom": 2795.78125,
+          "left": 33
+        },
+        "stage": {
+          "x": 33,
+          "y": 2097.390625,
+          "width": 254,
+          "height": 230,
+          "top": 2097.390625,
+          "right": 287,
+          "bottom": 2327.390625,
+          "left": 33
+        }
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "artwork exposes 16 roles and 6 application sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "approved four inner geometry remains exact at all six sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "all 16 exported SVGs are valid named-group assets without external/PNG assets",
+      "status": "PASS"
+    },
+    {
+      "name": "generated React components transpile and render geometry parity for all 16 96px variants",
+      "status": "PASS"
+    },
+    {
+      "name": "gallery has all 16 still tiles and six active preview sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "all 9 emotion controls, hover/focus, success to idle, and animation toggle work",
+      "status": "PASS"
+    },
+    {
+      "name": "reduced motion suppresses animation and offscreen suppresses animation",
+      "status": "PASS"
+    },
+    {
+      "name": "gallery-390 has no horizontal overflow and retains gallery/size controls",
+      "status": "PASS"
+    },
+    {
+      "name": "gallery-320 has no horizontal overflow and retains gallery/size controls",
+      "status": "PASS"
+    },
+    {
+      "name": "gallery emits no page errors, external requests, or storage writes",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    ".intentgraph/avatar-family-gallery-qa-1440.png",
+    ".intentgraph/avatar-family-gallery-qa-390.png",
+    ".intentgraph/avatar-family-gallery-qa-320.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "storageWrites": [],
+  "sourceFiles": [
+    "avatar-system/artwork.js",
+    "avatar-system/avatar.css",
+    "avatar-system/gallery.html",
+    "avatar-system/gallery.css",
+    "avatar-system/preview.js",
+    "avatar-system/export.cjs",
+    "avatar-system/react/NetworkAvatar.tsx",
+    "avatar-system/svg/cloud.svg",
+    "avatar-system/svg/controller.svg",
+    "avatar-system/svg/dns-ddi.svg",
+    "avatar-system/svg/firewall.svg",
+    "avatar-system/svg/leaf.svg",
+    "avatar-system/svg/load-balancer.svg",
+    "avatar-system/svg/monitoring.svg",
+    "avatar-system/svg/proxy.svg",
+    "avatar-system/svg/router.svg",
+    "avatar-system/svg/sd-wan.svg",
+    "avatar-system/svg/server.svg",
+    "avatar-system/svg/spine.svg",
+    "avatar-system/svg/storage.svg",
+    "avatar-system/svg/switch.svg",
+    "avatar-system/svg/vpn.svg",
+    "avatar-system/svg/wifi.svg"
+  ],
+  "candidateStart": {
+    "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+    "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad",
+    "avatar-system/gallery.html": "c6e067755638295be7744a46f86745a52a4c5fc554d745da150005fb95dfb9fb",
+    "avatar-system/gallery.css": "27ba6d0c4d21f94dc12ce534e0fc32cdc8cbda18ad7dc0ba6074b119924f146d",
+    "avatar-system/preview.js": "04353c4c52c1b2214126c7844a05b9efd316a14d9ae7db5c6dd4f2da3e8b3fb8",
+    "avatar-system/export.cjs": "61e3f8a6b2ad03fb4046349e96df3e32b11c6210b88b95eefd670310a6b61032",
+    "avatar-system/react/NetworkAvatar.tsx": "4a99d593a6c5c5b923c87fdeedc32d16d562101ff2cb8d97b5ad95613958127d",
+    "avatar-system/svg/cloud.svg": "fdd8b3c6e493aa1330001f8f6fef34a51fb2d9a04e9b9b92ca7fcb410c7a5b48",
+    "avatar-system/svg/controller.svg": "13c7996c22abdf20101cebb2686e7ad0d6e908708abe465b4755b8ce37cbcb76",
+    "avatar-system/svg/dns-ddi.svg": "215697bd27bbdc64ed5a6c29bfea1a275015a4b7c6a731a967abcc011a584ce8",
+    "avatar-system/svg/firewall.svg": "6d3c0b6626f89cd8eef4a1da58df00ff73c97ec68963c74496cd4ad646659013",
+    "avatar-system/svg/leaf.svg": "544ded1bdad1d34ddfe376c8199195dfeacfafe35b1f39640c8b4471df8ddac1",
+    "avatar-system/svg/load-balancer.svg": "11fd5ddf00867344cf1030be625800e6d1ba1b4d8ee8edf531fcbe27687e1422",
+    "avatar-system/svg/monitoring.svg": "b6b25a82f5ea11778f22446656826b1ddc2aa8ce0177940a79eb031f156b2959",
+    "avatar-system/svg/proxy.svg": "bcc39d73d9ff1b5e3288ce208a4054d3fb26f943f3e6b02192cb99ebe9a91845",
+    "avatar-system/svg/router.svg": "51d07f09d66eb031847765aa9df65d1458e2ef12cc66f7690a56f040c3e7678b",
+    "avatar-system/svg/sd-wan.svg": "e3beb09fe73eada003babeec0a7478f8328d462a296e31a7d6e6033c91d275da",
+    "avatar-system/svg/server.svg": "370be92fe55fa2da3f3ed298ef91899e27c11f7f3646214e4f2106f3e6b9fcf9",
+    "avatar-system/svg/spine.svg": "2acfd46769f8b7565da3e0ef25ef3309d61bf64918d15b5c254b766bd05f5795",
+    "avatar-system/svg/storage.svg": "6aff404d324195890494020923bd2f738d6c749c003a4c8e0766c1660d219c7a",
+    "avatar-system/svg/switch.svg": "2204540c035d5f6913577480cd70b5ee2e37bd85e0f0bfa7401838df227e9eb2",
+    "avatar-system/svg/vpn.svg": "2ec879bb7dd6e90be827ac46d3710bf422403ea5fb2b671821e943bb6d2354b6",
+    "avatar-system/svg/wifi.svg": "cb2f23eda83c71cbdd54bb5e13d2d5209c56509720fa0256b36cb86c7bbadb55"
+  },
+  "candidateEnd": {
+    "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+    "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad",
+    "avatar-system/gallery.html": "c6e067755638295be7744a46f86745a52a4c5fc554d745da150005fb95dfb9fb",
+    "avatar-system/gallery.css": "27ba6d0c4d21f94dc12ce534e0fc32cdc8cbda18ad7dc0ba6074b119924f146d",
+    "avatar-system/preview.js": "04353c4c52c1b2214126c7844a05b9efd316a14d9ae7db5c6dd4f2da3e8b3fb8",
+    "avatar-system/export.cjs": "61e3f8a6b2ad03fb4046349e96df3e32b11c6210b88b95eefd670310a6b61032",
+    "avatar-system/react/NetworkAvatar.tsx": "4a99d593a6c5c5b923c87fdeedc32d16d562101ff2cb8d97b5ad95613958127d",
+    "avatar-system/svg/cloud.svg": "fdd8b3c6e493aa1330001f8f6fef34a51fb2d9a04e9b9b92ca7fcb410c7a5b48",
+    "avatar-system/svg/controller.svg": "13c7996c22abdf20101cebb2686e7ad0d6e908708abe465b4755b8ce37cbcb76",
+    "avatar-system/svg/dns-ddi.svg": "215697bd27bbdc64ed5a6c29bfea1a275015a4b7c6a731a967abcc011a584ce8",
+    "avatar-system/svg/firewall.svg": "6d3c0b6626f89cd8eef4a1da58df00ff73c97ec68963c74496cd4ad646659013",
+    "avatar-system/svg/leaf.svg": "544ded1bdad1d34ddfe376c8199195dfeacfafe35b1f39640c8b4471df8ddac1",
+    "avatar-system/svg/load-balancer.svg": "11fd5ddf00867344cf1030be625800e6d1ba1b4d8ee8edf531fcbe27687e1422",
+    "avatar-system/svg/monitoring.svg": "b6b25a82f5ea11778f22446656826b1ddc2aa8ce0177940a79eb031f156b2959",
+    "avatar-system/svg/proxy.svg": "bcc39d73d9ff1b5e3288ce208a4054d3fb26f943f3e6b02192cb99ebe9a91845",
+    "avatar-system/svg/router.svg": "51d07f09d66eb031847765aa9df65d1458e2ef12cc66f7690a56f040c3e7678b",
+    "avatar-system/svg/sd-wan.svg": "e3beb09fe73eada003babeec0a7478f8328d462a296e31a7d6e6033c91d275da",
+    "avatar-system/svg/server.svg": "370be92fe55fa2da3f3ed298ef91899e27c11f7f3646214e4f2106f3e6b9fcf9",
+    "avatar-system/svg/spine.svg": "2acfd46769f8b7565da3e0ef25ef3309d61bf64918d15b5c254b766bd05f5795",
+    "avatar-system/svg/storage.svg": "6aff404d324195890494020923bd2f738d6c749c003a4c8e0766c1660d219c7a",
+    "avatar-system/svg/switch.svg": "2204540c035d5f6913577480cd70b5ee2e37bd85e0f0bfa7401838df227e9eb2",
+    "avatar-system/svg/vpn.svg": "2ec879bb7dd6e90be827ac46d3710bf422403ea5fb2b671821e943bb6d2354b6",
+    "avatar-system/svg/wifi.svg": "cb2f23eda83c71cbdd54bb5e13d2d5209c56509720fa0256b36cb86c7bbadb55"
+  },
+  "appStart": null,
+  "appEnd": null,
+  "candidateStable": true
+}

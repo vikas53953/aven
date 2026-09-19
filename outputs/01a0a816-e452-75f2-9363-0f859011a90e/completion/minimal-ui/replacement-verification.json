@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "method": "Read each baseline source, apply every file's replacement old/new pair sequentially, and compare byte-for-byte with the candidate copy.",
+  "hunks": 26,
+  "files": [
+    {"file":"polished.html","same":true,"candidateBytes":16036},
+    {"file":"polished.css","same":true,"candidateBytes":79678},
+    {"file":"polished.js","same":true,"candidateBytes":191587},
+    {"file":"polished-workspace-tools.js","same":true,"candidateBytes":47638}
+  ],
+  "automationTagsInCandidateHtml": false,
+  "liveProductFilesEdited": false
+}

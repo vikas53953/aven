@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-15T07:24:29.926Z",
+  "passed": true,
+  "features": [
+    "UX-003",
+    "UX-004"
+  ],
+  "checks": [
+    "account caret absent",
+    "account Settings keyboard access",
+    "actual profile heading",
+    "no redundant selector",
+    "rename syncs profile and conversation",
+    "draft retained"
+  ],
+  "scope": "Isolated Chromium; no provider/device requests"
+}

@@ -1,0 +1,53 @@
+{
+  "at": "2026-09-17T04:19:32.406Z",
+  "records": [
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Use installed absolute Git executables rather than repository working-directory or PATH lookup"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Inspect typed clarification calls before final-message filtering"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Retain final-message lifecycle for ordinary model completion"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Capture typed tool clarification result without a second model request"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve live-v9.1 follow-up UX-065"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve live-v9.1 follow-up UX-069"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve live-v9.1 follow-up UX-069"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve live-v9.1 follow-up UX-069"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve live-v9.1 follow-up UX-069"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Keep queued work paused throughout a resumed workflow segment"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Queue composer submissions during clarification and resume"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Explicitly abandoned restored questions release confirmed inactive local claims without replaying queued work"
+    }
+  ]
+}

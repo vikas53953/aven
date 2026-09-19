@@ -1,0 +1,10 @@
+{
+  "at": "2026-09-15T19:34:06.255Z",
+  "passed": true,
+  "checks": [
+    "midstream capture failure preserves explicit unknown/recovery state",
+    "final capture failure preserves explicit unknown/recovery state",
+    "recovery capture failure preserves explicit unknown/recovery state"
+  ],
+  "scope": "Mocked requests; no device execution"
+}

@@ -1,0 +1,41 @@
+{
+  "runStartedAt": "2026-09-17T03:50:41.769Z",
+  "invocation": {
+    "node": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "args": [
+      "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\integration-flow-tests\\integration-flow-tests.cjs"
+    ],
+    "productRootEnv": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\assembled-candidate"
+  },
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\assembled-candidate",
+  "status": "PASS",
+  "exitCode": 0,
+  "counts": {
+    "pass": 7,
+    "fail": 0,
+    "blocked": 0
+  },
+  "calls": {
+    "provider": 15,
+    "inventory": 4,
+    "command": 4,
+    "responder": 15,
+    "externalFetch": [],
+    "vault": 0
+  },
+  "candidateHashes": {
+    "intentgraph/server.cjs": "17d5911a5648396cf4eda68169f2a92db46434bef3dde612e5a4c7deab0b803a",
+    "intentgraph/clarification-runtime.cjs": "ceef4ba90270eeda9af8336c926622ca485af7d5276c5727f7ac97801e4fa0ef",
+    "intentgraph/provider-selection.cjs": "fbb3ae222f24996effd52703e8466be3aa995a784b4737aed5376be9faf9ec8e",
+    "intentgraph/reliability.cjs": "a2d4b03d61e3b2e1eacf6fec871584241ce77f44a94696f1206bf18bf06b9c8f",
+    "polished.js": "58d1f9ae9e4568017fc671f043777913f580a3c042562236c1af665049485fb2",
+    "polished-backup.js": "b0bc2c8b231fd16ef757bb2ddf414b6bcda1b7de119fc7fd248c935f93f39765"
+  },
+  "cleanupWarnings": [
+    {
+      "path": "C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-MUFyHg",
+      "error": "EPERM, Permission denied: \\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-MUFyHg '\\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-MUFyHg'"
+    }
+  ],
+  "finishedAt": "2026-09-17T03:50:50.904Z"
+}

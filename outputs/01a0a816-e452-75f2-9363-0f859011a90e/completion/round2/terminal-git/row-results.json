@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "id": "UX-071",
+      "status": "PASS_WITH_LIMITATIONS",
+      "evidenceLevel": "frozen-terminal-server-and-browser-evidence-plus-round2-reuse-review",
+      "finding": "A bounded read-only network diagnostic terminal is available from the tools menu with exact target/session permission context and separately retained raw evidence.",
+      "limitation": "This does not provide arbitrary OS shell access; no real device, provider, credential, or shell process was used.",
+      "evidence": ["terminal/reuse.json", "completion/terminal/server-evidence.json", "completion/terminal/browser-evidence.json"]
+    },
+    {
+      "id": "UX-075",
+      "status": "PASS_WITH_LIMITATIONS",
+      "evidenceLevel": "round2-backend-and-browser-tests; exact manifest",
+      "finding": "Git configuration, changed-file selection, full patch review, stage/unstage, staged-diff commit review, CAS commit, and separate PR review/publish controls are present with fail-closed repository and transport boundaries.",
+      "limitation": "No user repository was changed and no push or real PR publish was performed; root assembly and served-source verification remain pending.",
+      "evidence": ["manifest.json", "independent-review.json", "validation.json"]
+    }
+  ]
+}

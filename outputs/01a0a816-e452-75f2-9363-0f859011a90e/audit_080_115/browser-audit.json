@@ -1,0 +1,78 @@
+{
+  "at": "2026-09-16T03:18:00.170Z",
+  "scope": "UX-080..UX-115; isolated Chromium; fake local API only",
+  "checks": [
+    {
+      "id": "UX-102",
+      "name": "false-configured status exposes hard-coded configured identity contradiction",
+      "status": "FAIL",
+      "evidence": "browser-audit.json; polished.js:897; polished-diagnostics.js:10",
+      "limitation": "About shows configured identity while mocked status says configured:false."
+    },
+    {
+      "id": "UX-083",
+      "name": "feed derives a real run entry and opens its message",
+      "status": "PASS",
+      "evidence": "workspace-shell fresh fixture; polished-workspace-tools.js:545",
+      "limitation": ""
+    },
+    {
+      "id": "UX-084",
+      "name": "idea create/archive/restore local flow",
+      "status": "PASS",
+      "evidence": "browser-audit.json; localStorage fixture only",
+      "limitation": ""
+    },
+    {
+      "id": "UX-081",
+      "name": "artifacts surface carries selected run evidence",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished-workspace-tools.js:581",
+      "limitation": ""
+    },
+    {
+      "id": "UX-091",
+      "name": "keyboard Escape/focus return and named pane controls",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished.js:248",
+      "limitation": ""
+    },
+    {
+      "id": "UX-092",
+      "name": "selected coworker and unavailable panes expose accessible state",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished.html:77-81",
+      "limitation": ""
+    },
+    {
+      "id": "UX-103",
+      "name": "coworker identity remains Firewall across profile and conversation shell",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished.js:807-809",
+      "limitation": ""
+    },
+    {
+      "id": "UX-097",
+      "name": "empty feed and unavailable session messages are explicit",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished.js:636-644",
+      "limitation": ""
+    },
+    {
+      "id": "UX-112",
+      "name": "unsupported locale is disabled and English fallback is explicit",
+      "status": "PASS",
+      "evidence": "browser-audit.json; polished.js:901",
+      "limitation": ""
+    },
+    {
+      "id": "UX-102",
+      "name": "false-configured status exposes hard-coded configured identity contradiction",
+      "status": "FAIL",
+      "evidence": "browser-audit.json; polished.js:897 + polished-diagnostics.js:10",
+      "limitation": "About says configured while the mocked local status says configured:false."
+    }
+  ],
+  "blockedRequests": [],
+  "pageErrors": []
+}

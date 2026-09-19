@@ -1,0 +1,18 @@
+[
+  {
+    "file": "polished.js",
+    "sha256": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c"
+  },
+  {
+    "file": "polished-diagnostics.js",
+    "sha256": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c"
+  },
+  {
+    "file": "polished-workspace-tools.js",
+    "sha256": "350e57dfab400803800577cacc19692456a23e87a296601ec6b819845fdd9850"
+  },
+  {
+    "file": "polished.html",
+    "sha256": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "command": "node --test intentgraph\\network-execution.test.cjs intentgraph\\sandbox-routes.test.cjs intentgraph\\steering.test.cjs intentgraph\\agent-runtime.test.cjs intentgraph\\chat-runtime.test.cjs",
+  "exitCode": 0,
+  "passed": 25,
+  "failed": 0,
+  "result": "PASS",
+  "capturedDuringAudit": true,
+  "coverage": [
+    "allowlist/target/failed transport/no device fallback",
+    "sandbox origin/header and no generic actions",
+    "steering authorized active run/pending IDs exactly once",
+    "late steering rejected after final boundary",
+    "beforeModel drains steering into next model messages and emits applied once",
+    "bounded raw output/tool context"
+  ]
+}

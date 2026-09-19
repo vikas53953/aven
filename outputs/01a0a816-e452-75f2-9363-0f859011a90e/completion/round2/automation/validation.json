@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runtime": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+  "command": "node --check candidate/polished-automation.js && node --check candidate/polished.js && node --check candidate/polished-backup.js && node --check candidate/automation.test.cjs && AVEN_SKIP_BROWSER=1 node candidate/automation.test.cjs",
+  "exitCode": 0,
+  "result": {
+    "syntax": "passed",
+    "pure": "passed",
+    "backup": "preserved",
+    "externalCalls": 0,
+    "disabledJobs": "not executed",
+    "nextRun": "passed",
+    "failures": "visible",
+    "procedureDispatchVersion": "passed",
+    "requiredAccess": "blocked before adapter call when unavailable",
+    "staleVersion": "blocked before adapter call",
+    "pluginRefresh": "local /api/capabilities shape mapped; no install, credentials or connection creation",
+    "productionHook": "local GET /api/capabilities, provider/model readiness mapping, and full scheduled procedure contract in validated message content wired",
+    "browser": "pending root browser-fixture lease",
+    "actualAssembledServer": "passed: injected responder accepted validated chat schema; procedure remained in message content and context stayed numeric-only"
+  },
+  "browserScope": "Not started in this child because the root owns the one-fixture browser lease. The updated fixture routes local /api/capabilities and /api/chat only, then asserts endpoint-derived availability and exact procedure message content; pure validation also starts the assembled server with an injected responder.",
+  "limitations": [
+    "External scheduling and provider/device/plugin adapters are intentionally not exercised.",
+    "The local endpoint snapshot is fixture-routed in browser coverage; no real provider, device, plugin installation or credential flow is contacted.",
+    "Root must run the candidate browser fixture after granting the lease; the test itself closes its server and browser in finally."
+  ]
+}

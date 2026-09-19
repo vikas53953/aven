@@ -1,0 +1,128 @@
+{
+  "phase": "polished-app",
+  "startedAt": "2026-09-12T16:26:48.956Z",
+  "base": "http://127.0.0.1:8767",
+  "sourceFiles": [
+    "polished.html",
+    "polished.css",
+    "polished.js",
+    "polished-avatars.js",
+    "avatar-system/artwork.js",
+    "avatar-system/avatar.css"
+  ],
+  "candidateStart": {
+    "polished.html": "685d24454e8345d822466ae2ba16a0cd389b980ee7733ed9ab23fb76a7ea93fb",
+    "polished.css": "45b48460ba60479d20aa595ae7f0e1a0bc65785338b5788168b8d057fa5f7445",
+    "polished.js": "a4ba5412ae5ff309d55ed6b0c1c3eba165b27ee8a13c39ffd471438ba66497f0",
+    "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+    "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+    "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad"
+  },
+  "candidateEnd": {
+    "polished.html": "685d24454e8345d822466ae2ba16a0cd389b980ee7733ed9ab23fb76a7ea93fb",
+    "polished.css": "45b48460ba60479d20aa595ae7f0e1a0bc65785338b5788168b8d057fa5f7445",
+    "polished.js": "a4ba5412ae5ff309d55ed6b0c1c3eba165b27ee8a13c39ffd471438ba66497f0",
+    "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+    "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+    "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad"
+  },
+  "candidateStable": true,
+  "viewportRuns": [
+    {
+      "width": 390,
+      "initial": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390,
+        "bodyClientWidth": 390
+      },
+      "open": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390,
+        "bodyClientWidth": 390
+      },
+      "profile": {
+        "x": 145.5,
+        "y": 157,
+        "width": 116,
+        "height": 129
+      }
+    },
+    {
+      "width": 320,
+      "initial": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "bodyScrollWidth": 320,
+        "bodyClientWidth": 320
+      },
+      "open": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "bodyScrollWidth": 320,
+        "bodyClientWidth": 320
+      },
+      "profile": {
+        "x": 110.5,
+        "y": 157,
+        "width": 116,
+        "height": 129
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "picker exposes all 16 styles and persists every choice immediately",
+      "status": "PASS"
+    },
+    {
+      "name": "custom color persists across reload and new agents render cloud amber",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy aliases normalize on render while raw stored records remain unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "existing photos and real file upload persist through reload",
+      "status": "PASS"
+    },
+    {
+      "name": "motion ownership follows profile, focused or selected sidebar, then header fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "picker tiles and photos stay static, including reduced motion",
+      "status": "PASS"
+    },
+    {
+      "name": "responsive 390px app has no horizontal overflow and profile remains accessible",
+      "status": "PASS"
+    },
+    {
+      "name": "responsive 320px app has no horizontal overflow and profile remains accessible",
+      "status": "PASS"
+    },
+    {
+      "name": "existing composer, add menu, create menu and sidebar sections remain usable",
+      "status": "PASS"
+    },
+    {
+      "name": "no page errors or external requests during app QA",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    ".intentgraph/avatar-family-app-qa-screenshots/app-1440-picker.png",
+    ".intentgraph/avatar-family-app-qa-screenshots/app-1440-new-agent.png",
+    ".intentgraph/avatar-family-app-qa-screenshots/app-390-initial.png",
+    ".intentgraph/avatar-family-app-qa-screenshots/app-390-profile.png",
+    ".intentgraph/avatar-family-app-qa-screenshots/app-320-initial.png",
+    ".intentgraph/avatar-family-app-qa-screenshots/app-320-profile.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "storageWrites": [],
+  "bugs": []
+}

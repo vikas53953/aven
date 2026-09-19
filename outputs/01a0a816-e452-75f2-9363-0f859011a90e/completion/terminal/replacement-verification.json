@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "file": "polished.html",
+      "status": "PASS",
+      "appliedHunks": 3
+    },
+    {
+      "file": "polished.js",
+      "status": "PASS",
+      "appliedHunks": 3
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "status": "PASS",
+      "appliedHunks": 2
+    },
+    {
+      "file": "completion/terminal/candidate/polished-terminal.js",
+      "status": "PASS",
+      "standalone": true
+    },
+    {
+      "file": "completion/terminal/candidate/polished-terminal.css",
+      "status": "PASS",
+      "standalone": true
+    }
+  ]
+}

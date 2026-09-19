@@ -1,0 +1,133 @@
+{
+  "candidate": "AV2-ae8ad3e219bd",
+  "capturedAt": "2026-09-12T16:28:35.666Z",
+  "scope": "Local frontend: sixteen network coworkers, shared SVG/React geometry and picker integration. Real AI, network execution and live graph/team telemetry remain unconnected.",
+  "checks": [
+    {
+      "name": "artwork exposes 16 roles and 6 application sizes",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "approved four inner geometry remains exact at all six sizes",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "all 16 exported SVGs are valid named-group assets without external/PNG assets",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "generated React components transpile and render geometry parity for all 16 96px variants",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "gallery has all 16 still tiles and six active preview sizes",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "all 9 emotion controls, hover/focus, success to idle, and animation toggle work",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "reduced motion suppresses animation and offscreen suppresses animation",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "gallery-390 has no horizontal overflow and retains gallery/size controls",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "gallery-320 has no horizontal overflow and retains gallery/size controls",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "gallery emits no page errors, external requests, or storage writes",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-qa-results.json"
+    },
+    {
+      "name": "picker exposes all 16 styles and persists every choice immediately",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "custom color persists across reload and new agents render cloud amber",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "legacy aliases normalize on render while raw stored records remain unchanged",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "existing photos and real file upload persist through reload",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "motion ownership follows profile, focused or selected sidebar, then header fallback",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "picker tiles and photos stay static, including reduced motion",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "responsive 390px app has no horizontal overflow and profile remains accessible",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "responsive 320px app has no horizontal overflow and profile remains accessible",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "existing composer, add menu, create menu and sidebar sections remain usable",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "no page errors or external requests during app QA",
+      "status": "PASS",
+      "evidence": ".intentgraph/avatar-family-app-qa-results.json"
+    },
+    {
+      "name": "All React wrappers across six sizes",
+      "status": "PASS",
+      "detail": "96/96 render geometry comparisons passed.",
+      "evidence": ".intentgraph/avatar-family-react-check.json"
+    },
+    {
+      "name": "Expanded-family visual acceptance",
+      "status": "PENDING",
+      "detail": "First four approved. The complete family is ready for the owner to review.",
+      "evidence": ".intentgraph/avatar-family.md"
+    }
+  ],
+  "captures": [
+    {
+      "label": "Full family gallery",
+      "path": "avatar-system/gallery.html"
+    },
+    {
+      "label": "Integrated picker",
+      "path": ".intentgraph/avatar-family-app-root.png"
+    },
+    {
+      "label": "Approved four",
+      "path": "avatar-system/four-preview.html"
+    }
+  ]
+}

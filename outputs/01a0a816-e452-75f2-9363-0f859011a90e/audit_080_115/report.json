@@ -1,0 +1,358 @@
+{
+  "rows": [
+    {
+      "id": "UX-080",
+      "verdict": "Missing",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "No complete state-changing workflow; local revert is chat-history only.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Review displays affected devices and rollback limits; chat revert never substitutes for device rollback.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No state-changing workflow is present to exercise."
+    },
+    {
+      "id": "UX-081",
+      "verdict": "Partial",
+      "evidenceLevel": "Fresh fixture (partial)",
+      "finding": "Fixture normalization preserves target/time and missing-vs-empty distinction; rendered comparison UI and explicit timestamp labels remain unverified.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Different devices/times are labeled; missing results are not represented as zero change.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Comparison UI and explicit timestamp labeling were not exercised; no provider/device calls."
+    },
+    {
+      "id": "UX-082",
+      "verdict": "Missing",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "No interactive topology node/link renderer or freshness/inferred-link labeling.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Nodes/links identify source and freshness; inferred links are labeled.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No topology data contract or renderer in Aven shell."
+    },
+    {
+      "id": "UX-083",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "feed derives a real run entry and opens its message",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Every entry opens relevant run; empty view explains what will appear.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-084",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "idea create/archive/restore local flow",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: No dead-end primary navigation; saved user ideas remain recoverable.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-085",
+      "verdict": "Partial",
+      "evidenceLevel": "Fresh fixture (partial)",
+      "finding": "Source/module check finds evidence-reference enforcement, but does not exercise completed-step behavior or migration.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Completed step links to evidence; manual checklist state is not agent execution proof.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Completed-step behavior and migration were not exercised; no provider/device calls."
+    },
+    {
+      "id": "UX-086",
+      "verdict": "Missing",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "No durable scheduling UI, next-run or pause/resume workflow.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Disabled schedule does not run; next-run time is correct; failures are visible.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No scheduler surface exists."
+    },
+    {
+      "id": "UX-087",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Deduplicated local completion notices link to the correct result and respect mute. Broader attention/system alerts remain pending.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Alert opens correct task and respects mute; duplicate events do not spam.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-088",
+      "verdict": "Missing",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Network sandbox inventory is a capability preview, not install/connect/plugin lifecycle management.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Unavailable tool cannot be selected; permissions and connection health are visible.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-089",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Local coworker documents exist, but no skills browser/procedure picker or version trace.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Selected procedure identifies required access; version used is traceable.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Documents are local notes, not reusable versioned procedures."
+    },
+    {
+      "id": "UX-090",
+      "verdict": "Deferred",
+      "evidenceLevel": "Owner decision",
+      "finding": "User explicitly deferred mobile/remote handoff until identity, remote runtime and resumability exist.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Handoff preserves context and permissions without concurrent duplicate execution.",
+      "nextAction": "Keep deferred until architecture is implemented.",
+      "limitation": "Deferred by user decision."
+    },
+    {
+      "id": "UX-091",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "keyboard Escape/focus return and named pane controls",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Visible focus, logical order, no traps; Escape returns focus correctly.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-092",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "selected coworker and unavailable panes expose accessible state",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Screen reader identifies each action, selected coworker and active run state correctly.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-093",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Code contains responsive/contrast-related CSS, but the fresh 200% and contrast browser checks were not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: At 200% text scale controls remain usable; contrast measured; narrow content reflows.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh 200% scaling or contrast run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-094",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Reduced-motion CSS is present, but the fresh reduced-motion browser check was not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Motion-reduced mode preserves all state changes and cancels decorative animation.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh reduced-motion run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-095",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Menu boundary/focus code is present, but the fresh narrow menu check was not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Menus stay within viewport, remain operable on hover, close predictably and restore focus.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh menu viewport run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-096",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Responsive containment code is present, but the fresh multi-width check was not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Desktop, narrow window and zoomed layouts retain controls; deliberate table scroll is contained.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh responsive multi-width run completed; prior overflow observations are historical evidence; no provider/device calls."
+    },
+    {
+      "id": "UX-097",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "empty feed and unavailable session messages are explicit",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Every visible action has a real result or an accurate reason it is unavailable.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-098",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Request errors surfaced; broad failure UX needs end-to-end checks.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Offline, timeout, cancellation and provider failure are distinct and recoverable.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Timeout and real provider failure are not exercised; external traffic blocked."
+    },
+    {
+      "id": "UX-099",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Long transcript code path was not freshly exercised in the bounded run.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Long chat stays responsive and scrolling does not lose selection or anchors.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh long-transcript browser run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-100",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Coworker creation and welcome exist; setup remains fragmented.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: A new user understands required setup, selected device and next safe action.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Provider/device readiness and selected device are not part of onboarding."
+    },
+    {
+      "id": "UX-101",
+      "verdict": "Partial",
+      "evidenceLevel": "Fresh fixture (partial)",
+      "finding": "Backup format and private-key rejection passed; full draft/queue/avatar/revert migration coverage remains unverified.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Chats, drafts, queued work, avatars and revert history survive migration exactly.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Fixture only asserted format/activeAgent and private-key rejection; draft, queue, avatar and revert migration were not asserted."
+    },
+    {
+      "id": "UX-102",
+      "verdict": "Defect",
+      "evidenceLevel": "Fresh isolated fixture",
+      "finding": "Fresh isolated mocked configured:false status reproduces About’s hard-coded configured provider identity contradiction.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Support report identifies exact build and contains no provider keys.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Mocked local status only; no provider/device calls."
+    },
+    {
+      "id": "UX-103",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "coworker identity remains Firewall across profile and conversation shell",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Same object keeps same name across sidebar, profile, Settings and composer.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-104",
+      "verdict": "Deferred",
+      "evidenceLevel": "Owner decision",
+      "finding": "User explicitly deferred customer isolation until identity/tenancy/access architecture exists.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Wrong-customer data is inaccessible; workspace/access context is explicit.",
+      "nextAction": "Keep deferred until architecture is implemented.",
+      "limitation": "Deferred by user decision."
+    },
+    {
+      "id": "UX-105",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Owner acceptance is unavailable; automated/rendered checks are separate from the owner gate.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Code check, rendered behavior and owner acceptance have separate recorded outcomes.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Owner acceptance unavailable."
+    },
+    {
+      "id": "UX-106",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "allowlisted read-only exact target fixture",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Only supported read-only commands execute; failed transport cannot be shown as healthy.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-107",
+      "verdict": "Partial",
+      "evidenceLevel": "Fresh fixture (partial)",
+      "finding": "Fresh fixture covers UNKNOWN mapping and control stripping; full Stop behavior and duplicate-retry prevention were not exercised.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Stop records UNKNOWN when remote completion cannot be established; no automatic duplicate retry.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Stop UX and duplicate-retry prevention were not freshly exercised; no provider/device calls."
+    },
+    {
+      "id": "UX-108",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Bounded context helper is present, but the fresh 31-message omission check was not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: User can tell when older messages are omitted; raw historical evidence stays available.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh long-context omission run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-109",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Local-only note copy is present, but the fresh request-boundary check was not reached.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Editing local note never implies the next model response used it unless request evidence proves inclusion.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "No fresh request-boundary run completed; no provider/device calls."
+    },
+    {
+      "id": "UX-110",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Safe text/link rendering exists; inline media and attachment reading remain pending.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Links open correct source; unsupported media remains a labeled file; raw CLI remains unchanged.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Inline media and attachment reading remain pending."
+    },
+    {
+      "id": "UX-111",
+      "verdict": "Unverified",
+      "evidenceLevel": "Code review only",
+      "finding": "Unread persistence/open clearing remains code-reviewed only after the harness menu overlay issue.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Unread state persists correctly; opening a conversation never cancels work.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Unread persistence/open clearing was not freshly exercised; no provider/device calls."
+    },
+    {
+      "id": "UX-112",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "unsupported locale is disabled and English fallback is explicit",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Language choice never appears applied while labels remain unchanged.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-113",
+      "verdict": "Partial",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "Serial capacity feedback identifies the active coworker and offers navigation to the active conversation while preserving independent drafts and FIFO queue behavior.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Second conversation shows why it waits and identifies active work without losing its draft.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Full serial multi-conversation queue UI was not exercised in this bounded run."
+    },
+    {
+      "id": "UX-114",
+      "verdict": "Missing",
+      "evidenceLevel": "Code + scoped fixture",
+      "finding": "IntentGraph approval tooling is a separate module; no Aven preview/execute digest integration.",
+      "evidence": "static-audit.json; module-audit.json; browser-audit.json; acceptance: Aven preview and executed action share the same digest, scope and one-time approval.",
+      "nextAction": "Implement or investigate the missing acceptance slice.",
+      "limitation": "Local fixtures only; no provider/device calls."
+    },
+    {
+      "id": "UX-115",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "Fresh isolated test",
+      "finding": "Ephemeral fixture and root readback preserve run/chat IDs and sanitized provenance; full UI reload remains unverified.",
+      "evidence": "root-run-readback.json; static-audit.json; module-audit.json; browser-audit.json; acceptance: A saved run record is retrievable with original provenance after UI reload.",
+      "nextAction": "Owner acceptance remains separate.",
+      "limitation": "Fixture and root readback cover durable record retrieval; a full UI reload and provider/device execution were not exercised."
+    }
+  ],
+  "tests": [
+    {
+      "command": "node static source audit",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "node module fixture audit",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "node isolated Playwright browser audit",
+      "exitCode": 1,
+      "result": "FAIL: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#draft')\u001b[22m\n\u001b[2m    - locator resolved to <textarea rows=\"1\" id=\"draft\" autocomplete=\"off\" placeholder=\"Message Firewall…\" aria-label=\"Message the selected coworkers\"></textarea>\u001b[22m\n\u001b[2m    - fill(\"Trigger fixture\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    }
+  ],
+  "defects": [
+    {
+      "ids": [
+        "UX-102"
+      ],
+      "severity": "medium",
+      "title": "About hard-codes configured provider identity",
+      "repro": "In isolated Chromium, mock GET /api/chat/status as configured:false; open Account > About and refresh local status.",
+      "expected": "The About connection identity should remain consistent with the false/unavailable status or say it is unknown.",
+      "actual": "About shows “OpenCode · MiMo V2.5 (configured)” while the diagnostics report shows provider “Not connected”, model “Unavailable”, configured:false.",
+      "evidence": "browser-audit.json; polished.js:897; polished-diagnostics.js:10"
+    }
+  ]
+}

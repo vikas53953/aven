@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "checks": 30,
+  "scopes": {
+    "ideas": "workspaceTools.ideas",
+    "goals": "workspaceTools.goals plus per-step evidence",
+    "feed": "real messages with runId/events/evidence",
+    "artifacts": "raw output fields; selectedChatId supported"
+  },
+  "limitations": [
+    "Root must persist workspaceTools and provide synchronous onSave.",
+    "Runtime/provider wiring remains outside this module."
+  ]
+}

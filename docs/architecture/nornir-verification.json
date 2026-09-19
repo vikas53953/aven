@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-15T02:15:21.719Z",
+  "scope": "Nornir/Netmiko adoption",
+  "installed": {
+    "nornir": "3.3.0",
+    "netmiko": "4.7.0"
+  },
+  "tests": {
+    "python": "4 passed: real Nornir task runner, mocked Netmiko device",
+    "node": "16 focused routing/runtime/adapter/chat tests passed",
+    "dependencies": "pip check passed",
+    "architecture": "Desktop/mobile browser checks passed"
+  },
+  "liveRegression": [
+    {
+      "question": "Check sw1 interface addressing using live evidence. Keep the summary short.",
+      "runId": "408446b5-2a81-4cf6-b446-7fa49f00dcc9",
+      "commands": [
+        {
+          "command": "inventory",
+          "status": "SUCCESS"
+        },
+        {
+          "command": "show ip interface brief",
+          "status": "SUCCESS",
+          "source": "cisco-catalyst"
+        }
+      ]
+    },
+    {
+      "question": "What is MPLS? Explain in two sentences.",
+      "runId": "abef4b43-0d40-4044-8266-24195158e4a4",
+      "commands": []
+    }
+  ],
+  "ssh": {
+    "configuredProfiles": 0,
+    "liveVerified": false,
+    "next": "Configure lab hostname, username, locally stored password and verified SSH host key."
+  },
+  "limits": [
+    "Cisco IOS read-only catalog: 11 operations; Catalyst remains 6.",
+    "Single-target worker per tool invocation, no durable fleet jobs.",
+    "Diagnostic correctness, durable investigations and tenant isolation remain separate work."
+  ]
+}

@@ -1,0 +1,246 @@
+[
+  {
+    "id": "UX-021",
+    "cells": {
+      "D": "Present",
+      "E": "Selected UTF-8 text files are validated locally. Explicit Send includes exact contents in saved request text. Unsupported files remain labeled/removable; previous-session names require reattachment.",
+      "N": "Verified",
+      "P": "2026-09-16: attachments.json; verify-attachments-unit.cjs. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-022",
+    "cells": {
+      "D": "Present",
+      "E": "Composer file drop and clipboard-file paste create usable text attachments; unsupported and oversized files give recovery instructions.",
+      "N": "Verified",
+      "P": "2026-09-16: attachments.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-029",
+    "cells": {
+      "D": "Present",
+      "E": "Stop aborts the request, pauses queued work and explicitly marks submitted remote completion UNKNOWN. Captured evidence remains inspectable.",
+      "N": "Verified",
+      "P": "2026-09-16: verify-queue-terminal.cjs 4/4; run-durability.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-036",
+    "cells": {
+      "D": "Present",
+      "E": "Run metadata retains elapsed time and SUCCESS/FAILURE/UNKNOWN outcome. Interrupted runs show a visible uncertainty notice rather than completed success.",
+      "N": "Verified",
+      "P": "2026-09-16: run-recovery.json; run-durability.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-038",
+    "cells": {
+      "D": "Present",
+      "E": "Run details show actual response model and supported token metadata. Missing usage is Unavailable. Existing context preview reports the bounded message window.",
+      "N": "Verified",
+      "P": "2026-09-16: run-recovery.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-040",
+    "cells": {
+      "D": "Present",
+      "E": "Bounded local run journals persist stream evidence. Restart recovers one incomplete record and pauses queued work without re-execution; save failures retain recovery state.",
+      "N": "Verified",
+      "P": "2026-09-16: run-recovery.json; run-durability.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-048",
+    "cells": {
+      "D": "Present",
+      "E": "Copy a local message link and open its exact saved chat/message. Missing and archived destinations give explanations. Links are scoped to this browser workspace.",
+      "N": "Verified",
+      "P": "2026-09-16: run-recovery.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-064",
+    "cells": {
+      "D": "Present",
+      "E": "Help opens keyboard/local workspace guidance. Feedback saves locally and can be downloaded manually; no private logs or network submission are attached.",
+      "N": "Verified",
+      "P": "2026-09-16: diagnostics-ui.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-083",
+    "cells": {
+      "D": "Present",
+      "E": "Feed derives entries from actual saved run messages and opens their exact message. Empty views explain what will appear.",
+      "N": "Verified",
+      "P": "2026-09-16: workspace-shell.json; verify-workspace-tools.cjs 30 checks. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-084",
+    "cells": {
+      "D": "Present",
+      "E": "Ideas can be created, edited, archived and restored with local persistence and save-failure recovery. No seed records.",
+      "N": "Verified",
+      "P": "2026-09-16: workspace-shell.json; verify-workspace-tools.cjs 30 checks. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-085",
+    "cells": {
+      "D": "Present",
+      "E": "Local goals and checklist steps require real message evidence for completion. Manual completion is labeled, references remain inspectable, and missing references are explicit.",
+      "N": "Verified",
+      "P": "2026-09-16: verify-workspace-tools.cjs 30 checks; workspace-shell.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-093",
+    "cells": {
+      "D": "Present",
+      "E": "Measured dark/light text contrast and tested 200% computed font scaling with usable controls. Narrow content reflows in tested Chromium views.",
+      "N": "Verified",
+      "P": "2026-09-16: accessibility-results.json; scoped checks, not a full WCAG conformance claim. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-094",
+    "cells": {
+      "D": "Present",
+      "E": "Reduced-motion mode cancels decorative animation while state changes remain visible. Forced-colors scrollbar fallback verified.",
+      "N": "Verified",
+      "P": "2026-09-16: accessibility-results.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-095",
+    "cells": {
+      "D": "Present",
+      "E": "Pointer, touch and keyboard menus remain within viewport. Arrow navigation and Escape focus return pass at tested widths.",
+      "N": "Verified",
+      "P": "2026-09-16: accessibility-results.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-096",
+    "cells": {
+      "D": "Present",
+      "E": "Collapsed sidebar overflow corrected. Chat, panes and menus retain controls at 320/390/760/1440px and with 200% text stress.",
+      "N": "Verified",
+      "P": "2026-09-16: accessibility-results.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-102",
+    "cells": {
+      "D": "Present",
+      "E": "About identifies the loaded build and offers a user-triggered local configuration snapshot and safe support copy. Unverified reachability is explicit.",
+      "N": "Verified",
+      "P": "2026-09-16: diagnostics-ui.json; verify-chat-read-api.cjs. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-107",
+    "cells": {
+      "D": "Present",
+      "E": "Cancellation stops local fetch and propagates to the server; already submitted remote work is explicitly UNKNOWN, with retained evidence and no automatic duplicate retry.",
+      "N": "Verified",
+      "P": "2026-09-16: verify-queue-terminal.cjs 4/4; run-durability.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-112",
+    "cells": {
+      "D": "Present",
+      "E": "The language selector explicitly identifies English as the system fallback; unsupported translations cannot appear selected or applied.",
+      "N": "Verified",
+      "P": "2026-09-16: diagnostics-ui.json. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-113",
+    "cells": {
+      "D": "Present",
+      "E": "Serial capacity feedback identifies the active coworker and offers navigation to the active conversation while preserving independent drafts and FIFO queue behavior.",
+      "N": "Verified",
+      "P": "2026-09-16: alerts.json; verify-queue-terminal.cjs 4/4. Isolated tests passed; no live provider/device call. Owner acceptance pending."
+    }
+  },
+  {
+    "id": "UX-057",
+    "cells": {
+      "D": "Partial",
+      "E": "Muted coworkers suppress local completion notices. Enabled notices open the finished message. Waiting/error attention alerts remain pending.",
+      "N": "Implemented",
+      "P": "2026-09-16: alerts.json. Implemented slice verified; full feature remains pending."
+    }
+  },
+  {
+    "id": "UX-066",
+    "cells": {
+      "D": "Partial",
+      "E": "Artifacts now list actual saved raw evidence outputs for the selected chat, with exact downloads and provenance. General generated-file registry remains pending.",
+      "N": "Implemented",
+      "P": "2026-09-16: workspace-shell.json. Implemented slice verified; full feature remains pending."
+    }
+  },
+  {
+    "id": "UX-087",
+    "cells": {
+      "D": "Partial",
+      "E": "Deduplicated local completion notices link to the correct result and respect mute. Broader attention/system alerts remain pending.",
+      "N": "Implemented",
+      "P": "2026-09-16: alerts.json. Implemented slice verified; full feature remains pending."
+    }
+  },
+  {
+    "id": "UX-060",
+    "cells": {
+      "D": "Partial",
+      "E": "Removed cosmetic provider-switch controls. Settings shows actual fixed runtime and user-triggered configuration snapshot. Provider switching/setup remains pending.",
+      "N": "Implemented",
+      "P": "2026-09-16: diagnostics-ui.json. Implemented slice verified; full feature remains pending."
+    }
+  },
+  {
+    "id": "UX-061",
+    "cells": {
+      "D": "Partial",
+      "E": "Local configuration/status snapshots refresh with an explicit check time. Reachability and live provider/device health remain unverified.",
+      "N": "Implemented",
+      "P": "2026-09-16: diagnostics-ui.json. Implemented slice verified; full feature remains pending."
+    }
+  },
+  {
+    "id": "UX-053",
+    "cells": {
+      "N": "Deferred",
+      "L": "2026-09-16 user decision: keep cross-device history, accounts/customer isolation and remote handoff pending; finish local features first."
+    }
+  },
+  {
+    "id": "UX-063",
+    "cells": {
+      "N": "Deferred",
+      "L": "2026-09-16 user decision: keep cross-device history, accounts/customer isolation and remote handoff pending; finish local features first."
+    }
+  },
+  {
+    "id": "UX-090",
+    "cells": {
+      "N": "Deferred",
+      "L": "2026-09-16 user decision: keep cross-device history, accounts/customer isolation and remote handoff pending; finish local features first."
+    }
+  },
+  {
+    "id": "UX-104",
+    "cells": {
+      "N": "Deferred",
+      "L": "2026-09-16 user decision: keep cross-device history, accounts/customer isolation and remote handoff pending; finish local features first."
+    }
+  }
+]

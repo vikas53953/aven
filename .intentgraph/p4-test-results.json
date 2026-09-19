@@ -1,0 +1,93 @@
+{
+  "baseline": "F09-P4",
+  "startedAt": "2026-09-11T04:29:03.593Z",
+  "sourceFiles": [
+    "polished.html",
+    "polished.css",
+    "polished.js",
+    "polished-avatars.js",
+    "prototype-review.html"
+  ],
+  "candidateStart": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a665c974bdb95112968a140d85e4f9207b14397cde25505a0147203cc78c705c",
+    "polished.js": "ce2665803e7982fdc1118664910b89a2bbb409705021180d57e2ec4fc06a942b",
+    "polished-avatars.js": "b4d0daff1007ff5f9fb5f99e5b6162d18b47952d371d6ec5d42a66e721d73188",
+    "prototype-review.html": "e30c5722870e61e286a04de734a297c58fd600a03c7b0fff585d3647726d1661"
+  },
+  "checks": [
+    {
+      "name": "P4 direct profile entry, per-agent immediate avatar persistence, autosave and identity split",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 upload token ordering, uploaded-image integrity and motion/reduced-motion behavior",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 avatar size and visible mascot coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 custom section collapse persistence, hover/focus chevron and rename validation",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 composer add menu stays above and accessible across desktop and mobile viewports",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 accepted settings, keyboard and local preservation regressions",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 protected wireframe sources and candidate stability",
+      "status": "PASS"
+    },
+    {
+      "name": "P4 no page errors or external runtime requests",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "label": "sections-renamed",
+      "path": ".intentgraph/p4-sections-renamed.png"
+    },
+    {
+      "label": "menu-1440",
+      "path": ".intentgraph/p4-menu-1440.png"
+    },
+    {
+      "label": "main-collapsed-390",
+      "path": ".intentgraph/p4-main-collapsed-390.png"
+    },
+    {
+      "label": "menu-390",
+      "path": ".intentgraph/p4-menu-390.png"
+    },
+    {
+      "label": "main-collapsed-320",
+      "path": ".intentgraph/p4-main-collapsed-320.png"
+    },
+    {
+      "label": "menu-320",
+      "path": ".intentgraph/p4-menu-320.png"
+    },
+    {
+      "label": "profile-and-regression",
+      "path": ".intentgraph/p4-profile-and-regression.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "finishedAt": "2026-09-11T04:29:16.679Z",
+  "candidateEnd": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a665c974bdb95112968a140d85e4f9207b14397cde25505a0147203cc78c705c",
+    "polished.js": "ce2665803e7982fdc1118664910b89a2bbb409705021180d57e2ec4fc06a942b",
+    "polished-avatars.js": "b4d0daff1007ff5f9fb5f99e5b6162d18b47952d371d6ec5d42a66e721d73188",
+    "prototype-review.html": "e30c5722870e61e286a04de734a297c58fd600a03c7b0fff585d3647726d1661"
+  },
+  "candidateStable": true
+}

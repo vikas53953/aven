@@ -1,0 +1,193 @@
+{
+  "at": "2026-09-17T04:19:31.744Z",
+  "resolved": [
+    {
+      "file": "polished.js",
+      "reason": "Keep compact mode display and capability-aware per-chat concurrency",
+      "old": "modePicker.disabled=chatRequests.size>0||!!currentChat()?.pendingQueue?.length;",
+      "new": "modePicker.disabled=(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(currentChat()?.id):chatRequests.size>0)||!!currentChat()?.pendingQueue?.length;"
+    },
+    {
+      "file": "polished.html",
+      "reason": "Place compact model picker beside plus, preserve footer removal",
+      "old": "<button class=\"icon-button\" id=\"tools-menu\" type=\"button\" aria-label=\"Add attachments or tools\" title=\"Add attachments or tools\" aria-expanded=\"false\" data-icon=\"plus\"></button>",
+      "new": "<button class=\"icon-button\" id=\"tools-menu\" type=\"button\" aria-label=\"Add attachments or tools\" title=\"Add attachments or tools\" aria-expanded=\"false\" data-icon=\"plus\"></button>\r\n                  <button class=\"composer-provider-trigger\" id=\"composer-provider-trigger\" type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Choose provider, model and effort\" title=\"OpenCode · MiMo V2.5 · effort None\">MiMo V2.5</button>"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Merge model selection defaults with minimal presentation preferences",
+      "old": "model:'',browser:true",
+      "new": "model:'',providerSelection:null,providerSelectionExplicit:false,browser:true"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Validate combined selected-provider and idempotent request contract",
+      "old": "      const mode = body?.mode === undefined ? 'inspect' : body.mode;\n      if(!body || Object.keys(body).some(k=>!['chatId','agentName','messages','mode','requestId','idempotencyKey'].includes(k)) || !CHAT_MODES.includes(mode) || typeof body.chatId!=='string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.agentName!=='string' || body.agentName.length>80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length>24 || body.messages.some(m=>!m || Object.keys(m).some(k=>!['role','content'].includes(k)) || !['user','assistant'].includes(m.role) || typeof m.content!=='string' || !m.content.trim()) || body.messages.at(-1).role!=='user' || body.messages.reduce((n,m)=>n+m.content.length,0)>32000){sendError(res,400,new Error('Chat requires up to 24 text messages and mode plan or inspect'));return;}\n      if(!execution?.provider){sendError(res,503,new Error('Chat provider is unavailable'));return;}\r\n",
+      "new": "      const mode = body?.mode === undefined ? 'inspect' : body.mode;\n      if(!body || Object.keys(body).some(k=>!['chatId','agentName','messages','mode','selection','context','requestId','idempotencyKey'].includes(k)) || (Object.hasOwn(body,'selection') && (!body.selection || typeof body.selection!=='object' || Array.isArray(body.selection))) || (Object.hasOwn(body,'context') && body.context!==null && (typeof body.context!=='object' || Array.isArray(body.context) || Object.keys(body.context).some(k=>!['windowMessages','windowCharacters','retainedMessages','retainedCharacters','omittedMessages','totalMessages'].includes(k)) || Object.values(body.context).some(value=>value!==null&&(!Number.isSafeInteger(value)||value<0)))) || !CHAT_MODES.includes(mode) || typeof body.chatId!=='string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.agentName!=='string' || body.agentName.length>80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length>24 || body.messages.some(m=>!m || Object.keys(m).some(k=>!['role','content'].includes(k)) || !['user','assistant'].includes(m.role) || typeof m.content!=='string' || !m.content.trim()) || body.messages.at(-1).role!=='user' || body.messages.reduce((n,m)=>n+m.content.length,0)>32000){sendError(res,400,new Error('Chat requires up to 24 text messages, mode plan or inspect, and a safe optional provider selection'));return;}\n      const capabilities=await providerSelection.capabilities();\n      const selected=resolveSelection({selection:Object.hasOwn(body,'selection')?body.selection:undefined,capabilities,defaultSelection:DEFAULT_SELECTION});\n      if(!selected.ok){sendError(res,409,Object.assign(new Error(selected.reason),{code:selected.code}));return;}\n      if(!execution?.provider){sendError(res,503,new Error('Chat provider is unavailable'));return;}"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Keep local context counts and add bounded request window metadata",
+      "old": "return {messages,characters,omitted,total,windowMessages:messages.length,windowCharacters:characters,retainedMessages:messages.length,retainedCharacters:characters,omittedMessages:omitted,totalMessages:total};",
+      "new": "return {messages,characters,omitted,total,windowMessages:messages.length,windowCharacters:characters,retainedMessages:messages.length,retainedCharacters:characters,omittedMessages:omitted,totalMessages:total,metadata:{windowMessages:24,windowCharacters:32000,retainedMessages:messages.length,retainedCharacters:characters,omittedMessages:omitted,totalMessages:total}};"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve durable pending run fields and append requested selection",
+      "old": "appliedSteerIds:new Set(),reliabilityRunId:",
+      "new": "appliedSteerIds:new Set(),requestedSelection:selection,context,selectionExplicit,reliabilityRunId:"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Send selection/context and reliability identifiers together",
+      "old": "messages,mode:modeFor(requestMode),requestId:pending.reliabilityRequestId",
+      "new": "messages,mode:modeFor(requestMode),context,...(selectionExplicit?{selection}:{}),requestId:pending.reliabilityRequestId"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Pause only this chat queue while its clarification is pending",
+      "old": "if((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.pendingQueue?.length){",
+      "new": "if((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.pendingQueue?.length||c.workflowState?.status==='waiting-question'){"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Preserve per-chat concurrency and prevent dispatch through a pending question",
+      "old": "if(!c||c.archived||(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;",
+      "new": "if(!c||c.archived||(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.queueEditing||c.workflowState?.status==='waiting-question'||!c.pendingQueue?.length)return false;"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "reason": "Keep generated-file badge inside collapsed artifact details",
+      "old": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', 'Raw output')); details.append(top);",
+      "new": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', artifact.generatedFile ? 'Generated file' : 'Raw output')); details.append(top);"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "reason": "Truthful compact generated-file summary",
+      "old": "artifact.command || 'Raw output'",
+      "new": "artifact.command || (artifact.generatedFile ? 'Generated file' : 'Raw output')"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "reason": "Keep raw artifact content collapsed and explicit preview action available",
+      "old": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; details.append(pre);",
+      "new": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; details.append(pre); if (artifact.generatedFile && globalThis.AvenWorkspaceCapabilities) { const preview = button('Open sandbox preview', 'button-secondary', () => { const previous = card.querySelector('.aven-generated-file-preview'); previous?.remove(); const host = create('div', 'aven-generated-file-preview'); card.append(host); try { globalThis.AvenWorkspaceCapabilities.openGeneratedFile({ ...artifact, content: artifact.content }, { container: host, selectedChatId: opts.selectedChatId || artifact.chatId }); } catch (error) { host.textContent = `Preview unavailable: ${error?.message || 'unknown error'}`; } }); preview.dataset.avenFocusKey = `artifact-preview-${index}`; card.append(preview); }"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Add automation settings helper without replacing provider settings",
+      "old": "  function renderSettingsPage()",
+      "new": "  function renderSettingsPage()"
+    },
+    {
+      "file": "polished.js",
+      "reason": "History null guard superseded by minimal UI guarded legacy picker and shared plus-menu mode setter",
+      "owner": "history",
+      "index": 7
+    },
+    {
+      "file": "polished.js",
+      "reason": "Remove duplicate fenced evidence across Markdown boundary newlines without changing retained raw bytes",
+      "old": "body===wanted||wanted.startsWith(body)||body.startsWith(wanted)?'':whole",
+      "new": "body.replace(/\\r\\n/g,'\\n').replace(/^\\n+|\\n+$/g,'')===wanted.replace(/\\r\\n/g,'\\n').replace(/^\\n+|\\n+$/g,'')?'':whole"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Fold long generated code while retaining explanation and exact source",
+      "old": "n.textContent=code.join('\\n');pre.append(n);parent.append(pre);continue;",
+      "new": "n.textContent=code.join('\\n');pre.append(n);if(code.length>12){const details=document.createElement('details');details.className='message-code-fold';const summary=document.createElement('summary');const language=line.trim().slice(3).trim();summary.textContent=(language||'Code')+' · '+code.length+' lines';pre.tabIndex=0;details.append(summary,pre);parent.append(details);}else parent.append(pre);continue;"
+    }
+  ],
+  "pending": [
+    {
+      "owner": "provider",
+      "index": 20,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 3,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 4,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 8,
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 9,
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 15,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workflows",
+      "index": 23,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap"
+    },
+    {
+      "owner": "workspace",
+      "index": 1,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "automation",
+      "index": 4,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "automation",
+      "index": 9,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "automation",
+      "index": 10,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "automation",
+      "index": 14,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "terminal",
+      "index": 2,
+      "file": "polished.html",
+      "reason": "overlap"
+    },
+    {
+      "owner": "git",
+      "index": 3,
+      "file": "polished.js",
+      "reason": "overlap"
+    },
+    {
+      "owner": "git",
+      "index": 8,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap"
+    }
+  ]
+}

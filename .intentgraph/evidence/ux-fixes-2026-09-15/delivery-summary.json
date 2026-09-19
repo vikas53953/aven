@@ -1,0 +1,65 @@
+{
+  "build": "ux-pipeline-v5",
+  "date": "2026-09-15",
+  "verifiedFeatureIds": [
+    "UX-001",
+    "UX-002",
+    "UX-003",
+    "UX-004",
+    "UX-005",
+    "UX-006",
+    "UX-007",
+    "UX-009",
+    "UX-016",
+    "UX-017",
+    "UX-018",
+    "UX-024",
+    "UX-025",
+    "UX-041",
+    "UX-044",
+    "UX-045",
+    "UX-047",
+    "UX-049",
+    "UX-051",
+    "UX-052",
+    "UX-059",
+    "UX-065",
+    "UX-103",
+    "UX-108",
+    "UX-109"
+  ],
+  "partialSlices": {
+    "UX-102": "Build identity and safe details implemented; live connection diagnostics pending.",
+    "UX-110": "Safe links implemented; inline media and attachment contents pending."
+  },
+  "needsFixRemaining": 0,
+  "ownerAcceptance": "Pending",
+  "runtimeScope": "Local UI with isolated mocked chat; live existing browser workspace inspected without provider/device calls. No package or deployment performed.",
+  "tests": {
+    "review-ux-pipeline.cjs": "PASS",
+    "verify-direct-teams.cjs": "PASS",
+    "verify-reaction-recovery.cjs": "PASS",
+    "verify-queue-terminal.cjs": "4/4 PASS",
+    "verify-chat-interactions.cjs": "PASS",
+    "verify-local-commands.cjs": "PASS",
+    "verify-edit-rendering.cjs": "PASS",
+    "verify-history-navigation.cjs": "PASS",
+    "verify-backup-schema.cjs": "9/9 PASS",
+    "verify-local-data-ui.cjs": "PASS",
+    "verify-architecture-v2.cjs": "PASS"
+  },
+  "sourceHashes": {
+    "polished.html": "c76a5a4de1a528c0a4006a0574977eb52133570d88b90e0cddd4922e6ea7efe4",
+    "polished.js": "5400a3687ac20ddb808fce6115915f5f78d0134e1bd2e5af9f1d26593ae1f836",
+    "polished.css": "8e87837c6241563d9a92debc6bffc816293b07ddd719c3368b71118e193a5e70",
+    "polished-backup.js": "4cde4d1d9c779c2f1679f5d1d9912e045d36ccc49d8ced61021e1ed624d04d7e"
+  },
+  "preserved": "Coworker avatars, original local histories and drafts, archives, queues/steering distinction, exact raw CLI source. Pre-change source copies remain in before/.",
+  "reviewClosure": [
+    "private fields rejected or filtered only outside evidence metadata",
+    "message recipient arrays validated before remapping",
+    "pending import journal recovers before migration",
+    "UTF-8 export/import size limit aligned",
+    "inventory raw evidence included in Markdown"
+  ]
+}

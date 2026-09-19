@@ -1,0 +1,32 @@
+{
+  "status": "PASS scoped candidate; full acceptance remains bounded by stated row limitations",
+  "candidate": "completion/history-candidate/polished.js",
+  "candidateSha256": "028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822",
+  "replacementPackage": "completion/replacements.json",
+  "replacementProof": "completion/replacement-apply-check.json; 9/9 CRLF byte hunks matched once sequentially; applied SHA256 33A5360DC985F830960C5381362DF10CD7B7076AAE866828D93D733F8880A7B7",
+  "liveIntegrity": "Live polished.js remains AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C; liveFilesModified=[]",
+  "testCommand": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe completion/history-settings-audit.cjs",
+  "testResult": {
+    "checks": 47,
+    "passed": 47,
+    "failed": 0,
+    "ownedRows": 49,
+    "passRows": 47,
+    "deferredRows": ["UX-053", "UX-063"],
+    "blockedRequests": 0,
+    "pageErrors": 0,
+    "apiCalls": 3
+  },
+  "implemented": [
+    "Canonical chat/folder ordering uses persisted pin timestamps with a pinned flag first, so legacy pinned:true records remain in the pinned group after reload.",
+    "Storage failure rollback re-renders navigation and conversation state so stale click closures cannot mutate discarded objects.",
+    "Valid Add-mode backup restore preserves unrelated history, pinnedAt and paused imported queues; invalid JSON remains unchanged.",
+    "Fork provenance survives reload and its origin control reopens the exact parent message.",
+    "Ideas create/save/archive/restore and both-theme readability are exercised in the isolated browser fixture.",
+    "Muted and enabled completion notifications are exercised with an exact Open result link; active work remains alive while another chat opens.",
+    "Search result keyboard traversal and Enter activation open the exact saved message context.",
+    "Absent legacy chat-mode control no longer aborts interaction wiring, so Feed and Ideas routes remain usable.",
+    "Candidate preserves backup/import source and records the planned provider/workflow/automation schema gaps for root integration."
+  ],
+  "integration": "Apply completion/replacements.json to the immutable baseline polished.js. Do not replace the root live file wholesale; reconcile with other agent changes."
+}

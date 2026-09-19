@@ -1,0 +1,13 @@
+{
+  "at": "2026-09-15T19:42:30.036Z",
+  "passed": true,
+  "checks": [
+    "mode scope text agrees with persisted inspect/plan mode",
+    "Browser and Computer panes are truthful unavailable states with no action buttons",
+    "desktop pane supports keyboard and pointer resize with persisted width",
+    "ResizeObserver clamps pane to 320px while retaining a 320px center column",
+    "320px viewport has no horizontal overflow",
+    "SOUL.md and MEMORY.md save quota failures retain edited text and the previous saved value"
+  ],
+  "scope": "Isolated localhost shell; backend/provider/device routes blocked; synthetic pane geometry only; no user storage or external calls."
+}

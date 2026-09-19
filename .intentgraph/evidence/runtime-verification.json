@@ -1,0 +1,49 @@
+{
+  "at": "2026-09-12T17:37:18.838Z",
+  "revision": 44,
+  "sourceHashes": {
+    "intentgraph/backend.test.cjs": "b195e208304494038d6e93b56567158b3273a61a647712b681cb384ddb2cea50",
+    "intentgraph/check-index.cjs": "9e42249e639c22ef74b93ca85625bee2241ede129f00d503aa72eba7e489c5c2",
+    "intentgraph/cli.cjs": "800864c8c5c0c7eec5b05beb41e9aa37b1f8376979b0cb7b36d6ce047bd34e2d",
+    "intentgraph/engine.cjs": "0a77de8ec01bcd8b580bcfe1e7ffb44dce53d05a9d2e65cf52ebeb63a9456ecf",
+    "intentgraph/indexer.cjs": "f463ed1e6da57b8db241a7a3254d19018cae3b0424786b4b6a5479d19f01e3c5",
+    "intentgraph/package.json": "78d7afacec004bcafcc28622240081c142288598b5a21ecc5d68d58db59ae46d",
+    "intentgraph/README.md": "f022b3b56a9d930203091dbcc31d6ad896d18685803479e186ad72d66824a270",
+    "intentgraph/server.cjs": "b5aeb4a9f54d19db73767f8d618c41d9dcee6220cfdb2d30a6234e86b587313a",
+    "intentgraph/trace.cjs": "ab3666fe07ec9d986a4ff2a65d18010b7d8d36f9b4076f4efe04f8bc96c5500e",
+    "intentgraph/trace.test.cjs": "275a6f492446f485794bab991f51f9c43222450fafdd30129b386f18ce86b15b",
+    "intentgraph/ui/app.js": "9dd37aaa011f72651abbaf1a1263d4476162cfcce8bae0d473f401028eb625ed",
+    "intentgraph/ui/index.html": "f57dc80c2dd452ff5dc0367771bb0614f3f2d7cf1a25689915cfa378e4e44eaa",
+    "intentgraph/ui/style.css": "16e6ad8fe27c9f13f99648940230e07f5dcd8cfdb4f749d72e70a08b6da3f7e6"
+  },
+  "backend": {
+    "command": "node --test intentgraph/backend.test.cjs intentgraph/trace.test.cjs",
+    "passed": 5,
+    "failed": 0,
+    "scope": [
+      "serialized release and assignment invalidation",
+      "parser caching",
+      "symlink secret exclusion",
+      "restart diff integrity",
+      "async trace parentage and failure preservation"
+    ]
+  },
+  "browser": {
+    "passed": 29,
+    "failed": 0,
+    "findings": [],
+    "pageErrors": [],
+    "httpErrors": [],
+    "networkFailures": [],
+    "source": "../intentgraph-ui-fixture/.intentgraph/runtime/ui-results.json"
+  },
+  "independentBackendReview": {
+    "performed": true,
+    "scope": "Baseline references vs implementation, stale source/evidence release denials, lexical property-call resolution",
+    "limitation": "Cache, assignment, symlink and restart follow-up fixes subsequently checked by root regression suite."
+  },
+  "ownerVisualAcceptance": "pending",
+  "aiConnected": false,
+  "automaticDispatch": false,
+  "deviceExecution": false
+}

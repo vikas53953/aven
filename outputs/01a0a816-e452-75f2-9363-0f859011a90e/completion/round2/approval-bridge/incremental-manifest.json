@@ -1,0 +1,21 @@
+{
+  "assignment": "approval-bridge",
+  "scope": ["UX-080", "UX-114"],
+  "frozenInput": "completion/workflows/candidate (read-only), intentgraph/adapters/index.cjs (read-only), intentgraph/execution-service.cjs (read-only), intentgraph/server.cjs (read-only)",
+  "liveProductFilesEdited": false,
+  "sharedIntegrationEdited": false,
+  "changes": [
+    { "path": "completion/round2/approval-bridge/approval-bridge.cjs", "kind": "server-owned-connection-and-approval-bridge", "purpose": "Memory-only scoped connections and adapter tokens, durable sanitized receipt ledger, exact request guards, digest/scope/session/generation/expiry binding, one-use execution and terminal UNKNOWN." },
+    { "path": "completion/round2/approval-bridge/approval-bridge-ui.js", "kind": "minimal-user-ui-and-client", "purpose": "Existing-pane mount, explicit inspected-target picker, bounded click/fill Review action path, read-only network proposal card, exact-header client, and Agent/Plan/write mapping." },
+    { "path": "completion/round2/approval-bridge/approval-bridge-ui.css", "kind": "minimal-user-ui-style", "purpose": "Compact review pane styles." },
+    { "path": "completion/round2/approval-bridge/approval-bridge.test.cjs", "kind": "focused-http-unit-tests", "purpose": "Actual local HTTP contract tests with injected execution facade and lifecycle/security/fill-secret/UNKNOWN/network-write/UI-target coverage." },
+    { "path": "completion/round2/approval-bridge/API_CONTRACT.md", "kind": "shared-contract", "purpose": "Exact server, UI, durable ledger and production facade interfaces for root composition." },
+    { "path": "completion/round2/approval-bridge/root-hook-manifest.json", "kind": "root-integration-manifest", "purpose": "Exact direct-action bypass guard, route, close, browser lease and pane/client hooks." }
+  ],
+  "deferredToRoot": [
+    "Apply the exact server bypass, approval route and close hooks in root-hook-manifest.json before generic POST /api/action dispatch.",
+    "Compose createAdapterStateProvider(execution.adapters) with the runtime SQLite ledger path as specified in root-hook-manifest.json.",
+    "Mount the client/pane in the existing workspace plus-menu with the supplied execution.adapter browser.open/browser.inspect and desktop.windows/desktop.select/desktop.inspect target seam.",
+    "Run composed server and browser acceptance under the root browser fixture lease."
+  ]
+}

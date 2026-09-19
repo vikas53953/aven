@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101317">
+  <title>Aven · Network workspace</title>
+  <link rel="stylesheet" href="polished.css?revision=ux-audit-fixes-v8">
+  <link rel="stylesheet" href="avatar-system/avatar.css">
+  <link rel="stylesheet" href="polished-workspace-tools.css?revision=ux-audit-fixes-v8">
+  <link rel="stylesheet" href="polished-automation.css?revision=automation-v1">
+  <link rel="stylesheet" href="workspace-capabilities.css?revision=workspace-capabilities-v1">
+  <link rel="stylesheet" href="polished-evidence-tools.css?revision=ux-audit-fixes-v8">
+  <link rel="stylesheet" href="polished-files.css?revision=ux-audit-fixes-v8">
+  <link rel="stylesheet" href="polished-git.css?revision=ux075-git-v1">
+  <link rel="stylesheet" href="polished-terminal.css?revision=ux071-read-only-diagnostic">
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <aside class="rail expanded" id="rail" aria-label="Primary navigation">
+      <div class="rail-top">
+        <button class="icon-button rail-action" id="toggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" data-icon="sidebar" data-tip="Collapse sidebar"></button>
+        <button class="icon-button rail-action" id="quick-create" type="button" aria-label="Create coworker" aria-expanded="false" data-icon="plus" data-tip="Create coworker"></button>
+      </div>
+      <button class="nav-button" id="search-nav" type="button" data-destination="Search" data-icon="search" data-tip="Search"><span class="nav-label">Search</span></button>
+      <div class="sidebar-scroll" id="sidebar-scroll">
+        <section class="sidebar-group" data-sidebar-group="direct">
+          <button class="sidebar-group-toggle" type="button" data-group-toggle="direct" aria-expanded="true"><span>Coworkers</span><span class="group-chevron">⌄</span></button>
+          <div class="sidebar-group-list" id="direct-list" data-group-list="direct"></div>
+        </section>
+        <section class="sidebar-group" data-sidebar-group="conversations">
+          <button class="sidebar-group-toggle" type="button" data-group-toggle="conversations" aria-expanded="true"><span>Conversations</span><span class="group-chevron">⌄</span></button>
+          <div class="sidebar-group-list" id="team-list" data-group-list="conversations"></div>
+        </section>
+      </div>
+      <div class="rail-group rail-group-lower" aria-label="Workspace views">
+        <button class="nav-button" type="button" data-destination="Feed" data-icon="feed" data-tip="Feed"><span class="nav-label">Feed</span></button>
+        <button class="nav-button" type="button" data-destination="Ideas" data-icon="ideas" data-tip="Ideas"><span class="nav-label">Ideas</span></button>
+        <button class="nav-button" type="button" data-destination="Goals" data-icon="goals" data-tip="Goals"><span class="nav-label">Goals</span></button>
+        <button class="nav-button" type="button" data-destination="Artifacts" data-icon="library" data-tip="Artifacts"><span class="nav-label">Artifacts</span></button>
+      </div>
+      <div class="sidebar-divider" id="sidebar-resize" role="separator" tabindex="0" aria-label="Resize sidebar" aria-valuemin="220" aria-valuemax="380" aria-valuenow="260"></div>
+      <button class="account-button" id="account-button" type="button" aria-expanded="false" aria-haspopup="menu"><span class="account-avatar">V</span><span class="nav-label" id="account-name">Vikas</span></button>
+      <button class="nav-button rail-settings" id="settings" type="button" aria-label="Open settings" data-icon="settings" data-tip="Settings"><span class="nav-label">Settings</span></button>
+    </aside>
+
+    <main class="workspace" id="workspace">
+      <header class="app-header">
+        <a class="review-link" href="prototype-review.html">Review this prototype <span aria-hidden="true">↗</span></a>
+      </header>
+      <div class="workspace-body">
+        <section class="center-column" id="center-column" aria-label="Conversation workspace">
+          <div class="center-header">
+            <button class="agent-avatar-button header-avatar-button" id="avatar" type="button" aria-label="Open coworker workspace"><span class="agent-avatar avatar-small" aria-hidden="true"></span></button>
+            <div class="center-title-wrap"><h1 id="surface">Branch network review</h1><span id="surface-context" class="surface-context" hidden></span></div>
+            <button class="nav-icon" id="chat-back" type="button" aria-label="Previous conversation" title="Previous conversation" disabled>←</button>
+            <button class="nav-icon" id="chat-forward" type="button" aria-label="Next conversation" title="Next conversation" disabled>→</button>
+            <button class="nav-icon" id="commands-button" type="button" aria-label="Open commands" title="Commands · Ctrl+K">⌘</button>
+            <button class="nav-icon thread-header-actions" id="thread-actions" type="button" aria-label="Chat actions" title="Chat actions">⋯</button>
+          </div>
+          <div class="conversation-find" id="conversation-find" hidden>
+            <input id="conversation-find-input" type="search" aria-label="Find in conversation" placeholder="Find in conversation">
+            <span id="conversation-find-count" role="status"></span>
+            <button id="find-prev" type="button" aria-label="Previous match">↑</button>
+            <button id="find-next" type="button" aria-label="Next match">↓</button>
+            <button id="find-close" type="button" aria-label="Close find">×</button>
+          </div>
+          <div class="center-content" id="center-content">
+            <section class="conversation" id="conversation" aria-label="Conversation" aria-live="polite"></section>
+            <section class="directory" id="chat-directory" aria-label="Conversation directory" hidden></section>
+            <section class="empty-view" id="empty-view" hidden></section>
+            <section class="create-view" id="create-view" hidden></section>
+          </div>
+          <button type="button" class="jump-latest" id="jump-latest" hidden>↓ Jump to latest</button>
+          <div class="composer-wrap" id="composer-wrap">
+            <section class="pending-queue" id="pending-queue" hidden aria-label="Queued messages">
+              <div class="queue-header">
+                <div><span class="eyebrow">UP NEXT</span><strong id="queue-title">Queued messages</strong></div>
+                <span class="queue-count" id="queue-count"></span>
+              </div>
+              <p class="queue-note" id="queue-note" role="status"></p>
+              <ol class="queue-list" id="queue-list"></ol>
+              <button class="button-secondary queue-resume" id="resume-queue" type="button" hidden>Resume queue</button>
+            </section>
+            <div id="reply-preview" class="reply-preview" hidden></div>
+            <form class="composer" id="composer">
+              <textarea id="draft" rows="1" aria-label="Message the selected coworkers" placeholder="Ask about your network…" autocomplete="off"></textarea>
+              <div class="attachment-row" id="attachments" aria-label="Selected attachments"></div>
+              <div class="composer-bottom">
+                <div class="composer-actions">
+                  <button class="icon-button" id="tools-menu" type="button" aria-label="Add attachments or tools" title="Add attachments or tools" aria-expanded="false" data-icon="plus"></button>
+                  <button class="composer-provider-trigger" id="composer-provider-trigger" type="button" aria-haspopup="dialog" aria-label="Choose provider, model and effort" title="OpenCode · MiMo V2.5 · effort None">MiMo V2.5</button>
+                </div>
+                <div class="composer-submit-actions">
+                  <button class="button-secondary composer-steer" id="steer" type="button" hidden>Steer next step</button>
+                  <button class="context-indicator" id="context-indicator" type="button" aria-label="Context capacity unavailable" title="Context capacity is unavailable until the selected model reports its limit." data-context-state="unknown"><span aria-hidden="true"></span></button>
+                  <button class="send-button" id="send" type="submit" aria-label="Send message" title="Send message" disabled data-icon="send"></button>
+                </div>
+              </div>
+            </form>
+            <p class="composer-footnote" id="chat-status" role="status"></p>
+          </div>
+        </section>
+
+        <aside class="right-pane" id="right-pane" role="dialog" aria-modal="false" aria-label="Coworker workspace" hidden>
+          <div id="pane-resize" tabindex="0" role="separator" aria-label="Resize work pane" aria-orientation="vertical"></div>
+          <div class="pane-header"><div><span class="eyebrow">COWORKER</span><h2 id="pane-title">Coworker</h2></div><button class="icon-button" id="close-pane" type="button" aria-label="Close right workspace" title="Close workspace" data-icon="close"></button></div>
+          <div class="pane-tabs" role="tablist" aria-label="Workspace views">
+            <button type="button" role="tab" data-pane="agent" aria-selected="true" aria-label="Coworker workspace" title="Coworker" data-icon="avatar"></button>
+            <button type="button" role="tab" data-pane="browser" aria-selected="false" aria-label="Browser preview" title="Browser" data-icon="browser"></button>
+            <button type="button" role="tab" data-pane="plugins" aria-selected="false" aria-label="Network connections" title="Plugins" data-icon="plug"></button>
+            <button type="button" role="tab" data-pane="computer" aria-selected="false" aria-label="Computer preview" title="Computer" data-icon="computer"></button>
+            <button type="button" role="tab" data-pane="automation" aria-selected="false" aria-label="Schedules and procedures" title="Automation" data-icon="clock"></button>
+          </div>
+          <div class="pane-content" id="pane-content"></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <div class="popover" id="add-menu" hidden role="menu" aria-label="Composer options">
+    <button type="button" role="menuitemradio" data-mode="inspect" aria-checked="true" title="Agent mode · allowlisted read-only diagnostics"><span>Agent</span></button>
+    <button type="button" role="menuitemradio" data-mode="plan" aria-checked="false" title="Plan mode · proposals only, no tools"><span>Plan</span></button>
+    <div class="menu-separator"></div>
+    <button type="button" data-add="localfiles" data-icon="file"><span>Open local folder</span></button>
+    <button type="button" data-add="files" data-icon="file"><span>Attach files</span></button>
+    <button type="button" data-add="images" data-icon="image"><span>Attach images</span></button>
+    <div class="menu-separator"></div>
+    <button type="button" data-add="browser" data-icon="browser"><span>Use browser preview</span></button>
+    <button type="button" data-add="terminal" data-icon="plug"><span>Terminal</span></button>
+    <button type="button" data-add="plugins" data-icon="plug"><span>Network sandbox</span></button>
+    <button type="button" data-add="computer" data-icon="computer"><span>Use computer preview</span></button>
+  </div>
+  <input type="file" id="file-picker" multiple hidden>
+  <input type="file" id="image-picker" accept="image/*" multiple hidden>
+
+  <div class="popover create-popover" id="create-menu" hidden aria-label="Create in workspace">
+    <button type="button" data-create="agent" data-icon="avatar"><span>New coworker</span></button>
+  </div>
+
+  <div class="popover account-menu" id="account-menu" hidden role="menu" aria-label="Account menu">
+    <button type="button" data-account-action="settings" role="menuitem" data-icon="settings"><span>Settings</span></button>
+    <button type="button" data-account-action="about" role="menuitem" data-icon="about"><span>About</span></button>
+    <button type="button" data-account-action="help" role="menuitem" data-icon="help"><span>Help Center</span></button>
+    <button type="button" data-account-action="feedback" role="menuitem" data-icon="feedback"><span>Send Feedback</span></button>
+    <div class="menu-separator"></div>
+    <button type="button" data-account-action="add-account" role="menuitem" data-icon="account"><span>Add Account</span></button>
+    <button type="button" data-account-action="logout" role="menuitem" data-icon="logout"><span>Log out</span></button>
+  </div>
+
+  <dialog id="workspace-create-dialog" aria-labelledby="workspace-create-title">
+    <div class="dialog-header"><div><span class="eyebrow">CREATE</span><h2 id="workspace-create-title">Create</h2></div><button class="icon-button" id="close-workspace-create" type="button" aria-label="Close creation dialog" data-icon="close"></button></div>
+    <div class="create-dialog-body" id="create-dialog-body"></div>
+  </dialog>
+
+  <dialog id="info-dialog" aria-labelledby="info-dialog-title"><div class="dialog-header"><div><span class="eyebrow">AVEN</span><h2 id="info-dialog-title">About</h2></div><button class="icon-button" id="close-info" type="button" aria-label="Close" data-icon="close"></button></div><div class="info-dialog-body" id="info-dialog-body"></div><div class="dialog-footer"><button class="button-primary" id="info-ok" type="button">Done</button></div></dialog>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <div class="dialog-header"><div><span class="eyebrow">WORKSPACE PREFERENCES</span><h2 id="settings-title">Settings</h2></div><button class="icon-button" id="close-settings" type="button" aria-label="Close settings" data-icon="close"></button></div>
+    <div class="settings-layout"><nav class="settings-nav" id="settings-nav" aria-label="Settings categories"></nav><section class="settings-content" id="settings-content"></section></div>
+    <div class="dialog-footer"><span class="dialog-status" id="settings-status" role="status"></span><button class="button-secondary" id="cancel-settings" type="button">Cancel</button><button class="button-primary" id="save-settings" type="button">Save settings</button></div>
+  </dialog>
+
+  <dialog id="search-dialog" aria-labelledby="search-title">
+    <div class="search-header"><div><span class="eyebrow">WORKSPACE SEARCH</span><h2 id="search-title">Search Aven</h2></div><button class="icon-button" id="close-search" type="button" aria-label="Close search" data-icon="close"></button></div>
+    <div class="search-input-wrap"><span data-icon="search" aria-hidden="true"></span><input id="global-search" type="search" aria-label="Search workspace" placeholder="Search conversations, messages, coworkers…"></div>
+    <div class="search-filters" id="search-filters" aria-label="Search filters"></div><div class="search-scope"><label>Coworker<select id="search-coworker"></select></label><label>Conversation<select id="search-conversation"></select></label><button type="button" id="search-clear">Clear filters</button></div><p class="search-count" id="search-count" role="status"></p><div class="search-results" id="search-results"></div>
+    <p class="dialog-note">Search uses locally saved names, messages and attachment filenames. Press Escape to close.</p>
+  </dialog>
+
+  <dialog id="command-dialog" aria-labelledby="command-title">
+    <div class="dialog-header"><h2 id="command-title">Commands</h2><button id="close-commands" class="icon-button" type="button" aria-label="Close commands">×</button></div>
+    <input id="command-query" type="search" aria-label="Search commands" placeholder="Find an action…" autocomplete="off">
+    <div id="command-results" aria-label="Matching commands"></div>
+    <p class="dialog-note">↑ ↓ to choose · Enter to open · Escape to close</p>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="avatar-system/artwork.js"></script>
+  <script src="polished-avatars.js"></script>
+  <script src="polished-backup.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-diagnostics.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-workspace-tools.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-automation.js?revision=automation-v1"></script>
+  <script src="workspace-capabilities.js?revision=workspace-capabilities-v1"></script>
+  <script src="polished-attachments.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-reliability.js?revision=ux-reliability-v1"></script>
+  <script src="polished-run-state.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-evidence-tools.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-files.js?revision=ux-audit-fixes-v8"></script>
+  <script src="polished-git.js?revision=ux075-git-v1"></script>
+  <script src="polished-terminal.js?revision=ux071-read-only-diagnostic"></script>
+  <script src="provider-picker.js?revision=provider-contract-v1"></script>
+  <script src="polished-approval-workflow.js?revision=workflow-v1"></script>
+  <script src="polished.js?revision=ux-audit-fixes-v8"></script>
+</body>
+</html>
+

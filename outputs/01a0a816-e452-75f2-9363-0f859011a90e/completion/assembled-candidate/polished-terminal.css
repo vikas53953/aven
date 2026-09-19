@@ -1,0 +1,30 @@
+/* UX071: compact, independently removable read-only diagnostic terminal surface. */
+.terminal-surface { display: grid; gap: 14px; margin-top: 16px; padding: 16px; border: 1px solid var(--line, #d9d9d9); border-radius: 14px; background: var(--surface, #fff); }
+.terminal-heading { display: grid; gap: 4px; }
+.terminal-heading h2 { margin: 0; font-size: 1rem; }
+.terminal-subtitle { margin: 0; color: var(--muted, #666); font-size: .84rem; }
+.terminal-capabilities, .terminal-evidence-metadata { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.terminal-capability, .terminal-field { min-width: 0; }
+.terminal-capability dt, .terminal-field dt { color: var(--muted, #666); font-size: .72rem; letter-spacing: .02em; }
+.terminal-capability dd, .terminal-field dd { overflow-wrap: anywhere; margin: 3px 0 0; font-size: .82rem; }
+.terminal-controls { display: grid; grid-template-columns: minmax(160px, 1fr) minmax(180px, 1.4fr); gap: 10px; align-items: end; }
+.terminal-control { display: grid; gap: 5px; color: var(--muted, #666); font-size: .76rem; }
+.terminal-control select { min-height: 40px; width: 100%; }
+.terminal-actions { display: flex; flex-wrap: wrap; grid-column: 1 / -1; gap: 8px; }
+.terminal-actions button, .terminal-copy { min-height: 40px; }
+.terminal-status-message { min-height: 1.3em; margin: 0; color: var(--muted, #666); font-size: .82rem; }
+.terminal-evidence-list { display: grid; gap: 10px; }
+.terminal-evidence-title { margin: 0; font-size: .88rem; }
+.terminal-evidence { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--line, #d9d9d9); border-radius: 10px; background: color-mix(in srgb, var(--surface, #fff) 92%, var(--ink, #111)); }
+.terminal-evidence-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.terminal-status { font-size: .8rem; }
+.terminal-status-failure, .terminal-status-unknown { color: var(--danger, #9e2a2b); }
+.terminal-status-success { color: var(--success, var(--text, #222)); }
+.terminal-evidence-time { color: var(--muted, #666); font-size: .72rem; white-space: nowrap; }
+.terminal-evidence-metadata { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.terminal-raw-details { display: grid; gap: 8px; }
+.terminal-raw-details summary { cursor: pointer; min-height: 32px; padding: 6px 0; color: var(--muted, #666); font-size: .78rem; }
+.terminal-raw-output { max-height: 320px; overflow: auto; margin: 0; padding: 10px; border: 1px solid var(--line, #d9d9d9); border-radius: 8px; background: var(--code-surface, var(--surface-3, #f5f5f5)); color: var(--text, #222); font: .75rem/1.45 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.terminal-output-note { margin: 0; color: var(--muted, #666); font-size: .74rem; }
+@media (max-width: 700px) { .terminal-capabilities, .terminal-evidence-metadata, .terminal-controls { grid-template-columns: 1fr; } .terminal-evidence-top { align-items: flex-start; flex-direction: column; gap: 4px; } }
+@media (prefers-reduced-motion: reduce) { .terminal-surface *, .terminal-surface *::before, .terminal-surface *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }

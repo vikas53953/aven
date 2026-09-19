@@ -1,0 +1,474 @@
+{
+  "at": "2026-09-16T04:07:08.191Z",
+  "integrated": false,
+  "blockedPolicy": "Only local static shell traffic is allowed; API and every non-static origin are aborted; no provider, device, or user storage is used.",
+  "tests": [
+    {
+      "name": "replacement manifest exactness",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe artifact-duplication.test.cjs",
+      "exitCode": 0,
+      "result": "PASS: 2 exact baseline blocks and candidate replacements"
+    },
+    {
+      "mode": "baseline",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe artifact-duplication.test.cjs",
+      "exitCode": 1,
+      "result": "FAIL"
+    },
+    {
+      "mode": "candidate",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe artifact-duplication.test.cjs",
+      "exitCode": 0,
+      "result": "PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "mirror",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": false
+    },
+    {
+      "id": "empty-vs-missing",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "",
+        ""
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": false
+    },
+    {
+      "id": "distinct-source",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-run",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-parent-run",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "actual-backend-shaped-mirror",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": false
+    },
+    {
+      "id": "distinct-target",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-command",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-output",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\nsecond result\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-provenance",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-stable-id",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "swapped-identity-fields",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-timestamp",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "repeated-genuine-invocation",
+      "mode": "baseline",
+      "expected": 4,
+      "cards": 4,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "order-and-one-to-one",
+      "mode": "baseline",
+      "expected": 4,
+      "cards": 4,
+      "outputs": [
+        "first\n",
+        "second\n",
+        "second\n",
+        "third\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": false
+    },
+    {
+      "id": "ambiguous-no-identity",
+      "mode": "baseline",
+      "expected": 3,
+      "cards": 3,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "merge-provenance",
+      "mode": "baseline",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": false
+    },
+    {
+      "id": "mirror",
+      "mode": "candidate",
+      "expected": 1,
+      "cards": 1,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "empty-vs-missing",
+      "mode": "candidate",
+      "expected": 1,
+      "cards": 1,
+      "outputs": [
+        ""
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-source",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-run",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-parent-run",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "actual-backend-shaped-mirror",
+      "mode": "candidate",
+      "expected": 1,
+      "cards": 1,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-target",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-command",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-output",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\nsecond result\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-provenance",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-stable-id",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "swapped-identity-fields",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "distinct-timestamp",
+      "mode": "candidate",
+      "expected": 2,
+      "cards": 2,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "repeated-genuine-invocation",
+      "mode": "candidate",
+      "expected": 4,
+      "cards": 4,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "order-and-one-to-one",
+      "mode": "candidate",
+      "expected": 3,
+      "cards": 3,
+      "outputs": [
+        "first\n",
+        "second\n",
+        "third\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "ambiguous-no-identity",
+      "mode": "candidate",
+      "expected": 3,
+      "cards": 3,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n",
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    },
+    {
+      "id": "merge-provenance",
+      "mode": "candidate",
+      "expected": 1,
+      "cards": 1,
+      "outputs": [
+        "\n Router#show interfaces\n\tGi0/1  up  up\n"
+      ],
+      "blocked": [],
+      "pageErrors": [],
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,3155 @@
+{
+  "at": "2026-09-16T06:10:19.856Z",
+  "warning": "Implementation claims and scoped test passes are not final completion verdicts.",
+  "inputs": [
+    {
+      "owner": "history",
+      "file": "row-results.json",
+      "available": true,
+      "rows": 49
+    },
+    {
+      "owner": "navigation-review",
+      "file": "navigation-tests/row-results.json",
+      "available": true,
+      "rows": 30
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "minimal-ui/row-results.json",
+      "available": true,
+      "rows": 10
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "reaction-picker/row-results.json",
+      "available": true,
+      "rows": 1
+    },
+    {
+      "owner": "reliability",
+      "file": "reliability/row-results.json",
+      "available": true,
+      "rows": 18
+    },
+    {
+      "owner": "provider",
+      "file": "provider/row-results.json",
+      "available": true,
+      "rows": 9
+    },
+    {
+      "owner": "workflows",
+      "file": "workflows/row-results.json",
+      "available": true,
+      "rows": 8
+    },
+    {
+      "owner": "workspace",
+      "file": "workspace/row-results.json",
+      "available": true,
+      "rows": 15
+    },
+    {
+      "owner": "automation",
+      "file": "automation/row-results.json",
+      "available": true,
+      "rows": 5
+    }
+  ],
+  "rows": [
+    {
+      "id": "UX-001",
+      "feature": "Subtle scrollbars",
+      "acceptance": "Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-001",
+          "status": "PASS",
+          "evidence": [
+            "scroll surfaces wake and remain scrollable: PASS"
+          ],
+          "limitation": "This fixture does not measure OS scrollbar fade timing or physical touch input."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-001",
+          "feature": "Subtle scrollbars",
+          "acceptance": "Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-001",
+                  "name": "mouse, keyboard, and idle scrollbar behavior",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+                },
+                {
+                  "source": "live",
+                  "id": "UX-001",
+                  "name": "Chromium touch gesture scrolls the conversation surface",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-002",
+      "feature": "Contain horizontal overflow",
+      "acceptance": "No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-002",
+          "status": "PASS",
+          "evidence": [
+            "page and sidebar stay within viewport while raw output remains exact: PASS"
+          ],
+          "limitation": "OS clipboard integration is intercepted in the isolated browser."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-002",
+          "feature": "Contain horizontal overflow",
+          "acceptance": "No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-002",
+                  "name": "raw CLI line copy stays exact while page bounds remain contained",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies exact CLI text and clipboard whitespace plus 390px horizontal containment; no wider viewport matrix."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies exact CLI text and clipboard whitespace plus 390px horizontal containment; no wider viewport matrix."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-003",
+      "feature": "Account entry",
+      "acceptance": "Caret absent; account menu remains keyboard reachable.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-003",
+          "status": "PASS",
+          "evidence": [
+            "account menu is keyboard reachable without a caret: PASS"
+          ],
+          "limitation": "No assistive technology certification."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-003",
+          "feature": "Account entry",
+          "acceptance": "Caret absent; account menu remains keyboard reachable.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-003",
+                  "name": "account entry has no caret and returns focus after Escape",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies keyboard account entry/Escape focus and visible identity; browser caret and assistive-technology certification remain separate."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies keyboard account entry/Escape focus and visible identity; browser caret and assistive-technology certification remain separate."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-004",
+      "feature": "Selected profile identity",
+      "acceptance": "Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-004",
+          "status": "PASS",
+          "evidence": [
+            "profile rename synchronizes selected coworker header: PASS"
+          ],
+          "limitation": "Scoped to selected profile and two local coworkers."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-004",
+          "feature": "Selected profile identity",
+          "acceptance": "Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-004",
+                  "name": "profile rename updates selected header and leaves other coworker unchanged",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies profile rename/header synchronization and peer identity in local storage; no multi-user sync."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies profile rename/header synchronization and peer identity in local storage; no multi-user sync."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-005",
+      "feature": "Horizontal reaction panel",
+      "acceptance": "Row matches reference structure; opens by mouse and keyboard without clipping.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-005",
+          "status": "PASS",
+          "evidence": [
+            "reaction row opens and supports keyboard selection: PASS"
+          ],
+          "limitation": "Narrow reference geometry is outside this scoped check."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-005",
+          "feature": "Horizontal reaction panel",
+          "acceptance": "Row matches reference structure; opens by mouse and keyboard without clipping.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-005",
+                  "name": "reaction row opens by keyboard and pointer without clipping",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies pointer/keyboard reaction row navigation and viewport bounds; no visual reference diff."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies pointer/keyboard reaction row navigation and viewport bounds; no visual reference diff."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-006",
+      "feature": "One reaction per user",
+      "acceptance": "Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-006",
+          "status": "PASS",
+          "evidence": [
+            "one reaction replaces, clears and survives reload: PASS"
+          ],
+          "limitation": "Local browser storage only."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-006",
+          "feature": "One reaction per user",
+          "acceptance": "Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-006",
+                  "name": "one reaction replaces, clears, survives reload, and preserves messages",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies single-reaction replacement, clear, reload persistence, and message retention; no concurrent-device sync."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies single-reaction replacement, clear, reload persistence, and message retention; no concurrent-device sync."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-007",
+      "feature": "Coworker-first entry",
+      "acceptance": "New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-007",
+          "status": "PASS",
+          "evidence": [
+            "coworker-first direct entry leaves existing history reachable: PASS"
+          ],
+          "limitation": "Bounded to the seeded coworker/history set."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-007",
+          "feature": "Coworker-first entry",
+          "acceptance": "New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-007",
+                  "name": "coworker-first entry keeps direct chats, queue, grouped history, and avatar access reachable",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies direct/grouped history, queue, and avatar reachability; no user-study evidence."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies direct/grouped history, queue, and avatar reachability; no user-study evidence."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-008",
+      "feature": "Stable conversation header",
+      "acceptance": "Short first message never replaces coworker identity.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-008",
+          "status": "PASS",
+          "evidence": [
+            "short saved conversation retains coworker header: PASS"
+          ],
+          "limitation": "No live provider stream in this fixture."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-008",
+          "feature": "Stable conversation header",
+          "acceptance": "Short first message never replaces coworker identity.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-008",
+                  "name": "short sent message retains selected coworker header",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies local send preserves the selected header and request identity; provider execution is blocked."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies local send preserves the selected header and request identity; provider execution is blocked."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-009",
+      "feature": "Sidebar previews",
+      "acceptance": "Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-009",
+          "status": "PASS",
+          "evidence": [
+            "sidebar preview is plain text and full title is accessible: PASS"
+          ],
+          "limitation": "Extreme title matrix is outside this check."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-009",
+          "feature": "Sidebar previews",
+          "acceptance": "Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-009",
+                  "name": "plain preview and full duplicate title remain accessible at narrow width",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies 390px previews, duplicate titles, and horizontal containment; no full responsive breakpoint matrix."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies 390px previews, duplicate titles, and horizontal containment; no full responsive breakpoint matrix."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-010",
+      "feature": "Pin important conversations",
+      "acceptance": "Pinned items remain accessible and retain order after reload.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-010",
+          "status": "PASS",
+          "evidence": [
+            "pinned chats stay grouped, legacy pins survive reload, and failed save is safe: PASS"
+          ],
+          "limitation": "Canonical render ordering is checked in the DOM; the injected quota error verifies the previous pin state remains persisted."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-010",
+          "feature": "Pin important conversations",
+          "acceptance": "Pinned items remain accessible and retain order after reload.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-010",
+                  "name": "multiple pinned conversations retain exact order and access after reload",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies two pinned rows retain exact order and access after reload; no cross-device sync."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies two pinned rows retain exact order and access after reload; no cross-device sync."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-011",
+      "feature": "Rename conversations",
+      "acceptance": "Renaming a conversation never renames its coworker unexpectedly.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-011",
+          "status": "PASS",
+          "evidence": [
+            "conversation rename leaves coworker identity unchanged: PASS"
+          ],
+          "limitation": "Scoped to direct conversation rename."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-011",
+          "feature": "Rename conversations",
+          "acceptance": "Renaming a conversation never renames its coworker unexpectedly.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-011",
+                  "name": "conversation rename leaves coworker identity unchanged through navigation",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies conversation rename keeps coworker identity through navigation; local fixture only."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies conversation rename keeps coworker identity through navigation; local fixture only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-012",
+      "feature": "Sections and ordering",
+      "acceptance": "Grouping never implies coordinated agent execution or hides old histories.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-012",
+          "status": "PASS",
+          "evidence": [
+            "direct chats and grouped conversations stay distinct: PASS"
+          ],
+          "limitation": "No exhaustive implication study."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-012",
+          "feature": "Sections and ordering",
+          "acceptance": "Grouping never implies coordinated agent execution or hides old histories.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-012",
+                  "name": "direct and grouped histories stay distinct and old grouped chat remains discoverable",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies direct/grouped histories remain distinct and old grouped rows remain reachable; no user interpretation study."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies direct/grouped histories remain distinct and old grouped rows remain reachable; no user interpretation study."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-013",
+      "feature": "Sidebar collapse and resize",
+      "acceptance": "Collapse and resize leave active chat and composer usable.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-013",
+          "status": "PASS",
+          "evidence": [
+            "collapsed rail leaves composer usable: PASS"
+          ],
+          "limitation": "Pointer resize matrix is not included here."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-013",
+          "feature": "Sidebar collapse and resize",
+          "acceptance": "Collapse and resize leave active chat and composer usable.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-013",
+                  "name": "resize and collapse preserve active chat and composer usability",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies mouse resize, Home-key resize, collapse, and composer editing; no assistive-technology certification."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies mouse resize, Home-key resize, collapse, and composer editing; no assistive-technology certification."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-014",
+      "feature": "Back and forward navigation",
+      "acceptance": "Back returns to previous chat without dropping draft or executing a request.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-014",
+          "status": "PASS",
+          "evidence": [
+            "back and forward preserve chat drafts: PASS"
+          ],
+          "limitation": "Single local navigation sequence."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-014",
+          "feature": "Back and forward navigation",
+          "acceptance": "Back returns to previous chat without dropping draft or executing a request.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-014",
+                  "name": "back and forward preserve drafts without sending or executing",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies back/forward draft restoration and zero chat API calls; local session history only."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies back/forward draft restoration and zero chat API calls; local session history only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-015",
+      "feature": "Workspace search",
+      "acceptance": "Known saved phrase resolves to the correct conversation.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-015",
+          "status": "PASS",
+          "evidence": [
+            "search result keyboard activation opens exact message context: PASS"
+          ],
+          "limitation": "Scoped to a unique saved phrase."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-015",
+          "feature": "Workspace search",
+          "acceptance": "Known saved phrase resolves to the correct conversation.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-015",
+                  "name": "known search result opens the exact conversation",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies a known phrase opens exact message m3 and focuses it; search index is local fixture data."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies a known phrase opens exact message m3 and focuses it; search index is local fixture data."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-016",
+      "feature": "Search filters and results",
+      "acceptance": "Filter by coworker or conversation and open exact result context.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-016",
+          "status": "PASS",
+          "evidence": [
+            "search coworker and conversation filters narrow results: PASS"
+          ],
+          "limitation": "Duplicate-term disambiguation remains fixture-scoped."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-016",
+          "feature": "Search filters and results",
+          "acceptance": "Filter by coworker or conversation and open exact result context.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-016",
+                  "name": "coworker and conversation filters open exact duplicate-term context",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies coworker and conversation filters return exact result d1 and focus it; no external index."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies coworker and conversation filters return exact result d1 and focus it; no external index."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-017",
+      "feature": "Find within conversation",
+      "acceptance": "Searching a repeated term visits every match without losing composer draft.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-017",
+          "status": "PASS",
+          "evidence": [
+            "find visits repeated matches while preserving draft: PASS"
+          ],
+          "limitation": "The fixture contains three repeated user terms and one saved evidence term."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-017",
+          "feature": "Find within conversation",
+          "acceptance": "Searching a repeated term visits every match without losing composer draft.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-017",
+                  "name": "find next and previous visit every match while preserving draft",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies four local matches cycle with next/previous while preserving the draft; no cross-conversation find scope."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies four local matches cycle with next/previous while preserving the draft; no cross-conversation find scope."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-018",
+      "feature": "Command palette",
+      "acceptance": "Keyboard opens palette; selected action works in current chat; Escape restores focus.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-018",
+          "status": "PASS",
+          "evidence": [
+            "command palette traverses with keyboard and Escape restores opener: PASS"
+          ],
+          "limitation": "Unavailable-command filtering is limited to the current local registry."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-018",
+          "feature": "Command palette",
+          "acceptance": "Keyboard opens palette; selected action works in current chat; Escape restores focus.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-018",
+                  "name": "keyboard opens palette, runs current-chat action, and Escape restores focus",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies Ctrl+K, keyboard result navigation, action execution, and Escape focus restoration; no OS-level shortcut conflicts."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies Ctrl+K, keyboard result navigation, action execution, and Escape focus restoration; no OS-level shortcut conflicts."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-019",
+      "feature": "Multiline input and send",
+      "acceptance": "Empty send disabled. Multiline text and IME composition do not send accidentally.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-019",
+          "status": "candidate-pass-scoped",
+          "evidence": "browser-overlay.test.cjs: browser overlay protects IME Enter... passed; synthetic compositionstart plus isComposing Enter produced zero requests, then one request after compositionend.",
+          "limitation": "The test uses Chromium keyboard events rather than a physical IME and does not certify every OS IME."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-020",
+      "feature": "Draft preservation",
+      "acceptance": "Two chats retain different unsent drafts after switching and reload.",
+      "priorVerdict": "Unverified",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-020",
+          "status": "candidate-pass",
+          "evidence": "browser-overlay.test.cjs: keeps independent drafts across chat switching, reload, and 5k text passed; chat-a/chat-b drafts remained distinct and the 5,000-character draft reloaded exactly.",
+          "limitation": "Candidate overlay only; packaged app and cross-device sync were not tested."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-021",
+      "feature": "Attachment selection and removal",
+      "acceptance": "Unsupported attachments are labeled before send; supported contents reach model context.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-021",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: normalizeAttachment, renderAttachmentChips and bindAttachmentSources reuse the existing bounded AvenAttachments reader; rejected records stay visible and removable. The exact polished.js init hunk passes the current composer/file-picker seams.",
+          "limitation": "No live provider/device request was made; the existing shell must still supply AvenAttachments.readFiles."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-022",
+      "feature": "Drag-drop and clipboard files",
+      "acceptance": "Paste/drop valid file creates one usable attachment. Invalid type shows recovery.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-022",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: bindAttachmentSources handles file-picker change, one-file drop and clipboard-file paste through the existing duplicate/size/type reader. Full candidate polished-shell verification produced a ready shell-fixture.txt chip.",
+          "limitation": "The browser check uses a synthetic DOM and local File object; no user file was read."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-023",
+      "feature": "File or device mentions",
+      "acceptance": "Mention resolves to a stable ID; unavailable devices cannot appear connected.",
+      "priorVerdict": "Missing",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-023",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: normalizeInventory, stableId, resolveMention and mentionChips resolve exact device/document IDs and retain disconnected state without presenting it as connected. Full shell verification rendered the disconnected offline-1 mention.",
+          "limitation": "Inventory is supplied by the parent runtime; no device inventory call was made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-024",
+      "feature": "Reply to a message",
+      "acceptance": "Reply identifies source message; cancel removes reference without deleting draft.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-024",
+          "status": "PASS",
+          "evidence": [
+            "reply identifies source and cancel retains draft: PASS"
+          ],
+          "limitation": "Mouse path only."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-024",
+          "feature": "Reply to a message",
+          "acceptance": "Reply identifies source message; cancel removes reference without deleting draft.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-024",
+                  "name": "reply identifies source and cancel keeps draft",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies reply source identification and cancel preserving the draft; local fixture only."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies reply source identification and cancel preserving the draft; local fixture only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-025",
+      "feature": "Edit and resend a prompt",
+      "acceptance": "User can review edited prompt before send; earlier device commands are never reversed or repeated silently.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-025",
+          "status": "partial",
+          "evidence": "Durable run and queue receipts retain prior evidence and reject a replay after a failed 502; browser-overlay.test.cjs dispatches queued messages FIFO and blocks unsafe retry after a 502.",
+          "limitation": "The prior-message edit/resend UI is existing code and no device-command edit path was invoked, so silent reversal/repetition of an edited device command remains unverified."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-026",
+      "feature": "Voice dictation",
+      "acceptance": "Recording indicator and cancel work; transcript is editable before sending.",
+      "priorVerdict": "Missing",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-026",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: createDictationController exposes recording, cancel and editable review states and requires an injected adapter; absent adapter renders a disabled unavailable message. Full shell verification found the disabled voice control.",
+          "limitation": "No microphone, SpeechRecognition or transcription provider was called."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-027",
+      "feature": "Model and effort picker",
+      "acceptance": "Picker change is reflected in the next request and response provenance.",
+      "priorVerdict": "Missing",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-027",
+          "status": "implemented-candidate",
+          "evidence": "candidate/intentgraph/provider-selection.cjs; candidate/intentgraph/provider-adapter.cjs; candidate/provider-picker.js; provider-selection.test.cjs and provider-adapter.test.cjs cover explicit selection, model/effort request fields, response provenance, and unsupported combinations (20/20 provider tests pass).",
+          "limitation": "Root must apply the exact polished/server/agent-runtime hunks; no live provider request was made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-028",
+      "feature": "Streamed response and activity",
+      "acceptance": "No duplicate final text or evidence when a stream finishes.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-028",
+          "status": "candidate-pass-scoped",
+          "evidence": "browser-overlay.test.cjs: protects IME Enter, deduplicates final NDJSON, and records elapsed time passed; two mock final events rendered one assistant message and one evidence panel without a duplicated final evidence line.",
+          "limitation": "The duplicate stream was an isolated local mock; provider reconnect and real transport failures were not exercised."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-029",
+      "feature": "Stop a running request",
+      "acceptance": "Stop state is truthful; cancellation does not claim a completed device command was undone.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-029",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs: overlay parallel opt-in isolates independent chats and cancellation passed; stopping chat A left chat B successful and the cancelled run was durably UNKNOWN.",
+          "limitation": "Cancellation used an injected abort-aware responder and made no remote device call."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-030",
+      "feature": "Queue follow-up messages",
+      "acceptance": "Queued messages stay ordered and are never submitted twice.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-030",
+          "status": "candidate-pass",
+          "evidence": "reliability.test.cjs queue claims are FIFO... and browser-overlay.test.cjs dispatches queued messages FIFO... passed; sequence order and mock request order were first queued then second queued with one request each.",
+          "limitation": "The provider was a local mock and the candidate awaits root sequential integration."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-031",
+      "feature": "Queue edit, remove and resume",
+      "acceptance": "Reload retains queue; resume is intentional; editing changes only selected item.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-031",
+          "status": "candidate-pass-scoped",
+          "evidence": "reliability.test.cjs queue claims... passed explicit pause/requeue and unknown recovery; browser-overlay.test.cjs also passed FIFO queue resume and waiting-question pause with the second item retained.",
+          "limitation": "The browser fixture did not crash a real packaged process between queue persistence and resume."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-032",
+      "feature": "Steer the next step",
+      "acceptance": "Correction applies before next tool step and does not silently create a duplicate run.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-032",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs: overlay steering is bound to the active run and applies before the mock next step passed; a valid run token accepted correction and the responder consumed it before final completion.",
+          "limitation": "This is an HTTP integration fixture; a physical device tool step and full Aven browser steering UI were not invoked."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-033",
+      "feature": "Clarification and approval cards",
+      "acceptance": "Answer maps to one pending question; stale cards cannot authorize later work.",
+      "priorVerdict": "Missing",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-033",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; candidate/agent-runtime-clarification.test.cjs, normal-chat-workflow.fixture.test.cjs, approval-workflow.test.cjs, and clarification-server-adapter.test.cjs: typed model pending-question, normal /api/chat pause/resume, visible card state, one-answer mapping, stale rejection, cancel, ownership, persistence",
+          "limitation": "The exact server mount is supplied as a candidate replacement hunk; no live provider, device, or network call was made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-034",
+      "feature": "Plan and inspect modes",
+      "acceptance": "Plan mode cannot execute state-changing operations; current read-only scope stays explicit.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-034",
+          "status": "partial-candidate",
+          "evidence": "Candidate plus menu exposes concise Agent and Plan radio items, persists the selected chat mode, and keeps modeFor/requestChatReply semantics unchanged; minimal-ui/browser-evidence.json checks both selections.",
+          "limitation": "No backend or live provider request was made, so runtime enforcement of Plan's no-tool boundary remains a parent acceptance gate."
+        },
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-034",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; replacements.json agent-runtime hunk; agent-runtime-clarification.test.cjs: explicit typed pending_question model contract; candidate tests: plan mode marks execution unavailable and rejects approval/execution",
+          "limitation": "Provider selection and capability validation remain root/provider-owned; the candidate runtime hunk only extracts a structured model pending question."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-035",
+      "feature": "Detailed tool transcript",
+      "acceptance": "Summary, tool input and actual result remain distinguishable.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-035",
+          "status": "PASS",
+          "evidence": [
+            "tool transcript distinguishes event and raw result: PASS"
+          ],
+          "limitation": "Saved fixture only; no provider stream."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-036",
+      "feature": "Run state and elapsed time",
+      "acceptance": "A failed or interrupted run cannot display completed success; elapsed time stops correctly.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-036",
+          "status": "candidate-pass-scoped",
+          "evidence": "browser-overlay.test.cjs: protects IME Enter, deduplicates final NDJSON, and records elapsed time passed with a visible Took duration; reliability.test.cjs waiting/terminal guards reject outcome overwrites.",
+          "limitation": "The mock delay was short and no packaged performance profile was taken."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-037",
+      "feature": "Parallel work visibility",
+      "acceptance": "Two runs remain isolated, individually stoppable and recoverable.",
+      "priorVerdict": "Missing",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-037",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs: overlay parallel opt-in isolates independent chats and cancellation passed A+B parallel dispatch, same-chat A conflict, A cancellation, B success, and two durable run evidence files.",
+          "limitation": "Parallel mode is explicit and requires the runtime isolation capability; no external provider/device isolation was proven."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-038",
+      "feature": "Context and usage visibility",
+      "acceptance": "Unknown usage displays unavailable; displayed model and token totals match actual response data.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-038",
+          "status": "implemented-candidate",
+          "evidence": "provider-selection.cjs normalizes usage to null when omitted and polished.js exposes bounded context metadata with retained/omitted/total counts; hunk-validation.json confirms the request and response hunks apply sequentially.",
+          "limitation": "The root UI agent owns context-preview rendering; no provider response was available to verify token totals."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-039",
+      "feature": "Retry with retained evidence",
+      "acceptance": "Retry does not repeat completed device actions silently; partial evidence remains inspectable.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-039",
+          "status": "candidate-pass-scoped",
+          "evidence": "browser-overlay.test.cjs: dispatches queued messages FIFO and blocks unsafe retry after a 502 passed; the retry click produced no third request and persisted the already-claimed warning. Unknown queue/run outcomes require explicit recovery/requeue in reliability.test.cjs.",
+          "limitation": "No completed device action was replayed, so retained-action review against a real device remains pending."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-040",
+      "feature": "Resume after app restart",
+      "acceptance": "Restart during work preserves transcript and exposes recovery without duplicate execution.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-040",
+          "status": "candidate-pass-scoped",
+          "evidence": "reliability.test.cjs: restart recovery marks active runs unknown without issuing a retry and browser-overlay.test.cjs draft/reload plus waiting queue tests passed; recovered work remains paused until explicit action.",
+          "limitation": "The browser fixture did not terminate a packaged app process during an active provider stream."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-041",
+      "feature": "Readable Markdown",
+      "acceptance": "Representative network reports remain readable; untrusted HTML cannot execute.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-041",
+          "status": "PASS",
+          "evidence": [
+            "markdown renders safe headings/lists/table/code: PASS"
+          ],
+          "limitation": "Representative fixture only."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-041",
+          "feature": "Readable Markdown",
+          "acceptance": "Representative network reports remain readable; untrusted HTML cannot execute.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-041",
+                  "name": "safe markdown is readable and unsafe HTML/schemes stay inert",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies table/code-fence readability and safe-link/unsafe-HTML inertness; no broader sanitizer fuzzing."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies table/code-fence readability and safe-link/unsafe-HTML inertness; no broader sanitizer fuzzing."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-042",
+      "feature": "Code blocks and exact copy",
+      "acceptance": "Spaces, tabs and line breaks survive copy; no duplicate raw output.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-042",
+          "status": "PASS",
+          "evidence": [
+            "raw CLI copy preserves tabs and newlines: PASS"
+          ],
+          "limitation": "OS clipboard remains intercepted."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-042",
+          "feature": "Code blocks and exact copy",
+          "acceptance": "Spaces, tabs and line breaks survive copy; no duplicate raw output.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-042",
+                  "name": "CLI output renders once and copy preserves whitespace",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies one CLI output render and exact whitespace clipboard content; clipboard is isolated in Chromium."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies one CLI output render and exact whitespace clipboard content; clipboard is isolated in Chromium."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-043",
+      "feature": "Copy messages",
+      "acceptance": "Copy uses correct message and reports failure without claiming success.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-043",
+          "status": "PASS",
+          "evidence": [
+            "copy failure reports failure: PASS"
+          ],
+          "limitation": "Browser clipboard rejection is injected."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-043",
+          "feature": "Copy messages",
+          "acceptance": "Copy uses correct message and reports failure without claiming success.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-043",
+                  "name": "message copy selects the correct text and truthfully reports denial",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies correct message copy and denied-clipboard Copy failed feedback; clipboard is intercepted in isolated Chromium."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies correct message copy and denied-clipboard Copy failed feedback; clipboard is intercepted in isolated Chromium."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-044",
+      "feature": "Time grouping and metadata",
+      "acceptance": "Old and new days are clear; full timestamp accessible on focus or hover.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-044",
+          "status": "PASS",
+          "evidence": [
+            "timestamps expose accessible labels: PASS"
+          ],
+          "limitation": "Timezone matrix is not included."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-044",
+          "feature": "Time grouping and metadata",
+          "acceptance": "Old and new days are clear; full timestamp accessible on focus or hover.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-044",
+                  "name": "old/new date groups and accessible full timestamps are visible",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies old/new date groups and focused full timestamp labels; timezone presentation is limited to this environment."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies old/new date groups and focused full timestamp labels; timezone presentation is limited to this environment."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-045",
+      "feature": "Follow latest without jumping",
+      "acceptance": "New output does not pull user away from an older message; latest button is keyboard usable.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-045",
+          "status": "PASS",
+          "evidence": [
+            "latest control appears after leaving bottom: PASS"
+          ],
+          "limitation": "No live streaming output."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-045",
+          "feature": "Follow latest without jumping",
+          "acceptance": "New output does not pull user away from an older message; latest button is keyboard usable.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-045",
+                  "name": "new output keeps older reading position and latest control is keyboard usable",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies older reading position, new output, and keyboard latest control; local fixture run only."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies older reading position, new output, and keyboard latest control; local fixture run only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-046",
+      "feature": "Conversation revert and undo",
+      "acceptance": "Revert and undo restore exact message history; busy or queued state is protected.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-046",
+          "status": "PASS",
+          "evidence": [
+            "revert and undo restore saved history: PASS"
+          ],
+          "limitation": "Busy/queued protection is separately bounded."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-046",
+          "feature": "Conversation revert and undo",
+          "acceptance": "Revert and undo restore exact message history; busy or queued state is protected.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-046",
+                  "name": "revert and undo restore byte-equivalent history and protect queued work",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies deep-equal revert/undo history and queued-work protection; no provider busy race."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies deep-equal revert/undo history and queued-work protection; no provider busy race."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-047",
+      "feature": "Fork or side conversation",
+      "acceptance": "Branch retains provenance and can be revisited without mutating parent history.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-047",
+          "status": "PASS",
+          "evidence": [
+            "fork retains provenance and survives revisit without mutating parent: PASS"
+          ],
+          "limitation": "Reload and fork-origin target are exercised against the seeded local history."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-047",
+          "feature": "Fork or side conversation",
+          "acceptance": "Branch retains provenance and can be revisited without mutating parent history.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-047",
+                  "name": "fork preserves provenance, parent history, and reload revisit",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies fork provenance, parent immutability, and reload revisit; no cross-device history sync."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies fork provenance, parent immutability, and reload revisit; no cross-device history sync."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-048",
+      "feature": "Direct links to evidence/messages",
+      "acceptance": "Link opens correct conversation/message; missing or archived targets have a clear explanation.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-048",
+          "status": "PASS",
+          "evidence": [
+            "message link contains exact local chat and message: PASS"
+          ],
+          "limitation": "Missing/archived destination messages are not exercised here."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-048",
+          "feature": "Direct links to evidence/messages",
+          "acceptance": "Link opens correct conversation/message; missing or archived targets have a clear explanation.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-048",
+                  "name": "existing, missing, and archived message links explain their destination",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies existing, missing, and archived local hash links and explanations; local URL handling only."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies existing, missing, and archived local hash links and explanations; local URL handling only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-049",
+      "feature": "Reaction picker beyond defaults",
+      "acceptance": "Picker supports search/navigation and closes without moving the message.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-049",
+          "status": "PASS",
+          "evidence": [
+            "more-reactions picker opens without moving message: PASS"
+          ],
+          "limitation": "Picker search is not part of this build."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-049",
+          "feature": "Reaction picker beyond defaults",
+          "acceptance": "Picker supports search/navigation and closes without moving the message.",
+          "baselineAuditVerdict": "Partial",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-049",
+                  "name": "more-reactions picker navigates, dismisses, and exposes search",
+                  "passed": false,
+                  "evidence": "Error: Partial picker support: arrow focus remained inside picker=false; search controls=0",
+                  "limitation": "Fixture verifies ten picker buttons, ArrowRight behavior, Escape dismissal, and message layout. Current v8 leaves ArrowRight outside the picker and exposes no search control, so acceptance is partial."
+                }
+              ],
+              "status": "PARTIAL"
+            }
+          ],
+          "limitation": "Fixture verifies ten picker buttons, ArrowRight behavior, Escape dismissal, and message layout. Current v8 leaves ArrowRight outside the picker and exposes no search control, so acceptance is partial."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-050",
+      "feature": "Archive and restore",
+      "acceptance": "Archived chat is read-only until restored; messages and evidence survive.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-050",
+          "status": "PASS",
+          "evidence": [
+            "archive hides composer and restore preserves history: PASS"
+          ],
+          "limitation": "Local history only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-051",
+      "feature": "Export conversations and evidence",
+      "acceptance": "Export contains correct selected scope, timestamps and exact evidence without credentials.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-051",
+          "status": "PASS",
+          "evidence": [
+            "workspace export includes history, exact evidence and pin metadata: PASS"
+          ],
+          "limitation": "Workspace export is all-local scope; OS download path is temporary; pinnedAt is checked for a newly pinned and legacy pinned chat."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-052",
+      "feature": "Import and backup recovery",
+      "acceptance": "Invalid backup changes nothing. Valid restore preserves unrelated current work.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-052",
+          "status": "PASS",
+          "evidence": [
+            "invalid import is safe and valid add restore preserves unrelated work, pins and queues: PASS"
+          ],
+          "limitation": "Invalid JSON and valid Add mode are exercised in one isolated browser; imported pinnedAt is checked after the migration/restore transaction."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-053",
+      "feature": "Durable cross-device histories",
+      "acceptance": "Two devices show consistent authorized history with explicit conflict handling.",
+      "priorVerdict": "Deferred",
+      "owner": "root",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-053",
+          "status": "DEFERRED",
+          "evidence": [
+            "Baseline ledger records this capability as explicitly deferred pending identity/ownership contracts."
+          ],
+          "limitation": "Cross-device service is not present in this build."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-054",
+      "feature": "Avatar family and appearance",
+      "acceptance": "Saved avatars remain the same after migration and reload.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-054",
+          "status": "PASS",
+          "evidence": [
+            "legacy avatar alias migrates visually and chosen avatar persists after reload: PASS"
+          ],
+          "limitation": "Legacy mesh is normalized by the avatar adapter and the selected replacement is verified after reload."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-055",
+      "feature": "Name, label and description",
+      "acceptance": "Long name remains readable; saved changes update selected coworker only.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-055",
+          "status": "PASS",
+          "evidence": [
+            "long coworker name remains selected-only: PASS"
+          ],
+          "limitation": "Only one long label is exercised."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-056",
+      "feature": "Behavior and document access",
+      "acceptance": "Editing document explains effect and scope; saved content is the content actually used.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-056",
+          "status": "partial-candidate",
+          "evidence": "candidate/workspace-capabilities.js: documentUseDisclosure gives each local document a stable ID, local scope and requestIncludes=false disclosure.",
+          "limitation": "The existing product still needs a real next-request capture before saved content can be claimed as model-consumed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-057",
+      "feature": "Notification preference",
+      "acceptance": "Muted coworker stays quiet; enabled alerts link to the correct finished/waiting run.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-057",
+          "status": "PASS",
+          "evidence": [
+            "muted runs stay quiet and enabled finished runs link to the exact result: PASS"
+          ],
+          "limitation": "The local NDJSON fixture injects finished run events; waiting/error alert event variants remain owned by the automation alert core."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-058",
+      "feature": "Simple creation and first welcome",
+      "acceptance": "Welcome is visibly local and never sent as fabricated model history.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-058",
+          "status": "PASS",
+          "evidence": [
+            "new coworker shows a local welcome and persists its first chat: PASS"
+          ],
+          "limitation": "Local-only creation fixture; no model request is made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-059",
+      "feature": "Appearance and density",
+      "acceptance": "Both themes preserve readable controls and evidence; settings persist.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-059",
+          "status": "PASS",
+          "evidence": [
+            "theme save/cancel preserves readable controls and evidence in both modes: PASS"
+          ],
+          "limitation": "Light and dark computed foreground/background colors are captured for the conversation and saved evidence block."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-060",
+      "feature": "Live provider setup",
+      "acceptance": "Changing provider cannot silently leave a different runtime active. No secrets in UI output.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-060",
+          "status": "implemented-candidate",
+          "evidence": "contract.md and agent-runtime replacement route selected provider/model/effort through the runtime; provider-agent-runtime.test.cjs proves a configured OpenRouter request reaches the selected official path using injected key/transport with no modelFactory.",
+          "limitation": "Credential values and provider calls are intentionally absent from this run; first-class adapters require explicit host configuration."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-061",
+      "feature": "Connections health",
+      "acceptance": "Disconnected adapter cannot look ready; refresh updates from real state.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-061",
+          "status": "implemented-candidate",
+          "evidence": "provider-selection.cjs distinguishes connected, configured, unavailable, and unknown; server capabilities are injected or derived from the local execution status without inferring reachability from configuration.",
+          "limitation": "Refresh is limited to the host capability callback/local execution status; no external health probe was run."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-062",
+      "feature": "Privacy and data controls",
+      "acceptance": "User can identify what stays local and what a request sends; destructive actions are recoverable where promised.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-062",
+          "status": "PASS",
+          "evidence": [
+            "privacy page names local and sent data: PASS"
+          ],
+          "limitation": "Destructive recovery paths are separately bounded."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-063",
+      "feature": "Real account and sign-out",
+      "acceptance": "No control suggests remote sign-in or sign-out succeeded when it only changes local display.",
+      "priorVerdict": "Deferred",
+      "owner": "root",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-063",
+          "status": "DEFERRED",
+          "evidence": [
+            "Baseline ledger records this capability as explicitly deferred pending identity/ownership contracts."
+          ],
+          "limitation": "Authenticated account lifecycle is not present in this build."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-064",
+      "feature": "Help and feedback",
+      "acceptance": "Every help entry opens useful information; feedback never silently sends private logs.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-064",
+          "status": "PASS",
+          "evidence": [
+            "help and feedback remain local: PASS"
+          ],
+          "limitation": "Storage failure for feedback is not injected."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-065",
+      "feature": "Shortcut reference",
+      "acceptance": "Displayed shortcuts work and unavailable actions are not advertised.",
+      "priorVerdict": "Partial",
+      "owner": "history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-065",
+          "status": "PASS",
+          "evidence": [
+            "documented shortcuts match working palette controls: PASS"
+          ],
+          "limitation": "Cmd modifier and unavailable command matrix are not repeated."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-066",
+      "feature": "Artifact library for real chats",
+      "acceptance": "Real chat artifact opens correct file; another chat never inherits sample output.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-066",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: collectGeneratedFiles requires chat/message provenance, deduplicates generatedFiles/files/artifacts aliases, and openGeneratedFile enforces selected-chat scope with CSP-limited sandbox HTML or text/image preview. Exact adjacent polished-workspace-tools.js hunks mark generated files, add a scoped preview action, and replace repeated previews; full shell fixture verified one card and one iframe.",
+          "limitation": "No external file or network read was used."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-067",
+      "feature": "Browser preview",
+      "acceptance": "Preview shows actual current content and truthful unavailable states.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-067",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: sessionFromExecutionStatus/createExecutionBridge maps the existing browser adapter and renderSessionState shows only authorized selected pages. createHttpExecutionBridge uses the narrow loopback workspace status/read API; full shell mock HTTP verification rendered the authorized page snapshot, and the real createServer mock test verified CORS/token enforcement.",
+          "limitation": "No real browser adapter session was started; no actual page content is claimed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-068",
+      "feature": "Computer preview and control",
+      "acceptance": "Stale or unavailable screen is labeled; controls apply only to authorized session.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-068",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: desktop status requires a selected window plus explicit authorization before connected state; stale/unavailable state has no controls. Full shell mock HTTP verification rendered the authorized selected-window ID, and the real createServer mock test verified the selected-window status projection and read-only CORS/token boundary.",
+          "limitation": "No desktop process or screen capture was started."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-069",
+      "feature": "Resizable work panes",
+      "acceptance": "Opening evidence preserves enough room to read and type; close returns focus.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-069",
+          "status": "PASS",
+          "evidence": [
+            "pane resize persists and close returns focus: PASS"
+          ],
+          "limitation": "One keyboard resize step."
+        },
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-069",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: bindPaneResizer clamps width to preserve the chat minimum, supports keyboard resize and persists only through an injected storage object; full shell verification also exercised the existing #pane-resize keyboard seam.",
+          "limitation": "No packaged live pane reload or focus test was run."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-070",
+      "feature": "File tree and editor",
+      "acceptance": "Only authorized files are shown and edits have explicit save/diff behavior.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-070",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: safeRelativePath/normalizeWorkspaceFile/createFileTree filter to explicitly authorized bounded text files; mountFileEditor returns an exact before/after review payload and explicit save/cancel callbacks.",
+          "limitation": "No OS folder picker or user disk write was used."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-071",
+      "feature": "Interactive terminal",
+      "acceptance": "User sees target/session and permissions; raw evidence remains separately retained.",
+      "priorVerdict": "Missing",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-071",
+          "status": "partial-candidate",
+          "evidence": "candidate/workspace-capabilities.js: terminal session is explicitly unavailable and renderSessionState says read-only evidence is retained while interactive execution is disabled; the narrow server status projection preserves that explicit terminal-unavailable contract.",
+          "limitation": "The current execution adapter has no terminal operation, so a real interactive terminal is not claimed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-072",
+      "feature": "Before/after change review",
+      "acceptance": "Proposal shows exact diff and target; edits invalidate prior approval.",
+      "priorVerdict": "Partial",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-072",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and polished-approval-workflow.browser.test.cjs: exact target, diff, impact, rollback, scopeDigest/actionDigest and stale replacement",
+          "limitation": "Network configuration impact is represented as review data; no device write or rollback was attempted."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-073",
+      "feature": "Inline evidence annotations",
+      "acceptance": "Comment cannot drift to a different result after rerun.",
+      "priorVerdict": "Partial",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-073",
+          "status": "PASS",
+          "evidence": [
+            "annotation success binds to evidence identity: PASS"
+          ],
+          "limitation": "Stale-result rejection, discard and save-failure are not generated here."
+        },
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-073",
+          "status": "partial-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/polished-approval-workflow.browser.test.cjs: immutable review receipts retain proposal scope/action identity across reload and browser review card shows the same digests",
+          "limitation": "Inline evidence annotation remains outside this workflow card slice."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-074",
+      "feature": "Execution approval receipt",
+      "acceptance": "Target or command changes require new review; old approval cannot authorize new work.",
+      "priorVerdict": "Missing",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-074",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and clarification-server-adapter.test.cjs: digest-bound decision and execution tokens, one-time consume, deny/cancel, expiry, unknown completion, explicit approved/mock receipt",
+          "limitation": "Executor is restricted to an explicitly marked mock boundary; no real write success is claimed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-075",
+      "feature": "Git stage, commit and PR controls",
+      "acceptance": "Git operations have clear repository and diff scope; no hidden publish.",
+      "priorVerdict": "Missing",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-075",
+          "status": "deferred",
+          "evidence": "completion/baseline-ledger.json UX-075 acceptance/dependency; candidate workflow API exposes no stage, commit, push, publish, or hidden Git operation",
+          "limitation": "Git diff/review remains deferred until configuration-as-code is a primary workflow, per the baseline target; this slice establishes the concrete no-Git-operation boundary."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-076",
+      "feature": "Device inventory selection",
+      "acceptance": "User can see exact selected devices; aliases resolve consistently to evidence IDs.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-076",
+          "status": "reassigned",
+          "evidence": "Workspace owner combines device inventory selection with stable mentions/inventory UI; this provider package leaves those paths untouched.",
+          "limitation": "Device identity/state acceptance is outside this provider slice."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-077",
+      "feature": "Read-only scope visibility",
+      "acceptance": "Read-only label agrees with enforced tool set; no confusing change/run action is offered.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "root",
+      "candidateReports": [],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-078",
+      "feature": "Evidence provenance and timestamps",
+      "acceptance": "Copied/exported evidence traces to exact run and command; generated narrative is distinguishable.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-078",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: normalizeEvidence/renderEvidenceProvenance preserve run, evidence, target, command, source, status, capture time and missing-versus-empty output state.",
+          "limitation": "Copy/export wiring remains with the parent shell; no user storage or provider data was read."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-079",
+      "feature": "Success versus healthy status",
+      "acceptance": "Successful command on faulty device cannot appear as healthy solely from exit status.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "root",
+      "candidateReports": [],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-080",
+      "feature": "Scope, impact and rollback preview",
+      "acceptance": "Review displays affected devices and rollback limits; chat revert never substitutes for device rollback.",
+      "priorVerdict": "Missing",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-080",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/polished-approval-workflow.js; candidate/approval-workflow.test.cjs and polished-approval-workflow.browser.test.cjs: affected target/scope, impact, rollback limits, and no chat-revert substitute",
+          "limitation": "Rollback remains descriptive review data; no network state-changing operation was invoked."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-081",
+      "feature": "Comparison of diagnostic runs",
+      "acceptance": "Different devices/times are labeled; missing results are not represented as zero change.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-081",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: compareDiagnosticRuns/renderRunComparison label target/time differences and render missing output as unknown rather than empty.",
+          "limitation": "No live two-run comparison was opened; tests use deterministic mock records."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-082",
+      "feature": "Topology and visual evidence",
+      "acceptance": "Nodes/links identify source and freshness; inferred links are labeled.",
+      "priorVerdict": "Missing",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-082",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: normalizeTopology/renderTopology attach source/freshness to nodes and links, filter invalid endpoints and mark inferred links visibly.",
+          "limitation": "Topology data must come from an injected inventory contract; no network inventory call was made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-083",
+      "feature": "Feed / activity inbox",
+      "acceptance": "Every entry opens relevant run; empty view explains what will appear.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "complete_history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-083",
+          "status": "PASS",
+          "evidence": [
+            "feed entry opens relevant saved run: PASS"
+          ],
+          "limitation": "Fixture has no provider/device run."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-084",
+      "feature": "Ideas view",
+      "acceptance": "No dead-end primary navigation; saved user ideas remain recoverable.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "complete_history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-084",
+          "status": "PASS",
+          "evidence": [
+            "ideas can be created, saved, archived and recovered locally: PASS"
+          ],
+          "limitation": "The fixture exercises the actual workspace-tools Add, Save, reload, Archive and Restore controls with local storage only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-085",
+      "feature": "Goals and task checklist",
+      "acceptance": "Completed step links to evidence; manual checklist state is not agent execution proof.",
+      "priorVerdict": "Partial",
+      "owner": "complete_automation",
+      "candidateReports": [
+        {
+          "owner": "automation",
+          "report": "automation/row-results.json",
+          "id": "UX-085",
+          "status": "implemented-candidate",
+          "evidence": "automation.test.cjs goalCompletionCheck accepts checked steps only when each evidence reference resolves and requires a resolving completion evidence reference.",
+          "limitation": "Existing workspace goal form remains owned by the parent integration; this candidate module supplies the evidence-bound completion contract."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-086",
+      "feature": "Scheduled investigations",
+      "acceptance": "Disabled schedule does not run; next-run time is correct; failures are visible.",
+      "priorVerdict": "Missing",
+      "owner": "complete_automation",
+      "candidateReports": [
+        {
+          "owner": "automation",
+          "report": "automation/row-results.json",
+          "id": "UX-086",
+          "status": "implemented-candidate",
+          "evidence": "automation.test.cjs covers Asia/Kolkata daily time, future-time wrong-weekday weekly scheduling, disabled jobs, adapter success/failure, scheduler in-flight disable/delete, replay dedup and save failure. Browser flow opens Schedules & procedures, saves a disabled weekly job, then explicitly enables a future job.",
+          "limitation": "The scheduler is bounded to the open Aven page and the existing saved-conversation CHAT_API adapter; no external scheduler, provider or device call is made."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-087",
+      "feature": "Completion and attention alerts",
+      "acceptance": "Alert opens correct task and respects mute; duplicate events do not spam.",
+      "priorVerdict": "Partial",
+      "owner": "complete_automation",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-087",
+          "status": "PASS",
+          "evidence": [
+            "notification setting exposes the enabled state after a linked completion: PASS"
+          ],
+          "limitation": "Muted and enabled delivery plus exact finished-result linking are exercised in UX-057; waiting/error variants remain owned by the automation alert core."
+        },
+        {
+          "owner": "automation",
+          "report": "automation/row-results.json",
+          "id": "UX-087",
+          "status": "implemented-candidate",
+          "evidence": "AvenAutomation notificationEvent/recordNotification defines completion, failure and input_required semantics with stable-ID dedup and mute state; polished.js records input, completion and failure events and renders alert actions.",
+          "limitation": "Pure tests cover mute and duplicate delivery; the Chromium smoke flow does not inject a live completion/failure stream."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-088",
+      "feature": "Plugin discovery and management",
+      "acceptance": "Unavailable tool cannot be selected; permissions and connection health are visible.",
+      "priorVerdict": "Missing",
+      "owner": "complete_automation",
+      "candidateReports": [
+        {
+          "owner": "automation",
+          "report": "automation/row-results.json",
+          "id": "UX-088",
+          "status": "implemented-candidate",
+          "evidence": "PLUGIN_REGISTRY renders capabilities, required access, availability and connection health; unavailable entries are disabled and selectPlugin rejects catalyst-center. Chromium loads the registry in the reachable automation pane.",
+          "limitation": "No installation, credentials, provider call or device connection is attempted."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-089",
+      "feature": "Skills and reusable workflows",
+      "acceptance": "Selected procedure identifies required access; version used is traceable.",
+      "priorVerdict": "Missing",
+      "owner": "complete_automation",
+      "candidateReports": [
+        {
+          "owner": "automation",
+          "report": "automation/row-results.json",
+          "id": "UX-089",
+          "status": "implemented-candidate",
+          "evidence": "WORKFLOW_REGISTRY renders version, purpose, inputs, required access, evidence requirements and procedure; stale workflow versions are rejected and schedules persist workflowId/workflowVersion. Backup tests preserve and remap automation state.",
+          "limitation": "The registry is a local static v1 catalog; no external procedure capability is asserted."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-090",
+      "feature": "Mobile or remote handoff",
+      "acceptance": "Handoff preserves context and permissions without concurrent duplicate execution.",
+      "priorVerdict": "Deferred",
+      "owner": "root",
+      "candidateReports": [],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-091",
+      "feature": "Keyboard-only operation",
+      "acceptance": "Visible focus, logical order, no traps; Escape returns focus correctly.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-091",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes plus-menu Enter/ArrowDown/Space/Escape navigation, focus return, and keyboard settings cancel/save; focus-visible rules and native controls remain in the candidate CSS/HTML.",
+          "limitation": "Focused primary paths only; no broad assistive-technology certification."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-092",
+      "feature": "Accessible names and state",
+      "acceptance": "Screen reader identifies each action, selected coworker and active run state correctly.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-092",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes menuitemradio roles and selected state, context indicator accessible label, and labeled presentation controls.",
+          "limitation": "No full screen-reader or active-run accessibility certification was performed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-093",
+      "feature": "Contrast, text scaling and reflow",
+      "acceptance": "At 200% text scale controls remain usable; contrast measured; narrow content reflows.",
+      "priorVerdict": "Unverified",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-093",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes main answer contrast at or above 4.5:1, 200% root text stress, and narrow 320px reflow with no horizontal overflow.",
+          "limitation": "Contrast measurement and 200% text-scale checks are outside this focused fixture."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-094",
+      "feature": "Reduced motion",
+      "acceptance": "Motion-reduced mode preserves all state changes and cancels decorative animation.",
+      "priorVerdict": "Unverified",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-094",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes reduced-motion media emulation with decorative animation effectively canceled; source replacements leave existing motion rules intact.",
+          "limitation": "Reduced-motion media emulation was not run in this focused pass."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-095",
+      "feature": "Hover, focus and touch menus",
+      "acceptance": "Menus stay within viewport, remain operable on hover, close predictably and restore focus.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-095",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes compact composer/context/send target geometry at 24px or larger; existing native menu/details controls remain pointer and keyboard operable.",
+          "limitation": "Touch-specific menu geometry and full Escape/focus-return traversal were not certified."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-096",
+      "feature": "Responsive pane layout",
+      "acceptance": "Desktop, narrow window and zoomed layouts retain controls; deliberate table scroll is contained.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-096",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes the 320px responsive pane flow, visible right pane, Escape close, and no horizontal overflow.",
+          "limitation": "Other panes and zoomed layouts are parent acceptance coverage."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-097",
+      "feature": "Empty and unavailable states",
+      "acceptance": "Every visible action has a real result or an accurate reason it is unavailable.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-097",
+          "status": "PASS",
+          "evidence": "quality-evidence.json passes unavailable context wording with no fabricated percentage, visible FAILURE cues, and active-run minimal defaults; root-ui-boundaries.json independently confirms raw active output stays hidden while Stop remains visible.",
+          "limitation": "The complete product inventory of unavailable actions was not exercised."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-098",
+      "feature": "Recoverable errors",
+      "acceptance": "Offline, timeout, cancellation and provider failure are distinct and recoverable.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-098",
+          "status": "candidate-pass-scoped",
+          "evidence": "reliability.test.cjs malformed or failed storage recovery... passed fail-closed journal/write behavior; server-overlay.test.cjs storage unavailable... passed with zero responder calls, and browser 502 coverage distinguished a failed request from unsafe retry.",
+          "limitation": "No real provider offline/timeout was called; those transport classes remain mock-bound."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-099",
+      "feature": "Long transcript performance",
+      "acceptance": "Long chat stays responsive and scrolling does not lose selection or anchors.",
+      "priorVerdict": "Unverified",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-099",
+          "status": "candidate-pass-scoped",
+          "evidence": "browser-overlay.test.cjs: renders a 500-message transcript after reload... passed with a scrollable conversation and all 500 message rows present.",
+          "limitation": "This is a bounded render/scroll check, not a full responsiveness benchmark or selection-anchor certification."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-100",
+      "feature": "First-run onboarding",
+      "acceptance": "A new user understands required setup, selected device and next safe action.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-100",
+          "status": "partial-candidate",
+          "evidence": "provider-picker.js renders all four first-class provider labels with truthful configured/connected/unavailable/unknown states and disables unsupported models/efforts; no credentials UI is introduced.",
+          "limitation": "Existing onboarding/readiness presentation is root-owned; this slice supplies capability data and picker behavior only."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-101",
+      "feature": "Saved state and migration integrity",
+      "acceptance": "Chats, drafts, queued work, avatars and revert history survive migration exactly.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-101",
+          "status": "partial",
+          "evidence": "Reliability state uses strict version validation, journal rollback and unknown-field-preserving map storage; module tests cover malformed recovery and saved draft/queue/run state.",
+          "limitation": "Complete chats/preferences/avatar/revert-history migration comparison remains root/history-agent work; this slice does not rewrite saved-state migration."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-102",
+      "feature": "Release identity and diagnostics",
+      "acceptance": "Support report identifies exact build and contains no provider keys.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-102",
+          "status": "implemented-candidate",
+          "evidence": "server capabilities replacement reports adapter-reported status and null checkedAt when unverified; selection/provider tests cover unavailable and invalid paths; no fake percent or connection claim is generated.",
+          "limitation": "Release diagnostics still require root integration and local runtime verification."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-103",
+      "feature": "Consistent terminology and icon system",
+      "acceptance": "Same object keeps same name across sidebar, profile, Settings and composer.",
+      "priorVerdict": "Partial",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-103",
+          "status": "implemented-candidate",
+          "evidence": "The candidate uses Agent, Plan, Evidence, Investigation activity, Run details and Context capacity labels consistently at the seams it owns; no storage schema is changed.",
+          "limitation": "Full application terminology review remains outside this slice."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-104",
+      "feature": "Multiple customer isolation UX",
+      "acceptance": "Wrong-customer data is inaccessible; workspace/access context is explicit.",
+      "priorVerdict": "Deferred",
+      "owner": "root",
+      "candidateReports": [],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-105",
+      "feature": "Professional finish acceptance",
+      "acceptance": "Code check, rendered behavior and owner acceptance have separate recorded outcomes.",
+      "priorVerdict": "Unverified",
+      "owner": "minimal_ui",
+      "candidateReports": [
+        {
+          "owner": "minimal-ui",
+          "report": "minimal-ui/row-results.json",
+          "id": "UX-105",
+          "status": "partial-candidate",
+          "evidence": "The candidate has a 23-check isolated browser PASS, exact sequential replacement verification, and desktop/mobile screenshots in this directory.",
+          "limitation": "Owner visual acceptance and parent integration remain separate gates."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-106",
+      "feature": "Live inventory and read-only diagnostics",
+      "acceptance": "Only supported read-only commands execute; failed transport cannot be shown as healthy.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "root",
+      "candidateReports": [],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-107",
+      "feature": "Remote command cancellation limits",
+      "acceptance": "Stop records UNKNOWN when remote completion cannot be established; no automatic duplicate retry.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-107",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs cancellation and reliability.test.cjs restart recovery passed UNKNOWN settlement with no automatic retry; browser-overlay.test.cjs failed 502 retry produced no second request after the durable claim.",
+          "limitation": "No remote device completion ambiguity was reproduced; evidence is injected local runtime behavior."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-108",
+      "feature": "Context truncation disclosure",
+      "acceptance": "User can tell when older messages are omitted; raw historical evidence stays available.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-108",
+          "status": "implemented-candidate",
+          "evidence": "provider-selection contract defines windowMessages/windowCharacters/retainedMessages/retainedCharacters/omittedMessages/totalMessages; polished request hunk sends the same metadata used to build messages.",
+          "limitation": "UI disclosure and over-limit browser acceptance remain with the root UI agent."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-109",
+      "feature": "Local notes versus model memory",
+      "acceptance": "Editing local note never implies the next model response used it unless request evidence proves inclusion.",
+      "priorVerdict": "Partial",
+      "owner": "provider",
+      "candidateReports": [
+        {
+          "owner": "provider",
+          "report": "provider/row-results.json",
+          "id": "UX-109",
+          "status": "preserved-regression",
+          "evidence": "The request hunk carries bounded chat messages/context and selected provenance only; local notes/preferences are not added to provider payloads. No note or provider call was performed.",
+          "limitation": "Root should capture a post-note-edit mock payload to close the remaining acceptance evidence."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-110",
+      "feature": "Safe links and inline media",
+      "acceptance": "Links open correct source; unsupported media remains a labeled file; raw CLI remains unchanged.",
+      "priorVerdict": "Partial",
+      "owner": "workspace",
+      "candidateReports": [
+        {
+          "owner": "workspace",
+          "report": "workspace/row-results.json",
+          "id": "UX-110",
+          "status": "implemented-candidate",
+          "evidence": "candidate/workspace-capabilities.js: renderSafeMessage creates only HTTP(S) links with noopener/referrer-safe attributes, keeps HTML/unsafe schemes inert and labels unsupported media; raw text uses textContent.",
+          "limitation": "Inline media is limited to local data images; no external media was fetched."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-111",
+      "feature": "Mark read or unread",
+      "acceptance": "Unread state persists correctly; opening a conversation never cancels work.",
+      "priorVerdict": "Unverified",
+      "owner": "complete_history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-111",
+          "status": "PASS",
+          "evidence": [
+            "opening another chat does not cancel active work and unread state still persists: PASS"
+          ],
+          "limitation": "The held loopback NDJSON response proves the request completes after switching chats; no provider call is made."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-111",
+          "feature": "Mark read or unread",
+          "acceptance": "Unread state persists correctly; opening a conversation never cancels work.",
+          "baselineAuditVerdict": "Unverified",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-111",
+                  "name": "unread state persists through reload, opening clears it, and active run remains intact",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies unread toggle/reload/open and held local run journal while switching chats; provider execution is blocked."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies unread toggle/reload/open and held local run journal while switching chats; provider execution is blocked."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-112",
+      "feature": "Language support disclosure",
+      "acceptance": "Language choice never appears applied while labels remain unchanged.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "complete_history",
+      "candidateReports": [
+        {
+          "owner": "history",
+          "report": "row-results.json",
+          "id": "UX-112",
+          "status": "PASS",
+          "evidence": [
+            "unsupported language is disabled and cannot appear applied: PASS"
+          ],
+          "limitation": "Additional translations are not implemented."
+        },
+        {
+          "owner": "navigation-review",
+          "report": "navigation-tests/row-results.json",
+          "id": "UX-112",
+          "feature": "Language support disclosure",
+          "acceptance": "Language choice never appears applied while labels remain unchanged.",
+          "baselineAuditVerdict": "Verified (scoped)",
+          "status": "PARTIAL",
+          "sourceResults": [
+            {
+              "source": "baseline",
+              "checks": [],
+              "status": "UNVERIFIED"
+            },
+            {
+              "source": "live",
+              "checks": [
+                {
+                  "source": "live",
+                  "id": "UX-112",
+                  "name": "unsupported language cannot appear applied and English fallback is explicit",
+                  "passed": true,
+                  "evidence": "PASS",
+                  "limitation": "Fixture verifies the disabled unsupported option is skipped by keyboard (English then system); no translation coverage."
+                }
+              ],
+              "status": "PASS"
+            }
+          ],
+          "limitation": "Fixture verifies the disabled unsupported option is skipped by keyboard (English then system); no translation coverage."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-113",
+      "feature": "Serial capacity feedback",
+      "acceptance": "Second conversation shows why it waits and identifies active work without losing its draft.",
+      "priorVerdict": "Partial",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-113",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs parallel/same-chat guard passed independent A+B dispatch and same-chat conflict; browser draft switching retained the waiting conversation draft while another run was active.",
+          "limitation": "The full serial multi-conversation capacity message was not separately asserted in the browser fixture."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-114",
+      "feature": "Existing approval tooling integration",
+      "acceptance": "Aven preview and executed action share the same digest, scope and one-time approval.",
+      "priorVerdict": "Missing",
+      "owner": "workflows",
+      "candidateReports": [
+        {
+          "owner": "workflows",
+          "report": "workflows/row-results.json",
+          "id": "UX-114",
+          "status": "implemented-candidate",
+          "evidence": "candidate/approval-workflow.cjs; candidate/clarification-runtime.cjs; candidate/clarification-server-adapter.cjs; candidate/polished-approval-workflow.js; replacements.json: persisted ownership, receipt, and shared scope/action digest through review, approval, execution, and UI; normal HTTP fixture preserves same run/chat and selection",
+          "limitation": "Root must review/apply the exact server/runtime/UI replacement hunks; executor remains mock-only and no live write success is claimed."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    },
+    {
+      "id": "UX-115",
+      "feature": "Durable raw run records",
+      "acceptance": "A saved run record is retrievable with original provenance after UI reload.",
+      "priorVerdict": "Verified (scoped)",
+      "owner": "reliability",
+      "candidateReports": [
+        {
+          "owner": "reliability",
+          "report": "reliability/row-results.json",
+          "id": "UX-115",
+          "status": "candidate-pass-scoped",
+          "evidence": "server-overlay.test.cjs durable duplicate dispatch and explicit recovery passed; reliability.test.cjs FileStorage fresh-instance replay and SQLite two-process stale-lock CAS passed. Run evidence files were written once and duplicate responder calls stayed at one.",
+          "limitation": "No existing production records or cross-device store were touched; root integration must preserve prior evidence paths."
+        }
+      ],
+      "rootVerdict": "Pending integration and acceptance review"
+    }
+  ]
+}

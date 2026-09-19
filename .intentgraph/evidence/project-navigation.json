@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-15T04:58:59.227Z",
+  "passed": true,
+  "checks": [
+    "hover actions",
+    "new project chat",
+    "rename",
+    "pin/reload/order",
+    "move isolation",
+    "archive/restore/reload",
+    "busy and queued archive blocked",
+    "keyboard menu/focus",
+    "persistent collapse",
+    "icon copy exact/status",
+    "no SUCCESS badge",
+    "390px menu bounds",
+    "no page errors"
+  ]
+}

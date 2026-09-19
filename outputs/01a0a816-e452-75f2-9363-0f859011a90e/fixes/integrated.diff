@@ -1,0 +1,315 @@
+--- baseline/polished.js
++++ current/polished.js
+@@ -1,6 +1,37 @@
+ (() => {
+   'use strict';
+-  const startupRecovery=AvenWorkspaceBackup.recoverPending(localStorage);
++  const CREATE_PENDING_KEY='aven-polished-coworker-create-pending-v1';
++  const CREATE_KEYS=['aven-polished-preferences-v1','aven-polished-chats-v1','aven-polished-docs-v1'];
++  const CREATE_TX_VERSION=1;
++  function recoverPendingCoworkerCreate(storage){
++    try{
++      const pending=storage.getItem(CREATE_PENDING_KEY);
++      if(!pending)return{ok:true,recovered:false};
++      const transaction=JSON.parse(pending),before=transaction?.before;
++      if(transaction?.version!==CREATE_TX_VERSION||typeof transaction.transactionId!=='string'||!transaction.transactionId||!before||typeof before!=='object'||CREATE_KEYS.some(key=>!Object.hasOwn(before,key)||(before[key]!==null&&typeof before[key]!=='string')))throw Error('Invalid coworker creation recovery journal.');
++      for(const key of CREATE_KEYS){const previous=before[key],current=storage.getItem(key);if(current===previous)continue;if(previous===null)storage.removeItem(key);else storage.setItem(key,previous);}
++      storage.removeItem(CREATE_PENDING_KEY);
++      return{ok:true,recovered:true};
++    }catch(error){return{ok:false,recovered:false,error};}
++  }
++  function persistCoworkerCreation(storage,next){
++    let before;
++    try{
++      before=Object.fromEntries(CREATE_KEYS.map(key=>[key,storage.getItem(key)]));
++      const transaction={version:CREATE_TX_VERSION,transactionId:globalThis.crypto?.randomUUID?globalThis.crypto.randomUUID():`aven-create-${Date.now()}-${Math.random().toString(16).slice(2)}`,createdAt:new Date().toISOString(),before};
++      storage.setItem(CREATE_PENDING_KEY,JSON.stringify(transaction));
++      const values=[JSON.stringify(next.prefs),JSON.stringify(next.data),JSON.stringify(next.docs)];
++      CREATE_KEYS.forEach((key,index)=>storage.setItem(key,values[index]));
++      storage.removeItem(CREATE_PENDING_KEY);
++      return{ok:true,recovered:false,pending:false};
++    }catch(error){
++      const recovery=recoverPendingCoworkerCreate(storage);
++      return{ok:false,recovered:recovery.ok,pending:!recovery.ok,error,recovery};
++    }
++  }
++  const creationRecovery=recoverPendingCoworkerCreate(localStorage);
++  const startupRecovery=creationRecovery.ok?AvenWorkspaceBackup.recoverPending(localStorage):creationRecovery;
++  let coworkerCreationRecoveryBlocked=!creationRecovery.ok;
+   const byId = id => document.getElementById(id);
+   const one = (selector, root = document) => root.querySelector(selector);
+   const all = (selector, root = document) => [...root.querySelectorAll(selector)];
+@@ -18,7 +49,7 @@
+   const setIcons = (root = document) => all('[data-icon]', root).forEach(node => { if (!node.querySelector('.icon')) node.prepend(document.createRange().createContextualFragment(icon(node.dataset.icon))); });
+ 
+   const PREF_KEY='aven-polished-preferences-v1', CHAT_KEY='aven-polished-chats-v1', DOC_KEY='aven-polished-docs-v1', BACKUP_KEY='aven-polished-p1-raw-backup-v1', MIGRATION_KEY='aven-polished-direct-teams-migration-v4', MIGRATION_BACKUP_KEY='aven-polished-direct-teams-raw-backup-v1', REACTION_BACKUP_KEY='aven-polished-local-reactions-raw-backup-v1', REACTION_MIGRATION_KEY='aven-polished-local-reactions-v1';
+-  const UI_BUILD='ux-pipeline-v7',UI_BUILD_DATE='2026-09-16';
++  const UI_BUILD='ux-audit-fixes-v8',UI_BUILD_DATE='2026-09-16';
+   const CHAT_API='http://127.0.0.1:8768/api/chat';
+   const MAX_QUEUE_ITEMS=8, MAX_QUEUE_TEXT=4000, MAX_RAW_OUTPUT=512*1024, MAX_STREAM_BYTES=8*1024*1024;
+   const defaultPrefs={theme:'system',accent:'black',language:'system',density:'comfortable',displayName:'',activeAgent:'companion',provider:'Not connected',model:'',browser:true,computer:false,sections:[],agents:[{id:'companion',name:'Network companion',role:'Investigate branch networks and explain findings.',timezone:'Follow system',autoReview:false},{id:'topology',name:'Topology analyst',role:'Map dependencies and surface the next useful signal.',timezone:'Follow system',autoReview:false}]};
+@@ -73,7 +104,7 @@
+   let profileDraft=null,profileAgentId=null,profileOriginal='',profileGeneration=0,profileAvatarBusy=false,avatarTab='styles',settingsBehavior=new Map(),behaviorAgentId=null;
+   let paneView='agent',paneOpener=null,settingsDraft=null,settingsPage='general',settingsOpener=null,searchOpener=null,createReturnChat=null,contextAgentId=null,contextChatId=null,activeDoc=null,composition=false;
+   const sessionAttachments=new Map(),toolStates={browser:{status:'idle',attempt:0},plugins:{status:'idle',attempt:0},computer:{status:'idle',attempt:0}};let toolTimers={};
+-  const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(_){return false;}};const savePrefs=()=>save(PREF_KEY,prefs),saveData=()=>save(CHAT_KEY,data),saveDocs=()=>save(DOC_KEY,docs);const currentChat=()=>data.chats.find(c=>c.id===data.activeChat)||data.chats[0];const agentById=id=>prefs.agents.find(a=>a.id===id)||prefs.agents[0];const selectedAgents=(chat=currentChat())=>(chat?.recipients||[prefs.activeAgent]).map(agentById).filter(Boolean);const projectById=id=>data.projects.find(p=>p.id===id);const activeProject=chat=>projectById(chat?.projectId)||projectById('personal');
++  const save=(k,v)=>{if(coworkerCreationRecoveryBlocked)return false;try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(_){return false;}};const savePrefs=()=>save(PREF_KEY,prefs),saveData=()=>save(CHAT_KEY,data),saveDocs=()=>save(DOC_KEY,docs);const currentChat=()=>data.chats.find(c=>c.id===data.activeChat)||data.chats[0];const agentById=id=>prefs.agents.find(a=>a.id===id)||prefs.agents[0];const selectedAgents=(chat=currentChat())=>(chat?.recipients||[prefs.activeAgent]).map(agentById).filter(Boolean);const projectById=id=>data.projects.find(p=>p.id===id);const activeProject=chat=>projectById(chat?.projectId)||projectById('personal');
+   function createAvatar(size='small',agent=agentById(prefs.activeAgent)){return AvenAvatars.make(size,agent);}
+   function resolvedTheme(){return prefs.theme==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):prefs.theme;}
+   function applyPrefs(){document.documentElement.dataset.theme=resolvedTheme();document.documentElement.dataset.accent=prefs.accent||'black';document.documentElement.dataset.density=prefs.density||'comfortable';const recipientIds=currentChat()?.recipients||[prefs.activeAgent],a=agentById(recipientIds[0]);byId('avatar').replaceChildren(createAvatar('small',a));byId('draft').placeholder='Message '+recipientIds.map(id=>agentById(id).name).join(', ')+'…';byId('account-name').textContent=prefs.displayName||'Vikas';}
+@@ -764,7 +795,7 @@
+   function setSurface(title,context=''){byId('surface').textContent=title;const node=byId('surface-context');if(node){node.textContent=context;node.hidden=!context;}}
+   function renderCustomSection(sec,list,parent,renderRow){const wrap=document.createElement('section');wrap.className='custom-section';const header=document.createElement('div');header.className='custom-section-header';const toggle=document.createElement('button');toggle.type='button';toggle.className='custom-section-toggle';toggle.dataset.sectionToggle=sec.id;toggle.setAttribute('aria-expanded',String(!sec.collapsed));toggle.innerHTML='<span>'+esc(sec.name)+'</span><span class="section-chevron" aria-hidden="true">⌄</span>';const body=document.createElement('div');body.dataset.sectionBody=sec.id;body.className='custom-section-body';body.hidden=!!sec.collapsed;body.id='section-body-'+sec.id;toggle.setAttribute('aria-controls',body.id);toggle.onclick=()=>{const next=clone(prefs),target=next.sections.find(x=>x.id===sec.id);if(!target)return;target.collapsed=!target.collapsed;if(!save(PREF_KEY,next)){toast('Section could not be saved.');return;}prefs=next;renderSidebar();all('[data-section-toggle]').find(n=>n.dataset.sectionToggle===sec.id)?.focus();};const menu=document.createElement('button');menu.type='button';menu.dataset.sectionMenu=sec.id;menu.className='section-menu-button';menu.textContent='···';menu.setAttribute('aria-label',sec.name+' section actions');menu.onclick=e=>{e.stopPropagation();const r=menu.getBoundingClientRect();showSectionMenu(sec.id,r.left,r.bottom,menu);};header.oncontextmenu=e=>{e.preventDefault();const r=toggle.getBoundingClientRect();showSectionMenu(sec.id,e.clientX||r.left,e.clientY||r.bottom,toggle);};header.append(toggle,menu);for(const item of list)renderRow(item,body);if(!list.length)body.innerHTML='<div class="sidebar-empty">No coworkers in this section</div>';wrap.append(header,body);parent.append(wrap);}
+   function threadNavMenu(c,opener,point){const direct=isDirectConversation(c),owner=directOwner(c);navMenu(opener,[{label:'Find in conversation',icon:'search',run:openConversationFind},...(direct?[{label:'Rename conversation',icon:'edit',run:()=>renameNav('chat',c)}]:[]),{label:direct?'Rename coworker':'Rename',icon:'edit',run:()=>direct?renameNav('coworker',owner):renameNav('chat',c)},{label:direct?'Open coworker profile':'Copy conversation',icon:direct?'avatar':'copy',run:direct?(()=>openProfile(owner.id)):async()=>{const text=c.messages.map(m=>{const raw=evidenceItems(m.events,m.evidence);return (m.role==='user'?'You':agentById(m.agentId||c.recipients?.[0]).name)+':\n'+(raw.length?raw.map(e=>e.output).join('\n\n'):m.text||'');}).join('\n\n');try{await navigator.clipboard.writeText(text);toast('Conversation copied.');}catch{toast('Could not access the clipboard.');}}},{label:c.pinned?'Unpin':'Pin',icon:'pin',run:()=>navCommit(()=>{c.pinned=!c.pinned;})},{label:c.archived?'Restore chat':'Archive',icon:c.archived?'restore':'archive',disabled:!c.archived&&chatBusy(c),reason:'Finish the run and clear queued messages before archiving.',run:()=>c.archived?(navCommit(()=>{c.archived=false;}),showChat(c.id)):archiveNavChat(c)},null,{label:'Move to…',icon:'move',disabled:!!c.channelId,run:()=>moveNavChat(c)},...(direct?[{label:owner.unread?'Mark as read':'Mark as unread',icon:'more',run:()=>{owner.unread=!owner.unread;savePrefs();renderSidebar();}},{label:'Move to section…',icon:'move',run:()=>openMove(owner.id,'section',c.id)},{label:'Hide coworker from sidebar',icon:'archive',run:()=>{owner.hidden=true;savePrefs();renderSidebar();}}]:[])],point);}
+-  function renameNav(kind,item){const isCoworker=kind==='coworker',isTeam=kind==='team';navDialog('Rename '+(isCoworker?'coworker':isTeam?'folder':'conversation'),[{id:'nav-name',label:'Name',value:isCoworker?item.name:isTeam?item.name:item.title}],'Save',(status,dialog)=>{const name=byId('nav-name').value.trim();if(!name){status.textContent='Enter a name.';return;}if(isCoworker){const next=clone(prefs),target=next.agents.find(a=>a.id===item.id);if(!target){status.textContent='Coworker is unavailable.';return;}if(next.agents.some(a=>a.id!==item.id&&a.name.trim().toLowerCase()===name.toLowerCase())){status.textContent='Another coworker uses that name.';return;}target.name=name;if(!save(PREF_KEY,next)){status.textContent='Could not save locally. The previous name is unchanged.';return;}prefs=next;applyPrefs();renderSidebar();if(currentChat()?.recipients?.[0]===item.id&&!currentChat()?.projectId)setSurface(name);dialog.close();return;}if(navCommit(()=>{if(isTeam)item.name=name;else{item.title=name;item.autoTitle=false;}})){dialog.close();if(kind==='chat'&&data.activeChat===item.id)setSurface(name,projectById(item.projectId)?.name||'');if(isTeam&&currentChat()?.projectId===item.id)setSurface(currentChat().title,name);}});}
++  function renameNav(kind,item){const isCoworker=kind==='coworker',isTeam=kind==='team';navDialog('Rename '+(isCoworker?'coworker':isTeam?'folder':'conversation'),[{id:'nav-name',label:'Name',value:isCoworker?item.name:isTeam?item.name:item.title}],'Save',(status,dialog)=>{const name=byId('nav-name').value.trim();if(!name){status.textContent='Enter a name.';return;}if(isCoworker){const next=clone(prefs),target=next.agents.find(a=>a.id===item.id);if(!target){status.textContent='Coworker is unavailable.';return;}if(next.agents.some(a=>a.id!==item.id&&a.name.trim().toLowerCase()===name.toLowerCase())){status.textContent='Another coworker uses that name.';return;}target.name=name;if(!save(PREF_KEY,next)){status.textContent='Could not save locally. The previous name is unchanged.';return;}prefs=next;applyPrefs();renderSidebar();if(currentChat()?.recipients?.[0]===item.id&&!currentChat()?.projectId)setSurface(name);dialog.close();return;}if(navCommit(()=>{if(isTeam)item.name=name;else{item.title=name;item.autoTitle=false;}})){dialog.close();if(kind==='chat'&&data.activeChat===item.id)setSurface(isDirectConversation(item)?directOwner(item).name:item.title,projectById(item.projectId)?.name||'');if(isTeam&&currentChat()?.projectId===item.id)setSurface(currentChat().title,name);}});}
+   function moveNavChat(c){navDialog('Move conversation',[{id:'nav-destination',label:'Location',value:c.projectId||'',options:[...(c.recipients?.length===1?[['','Coworkers']]:[]),...data.projects.filter(t=>t.id!=='personal'||data.chats.some(x=>x.projectId===t.id)).map(folder=>[folder.id,folder.name])]}],'Move',(status,dialog)=>{const id=byId('nav-destination').value||null;if((!id&&c.recipients?.length!==1)||c.channelId||(id&&!data.projects.some(folder=>folder.id===id))){status.textContent='Choose an existing folder or Coworkers.';return;}if(navCommit(()=>{c.projectId=id;})){dialog.close();showChat(c.id);}});}
+   function editTeamMembers(team){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return;const dialog=byId('workspace-create-dialog'),selected=new Set(team.members||[]);byId('workspace-create-title').textContent='Edit folder coworkers';byId('create-dialog-body').innerHTML='<form id="team-members-form" class="workspace-form"><p class="form-help">Choose the coworkers who receive new conversations in this folder.</p><fieldset><legend>Coworkers</legend><div id="team-member-options" class="member-options"></div></fieldset><p id="team-members-status" class="form-status" role="status"></p><div class="form-actions"><button type="button" id="cancel-team-members" class="button-secondary">Cancel</button><button type="submit" class="button-primary">Save coworkers</button></div></form>';const options=byId('team-member-options');prefs.agents.filter(a=>!a.hidden&&!a.archived).forEach(a=>{const label=document.createElement('label');const input=document.createElement('input');input.type='checkbox';input.value=a.id;input.checked=selected.has(a.id);label.append(input,document.createTextNode(a.name));options.append(label);});byId('cancel-team-members').onclick=()=>dialog.close();byId('close-workspace-create').onclick=()=>dialog.close();dialog.onclose=()=>byId('thread-actions')?.focus();byId('team-members-form').onsubmit=e=>{e.preventDefault();const ids=all('#team-member-options input:checked').map(n=>n.value);if(!ids.length){byId('team-members-status').textContent='Choose at least one coworker.';return;}if(navCommit(()=>{team.members=ids;})){dialog.close();}};dialog.showModal();options.querySelector('input')?.focus();}
+   function newProjectChat(team){const members=[...new Set((team.members||[]).filter(id=>prefs.agents.some(a=>a.id===id&&!a.hidden&&!a.archived)))];navDialog('New conversation in '+team.name,[{id:'nav-chat-name',label:'Conversation name',value:'New conversation'}],'Create conversation',(status,dialog)=>{const name=byId('nav-chat-name').value.trim();if(!name){status.textContent='Choose a conversation name.';return;}if(!members.length){status.textContent='Add at least one coworker to this folder first.';return;}const chat={id:uid(),title:name,autoTitle:false,projectId:team.id,channelId:null,recipients:members,sample:false,draft:'',messages:[],pendingQueue:[]};if(navCommit(()=>{data.chats.unshift(chat);team.collapsed=false;})){dialog.close();showChat(chat.id);byId('draft').focus();}});}
+@@ -804,7 +835,7 @@
+   function showChat(id=data.activeChat,options={}){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;retainDraft();const c=data.chats.find(x=>x.id===id)||data.chats.find(x=>!x.archived)||data.chats[0];if(!c)return false;if(renderedChatId!==c.id){closeConversationFind(false);if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;resetToolContext();}recordConversationVisit(c,options);c.unread=false;if(isDirectConversation(c))directOwner(c).unread=false;data.activeChat=c.id;renderedChatId=c.id;currentView='conversation';if(c.recipients?.[0]&&prefs.agents.some(a=>a.id===c.recipients[0]))prefs.activeAgent=c.recipients[0];saveData();savePrefs();applyPrefs();clearCenter();byId('conversation').hidden=false;byId('composer-wrap').hidden=!!c.archived;const team=c.projectId?projectById(c.projectId):null;setSurface(isDirectConversation(c)?directOwner(c).name:c.title,team?.name||'');renderConversation();renderComposer();renderSidebar();if(!byId('right-pane').hidden){if(paneView==='agent'||paneView==='profile')renderAgentPane();else if(paneView==='artifacts')renderArtifactsPane();else if(['annotate','compare'].includes(paneView))closePane(true);else renderToolPane(paneView);}if(innerWidth<=760)closePane(true);requestAnimationFrame(()=>{if(currentView==='conversation'&&currentChat()?.id===c.id){const scroll=byId('center-content');scroll.scrollTop=Number.isFinite(options.scrollTop)?options.scrollTop:scroll.scrollHeight;updateLatestControl();}});return true;}
+   function openAgentConversation(id){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return;retainDraft();const a=agentById(id);prefs.activeAgent=id;a.unread=false;savePrefs();const existing=data.chats.filter(c=>!c.archived&&isDirectConversation(c)&&c.recipients[0]===id);if(existing.length){showChat(existing.find(c=>c.id===data.activeChat)?.id||existing[0].id);return;}const welcome={id:uid(),role:'assistant',agentId:id,text:'Hi, I’m '+a.name+'. I’m ready to help with your network work.',welcome:true,createdAt:now()};const c={id:uid(),title:a.name,autoTitle:false,sample:false,channelId:null,projectId:null,recipients:[id],draft:'',pendingAttachmentNames:[],messages:[welcome],pendingQueue:[]};data.chats.unshift(c);if(!saveData()){data.chats.shift();toast('Could not save this coworker locally.');return;}showChat(c.id);}
+   function createWorkspace(type,editId=null){if(type==='agent-edit'){openProfile(editId);return;}if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return;const isCoworker=type==='agent'||type==='coworker',isTeam=type==='team'||type==='project'||type==='channel';if(!isCoworker&&!isTeam)return;closePopovers();retainDraft();createReturnChat=data.activeChat;createSucceeded=false;createOpener=document.activeElement;const dialog=byId('workspace-create-dialog'),body=byId('create-dialog-body'),label=isCoworker?'coworker':'team';byId('workspace-create-title').textContent='New '+label;let html='<form class="workspace-form" id="workspace-create-form"><label for="workspace-create-name">Name</label><input id="workspace-create-name" maxlength="80" required autocomplete="off" placeholder="'+(isTeam?'For example: Network operations':'For example: Firewall specialist')+'">';if(isCoworker)html+='<label for="workspace-create-role">Focus</label><textarea id="workspace-create-role" maxlength="1500" required placeholder="What should this coworker help with?"></textarea>';if(isTeam)html+='<fieldset><legend>Coworkers</legend><div id="workspace-create-members" class="member-options">'+prefs.agents.filter(a=>!a.hidden&&!a.archived).map(a=>'<label><input type="checkbox" value="'+esc(a.id)+'" '+(a.id===prefs.activeAgent?'checked':'')+'>'+esc(a.name)+'</label>').join('')+'</div></fieldset>';body.innerHTML=html+'<p id="workspace-create-status" class="form-status" role="status"></p><div class="form-actions"><button class="button-secondary" id="cancel-workspace-create" type="button">Cancel</button><button class="button-primary" id="finish-workspace-create" type="submit">Create '+label+'</button></div></form>';byId('cancel-workspace-create').onclick=()=>dialog.close();byId('close-workspace-create').onclick=()=>dialog.close();byId('workspace-create-form').onsubmit=e=>{e.preventDefault();finishWorkspaceCreate(type);};dialog.onclose=()=>{if(!createSucceeded)showChat(createReturnChat);if(createOpener?.isConnected)createOpener.focus();};dialog.showModal();byId('workspace-create-name').focus();}
+-  function finishWorkspaceCreate(type){const isCoworker=type==='agent'||type==='coworker',isTeam=type==='team'||type==='project'||type==='channel',name=byId('workspace-create-name')?.value.trim(),status=byId('workspace-create-status');if(!name)return;if(isCoworker){const role=byId('workspace-create-role')?.value.trim();if(!role){status.textContent='Describe the coworker focus.';return;}if(prefs.agents.some(a=>a.name.toLowerCase()===name.toLowerCase())){status.textContent='Choose a different name.';return;}const a={id:uid(),name,role,description:role,label:'',notifications:true,timezone:'Follow system',autoReview:false,hidden:false,archived:false,pinned:false,unread:false,sectionId:''},welcome={id:uid(),role:'assistant',agentId:a.id,text:'Hi, I’m '+name+'. I’m ready to help with your network work.',welcome:true,createdAt:now()},c={id:uid(),title:name,autoTitle:false,sample:false,channelId:null,projectId:null,recipients:[a.id],draft:'',pendingAttachmentNames:[],messages:[welcome],pendingQueue:[]};prefs.agents.push(a);data.chats.unshift(c);docs[a.id]={'SOUL.md':'# '+name+'\n\nDescribe the coworker\'s tone and boundaries.','MEMORY.md':''};if(!savePrefs()||!saveData()||!saveDocs()){prefs.agents.pop();data.chats.shift();delete docs[a.id];toast('Could not save this coworker locally.');return;}prefs.activeAgent=a.id;savePrefs();createSucceeded=true;byId('workspace-create-dialog').close();showChat(c.id);byId('draft').focus();return;}if(isTeam){const members=[...new Set(all('#workspace-create-members input:checked').map(n=>n.value))];if(!members.length){status.textContent='Choose at least one coworker.';return;}if(data.projects.some(team=>team.name.toLowerCase()===name.toLowerCase())){status.textContent='Choose a different name.';return;}const team={id:uid(),name,members,collapsed:false,pinned:false};const chat={id:uid(),title:name,projectId:team.id,channelId:null,recipients:members,sample:false,draft:'',messages:[],pendingQueue:[]};data.projects.push(team);data.chats.unshift(chat);if(!saveData()){data.projects.pop();data.chats.shift();status.textContent='Could not save this folder locally.';return;}createSucceeded=true;byId('workspace-create-dialog').close();showChat(chat.id);}}
++  function finishWorkspaceCreate(type){const isCoworker=type==='agent'||type==='coworker',isTeam=type==='team'||type==='project'||type==='channel',name=byId('workspace-create-name')?.value.trim(),status=byId('workspace-create-status');if(!name)return;if(isCoworker){const role=byId('workspace-create-role')?.value.trim();if(!role){status.textContent='Describe the coworker focus.';return;}const pendingRecovery=recoverPendingCoworkerCreate(localStorage);if(!pendingRecovery.ok){coworkerCreationRecoveryBlocked=true;const message='Could not recover the previous local creation. A pending coworker change is still retained. Reload after browser storage is available.';status.textContent=message;toast(message);return;}coworkerCreationRecoveryBlocked=false;if(prefs.agents.some(a=>a.name.toLowerCase()===name.toLowerCase())){status.textContent='Choose a different name.';return;}const before={prefs:clone(prefs),data:clone(data),docs:clone(docs)},nextPrefs=clone(prefs),nextData=clone(data),nextDocs=clone(docs),a={id:uid(),name,role,description:role,label:'',notifications:true,timezone:'Follow system',autoReview:false,hidden:false,archived:false,pinned:false,unread:false,sectionId:''},welcome={id:uid(),role:'assistant',agentId:a.id,text:'Hi, I’m '+name+'. I’m ready to help with your network work.',welcome:true,createdAt:now()},c={id:uid(),title:name,autoTitle:false,sample:false,channelId:null,projectId:null,recipients:[a.id],draft:'',pendingAttachmentNames:[],messages:[welcome],pendingQueue:[]};nextPrefs.agents.push(a);nextPrefs.activeAgent=a.id;nextData.chats.unshift(c);nextData.activeChat=c.id;nextDocs[a.id]={'SOUL.md':'# '+name+'\n\nDescribe the coworker\'s tone and boundaries.','MEMORY.md':''};const result=persistCoworkerCreation(localStorage,{prefs:nextPrefs,data:nextData,docs:nextDocs});if(!result.ok){prefs=before.prefs;data=before.data;docs=before.docs;if(result.pending)coworkerCreationRecoveryBlocked=true;const message=result.pending?'Could not save this coworker locally. A previous local creation is pending recovery. Reload after browser storage is available.':'Could not save this coworker locally.';status.textContent=message;toast(message);return;}prefs=nextPrefs;data=nextData;docs=nextDocs;createSucceeded=true;byId('workspace-create-dialog').close();showChat(c.id);byId('draft').focus();return;}if(isTeam){const members=[...new Set(all('#workspace-create-members input:checked').map(n=>n.value))];if(!members.length){status.textContent='Choose at least one coworker.';return;}if(data.projects.some(team=>team.name.toLowerCase()===name.toLowerCase())){status.textContent='Choose a different name.';return;}const team={id:uid(),name,members,collapsed:false,pinned:false};const chat={id:uid(),title:name,projectId:team.id,channelId:null,recipients:members,sample:false,draft:'',messages:[],pendingQueue:[]};data.projects.push(team);data.chats.unshift(chat);if(!saveData()){data.projects.pop();data.chats.shift();status.textContent='Could not save this folder locally.';return;}createSucceeded=true;byId('workspace-create-dialog').close();showChat(chat.id);}}
+   function openProfile(id=prefs.activeAgent,chooseAvatar=false){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return;closePopovers();profileAgentId=id;prefs.activeAgent=id;savePrefs();applyPrefs();const a=agentById(id);profileDraft={name:a.name,label:a.label||'',description:a.description??a.role??'',notifications:a.notifications!==false,avatar:AvenAvatars.config(a)};profileOriginal=JSON.stringify(profileDraft);profileGeneration++;profileAvatarBusy=false;avatarTab='styles';paneView='profile';if(byId('right-pane').hidden)paneOpener=document.activeElement;byId('right-pane').hidden=false;byId('pane-title').textContent=a.name;all('[data-pane]').forEach(n=>n.setAttribute('aria-selected',String(n.dataset.pane==='agent')));renderProfile();syncPaneModal();if(chooseAvatar)openAvatarPicker();}
+   function syncAgentIdentity(id){const a=agentById(id);for(const row of all('[data-agent-row]').filter(n=>n.dataset.agentRow===id)){one('.network-avatar',row)?.replaceWith(createAvatar('small',a));const label=one('.sidebar-row-label',row);if(label)label.textContent=a.name;one('[data-agent-menu]',row)?.setAttribute('aria-label',a.name+' actions');}for(const row of all('[data-direct-row]').filter(n=>n.dataset.agentRow===id)){const name=one('.direct-name',row);if(name)name.textContent=a.name;const open=one('.direct-open',row);if(open)open.title=a.name;}if(currentChat()?.recipients?.[0]===id&&!currentChat()?.projectId)setSurface(a.name);if(!byId('right-pane').hidden&&paneView==='profile')byId('pane-title').textContent=a.name;}
+   function searchChatLabel(c){return (isDirectConversation(c)?directOwner(c).name+' · ':'')+c.title+(c.archived?' · Archived':'');}
+@@ -870,7 +901,7 @@
+     };
+     byId('cancel-import').onclick=()=>{selection++;pending=null;preview.hidden=true;byId('import-workspace').value='';status.textContent='Import cancelled. Your workspace is unchanged.';};
+     const restore=mode=>{
+-      if(!pending)return;if(busy()){status.textContent='Finish active runs and save or close profile editors before importing.';return;}
++      if(!pending)return;const pendingRecovery=recoverPendingCoworkerCreate(localStorage);if(!pendingRecovery.ok){coworkerCreationRecoveryBlocked=true;status.textContent='An unfinished coworker creation is pending recovery. Reload after browser storage is available before restoring a workspace.';return;}coworkerCreationRecoveryBlocked=false;if(busy()){status.textContent='Finish active runs and save or close profile editors before importing.';return;}
+       try{AvenWorkspaceBackup.replace(localStorage,pending,workspaceEnvelope(),mode);status.textContent='Workspace restored. Reloading…';location.reload();}
+       catch(error){status.textContent=error.message;byId('download-recovery').disabled=!localStorage.getItem(AvenWorkspaceBackup.BACKUP);}
+     };
+@@ -892,10 +923,10 @@
+   function wireMessageLinks(){
+     const open=()=>{if(!location.hash)return;const args=new URLSearchParams(location.hash.slice(1)),chatId=args.get('chat'),messageId=args.get('message');if(!chatId)return;const c=data.chats.find(c=>c.id===chatId);if(!c){toast('This linked conversation is unavailable in this browser workspace.');return;}if(c.archived){toast('This linked conversation is archived. Restore it in Settings → Archived chats.');return;}if(messageId&&!c.messages.some(m=>m.id===messageId)){toast('This linked message is unavailable. The conversation is still saved.');return;}if(messageId)openMessageContext(c.id,messageId);else showChat(c.id);};window.addEventListener('hashchange',open);open();
+   }
+-  function renderLocalDiagnostics(container){return AvenDiagnostics.render(container,{build:UI_BUILD,chatId:currentChat()?.id,onDownload:downloadLocal});}
++  function renderLocalDiagnostics(container,onStatus){return AvenDiagnostics.render(container,{build:UI_BUILD,chatId:currentChat()?.id,onDownload:downloadLocal,onStatus});}
+   function showBuildInfo(){
+-    showInfo('About Aven','<h3>A workspace for network coworkers</h3><dl class="build-info"><dt>UI build</dt><dd>'+UI_BUILD+'</dd><dt>Updated</dt><dd>'+UI_BUILD_DATE+'</dd><dt>Storage</dt><dd>This browser · workspace backup version '+AvenWorkspaceBackup.VERSION+'</dd><dt>Chat connection</dt><dd>OpenCode · MiMo V2.5 (configured)</dd></dl><p class="setting-help">This identifies the loaded UI. It does not confirm provider or device health. Export and recovery are available under Settings → Privacy &amp; data.</p><button type="button" id="copy-build-info">Copy build details</button>');
+-    const diagnostics=document.createElement('section');byId('info-dialog-body').append(diagnostics);renderLocalDiagnostics(diagnostics);
++    showInfo('About Aven','<h3>A workspace for network coworkers</h3><dl class="build-info"><dt>UI build</dt><dd>'+UI_BUILD+'</dd><dt>Updated</dt><dd>'+UI_BUILD_DATE+'</dd><dt>Storage</dt><dd>This browser · workspace backup version '+AvenWorkspaceBackup.VERSION+'</dd><dt>Chat connection</dt><dd id="about-chat-connection">Unknown · local status not checked</dd></dl><p class="setting-help">This identifies the loaded UI. Connection details update from the local status check; they do not confirm provider or device reachability. Export and recovery are available under Settings → Privacy &amp; data.</p><button type="button" id="copy-build-info">Copy build details</button>');
++    const connectionRow=byId('about-chat-connection');const diagnostics=document.createElement('section');byId('info-dialog-body').append(diagnostics);renderLocalDiagnostics(diagnostics,snapshot=>{const row=connectionRow;if(!row?.isConnected)return;if(snapshot?.state==='unavailable'){row.textContent='Unavailable · local status unavailable';return;}if(snapshot?.state==='checking'||snapshot?.state==='unknown'){row.textContent='Unknown · local status not checked';return;}const provider=typeof snapshot?.provider==='string'&&snapshot.provider.trim()?snapshot.provider:'Unavailable';const model=typeof snapshot?.model==='string'&&snapshot.model.trim()?snapshot.model:'Unavailable';row.textContent=provider+' · '+model+' ('+(snapshot?.configured===true?'configured':'not configured')+'; reachability unverified)';});
+     byId('copy-build-info').onclick=async()=>{try{await navigator.clipboard.writeText('Aven UI '+UI_BUILD+'\nUpdated '+UI_BUILD_DATE+'\nLocal workspace backup v'+AvenWorkspaceBackup.VERSION);byId('copy-build-info').textContent='Copied';}catch{byId('copy-build-info').textContent='Copy failed';}};
+   }
+   function renderSettingsPage(){all('[data-category]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.category===settingsPage)));const p=byId('settings-content');p.replaceChildren();if(settingsPage==='general')p.innerHTML='<h2>General</h2><p>Local workspace preferences. No account is connected.</p><label for="pref-display-name">Display name</label><input id="pref-display-name" data-pref="displayName" maxlength="80" placeholder="Vikas">';if(settingsPage==='appearance')p.innerHTML='<h2>Appearance</h2><p>Choose the visual language for this workspace.</p><label for="pref-theme">Theme</label><select id="pref-theme" data-pref="theme"><option value="system">Follow System</option><option value="light">Light</option><option value="dark">Dark</option></select><label for="pref-accent">Accent</label><select id="pref-accent" data-pref="accent"><option value="black">Black</option><option value="blue">Blue</option><option value="violet">Violet</option><option value="green">Green</option></select><label for="pref-density">Density</label><select id="pref-density" data-pref="density"><option value="comfortable">Comfortable</option><option value="compact">Compact</option></select><label for="pref-language">Language</label><select id="pref-language" data-pref="language"><option value="system">English (system fallback)</option><option value="en">English</option><option value="unsupported" disabled>Other languages (not supported)</option></select>';if(settingsPage==='coworkers')renderAgentsSettings();if(settingsPage==='behavior')renderBehaviorSettings();if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);if(settingsPage==='data')renderDataSettings();if(settingsPage==='archived')renderArchivedSettings();all('#settings-content [data-pref]').forEach(n=>{if(n.type==='checkbox')n.checked=!!settingsDraft[n.dataset.pref];else n.value=settingsDraft[n.dataset.pref]??'';});}
+@@ -903,7 +934,7 @@
+   function accountAction(action){closePopovers();if(action==='settings')openSettings();else if(action==='about')showBuildInfo();else if(action==='help')showShortcutReference();else if(action==='feedback'){showInfo('Send Feedback','<label for="feedback-text">What could work better?</label><textarea id="feedback-text" rows="5" maxlength="4000" placeholder="Describe what you expected and what happened…"></textarea><button type="button" id="save-feedback" class="button-primary">Save feedback locally</button><p id="feedback-status" role="status"></p><button type="button" id="export-feedback">Download saved feedback</button><p class="setting-help">Feedback stays local. Download it to share manually; no logs are attached.</p>');byId('export-feedback').onclick=()=>{try{const items=JSON.parse(localStorage.getItem('aven-feedback-v1')||'[]');downloadLocal('aven-feedback.json',JSON.stringify(items,null,2));}catch{byId('feedback-status').textContent='Saved feedback could not be read.';}};byId('save-feedback').onclick=()=>{const text=byId('feedback-text').value.trim();if(!text){byId('feedback-status').textContent='Add your feedback first.';return;}let items;try{items=JSON.parse(localStorage.getItem('aven-feedback-v1')||'[]');}catch{items=[];}if(!Array.isArray(items))items=[];if(save('aven-feedback-v1',[...items,{text,createdAt:now()}])){byId('feedback-status').textContent='Saved locally.';byId('feedback-text').value='';}else byId('feedback-status').textContent='Could not save to local storage.';};}else if(action==='add-account')showInfo('Add Account','<div class="info-symbol">'+icon('account')+'</div><h3>Accounts are not connected yet</h3><p>This frontend can preview account controls. Sign-in will be available when authentication is connected.</p>');else if(action==='logout')showInfo('Log out','<div class="info-symbol">'+icon('logout')+'</div><h3>No connected account</h3><p>There is no signed-in session to end. Your local conversations stay on this device.</p>');}
+   function openMove(id,kind,chatId=null){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return;const a=agentById(id),dialog=byId('workspace-create-dialog');createSucceeded=true;createReturnChat=data.activeChat;createOpener=document.activeElement;byId('workspace-create-title').textContent='Move '+a.name;const choices=kind==='project'?data.projects:prefs.sections;byId('create-dialog-body').innerHTML='<form id="move-form" class="workspace-form"><label for="move-target">'+(kind==='project'?'Conversation folder':'Section')+'</label><select id="move-target">'+(kind==='project'?'<option value="__direct">Coworkers · no folder</option>':'')+choices.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('')+(kind==='section'?'<option value="__new">Create a section…</option>':'')+'</select>'+(kind==='section'?'<label for="new-section-name">New section name</label><input id="new-section-name" maxlength="60" placeholder="For example: Operations">':'')+'<p id="move-status" role="status"></p><div class="form-actions"><button type="button" id="cancel-move" class="button-secondary">Cancel</button><button type="submit" class="button-primary" id="save-move">Move</button></div></form>';byId('cancel-move').onclick=()=>dialog.close();byId('close-workspace-create').onclick=()=>dialog.close();dialog.onclose=()=>{if(createOpener?.isConnected)createOpener.focus();};byId('move-form').onsubmit=e=>{e.preventDefault();let target=byId('move-target').value;if(target==='__direct')target=null;if(kind==='section'&&target==='__new'){const name=byId('new-section-name').value.trim();if(!name){byId('move-status').textContent='Enter a section name.';return;}const found=prefs.sections.find(s=>s.name.toLowerCase()===name.toLowerCase());target=found?.id||uid();if(!found)prefs.sections.push({id:target,name});}if(kind==='section')a.sectionId=target;else{a.projectId=target;for(const c of data.chats.filter(c=>chatId?c.id===chatId:(!c.channelId&&!c.projectId&&c.recipients?.length===1&&c.recipients[0]===id)))c.projectId=target;saveData();}savePrefs();dialog.close();renderSidebar();showChat();};dialog.showModal();byId('move-target').focus();}
+   function showContextMenu(id,x,y,opener,chatId=null){contextChatId=chatId;closePopovers();closeContextMenu(false);contextAgentId=id;contextOpener=opener||document.activeElement;const menu=document.createElement('div');menu.id='agent-context-menu';menu.className='context-menu';menu.setAttribute('role','menu');const a=agentById(id),actions=[['pin',a.pinned?'Unpin':'Pin'],['unread',a.unread?'Mark as read':'Mark as unread'],['edit','Edit profile'],['move-project','Move to folder…'],['move-section','Move to section…'],['hide','Hide from sidebar'],['delete','Delete local coworker']];for(const [act,label]of actions){const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.dataset.menuAction=act;b.textContent=label;if(act==='delete')b.className='menu-danger';b.onclick=()=>contextAction(act);menu.append(b);}document.body.append(menu);menu.style.left=Math.max(8,Math.min(x,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,Math.min(y,innerHeight-menu.offsetHeight-8))+'px';one('button',menu).focus();}
+-  const initialInit=init;init=()=>{if(migrationFailed){document.body.replaceChildren();const note=document.createElement('p');note.textContent='Could not safely migrate saved conversations. Free browser storage and reload. Your previous data has not been replaced.';document.body.append(note);if(!startupRecovery.ok){note.textContent='An interrupted import could not be recovered. Free browser storage and reload, or download the retained pre-import backup.';const recovery=document.createElement('button');recovery.type='button';recovery.textContent='Download pre-import backup';recovery.onclick=()=>{try{const saved=JSON.parse(localStorage.getItem(AvenWorkspaceBackup.BACKUP));downloadLocal('aven-pre-import-backup.json',AvenWorkspaceBackup.serialize(saved.envelope));}catch{note.textContent='The recovery backup could not be exported. Keep browser data intact and retry after freeing storage.';}};document.body.append(recovery);}return;}initialInit();finishInteractionWiring();};
++  const initialInit=init;init=()=>{if(migrationFailed){document.body.replaceChildren();const note=document.createElement('p');note.textContent='Could not safely migrate saved conversations. Free browser storage and reload. Your previous data has not been replaced.';document.body.append(note);if(!startupRecovery.ok){if(!creationRecovery.ok){note.textContent='An interrupted coworker creation could not be recovered. Free browser storage and reload. Pending local workspace data was kept intact.';return;}note.textContent='An interrupted import could not be recovered. Free browser storage and reload, or download the retained pre-import backup.';const recovery=document.createElement('button');recovery.type='button';recovery.textContent='Download pre-import backup';recovery.onclick=()=>{try{const saved=JSON.parse(localStorage.getItem(AvenWorkspaceBackup.BACKUP));downloadLocal('aven-pre-import-backup.json',AvenWorkspaceBackup.serialize(saved.envelope));}catch{note.textContent='The recovery backup could not be exported. Keep browser data intact and retry after freeing storage.';}};document.body.append(recovery);}return;}initialInit();finishInteractionWiring();};
+   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+ })();
+ 
+--- baseline/polished-diagnostics.js
++++ current/polished-diagnostics.js
+@@ -1,13 +1,13 @@
+ /* User-triggered local diagnostics. Configuration snapshots are not health probes. */
+ (function(root){
+   'use strict';
+-  function render(container,{build,chatId,onDownload}={}){
+-    container.replaceChildren();const h=document.createElement('h3');h.textContent='Local connection diagnostics';const note=document.createElement('p');note.textContent='OpenCode Go / MiMo V2.5 is the current runtime. Provider switching is not available. Refresh reads local configuration and historical checks; device reachability remains unverified.';
++  function render(container,{build,chatId,onDownload,onStatus}={}){
++    container.replaceChildren();const h=document.createElement('h3');h.textContent='Local connection diagnostics';const note=document.createElement('p');note.textContent='Refresh reads local configuration and historical checks. Provider and model are shown from that local status only; device reachability remains unverified.';
+     const refresh=document.createElement('button');refresh.type='button';refresh.textContent='Refresh local status';refresh.id='refresh-local-status';const status=document.createElement('p');status.setAttribute('role','status');status.id='local-status-result';status.textContent='Not checked in this view.';
+     const report=document.createElement('pre');report.className='diagnostics-report';report.hidden=true;const copy=document.createElement('button');copy.type='button';copy.textContent='Copy support report';copy.id='copy-support-report';copy.disabled=true;
+     container.append(h,note,refresh,status,report,copy);let safe=null;
+     async function get(path){const response=await fetch('http://127.0.0.1:8768/api/chat/'+path,{headers:{'X-Aven-Chat':'text-only'},signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('Local service unavailable');return response.json();}
+-    refresh.onclick=async()=>{refresh.disabled=true;copy.disabled=true;safe=null;report.hidden=true;status.textContent='Reading local configuration…';try{const value=await get('status');safe={build:String(build||'Unknown'),provider:typeof value.provider==='string'?value.provider:'Unavailable',model:typeof value.model==='string'?value.model:'Unavailable',configured:value.configured===true,lastChecked:typeof value.lastChecked==='string'?value.lastChecked:'Unavailable',reachability:'unverified'};report.textContent=JSON.stringify(safe,null,2);report.hidden=false;copy.disabled=false;status.textContent=(safe.configured?'Provider credential configured.':'Provider credential not configured.')+' This snapshot does not verify provider or device health.';}catch{status.textContent='Local status unavailable. Start or update the local Aven service, then refresh. Previous results are not shown as current.';}finally{refresh.disabled=false;}};
++    refresh.onclick=async()=>{refresh.disabled=true;copy.disabled=true;safe=null;report.hidden=true;status.textContent='Reading local configuration…';onStatus?.({state:'checking'});try{const value=await get('status');if(!value||typeof value!=='object'||typeof value.configured!=='boolean')throw Error('Invalid local status');safe={build:String(build||'Unknown'),provider:typeof value.provider==='string'?value.provider:'Unavailable',model:typeof value.model==='string'?value.model:'Unavailable',configured:value.configured===true,lastChecked:typeof value.lastChecked==='string'?value.lastChecked:'Unavailable',reachability:'unverified'};report.textContent=JSON.stringify(safe,null,2);report.hidden=false;copy.disabled=false;onStatus?.({...safe,state:'checked'});status.textContent=(safe.configured?'Provider credential configured.':'Provider credential not configured.')+' This snapshot does not verify provider or device health.';}catch{onStatus?.({state:'unavailable'});status.textContent='Local status unavailable. Start or update the local Aven service, then refresh. Previous results are not shown as current.';}finally{refresh.disabled=false;}};
+     copy.onclick=async()=>{if(!safe)return;try{await navigator.clipboard.writeText(JSON.stringify(safe,null,2));status.textContent='Support report copied. No credentials or private logs included.';}catch{status.textContent='Copy failed. Select the visible support report to copy it.';}};
+     if(chatId){const runs=document.createElement('button');runs.type='button';runs.id='load-saved-runs';runs.textContent='Find saved runs for this conversation';const list=document.createElement('div');list.className='saved-run-list';container.append(runs,list);runs.onclick=async()=>{runs.disabled=true;list.replaceChildren();try{const result=await get('runs?chatId='+encodeURIComponent(chatId));if(!Array.isArray(result.runs))throw Error('Invalid list');if(!result.runs.length)list.textContent='No saved server run records for this conversation.';for(const item of result.runs){if(typeof item.runId!=='string')continue;const button=document.createElement('button');button.type='button';button.textContent='Download run '+item.runId;button.onclick=async()=>{button.disabled=true;try{const record=await get('runs/'+encodeURIComponent(item.runId)+'?chatId='+encodeURIComponent(chatId));if(record.chatId!==chatId||record.runId!==item.runId)throw Error('Wrong record');onDownload?.('aven-run-'+item.runId+'.json',JSON.stringify(record,null,2));status.textContent='Saved run downloaded. This contains private conversation evidence; keep it private.';}catch{status.textContent='Saved run unavailable. Nothing was executed or retried.';}finally{button.disabled=false;}};list.append(button);}}catch{list.textContent='Saved runs unavailable. Check the local service and try again.';}finally{runs.disabled=false;}};}
+     return {getReport:()=>safe};
+--- baseline/polished-workspace-tools.js
++++ current/polished-workspace-tools.js
+@@ -124,17 +124,123 @@
+     return Boolean(runId || events || evidence);
+   };
+ 
+-  const collectOutputs = (value, output, seen) => {
++  // A saved run keeps the same diagnostic result in two channels: the
++  // tool-result event and the assistant message evidence. JSON persistence
++  // gives those representations different object identities, so identity is
++  // useful for cycle protection but cannot be the artifact identity.
++  const ARTIFACT_ID_FIELDS = Object.freeze([
++    'id', 'stableId', 'resultId', 'outputId', 'evidenceId', 'eventId',
++    'invocationId', 'executionId', 'operationId', 'requestId', 'traceId',
++    'attemptId', 'callId', 'toolCallId', 'runId', 'journalId',
++  ]);
++  const ARTIFACT_TIME_FIELDS = Object.freeze([
++    'capturedAt', 'createdAt', 'updatedAt', 'timestamp', 'time', 'at',
++    'retrievedAt', 'startedAt', 'completedAt', 'finishedAt', 'endedAt',
++  ]);
++  const ARTIFACT_PROVENANCE_FIELDS = Object.freeze({
++    source: ['source', 'provenance', 'type'],
++    command: ['command', 'operation'],
++    target: ['target', 'hostname'],
++    status: ['status'],
++    filename: ['filename', 'name'],
++  });
++  // Carry run/provenance fields from an event wrapper to nested evidence.
++  // Event-local ids such as toolId/eventId are intentionally excluded: they
++  // identify the envelope, while the nested result is mirrored by evidence.
++  // Envelope timestamps are also excluded because they describe the event,
++  // not the captured output; result timestamps stay on the output item.
++  const ARTIFACT_CONTEXT_FIELDS = Object.freeze([
++    'runId', 'journalId', 'stableId', 'resultId', 'outputId', 'evidenceId',
++    'invocationId', 'executionId', 'operationId', 'requestId', 'traceId',
++    'attemptId', 'callId', 'source', 'provenance', 'command', 'operation',
++    'target', 'hostname', 'status',
++  ]);
++  const artifactRaw = (value) => {
++    const text = stringValue(value);
++    return text.trim() ? text : '';
++  };
++  const artifactValues = (record, fields) => {
++    const direct = [...new Set(fields.map((field) => artifactRaw(record?.item?.[field])).filter(Boolean))];
++    return direct.length ? direct : [...new Set(fields.map((field) => artifactRaw(record?.context?.[field])).filter(Boolean))];
++  };
++  const artifactMap = (record, fields) => Object.fromEntries(fields.map((field) => [field, [...new Set([artifactRaw(record?.item?.[field]), artifactRaw(record?.context?.[field])].filter(Boolean))]]).filter(([, values]) => values.length));
++  const artifactSetsEqual = (left, right) => left.length === right.length && left.every((value) => right.includes(value));
++  const artifactMapsEqual = (left, right) => {
++    const leftKeys = Object.keys(left), rightKeys = Object.keys(right);
++    return leftKeys.length === rightKeys.length && leftKeys.every((key) => rightKeys.includes(key) && artifactSetsEqual(left[key], right[key]));
++  };
++  const artifactIdentity = (record) => {
++    const ids = artifactMap(record, ARTIFACT_ID_FIELDS);
++    const times = artifactMap(record, ARTIFACT_TIME_FIELDS);
++    const provenance = Object.fromEntries(Object.entries(ARTIFACT_PROVENANCE_FIELDS).map(([name, fields]) => [name, artifactValues(record, fields)]));
++    return { ids, times, provenance };
++  };
++  const artifactRecordsMatch = (left, right) => {
++    if (!left || !right || left.value !== right.value) return false;
++    const a = artifactIdentity(left), b = artifactIdentity(right);
++    // A present identifier or timestamp must match exactly. Missing identity
++    // stays unknown; it is never treated as a wildcard for a known value.
++    if ((Object.keys(a.ids).length || Object.keys(b.ids).length) && !artifactMapsEqual(a.ids, b.ids)) return false;
++    if ((Object.keys(a.times).length || Object.keys(b.times).length) && !artifactMapsEqual(a.times, b.times)) return false;
++    let comparable = 0;
++    for (const name of Object.keys(ARTIFACT_PROVENANCE_FIELDS)) {
++      const leftValues = a.provenance[name], rightValues = b.provenance[name];
++      if (!leftValues.length || !rightValues.length) continue;
++      if (!artifactSetsEqual(leftValues, rightValues)) return false;
++      comparable += 1;
++    }
++    // With no stable identity, at least two matching provenance dimensions
++    // are required. This keeps an output-only pair from hiding two genuine
++    // results whose provenance was not persisted.
++    return comparable >= 2 || Boolean(Object.keys(a.ids).length || Object.keys(a.times).length) && comparable >= 1;
++  };
++  const mergeArtifactRecords = (primary, mirror) => {
++    const item = { ...primary.item };
++    const context = { ...(primary.context || {}) };
++    Object.entries(mirror.item || {}).forEach(([key, value]) => {
++      if (!artifactRaw(item[key]) && artifactRaw(value)) item[key] = value;
++    });
++    Object.entries(mirror.context || {}).forEach(([key, value]) => {
++      if (!artifactRaw(context[key]) && artifactRaw(value)) context[key] = value;
++    });
++    return { ...primary, item, context };
++  };
++  const reconcileArtifactOutputs = (events, evidence) => {
++    const mergedEvents = events.map((record) => ({ ...record }));
++    const matchedEvents = new Set();
++    const unmatchedEvidence = [];
++    evidence.forEach((record) => {
++      const candidates = [];
++      events.forEach((event, index) => {
++        if (!matchedEvents.has(index) && artifactRecordsMatch(event, record)) candidates.push(index);
++      });
++      // Matching is deliberately one-to-one. An ambiguous no-ID pair remains
++      // visible so repeated identical invocations cannot be silently erased.
++      if (candidates.length === 1) {
++        const index = candidates[0];
++        matchedEvents.add(index);
++        mergedEvents[index] = mergeArtifactRecords(mergedEvents[index], record);
++      } else unmatchedEvidence.push(record);
++    });
++    return mergedEvents.concat(unmatchedEvidence);
++  };
++  const collectOutputs = (value, output, seen, channel, context = {}) => {
+     if (Array.isArray(value)) {
+-      value.forEach((item) => collectOutputs(item, output, seen));
++      if (seen.has(value)) return;
++      seen.add(value);
++      value.forEach((item) => collectOutputs(item, output, seen, channel, context));
+       return;
+     }
+     if (!value || typeof value !== 'object') return;
+     if (seen.has(value)) return;
+     seen.add(value);
+-    if (typeof value.output === 'string') output.push({ item: value, value: value.output });
+-    if (Array.isArray(value.evidence)) value.evidence.forEach((item) => collectOutputs(item, output, seen));
+-    else if (value.evidence && typeof value.evidence === 'object') collectOutputs(value.evidence, output, seen);
++    const nextContext = { ...context };
++    ARTIFACT_CONTEXT_FIELDS.forEach((field) => {
++      if (artifactRaw(value[field])) nextContext[field] = value[field];
++    });
++    if (typeof value.output === 'string') output.push({ item: value, value: value.output, channel, context: nextContext });
++    if (Array.isArray(value.evidence)) value.evidence.forEach((item) => collectOutputs(item, output, seen, channel, nextContext));
++    else if (value.evidence && typeof value.evidence === 'object') collectOutputs(value.evidence, output, seen, channel, nextContext);
+   };
+ 
+   const feedEntries = (data) => {
+@@ -167,10 +273,10 @@
+     const entries = [];
+     chats.forEach((chat) => messagesOf(chat).forEach((message) => {
+       if (!nonEmpty(chat.id) || !nonEmpty(message.id)) return;
+-      const outputs = [];
+-      const seen = new Set();
+-      collectOutputs(message.events, outputs, seen);
+-      collectOutputs(message.evidence, outputs, seen);
++      const eventOutputs = [], evidenceOutputs = [], seen = new Set(), messageContext = { runId: nonEmpty(message.runId) };
++      collectOutputs(message.events, eventOutputs, seen, 'events', messageContext);
++      collectOutputs(message.evidence, evidenceOutputs, seen, 'evidence', messageContext);
++      const outputs = reconcileArtifactOutputs(eventOutputs, evidenceOutputs);
+       outputs.forEach(({ item, value }, index) => {
+         const sourceName = nonEmpty(item.filename) || nonEmpty(item.name);
+         const filename = sourceName ? sourceName.replace(/^.*[\\/]/, '') : `evidence-${safeKey(message.id)}-${index + 1}.txt`;
+--- baseline/polished.html
++++ current/polished.html
+@@ -5,11 +5,11 @@
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="theme-color" content="#101317">
+   <title>Aven · Network workspace</title>
+-  <link rel="stylesheet" href="polished.css?revision=ux-pipeline-v7">
++  <link rel="stylesheet" href="polished.css?revision=ux-audit-fixes-v8">
+   <link rel="stylesheet" href="avatar-system/avatar.css">
+-  <link rel="stylesheet" href="polished-workspace-tools.css?revision=ux-pipeline-v7">
+-  <link rel="stylesheet" href="polished-evidence-tools.css?revision=ux-pipeline-v7">
+-  <link rel="stylesheet" href="polished-files.css?revision=ux-pipeline-v7">
++  <link rel="stylesheet" href="polished-workspace-tools.css?revision=ux-audit-fixes-v8">
++  <link rel="stylesheet" href="polished-evidence-tools.css?revision=ux-audit-fixes-v8">
++  <link rel="stylesheet" href="polished-files.css?revision=ux-audit-fixes-v8">
+ </head>
+ <body>
+   <div class="app-shell" id="app-shell">
+@@ -170,14 +170,14 @@
+   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+   <script src="avatar-system/artwork.js"></script>
+   <script src="polished-avatars.js"></script>
+-  <script src="polished-backup.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-diagnostics.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-workspace-tools.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-attachments.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-run-state.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-evidence-tools.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished-files.js?revision=ux-pipeline-v7"></script>
+-  <script src="polished.js?revision=ux-pipeline-v7"></script>
++  <script src="polished-backup.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-diagnostics.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-workspace-tools.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-attachments.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-run-state.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-evidence-tools.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished-files.js?revision=ux-audit-fixes-v8"></script>
++  <script src="polished.js?revision=ux-audit-fixes-v8"></script>
+ </body>
+ </html>
+ 

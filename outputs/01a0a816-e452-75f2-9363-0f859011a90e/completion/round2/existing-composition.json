@@ -1,0 +1,45 @@
+{
+  "at": "2026-09-17T04:19:31.939Z",
+  "resolved": [
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Combine provider capability discovery and default per-chat/preflight contract"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Close owned workflow storage alongside reliability"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Keep one attachment event binder after history/recovery hydration"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Retain automation controllers with provider state"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Record saved terminal notification without replacing provider metadata"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Keep automation pane current when switching conversation"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Expose automation settings with selected provider settings"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Add automation settings navigation"
+    },
+    {
+      "file": "polished.js",
+      "reason": "Expose Git settings without replacing model configuration"
+    },
+    {
+      "file": "polished.html",
+      "reason": "Retain Agent/Plan and add Terminal beside Plugins"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "at": "2026-09-17T04:19:32.088Z",
+  "resolutions": [
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Attribute errors to the selected provider without implying OpenCode"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Bind replay identity to selected provider and request context"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Expose composed workflow, Git and reliability lifecycle for local tests"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Route selected provider through clarification lifecycle"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "reason": "Settle the same durable WAITING run after answer or cancel"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Track a validated pending question without replacing provider metadata"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Extract question after observing actual provider response"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Preserve selected and observed provider provenance on clarification"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "Health boundary independently composes with provider metadata"
+    }
+  ]
+}

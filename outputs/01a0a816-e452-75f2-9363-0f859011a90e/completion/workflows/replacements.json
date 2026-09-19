@@ -1,0 +1,122 @@
+[
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "const { createChatReadApi } = require('./chat-read-api.cjs');",
+    "new": "const { createChatReadApi } = require('./chat-read-api.cjs');\nconst { createClarificationRunManager } = require('./clarification-runtime.cjs');\nconst { createWorkflowApi } = require('./clarification-server-adapter.cjs');"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "  engine.subscribe(publish);",
+    "new": "  const workflowManagerOwned = !options.clarificationManager;\n  const workflowManager = options.clarificationManager || createClarificationRunManager({\n    workflow: options.approvalWorkflow,\n    workflowOptions: { storagePath: options.workflowStoragePath || path.join(runtimeDirectory, 'workflow-approval.json'), ...(options.workflowOptions || {}) },\n    responder: options.clarificationResponder || options.chatResponder,\n    onEvent: publish,\n    onStatus: options.onWorkflowStatus\n  });\n  const workflowApi = createWorkflowApi({ manager: workflowManager, originAllowed: chatOriginAllowed });\n  engine.subscribe(publish);"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "    if (await chatReadApi.handle(req, res)) return;",
+    "new": "    if (await workflowApi.handle(req, res)) return;\n    if (await chatReadApi.handle(req, res)) return;"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };",
+    "new": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution, clarificationManager: workflowManager, workflowApi };"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "        const responder=options.chatResponder||require('./agent-runtime.cjs').respond;\n        const reply=await responder({provider:execution?.provider,sandbox:networkExecution,messages:body.messages,agentName:body.agentName,chatId:body.chatId,mode,signal:controller.signal,onEvent:emit,drainSteering:runState.drainSteering,onModelComplete:runState.beginClosing});\n        runState.beginClosing();\n        completedReply={...reply,runId,mode};\n        emit({type:'final',reply:completedReply});\n        if(!streaming&&!res.destroyed)sendJson(res,200,completedReply);",
+    "new": "         const responder=options.chatResponder||require('./agent-runtime.cjs').respond;\n        const workflowRun=await workflowManager.start({runId,chatId:body.chatId,mode,messages:body.messages,selection:body.selection,responder,onEvent:(event)=>{if(event.type!=='start')emit(event);},responderOptions:{provider:execution?.provider,sandbox:networkExecution,agentName:body.agentName,signal:controller.signal,onEvent:emit,drainSteering:runState.drainSteering,onModelComplete:runState.beginClosing}});\n        runState.beginClosing();\n        if(workflowRun.status==='waiting-question'){\n          completedReply={...workflowRun,runId,mode};\n          const pendingResult=workflowRun.result||{};\n          emit({type:'pending_question',mode,question:workflowRun.pendingQuestion.question,questionToken:workflowRun.pendingQuestion.token,...(typeof pendingResult.model==='string'?{model:pendingResult.model}:{}),...(typeof pendingResult.source==='string'?{source:pendingResult.source}:{}),...(pendingResult.provenance?{provenance:pendingResult.provenance}:{})});\n        }else{\n          completedReply={...workflowRun.result,runId,mode,workflowRunId:workflowRun.runId};\n          emit({type:'final',reply:completedReply});\n        }\n        if(!streaming&&!res.destroyed)sendJson(res,200,completedReply);"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "        const { steeringToken: _discardedToken, ...persisted } = safe;",
+    "new": "        const { steeringToken: _discardedToken, questionToken: _discardedQuestionToken, ...persisted } = safe;"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "        try{const dir=path.join(root,'.intentgraph','evidence','runs');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,runId+'.json'),JSON.stringify({runId,chatId:body.chatId,events,reply:completedReply},null,2),{flag:'wx'});}catch{ /* Evidence persistence failure does not repeat tools. */ }",
+    "new": "        try{const dir=path.join(root,'.intentgraph','evidence','runs');fs.mkdirSync(dir,{recursive:true});const persistedReply=completedReply?.pendingQuestion?{...completedReply,pendingQuestion:{...completedReply.pendingQuestion,token:undefined}}:completedReply;fs.writeFileSync(path.join(dir,runId+'.json'),JSON.stringify({runId,chatId:body.chatId,events,reply:persistedReply},null,2),{flag:'wx'});}catch{ /* Evidence persistence failure does not repeat tools. */ }"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "const { getSecret } = require('./vault.cjs');",
+    "new": "const { getSecret } = require('./vault.cjs');\nconst { extractPendingQuestion } = require('./clarification-runtime.cjs');"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode } = {})",
+    "new": "async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, responseMetadata } = {})"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "    let finalMessage = null;\n    const stream = agent.streamEvents({ messages: toMessages(messages) }, {\n      version: 'v2',\n      signal: deadline.signal,\n      recursionLimit: MAX_TOOL_CALLS * 4 + 8,\n      configurable: { thread_id: `intentgraph-${safeText(chatId, 100) || runId}` }\n    });\n    for await (const event of stream) {\n      if (event.event === 'on_chat_model_end') {\n        const output = event.data?.output;\n        if (AIMessage.isInstance(output) && (!output.tool_calls?.length || selectedMode === 'plan')) {\n          finalMessage = output;\n          try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n        }\n      }\n      if (event.event === 'on_tool_error') {\n        const args = eventArgs(event.data?.input);\n        emit({ type: 'tool_error', name: safeText(event.name, 64), ...(args.operation ? { operation: safeText(args.operation, 80) } : {}), ...(args.hostname ? { hostname: safeText(args.hostname, 128) } : {}), status: 'FAILURE', error: 'Tool invocation failed.' });\n      }\n    }\n",
+    "new": "    let finalMessage = null;\n    let pendingQuestion = null;\n    const stream = agent.streamEvents({ messages: toMessages(messages) }, {\n      version: 'v2',\n      signal: deadline.signal,\n      recursionLimit: MAX_TOOL_CALLS * 4 + 8,\n      configurable: { thread_id: `intentgraph-${safeText(chatId, 100) || runId}` }\n    });\n    for await (const event of stream) {\n      if (event.event === 'on_chat_model_end') {\n        const output = event.data?.output;\n        if (AIMessage.isInstance(output)) {\n          const structured = extractPendingQuestion(output);\n          if (structured) {\n            pendingQuestion = structured;\n            try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n            break;\n          }\n          if (!output.tool_calls?.length || selectedMode === 'plan') {\n            finalMessage = output;\n            try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n          }\n        }\n      }\n      if (event.event === 'on_tool_end') {\n        const structured = extractPendingQuestion(event.data?.output ?? event.data?.input ?? event.data);\n        if (structured) {\n          pendingQuestion = structured;\n          try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n          break;\n        }\n      }\n      if (event.event === 'on_tool_error') {\n        const args = eventArgs(event.data?.input);\n        emit({ type: 'tool_error', name: safeText(event.name, 64), ...(args.operation ? { operation: safeText(args.operation, 80) } : {}), ...(args.hostname ? { hostname: safeText(args.hostname, 128) } : {}), status: 'FAILURE', error: 'Tool invocation failed.' });\n      }\n    }\n    if (pendingQuestion) { const provenance = responseMetadata || null; return { pendingQuestion, source: provenance?.source || 'unavailable', model: provenance?.modelId || MODEL, mode: selectedMode, runId, ...(provenance ? { provenance: { providerId: provenance.providerId, modelId: provenance.modelId || MODEL, effort: provenance.effort, source: provenance.source } } : {}) }; }\n"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "    'If the user has not supplied enough device, hostname, or diagnostic scope information, ask one concise clarification instead of guessing. Inspect the next useful fact only after the previous tool result supports it.',",
+    "new": "    'If the user has not supplied enough device, hostname, or diagnostic scope information, ask one concise clarification instead of guessing. Call the typed ask_clarification tool when available, or return one JSON content envelope with type pending_question, prompt, choices, allow_free_text, and context; never encode a pending question only as prose. Inspect the next useful fact only after the previous tool result supports it.',"
+  },
+  {
+    "file": "polished.html",
+    "old": "  <script src=\"polished.js?revision=ux-audit-fixes-v8\"></script>",
+    "new": "  <script src=\"polished-approval-workflow.js?revision=workflow-v1\"></script>\n  <script src=\"polished.js?revision=ux-audit-fixes-v8\"></script>"
+  },
+  {
+    "file": "polished.js",
+    "old": "  function renderConversation(){",
+    "new": "  const workflowTokens=new Map();\n  async function sendWorkflowCommand(chat,command,payload){try{const response=await fetch(`${CHAT_API}/workflow/${command}`,{method:'POST',headers:{'Content-Type':'application/json','X-Aven-Chat':'text-only','Accept':'application/json'},body:JSON.stringify(payload)});const result=await response.json();if(!response.ok)throw Error(result.reasons?.[0]||result.error||'Workflow request failed.');if(result.status==='waiting-question'&&result.pendingQuestion){const question=result.pendingQuestion.question||result.pendingQuestion;workflowTokens.set(chat.id,{runId:result.runId,chatId:chat.id,questionId:question.id,questionToken:result.pendingQuestion.token});chat.workflowState={status:result.status,runId:result.runId,chatId:chat.id,mode:result.mode,model:result.result?.model,source:result.result?.source,provenance:result.result?.provenance,pendingQuestion:{question}};}else if(result.approval){const prior=workflowTokens.get(chat.id)||{};const runId=result.run?.runId||chat.workflowState?.runId||prior.runId;const approvalStatus=result.approval.status;const auth={...prior,runId,chatId:chat.id,approvalId:result.approval.id,decisionToken:approvalStatus==='pending'?(result.token||prior.decisionToken):undefined,executionToken:approvalStatus==='approved'?(result.executionToken||prior.executionToken):undefined};if(['pending','approved'].includes(approvalStatus))workflowTokens.set(chat.id,auth);else workflowTokens.delete(chat.id);chat.workflowState={status:approvalStatus,runId,chatId:chat.id,approval:result.approval,receipt:result.receipt||chat.workflowState?.receipt};if(result.executed){chat.workflowState.status='executed';workflowTokens.delete(chat.id);}}else if(result.status==='completed'&&result.result){const reply=result.result;chat.messages.push({id:uid(),role:'assistant',agentId:selectedAgents(chat)[0]?.id||prefs.activeAgent,text:reply.text||'The run completed without a text response.',model:reply.model,mode:reply.mode||chat.workflowState?.mode||'inspect',source:reply.source||'',status:reply.status||'SUCCESS',usage:reply.usage||null,provenance:reply.provenance||null,events:reply.events||[],evidence:reply.evidence||[],runId:result.runId,createdAt:now()});workflowTokens.delete(chat.id);delete chat.workflowState;}else{if(['canceled','question-ended'].includes(result.status))workflowTokens.delete(chat.id);chat.workflowState={...(chat.workflowState||{}),status:result.status||'completed',result:result.result||null};}delete chat.workflowError;saveData();renderConversation();renderSidebar();updateSend();if(result.status==='completed')dispatchAvailableQueue();}catch(error){chat.workflowError=error.message||'Workflow request failed.';saveData();renderConversation();toast(chat.workflowError);}}\n  function workflowActionsForChat(chat){const state=chat?.workflowState;const auth=workflowTokens.get(chat.id)||{};return{onAnswer:value=>{if(!state?.pendingQuestion||state.status!=='waiting-question'||!auth.questionToken)return;const previous=chat.workflowState;chat.workflowState={...previous,status:'running',stopping:false};if(!saveData()){chat.workflowState=previous;chat.workflowError='Could not save answer state. The request was not sent.';renderConversation();updateSend();return;}renderConversation();updateSend();sendWorkflowCommand(chat,'answer',{runId:auth.runId||state.runId,chatId:chat.id,questionId:state.pendingQuestion.question.id,questionToken:auth.questionToken,...(value.choice?{choice:value.choice}:{text:value.text})});},onCancel:value=>{if(state?.pendingQuestion&&auth.questionToken)sendWorkflowCommand(chat,'cancel',{runId:auth.runId||state.runId,chatId:chat.id,questionId:state.pendingQuestion.question.id,questionToken:auth.questionToken});else if(state?.approval&&auth.decisionToken)sendWorkflowCommand(chat,'approval/cancel',{runId:auth.runId||state.runId,chatId:chat.id,approvalId:value.approvalId,token:auth.decisionToken});},onAbandon:value=>{if(state?.pendingQuestion)sendWorkflowCommand(chat,'abandon',{runId:auth.runId||state.runId,chatId:chat.id,questionId:state.pendingQuestion.question.id});},onStop:value=>{if(!state?.pendingQuestion||state.status!=='running'||state.stopping)return;const previous=chat.workflowState;chat.workflowState={...previous,stopping:true};if(!saveData()){chat.workflowState=previous;chat.workflowError='Could not save stop state. The run remains active.';renderConversation();updateSend();return;}renderConversation();updateSend();sendWorkflowCommand(chat,'stop',{runId:auth.runId||state.runId,chatId:chat.id,reason:'stopped while resuming'}).finally(()=>{if(chat.workflowState?.status==='running'){chat.workflowState={...chat.workflowState,stopping:false};saveData();renderConversation();updateSend();}});},onApprove:value=>{if(auth.decisionToken)sendWorkflowCommand(chat,'approval/approve',{runId:auth.runId||state.runId,chatId:chat.id,approvalId:value.approvalId,token:auth.decisionToken,actionDigest:value.actionDigest,scope:value.scope});},onDeny:value=>{if(auth.decisionToken)sendWorkflowCommand(chat,'approval/deny',{runId:auth.runId||state.runId,chatId:chat.id,approvalId:value.approvalId,token:auth.decisionToken});},onExecute:value=>{if(auth.executionToken)sendWorkflowCommand(chat,'approval/execute',{runId:auth.runId||state.runId,chatId:chat.id,approvalId:value.approvalId,executionToken:auth.executionToken,actionDigest:value.actionDigest,scope:value.scope});}};}\n  function renderWorkflowState(chat,box){const state=chat?.workflowState;if(!state||!window.AvenApprovalWorkflow?.renderConversationState)return;const auth=workflowTokens.get(chat.id);const needsFresh=!auth&&['waiting-question','running','pending','approved'].includes(state.status);const view=needsFresh?{...state,status:'restored-history',executionAllowed:false}:state;const host=document.createElement('div');host.className='workflow-state-host';const card=window.AvenApprovalWorkflow.renderConversationState(host,view,workflowActionsForChat(chat));if(card)box.append(host);if(chat.workflowError){const error=document.createElement('p');error.className='workflow-status';error.setAttribute('role','alert');error.textContent=chat.workflowError;host.append(error);}}\n  function renderConversation(){"
+  },
+  {
+    "file": "polished.js",
+    "old": "renderRewindNotice(c,box);renderWorking(c);",
+    "new": "renderRewindNotice(c,box);renderWorkflowState(c,box);renderWorking(c);"
+  },
+  {
+    "file": "polished.js",
+    "old": "if(event.type==='final')result=event.reply;if(event.type==='failed')failure=event.message;",
+    "new": "if(event.type==='final')result=event.reply;if(event.type==='pending_question')result={status:'waiting-question',runId:event.runId,mode:event.mode,model:event.model,source:event.source,provenance:event.provenance,pendingQuestion:{question:event.question,token:event.questionToken}};if(event.type==='failed')failure=event.message;"
+  },
+  {
+    "file": "polished.js",
+    "old": "      if(!response.ok)throw Error(result.error||'Connection unavailable.');if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');",
+    "new": "      if(!response.ok)throw Error(result.error||'Connection unavailable.');if(result.status==='waiting-question'&&result.pendingQuestion){const question=result.pendingQuestion.question||result.pendingQuestion;const metadata=result.result||result;workflowTokens.set(c.id,{runId:result.runId,chatId:c.id,questionId:question.id,questionToken:result.pendingQuestion.token});c.workflowState={status:result.status,runId:result.runId,chatId:c.id,mode:result.mode,model:metadata.model,source:metadata.source,provenance:metadata.provenance,pendingQuestion:{question}};delete c.runJournal;delete c.queueDispatching;saveData();runOutcome='waiting';}else if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');"
+  },
+  {
+    "file": "polished.js",
+    "old": "if(data.chats.includes(c)){const status=",
+    "new": "if(data.chats.includes(c)&&result.status!=='waiting-question'){const status="
+  },
+  {
+    "file": "polished.js",
+    "old": "if(runOutcome!=='success')pauseQueue(c,",
+    "new": "if(runOutcome!=='success'&&runOutcome!=='waiting')pauseQueue(c,"
+  },
+  {
+    "file": "polished.js",
+    "old": "function chatBusy(c){return chatRequests.has(c.id)||(c.pendingQueue||[]).length>0;}",
+    "new": "function chatBusy(c){return chatRequests.has(c.id)||(c.pendingQueue||[]).length>0||['waiting-question','running'].includes(c.workflowState?.status);}"
+  },
+  {
+    "file": "polished.js",
+    "old": "if(chatRequests.size||c.queuePaused||c.pendingQueue?.length){",
+    "new": "if(chatRequests.size||c.queuePaused||c.pendingQueue?.length||['waiting-question','running'].includes(c.workflowState?.status)){"
+  },
+  {
+    "file": "polished.js",
+    "old": "if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;",
+    "new": "if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||['waiting-question','running'].includes(c.workflowState?.status)||!c.pendingQueue?.length)return false;"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "  return [inventoryTool, runDiagnostic];",
+    "new": "  const askClarification = tool(async (input) => ({\n    type: 'pending_question', prompt: input.prompt, choices: input.choices || [],\n    allow_free_text: input.allow_free_text ?? input.allowFreeText ?? true, context: input.context ?? null\n  }), {\n    name: 'ask_clarification',\n    description: 'Pause the run for one precise user choice or bounded free-text answer; do not guess missing network scope.',\n    schema: z.object({\n      prompt: z.string().min(1).max(20000),\n      choices: z.array(z.union([z.string().min(1).max(200), z.object({ id: z.string().min(1).max(200), label: z.string().min(1).max(500) }).strict()])).max(16).optional(),\n      allow_free_text: z.boolean().optional(),\n      allowFreeText: z.boolean().optional(),\n      context: z.record(z.unknown()).nullable().optional()\n    }).strict()\n  });\n  return [inventoryTool, runDiagnostic, askClarification];"
+  },
+  {
+    "file": "intentgraph/agent-runtime.cjs",
+    "old": "    'Describe a bounded read-only investigation plan, the exact scope or clarification needed, and the evidence that would confirm or reject each step.',",
+    "new": "    'Describe a bounded read-only investigation plan, the exact scope or clarification needed, and the evidence that would confirm or reject each step. Return a needed scope question as one JSON object with type pending_question, prompt, choices, allow_free_text, and context.',"
+  },
+  {
+    "file": "intentgraph/server.cjs",
+    "old": "  server.once('close', () => sandbox.close());",
+    "new": "  server.once('close', () => { if (workflowManagerOwned) workflowManager.close?.(); sandbox.close(); });"
+  }
+]

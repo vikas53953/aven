@@ -1,0 +1,22 @@
+{
+  "rows": [
+    {
+      "id": "UX-023",
+      "status": "implemented-candidate",
+      "evidence": "Frozen workspace-capabilities.js normalizes inventory records to stable IDs, resolves @device/@document mentions, marks unavailable devices disconnected and exposes Use stable ID. The exact send path composes the edited draft, stores it as the user message text, and chatContext serializes that text into the next request; round2 static validation covers this chain. Copied capability unit tests pass; integrated shell/browser acceptance remains a root gate.",
+      "limitation": "No live inventory or device adapter was called. The assembled user-path fixture used injected inventory and confirmed the next request payload without contacting a device."
+    },
+    {
+      "id": "UX-026",
+      "status": "implemented-candidate",
+      "evidence": "Round2 adds a lazy Web Speech adapter factory for SpeechRecognition/webkitSpeechRecognition. It never starts at construction, discloses that browser speech services may receive audio, and exposes explicit start, recording indicator, stop-to-review, cancel and editable transcript states. Asynchronous permission/error, spontaneous end, multi-batch result accumulation and cancellation-race tests use fake recognizers only; all 59 unit cases pass. The shell uses the adapter only when the browser capability exists, with injected AvenDictationAdapter taking precedence.",
+      "limitation": "No microphone, real SpeechRecognition runtime, transcription provider or saved user state was accessed. The assembled user-path fixture used a fake recognizer; browser permission and provider privacy behavior remain an owner gate."
+    },
+    {
+      "id": "UX-082",
+      "status": "implemented-candidate",
+      "evidence": "Round2 mounts #sandbox-topology in the user-facing Network sandbox pane. It derives nodes from returned inventory only, accepts links only from explicit sandboxResult.topology data, and renders source, freshness, stable IDs and observed/inferred link labels. Missing device IDs are shown as unavailable/nonselectable rather than fabricated targets. Unit, exact-replacement, and assembled user-path browser checks pass.",
+      "limitation": "No live topology payload or network inventory call was made; the browser check injected the payload and confirmed the actual Network pane rendering. Inventory-only data renders nodes with no invented links."
+    }
+  ]
+}

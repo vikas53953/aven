@@ -1,0 +1,733 @@
+{
+  "generatedAt": "2026-09-17T03:46:07.659Z",
+  "rows": [
+    {
+      "id": "UX-001",
+      "feature": "Subtle scrollbars",
+      "acceptance": "Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-001",
+              "name": "mouse, keyboard, and idle scrollbar behavior",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+            },
+            {
+              "source": "configured",
+              "id": "UX-001",
+              "name": "Chromium touch gesture scrolls the conversation surface",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification."
+    },
+    {
+      "id": "UX-002",
+      "feature": "Contain horizontal overflow",
+      "acceptance": "No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-002",
+              "name": "raw CLI line copy stays exact while page bounds remain contained",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies exact CLI text and clipboard whitespace plus 390px horizontal containment; no wider viewport matrix."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies exact CLI text and clipboard whitespace plus 390px horizontal containment; no wider viewport matrix."
+    },
+    {
+      "id": "UX-003",
+      "feature": "Account entry",
+      "acceptance": "Caret absent; account menu remains keyboard reachable.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-003",
+              "name": "account entry has no caret and returns focus after Escape",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies keyboard account entry/Escape focus and visible identity; browser caret and assistive-technology certification remain separate."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies keyboard account entry/Escape focus and visible identity; browser caret and assistive-technology certification remain separate."
+    },
+    {
+      "id": "UX-004",
+      "feature": "Selected profile identity",
+      "acceptance": "Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-004",
+              "name": "profile rename updates selected header and leaves other coworker unchanged",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies profile rename/header synchronization and peer identity in local storage; no multi-user sync."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies profile rename/header synchronization and peer identity in local storage; no multi-user sync."
+    },
+    {
+      "id": "UX-005",
+      "feature": "Horizontal reaction panel",
+      "acceptance": "Row matches reference structure; opens by mouse and keyboard without clipping.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-005",
+              "name": "reaction row opens by keyboard and pointer without clipping",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies pointer/keyboard reaction row navigation and viewport bounds; no visual reference diff."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies pointer/keyboard reaction row navigation and viewport bounds; no visual reference diff."
+    },
+    {
+      "id": "UX-006",
+      "feature": "One reaction per user",
+      "acceptance": "Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-006",
+              "name": "one reaction replaces, clears, survives reload, and preserves messages",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies single-reaction replacement, clear, reload persistence, and message retention; no concurrent-device sync."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies single-reaction replacement, clear, reload persistence, and message retention; no concurrent-device sync."
+    },
+    {
+      "id": "UX-007",
+      "feature": "Coworker-first entry",
+      "acceptance": "New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-007",
+              "name": "coworker-first entry keeps direct chats, queue, grouped history, and avatar access reachable",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies direct/grouped history, queue, and avatar reachability; no user-study evidence."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies direct/grouped history, queue, and avatar reachability; no user-study evidence."
+    },
+    {
+      "id": "UX-008",
+      "feature": "Stable conversation header",
+      "acceptance": "Short first message never replaces coworker identity.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-008",
+              "name": "short sent message retains selected coworker header",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies local send preserves the selected header and request identity; provider execution is blocked."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies local send preserves the selected header and request identity; provider execution is blocked."
+    },
+    {
+      "id": "UX-009",
+      "feature": "Sidebar previews",
+      "acceptance": "Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-009",
+              "name": "plain preview and full duplicate title remain accessible at narrow width",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies 390px previews, duplicate titles, and horizontal containment; no full responsive breakpoint matrix."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies 390px previews, duplicate titles, and horizontal containment; no full responsive breakpoint matrix."
+    },
+    {
+      "id": "UX-010",
+      "feature": "Pin important conversations",
+      "acceptance": "Pinned items remain accessible and retain order after reload.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-010",
+              "name": "multiple pinned conversations retain exact order and access after reload",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies two pinned rows retain exact order and access after reload; no cross-device sync."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies two pinned rows retain exact order and access after reload; no cross-device sync."
+    },
+    {
+      "id": "UX-011",
+      "feature": "Rename conversations",
+      "acceptance": "Renaming a conversation never renames its coworker unexpectedly.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-011",
+              "name": "conversation rename leaves coworker identity unchanged through navigation",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies conversation rename keeps coworker identity through navigation; local fixture only."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies conversation rename keeps coworker identity through navigation; local fixture only."
+    },
+    {
+      "id": "UX-012",
+      "feature": "Sections and ordering",
+      "acceptance": "Grouping never implies coordinated agent execution or hides old histories.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-012",
+              "name": "direct and grouped histories stay distinct and old grouped chat remains discoverable",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies direct/grouped histories remain distinct and old grouped rows remain reachable; no user interpretation study."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies direct/grouped histories remain distinct and old grouped rows remain reachable; no user interpretation study."
+    },
+    {
+      "id": "UX-013",
+      "feature": "Sidebar collapse and resize",
+      "acceptance": "Collapse and resize leave active chat and composer usable.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-013",
+              "name": "resize and collapse preserve active chat and composer usability",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies mouse resize, Home-key resize, collapse, and composer editing; no assistive-technology certification."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies mouse resize, Home-key resize, collapse, and composer editing; no assistive-technology certification."
+    },
+    {
+      "id": "UX-014",
+      "feature": "Back and forward navigation",
+      "acceptance": "Back returns to previous chat without dropping draft or executing a request.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-014",
+              "name": "back and forward preserve drafts without sending or executing",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies back/forward draft restoration and zero chat API calls; local session history only."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies back/forward draft restoration and zero chat API calls; local session history only."
+    },
+    {
+      "id": "UX-015",
+      "feature": "Workspace search",
+      "acceptance": "Known saved phrase resolves to the correct conversation.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-015",
+              "name": "known search result opens the exact conversation",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies a known phrase opens exact message m3 and focuses it; search index is local fixture data."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies a known phrase opens exact message m3 and focuses it; search index is local fixture data."
+    },
+    {
+      "id": "UX-016",
+      "feature": "Search filters and results",
+      "acceptance": "Filter by coworker or conversation and open exact result context.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-016",
+              "name": "coworker and conversation filters open exact duplicate-term context",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies coworker and conversation filters return exact result d1 and focus it; no external index."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies coworker and conversation filters return exact result d1 and focus it; no external index."
+    },
+    {
+      "id": "UX-017",
+      "feature": "Find within conversation",
+      "acceptance": "Searching a repeated term visits every match without losing composer draft.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-017",
+              "name": "find next and previous visit every match while preserving draft",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies four local matches cycle with next/previous while preserving the draft; no cross-conversation find scope."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies four local matches cycle with next/previous while preserving the draft; no cross-conversation find scope."
+    },
+    {
+      "id": "UX-018",
+      "feature": "Command palette",
+      "acceptance": "Keyboard opens palette; selected action works in current chat; Escape restores focus.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-018",
+              "name": "keyboard opens palette, runs current-chat action, and Escape restores focus",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies Ctrl+K, keyboard result navigation, action execution, and Escape focus restoration; no OS-level shortcut conflicts."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies Ctrl+K, keyboard result navigation, action execution, and Escape focus restoration; no OS-level shortcut conflicts."
+    },
+    {
+      "id": "UX-024",
+      "feature": "Reply to a message",
+      "acceptance": "Reply identifies source message; cancel removes reference without deleting draft.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-024",
+              "name": "reply identifies source and cancel keeps draft",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies reply source identification and cancel preserving the draft; local fixture only."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies reply source identification and cancel preserving the draft; local fixture only."
+    },
+    {
+      "id": "UX-041",
+      "feature": "Readable Markdown",
+      "acceptance": "Representative network reports remain readable; untrusted HTML cannot execute.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-041",
+              "name": "safe markdown is readable and unsafe HTML/schemes stay inert",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies table/code-fence readability and safe-link/unsafe-HTML inertness; no broader sanitizer fuzzing."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies table/code-fence readability and safe-link/unsafe-HTML inertness; no broader sanitizer fuzzing."
+    },
+    {
+      "id": "UX-042",
+      "feature": "Code blocks and exact copy",
+      "acceptance": "Spaces, tabs and line breaks survive copy; no duplicate raw output.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-042",
+              "name": "CLI output renders once and copy preserves whitespace",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies one CLI output render and exact whitespace clipboard content; clipboard is isolated in Chromium."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies one CLI output render and exact whitespace clipboard content; clipboard is isolated in Chromium."
+    },
+    {
+      "id": "UX-043",
+      "feature": "Copy messages",
+      "acceptance": "Copy uses correct message and reports failure without claiming success.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-043",
+              "name": "message copy selects the correct text and truthfully reports denial",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies correct message copy and denied-clipboard Copy failed feedback; clipboard is intercepted in isolated Chromium."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies correct message copy and denied-clipboard Copy failed feedback; clipboard is intercepted in isolated Chromium."
+    },
+    {
+      "id": "UX-044",
+      "feature": "Time grouping and metadata",
+      "acceptance": "Old and new days are clear; full timestamp accessible on focus or hover.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-044",
+              "name": "old/new date groups and accessible full timestamps are visible",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies old/new date groups and focused full timestamp labels; timezone presentation is limited to this environment."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies old/new date groups and focused full timestamp labels; timezone presentation is limited to this environment."
+    },
+    {
+      "id": "UX-045",
+      "feature": "Follow latest without jumping",
+      "acceptance": "New output does not pull user away from an older message; latest button is keyboard usable.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-045",
+              "name": "new output keeps older reading position and latest control is keyboard usable",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies older reading position, new output, and keyboard latest control; local fixture run only."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies older reading position, new output, and keyboard latest control; local fixture run only."
+    },
+    {
+      "id": "UX-046",
+      "feature": "Conversation revert and undo",
+      "acceptance": "Revert and undo restore exact message history; busy or queued state is protected.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-046",
+              "name": "revert and undo restore byte-equivalent history and protect queued work",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies deep-equal revert/undo history and queued-work protection; no provider busy race."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies deep-equal revert/undo history and queued-work protection; no provider busy race."
+    },
+    {
+      "id": "UX-047",
+      "feature": "Fork or side conversation",
+      "acceptance": "Branch retains provenance and can be revisited without mutating parent history.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-047",
+              "name": "fork preserves provenance, parent history, and reload revisit",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies fork provenance, parent immutability, and reload revisit; no cross-device history sync."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies fork provenance, parent immutability, and reload revisit; no cross-device history sync."
+    },
+    {
+      "id": "UX-048",
+      "feature": "Direct links to evidence/messages",
+      "acceptance": "Link opens correct conversation/message; missing or archived targets have a clear explanation.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-048",
+              "name": "existing, missing, and archived message links explain their destination",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies existing, missing, and archived local hash links and explanations; local URL handling only."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies existing, missing, and archived local hash links and explanations; local URL handling only."
+    },
+    {
+      "id": "UX-049",
+      "feature": "Reaction picker beyond defaults",
+      "acceptance": "Picker supports search/navigation and closes without moving the message.",
+      "baselineAuditVerdict": "Partial",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-049",
+              "name": "more-reactions picker navigates, dismisses, and exposes search",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies ten picker buttons, ArrowRight behavior, Escape dismissal, and message layout. Current v8 leaves ArrowRight outside the picker and exposes no search control, so acceptance is partial."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies ten picker buttons, ArrowRight behavior, Escape dismissal, and message layout. Current v8 leaves ArrowRight outside the picker and exposes no search control, so acceptance is partial."
+    },
+    {
+      "id": "UX-111",
+      "feature": "Mark read or unread",
+      "acceptance": "Unread state persists correctly; opening a conversation never cancels work.",
+      "baselineAuditVerdict": "Unverified",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-111",
+              "name": "unread state persists through reload, opening clears it, and active run remains intact",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies unread toggle/reload/open and held local run journal while switching chats; provider execution is blocked."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies unread toggle/reload/open and held local run journal while switching chats; provider execution is blocked."
+    },
+    {
+      "id": "UX-112",
+      "feature": "Language support disclosure",
+      "acceptance": "Language choice never appears applied while labels remain unchanged.",
+      "baselineAuditVerdict": "Verified (scoped)",
+      "status": "PASS",
+      "sourceResults": [
+        {
+          "source": "configured",
+          "checks": [
+            {
+              "source": "configured",
+              "id": "UX-112",
+              "name": "unsupported language cannot appear applied and English fallback is explicit",
+              "passed": true,
+              "evidence": "PASS",
+              "limitation": "Fixture verifies the disabled unsupported option is skipped by keyboard (English then system); no translation coverage."
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "limitation": "Fixture verifies the disabled unsupported option is skipped by keyboard (English then system); no translation coverage."
+    }
+  ]
+}

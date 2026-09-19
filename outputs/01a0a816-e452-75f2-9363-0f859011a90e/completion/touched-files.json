@@ -1,0 +1,35 @@
+{
+  "liveFilesModified": [],
+  "candidateFilesModified": [
+    "completion/history-candidate/polished.js",
+    "completion/history-settings-audit.cjs",
+    "completion/make-replacements.py",
+    "completion/prove-history-replacements.cjs"
+  ],
+  "candidateFilesCopiedForBrowserRun": [
+    "completion/history-candidate/polished.html",
+    "completion/history-candidate/polished.css",
+    "completion/history-candidate/polished-backup.js",
+    "completion/history-candidate/polished-workspace-tools.js",
+    "completion/history-candidate/polished-attachments.js",
+    "completion/history-candidate/polished-avatars.js",
+    "completion/history-candidate/polished-diagnostics.js",
+    "completion/history-candidate/polished-evidence-tools.js",
+    "completion/history-candidate/polished-files.js",
+    "completion/history-candidate/polished-run-state.js",
+    "completion/history-candidate/avatar-system/avatars.js",
+    "completion/history-candidate/avatar-system/avatar-data.js",
+    "completion/history-candidate/avatar-system/avatar.css"
+  ],
+  "reports": [
+    "completion/history-settings-audit.cjs",
+    "completion/row-results.json",
+    "completion/history-settings-evidence.json",
+    "completion/backup-schema-audit.json",
+    "completion/replacements.json",
+    "completion/source-hashes.json",
+    "completion/replacement-apply-check.json",
+    "completion/history-patched-from-baseline.js",
+    "completion/prove-history-replacements.cjs"
+  ]
+}

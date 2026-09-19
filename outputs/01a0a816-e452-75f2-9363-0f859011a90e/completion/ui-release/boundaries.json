@@ -1,0 +1,22 @@
+{
+  "at": "2026-09-16T06:24:25.475Z",
+  "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\ui-release\\candidate",
+  "sourceHashes": {
+    "polished.html": "f343be26c0ac2944fa5ff42607bea2445248b9f4928f0d31db2041194a251741",
+    "polished.js": "4b0b45ced4814c12a4acb93855bbd4881b32ad195bdee669bdae7574fab9247b",
+    "polished.css": "3ce122e6e7ebcffd7bc550204c735e592a4cd092f5992b71f5744a69e5f86694"
+  },
+  "results": [
+    {
+      "name": "Failure with raw output stays visible when diagnostics are off",
+      "passed": true
+    },
+    {
+      "name": "Active raw output and investigation stay hidden while Stop remains visible",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "externalCalls": 0,
+  "passed": true
+}

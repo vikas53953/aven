@@ -1,0 +1,93 @@
+{
+  "at": "2026-09-15T19:15:39.443Z",
+  "scope": "isolated Chromium; local app only; provider/device requests blocked",
+  "findings": [
+    {
+      "id": "UX-019",
+      "feature": "Multiline input and send",
+      "observed": {
+        "emptyDisabled": true,
+        "multilineHeld": true,
+        "imeHeld": true,
+        "calls": 0
+      },
+      "criterion": "Empty send is disabled; Shift+Enter and IME composition do not submit accidentally.",
+      "result": "PASS",
+      "source": "polished.js:519,711",
+      "blocked": 0
+    },
+    {
+      "id": "UX-111",
+      "feature": "Mark read or unread",
+      "observed": {
+        "menu": "Find in conversation\nRename conversation\nRename coworker\nOpen coworker profile\nPin\nArchive\nMove to…\nMark as unread\nMove to section…\nHide coworker from sidebar",
+        "beforeOpen": true,
+        "afterOpen": false
+      },
+      "criterion": "Opening a conversation should clear unread state without cancelling work.",
+      "result": "PASS",
+      "source": "polished.js:740,779,746",
+      "blocked": 0
+    },
+    {
+      "id": "UX-011",
+      "feature": "Rename conversations",
+      "observed": {
+        "chatTitle": "Renamed saved chat",
+        "coworkerName": "Firewall coworker"
+      },
+      "criterion": "Renaming a conversation must not rename its coworker unexpectedly.",
+      "result": "PASS",
+      "source": "polished.js:739-740",
+      "blocked": 0
+    },
+    {
+      "id": "UX-079",
+      "feature": "Success versus healthy status",
+      "observed": {
+        "runDetails": "Run details · FAILURE",
+        "storedStatus": "FAILURE"
+      },
+      "criterion": "A successful command exit status must not make faulty device evidence appear healthy.",
+      "result": "PASS",
+      "source": "polished.js:679,424",
+      "blocked": 0
+    },
+    {
+      "id": "UX-043",
+      "feature": "Copy messages",
+      "observed": {
+        "reportsFailure": true
+      },
+      "criterion": "Copy uses the correct message and reports failure without claiming success.",
+      "result": "PASS",
+      "source": "polished.js:333-334,428",
+      "blocked": 0
+    },
+    {
+      "id": "UX-078",
+      "feature": "Evidence provenance and timestamps",
+      "observed": {
+        "hasRunId": true,
+        "hasCommand": true
+      },
+      "criterion": "Copied/exported evidence traces to the exact run and command.",
+      "result": "PASS",
+      "source": "polished.js:823-830",
+      "blocked": 0
+    },
+    {
+      "id": "UX-030",
+      "feature": "Queue follow-up messages",
+      "observed": {
+        "callsAfterFailure": 0,
+        "persistedAfterFailure": 1,
+        "callsAfterRecovery": 1
+      },
+      "criterion": "A queue item is not submitted when its run capture cannot be persisted, and can be intentionally resumed after recovery.",
+      "result": "PASS",
+      "source": "polished.js:512-515,670-682",
+      "blocked": 0
+    }
+  ]
+}

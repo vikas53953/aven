@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "scope": "round2 automation only; exact incremental candidate against identified frozen inputs",
+  "frozenInputs": {
+    "automationModuleAndTest": "completion/automation/candidate",
+    "assembledShell": "completion/assembled-candidate"
+  },
+  "sourceSHAByFile": {
+    "polished-automation.js": "E95CAFBCF6770F24AFFBCC79BB5708D7E867FBC206B57F3D995792BA88958B02",
+    "polished-automation.css": "996AEB3665D1E2F3CF5EA3FDBE752738049794FC0738C291FF705362D274D733",
+    "polished.js": "813885043DEF3D8109FCEEA24451FEE6B9E8C06C9565A32DAC21BA11DDA1B8A6",
+    "polished.html": "49864D2629D69FBF7AB06C8A620FC4432E81D140FE1245D1FB6D88FC393A883A",
+    "polished-backup.js": "B0BC2C8B231FD16EF757BB2DDF414B6BCDA1B7DE119FC7FD248C935F93F39765",
+    "automation.test.cjs": "192D7349D3967440F134469659FC2F094E6626DD79800C238913054381932F07",
+    "polished-workspace-tools.js": "7E27459CD2AD4A4EB0B35AEC577FF7AD884485CCB3DCE1315C717627818CE262"
+  },
+  "candidateSHAByFile": {
+    "polished-automation.js": "9DE798739E4994354F4DA3737BC1B292128C93F55386517125C243FF28613A08",
+    "polished-automation.css": "996AEB3665D1E2F3CF5EA3FDBE752738049794FC0738C291FF705362D274D733",
+    "polished.js": "FD963426738A3768733CD94AC2656A01EA09B3961BD27A5756E6369871E9189C",
+    "polished.html": "49864D2629D69FBF7AB06C8A620FC4432E81D140FE1245D1FB6D88FC393A883A",
+    "polished-backup.js": "8942EBFAF45DA374EE0B02EE80E7A97ED776C16DFD3D12DA916FAE49DEA25F1D",
+    "automation.test.cjs": "A3D31B31D2E5AD1C71A42E80490AFC2894EE5F485252CE18981473C6FC52D2D3",
+    "polished-workspace-tools.js": "7E27459CD2AD4A4EB0B35AEC577FF7AD884485CCB3DCE1315C717627818CE262"
+  },
+  "changes": [
+    {
+      "file": "polished-automation.js",
+      "description": "Retain workflow ID/version in run history and dispatch results; resolve the exact procedure definition; enforce required access; add endpoint-shaped capability mapping and refresh UI with truthful availability, permissions and health."
+    },
+    {
+      "file": "polished.js",
+      "description": "Wire user-triggered local GET /api/capabilities into the production automation options, enforce provider/model capability state, and keep the full versioned procedure contract in the validated scheduled message while sending only the server-approved numeric context metadata."
+    },
+    {
+      "file": "polished-backup.js",
+      "description": "Allow workflow provenance fields in validated schedule history records."
+    },
+    {
+      "file": "automation.test.cjs",
+      "description": "Add pure assertions for exact version dispatch, required-access blocking, endpoint-shaped capability mapping, and browser fixture assertions for production refresh and full dispatch context."
+    }
+  ],
+  "unchangedPassThrough": [
+    "polished-automation.css",
+    "polished.html",
+    "polished-workspace-tools.js"
+  ],
+  "touchedFiles": [
+    "candidate/polished-automation.js",
+    "candidate/polished.js",
+    "candidate/polished-backup.js",
+    "candidate/automation.test.cjs",
+    "gap-assessment.md",
+    "replacements.json",
+    "row-results.json",
+    "validation.json",
+    "replacement-apply-proof.json",
+    "root-hooks.json"
+  ]
+}

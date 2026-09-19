@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "candidate": "completion/terminal/candidate",
+  "scope": "UX071 local read-only diagnostic terminal",
+  "liveProductFilesEdited": false,
+  "externalCalls": false,
+  "rows": [
+    {
+      "id": "UX071",
+      "status": "PASS",
+      "evidence": [
+        "terminal.server.test.cjs and server-evidence.json: actual createServer with injected network facade resolves an exact inventory target, rejects unsupported commands and model-supplied connection parameters before adapter dispatch, enforces loopback origin and X-Aven-Sandbox read-only header, and preserves submitted UNKNOWN without retry.",
+        "terminal.browser.test.cjs: isolated candidate shell passes reachable Terminal and preserved Plugins path, generic diagnostics labels, exact target/allowlist, separate evidence persistence, cancel UNKNOWN/no retry, responsive touch targets and reduced-motion checks; pageErrors and blockedRequests are empty.",
+        "replacement-verification.json: eight exact frozen-v8 baseline hunks and two standalone assets reconstruct the candidate byte-for-byte."
+      ],
+      "limitation": "No real network device, provider, credential, or shell process was used; screen-reader certification remains outside this isolated fixture."
+    }
+  ]
+}

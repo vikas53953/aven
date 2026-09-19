@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "UX-091-plus-menu-keyboard",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-091-settings-keyboard",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-092-accessible-names-and-state",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-093-contrast-and-text-stress",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-094-reduced-motion",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-095-touch-targets",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-096-responsive-pane",
+      "status": "PASS"
+    },
+    {
+      "id": "UX-097-truthful-unavailable",
+      "status": "PASS"
+    },
+    {
+      "id": "UI-05-failure-cue-with-details-off",
+      "status": "PASS"
+    },
+    {
+      "id": "UI-02-active-run-minimal-default",
+      "status": "PASS"
+    }
+  ],
+  "requestCount": 48,
+  "viewport": "1440x900, 320x900, 200% root text stress",
+  "externalRequests": 0,
+  "liveProductFilesEdited": false
+}

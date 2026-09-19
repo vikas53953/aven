@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101317">
+  <title>Aven · Network workspace</title>
+  <link rel="stylesheet" href="polished.css">
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <aside class="rail expanded" id="rail" aria-label="Primary navigation">
+      <div class="rail-top">
+        <button class="icon-button rail-action" id="toggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" data-icon="sidebar" data-tip="Collapse sidebar"></button>
+        <button class="icon-button rail-action" id="quick-create" type="button" aria-label="Create agent, channel or project" aria-expanded="false" data-icon="plus" data-tip="Create"></button>
+      </div>
+      <button class="nav-button" id="search-nav" type="button" data-destination="Search" data-icon="search" data-tip="Search"><span class="nav-label">Search</span></button>
+      <div class="sidebar-scroll" id="sidebar-scroll">
+        <section class="sidebar-group" data-sidebar-group="agents">
+          <button class="sidebar-group-toggle" type="button" data-group-toggle="agents" aria-expanded="true"><span>Agents</span><span class="group-chevron">⌄</span></button>
+          <div class="sidebar-group-list" id="agent-list" data-group-list="agents"></div>
+        </section>
+        <section class="sidebar-group" data-sidebar-group="channels">
+          <button class="sidebar-group-toggle" type="button" data-group-toggle="channels" aria-expanded="true"><span>Channels</span><span class="group-chevron">⌄</span></button>
+          <div class="sidebar-group-list" id="channel-list" data-group-list="channels"></div>
+        </section>
+        <section class="sidebar-group" data-sidebar-group="projects">
+          <button class="sidebar-group-toggle" type="button" data-group-toggle="projects" aria-expanded="true"><span>Projects</span><span class="group-chevron">⌄</span></button>
+          <div class="sidebar-group-list" id="project-list" data-group-list="projects"></div>
+        </section>
+      </div>
+      <div class="rail-group rail-group-lower" aria-label="Workspace views">
+        <button class="nav-button" type="button" data-destination="Feed" data-icon="feed" data-tip="Feed"><span class="nav-label">Feed</span></button>
+        <button class="nav-button" type="button" data-destination="Ideas" data-icon="ideas" data-tip="Ideas"><span class="nav-label">Ideas</span></button>
+        <button class="nav-button" type="button" data-destination="Goals" data-icon="goals" data-tip="Goals"><span class="nav-label">Goals</span></button>
+        <button class="nav-button" type="button" data-destination="Artifacts" data-icon="library" data-tip="Artifacts"><span class="nav-label">Artifacts</span></button>
+      </div>
+      <div class="sidebar-divider" id="sidebar-resize" role="separator" tabindex="0" aria-label="Resize sidebar" aria-valuemin="220" aria-valuemax="380" aria-valuenow="260"></div>
+      <button class="account-button" id="account-button" type="button" aria-expanded="false" aria-haspopup="menu"><span class="account-avatar">V</span><span class="nav-label" id="account-name">Vikas</span><span class="account-caret">⌄</span></button>
+      <button class="nav-button rail-settings" id="settings" type="button" aria-label="Open settings" data-icon="settings" data-tip="Settings"><span class="nav-label">Settings</span></button>
+    </aside>
+
+    <main class="workspace" id="workspace">
+      <header class="app-header">
+        <div class="wordmark" aria-label="Aven"><span class="wordmark-glyph" aria-hidden="true"><i></i><i></i><i></i></span><strong>Aven</strong></div>
+        <a class="review-link" href="prototype-review.html">Review this prototype <span aria-hidden="true">↗</span></a>
+      </header>
+      <div class="workspace-body">
+        <section class="center-column" id="center-column" aria-label="Conversation workspace">
+          <div class="center-header">
+            <div class="center-title-wrap"><span class="eyebrow" id="center-eyebrow">CONVERSATION</span><h1 id="surface">Branch network review</h1><p class="location-line" id="chat-location">Personal · local workspace</p></div>
+            <button class="agent-avatar-button header-avatar-button" id="avatar" type="button" aria-label="Open agent workspace"><span class="agent-avatar avatar-small" aria-hidden="true"></span></button>
+          </div>
+          <div class="center-content" id="center-content">
+            <section class="conversation" id="conversation" aria-label="Conversation" aria-live="polite"></section>
+            <section class="directory" id="chat-directory" aria-label="Conversation directory" hidden></section>
+            <section class="empty-view" id="empty-view" hidden></section>
+            <section class="create-view" id="create-view" hidden></section>
+          </div>
+          <div class="composer-wrap" id="composer-wrap">
+            <form class="composer" id="composer">
+              <details class="recipient-picker" id="recipient-picker">
+                <summary id="recipient-summary">To: Network companion</summary>
+                <div class="recipient-options" id="recipient-options"></div>
+              </details>
+              <textarea id="draft" rows="1" aria-label="Message the selected agents" placeholder="Ask about your network…" autocomplete="off"></textarea>
+              <div class="attachment-row" id="attachments" aria-label="Selected attachments"></div>
+              <div class="composer-bottom">
+                <div class="composer-actions">
+                  <button class="icon-button" id="tools-menu" type="button" aria-label="Add attachments or tools" title="Add attachments or tools" aria-expanded="false" data-icon="plus"></button>
+                  <span class="composer-note" id="composer-note">Local draft · no AI request</span>
+                </div>
+                <button class="send-button" id="send" type="submit" aria-label="Send message locally" title="Send message" disabled data-icon="send"></button>
+              </div>
+            </form>
+            <p class="composer-footnote" id="chat-status" role="status">Local only · nothing is sent</p>
+          </div>
+        </section>
+
+        <aside class="right-pane" id="right-pane" role="dialog" aria-modal="false" aria-label="Agent workspace" hidden>
+          <div class="pane-header"><div><span class="eyebrow">WORKSPACE</span><h2 id="pane-title">Agent</h2></div><button class="icon-button" id="close-pane" type="button" aria-label="Close right workspace" title="Close workspace" data-icon="close"></button></div>
+          <div class="pane-tabs" role="tablist" aria-label="Workspace views">
+            <button type="button" role="tab" data-pane="agent" aria-selected="true" aria-label="Agent workspace" title="Agent" data-icon="avatar"></button>
+            <button type="button" role="tab" data-pane="browser" aria-selected="false" aria-label="Browser preview" title="Browser" data-icon="browser"></button>
+            <button type="button" role="tab" data-pane="plugins" aria-selected="false" aria-label="Plugin preview" title="Plugins" data-icon="plug"></button>
+            <button type="button" role="tab" data-pane="computer" aria-selected="false" aria-label="Computer preview" title="Computer" data-icon="computer"></button>
+          </div>
+          <div class="pane-content" id="pane-content"></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <div class="popover" id="add-menu" hidden aria-label="Add to conversation">
+    <button type="button" data-add="files" data-icon="file"><span>Attach files</span></button>
+    <button type="button" data-add="images" data-icon="image"><span>Attach images</span></button>
+    <div class="menu-separator"></div>
+    <button type="button" data-add="browser" data-icon="browser"><span>Use browser preview</span></button>
+    <button type="button" data-add="plugins" data-icon="plug"><span>Review plugin access</span></button>
+    <button type="button" data-add="computer" data-icon="computer"><span>Use computer preview</span></button>
+  </div>
+  <input type="file" id="file-picker" multiple hidden>
+  <input type="file" id="image-picker" accept="image/*" multiple hidden>
+
+  <div class="popover create-popover" id="create-menu" hidden aria-label="Create in Aven">
+    <button type="button" data-create="agent" data-icon="avatar"><span>New agent</span></button>
+    <button type="button" data-create="channel" data-icon="channels"><span>New channel</span></button>
+    <button type="button" data-create="project" data-icon="folder"><span>New project</span></button>
+  </div>
+
+  <div class="popover account-menu" id="account-menu" hidden role="menu" aria-label="Account menu">
+    <button type="button" data-account-action="settings" role="menuitem" data-icon="settings"><span>Settings</span></button>
+    <button type="button" data-account-action="about" role="menuitem"><span>About</span></button>
+    <button type="button" data-account-action="help" role="menuitem"><span>Help Center</span></button>
+    <button type="button" data-account-action="feedback" role="menuitem"><span>Send Feedback</span></button>
+    <div class="menu-separator"></div>
+    <button type="button" data-account-action="logout" role="menuitem"><span>Log out</span></button>
+  </div>
+
+  <dialog id="workspace-create-dialog" aria-labelledby="workspace-create-title">
+    <div class="dialog-header"><div><span class="eyebrow">CREATE</span><h2 id="workspace-create-title">Create</h2></div><button class="icon-button" id="close-workspace-create" type="button" aria-label="Close creation dialog" data-icon="close"></button></div>
+    <div class="create-dialog-body" id="create-dialog-body"></div>
+  </dialog>
+
+  <dialog id="info-dialog" aria-labelledby="info-dialog-title"><div class="dialog-header"><div><span class="eyebrow">AVEN</span><h2 id="info-dialog-title">About</h2></div><button class="icon-button" id="close-info" type="button" aria-label="Close" data-icon="close"></button></div><div class="info-dialog-body" id="info-dialog-body"></div><div class="dialog-footer"><button class="button-primary" id="info-ok" type="button">Done</button></div></dialog>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <div class="dialog-header"><div><span class="eyebrow">AVEN PREFERENCES</span><h2 id="settings-title">Settings</h2></div><button class="icon-button" id="close-settings" type="button" aria-label="Close settings" data-icon="close"></button></div>
+    <div class="settings-layout"><nav class="settings-nav" id="settings-nav" aria-label="Settings categories"></nav><section class="settings-content" id="settings-content"></section></div>
+    <div class="dialog-footer"><span class="dialog-status" id="settings-status" role="status"></span><button class="button-secondary" id="cancel-settings" type="button">Cancel</button><button class="button-primary" id="save-settings" type="button">Save settings</button></div>
+  </dialog>
+
+  <dialog id="search-dialog" aria-labelledby="search-title">
+    <div class="search-header"><div><span class="eyebrow">WORKSPACE SEARCH</span><h2 id="search-title">Search Aven</h2></div><button class="icon-button" id="close-search" type="button" aria-label="Close search" data-icon="close"></button></div>
+    <div class="search-input-wrap"><span data-icon="search" aria-hidden="true"></span><input id="global-search" type="search" aria-label="Search workspace" placeholder="Search chats, messages, agents…"></div>
+    <div class="search-filters" id="search-filters" aria-label="Search filters"></div><div class="search-results" id="search-results"></div>
+    <p class="dialog-note">Search uses locally saved names, messages and attachment filenames. Press Escape to close.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="polished.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{
+  "at": "2026-09-16T03:18:00.196Z",
+  "checks": [
+    {
+      "id": "UX-080",
+      "verdict": "Missing",
+      "finding": "No complete state-changing workflow; local revert is chat-history only.",
+      "evidence": "polished.js:353; no rollback/scope/impact review surface"
+    },
+    {
+      "id": "UX-082",
+      "verdict": "Missing",
+      "finding": "No interactive topology node/link renderer or freshness/inferred-link labeling.",
+      "evidence": "polished.js:598; no topology renderer in polished shell"
+    },
+    {
+      "id": "UX-086",
+      "verdict": "Missing",
+      "finding": "No durable scheduling UI, next-run or pause/resume workflow.",
+      "evidence": "polished.html:109; no schedule controls in polished shell"
+    },
+    {
+      "id": "UX-088",
+      "verdict": "Missing",
+      "finding": "Network sandbox inventory is a capability preview, not install/connect/plugin lifecycle management.",
+      "evidence": "polished.js:613; polished.html:77-81"
+    },
+    {
+      "id": "UX-089",
+      "verdict": "Partial",
+      "finding": "Local coworker documents exist, but no skills browser/procedure picker or version trace.",
+      "evidence": "polished.js:558; no skills registry/picker"
+    },
+    {
+      "id": "UX-090",
+      "verdict": "Deferred",
+      "finding": "User explicitly deferred mobile/remote handoff until identity, remote runtime and resumability exist.",
+      "evidence": "source-register row UX-090; no remote transport invoked"
+    },
+    {
+      "id": "UX-104",
+      "verdict": "Deferred",
+      "finding": "User explicitly deferred customer isolation until identity/tenancy/access architecture exists.",
+      "evidence": "source-register row UX-104; local browser storage has no account boundary"
+    },
+    {
+      "id": "UX-105",
+      "verdict": "Unverified",
+      "finding": "Owner acceptance is unavailable; automated/rendered checks are separate from the owner gate.",
+      "evidence": "source-register row UX-105; no owner acceptance artifact"
+    },
+    {
+      "id": "UX-110",
+      "verdict": "Partial",
+      "finding": "Safe text/link rendering exists; inline media and attachment reading remain pending.",
+      "evidence": "polished.js:?; polished-evidence-tools.js:191"
+    },
+    {
+      "id": "UX-114",
+      "verdict": "Missing",
+      "finding": "IntentGraph approval tooling is a separate module; no Aven preview/execute digest integration.",
+      "evidence": "intentgraph/ui/index.html:7-8; no Aven approval route in polished shell"
+    }
+  ],
+  "sourceHashes": {
+    "polished.html": "c25c990105c0b21fbbd38da073cf7a297f8740186869c6623262de97114c0af2",
+    "polished.js": "82666c61754b7e32ab13b78dcbf64018b68c2d28244b876f2d9b3f881f491b0a",
+    "polished.css": "d7dfbacd5b37d424fbcb86a6a51873d30a22867c553ff4aa453c4444cfefcd93",
+    "polished-workspace-tools.js": "5395bd4fac4a25fe5f63c8e05d1c8db18e66d2bdb7435b7024bf8f1aa77e6ef6",
+    "polished-evidence-tools.js": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc",
+    "polished-run-state.js": "1c81ceb1b0a0bed0463eb1641711d3e66d19654a7188a191c996ed40f6be91a6"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "baseline": "F07",
+  "startedAt": "2026-09-11T03:06:41.661Z",
+  "candidateStart": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "7353ef529bb005b4e123f63face27bf708b7316a75332d88f642daee8534b585",
+    "polished.js": "8dc23e693007735102a07ea2db10bff5872bcd2c72066cb24f98dfaa3a49999c",
+    "prototype-review.html": "32292f5be9ed044e15cc07f9478a2857ffc7d4e5e0113d06fa64a20599eee186"
+  },
+  "checks": [
+    {
+      "name": "F07 preservation: idempotent migration and original storage backup",
+      "status": "FAIL",
+      "detail": "draft must survive\n+ actual - expected\n\n+ ''\n- 'Do not lose my draft'\n"
+    },
+    {
+      "name": "F07-01/02/03: popup creation, immediate conversation and channel/project ownership",
+      "status": "FAIL",
+      "detail": "The expression evaluated to a falsy value:\n\n  assert(c.recipients.includes(a.id))\n"
+    },
+    {
+      "name": "F07-04: Enter sends, Shift+Enter newline, IME never sends",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-05/10: centered settings, theme, account actions and save/cancel",
+      "status": "FAIL",
+      "detail": "Settings centered"
+    },
+    {
+      "name": "Preserved journeys: attachments, search, agent documents and tool states",
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#avatar')\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"avatar\" type=\"button\" aria-label=\"Open agent workspace\" class=\"agent-avatar-button header-avatar-button\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    11 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "name": "F07 responsive: six widths, modal bounds, focus and reduced motion",
+      "status": "FAIL",
+      "detail": "Page overflow 1920"
+    },
+    {
+      "name": "F07-07: sidebar pointer/keyboard resize, collapse restoration and group context",
+      "status": "FAIL",
+      "detail": "Drag must resize sidebar"
+    },
+    {
+      "name": "Protected wireframe unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "No page errors or external runtime calls",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "label": "create-agent",
+      "path": ".intentgraph/p2-create-agent.png"
+    },
+    {
+      "label": "settings",
+      "path": ".intentgraph/p2-settings.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "finishedAt": "2026-09-11T03:07:01.178Z",
+  "candidateEnd": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "7353ef529bb005b4e123f63face27bf708b7316a75332d88f642daee8534b585",
+    "polished.js": "8dc23e693007735102a07ea2db10bff5872bcd2c72066cb24f98dfaa3a49999c",
+    "prototype-review.html": "32292f5be9ed044e15cc07f9478a2857ffc7d4e5e0113d06fa64a20599eee186"
+  },
+  "candidateStable": true
+}

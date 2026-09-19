@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "Syntax: polished.js",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--check",
+        "polished.js"
+      ],
+      "startedAt": "2026-09-16T04:08:47.011Z",
+      "endedAt": "2026-09-16T04:08:47.211Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "syntax-polished-js.txt"
+    },
+    {
+      "name": "Syntax: polished-diagnostics.js",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--check",
+        "polished-diagnostics.js"
+      ],
+      "startedAt": "2026-09-16T04:08:47.215Z",
+      "endedAt": "2026-09-16T04:08:47.393Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "syntax-polished-diagnostics-js.txt"
+    },
+    {
+      "name": "Syntax: polished-workspace-tools.js",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--check",
+        "polished-workspace-tools.js"
+      ],
+      "startedAt": "2026-09-16T04:08:47.394Z",
+      "endedAt": "2026-09-16T04:08:47.576Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "syntax-polished-workspace-tools-js.txt"
+    },
+    {
+      "name": "Syntax: polished-backup.js",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--check",
+        "polished-backup.js"
+      ],
+      "startedAt": "2026-09-16T04:08:47.576Z",
+      "endedAt": "2026-09-16T04:08:47.735Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "syntax-polished-backup-js.txt"
+    },
+    {
+      "name": "Backup schema and recovery",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--test",
+        ".intentgraph/runtime/verify-backup-schema.cjs"
+      ],
+      "startedAt": "2026-09-16T04:08:47.735Z",
+      "endedAt": "2026-09-16T04:08:48.422Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "backup-schema-and-recovery.txt"
+    },
+    {
+      "name": "Workspace tools",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        ".intentgraph/runtime/verify-workspace-tools.cjs"
+      ],
+      "startedAt": "2026-09-16T04:08:48.422Z",
+      "endedAt": "2026-09-16T04:08:54.410Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "workspace-tools.txt"
+    },
+    {
+      "name": "Evidence tools",
+      "command": [
+        "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        ".intentgraph/runtime/verify-evidence-tools.cjs"
+      ],
+      "startedAt": "2026-09-16T04:08:54.410Z",
+      "endedAt": "2026-09-16T04:09:00.867Z",
+      "exitCode": 0,
+      "passed": true,
+      "log": "evidence-tools.txt"
+    }
+  ]
+}

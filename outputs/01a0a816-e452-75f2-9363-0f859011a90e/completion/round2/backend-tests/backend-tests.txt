@@ -1,0 +1,358 @@
+TAP version 13
+# Subtest: browser adapter bounds origins, produces local inspection artifacts, and requires one-use approval
+ok 1 - browser adapter bounds origins, produces local inspection artifacts, and requires one-use approval
+  ---
+  duration_ms: 10339.6281
+  type: 'test'
+  ...
+# Subtest: desktop adapter rejects unlisted windows and reuses no approval token
+ok 2 - desktop adapter rejects unlisted windows and reuses no approval token
+  ---
+  duration_ms: 19.64
+  type: 'test'
+  ...
+# Subtest: network adapter refuses unsupported commands, missing known-hosts, and malformed worker output
+ok 3 - network adapter refuses unsupported commands, missing known-hosts, and malformed worker output
+  ---
+  duration_ms: 39.8545
+  type: 'test'
+  ...
+# Subtest: LangGraph agent uses the inventory tool for a natural language fact and returns bounded evidence
+ok 4 - LangGraph agent uses the inventory tool for a natural language fact and returns bounded evidence
+  ---
+  duration_ms: 253.0383
+  type: 'test'
+  ...
+# Subtest: natural language diagnostic resolves hostname and UUID server-side and dispatches one allowed operation
+ok 5 - natural language diagnostic resolves hostname and UUID server-side and dispatches one allowed operation
+  ---
+  duration_ms: 102.2662
+  type: 'test'
+  ...
+# Subtest: general explanations do not invoke tools, and unknown host evidence is not success
+ok 6 - general explanations do not invoke tools, and unknown host evidence is not success
+  ---
+  duration_ms: 232.1679
+  type: 'test'
+  ...
+# Subtest: tool budget bounds backend calls and reports partial evidence without retrying duplicate diagnostics
+ok 7 - tool budget bounds backend calls and reports partial evidence without retrying duplicate diagnostics
+  ---
+  duration_ms: 516.1127
+  type: 'test'
+  ...
+# Subtest: abort and timeout reject promptly and pass cancellation to backend
+ok 8 - abort and timeout reject promptly and pass cancellation to backend
+  ---
+  duration_ms: 244.8672
+  type: 'test'
+  ...
+# Subtest: malformed and unsupported model tool arguments never reach the device adapter
+ok 9 - malformed and unsupported model tool arguments never reach the device adapter
+  ---
+  duration_ms: 349.7161
+  type: 'test'
+  ...
+# Subtest: unknown submission is not repeated and completed evidence survives a later model failure
+ok 10 - unknown submission is not repeated and completed evidence survives a later model failure
+  ---
+  duration_ms: 222.1548
+  type: 'test'
+  ...
+# Subtest: framework exposes SSH-specific BGP operation and retains Nornir provenance
+ok 11 - framework exposes SSH-specific BGP operation and retains Nornir provenance
+  ---
+  duration_ms: 64.7146
+  type: 'test'
+  ...
+# Subtest: agent NDJSON lifecycle and origin boundaries
+ok 12 - agent NDJSON lifecycle and origin boundaries
+  ---
+  duration_ms: 1238.4426
+  type: 'test'
+  ...
+# Subtest: bounded service enforces checkpoint, race, and confinement boundaries
+ok 13 - bounded service enforces checkpoint, race, and confinement boundaries
+  ---
+  duration_ms: 5196.4392
+  type: 'test'
+  ...
+# Subtest: parser cache reuses unchanged AST work and invalidates on content or path-set changes
+ok 14 - parser cache reuses unchanged AST work and invalidates on content or path-set changes
+  ---
+  duration_ms: 84.7715
+  type: 'test'
+  ...
+# Subtest: symlink aliases cannot expose secret or ignored targets
+ok 15 - symlink aliases cannot expose secret or ignored targets
+  ---
+  duration_ms: 13.8336
+  type: 'test'
+  ...
+# Subtest: restart does not invent a before diff from current bytes
+ok 16 - restart does not invent a before diff from current bytes
+  ---
+  duration_ms: 92.023
+  type: 'test'
+  ...
+# Subtest: pinned agent withholds the socket until secureConnect pin verification
+ok 17 - pinned agent withholds the socket until secureConnect pin verification
+  ---
+  duration_ms: 5.2491
+  type: 'test'
+  ...
+# Subtest: status is local-only and trust is required before credentials or network
+ok 18 - status is local-only and trust is required before credentials or network
+  ---
+  duration_ms: 19.7193
+  type: 'test'
+  ...
+# Subtest: TLS pin rejection happens before authentication and no raw token is returned
+ok 19 - TLS pin rejection happens before authentication and no raw token is returned
+  ---
+  duration_ms: 23.9329
+  type: 'test'
+  ...
+# Subtest: inventory authenticates once, normalizes devices, redacts tokens, and caches for 30 seconds
+ok 20 - inventory authenticates once, normalizes devices, redacts tokens, and caches for 30 seconds
+  ---
+  duration_ms: 25.3033
+  type: 'test'
+  ...
+# Subtest: redirects and malformed inventory are generic failures without raw response data
+ok 21 - redirects and malformed inventory are generic failures without raw response data
+  ---
+  duration_ms: 14.6473
+  type: 'test'
+  ...
+# Subtest: command runner sends a bounded JSON body, polls only validated ids, and returns SUCCESS output
+ok 22 - command runner sends a bounded JSON body, polls only validated ids, and returns SUCCESS output
+  ---
+  duration_ms: 1035.6574
+  type: 'test'
+  ...
+# Subtest: command runner refuses invalid ids and distinguishes blocklisted output
+ok 23 - command runner refuses invalid ids and distinguishes blocklisted output
+  ---
+  duration_ms: 12.6682
+  type: 'test'
+  ...
+# Subtest: device failure output preserves whitespace and failure status
+ok 24 - device failure output preserves whitespace and failure status
+  ---
+  duration_ms: 17.3749
+  type: 'test'
+  ...
+# Subtest: oversized output and abort after POST preserve unknown submission without resubmission
+ok 25 - oversized output and abort after POST preserve unknown submission without resubmission
+  ---
+  duration_ms: 26.3714
+  type: 'test'
+  ...
+# Subtest: semantic inventory selects only requested fields, one call, no fabricated values
+ok 26 - semantic inventory selects only requested fields, one call, no fabricated values
+  ---
+  duration_ms: 9.0746
+  type: 'test'
+  ...
+# Subtest: run show version requires a valid inventory UUID before dispatch
+ok 27 - run show version requires a valid inventory UUID before dispatch
+  ---
+  duration_ms: 1.4337
+  type: 'test'
+  ...
+# Subtest: unsupported and malformed actions cannot invoke tools
+ok 28 - unsupported and malformed actions cannot invoke tools
+  ---
+  duration_ms: 2.4344
+  type: 'test'
+  ...
+# Subtest: invented fields, hosts and prose from selection are rejected
+ok 29 - invented fields, hosts and prose from selection are rejected
+  ---
+  duration_ms: 1.6269
+  type: 'test'
+  ...
+# Subtest: disconnect suppresses late inventory and no second model call
+ok 30 - disconnect suppresses late inventory and no second model call
+  ---
+  duration_ms: 11.2753
+  type: 'test'
+  ...
+# Subtest: oversized snapshot is withheld and missing inventory never yields invented facts
+ok 31 - oversized snapshot is withheld and missing inventory never yields invented facts
+  ---
+  duration_ms: 2.0817
+  type: 'test'
+  ...
+# Subtest: exact latest-turn command dispatches once and returns raw SUCCESS output with metadata
+ok 32 - exact latest-turn command dispatches once and returns raw SUCCESS output with metadata
+  ---
+  duration_ms: 1.8346
+  type: 'test'
+  ...
+# Subtest: history, quotes, separators, writes, multiple targets, and unknown targets never dispatch
+ok 33 - history, quotes, separators, writes, multiple targets, and unknown targets never dispatch
+  ---
+  duration_ms: 1.0356
+  type: 'test'
+  ...
+# Subtest: command failure buckets remain distinct and submitted abort is reported without retry
+ok 34 - command failure buckets remain distinct and submitted abort is reported without retry
+  ---
+  duration_ms: 4.4536
+  type: 'test'
+  ...
+# Subtest: chat origin, payload bounds, single flight and response isolation
+ok 35 - chat origin, payload bounds, single flight and response isolation
+  ---
+  duration_ms: 1394.7985
+  type: 'test'
+  ...
+# Subtest: OpenCode provider pins endpoint/session, bounds requests, and classifies failures without retry
+ok 36 - OpenCode provider pins endpoint/session, bounds requests, and classifies failures without retry
+  ---
+  duration_ms: 15.6934
+  type: 'test'
+  ...
+# Subtest: coordinator takes a durable snapshot, requires explicit apply, records evidence, and is idempotent
+ok 37 - coordinator takes a durable snapshot, requires explicit apply, records evidence, and is idempotent
+  ---
+  duration_ms: 1935.146
+  type: 'test'
+  ...
+# Subtest: engine review submission failures remain visible as a source-review handoff
+ok 38 - engine review submission failures remain visible as a source-review handoff
+  ---
+  duration_ms: 589.9519
+  type: 'test'
+  ...
+# Subtest: coordinator rejects traversal, protected files, symlinks, and stale CAS before writing
+ok 39 - coordinator rejects traversal, protected files, symlinks, and stale CAS before writing
+  ---
+  duration_ms: 438.7772
+  type: 'test'
+  ...
+# Subtest: review corrections produce a new proposal that still requires explicit apply
+ok 40 - review corrections produce a new proposal that still requires explicit apply
+  ---
+  duration_ms: 2106.4578
+  type: 'test'
+  ...
+# Subtest: close marks an in-flight run interrupted and resume never replays a write
+ok 41 - close marks an in-flight run interrupted and resume never replays a write
+  ---
+  duration_ms: 416.0726
+  type: 'test'
+  ...
+# Subtest: a second coordinator cannot construct during an active run and malformed locks remain fail-closed
+ok 42 - a second coordinator cannot construct during an active run and malformed locks remain fail-closed
+  ---
+  duration_ms: 444.8018
+  type: 'test'
+  ...
+# Subtest: global admission permits only one durable run and enforces the output budget
+ok 43 - global admission permits only one durable run and enforces the output budget
+  ---
+  duration_ms: 613.2882
+  type: 'test'
+  ...
+# Subtest: status reports the non-Git workspace as blocked and pins the catalog
+ok 44 - status reports the non-Git workspace as blocked and pins the catalog
+  ---
+  duration_ms: 745.3708
+  type: 'test'
+  ...
+# Subtest: run executes only the fixed syntax command, records bounded evidence, and never grants release
+ok 45 - run executes only the fixed syntax command, records bounded evidence, and never grants release
+  ---
+  duration_ms: 800.1543
+  type: 'test'
+  ...
+# Subtest: setup pins transitive fixed-runner modules and run rechecks source and candidate hashes after the command
+ok 46 - setup pins transitive fixed-runner modules and run rechecks source and candidate hashes after the command
+  ---
+  duration_ms: 678.0628
+  type: 'test'
+  ...
+# Subtest: candidate files cannot include delivery runners, runtime, dependencies, or secrets
+ok 47 - candidate files cannot include delivery runners, runtime, dependencies, or secrets
+  ---
+  duration_ms: 606.1307
+  type: 'test'
+  ...
+# Subtest: hook installation is explicit and the hook gate rejects staged files outside the reviewed task
+ok 48 - hook installation is explicit and the hook gate rejects staged files outside the reviewed task
+  ---
+  duration_ms: 8932.1964
+  type: 'test'
+  ...
+# Subtest: execution API denies profile mutation and dispatches only named local operations
+ok 49 - execution API denies profile mutation and dispatches only named local operations
+  ---
+  duration_ms: 20.7082
+  type: 'test'
+  ...
+# Subtest: inventory distinguishes configured SSH from live Catalyst observations without credentials
+ok 50 - inventory distinguishes configured SSH from live Catalyst observations without credentials
+  ---
+  duration_ms: 10.1819
+  type: 'test'
+  ...
+# Subtest: exact resolved device routes through one transport and does not fall back
+ok 51 - exact resolved device routes through one transport and does not fall back
+  ---
+  duration_ms: 2.7013
+  type: 'test'
+  ...
+# Subtest: missing profiles and pre-abort do not execute; Catalyst remains usable
+ok 52 - missing profiles and pre-abort do not execute; Catalyst remains usable
+  ---
+  duration_ms: 2.7998
+  type: 'test'
+  ...
+# Subtest: sandbox routes require exact origin and explicit header without exposing generic actions
+ok 53 - sandbox routes require exact origin and explicit header without exposing generic actions
+  ---
+  duration_ms: 1145.6967
+  type: 'test'
+  ...
+# Subtest: steering is authorized to one active run and pending IDs survive close exactly once
+ok 54 - steering is authorized to one active run and pending IDs survive close exactly once
+  ---
+  duration_ms: 1280.276
+  type: 'test'
+  ...
+# Subtest: late steering is rejected after the final model boundary and before final event
+ok 55 - late steering is rejected after the final model boundary and before final event
+  ---
+  duration_ms: 2358.7585
+  type: 'test'
+  ...
+# Subtest: beforeModel drains steering into the next model messages and emits applied once
+ok 56 - beforeModel drains steering into the next model messages and emits applied once
+  ---
+  duration_ms: 214.1649
+  type: 'test'
+  ...
+# Subtest: tool result events retain bounded raw output and model tool context stays bounded
+ok 57 - tool result events retain bounded raw output and model tool context stays bounded
+  ---
+  duration_ms: 402.7071
+  type: 'test'
+  ...
+# Subtest: traces preserve async parentage and results without recording application data
+ok 58 - traces preserve async parentage and results without recording application data
+  ---
+  duration_ms: 528.3448
+  type: 'test'
+  ...
+1..58
+# tests 58
+# suites 0
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 57009.1774

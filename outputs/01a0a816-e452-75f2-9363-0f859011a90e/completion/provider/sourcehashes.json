@@ -1,0 +1,63 @@
+{
+  "baselineLedger": {
+    "path": "completion/baseline-ledger.json",
+    "sha256": "457effc017703f9bec31f17000dee22b8c8f3cfd449986bb880951d87f1f403f"
+  },
+  "sourceSHA": {
+    "polished.html": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+    "polished.js": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+    "intentgraph/server.cjs": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef",
+    "intentgraph/agent-runtime.cjs": "be188a28902527bba7242ddb75c18a8aceeacf5cfc68964c19ec79048392c92c"
+  },
+  "touchedFiles": [
+    "candidate/provider-picker.js",
+    "candidate/intentgraph/provider-selection.cjs",
+    "candidate/intentgraph/provider-adapter.cjs",
+    "candidate/intentgraph/provider-selection.test.cjs",
+    "candidate/intentgraph/provider-adapter.test.cjs",
+    "candidate/intentgraph/provider-runtime-config.cjs",
+    "candidate/intentgraph/provider-runtime-config.test.cjs",
+    "candidate/intentgraph/provider-agent-runtime.test.cjs",
+    "replacements.json",
+    "sourcehashes.json",
+    "touchedfiles.json",
+    "row-results.json",
+    "contract.md",
+    "hunk-validation.json",
+    "runtime-overlay-test.cjs",
+    "runtime-overlay-result.json",
+    "candidate/intentgraph/provider-server-config.test.cjs",
+    "candidate/provider-settings.browser.test.cjs",
+    "candidate/intentgraph/agent-stream.test.cjs",
+    "test-replacements.json",
+    "test-hunk-validation.json",
+    "settings-browser-result.json",
+    "test-compatibility.md",
+    "test-compatibility-result.json",
+    "candidate/intentgraph/chat.test.cjs",
+    "candidate/intentgraph/steering.test.cjs"
+  ],
+  "candidateSHA": {
+    "candidate/provider-picker.js": "5a9a1c9608c83a46647fd5045d0d0f8d607488dae924dda18f35b7f0b86c1901",
+    "candidate/intentgraph/provider-selection.cjs": "fbb3ae222f24996effd52703e8466be3aa995a784b4737aed5376be9faf9ec8e",
+    "candidate/intentgraph/provider-adapter.cjs": "98770029b3f1eba5819fd6c8133e4783deae6ca6bc5a5625d61036d13c42e9f2",
+    "candidate/intentgraph/provider-selection.test.cjs": "29e75497aaa3b10f0ba13124f615ced8cf2800a2da426439fc9645fc7d093555",
+    "candidate/intentgraph/provider-adapter.test.cjs": "6639432e0b8c89cce124cb2d124b62fd99d9995fc7a5f74428b06024361e1378",
+    "candidate/intentgraph/provider-runtime-config.cjs": "c156380e672c407fe4d0cc684af49beed8cba8be7372a30b0faceb077aea879e",
+    "candidate/intentgraph/provider-runtime-config.test.cjs": "98cdfa4cbd1e0db9d186c853264927bb887c0352c1721a327f8685abf698e951",
+    "candidate/intentgraph/provider-agent-runtime.test.cjs": "3a069b04955ceec721b0ce49630da79deb895b174292974bbbfb8090659ccf9a",
+    "candidate/intentgraph/provider-server-config.test.cjs": "f242aab653944ae381ca3ebbb60cee83b0b70fe61961d6b57513eee33edd5c31",
+    "candidate/provider-settings.browser.test.cjs": "e5fcf566805c4a80ca82c8073f6bb30e8afb7762f1c1efafa718c6210e949c5e",
+    "candidate/intentgraph/agent-stream.test.cjs": "ca39df6b9455b23456fbcb5fd6b2504a7c10082823d2959f54b461b35f2cbc62",
+    "test-replacements.json": "9ceaad50de74812cb1c71ab8bdc25c0d0be5d971eb5f4791400ac412c1e6f7dd",
+    "test-hunk-validation.json": "856b0f24e4222a6df4dfa92b9873d02d860c0ce2b2e3a25586900100423740e7",
+    "settings-browser-result.json": "b8f93d520db3b606d7e2153e7f897972c7bf024f3b18ac3bd1f30f565339f223",
+    "test-compatibility-result.json": "6143aab5bbd99a762c921faa38385c738bc33edd1350838c4d148ca1583c05ff",
+    "test-compatibility.md": "c2a8e8245a8b3dee779b0590dc1fa276bfef1c85c788edd3201566af4a87b8f2",
+    "candidate/intentgraph/chat.test.cjs": "86564c56ada0a6ddb621a5b82fe5c7366f3bde8933f5e712e3cfdc7c7927d838",
+    "candidate/intentgraph/steering.test.cjs": "ce515ccd0f513a23d45882a5907565d3fc4894d17664c82c9526b79212680eda"
+  },
+  "exactBeforeAfter": "See replacements.json: every old anchor has a sourceSHA and is verified to occur exactly once against the baseline before sequential application.",
+  "liveProductFilesEdited": false,
+  "externalCalls": false
+}

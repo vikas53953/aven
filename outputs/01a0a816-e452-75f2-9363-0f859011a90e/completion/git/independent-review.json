@@ -1,0 +1,18 @@
+{
+  "reviewer": "review_git_candidate",
+  "scope": "Read-only candidate review; no live operations",
+  "verdict": "CHANGES_REQUIRED",
+  "findings": [
+    {"id":"GIT-01","severity":"critical","file":"intentgraph/git-workspace.cjs","line":271,"finding":"Snapshot diffs precede repository filter rejection; configured clean/process filters may execute during configure/status."},
+    {"id":"GIT-02","severity":"high","file":"intentgraph/git-workspace.cjs","line":606,"finding":"PR publish does not bind current repository and branch to reviewed identity."},
+    {"id":"GIT-03","severity":"high","file":"intentgraph/git-workspace.cjs","line":611,"finding":"PR publish fails to compare remote base OID with reviewed base OID."},
+    {"id":"GIT-04","severity":"high","file":"intentgraph/git-workspace.cjs","line":343,"finding":"Deleted symlinks and index symlink/gitlink modes can bypass unsupported path checks."},
+    {"id":"GIT-05","severity":"high","file":"intentgraph/git-workspace.cjs","line":131,"finding":"Inherited Git environment may redirect repository/index/config or execute SSH command."},
+    {"id":"GIT-06","severity":"medium","file":"intentgraph/git-workspace.cjs","line":271,"finding":"Index CAS hashes staged listing, not complete raw index state including flags/extensions."},
+    {"id":"GIT-07","severity":"medium","file":"intentgraph/git-workspace.cjs","line":10,"finding":"Review output accepts 4MiB while apply request is bounded to 2MiB."},
+    {"id":"GIT-08","severity":"medium","file":"intentgraph/git-workspace.cjs","line":521,"finding":"Post-update-ref status failure needs truthful committed/uncertain outcome and reachability metadata."},
+    {"id":"GIT-09","severity":"medium","file":"polished-git.js","line":239,"finding":"Reconfiguring repository leaves commit and PR review panels actionable."}
+  ],
+  "checks": ["git-workspace.cjs syntax passed", "polished-git.js syntax passed"],
+  "resolution": "Returned to executor; not integrated"
+}

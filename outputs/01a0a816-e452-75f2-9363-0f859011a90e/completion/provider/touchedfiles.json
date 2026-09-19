@@ -1,0 +1,37 @@
+{
+  "scope": "Provider/model/effort selection candidate artifacts only. Live product source files were not edited.",
+  "files": [
+    "candidate/provider-picker.js",
+    "candidate/intentgraph/provider-selection.cjs",
+    "candidate/intentgraph/provider-adapter.cjs",
+    "candidate/intentgraph/provider-selection.test.cjs",
+    "candidate/intentgraph/provider-adapter.test.cjs",
+    "candidate/intentgraph/provider-runtime-config.cjs",
+    "candidate/intentgraph/provider-runtime-config.test.cjs",
+    "candidate/intentgraph/provider-agent-runtime.test.cjs",
+    "replacements.json",
+    "sourcehashes.json",
+    "row-results.json",
+    "contract.md",
+    "hunk-validation.json",
+    "runtime-overlay-test.cjs",
+    "runtime-overlay-result.json",
+    "candidate/intentgraph/provider-server-config.test.cjs",
+    "candidate/provider-settings.browser.test.cjs",
+    "candidate/intentgraph/agent-stream.test.cjs",
+    "test-replacements.json",
+    "test-hunk-validation.json",
+    "settings-browser-result.json",
+    "test-compatibility.md",
+    "test-compatibility-result.json",
+    "candidate/intentgraph/chat.test.cjs",
+    "candidate/intentgraph/steering.test.cjs"
+  ],
+  "overlapFilesReadOnly": [
+    "polished.html",
+    "polished.js",
+    "intentgraph/server.cjs",
+    "intentgraph/agent-runtime.cjs"
+  ],
+  "liveProductFilesEdited": false
+}

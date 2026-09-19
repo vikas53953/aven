@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "scope": "UX079/UX106 health status boundary; candidate-only runtime and minimal UI changes.",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse",
+  "touchedFiles": [
+    "candidate/intentgraph/agent-runtime.cjs",
+    "candidate/intentgraph/catalyst.cjs",
+    "candidate/intentgraph/vault.cjs",
+    "candidate/intentgraph/network-commands.json",
+    "candidate/polished.js",
+    "candidate/minimal-ui-health/polished.js",
+    "candidate/frozen-v8/polished.js"
+  ],
+  "unchangedCopies": [
+    "candidate/intentgraph/catalyst.cjs",
+    "candidate/intentgraph/vault.cjs",
+    "candidate/intentgraph/network-commands.json",
+    "candidate/intentgraph/network-execution.cjs",
+    "candidate/intentgraph/adapters/index.cjs",
+    "candidate/intentgraph/agent-runtime.test.cjs",
+    "candidate/intentgraph/chat-runtime.cjs",
+    "candidate/intentgraph/chat-runtime.test.cjs"
+  ],
+  "sourceHashes": {
+    "liveAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "frozenAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "latestMinimalUiCandidate": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD",
+    "frozenV8PolishedJs": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+    "livePolishedJs": "560374B9C20BA04546EB238558D8E45ACD2353F8F69DF73824D8356E902DA17A",
+    "livePolishedHtml": "42C1417D125D2C727D343A33832F5348FD3C06117F24509C17933DFD524D54B2"
+  },
+  "candidateHashes": {
+    "agentRuntime": "A9997E0D0D79DF141AA14BB1913551485E517E5819D19004D9B7B1C68B2BDFCD",
+    "frozenV8PolishedJs": "33ACF1B4D94AF51DDAFEF6A3383F097C543182E8365EC002C275B417F682D11A",
+    "preservedMinimalUiPolishedJs": "65D85ADE51321FC84139B3DABCACB44D30FECDDD38AD69B8A6A46E11B512561C"
+  },
+  "replacements": [
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\intentgraph\\agent-runtime.cjs",
+      "old": "const CHAT_MODES = Object.freeze(['inspect', 'plan']);\n\nconst OPERATION_COMMANDS",
+      "new": "const CHAT_MODES = Object.freeze(['inspect', 'plan']);\nconst NOT_ASSESSED_HEALTH = Object.freeze({ status: 'not_assessed', reason: 'Command completion is not a device health assessment.' });\n\nconst OPERATION_COMMANDS",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+      "sourceSHA256After": "DB59EA44662D539D524A12A39C319CBD816B05A9D19216F18C623B07B8851D08"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\intentgraph\\agent-runtime.cjs",
+      "old": "    'Never claim a command succeeded unless the tool result status is SUCCESS and includes raw output. Preserve UNKNOWN, FAILURE, BLOCKLISTED, NOT_EXECUTED, and budget exhaustion accurately. Never substitute output or imply a retry.',",
+      "new": "    'Never claim a command succeeded unless the tool result status is SUCCESS and includes raw output. Preserve UNKNOWN, FAILURE, BLOCKLISTED, NOT_EXECUTED, and budget exhaustion accurately. Never substitute output or imply a retry.',\n    'A SUCCESS command result means execution completed only; it never establishes a healthy device. Health conclusions require concrete raw evidence and must remain qualified. If any check is UNKNOWN, FAILURE, BLOCKLISTED, or NOT_EXECUTED, lead the authoritative answer with that deterministic outcome and state that device health is not established.',",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "DB59EA44662D539D524A12A39C319CBD816B05A9D19216F18C623B07B8851D08",
+      "sourceSHA256After": "3FA0CE0C145A14660354FFFC2D657E90B37A5BC8E51F745A2CA201459B7CFCA7"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\intentgraph\\agent-runtime.cjs",
+      "old": "function evidenceSummary(evidence) {\n  const nonSuccess = evidence.filter((item) => item.status !== 'SUCCESS');\n  if (!nonSuccess.length) return '';\n  return '\\n\\nObserved operation status:\\n' + nonSuccess.map((item) => `${item.command} on ${item.target}: ${item.status}`).join('\\n');\n}",
+      "new": "function incompleteEvidenceSummary(evidence) {\n  const nonSuccess = evidence.filter((item) => item.status !== 'SUCCESS');\n  if (!nonSuccess.length) return '';\n  const observed = nonSuccess.map((item) => `${item.command} on ${item.target}: ${item.status}`).join('; ');\n  return `Observed check status: ${observed}. Device health is not established by these checks.`;\n}\n\nfunction healthAssessmentFor(evidence) {\n  return evidence.some((item) => item.command !== 'inventory') ? { ...NOT_ASSESSED_HEALTH } : null;\n}",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "3FA0CE0C145A14660354FFFC2D657E90B37A5BC8E51F745A2CA201459B7CFCA7",
+      "sourceSHA256After": "73D107CED339B6F603BAF7DA4EB45C4E1BC4628362044B79EE2B44B5057D8086"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\intentgraph\\agent-runtime.cjs",
+      "old": "    const groundedText = text || (evidence.length ? 'The investigation ended without a grounded final response.' : 'No grounded response was returned.');\n",
+      "new": "    const groundedText = text || (evidence.length ? 'The investigation ended without a grounded final response.' : 'No grounded response was returned.');\n    const incompleteSummary = incompleteEvidenceSummary(evidence);\n    const healthAssessment = healthAssessmentFor(evidence);\n",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "73D107CED339B6F603BAF7DA4EB45C4E1BC4628362044B79EE2B44B5057D8086",
+      "sourceSHA256After": "C36649CB5E76F873AA276250F44176C9A87982C54F2D24A36EE23272DD4156FF"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\intentgraph\\agent-runtime.cjs",
+      "old": "      text: `${groundedText}${evidenceSummary(evidence)}`,",
+      "new": "      text: incompleteSummary || groundedText,\n      ...(incompleteSummary && groundedText ? { advisoryText: groundedText } : {}),\n      ...(healthAssessment ? { healthAssessment } : {}),",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "C36649CB5E76F873AA276250F44176C9A87982C54F2D24A36EE23272DD4156FF",
+      "sourceSHA256After": "A9997E0D0D79DF141AA14BB1913551485E517E5819D19004D9B7B1C68B2BDFCD"
+    },
+    {
+      "file": "polished.js",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "old": "status.textContent=String(item.status||'UNKNOWN');",
+      "new": "status.textContent='Execution: '+String(item.status||'UNKNOWN');status.setAttribute('aria-label','Execution status: '+String(item.status||'UNKNOWN'));",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sourceSHA256After": "685459B97D23B21A02E7C2D9BE7CDB2B1E1FB242721CDB4578411E6C5B7810E5"
+    },
+    {
+      "file": "polished.js",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "old": "header.append(title);if(item.status!=='SUCCESS')header.append(status);",
+      "new": "header.append(title);header.append(status);",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "685459B97D23B21A02E7C2D9BE7CDB2B1E1FB242721CDB4578411E6C5B7810E5",
+      "sourceSHA256After": "5628AC2EB55CE0324EDD99CFB89DF45E780320B4CBC673AE35896C8287C8452F"
+    },
+    {
+      "file": "polished.js",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "old": "events:pending.events,evidence:AvenRunState.clean(result.evidence||[]),runId:",
+      "new": "events:pending.events,evidence:AvenRunState.clean(result.evidence||[]),healthAssessment:result.healthAssessment&&{status:result.healthAssessment.status,reason:result.healthAssessment.reason},runId:",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "5628AC2EB55CE0324EDD99CFB89DF45E780320B4CBC673AE35896C8287C8452F",
+      "sourceSHA256After": "70ACC6AA3D13A4AEA455AF10459D50BD3916D8DF4A9477DB92549401590AED22"
+    },
+    {
+      "file": "polished.js",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "old": "+'. Execution status does not establish device health.';",
+      "new": "+'. Execution status is separate from device health.'+(m.healthAssessment?.status==='not_assessed'?' Health: not assessed · '+(m.healthAssessment.reason||'Command completion is not a device health assessment.'):'');",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "70ACC6AA3D13A4AEA455AF10459D50BD3916D8DF4A9477DB92549401590AED22",
+      "sourceSHA256After": "7763AA29BB0CD62276F57ED8CF40BA33210CD57359A1E2B5FF9910A77865777E"
+    },
+    {
+      "file": "polished.js",
+      "sourcePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "old": "const explanation=rawTextForMessage(m).trim();",
+      "new": "const explanation=(m.evidence||[]).some(e=>e.status&&e.status!=='SUCCESS')?'':rawTextForMessage(m).trim();",
+      "occurrenceCount": 1,
+      "sourceSHA256Before": "7763AA29BB0CD62276F57ED8CF40BA33210CD57359A1E2B5FF9910A77865777E",
+      "sourceSHA256After": "33ACF1B4D94AF51DDAFEF6A3383F097C543182E8365EC002C275B417F682D11A"
+    }
+  ]
+}

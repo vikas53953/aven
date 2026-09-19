@@ -1,0 +1,306 @@
+[
+  {
+    "id": "UX-003",
+    "verdict": "Verified (scoped)",
+    "evidenceLevel": "fresh",
+    "finding": "Live account row has no caret; it opens the account menu. Fresh isolated keyboard access also passed.",
+    "evidence": "root-ui-observations.json; audit_001_040/fresh-evidence.json",
+    "nextAction": "Retain regression coverage for keyboard access and the caret-free account entry.",
+    "limitation": "Verified in the inspected Chromium build; no broad assistive-technology certification."
+  },
+  {
+    "id": "UX-006",
+    "verdict": "Verified (scoped)",
+    "evidenceLevel": "fresh",
+    "finding": "Fresh fixtures demonstrated one selected reaction, replacement, clearing by selecting again, and persistence after reload.",
+    "evidence": "audit_001_040/fresh-evidence.json; audit_041_079/messages.json; audit_041_079/audit.cjs",
+    "nextAction": "Retain replacement, clearing and reload regression checks; verify complete message preservation.",
+    "limitation": "Local isolated storage; cross-device reactions are not implemented."
+  },
+  {
+    "id": "UX-008",
+    "verdict": "Partial",
+    "finding": "Initial direct-chat header retains the coworker identity, but Rename conversation temporarily replaces it with the conversation title (UX-011).",
+    "nextAction": "Fix the shared header refresh path in UX-011, then retest short messages and rename/navigation together.",
+    "limitation": "Initial render passed; the related rename path has a confirmed defect."
+  },
+  {
+    "id": "UX-011",
+    "verdict": "Defect",
+    "finding": "Renaming a direct conversation temporarily replaces the coworker identity in its header with the conversation title. The stored coworker name is not changed.",
+    "nextAction": "Render direct-chat headers from coworker identity after rename, consistent with showChat; test rename then navigation/reload.",
+    "limitation": "Presentation/state consistency defect; no evidence of persisted coworker-name corruption."
+  },
+  {
+    "id": "UX-039",
+    "verdict": "Partial",
+    "finding": "Failed runs retain partial evidence. A safe retry flow with review of already completed actions is still absent; this was already Not started in the source register.",
+    "nextAction": "Design explicit retry scope and retained-action review, then test that completed operations are never silently repeated.",
+    "limitation": "No unsafe repeated device operation was reproduced. This is an implementation gap, not a confirmed execution defect."
+  },
+  {
+    "id": "UX-041",
+    "finding": "A fresh Markdown fixture rendered headings, lists, table and code; injected image/script/iframe markup did not become executable elements.",
+    "limitation": "Representative fixture only; this is not a comprehensive security review."
+  },
+  {
+    "id": "UX-042",
+    "finding": "A fresh raw CLI fixture rendered once and copied exact spaces, tabs and newlines to the intercepted clipboard.",
+    "limitation": "Browser clipboard was intercepted; OS clipboard integration and all duplicate-output shapes were not tested. Artifact duplication is separately tracked in UX-066."
+  },
+  {
+    "id": "UX-043",
+    "finding": "Fresh tests copied the selected assistant/user messages and showed Copy failed when the clipboard rejected the write.",
+    "limitation": "Clipboard API was intercepted in an isolated browser."
+  },
+  {
+    "id": "UX-044",
+    "finding": "Fixture messages on different dates received date grouping; timestamps exposed focusable accessible labels.",
+    "limitation": "No screen-reader or timezone-boundary matrix was performed."
+  },
+  {
+    "id": "UX-046",
+    "verdict": "Partial",
+    "finding": "Revert removed later messages and Undo restored the later target message in the isolated fixture.",
+    "limitation": "Exact full-history equality and busy/queued protection were not asserted.",
+    "nextAction": "Verify byte-equivalent history restoration and blocked revert while running/queued."
+  },
+  {
+    "id": "UX-047",
+    "verdict": "Partial",
+    "finding": "Fork created a separate three-message branch with a parent provenance link; the parent draft remained unchanged.",
+    "limitation": "Revisit after reload and exact parent-history equality were not asserted.",
+    "nextAction": "Retest branch navigation/reload and parent-history preservation."
+  },
+  {
+    "id": "UX-050",
+    "verdict": "Partial",
+    "finding": "Archive hid the composer; restoring and reloading made the selected chat writable again.",
+    "limitation": "Exact message/evidence preservation across archive/restore was not asserted.",
+    "nextAction": "Compare full history/evidence before and after archive/restore."
+  },
+  {
+    "id": "UX-051",
+    "verdict": "Partial",
+    "finding": "Workspace export produced an aven-workspace envelope containing the selected fixture chat.",
+    "limitation": "Selected-conversation scope, exact raw evidence/timestamps and complete secret-exclusion behavior were not asserted.",
+    "nextAction": "Validate export content against source scope and raw evidence, including sensitive fields."
+  },
+  {
+    "id": "UX-056",
+    "verdict": "Partial",
+    "finding": "Live profile and document UI expose SOUL/MEMORY with explicit local-only disclosure; they are not model memory or a connected behavior runtime.",
+    "evidence": "root-ui-observations.json; audit_041_079/history-settings.json; polished.js",
+    "limitation": "Saving and consuming the same document in a real model request were not demonstrated.",
+    "nextAction": "Keep local-note semantics explicit; define and test any future runtime document integration."
+  },
+  {
+    "id": "UX-060",
+    "verdict": "Partial",
+    "evidenceLevel": "Direct live UI and local status GET",
+    "finding": "Current OpenCode Go / mimo-v2.5 configuration is displayed. The UI explicitly says provider switching is unavailable.",
+    "evidence": "root-ui-observations.json; polished-diagnostics.js",
+    "nextAction": "Add explicit provider setup/switching and verify the selected runtime and response provenance match.",
+    "limitation": "Local configured status is not proof of provider reachability; no credentials or provider requests were used."
+  },
+  {
+    "id": "UX-061",
+    "verdict": "Partial",
+    "evidenceLevel": "Direct live UI and local status GET",
+    "finding": "Connections displays generic local provider diagnostics, not individual adapter connection/health state.",
+    "evidence": "root-ui-observations.json; polished.js",
+    "nextAction": "Expose adapter-specific state and refresh results, with accurate unavailable/failed states.",
+    "limitation": "No remote adapter health check or inventory load was performed."
+  },
+  {
+    "id": "UX-062",
+    "verdict": "Partial",
+    "finding": "Live privacy copy distinguishes browser/service storage, request data and local-only notes/files; export/import controls exist.",
+    "evidence": "root-ui-observations.json; audit_041_079/history-settings.json",
+    "limitation": "The full destructive-operation recovery and valid-import preservation contract was not exercised.",
+    "nextAction": "Verify recoverability and disclosure against every data-control path."
+  },
+  {
+    "id": "UX-064",
+    "finding": "Help opened keyboard guidance. Feedback saved locally and reported that state without an outbound request.",
+    "limitation": "Tested help/feedback entries only; local storage failure for feedback was not injected."
+  },
+  {
+    "id": "UX-067",
+    "verdict": "Partial",
+    "finding": "Browser preview accurately says no browser session is connected; there is no actual page preview or control session.",
+    "evidence": "root-ui-observations.json; audit_041_079/panes-evidence.json",
+    "nextAction": "Implement an authorized browser session before treating preview/control as complete.",
+    "limitation": "Unavailable state passed; live browsing capability remains absent."
+  },
+  {
+    "id": "UX-068",
+    "verdict": "Partial",
+    "finding": "Computer preview accurately says no computer session is connected; there is no live screen or action session.",
+    "evidence": "root-ui-observations.json; audit_041_079/panes-evidence.json",
+    "nextAction": "Implement authorized screen/action sessions with freshness and control boundaries.",
+    "limitation": "Unavailable state passed; live computer control remains absent."
+  },
+  {
+    "id": "UX-078",
+    "verdict": "Partial",
+    "finding": "Fresh fixture and live saved messages expose run IDs, source/model and raw command metadata separately from narrative.",
+    "evidence": "root-ui-observations.json; audit_041_079/network-semantics.json",
+    "limitation": "Exact copied/exported evidence provenance across all timestamps and commands was not asserted.",
+    "nextAction": "Verify exported/copied records preserve complete original provenance."
+  },
+  {
+    "id": "UX-081",
+    "verdict": "Partial",
+    "evidenceLevel": "Fresh module fixture + inspected UI",
+    "finding": "Evidence normalization preserved target and distinguished missing output from a persisted empty string. Artifacts showed selected-run evidence.",
+    "limitation": "The comparison UI and timestamp labeling across different runs were not exercised.",
+    "nextAction": "Run a two-run comparison with different devices/times and missing versus empty output."
+  },
+  {
+    "id": "UX-085",
+    "verdict": "Partial",
+    "evidenceLevel": "Code inspection + direct live empty state",
+    "finding": "Goals has a local add/checklist surface and states that completion must cite evidence; the source contains an evidence-reference guard.",
+    "evidence": "root-ui-observations.json; polished-workspace-tools.js:390; audit_080_115/audit-080-115.cjs",
+    "limitation": "The child module check only inspected source text. Completion, persistence and invalid-evidence rejection were not behaviorally tested.",
+    "nextAction": "Exercise goal creation, valid/invalid evidence completion and reload without implying agent execution."
+  },
+  {
+    "id": "UX-087",
+    "verdict": "Partial",
+    "evidenceLevel": "Code inspection",
+    "finding": "Local completion-notice and mute controls exist; broader system/attention notification delivery is incomplete.",
+    "limitation": "Mute, correct destination and duplicate-event suppression were not freshly exercised.",
+    "nextAction": "Test delivery, mute, link targets and deduplication before claiming notification acceptance."
+  },
+  {
+    "id": "UX-089",
+    "verdict": "Missing",
+    "finding": "No skills/procedure picker with required access and version provenance exists. Local coworker notes do not implement this feature.",
+    "nextAction": "Define a versioned workflow registry and explicit procedure selection/access contract.",
+    "limitation": "Local documents exist, but the requested reusable workflow capability is absent."
+  },
+  {
+    "id": "UX-091",
+    "verdict": "Partial",
+    "finding": "Fresh fixtures demonstrated Escape/focus return for selected dialogs and named pane controls.",
+    "limitation": "A complete keyboard-only tour, focus order and trap audit were not performed.",
+    "nextAction": "Complete keyboard-only navigation through every primary flow."
+  },
+  {
+    "id": "UX-092",
+    "verdict": "Partial",
+    "finding": "Selected coworker and unavailable pane controls expose accessible labels/state in inspected fixtures.",
+    "limitation": "No screen-reader session or complete active-run announcement test was performed.",
+    "nextAction": "Verify action names, selected states and running/failure announcements with assistive technology."
+  },
+  {
+    "id": "UX-093",
+    "verdict": "Unverified",
+    "evidenceLevel": "Code inspection; fresh acceptance not established",
+    "finding": "Responsive styling exists, but this audit did not establish measured contrast or usable controls at 200% text scale.",
+    "limitation": "Historical workbook claims were not treated as fresh contrast/zoom evidence.",
+    "nextAction": "Measure light/dark contrast and test real 200% text scaling and reflow."
+  },
+  {
+    "id": "UX-094",
+    "verdict": "Unverified",
+    "evidenceLevel": "Code inspection; fresh acceptance not established",
+    "finding": "Reduced-motion CSS exists; the current browser run did not reach the intended motion assertion.",
+    "limitation": "No current demonstration that all state changes remain understandable with reduced motion.",
+    "nextAction": "Run a dedicated reduced-motion interaction test."
+  },
+  {
+    "id": "UX-095",
+    "verdict": "Partial",
+    "finding": "Selected menus opened and Escape/focus paths were exercised in browser fixtures.",
+    "limitation": "Touch, hover persistence and viewport-boundary behavior were not comprehensively checked.",
+    "nextAction": "Test menus by pointer, keyboard and touch at viewport edges."
+  },
+  {
+    "id": "UX-096",
+    "verdict": "Partial",
+    "finding": "Initial shell geometry checks passed at 1440/1024/768/390px; selected panes also opened in the live app.",
+    "evidence": "audit_001_040/fresh-evidence.json; root-ui-observations.json",
+    "limitation": "This does not establish every pane at narrow widths or 200% zoom. No layout fix was made in this audit.",
+    "nextAction": "Verify open panes, composer, menus and contained table scroll under narrow/zoomed layouts."
+  },
+  {
+    "id": "UX-099",
+    "verdict": "Unverified",
+    "evidenceLevel": "No completed fresh performance test",
+    "finding": "No completed large-history performance/selection/anchor result was established in this audit.",
+    "limitation": "A browser-control timeout occurred on the live artifact view; cause was not isolated and is not counted as a product defect.",
+    "nextAction": "Measure responsiveness and retained scroll/selection anchors with representative long transcripts."
+  },
+  {
+    "id": "UX-101",
+    "verdict": "Partial",
+    "finding": "Fresh backup serialization/parse fixture preserved format and active coworker and rejected a reserved private-key field.",
+    "limitation": "It did not prove exact migration preservation of all chats, drafts, queues, avatars and revert history.",
+    "nextAction": "Run an exact before/after migration comparison over the complete saved-state schema."
+  },
+  {
+    "id": "UX-102",
+    "verdict": "Defect",
+    "evidenceLevel": "Fresh isolated browser contradiction + code inspection",
+    "finding": "About hard-codes OpenCode / MiMo V2.5 as configured even when refreshed local diagnostics reports configured:false / Not connected.",
+    "nextAction": "Derive About connection identity from the same status snapshot and preserve unknown/unavailable states.",
+    "limitation": "False configuration was injected in an isolated fixture. The actual local service was configured during live inspection."
+  },
+  {
+    "id": "UX-103",
+    "verdict": "Partial",
+    "finding": "Initial selected coworker identity is consistent across profile and chat; renaming a direct conversation causes the header mismatch in UX-011.",
+    "limitation": "Full terminology/icon coverage was not audited; a specific identity inconsistency is confirmed.",
+    "nextAction": "Fix UX-011 and review remaining object names/icons across navigation and settings."
+  },
+  {
+    "id": "UX-108",
+    "verdict": "Partial",
+    "finding": "Live/context fixture discloses bounded model context and says full history remains saved; code selects a bounded history window.",
+    "evidence": "audit_001_040/fresh-evidence.json; polished.js:125; root-ui-observations.json",
+    "limitation": "A fresh over-limit request/omission-count comparison was not completed.",
+    "nextAction": "Compare displayed truncation counts with actual serialized request context and retained history."
+  },
+  {
+    "id": "UX-109",
+    "verdict": "Partial",
+    "finding": "Live profile and document UI explicitly disclose that SOUL/MEMORY are local notes and are not included in model requests.",
+    "evidence": "root-ui-observations.json; audit_041_079/history-settings.json; polished.js",
+    "limitation": "This audit did not save a note and inspect the next model request to verify exclusion.",
+    "nextAction": "Capture an isolated next-request payload after note editing and verify the disclosure matches it."
+  },
+  {
+    "id": "UX-111",
+    "verdict": "Unverified",
+    "evidenceLevel": "Code inspection; browser acceptance incomplete",
+    "finding": "Mark read/unread handlers exist, but the fresh persistence/opening test did not complete.",
+    "limitation": "No fresh proof that unread state survives reload or that opening cannot disturb an active run.",
+    "nextAction": "Exercise mark unread, reload, open and active-run preservation in a dedicated fixture."
+  },
+  {
+    "id": "UX-112",
+    "verdict": "Verified (scoped)",
+    "finding": "Fresh UI check showed English (system fallback) and a disabled unsupported-language choice.",
+    "limitation": "This verifies honest disclosure; additional language translations are not implemented."
+  },
+  {
+    "id": "UX-115",
+    "verdict": "Verified (scoped)",
+    "finding": "Fresh module fixture preserved raw record content/provenance while stripping private controls. Actual local GET listed four saved runs and retrieved one matching run/chat with 13 events and reply provenance.",
+    "evidence": "audit_080_115/module-audit.json; root-run-readback.json; root-ui-observations.json",
+    "limitation": "Existing local records only; no new provider/device run, service restart or cross-device durability test.",
+    "nextAction": "Retain local readback coverage; test crash/retention behavior separately before broader durability claims."
+  },
+  {
+    "id": "UX-004",
+    "verdict": "Partial",
+    "evidenceLevel": "fresh",
+    "finding": "Initial selected coworker identity, profile fields and local document access were inspected. A short profile rename updated the selected sidebar name in a fixture.",
+    "evidence": "root-ui-observations.json; audit_001_040/fresh-evidence.json; audit_041_079/history-settings.json",
+    "nextAction": "Verify profile rename synchronizes the header while leaving other coworkers unchanged.",
+    "limitation": "Header synchronization after profile rename and selected-coworker isolation were not asserted."
+  }
+]

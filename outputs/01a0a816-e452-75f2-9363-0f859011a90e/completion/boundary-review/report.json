@@ -1,0 +1,211 @@
+{
+  "review": "completion-boundary-review",
+  "status": "CHANGES_REQUIRED",
+  "stage": "early-review",
+  "scope": [
+    "workflows/candidate/approval-workflow.cjs",
+    "reliability/candidate/polished-reliability.js",
+    "reliability/candidate/intentgraph/reliability.cjs",
+    "reliability/candidate/intentgraph/reliability-storage.cjs",
+    "provider/candidate/intentgraph/provider-selection.cjs",
+    "provider/candidate/intentgraph/provider-adapter.cjs"
+  ],
+  "outOfScope": [
+    "Unhooked UI/runtime integration is intentionally not reported as a new defect.",
+    "No provider, device, credential, network, or long-running test was invoked."
+  ],
+  "findings": [
+    {
+      "id": "CB-001",
+      "severity": "critical",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "215-231",
+      "function": "ApprovalWorkflow.load/commit/persist",
+      "trigger": "Two workflow instances load the same storagePath at revision N and then approve or mutate different records before either reloads.",
+      "expected": "A serialized read-modify-write with an ownership lock and revision compare-and-swap; a stale writer must reject or reload before changing authorization state.",
+      "actual": "persist() writes an atomic replacement but never locks, rereads, or compares revision. Each instance mutates its stale in-memory state and can overwrite the other; both in-memory instances can still execute their own approved action.",
+      "action": "Add a durable transaction lock/CAS around every mutation, or route this state through the reliability ledger. Reject stale revisions and make reload the only recovery path."
+    },
+    {
+      "id": "CB-002",
+      "severity": "critical",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "448-476, 569-601",
+      "function": "requestApproval/execute",
+      "trigger": "Call requestApproval twice for the same still-proposed action, approve both returned tokens, then execute both execution tokens.",
+      "expected": "One idempotent approval request and at most one execution authorization for a proposal/action digest; duplicate calls return the existing decision or a conflict.",
+      "actual": "Each request creates a new approval. Only pending approvals are superseded, so an already approved approval remains valid while the second approval is created. Both execute successfully (focused probe: executor calls = 2).",
+      "action": "Bind an idempotency key and active approval uniqueness to proposalId + actionDigest + scopeDigest; reject or return an existing pending/approved/executed record."
+    },
+    {
+      "id": "CB-003",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "75-83, 115-129, 177-187, 227-231, 415-434",
+      "function": "requireJson/publicQuestion/publicProposal/buildReviewReceipt/commit",
+      "trigger": "Put apiKey, privateKey, password, or credential-bearing text in target, scope, diff, impact, rollback, question context, or an answer.",
+      "expected": "Reject credential fields or redact them before every public projection, event, receipt, and persisted state write. Secrets must not reach disk or UI.",
+      "actual": "Inputs are cloned and accepted as arbitrary JSON; publicProposal/publicQuestion and review receipts return the full payload, and commit persists it in proposals/questions/receipts/events. Focused probe returned a scope.apiKey unchanged from the public proposal.",
+      "action": "Introduce an allowlisted/redacted payload normalizer before hashing and before every public/persisted projection, with tests for common secret names and nested values."
+    },
+    {
+      "id": "CB-004",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "265-269, 345-356, 437-445, 555-565",
+      "function": "expireQuestion/renderQuestionCard/renderProposal/renderApprovalCard",
+      "trigger": "Render a question after its TTL, or render a proposal/approval after invalidate, supersede, deny, expire, or execute.",
+      "expected": "The projection must mark expired/stale/terminal cards non-interactive and non-actionable, with executionAllowed false. Expiry should be applied before projecting the card.",
+      "actual": "Rendering never calls expiry. A TTL-expired question still reports interactive:true. renderProposal and renderApprovalCard derive executionAllowed only from mode, so stale or terminal write cards report executionAllowed:true. Focused probe showed proposal status stale, receipt status proposed, executionAllowed true.",
+      "action": "Project an effective status at render time, persist expiry transitions if needed, and require current proposed/pending/approved state before exposing any actionable affordance."
+    },
+    {
+      "id": "CB-005",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "448-456, 467-475, 510-513",
+      "function": "requestApproval",
+      "trigger": "Create a proposal bound to answered question Q1, then pass questionId Q2 (also answered) to requestApproval.",
+      "expected": "Approval must retain and verify the proposal's exact question binding; an override must be rejected unless it is explicitly part of a new proposal.",
+      "actual": "The caller-supplied questionId replaces proposal.questionId without an equality check. The approval is accepted with Q2, and approval only checks that its own question is answered. Focused probe accepted proposal.questionId=Q1 with approval.questionId=Q2.",
+      "action": "Remove the override or require questionId === proposal.questionId; include the question answer digest in the approval binding."
+    },
+    {
+      "id": "CB-006",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workflows/candidate/approval-workflow.cjs",
+      "lines": "148-166",
+      "function": "validatePersistedState",
+      "trigger": "A persisted file is edited so a pending question becomes answered, or an approval becomes approved with a newly chosen executionTokenHash, while proposal digests remain unchanged.",
+      "expected": "Reload must fail closed on unverifiable authorization state, validate record relationships/transitions, and invalidate execution authorization when the state cannot establish that approval was freshly granted.",
+      "actual": "Reload validates proposal scope/action digests and only shape/status/hash syntax for questions and approvals. It does not validate question answers/expiry, bind approval to a proposal/question, or verify event history; a forged authorization status/hash is accepted by the loader.",
+      "action": "Validate relationships and transition history, or load authorization through the locked reliability ledger. If integrity cannot be established, clear decision/execution authorization and require fresh approval before execution."
+    },
+    {
+      "id": "CB-007",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/reliability/candidate/polished-reliability.js",
+      "lines": "228-235",
+      "function": "settleRun",
+      "trigger": "After owner A claims a run, owner B calls settleRun(runId,'SUCCESS' or 'FAILURE'); then settleRun is called again with the opposite terminal status.",
+      "expected": "Settlement requires the run owner/claim capability and an idempotency key, and terminal state is immutable except for a documented recovery transition.",
+      "actual": "settleRun has no owner or claim check, no idempotency key, and allows SUCCESS, FAILURE, and UNKNOWN to overwrite one another. Focused probe changed the same run from SUCCESS to FAILURE with no error.",
+      "action": "Require owner/claim token, reject terminal-to-terminal changes, and persist an idempotent settlement receipt keyed by runId plus operation key."
+    },
+    {
+      "id": "CB-008",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/reliability/candidate/polished-reliability.js",
+      "lines": "216-226",
+      "function": "claimNext/settleQueue/requeue",
+      "trigger": "A second ledger instance receives or derives the first claim's persisted claim.key and calls settleQueue for the claimed item.",
+      "expected": "Only the claiming consumer or an explicitly authorized recovery owner can settle/requeue; the claim capability must be owner-bound and non-guessable.",
+      "actual": "settleQueue checks only item.claim.key. The key is returned and persisted in the item, and no consumer/owner is compared. Focused probe settled owner A's item from owner B using the visible claim key.",
+      "action": "Bind settlement to consumer/owner and use a separate unguessable claim token; require explicit recovery authorization for unknown items."
+    },
+    {
+      "id": "CB-009",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/provider/candidate/intentgraph/provider-selection.cjs",
+      "lines": "49-64, 71-90, 111-131",
+      "function": "normalizeModel/normalizeCapabilities/validateSelection",
+      "trigger": "Provide a connected provider with a model record containing only id and efforts, with no model status, connected, or available field.",
+      "expected": "Missing model status stays unknown/configured unless the host supplies explicit known-support evidence; only explicit connected evidence may be displayed as connected. A configured known model may still be user-selected with reachability unverified.",
+      "actual": "normalizeModel falls back to the provider status. A connected provider therefore turns an unverified model into status connected, and validateSelection returns ok:true. Focused probe selected an unverified model.",
+      "action": "Do not inherit connected from provider status. Preserve a separate configured/known-support state and require explicit model connection evidence before claiming connected."
+    },
+    {
+      "id": "CB-010",
+      "severity": "medium",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/provider/candidate/intentgraph/provider-selection.cjs",
+      "lines": "134-143",
+      "function": "resolveSelection",
+      "trigger": "Resolve a legacy request with selection omitted while capabilities are empty, unknown, or the configured default provider is disconnected.",
+      "expected": "Legacy omission may resolve the configured OpenCode/MiMo default, but the result must remain explicitly unverified/configured-default; downstream dispatch must apply the adapter's capability/credential gate. `ok` must not be rendered as connected readiness.",
+      "actual": "The omitted-selection branch returns ok:true for OpenCode/MiMo V2.5 with all providers unknown. The candidate adapter currently revalidates before fetch, but a generic caller can treat this resolution as ready without that gate. Focused probe returned ok:true with unknown capabilities.",
+      "action": "Keep legacy compatibility, but separate resolved selection from runtime readiness (for example, `ready:false`/`status:'unknown'`) and require the adapter/runtime gate before sending."
+    },
+    {
+      "id": "CB-011",
+      "severity": "critical",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/provider/candidate/intentgraph/provider-adapter.cjs",
+      "lines": "74-110",
+      "function": "createProviderAdapter/complete",
+      "trigger": "Create an openai adapter with connected capabilities for all providers, then call complete() with an anthropic selection.",
+      "expected": "An adapter may send only selections whose providerId equals the adapter's providerId; provider credentials and endpoint must never be used for another provider's selection.",
+      "actual": "complete validates the selection against the whole capability snapshot but never compares chosen.providerId with the adapter providerId. Focused mock-fetch probe sent model fixture-claude to https://api.openai.com/v1/chat/completions with the OpenAI bearer credential and returned provider openai.",
+      "action": "Reject providerId mismatches before building headers or calling fetch, and bind adapter capability validation to the adapter's provider."
+    },
+    {
+      "id": "CB-012",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/provider/candidate/intentgraph/provider-adapter.cjs",
+      "lines": "17-31, 74-110",
+      "function": "safeUrl/createProviderAdapter/complete",
+      "trigger": "Pass a caller-controlled HTTPS endpoint such as https://collector.example to createProviderAdapter along with a real provider credential, then complete a validated selection.",
+      "expected": "Credential-bearing requests go only to an authorized provider host or an explicitly reviewed endpoint policy.",
+      "actual": "safeUrl checks only that the URL parses and uses HTTPS. Any HTTPS host, path, query, or userinfo is accepted, and complete sends the credential in Authorization or x-api-key to that URL.",
+      "action": "Allowlist provider origins and reject URL credentials/query/hash and unexpected paths; require an explicit, separately authorized custom-endpoint mode for alternatives."
+    },
+    {
+      "id": "CB-013",
+      "severity": "medium",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/provider/candidate/intentgraph/provider-adapter.cjs",
+      "lines": "115-133",
+      "function": "complete",
+      "trigger": "The provider returns HTTP 2xx with valid JSON that has no usable content or provider response fields, such as {}.",
+      "expected": "Malformed or empty provider responses are reported as an explicit failure/unknown outcome; a successful run must contain a validated response shape.",
+      "actual": "Any response.ok===true and parseable JSON is treated as success. responseText returns an empty string, selection fields fall back to the request, and lastStatus becomes connected. A caller can therefore settle a blank/malformed response as SUCCESS.",
+      "action": "Validate provider-specific response schema and non-empty content (or an explicit refusal/tool result) before returning success; preserve UNKNOWN on schema failure."
+    },
+    {
+      "id": "CB-014",
+      "severity": "critical",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/reliability/candidate/polished-reliability.js",
+      "lines": "180-186, 228-230",
+      "function": "receipt/claimRun",
+      "trigger": "Replay claimRun with the same requestId and idempotencyKey after the first call has returned.",
+      "expected": "The replay result must be marked duplicate/replayed and be bound to the original chat and request payload digest so browser/server gates suppress another provider request.",
+      "actual": "The first receipt stores duplicate:false and receipt() returns it verbatim. A focused probe showed both first and replay results duplicate:false with the same runId; replacement callers that gate on duplicate can submit the run again.",
+      "action": "Return duplicate:true for receipt replays, persist request/chat/payload digests, and reject a key reused with different request data. Add a mock-fetch regression asserting one provider call."
+    },
+    {
+      "id": "CB-015",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/reliability/candidate/polished-reliability.js",
+      "lines": "175-196",
+      "function": "recover",
+      "trigger": "A second tab or fresh ledger instance calls recover() while another tab's run is still RUNNING or CANCELLING.",
+      "expected": "Recovery is scoped to a crashed/expired owner lease, or requires explicit recovery evidence; opening a second tab must not cancel another live owner's run.",
+      "actual": "recover marks every active run UNKNOWN and cancelRequested:true, regardless of owner or lease. It can misclassify live work and cause the original tab's later completion to be rejected or overwritten.",
+      "action": "Persist owner leases/heartbeats and recover only expired owners, or make recovery owner/session-scoped with an explicit operator action for another owner's run."
+    },
+    {
+      "id": "CB-016",
+      "severity": "high",
+      "file": "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/reliability/candidate/polished-reliability.js",
+      "lines": "228-233",
+      "function": "cancelRun",
+      "trigger": "Call cancelRun(runId) without options.ownerId for a run claimed by another owner.",
+      "expected": "Cancellation must require the run owner or an explicit privileged recovery capability.",
+      "actual": "The owner check is conditional on options.ownerId. An arbitrary caller can set another owner's run to CANCELLING, and settleRun then has no owner check either.",
+      "action": "Require owner/claim proof on every cancel path; reserve cross-owner cancellation for a separately authorized recovery operation."
+    }
+  ],
+  "validation": {
+    "method": "Focused Node in-memory probes only; no full or long-running test suite.",
+    "results": [
+      "Approval duplicate path executed the same proposal twice.",
+      "Approval secret path returned scope.apiKey in the public proposal.",
+      "Approval question-binding path accepted Q1 proposal with Q2 approval.",
+      "Approval stale-render path reported executionAllowed:true for a stale proposal and interactive:true after question TTL.",
+      "Reliability settlement path changed SUCCESS to FAILURE without error.",
+      "Reliability queue path allowed another owner to settle a claimed item with its visible claim key.",
+      "Provider default path returned ok:true with unknown capabilities.",
+      "Provider model path returned ok:true for a model with no explicit availability evidence.",
+      "Provider adapter mock-fetch path accepted an anthropic selection on an openai adapter and sent the OpenAI credential.",
+      "Provider adapter mock-fetch path treated HTTP 200 JSON {} as connected success with empty text.",
+      "Reliability claim replay returned duplicate:false on both first and repeated calls."
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "assignment": "UX071",
+  "source": "completion/terminal/candidate",
+  "sourcePolicy": "frozen-read-only; reused without edits",
+  "acceptance": {
+    "targetSessionPermissions": "PASS: exact inventory target, generic network-diagnostic labels, read-only header and loopback-origin checks",
+    "rawRetention": "PASS: submitted output is retained as separate evidence and cancellation is UNKNOWN with no retry",
+    "broadInteractiveShell": "OUT_OF_SCOPE: no arbitrary OS shell/session was introduced; device diagnostics remain injected-adapter-only"
+  },
+  "sourceHashes": {
+    "polished-terminal.js": { "bytes": 17180, "sha256": "26F1BCF292CCDDBCE5BEB2E6DE560B951AF56D4D681EDE3E60EFA14DA4256D4F" },
+    "polished-terminal.css": { "bytes": 3309, "sha256": "F3FC4706D729A2F223C87F3E7EB42A9775684D6730AD49D9E0880E48789B48C0" },
+    "polished.html": { "bytes": 16128, "sha256": "65CA8CF142744377887C0A353452EF5B80F077C1877AC25701FB9C7A8829499A" },
+    "polished.js": { "bytes": 188486, "sha256": "6BB3F6C0546B4F577B839C5314BA7803D54EA82EA356D9BED2EFA8CA449D61F8" },
+    "intentgraph/server.cjs": { "bytes": 30237, "sha256": "43E131522813328ED2F10CA3CB93E74C626445419857C3247E18AA0F74E35104" }
+  },
+  "evidence": {
+    "server": "completion/terminal/server-evidence.json",
+    "browser": "completion/terminal/browser-evidence.json",
+    "replacementProof": "completion/terminal/replacement-verification.json",
+    "round2AssembledServer": "completion/round2/terminal-git/terminal/server-evidence.json",
+    "previousFailure": "completion/round2/terminal-git/terminal/previous-failure.json"
+  },
+  "round2Fixture": {
+    "file": "completion/round2/terminal-git/terminal/terminal.server.test.cjs",
+    "bytes": 13577,
+    "sha256": "D98BD41D17B6E9C8E2C226D66E3FC26E2C9A7D836C21A1894B31947D11B2990E",
+    "assembledRun": "PASS: 5/5 server cases against AVEN_PRODUCT_ROOT=completion/assembled-candidate; top-level polished-reliability.js copied into disposable fixture"
+  },
+  "limitation": "No real network device, provider, credential, or OS shell process was used; screen-reader certification remains outside the isolated fixture."
+}

@@ -1,0 +1,224 @@
+{
+  "version": "0.6",
+  "status": "Conversation organization and agent recipients proposed; visual review pending",
+  "reference": "https://www.youtube.com/watch?v=Sfmtbxqtz7o",
+  "scope": "Interactive wireframe, not final visual styling. Right workspace is user-directed adaptation. Tool actions and artifact content are samples.",
+  "items": [
+    {
+      "id": "branding",
+      "title": "Application identity",
+      "time": null,
+      "timestamp": "User feedback",
+      "coverage": "User-directed addition; artwork pending",
+      "user": "Do not say Netrok or Netrok Muse … choose another name.",
+      "observed": "The previous wireframe did not reserve a clear application identity position. The user now explicitly requests it.",
+      "mismatch": "Application branding and the agent avatar were not sufficiently distinguished.",
+      "proposal": "Aven is the proposed working name. Keep the name beside a reserved logo position in the top-left header until a recognizable logo is agreed. Agent identity remains separate.",
+      "flow": [
+        "Open application",
+        "See product name in header",
+        "Select avatar → separate agent workspace"
+      ],
+      "unknown": "Working name and final logo artwork await user agreement. No trademark or availability check is claimed.",
+      "check": "Product identity remains visible when the agent or artifact panel opens; it is not confused with the agent identity.",
+      "number": "01"
+    },
+    {
+      "id": "avatar",
+      "title": "Avatar & identity",
+      "number": "02",
+      "time": 341,
+      "timestamp": "5:41",
+      "coverage": "Appearance partly observed",
+      "user": "The Muse is an interactive avatar … I am not able to click on the agent itself.",
+      "observed": "The reference shows a small avatar in the rail and a larger avatar, name, status and controls in the agent panel.",
+      "mismatch": "The prototype substitutes a wordmark and an invented Atlas card for the agent identity and entry point.",
+      "proposal": "Keep the agent avatar separate from the application identity. Selecting it opens the agent workspace on the right, preserving the central conversation.",
+      "flow": [
+        "Select agent avatar",
+        "Open right agent workspace",
+        "Close panel → expand conversation"
+      ],
+      "unknown": "Exact opening transition, animation and whether the avatar is 3D remain unverified.",
+      "check": "Demonstrate the avatar at rest and on selection, then show where the user lands. Obtain visual agreement before choosing artwork."
+    },
+    {
+      "id": "navigation",
+      "title": "Icon-only navigation",
+      "number": "03",
+      "time": 115,
+      "timestamp": "1:55",
+      "coverage": "Collapsed rail observed",
+      "user": "Search will be on the top … then an agent … top section Chat, Channel, Thread … Projects … feed ideas and goal artifacts below.",
+      "observed": "The Feed frame has a narrow icon rail, avatar and a toggle. The video and transcript establish Chat, Feed, Ideas and Goals; library is discussed later.",
+      "mismatch": "The prototype omits destinations and does not reproduce the collapse interaction the user expects.",
+      "proposal": "Search at the top, then agent identity with a creation plus. A general Create button offers chat, channel, project and agent. Group Chats, Channels and Projects above Feed, Ideas, Goals and Artifacts. Bottom-left toggle and Settings stay in place.",
+      "flow": [
+        "Hover or focus an icon",
+        "See its label; select destination",
+        "Chat returns to the conversation"
+      ],
+      "unknown": "Icon-only navigation is the recommended response to this feedback. Exact final icon style and optional label toggle still await visual agreement.",
+      "check": "Verify group order, Search results, direct agent creation and the Create menu. Left toggle must only affect left navigation."
+    },
+    {
+      "id": "workspace",
+      "title": "Agent & document workspace",
+      "number": "04",
+      "time": 341,
+      "timestamp": "5:41–5:49",
+      "coverage": "User-directed placement; reference panel contents partly observed",
+      "user": "Conversation will be in the center … agent appearance, motion … should open on the right-hand side.",
+      "observed": "An agent panel has avatar, status, tabs, Edit and SOUL/MEMORY cards. A larger adjacent workspace opens MEMORY.md or SOUL.md; the SOUL editor has Save and close controls.",
+      "mismatch": "A task evidence drawer was treated as if it also represented the agent's identity, memory and capabilities.",
+      "proposal": "Move the agent workspace to the right as explicitly requested, even though the inspected reference showed it on the left. Open SOUL.md and MEMORY.md inside that right workspace. Keep chat and its draft visible.",
+      "flow": [
+        "Open agent on the right",
+        "Select document or agent settings",
+        "Back to agent / close → retain chat"
+      ],
+      "unknown": "Browser/computer panel details, tab meanings and unsaved-edit handling still need evidence or an explicit design decision.",
+      "check": "Verify the agent, its documents and settings open to the right of chat at desktop width. Switching panels and closing them must preserve the draft."
+    },
+    {
+      "id": "artifacts",
+      "title": "Artifacts & right panel",
+      "time": 592,
+      "timestamp": "~9:52",
+      "coverage": "User request; library transcript support; proposed layout",
+      "user": "Where will the artifacts … documents or web artifacts … where will the right shell be?",
+      "observed": "The video transcript discusses outputs retained in a library. Exact desktop artifact preview layout has not been fully inspected.",
+      "mismatch": "The first map omitted a clear place for generated documents and web artifacts.",
+      "proposal": "Use Artifacts in the left navigation as the single library entry. Remove duplicate artifact buttons from chat and the right-hand tab strip. Selecting a saved output opens its preview in the right workspace.",
+      "flow": [
+        "Select Artifacts in left rail",
+        "Select document or web output → right preview",
+        "Back to library / close → retain chat"
+      ],
+      "unknown": "Expanded previews, export/edit actions and durable storage will need later design decisions. Displayed artifacts are wireframe samples.",
+      "check": "Open both output types through the left Artifacts entry, return to its list and preserve the conversation draft.",
+      "number": "05"
+    },
+    {
+      "id": "tools",
+      "title": "Browser & plugin requests",
+      "time": 414,
+      "timestamp": "~6:54",
+      "coverage": "User request; browser transcript support; proposed flow",
+      "user": "Inside the chat … do connect to this plugin or use the browser … that is also not visible.",
+      "observed": "The transcript describes browser tasks. The user explicitly asks for plugin connection and browser interactions to be visible in chat.",
+      "mismatch": "The first map skipped how a chat request leads to a capability workspace or connection review.",
+      "proposal": "Represent tool requests as chat cards with an entry into the right workspace. Browser shows task/result content; Plugins shows provider, requested access and connection state. Keep requests visible in the conversation.",
+      "flow": [
+        "Select browser or plugin request",
+        "Inspect its right-hand workspace",
+        "Review result / connection state → return to chat"
+      ],
+      "unknown": "Real provider selection, consent, credentials, execution, cancellation and failures remain to be specified. This wireframe performs no external operation.",
+      "check": "Open browser and plugin requests from chat. Preview a browser result and a connection state without implying a real execution or connection.",
+      "number": "06"
+    },
+    {
+      "id": "settings",
+      "title": "Settings & preferences",
+      "number": "07",
+      "time": null,
+      "timestamp": "Reference gap",
+      "coverage": "User requirement; reference incomplete",
+      "user": "When I click on settings, nothing appears … any setting is not opening any of the pages.",
+      "observed": "The inspected frames do not establish the complete settings experience. No reference settings layout is claimed here.",
+      "mismatch": "A two-field dialog was presented without first identifying the reference's settings structure and contents.",
+      "proposal": "Open a dedicated settings dialog with General, Appearance, Agents, Models & providers, Connections, and Privacy & data pages. Display name, theme, density and proposed connection/provider preferences save locally.",
+      "flow": [
+        "Open Settings",
+        "Choose a category and change controls",
+        "Save locally / close → return to conversation"
+      ],
+      "unknown": "These are proposed settings categories, not a verified copy of the reference. Provider connections and permission enforcement are not implemented.",
+      "check": "Navigate all six categories, save a preference, reload and verify it. Close with Escape and preserve the chat draft."
+    },
+    {
+      "id": "composer",
+      "title": "Conversation & composer",
+      "number": "08",
+      "time": 98,
+      "timestamp": "~1:38",
+      "coverage": "Chat structure partly observed",
+      "user": "The plus symbol will also be used to upload the file … support uploading file images?",
+      "observed": "The main chat frame establishes the conversation area, narrow rail and separate activity area. Exact send-control states are not yet confirmed.",
+      "mismatch": "The prototype uses its own send treatment and visual spacing. Working submission does not establish reference fidelity.",
+      "proposal": "Open a plus menu with Attach files, Attach images, Connect a plugin, Use browser and Use computer. Show removable local file chips and image thumbnails; support a message with attachments and no text.",
+      "flow": [
+        "Select files or images from plus menu",
+        "Preview attachments and remove unwanted items",
+        "Send local message preview → clear composer"
+      ],
+      "unknown": "File contents remain in browser memory for the page session. Chat text and attachment names are saved locally. No file upload, analysis or model request occurs.",
+      "check": "Select a document and an image, inspect the thumbnail, remove an item and send an attachment-only local message."
+    },
+    {
+      "id": "computer",
+      "number": "09",
+      "title": "Computer workspace",
+      "time": null,
+      "timestamp": "User feedback",
+      "coverage": "User-requested capability; interaction proposal",
+      "user": "We do have a computer use on the left- or right-hand side … that is also not there.",
+      "observed": "The user explicitly requests a computer-use surface. Exact reference desktop-control states are not established by the inspected frames.",
+      "mismatch": "The previous wireframe included Browser but omitted a separate Computer workspace.",
+      "proposal": "Add a Computer tab in the right workspace and a computer request card in chat. Show the selected desktop, action sequence and session controls as a clearly labelled preview.",
+      "flow": [
+        "Select Computer or its chat request",
+        "Show desktop/session preview on right",
+        "Return or close → preserve conversation"
+      ],
+      "unknown": "Real screen access, execution, permissions, interruption and failure behavior remain unimplemented. No desktop is being controlled.",
+      "check": "Open Computer from chat and from its right-side tab, preview the session and return. Distinguish Computer from Browser and actual execution from a wireframe."
+    },
+    {
+      "id": "agents",
+      "number": "10",
+      "title": "Create & switch agents",
+      "time": null,
+      "timestamp": "User feedback",
+      "coverage": "User-requested workflow; proposed local profiles",
+      "user": "Can I call those multiple agents … under Chat, any of the chats … triggering?",
+      "observed": "User requests multiple agents and a visible creation flow. This wireframe previously showed only one unnamed companion.",
+      "mismatch": "No agent list, creation form or switching control existed.",
+      "proposal": "Every chat has a To selector with checkboxes for available profiles. Select one or more recipients; saved local messages show who they are addressed to. Agent creation is accessible directly beside the sidebar avatar.",
+      "flow": [
+        "Open Agents or the agent plus",
+        "Enter name and role → create local profile",
+        "Switch active profile → right workspace updates"
+      ],
+      "unknown": "Addressing is local only. These profiles are not invoked; execution, parallel replies, shared context and agent permissions remain future runtime work.",
+      "check": "Create two profiles, start a chat, select both and send a local message. Verify recipient labels and that another chat retains independent recipients."
+    },
+    {
+      "id": "organization",
+      "number": "11",
+      "title": "Chats, channels & projects",
+      "time": null,
+      "timestamp": "User feedback",
+      "coverage": "User-requested organization; proposed hierarchy",
+      "user": "Where is the new chat button? … channels … multiple threads inside … new thread, or a new project.",
+      "observed": "The previous wireframe only had a single conversation. User now requests chat creation, channels with threads, projects and top-level search.",
+      "mismatch": "There was no way to start another conversation or organize work.",
+      "proposal": "New chat in the conversation header starts a direct chat, or a thread inside the currently open channel. Channels group chat threads. Projects group channels and direct chats. Search covers local chat titles/messages, channels, projects and agents.",
+      "flow": [
+        "Create project or channel, or start a direct chat",
+        "Open a channel → New thread → choose agent recipients",
+        "Return via Chats / channel / Search; drafts and messages persist locally"
+      ],
+      "unknown": "This is a local organization model. Team membership, channel access, shared databases, real agent context routing and collaboration are not implemented.",
+      "check": "Create a project, a channel inside it and two threads. Switch with distinct drafts/recipients; reload and retrieve via Search. No thread content should appear in a different chat."
+    }
+  ],
+  "userDecision": {
+    "source": "Latest user feedback",
+    "supported": "Existing wireframe broadly correct",
+    "requested": "New chats, callable agent recipients, channels with threads, projects, top Search and direct creation controls",
+    "notApproved": "Final hierarchy, live agent invocation or collaboration"
+  },
+  "workingName": "Aven"
+}

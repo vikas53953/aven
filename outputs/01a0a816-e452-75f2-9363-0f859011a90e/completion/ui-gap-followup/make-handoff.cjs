@@ -1,0 +1,43 @@
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const dir = __dirname;
+const evidence = JSON.parse(fs.readFileSync(path.join(dir, 'gap-evidence.json'), 'utf8'));
+const proof = JSON.parse(fs.readFileSync(path.join(dir, 'replacements.json'), 'utf8'));
+const baseline = JSON.parse(fs.readFileSync(path.join(dir, 'targeted-baseline.json'), 'utf8'));
+const candidate = JSON.parse(fs.readFileSync(path.join(dir, 'targeted-candidate.json'), 'utf8'));
+const handoff = {
+  generatedAt: new Date().toISOString(),
+  package: 'ui-gap-followup',
+  scope: ['UX-002', 'UX-005', 'UX-046', 'UX-050', 'UX-051', 'UX-055', 'UX-059', 'UX-064', 'UX-065', 'UX-069', 'UX-073', 'UX-083'],
+  source: { path: 'ui-release/candidate', build: 'ux-minimal-ui-v9.1', polishedJsSha256: '560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a' },
+  candidate: { path: 'ui-gap-followup/candidate', polishedJsSha256: proof.candidateSha256, touchedFiles: proof.touchedFiles },
+  confirmedDefects: [
+    { id: 'UX-065', before: 'Help advertises Ctrl / Cmd + F in Feed/non-conversation view.', after: 'Help filters unavailable actions; conversation-only Find remains omitted outside a conversation.' },
+    { id: 'UX-069', before: 'Evidence pane close lost the message-action opener focus.', after: 'Evidence pane receives the originating message-action opener and restores it on close.' }
+  ],
+  tests: {
+    fullFocusedSuite: { checks: evidence.checks.length, passed: evidence.checks.filter(item => item.status === 'PASS').length, failed: evidence.checks.filter(item => item.status === 'FAIL').length, blockedRequests: evidence.blockedRequests.length, pageErrors: evidence.pageErrors.length, loopbackApiCalls: evidence.apiCalls.length },
+    targetedBaseline: baseline.results,
+    targetedCandidate: candidate.results,
+    command: 'node outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-gap-followup/ui-gap-followup.test.cjs',
+    targetedCommand: 'node outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-gap-followup/targeted-defect.test.cjs'
+  },
+  artifacts: {
+    evidence: 'gap-evidence.json',
+    rows: 'row-results.json',
+    replacements: 'replacements.json',
+    targetedBaseline: 'targeted-baseline.json',
+    targetedCandidate: 'targeted-candidate.json',
+    sequentialProof: 'replacements.json'
+  },
+  limitations: [
+    'All checks use isolated Chromium with local fixture storage and loopback status/chat interception; no provider, device, external network, credentials or user files.',
+    'UX-002 matrix covers 1440, 1280, 1024, 900, 768, 540, 390 and 320 widths; visual reference and assistive technology certification remain separate.',
+    'UX-073 covers discard only; stale rerun and annotation save-failure require a separate runtime result mutation hook.',
+    'UX-083 verifies populated local run/evidence cards; provider/device transport is not exercised.'
+  ],
+  liveFilesModified: []
+};
+fs.writeFileSync(path.join(dir, 'handoff.json'), JSON.stringify(handoff, null, 2));
+console.log(JSON.stringify({ checks: handoff.tests.fullFocusedSuite, candidate: handoff.candidate.polishedJsSha256, replacements: proof.replacements.length }));

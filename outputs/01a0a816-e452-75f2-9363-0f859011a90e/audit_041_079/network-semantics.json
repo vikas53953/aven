@@ -1,0 +1,9 @@
+{
+  "at": "2026-09-16T03:21:11.204Z",
+  "passed": true,
+  "blocked": [
+    "http://127.0.0.1:8768/api/sandbox/inventory"
+  ],
+  "backendCalls": 0,
+  "pageErrors": []
+}

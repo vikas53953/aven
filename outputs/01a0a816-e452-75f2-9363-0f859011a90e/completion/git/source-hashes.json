@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-16T07:35:20.232Z",
+  "files": {
+    "completion/git/polished-git.js": {
+      "bytes": 17264,
+      "sha256": "27898A8A885108FEC9CA006D9870BEA5675EA7118B139DB3376831F21843D6D1"
+    },
+    "completion/git/polished-git.css": {
+      "bytes": 3873,
+      "sha256": "FD437031F3EC6949EC376DF0C7F9AC00997066E10948D0A84D6ADEEB13E62335"
+    },
+    "completion/git/intentgraph/git-workspace.cjs": {
+      "bytes": 46001,
+      "sha256": "9598E8BA01BF8D7A8372EB0EDCC635F50EE0462CA58024C9276574DC8B57718E"
+    },
+    "completion/git/intentgraph/git-workspace.test.cjs": {
+      "bytes": 15884,
+      "sha256": "9AD4C0078E2F82CC35772FA000FC19C6DBE3C92670A2EF84C09E3C6E603B6D98"
+    },
+    "completion/git/git-ui.test.cjs": {
+      "bytes": 4919,
+      "sha256": "D23B44F1883F190C9788A435CA3A611F53B4E2B392A65A77B8A59AACC42BD558"
+    },
+    "completion/git/make-replacements.cjs": {
+      "bytes": 4741,
+      "sha256": "42CDAC1360B8CE7C9E0A1854CDFA181FECA5FC9340C0B0AD549C8BE71F463926"
+    },
+    "completion/git/validate-replacements.cjs": {
+      "bytes": 2521,
+      "sha256": "1248B9BE7AF18BDAF894C9FC9A53DEC0AE07490437FD584D8D2D5776FE184C52"
+    },
+    "completion/git/replacements.json": {
+      "bytes": 5499,
+      "sha256": "D07E0D439FD21EDB03710969EA4538884C5CE8669E423AE295ECD8C3EAD95D7D"
+    },
+    "completion/baseline/polished.html": {
+      "bytes": 15856,
+      "sha256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352"
+    },
+    "completion/baseline/polished.js": {
+      "bytes": 187901,
+      "sha256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C"
+    },
+    "completion/baseline/intentgraph/server.cjs": {
+      "bytes": 23374,
+      "sha256": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF"
+    }
+  }
+}

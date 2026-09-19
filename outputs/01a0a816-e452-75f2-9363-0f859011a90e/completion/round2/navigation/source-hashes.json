@@ -1,0 +1,88 @@
+{
+  "before": {
+    "baseline": {
+      "polished.html": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+      "polished.css": "d7dfbacd5b37d424fbcb86a6a51873d30a22867c553ff4aa453c4444cfefcd93",
+      "polished.js": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+      "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "polished-backup.js": "02da5654deeb94e0ca0403d5afddee97e09bf3cc7df398846e362fddc590a27d",
+      "polished-diagnostics.js": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c",
+      "polished-attachments.js": "8b24d098a5b79fac933156e14cfbc7b385c79f2a4d20b8a412ad63e4b1dc0684",
+      "polished-workspace-tools.js": "350e57dfab400803800577cacc19692456a23e87a296601ec6b819845fdd9850",
+      "polished-evidence-tools.js": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc",
+      "polished-run-state.js": "1c81ceb1b0a0bed0463eb1641711d3e66d19654a7188a191c996ed40f6be91a6",
+      "polished-files.js": "a4ee77e8596f7f18920eb193741d018766fdcb1ee59c09654361a524bb5b88a5",
+      "avatar-system/artwork.js": null,
+      "avatar-system/avatar.css": null
+    },
+    "live": {
+      "polished.html": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "polished.js": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "polished-backup.js": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "polished-diagnostics.js": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c",
+      "polished-attachments.js": "8b24d098a5b79fac933156e14cfbc7b385c79f2a4d20b8a412ad63e4b1dc0684",
+      "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "polished-evidence-tools.js": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc",
+      "polished-run-state.js": "1c81ceb1b0a0bed0463eb1641711d3e66d19654a7188a191c996ed40f6be91a6",
+      "polished-files.js": "a4ee77e8596f7f18920eb193741d018766fdcb1ee59c09654361a524bb5b88a5",
+      "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+      "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad"
+    }
+  },
+  "after": {
+    "baseline": {
+      "polished.html": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+      "polished.css": "d7dfbacd5b37d424fbcb86a6a51873d30a22867c553ff4aa453c4444cfefcd93",
+      "polished.js": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+      "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "polished-backup.js": "02da5654deeb94e0ca0403d5afddee97e09bf3cc7df398846e362fddc590a27d",
+      "polished-diagnostics.js": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c",
+      "polished-attachments.js": "8b24d098a5b79fac933156e14cfbc7b385c79f2a4d20b8a412ad63e4b1dc0684",
+      "polished-workspace-tools.js": "350e57dfab400803800577cacc19692456a23e87a296601ec6b819845fdd9850",
+      "polished-evidence-tools.js": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc",
+      "polished-run-state.js": "1c81ceb1b0a0bed0463eb1641711d3e66d19654a7188a191c996ed40f6be91a6",
+      "polished-files.js": "a4ee77e8596f7f18920eb193741d018766fdcb1ee59c09654361a524bb5b88a5",
+      "avatar-system/artwork.js": null,
+      "avatar-system/avatar.css": null
+    },
+    "live": {
+      "polished.html": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "polished.js": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "polished-avatars.js": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "polished-backup.js": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "polished-diagnostics.js": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c",
+      "polished-attachments.js": "8b24d098a5b79fac933156e14cfbc7b385c79f2a4d20b8a412ad63e4b1dc0684",
+      "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "polished-evidence-tools.js": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc",
+      "polished-run-state.js": "1c81ceb1b0a0bed0463eb1641711d3e66d19654a7188a191c996ed40f6be91a6",
+      "polished-files.js": "a4ee77e8596f7f18920eb193741d018766fdcb1ee59c09654361a524bb5b88a5",
+      "avatar-system/artwork.js": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+      "avatar-system/avatar.css": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad"
+    }
+  },
+  "equal": {
+    "baselineLiveEqual": false,
+    "commonFilesEqual": false,
+    "commonFiles": [
+      "polished.html",
+      "polished.css",
+      "polished.js",
+      "polished-avatars.js",
+      "polished-backup.js",
+      "polished-diagnostics.js",
+      "polished-attachments.js",
+      "polished-workspace-tools.js",
+      "polished-evidence-tools.js",
+      "polished-run-state.js",
+      "polished-files.js"
+    ],
+    "baselineMissingFiles": [
+      "avatar-system/artwork.js",
+      "avatar-system/avatar.css"
+    ],
+    "unchangedDuringRun": true
+  }
+}

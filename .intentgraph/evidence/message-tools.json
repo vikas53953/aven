@@ -1,0 +1,16 @@
+{
+  "at": "2026-09-13T17:38:05.181Z",
+  "liveAnswer": "MPLS (Multiprotocol Label Switching) is a data-forwarding technology that uses labels to route packets instead of relying on IP addresses. Routers (label-switching routers) swap labels at each hop, enabling faster forwarding, traffic engineering, and VPN services. Common use cases include MPLS VPNs, QoS enforcement, and path optimization across service-provider networks.",
+  "elapsed": "Took 14s",
+  "checks": [
+    "User/assistant timestamps",
+    "Both copy buttons copy original text",
+    "Response duration persists",
+    "Working timer updates",
+    "Safe headings/lists/code/table formatting",
+    "No HTML execution",
+    "390px overflow",
+    "Live MPLS reply"
+  ],
+  "errors": []
+}

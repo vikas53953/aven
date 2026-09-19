@@ -1,0 +1,10 @@
+{
+  "source": "User request in current task, 2026-09-16",
+  "requirements": [
+    {"id":"UI-01","requirement":"Artifact output bodies are collapsed by default.","acceptance":"Every raw artifact starts closed. Keyboard or pointer expansion reveals exact output and provenance; collapse hides it again. Download and message navigation remain usable."},
+    {"id":"UI-02","requirement":"Chat evidence, investigation and run details are optional settings, off by default.","acceptance":"New preferences hide all three categories. Separate toggles can enable them, Save persists across reload, Cancel does not commit, and disabling restores the minimal view. Answers, errors, pending decisions and cancellation controls stay visible."},
+    {"id":"UI-03","requirement":"Mode choice lives in the composer plus menu.","acceptance":"Agent and Plan are reachable by pointer and keyboard, selected state is clear, verbose mode description is absent from the normal chat. Plan retains backend restrictions. Choosing Agent alone grants no new access."},
+    {"id":"UI-04","requirement":"Compact context ring beside Send replaces the composer explanation.","acceptance":"Verbose provider/context/auto-fit footer copy is absent. Ring fits desktop/narrow layout and has an accessible tooltip or detail view. Missing token capacity is unavailable, not fabricated remaining percentage. Exact omission information remains discoverable."},
+    {"id":"UI-05","requirement":"Model answers are the primary chat content.","acceptance":"An explanation is visible without opening a disclosure. Tool output cannot displace or obscure it by default. Command-only responses retain a truthful concise outcome and an intentional way to inspect the output."}
+  ]
+}

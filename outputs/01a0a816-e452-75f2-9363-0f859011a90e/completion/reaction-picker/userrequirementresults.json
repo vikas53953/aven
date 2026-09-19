@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    {
+      "id": "UX049",
+      "status": "PASS",
+      "result": "More reactions has a concise named search, filtered keyboard navigation that stays within the picker, two-step Escape focus return, and message-specific local reaction persistence across reload.",
+      "evidence": "browser-evidence.json; replacement-verification.json",
+      "limitation": "Validation uses a local Chromium fixture and the built-in reaction set; no screen-reader certification, visual reference comparison, or multi-device synchronization."
+    }
+  ]
+}

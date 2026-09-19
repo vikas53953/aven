@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "entryCount": 4,
+  "appliedCount": 4,
+  "checks": [
+    {
+      "file": "intentgraph/agent-stream.test.cjs",
+      "sourceSHA": "223f1b61c985f5a1b06d28a433a9f2bcfed0e1b41f161f5f2209327afeafe364",
+      "anchorCount": 1
+    },
+    {
+      "file": "intentgraph/chat.test.cjs",
+      "sourceSHA": "16417e606f10bb343a8d514186d456887191c1276e0f5a0cfc77c6d54168770e",
+      "anchorCount": 1
+    },
+    {
+      "file": "intentgraph/steering.test.cjs",
+      "sourceSHA": "d66e3ba4da5cc09ad9f8f5ccc1a76bc4d5d40cdc13ca0d8dac24d3ad98b59731",
+      "anchorCount": 1
+    },
+    {
+      "file": "intentgraph/steering.test.cjs",
+      "sourceSHA": "d66e3ba4da5cc09ad9f8f5ccc1a76bc4d5d40cdc13ca0d8dac24d3ad98b59731",
+      "anchorCount": 1
+    }
+  ],
+  "candidates": {
+    "intentgraph/agent-stream.test.cjs": "ca39df6b9455b23456fbcb5fd6b2504a7c10082823d2959f54b461b35f2cbc62",
+    "intentgraph/chat.test.cjs": "86564c56ada0a6ddb621a5b82fe5c7366f3bde8933f5e712e3cfdc7c7927d838",
+    "intentgraph/steering.test.cjs": "ce515ccd0f513a23d45882a5907565d3fc4894d17664c82c9526b79212680eda"
+  },
+  "allApplied": true
+}

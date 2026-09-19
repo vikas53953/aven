@@ -1,0 +1,33 @@
+{
+  "assignment": "workflows",
+  "scope": ["UX-033", "UX-074"],
+  "input": "completion/workflows/candidate (frozen); completion/assembled-candidate (parent-owned observed input)",
+  "checks": [
+    {
+      "name": "round-2 syntax and frozen-input hash guard",
+      "result": "PASS",
+      "detail": "Bundled Node --check passed for all three round-2 tests; all frozen candidate SHA-256 entries matched input-hashes.json."
+    },
+    {
+      "name": "supplemental candidate workflow acceptance",
+      "result": "PASS",
+      "detail": "2 tests passed: ask_clarification tool output reaches the HTTP pending state, one answer resumes the same run, replay is rejected; changing target/operation/commands stales the old approval while the original receipt remains immutable."
+    },
+    {
+      "name": "assembled HTTP acceptance",
+      "result": "PASS",
+      "detail": "2 tests passed against the parent-owned assembled server with injected adapters: tool pending -> HTTP waiting -> same-run answer preserves selection and settles reliability WAITING then SUCCESS; explicit abandon permits a fresh same-chat request."
+    },
+    {
+      "name": "assembled browser acceptance",
+      "result": "PASS",
+      "detail": "assembled-browser-acceptance.test.cjs passes the assembled HTTP pending response -> card answer -> same-run workflow endpoint path. The rebuilt assembled-browser-full-flow fixture passes all 3 tests against the real polished page: held-resume Send enters the queue and dispatches after the resumed result; Stop during resume settles the canceled run; reload renders review-only, abandon releases the waiting lease, and a fresh same-chat request completes."
+    }
+  ],
+  "limitations": [
+    "No provider, credential, device, network, desktop, or external browser mutation was performed.",
+    "UX-074 real execution remains pending the separate approval-bridge owner; the candidate executor is explicitly mock-only and the UI says so.",
+    "No live product or shared integration file was edited; root must apply and review frozen replacement hunks; assembled browser acceptance is recorded here against the rebuilt candidate."
+    ,"Full polished-page browser evidence used an isolated static server, assembled HTTP server, and mock responder only; no browser lease remains active."
+  ]
+}

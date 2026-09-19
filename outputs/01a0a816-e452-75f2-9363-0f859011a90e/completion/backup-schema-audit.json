@@ -1,0 +1,36 @@
+{
+  "scope": "candidate audit of polished-backup.js against planned provider-per-chat/preferences, workflow pending/receipts, and workspaceTools.automation state",
+  "source": "history-candidate/polished-backup.js",
+  "sourceLines": [8, 32, 47, 52, 65, 81, 84],
+  "decision": "Needs narrow schema extensions before integrating the planned state. Do not normalize unknown fields broadly.",
+  "findings": [
+    {
+      "state": "provider per-chat/preferences selection",
+      "status": "needs-extension",
+      "evidence": "PREF_FIELDS is an allowlist and validate rejects unknown prefs; envelope filters unknown prefs (lines 8, 32, 65). Chat records are otherwise structurally preserved, so a provider/model selection stored on a chat survives validation unless it is placed in a queue item.",
+      "requiredChange": "Add the exact planned preference field names and bounded validation to PREF_FIELDS/validate/envelope. Preserve provider/model fields on chat records only if they are part of the committed state contract.",
+      "risk": "An unlisted preference field is rejected on import and silently omitted from export."
+    },
+    {
+      "state": "workflow pending/receipts",
+      "status": "queue-sensitive",
+      "evidence": "Each pendingQueue item is rebuilt with only id, text, createdAt, replyTo and mode (line 47). The graph/exportSafe path preserves safe arbitrary record fields elsewhere.",
+      "requiredChange": "If pending workflow or receipt fields live in pendingQueue entries, extend the queue item allowlist with exact bounded fields and validate their types. If they live under data or a chat record, add explicit validation only where needed.",
+      "risk": "Workflow pending/receipt metadata inside queue entries is dropped during import validation and queue restore."
+    },
+    {
+      "state": "workspaceTools.automation",
+      "status": "add-mode-gap",
+      "evidence": "workspaceTools validation only iterates ideas and goals (lines 52-55). Add-mode merge remaps only ideas and goals (lines 81-85); Replace retains the cloned data.",
+      "requiredChange": "Add a narrow automation schema/limit and remap/merge branch alongside ideas/goals, preserving safe automation fields and chat references. Keep imported queues paused as today.",
+      "risk": "Replace keeps automation, but Add-mode import drops incoming data.workspaceTools.automation."
+    }
+  ],
+  "preservation": {
+    "pinnedAt": "Verified in UX-052: a valid Add-mode backup with pinned:true, pinnedAt and a paused pending queue restored with pinnedAt unchanged, while the existing a1 history remained byte-for-byte equivalent by message IDs.",
+    "privateKeyFilter": "Keep graph/exportSafe private-key rejection; no credentials or connection controls should be admitted.",
+    "connectionControls": "validate still forces browser/computer false; preserve this safety behavior.",
+    "transaction": "replace still snapshots all KEYS before writes and recovers pending imports; preserve this transaction path.",
+    "recommendation": "Resolve exact planned field names from the integrated state model, then make narrow replacements. Do not broaden normalizeQueueItem or workspace merge to copy arbitrary fields."
+  }
+}

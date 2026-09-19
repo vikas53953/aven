@@ -1,0 +1,115 @@
+UX-001 | Subtle scrollbars | Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.
+UX-002 | Contain horizontal overflow | No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.
+UX-003 | Account entry | Caret absent; account menu remains keyboard reachable.
+UX-004 | Selected profile identity | Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.
+UX-005 | Horizontal reaction panel | Row matches reference structure; opens by mouse and keyboard without clipping.
+UX-006 | One reaction per user | Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.
+UX-007 | Coworker-first entry | New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.
+UX-008 | Stable conversation header | Short first message never replaces coworker identity.
+UX-009 | Sidebar previews | Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.
+UX-010 | Pin important conversations | Pinned items remain accessible and retain order after reload.
+UX-011 | Rename conversations | Renaming a conversation never renames its coworker unexpectedly.
+UX-012 | Sections and ordering | Grouping never implies coordinated agent execution or hides old histories.
+UX-013 | Sidebar collapse and resize | Collapse and resize leave active chat and composer usable.
+UX-014 | Back and forward navigation | Back returns to previous chat without dropping draft or executing a request.
+UX-015 | Workspace search | Known saved phrase resolves to the correct conversation.
+UX-016 | Search filters and results | Filter by coworker or conversation and open exact result context.
+UX-017 | Find within conversation | Searching a repeated term visits every match without losing composer draft.
+UX-018 | Command palette | Keyboard opens palette; selected action works in current chat; Escape restores focus.
+UX-019 | Multiline input and send | Empty send disabled. Multiline text and IME composition do not send accidentally.
+UX-020 | Draft preservation | Two chats retain different unsent drafts after switching and reload.
+UX-021 | Attachment selection and removal | Unsupported attachments are labeled before send; supported contents reach model context.
+UX-022 | Drag-drop and clipboard files | Paste/drop valid file creates one usable attachment. Invalid type shows recovery.
+UX-023 | File or device mentions | Mention resolves to a stable ID; unavailable devices cannot appear connected.
+UX-024 | Reply to a message | Reply identifies source message; cancel removes reference without deleting draft.
+UX-025 | Edit and resend a prompt | User can review edited prompt before send; earlier device commands are never reversed or repeated silently.
+UX-026 | Voice dictation | Recording indicator and cancel work; transcript is editable before sending.
+UX-027 | Model and effort picker | Picker change is reflected in the next request and response provenance.
+UX-028 | Streamed response and activity | No duplicate final text or evidence when a stream finishes.
+UX-029 | Stop a running request | Stop state is truthful; cancellation does not claim a completed device command was undone.
+UX-030 | Queue follow-up messages | Queued messages stay ordered and are never submitted twice.
+UX-031 | Queue edit, remove and resume | Reload retains queue; resume is intentional; editing changes only selected item.
+UX-032 | Steer the next step | Correction applies before next tool step and does not silently create a duplicate run.
+UX-033 | Clarification and approval cards | Answer maps to one pending question; stale cards cannot authorize later work.
+UX-034 | Plan and inspect modes | Plan mode cannot execute state-changing operations; current read-only scope stays explicit.
+UX-035 | Detailed tool transcript | Summary, tool input and actual result remain distinguishable.
+UX-036 | Run state and elapsed time | A failed or interrupted run cannot display completed success; elapsed time stops correctly.
+UX-037 | Parallel work visibility | Two runs remain isolated, individually stoppable and recoverable.
+UX-038 | Context and usage visibility | Unknown usage displays unavailable; displayed model and token totals match actual response data.
+UX-039 | Retry with retained evidence | Retry does not repeat completed device actions silently; partial evidence remains inspectable.
+UX-040 | Resume after app restart | Restart during work preserves transcript and exposes recovery without duplicate execution.
+UX-041 | Readable Markdown | Representative network reports remain readable; untrusted HTML cannot execute.
+UX-042 | Code blocks and exact copy | Spaces, tabs and line breaks survive copy; no duplicate raw output.
+UX-043 | Copy messages | Copy uses correct message and reports failure without claiming success.
+UX-044 | Time grouping and metadata | Old and new days are clear; full timestamp accessible on focus or hover.
+UX-045 | Follow latest without jumping | New output does not pull user away from an older message; latest button is keyboard usable.
+UX-046 | Conversation revert and undo | Revert and undo restore exact message history; busy or queued state is protected.
+UX-047 | Fork or side conversation | Branch retains provenance and can be revisited without mutating parent history.
+UX-048 | Direct links to evidence/messages | Link opens correct conversation/message; missing or archived targets have a clear explanation.
+UX-049 | Reaction picker beyond defaults | Picker supports search/navigation and closes without moving the message.
+UX-050 | Archive and restore | Archived chat is read-only until restored; messages and evidence survive.
+UX-051 | Export conversations and evidence | Export contains correct selected scope, timestamps and exact evidence without credentials.
+UX-052 | Import and backup recovery | Invalid backup changes nothing. Valid restore preserves unrelated current work.
+UX-053 | Durable cross-device histories | Two devices show consistent authorized history with explicit conflict handling.
+UX-054 | Avatar family and appearance | Saved avatars remain the same after migration and reload.
+UX-055 | Name, label and description | Long name remains readable; saved changes update selected coworker only.
+UX-056 | Behavior and document access | Editing document explains effect and scope; saved content is the content actually used.
+UX-057 | Notification preference | Muted coworker stays quiet; enabled alerts link to the correct finished/waiting run.
+UX-058 | Simple creation and first welcome | Welcome is visibly local and never sent as fabricated model history.
+UX-059 | Appearance and density | Both themes preserve readable controls and evidence; settings persist.
+UX-060 | Live provider setup | Changing provider cannot silently leave a different runtime active. No secrets in UI output.
+UX-061 | Connections health | Disconnected adapter cannot look ready; refresh updates from real state.
+UX-062 | Privacy and data controls | User can identify what stays local and what a request sends; destructive actions are recoverable where promised.
+UX-063 | Real account and sign-out | No control suggests remote sign-in or sign-out succeeded when it only changes local display.
+UX-064 | Help and feedback | Every help entry opens useful information; feedback never silently sends private logs.
+UX-065 | Shortcut reference | Displayed shortcuts work and unavailable actions are not advertised.
+UX-066 | Artifact library for real chats | Real chat artifact opens correct file; another chat never inherits sample output.
+UX-067 | Browser preview | Preview shows actual current content and truthful unavailable states.
+UX-068 | Computer preview and control | Stale or unavailable screen is labeled; controls apply only to authorized session.
+UX-069 | Resizable work panes | Opening evidence preserves enough room to read and type; close returns focus.
+UX-070 | File tree and editor | Only authorized files are shown and edits have explicit save/diff behavior.
+UX-071 | Interactive terminal | User sees target/session and permissions; raw evidence remains separately retained.
+UX-072 | Before/after change review | Proposal shows exact diff and target; edits invalidate prior approval.
+UX-073 | Inline evidence annotations | Comment cannot drift to a different result after rerun.
+UX-074 | Execution approval receipt | Target or command changes require new review; old approval cannot authorize new work.
+UX-075 | Git stage, commit and PR controls | Git operations have clear repository and diff scope; no hidden publish.
+UX-076 | Device inventory selection | User can see exact selected devices; aliases resolve consistently to evidence IDs.
+UX-077 | Read-only scope visibility | Read-only label agrees with enforced tool set; no confusing change/run action is offered.
+UX-078 | Evidence provenance and timestamps | Copied/exported evidence traces to exact run and command; generated narrative is distinguishable.
+UX-079 | Success versus healthy status | Successful command on faulty device cannot appear as healthy solely from exit status.
+UX-080 | Scope, impact and rollback preview | Review displays affected devices and rollback limits; chat revert never substitutes for device rollback.
+UX-081 | Comparison of diagnostic runs | Different devices/times are labeled; missing results are not represented as zero change.
+UX-082 | Topology and visual evidence | Nodes/links identify source and freshness; inferred links are labeled.
+UX-083 | Feed / activity inbox | Every entry opens relevant run; empty view explains what will appear.
+UX-084 | Ideas view | No dead-end primary navigation; saved user ideas remain recoverable.
+UX-085 | Goals and task checklist | Completed step links to evidence; manual checklist state is not agent execution proof.
+UX-086 | Scheduled investigations | Disabled schedule does not run; next-run time is correct; failures are visible.
+UX-087 | Completion and attention alerts | Alert opens correct task and respects mute; duplicate events do not spam.
+UX-088 | Plugin discovery and management | Unavailable tool cannot be selected; permissions and connection health are visible.
+UX-089 | Skills and reusable workflows | Selected procedure identifies required access; version used is traceable.
+UX-090 | Mobile or remote handoff | Handoff preserves context and permissions without concurrent duplicate execution.
+UX-091 | Keyboard-only operation | Visible focus, logical order, no traps; Escape returns focus correctly.
+UX-092 | Accessible names and state | Screen reader identifies each action, selected coworker and active run state correctly.
+UX-093 | Contrast, text scaling and reflow | At 200% text scale controls remain usable; contrast measured; narrow content reflows.
+UX-094 | Reduced motion | Motion-reduced mode preserves all state changes and cancels decorative animation.
+UX-095 | Hover, focus and touch menus | Menus stay within viewport, remain operable on hover, close predictably and restore focus.
+UX-096 | Responsive pane layout | Desktop, narrow window and zoomed layouts retain controls; deliberate table scroll is contained.
+UX-097 | Empty and unavailable states | Every visible action has a real result or an accurate reason it is unavailable.
+UX-098 | Recoverable errors | Offline, timeout, cancellation and provider failure are distinct and recoverable.
+UX-099 | Long transcript performance | Long chat stays responsive and scrolling does not lose selection or anchors.
+UX-100 | First-run onboarding | A new user understands required setup, selected device and next safe action.
+UX-101 | Saved state and migration integrity | Chats, drafts, queued work, avatars and revert history survive migration exactly.
+UX-102 | Release identity and diagnostics | Support report identifies exact build and contains no provider keys.
+UX-103 | Consistent terminology and icon system | Same object keeps same name across sidebar, profile, Settings and composer.
+UX-104 | Multiple customer isolation UX | Wrong-customer data is inaccessible; workspace/access context is explicit.
+UX-105 | Professional finish acceptance | Code check, rendered behavior and owner acceptance have separate recorded outcomes.
+UX-106 | Live inventory and read-only diagnostics | Only supported read-only commands execute; failed transport cannot be shown as healthy.
+UX-107 | Remote command cancellation limits | Stop records UNKNOWN when remote completion cannot be established; no automatic duplicate retry.
+UX-108 | Context truncation disclosure | User can tell when older messages are omitted; raw historical evidence stays available.
+UX-109 | Local notes versus model memory | Editing local note never implies the next model response used it unless request evidence proves inclusion.
+UX-110 | Safe links and inline media | Links open correct source; unsupported media remains a labeled file; raw CLI remains unchanged.
+UX-111 | Mark read or unread | Unread state persists correctly; opening a conversation never cancels work.
+UX-112 | Language support disclosure | Language choice never appears applied while labels remain unchanged.
+UX-113 | Serial capacity feedback | Second conversation shows why it waits and identifies active work without losing its draft.
+UX-114 | Existing approval tooling integration | Aven preview and executed action share the same digest, scope and one-time approval.
+UX-115 | Durable raw run records | A saved run record is retrievable with original provenance after UI reload.

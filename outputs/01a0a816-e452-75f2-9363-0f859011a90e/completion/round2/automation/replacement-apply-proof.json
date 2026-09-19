@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "mode": "hash-checked-incremental-candidate",
+  "frozenInputs": {
+    "automationModuleAndTest": "completion/automation/candidate",
+    "assembledShell": "completion/assembled-candidate"
+  },
+  "sourceHashesVerified": true,
+  "candidateHashesVerified": true,
+  "sourceFilesChanged": [
+    "polished-automation.js",
+    "polished.js",
+    "polished-backup.js",
+    "automation.test.cjs"
+  ],
+  "passThroughFilesVerified": [
+    "polished-automation.css",
+    "polished.html",
+    "polished-workspace-tools.js"
+  ],
+  "rootHooks": "root-hooks.json",
+  "sharedMergeApplied": false,
+  "liveProductApplied": false,
+  "externalCalls": 0,
+  "verifiedBy": "SHA-256 comparison against frozen inputs, isolated pure tests, and actual assembled server acceptance with injected responder"
+}

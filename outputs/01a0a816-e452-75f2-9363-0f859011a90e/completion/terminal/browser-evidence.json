@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "checks": {
+    "reachableTerminalAndGenericLabels": "PASS",
+    "targetAndAllowlist": "PASS",
+    "evidenceAndPersistence": "PASS",
+    "cancelUnknownNoRetry": "PASS",
+    "compactResponsive": "PASS",
+    "reducedMotion": "PASS"
+  },
+  "pageErrors": [],
+  "blockedRequests": [],
+  "apiCalls": [
+    {
+      "targetId": "aa754801-8895-41e8-8ca5-27ee415c9c42",
+      "command": "show version",
+      "requestId": "9e1b0472-fd21-48cf-b913-acc9dddcbfa2"
+    },
+    {
+      "targetId": "aa754801-8895-41e8-8ca5-27ee415c9c42",
+      "command": "show ip route",
+      "requestId": "564cdbe4-5b6a-4207-9f1c-6457437a13e8"
+    }
+  ]
+}

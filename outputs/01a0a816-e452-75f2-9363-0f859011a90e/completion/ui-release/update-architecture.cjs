@@ -1,0 +1,12 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'../../../..'),file=path.join(root,'docs/architecture/architecture.json');
+const d=JSON.parse(fs.readFileSync(file,'utf8'));
+if(d.revision!=='HLD 16')throw Error('Unexpected architecture revision; review before applying');
+d.revision='HLD 17';d.updated='2026-09-16';
+const ui=d.layers.find(x=>x.id==='ui');
+ui.current=ui.current.replace('ux-audit-fixes-v8','ux-minimal-ui-v9').replace('Plan mode binds zero backend tools; Inspect uses the existing read-only allowlist.','The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools.');
+ui.current+=' Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9; the broader reliability, provider, approval, automation, terminal and Git candidates remain unintegrated.';
+d.changes.unshift(['2026-09-16','Minimal UI v9 and history release','Integrated only the reviewed UI/history/reaction changes. Evidence: completion/ui-release/navigation/results.json (31 checks pass), browser-evidence.json (23 checks pass), quality-evidence.json (10 checks pass), backup.test.cjs (3 pass), integration.json (5 exact source files, verified hashes). Fixed duplicate fenced CLI output caused by Markdown boundary newlines without modifying retained output bytes. Backend behavior and remaining 115-row completion verdicts are unchanged; owner visual acceptance and full backend integration remain separate.']);
+fs.writeFileSync(file,JSON.stringify(d,null,2)+'\n');
+console.log(JSON.stringify({revision:d.revision,uiBuild:'ux-minimal-ui-v9'}));

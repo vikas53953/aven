@@ -1,0 +1,25 @@
+{
+  "at": "2026-09-15T19:44:00.310Z",
+  "passed": true,
+  "features": [
+    "UX-051",
+    "UX-052",
+    "UX-059",
+    "UX-102"
+  ],
+  "checks": [
+    "real JSON and Markdown downloads including inventory raw evidence",
+    "interrupted import recovered before startup migration",
+    "exact raw output/notes/draft export",
+    "version/malformed rejection",
+    "cancel unchanged",
+    "explicit restore and paused queue",
+    "pre-import recovery download",
+    "Add mode collision remap preserves current history/draft and reloads",
+    "density apply/cancel/reload",
+    "failed settings save keeps previous preferences",
+    "visible build details",
+    "no network"
+  ],
+  "scope": "Local UI in isolated browser. Transaction failure/schema boundaries independently tested in verify-backup-schema.cjs."
+}

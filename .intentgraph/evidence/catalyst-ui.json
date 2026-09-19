@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-09-13T16:02:46.329Z",
+  "devices": [
+    "sw1",
+    "sw2",
+    "sw3",
+    "sw4"
+  ],
+  "errors": [],
+  "overflow": false,
+  "source": "Live Cisco API through prototype load button",
+  "desktop": "catalyst-desktop.png",
+  "mobile": "catalyst-mobile.png"
+}

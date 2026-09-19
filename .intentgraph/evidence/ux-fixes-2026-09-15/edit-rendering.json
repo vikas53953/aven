@@ -1,0 +1,22 @@
+{
+  "at": "2026-09-15T19:40:26.952Z",
+  "passed": true,
+  "features": [
+    "UX-025",
+    "UX-041",
+    "UX-110 safe-link slice"
+  ],
+  "checks": [
+    "Markdown headings/list/table/emphasis/code",
+    "HTTP(S) source links with safe window/referrer attributes",
+    "unsafe schemes and HTML inert",
+    "remote image references do not load",
+    "cancel/oversize do not submit",
+    "explicit resend removes later context",
+    "original full history recovery copy, no request",
+    "composer draft independent",
+    "queued work disables edit",
+    "code whitespace unchanged"
+  ],
+  "scope": "Mocked chat; no external requests. Inline media/attachment backend remains pending."
+}

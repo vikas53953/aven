@@ -1,0 +1,86 @@
+{
+  "purpose": "Independent integration acceptance harness. It drives only a temporary fixture root through the candidate HTTP server and injects mock provider, adapter, and sandbox boundaries.",
+  "runCommand": "$env:AVEN_PRODUCT_ROOT='...'; & 'C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe' integration-flow-tests.cjs",
+  "defaultProductRoot": "../assembled-candidate",
+  "owned": [
+    {
+      "id": "UX-025",
+      "acceptance": "User can review an edited prompt before send; earlier device commands are never reversed or repeated silently.",
+      "checks": [
+        "the original HTTP run persists one diagnostic evidence record",
+        "an explicit edited send creates one fresh run whose provider payload contains the edited prompt and omits the original prompt/later evidence",
+        "the original evidence remains unchanged and the diagnostic command call count does not increase during the edited run",
+        "repeating the edited request id is rejected without another provider or device call"
+      ],
+      "limitation": "The backend fixture exercises the actual HTTP/provider/sandbox boundaries; the browser edit dialog and explicit resend gesture require the assembled UI rerun."
+    },
+    {
+      "id": "UX-030",
+      "acceptance": "Queued follow-up messages stay ordered and are never submitted twice.",
+      "checks": [
+        "chat first run reaches terminal evidence before the next queued message is submitted",
+        "next queued message is submitted exactly once and preserves inspect mode",
+        "same requestId/idempotencyKey is rejected without a second provider or sandbox call",
+        "with the candidate's allowConcurrentRuns contract enabled, a different chat can complete while one chat is active, while a second active request for the same chat is rejected without a provider or device call"
+      ],
+      "limitation": "The harness enables the candidate's per-chat concurrency option and models the browser queue with ordered HTTP requests; it does not certify packaged UI persistence or a physical user gesture."
+    },
+    {
+      "id": "UX-031",
+      "acceptance": "Reload retains queue state and resume is intentional; editing changes only the selected item.",
+      "checks": [
+        "initial HTTP stop aborts the run and produces no later terminal evidence",
+        "answer resumes a waiting run and a subsequent stop cancels the fresh segment",
+        "resume keeps the selected mode and does not issue a duplicate dispatch"
+      ],
+      "limitation": "This is a service lifecycle fixture; queue editing controls and packaged reload are outside this backend harness."
+    },
+    {
+      "id": "UX-033",
+      "acceptance": "An answer maps to one pending question and stale cards cannot authorize later work.",
+      "checks": [
+        "workflow start returns one pending question with an opaque token",
+        "the exact question token resumes the same run with the answer in context",
+        "a stale or repeated answer is rejected and does not call the responder again",
+        "terminal evidence keeps command, target, status, source, and provider provenance"
+      ],
+      "limitation": "No live provider, vault, browser, device, or approval executor is used; only the injected mock responder is exercised."
+    },
+    {
+      "id": "UX-040",
+      "acceptance": "Restart during work preserves transcript and exposes recovery without duplicate execution.",
+      "checks": [
+        "waiting run is recoverable after a server restart",
+        "recovered waiting state exposes no question token",
+        "restart does not issue a provider or device call"
+      ],
+      "limitation": "Restart is simulated by closing and recreating the HTTP server over the same temporary workflow store; packaged app process recovery remains separate."
+    },
+    {
+      "id": "UX-101",
+      "acceptance": "Chats, drafts, queued work, avatars and revert history survive migration exactly.",
+      "checks": [
+        "candidate workspace backup validation, serialization, replacement and parse-on-reload preserve direct and queued chats",
+        "drafts, pending queue item mode, pause state, avatars and revert history compare exactly after reload",
+        "provider/model, section, connection, sidebar and pane preference fields survive with connection fields normalized off",
+        "local coworker notes remain byte-equivalent in the reloaded envelope"
+      ],
+      "limitation": "This is an isolated candidate backup/migration contract run using in-memory storage; packaged Electron localStorage startup migration still requires the assembled UI rerun."
+    },
+    {
+      "id": "UX-109",
+      "acceptance": "Editing a local coworker note never implies the next model response used it unless request evidence proves inclusion.",
+      "checks": [
+        "after a local note edit, the captured mock chat request contains no note content",
+        "a client attempt to add notes to the strict chat payload is rejected before provider dispatch"
+      ],
+      "limitation": "This backend fixture does not click the profile document editor; it captures the HTTP boundary and must be paired with the browser editor interaction in the integrated rerun."
+    }
+  ],
+  "crossCutting": [
+    "actual createServer HTTP boundary and NDJSON stream are used",
+    "explicit provider selection is captured at the request, responder, and mock-provider boundaries",
+    "question and steering tokens must remain stream-only and absent from persisted evidence or recovered public state",
+    "all network requests are loopback-only and all provider/device boundaries are injected mocks"
+  ]
+}

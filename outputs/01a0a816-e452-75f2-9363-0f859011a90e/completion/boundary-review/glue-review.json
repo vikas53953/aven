@@ -1,0 +1,127 @@
+{
+  "review": "completion-boundary-glue-review",
+  "status": "CHANGES_REQUIRED",
+  "stage": "early-glue-review",
+  "scope": [
+    "completion/provider/replacements.json and candidate provider runtime wiring",
+    "completion/workflows/replacements.json and candidate clarification bridge",
+    "completion/reliability/replacements.json and candidate local service storage",
+    "completion/root-stage current composition snapshot"
+  ],
+  "outOfScope": [
+    "Previously reported core approval/replay/provider findings are not repeated.",
+    "Known UI card state/action population and normal /api/chat workflow bypass are treated as already routed.",
+    "Missing files in the in-progress root-stage copy are not treated as final completion claims.",
+    "No candidate files were modified and no long or mutable test suite was run."
+  ],
+  "findings": [
+    {
+      "id": "GLUE-001",
+      "severity": "critical",
+      "file": "completion/provider/replacements.json; completion/workflows/replacements.json",
+      "lines": "provider server responder hunk; workflow server responder hunk; provider and workflow agent-runtime import/stream hunks",
+      "function": "provider/workflow composition around /api/chat",
+      "trigger": "Apply both replacement packages to the same baseline server and agent-runtime files in either order.",
+      "expected": "One composed responder path should preserve provider selection, capabilities, key/fetch/model-factory wiring, clarification lifecycle, and the question token on the wire.",
+      "actual": "Both packages replace the same baseline responder and agent-runtime anchors. The workflow replacement starts workflowManager without selection/providerCapabilities/providerFetch/getKey/modelFactory and its manager overwrites selection with run.selection; the provider replacement calls the responder directly and omits workflowManager. Exact-replacement integration therefore either drops provider dispatch or bypasses clarification. stage-conflicts.json records these overlaps.",
+      "action": "Manually compose one route and one runtime contract before applying hunks. Pass the selected provider data into workflowManager.start and preserve it in the run for answer/resume; emit questionToken only on the wire and keep it out of evidence persistence. Add a composed route smoke check before claiming integration."
+    },
+    {
+      "id": "GLUE-002",
+      "severity": "high",
+      "file": "completion/provider/candidate/intentgraph/provider-runtime-config.cjs:37-44; completion/provider/replacements.json (createDefaultModel hunk); completion/root-stage/intentgraph/agent-runtime.cjs:166-193 and server.cjs:152,310",
+      "lines": "37-44; createDefaultModel provider factory branch; providerRuntime construction and responder arguments",
+      "function": "createProviderRuntimeConfig.modelFor/createDefaultModel",
+      "trigger": "Construct the intended host path with options.providerConfigs and no provider-specific modelFactory, while supplying a valid configured key and model.",
+      "expected": "The host either uses the default supported model implementation or fails explicitly with provider_adapter_unavailable; a callable wrapper that has no actual factory must not be treated as a model.",
+      "actual": "createProviderRuntimeConfig always returns a modelFactory function, but modelFor returns undefined when no factory is configured. createDefaultModel tests only typeof modelFactory and awaits that wrapper, so runtimeModel becomes undefined instead of falling back to ChatOpenAI or the adapter. The selected provider can be configured and accepted while no model is created and no request is sent.",
+      "action": "Expose modelFactory only when a real factory exists, or validate its return and use the explicit default/adapter fallback. Add providerConfigs-with-key/no-factory coverage for OpenCode, OpenAI, OpenRouter, and Anthropic."
+    },
+    {
+      "id": "GLUE-003",
+      "severity": "high",
+      "file": "completion/provider/candidate/intentgraph/provider-adapter.cjs:204-234; completion/provider/candidate/intentgraph/provider-runtime-config.cjs:30-35; completion/root-stage/intentgraph/agent-runtime.cjs:166-193 and server.cjs:310",
+      "lines": "204-234; 30-35; 166-193; 310",
+      "function": "createLangChainModel/providerFetch/createDefaultModel",
+      "trigger": "Select a configured OpenRouter or OpenAI model while the host supplied a provider-specific injected fetch or expects the candidate adapter to enforce its response schema.",
+      "expected": "Every selected provider request uses the selected provider adapter or the explicitly injected provider transport, with the adapter's credential, endpoint, and response validation boundary.",
+      "actual": "The candidate adapter's OpenRouter/OpenAI LangChain path is never constructed by createDefaultModel. providerFetch is passed by the server but is used only by the Anthropic branch; OpenRouter/OpenAI use ChatOpenAI with global restrictedFetch. The injected transport and adapter validation are therefore cosmetic for two first-class providers, and mock/host transport policy is bypassed.",
+      "action": "Route all providers through createLangChainModel or make the direct SDK path accept and enforce the selected provider transport. Keep the fallback explicit so a picker selection cannot report a provider that the runtime did not use."
+    },
+    {
+      "id": "GLUE-004",
+      "severity": "high",
+      "file": "completion/reliability/replacements.json (server-ledger-and-default-single-flight, server-claim-before-provider, server-settle-and-preserve-guard); completion/root-stage/intentgraph/server.cjs:172,291,326",
+      "lines": "172, 291, 326",
+      "function": "server reliability claim/settle wiring",
+      "trigger": "Run any accepted server request after the reliability ledger enforces ownerId in settleRun.",
+      "expected": "The owner used to create the ledger, claim the run, and settle the run is identical for the lifetime of that service instance.",
+      "actual": "The ledger is created with ownerId service-${process.pid}-${randomUUID()}, while claimRun and settleRun pass service-${process.pid}. With the current candidate settleRun owner check, every normal settlement raises claim_conflict and is swallowed. Completed runs remain RUNNING in durable state, so later single-flight requests can stay blocked.",
+      "action": "Create one serverOwnerId and pass it to ledger construction, claimRun, and settleRun, or use reliability.ownerId. Do not swallow an ownership settlement failure without surfacing an UNKNOWN/recovery state."
+    },
+    {
+      "id": "GLUE-005",
+      "severity": "high",
+      "file": "completion/workflows/candidate/clarification-runtime.cjs:172-205; completion/workflows/candidate/clarification-server-adapter.cjs:87-105",
+      "lines": "172-205; 87-105",
+      "function": "ClarificationRunManager.requestApproval and workflow API dispatch",
+      "trigger": "Create proposal P in run/chat B, then POST approval/request with a valid runId/chatId for run/chat A and input.proposalId=P; or use approval/review, approve, deny, cancel, or execute with an ID/token from another chat.",
+      "expected": "Every proposal and approval operation is bound to the owning run and chat; a bearer token from another workflow cannot authorize or disclose state in this chat.",
+      "actual": "requestApproval verifies only that the supplied run exists, then calls workflow.requestApproval(input) without checking proposal ownership. review calls manager.workflow.reviewProposal directly, and the other approval actions call manager methods without run/chat binding. The only HTTP boundary checks are a fixed X-Aven-Chat header and local origin, so known IDs/tokens cross the relationship boundary.",
+      "action": "Record runId/chatId on proposals and approvals or maintain a durable ownership index. Require those fields on every review/decision/execute route and reject mismatches before reading or changing workflow state."
+    },
+    {
+      "id": "GLUE-006",
+      "severity": "high",
+      "file": "completion/workflows/candidate/clarification-runtime.cjs:58-65,118-131,134-160; completion/root-stage/intentgraph/server.cjs:187-193",
+      "lines": "58-65, 118-131, 134-160; 187-193",
+      "function": "ClarificationRunManager lifecycle persistence",
+      "trigger": "Receive a waiting-question result, restart the local server, then answer the saved chat.workflowState using its runId/question token.",
+      "expected": "The persisted workflow boundary either restores the run and its provider context or returns an explicit recoverable/unknown state without stranding the user.",
+      "actual": "ClarificationRunManager keeps runs only in a process-local Map. The workflow state file persists questions/proposals/approvals but not runId, messages, status, or responder/provider context. After restart, answer/get/cancel return run_not_found even though the UI and approval store retain the pending workflow state.",
+      "action": "Persist and validate the run lifecycle and provider context, or deliberately invalidate it on restart and expose a durable stale/restart card with a fresh-question path. Never leave a persisted interactive card pointing at a volatile run."
+    },
+    {
+      "id": "GLUE-007",
+      "severity": "critical",
+      "file": "completion/reliability/candidate/intentgraph/reliability-storage.cjs:26-38",
+      "lines": "26-38",
+      "function": "FileStorage.setItem lock acquisition",
+      "trigger": "Two service processes observe the same expired lock file and race through the stale-lock cleanup.",
+      "expected": "Expired-lock takeover must be atomic and must never unlink a lock acquired by another process; the authoritative durable claim transaction must serialize.",
+      "actual": "Each process reads the old JSON and may then unlink it. Process A can create the new wx lock after its unlink, while process B, which already read the old file, unlinks A's new lock and creates its own. Both then enter mutate; last-writer state can lose a run/receipt and both provider calls can proceed. This defeats the backend deduplication boundary even though normal wx creation is atomic.",
+      "action": "Do not delete a lock after a stale read. Use an OS atomic lock primitive/lock directory with an owner nonce and conditional compare-and-delete for expiry, and test the read-expired/unlink/create interleaving across two processes. The browser localStorage check/write/read race remains a separate cross-tab concern already reported."
+    },
+    {
+      "id": "GLUE-008",
+      "severity": "high",
+      "file": "completion/workflows/candidate/approval-workflow.cjs:359-371,674-692,740-781",
+      "lines": "359-371; 674-692; 740-781",
+      "function": "ApprovalWorkflow.commit and authorization transitions",
+      "trigger": "A write/rename/lock failure occurs after an approval or execution transition mutates this.state but before persist completes, and the same manager instance handles another request.",
+      "expected": "A failed durable transition restores the prior in-memory state or permanently closes the manager until a validated reload; authorization cannot diverge between memory and disk.",
+      "actual": "commit increments and mutates this.state before persist. Its catch reloads only state_conflict; storage_unavailable, lock, and write failures leave the mutated authorization state in memory while the durable file still contains the prior state. Later calls observe a different approval status/token set from disk and can become stuck or act on state that was never committed.",
+      "action": "Apply transitions to a copy and swap only after a successful locked persist, or restore the pre-transition snapshot on every commit error and mark the manager unusable until reload. Add fault-injected persistence checks around approve and execute."
+    },
+    {
+      "id": "GLUE-009",
+      "severity": "high",
+      "file": "completion/reliability/replacements.json (server-ledger-and-default-single-flight); completion/root-stage/intentgraph/server.cjs:170-173,291",
+      "lines": "170-173, 291",
+      "function": "server startup and durable run claim",
+      "trigger": "Terminate the service after claimRun succeeds and before settleRun, restart with the same runtimeDirectory, then submit a new request.",
+      "expected": "The old run is marked UNKNOWN through an explicit, owner/lease-scoped recovery path and the user is shown a review/recovery state; the new request is not silently re-dispatched.",
+      "actual": "createServer creates a durable ledger but never invokes or exposes recovery. The old RUNNING record remains active, the new random service owner cannot settle it, and claimRun returns busy for the default single-flight mode. Subsequent requests can remain blocked indefinitely until an out-of-band state edit.",
+      "action": "Provide an explicit authorized recovery operation for expired service leases (or a startup recovery decision) that marks the old run UNKNOWN and preserves its no-retry guard. Surface recovery-required status rather than leaving single-flight permanently busy."
+    }
+  ],
+  "validation": {
+    "method": "Static review of current candidate/replacement text and current root-stage composition; no prior module probes were repeated.",
+    "evidence": [
+      "stage-conflicts.json shows provider/workflow overlap on server and agent-runtime anchors.",
+      "root-stage server currently uses one server owner UUID at ledger creation but service-pid owner strings at claim and settle.",
+      "provider runtime config always exposes a modelFactory wrapper whose no-factory path returns undefined.",
+      "FileStorage stale cleanup reads, unlinks, and recreates without compare-and-delete."
+    ]
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "scope": "Reliability only; apply sequentially after preserving the v8 source and any provider or clarification hunks.",
+  "sourceFiles": {
+    "polished.html": {
+      "baselineSHA256": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+      "sourceSHA256": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352"
+    },
+    "polished.js": {
+      "baselineSHA256": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+      "sourceSHA256": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c"
+    },
+    "intentgraph/server.cjs": {
+      "baselineSHA256": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef",
+      "sourceSHA256": "7cf27c81a5d81b199f83a0825a16bbcf74cfeb14ac833fd20e818f89cff74cef"
+    }
+  },
+  "replacements": [
+    {
+      "id": "load-reliability-before-ui",
+      "file": "polished.html",
+      "before": "  <script src=\"polished-attachments.js?revision=ux-audit-fixes-v8\"></script>",
+      "after": "  <script src=\"polished-attachments.js?revision=ux-audit-fixes-v8\"></script>\n  <script src=\"polished-reliability.js?revision=ux-reliability-v1\"></script>"
+    },
+    {
+      "id": "create-browser-ledger",
+      "file": "polished.js",
+      "before": "  const uid = () => globalThis.crypto?.randomUUID ? crypto.randomUUID() : `aven-${Date.now()}-${Math.random().toString(16).slice(2)}`;",
+      "after": "  const uid = () => globalThis.crypto?.randomUUID ? crypto.randomUUID() : `aven-${Date.now()}-${Math.random().toString(16).slice(2)}`;\n  const runtimeCapabilities=globalThis.AvenRuntimeCapabilities&&typeof globalThis.AvenRuntimeCapabilities==='object'?globalThis.AvenRuntimeCapabilities:{};if(typeof runtimeCapabilities.allowConcurrentRuns!=='boolean')runtimeCapabilities.allowConcurrentRuns=true;if(typeof runtimeCapabilities.source!=='string')runtimeCapabilities.source='known-local-server-default';globalThis.AvenRuntimeCapabilities=runtimeCapabilities;\n  const reliabilityOwnerId=`browser-${uid()}`,reliabilityLeaseKey=`aven-reliability-v1:lease:${reliabilityOwnerId}`;let reliabilityLedger=null;\n  function configureReliabilityLedger(){try{reliabilityLedger=globalThis.AvenReliability?.createReliabilityLedger({storage:localStorage,namespace:'aven-reliability-v1',ownerId:reliabilityOwnerId,concurrency:runtimeCapabilities.allowConcurrentRuns===true?'per-chat':'single'});}catch{reliabilityLedger=null;}}configureReliabilityLedger();\n  function refreshReliabilityLease(){try{localStorage.setItem(reliabilityLeaseKey,JSON.stringify({ownerId:reliabilityOwnerId,expiresAt:Date.now()+7500}));}catch{}}refreshReliabilityLease();const reliabilityLeaseTimer=setInterval(refreshReliabilityLease,2000);addEventListener('pagehide',()=>{clearInterval(reliabilityLeaseTimer);try{localStorage.removeItem(reliabilityLeaseKey);}catch{}},{once:true});\n  function liveReliabilityOwners(){const owners=new Set([reliabilityOwnerId]);try{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith('aven-reliability-v1:lease:'))continue;const value=JSON.parse(localStorage.getItem(key)||'null');if(value?.ownerId&&Number(value.expiresAt)>Date.now())owners.add(value.ownerId);}}catch{}return owners;}\n\n  function reliableDraft(c,value){try{if(!reliabilityLedger)throw Error('storage unavailable');reliabilityLedger.setDraft(c.id,value);return true;}catch{return false;}}\n  function reliableQueueSync(c){if(!reliabilityLedger)return false;try{for(const item of (c.pendingQueue||[])){const result=reliabilityLedger.enqueue(c.id,item.text,{idempotencyKey:`queue.enqueue:${c.id}:${item.id}`,itemId:item.id,mode:item.mode,createdAt:item.createdAt,replyTo:item.replyTo});if(!result?.accepted)return false;}return true;}catch{return false;}}\n  function reliableQueueCancel(c,itemId){try{return Boolean(reliabilityLedger?.cancelQueued(c.id,itemId,{idempotencyKey:`queue.cancel:${c.id}:${itemId}`}));}catch{return false;}}\n  function reliableQueueClaim(c,item){try{const key=`queue.claim:${c.id}:${item.id}`,result=reliabilityLedger?.claimNext(c.id,{idempotencyKey:key,consumerId:reliabilityLedger.ownerId});return result?.claimed&&result.item?.id===item.id?{key,item:result.item}:null;}catch{return null;}}\n  function reliableQueueSettle(c,p,status){try{if(!reliabilityLedger||!p.queueItemId||!p.queueClaimKey)return false;return Boolean(reliabilityLedger.settleQueue(c.id,p.queueItemId,{claimKey:p.queueClaimKey,idempotencyKey:`queue.settle:${c.id}:${p.queueItemId}:${status}`,status,consumerId:reliabilityLedger.ownerId}));}catch{return false;}}\n  function reliableRunClaim(c,requestMode,messages){try{if(!reliabilityLedger)return{accepted:false,reason:'storage_unavailable'};const message=c.messages.at(-1),requestId=`${c.id}:${message?.id||''}`;return reliabilityLedger.claimRun(c.id,{requestId,idempotencyKey:`run:${requestId}`,mode:requestMode,ownerId:reliabilityLedger.ownerId,fingerprint:JSON.stringify({chatId:c.id,mode:requestMode,messages:(messages||[]).map(m=>({role:m.role,content:m.content||m.text||''}))})});}catch{return{accepted:false,reason:'storage_unavailable'};}}\n  function reliableRunSettle(p,status){try{if(!reliabilityLedger||!p.reliabilityRunId)return false;return Boolean(reliabilityLedger.settleRun(p.reliabilityRunId,status,{chatId:p.chatId||null},{ownerId:reliabilityLedger.ownerId,idempotencyKey:`run.settle:${p.reliabilityRunId}:${status}`}));}catch{return false;}}"
+    },
+    {
+      "id": "persist-draft-with-ledger",
+      "file": "polished.js",
+      "before": "  function retainDraft(){const c=data.chats.find(x=>x.id===renderedChatId);if(!c||!byId('draft')||byId('composer-wrap').hidden)return;c.draft=byId('draft').value;if(sessionAttachments.has(c.id))c.pendingAttachmentNames=sessionAttachments.get(c.id).map(i=>i.name);saveData();}",
+      "after": "  function retainDraft(){const c=data.chats.find(x=>x.id===renderedChatId);if(!c||!byId('draft')||byId('composer-wrap').hidden)return true;const value=byId('draft').value,previous=c.draft;if(!reliableDraft(c,value)){toast('Draft storage is unavailable. Your draft remains in this conversation; reload was not started.');return false;}c.draft=value;if(sessionAttachments.has(c.id))c.pendingAttachmentNames=sessionAttachments.get(c.id).map(i=>i.name);if(!saveData()){reliableDraft(c,previous);c.draft=previous;toast('Could not save this draft. The previous saved draft is retained.');return false;}return true;}",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "block-switch-on-draft-failure",
+      "file": "polished.js",
+      "before": "  function showChat(id=data.activeChat,options={}){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;retainDraft();const c=",
+      "after": "  function showChat(id=data.activeChat,options={}){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;if(!retainDraft())return false;const c=",
+      "requires": [
+        "persist-draft-with-ledger"
+      ]
+    },
+    {
+      "id": "queue-persist-before-save",
+      "file": "polished.js",
+      "before": "    const previousQueueState={paused:c.queuePaused,reason:c.queuePauseReason,draft:c.draft,reply:c.draftReplyTo,names:c.pendingAttachmentNames};if(clearComposer){c.draft='';delete c.draftReplyTo;c.pendingAttachmentNames=[];}c.pendingQueue.push({id:uid(),text:value,mode:modeFor(c.mode),createdAt:now(),replyTo:normalizeReply(replyTo)});",
+      "after": "    const previousQueueState={paused:c.queuePaused,reason:c.queuePauseReason,draft:c.draft,reply:c.draftReplyTo,names:c.pendingAttachmentNames},itemId=uid();if(clearComposer){c.draft='';delete c.draftReplyTo;c.pendingAttachmentNames=[];}c.pendingQueue.push({id:itemId,text:value,mode:modeFor(c.mode),createdAt:now(),replyTo:normalizeReply(replyTo)});if(reliabilityLedger&&!reliableQueueSync(c)){c.pendingQueue.pop();c.draft=previousQueueState.draft;c.draftReplyTo=previousQueueState.reply;c.pendingAttachmentNames=previousQueueState.names;toast('Reliable queue storage is unavailable. The message was not queued.');return false;}",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "queue-rollback-ledger-on-save-failure",
+      "file": "polished.js",
+      "before": "    if(!saveData()){c.pendingQueue.pop();c.queuePaused=previousQueueState.paused;c.queuePauseReason=previousQueueState.reason;c.draft=previousQueueState.draft;c.draftReplyTo=previousQueueState.reply;c.pendingAttachmentNames=previousQueueState.names;toast('Could not save the queued message. Your draft is retained.');return false;}renderPendingQueue(c);updateSend();return true;",
+      "after": "    if(!saveData()){c.pendingQueue.pop();if(reliabilityLedger)reliableQueueCancel(c,itemId);c.queuePaused=previousQueueState.paused;c.queuePauseReason=previousQueueState.reason;c.draft=previousQueueState.draft;c.draftReplyTo=previousQueueState.reply;c.pendingAttachmentNames=previousQueueState.names;toast('Could not save the queued message. Your draft is retained.');return false;}renderPendingQueue(c);updateSend();return true;",
+      "requires": [
+        "queue-persist-before-save"
+      ]
+    },
+    {
+      "id": "queue-claim-before-dispatch",
+      "file": "polished.js",
+      "before": "  function dispatchNextQueued(c){\r\n    if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;\r\n    const before=clone(c);const item=c.pendingQueue.shift();const text=item.text;c.messages.push({id:uid(),role:'user',text,recipients:c.recipients,recipientNames:selectedAgents(c).map(a=>a.name),createdAt:now(),mode:modeFor(item.mode),queuedFrom:item.id,replyTo:normalizeReply(item.replyTo)});c.queueDispatching=item.id;",
+      "after": "  function dispatchNextQueued(c){\r\n    if(!c||c.archived||(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;\r\n    const item=c.pendingQueue[0];if(reliabilityLedger&&!reliableQueueSync(c)){c.queuePaused=true;c.queuePauseReason='Reliable queue storage is unavailable. Resume after storage recovers.';saveData();return false;}const claim=reliabilityLedger?reliableQueueClaim(c,item):{key:null,item};if(reliabilityLedger&&!claim){c.queuePaused=true;c.queuePauseReason='This queued item is already claimed or unknown. Review it before resuming.';saveData();return false;}\r\n    const before=clone(c);c.pendingQueue.shift();const text=item.text;c.messages.push({id:uid(),role:'user',text,recipients:c.recipients,recipientNames:selectedAgents(c).map(a=>a.name),createdAt:now(),mode:modeFor(item.mode),queuedFrom:item.id,replyTo:normalizeReply(item.replyTo)});c.queueDispatching=item.id;c.queueClaimKey=claim?.key||null;",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "run-claim-and-request-id",
+      "file": "polished.js",
+      "before": "    if(chatRequests.size)return;",
+      "after": "    if((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0))return;",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "run-durable-claim",
+      "file": "polished.js",
+      "before": "    if(c.captureWarning){toast(c.captureWarning+' Reload to recover saved work before another request.');return;}const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),agentId,mode:modeFor(requestMode),startedAt:now(),name:agent.name,started,controller,events:[],runId:null,steeringToken:null,steeringText:'',pendingSteerText:'',steeringStatus:'idle',steeringMessage:'Steering applies at the next step.',steeringEvents:new Map(),appliedSteerIds:new Set()};",
+      "after": "    if(c.captureWarning){toast(c.captureWarning+' Reload to recover saved work before another request.');return;}const reliableClaim=reliableRunClaim(c,requestMode,messages);if(!reliableClaim.accepted){c.replyError='Reliable run storage is unavailable or another run owns this request. No request was sent.';renderConversation();return;}if(reliableClaim.duplicate){c.captureWarning='This request was already claimed. Review its saved result; it was not submitted again.';saveData();renderConversation();return;}const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),agentId,mode:modeFor(requestMode),startedAt:now(),name:agent.name,started,controller,events:[],runId:null,steeringToken:null,steeringText:'',pendingSteerText:'',steeringStatus:'idle',steeringMessage:'Steering applies at the next step.',steeringEvents:new Map(),appliedSteerIds:new Set(),reliabilityRunId:reliableClaim.run.runId,reliabilityRequestId:reliableClaim.run.requestId,queueItemId:c.queueDispatching||null,queueClaimKey:c.queueClaimKey||null,chatId:c.id};",
+      "requires": [
+        "create-browser-ledger",
+        "run-claim-and-request-id"
+      ]
+    },
+    {
+      "id": "send-request-id",
+      "file": "polished.js",
+      "before": "body:JSON.stringify({chatId:c.id,agentName:agent.name.slice(0,80),messages,mode:modeFor(requestMode)}),signal:",
+      "after": "body:JSON.stringify({chatId:c.id,agentName:agent.name.slice(0,80),messages,mode:modeFor(requestMode),requestId:pending.reliabilityRequestId,idempotencyKey:`run:${pending.reliabilityRequestId}`}),signal:",
+      "requires": [
+        "run-durable-claim"
+      ]
+    },
+    {
+      "id": "settle-run-and-queue-on-finally",
+      "file": "polished.js",
+      "before": "    finally{clearInterval(timer);const scroll=byId('center-content'),",
+      "after": "    finally{clearInterval(timer);const finalStatus=runOutcome==='success'?'SUCCESS':result?.status==='waiting-question'?'WAITING':controller.signal.aborted?'UNKNOWN':'FAILURE';const runSettled=reliableRunSettle(pending,finalStatus),queueSettled=!pending.queueItemId||!pending.queueClaimKey||reliableQueueSettle(c,pending,finalStatus==='SUCCESS'?'acknowledged':'unknown');if(!runSettled||!queueSettled){c.captureWarning='Durable run settlement failed. Keep the captured result and recover storage before resuming queued work.';c.queuePaused=true;saveData();}delete c.queueClaimKey;const scroll=byId('center-content'),",
+      "requires": [
+        "run-durable-claim"
+      ]
+    },
+    {
+      "id": "browser-accept-waiting-question",
+      "file": "polished.js",
+      "before": "if(!response.ok)throw Error(result.error||'Connection unavailable.');if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');",
+      "after": "if(!response.ok)throw Error(result.error||'Connection unavailable.');const waitingQuestion=result?.status==='waiting-question'&&((typeof result.pendingQuestion==='string'&&result.pendingQuestion.trim())||(result.pendingQuestion?.question&&typeof result.pendingQuestion.question.prompt==='string'&&result.pendingQuestion.question.prompt.trim())||(result.pendingQuestion&&typeof result.pendingQuestion.prompt==='string'&&result.pendingQuestion.prompt.trim()));if((typeof result.text!=='string'||!result.text.trim())&&!waitingQuestion)throw Error('The provider returned an empty reply.');",
+      "requires": [
+        "run-durable-claim"
+      ]
+    },
+    {
+      "id": "browser-render-waiting-question",
+      "file": "polished.js",
+      "before": "role:'assistant',agentId,text:result.text,model:",
+      "after": "role:'assistant',agentId,text:(result.text&&result.text.trim())?result.text:`Question: ${typeof result.pendingQuestion==='string'?result.pendingQuestion:result.pendingQuestion?.question?.prompt||result.pendingQuestion?.prompt||'Please answer the pending question.'}`,model:",
+      "requires": [
+        "browser-accept-waiting-question"
+      ]
+    },
+    {
+      "id": "browser-waiting-status",
+      "file": "polished.js",
+      "before": "const status=AvenRunState.outcome(result,pending.events);",
+      "after": "const status=result?.status==='waiting-question'?'WAITING':AvenRunState.outcome(result,pending.events);",
+      "requires": [
+        "run-durable-claim"
+      ]
+    },
+    {
+      "id": "browser-visible-recovery-control",
+      "file": "polished.js",
+      "before": "status.append(document.createTextNode(c.captureWarning||message));",
+      "after": "status.append(document.createTextNode(c.captureWarning||message));if(c.captureWarning){const recover=document.createElement('button');recover.type='button';recover.textContent='Recover abandoned local work';recover.onclick=async()=>{recover.disabled=true;try{const local=await recoverLocalReliability({authorized:true,chatId:c.id});const response=await fetch(`${CHAT_API}/recovery`,{method:'POST',headers:{'X-Aven-Chat':'text-only','Content-Type':'application/json'},body:JSON.stringify({authorized:true})});const result=await response.json();if(!response.ok)throw Error(result.error||'Recovery unavailable.');const count=(local.count||0)+(result.count||0);toast(count?'Recovered '+count+' abandoned run item(s). Review the saved evidence before resuming.':local.reason==='backend_unavailable'?'Local service status is unavailable. No local work was changed.':'No abandoned local run was found.');}catch(error){toast(error.message||'Recovery unavailable. No request was sent.');}finally{recover.disabled=false;}};status.append(recover);}",
+      "requires": [
+        "run-durable-claim"
+      ]
+    },
+    {
+      "id": "send-to-chat-local-queue",
+      "file": "polished.js",
+      "before": "    if(chatRequests.size||c.queuePaused||c.pendingQueue?.length){",
+      "after": "    if((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.pendingQueue?.length){",
+      "requires": [
+        "run-claim-and-request-id"
+      ]
+    },
+    {
+      "id": "server-reliability-imports",
+      "file": "intentgraph/server.cjs",
+      "before": "const { createChatReadApi } = require('./chat-read-api.cjs');",
+      "after": "const { createChatReadApi } = require('./chat-read-api.cjs');\nconst { createReliabilityLedger } = require('./reliability.cjs');\nconst { FileStorage } = require('./reliability-storage.cjs');"
+    },
+    {
+      "id": "server-ledger-and-default-single-flight",
+      "file": "intentgraph/server.cjs",
+      "before": "  let chatPending = false;\n  const activeRuns = new Map();",
+      "after": "  let chatPending = false;\n  const concurrentRuns = options.allowConcurrentRuns !== false;\n  const serverOwnerId=`service-${process.pid}-${crypto.randomUUID()}`;\n  const reliabilityStorage=new FileStorage(path.join(runtimeDirectory,'reliability'));\n  const reliability = createReliabilityLedger({storage:reliabilityStorage,namespace:'chat',ownerId:serverOwnerId,concurrency:concurrentRuns?'per-chat':'single'});\n  const activeRuns = new Map();\n  const ownerProcessAlive=ownerId=>{const match=/^service-(\\d+)-/.exec(String(ownerId||''));if(!match)return true;try{process.kill(Number(match[1]),0);return true;}catch(error){return error.code==='EPERM';}};\n  const recoverAbandonedReliability=()=>{const state=reliability.snapshot(),owners=new Set();for(const run of Object.values(state.runs))if(['RUNNING','CANCELLING','WAITING'].includes(run.status)&&/^service-\\d+-/.test(run.ownerId)&&!ownerProcessAlive(run.ownerId))owners.add(run.ownerId);for(const queue of Object.values(state.queues))for(const item of queue.items)if(item.status==='claimed'&&/^service-\\d+-/.test(item.claim?.ownerId||'')&&!ownerProcessAlive(item.claim.ownerId))owners.add(item.claim.ownerId);let count=0;for(const ownerId of owners)count+=reliability.recover({authorized:true,ownerId}).count;return {recovered:count>0,count,owners:[...owners]};};\n  const recoverReliability=(recoveryOptions={})=>reliability.recover(recoveryOptions);"
+    },
+    {
+      "id": "server-accept-request-id",
+      "file": "intentgraph/server.cjs",
+      "before": "Object.keys(body).some(k=>!['chatId','agentName','messages','mode'].includes(k))",
+      "after": "Object.keys(body).some(k=>!['chatId','agentName','messages','mode','requestId','idempotencyKey'].includes(k))"
+    },
+    {
+      "id": "server-recovery-route",
+      "file": "intentgraph/server.cjs",
+      "before": "    if (pathname === '/api/chat/steer') {",
+      "after": "    if (pathname === '/api/chat/recovery') {\n      const origin=req.headers.origin;if(!chatOriginAllowed(origin,req)){sendError(res,403,new Error('Chat origin is not allowed'));return;}res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','POST');res.setHeader('Access-Control-Allow-Headers','X-Aven-Chat, Content-Type');res.writeHead(204);res.end();return;}if(req.method!=='POST'||req.headers['x-aven-chat']!=='text-only'){sendError(res,405,new Error('Explicit recovery requires a text-only POST'));return;}let body;try{body=await parseBody(req);}catch{sendError(res,400,new Error('Invalid recovery request'));return;}if(!body||body.authorized!==true||Object.keys(body).some(key=>key!=='authorized'&&key!=='probe')){sendError(res,403,new Error('Explicit recovery authorization is required'));return;}try{if(body.probe===true){const state=reliability.snapshot(),activeRuns=Object.values(state.runs).filter(run=>['RUNNING','CANCELLING','WAITING'].includes(run.status));sendJson(res,200,{probe:true,allowConcurrentRuns:concurrentRuns,activeRequestIds:activeRuns.map(run=>run.requestId),activeRuns:activeRuns.map(run=>({runId:run.runId,chatId:run.chatId,requestId:run.requestId,status:run.status}))});return;}sendJson(res,200,recoverAbandonedReliability());}catch(error){sendError(res,503,error);}return;\n    }\n    if (pathname === '/api/chat/steer') {",
+      "requires": [
+        "server-ledger-and-default-single-flight"
+      ]
+    },
+    {
+      "id": "server-claim-before-provider",
+      "file": "intentgraph/server.cjs",
+      "before": "      if(chatPending){sendError(res,409,new Error('Another reply is in progress. Try again when it finishes.'));return;}\r\n      chatPending=true;\r\n      const controller=new AbortController();",
+      "after": "      if(!concurrentRuns&&chatPending){sendError(res,409,new Error('Another reply is in progress. Try again when it finishes.'));return;}\n      const requestId=typeof body.requestId==='string'&&body.requestId.trim()?body.requestId.trim():crypto.randomUUID();const idempotencyKey=typeof body.idempotencyKey==='string'&&body.idempotencyKey.trim()?body.idempotencyKey.trim():requestId;let claim;try{claim=reliability.claimRun(body.chatId,{requestId,idempotencyKey,ownerId:serverOwnerId,mode,fingerprint:crypto.createHash('sha256').update(JSON.stringify({chatId:body.chatId,agentName:body.agentName,mode,messages:body.messages})).digest('hex')});}catch(error){sendError(res,error.code==='idempotency_conflict'?409:503,new Error(error.code==='idempotency_conflict'?'This request id was reused with different data.':'Reliable run storage is unavailable; no provider request was sent.'));return;}if(!claim.accepted){sendError(res,409,new Error('Another reply is in progress. Try again when it finishes.'));return;}if(claim.duplicate){sendError(res,409,new Error('This request was already claimed. Review the saved run; it was not submitted again.'));return;}if(!concurrentRuns)chatPending=true;\n      const controller=new AbortController();"
+    },
+    {
+      "id": "server-use-durable-run-id",
+      "file": "intentgraph/server.cjs",
+      "before": "      const runId=crypto.randomUUID(),steeringToken=crypto.randomBytes(32).toString('base64url'),events=[];",
+      "after": "      const runId=claim.run.runId,steeringToken=crypto.randomBytes(32).toString('base64url'),events=[];",
+      "requires": [
+        "server-claim-before-provider"
+      ]
+    },
+    {
+      "id": "server-settle-and-preserve-guard",
+      "file": "intentgraph/server.cjs",
+      "before": "        res.removeListener('close',disconnected);activeRuns.delete(runId);chatPending=false;",
+      "after": "        try{const statuses=[];const inspectStatus=value=>{if(!value||typeof value!=='object')return;if(typeof value.status==='string')statuses.push(value.status.toUpperCase());for(const key of ['evidence','events','reply','result','diagnostic','diagnostics']){const nested=value[key];if(Array.isArray(nested))nested.forEach(inspectStatus);else if(nested)inspectStatus(nested);}};inspectStatus(completedReply);const finalStatus=completedReply?.status==='waiting-question'?'WAITING':controller.signal.aborted?'UNKNOWN':statuses.some(status=>status==='UNKNOWN')?'UNKNOWN':statuses.some(status=>['FAILURE','BLOCKLISTED','NOT_EXECUTED'].includes(status))?'FAILURE':completedReply?'SUCCESS':'FAILURE';const question=completedReply?.pendingQuestion??completedReply?.question;const safeQuestion=typeof question==='string'?question.slice(0,4000):question&&typeof question==='object'?(()=>{const source=question.question&&typeof question.question==='object'?question.question:question;return typeof source.prompt==='string'?{id:typeof source.id==='string'?source.id.slice(0,200):'',prompt:source.prompt.slice(0,4000),choices:Array.isArray(source.choices)?source.choices.slice(0,20).map(choice=>typeof choice==='string'?choice:String(choice?.label||choice?.value||'')).filter(Boolean):[]}:null;})():null;reliability.settleRun(runId,finalStatus,{chatId:body.chatId,pendingQuestion:safeQuestion},{ownerId:serverOwnerId,idempotencyKey:`run.settle:${runId}:${finalStatus}`});}catch(error){console.error('Reliable run settlement failed',error.code||error.message);}res.removeListener('close',disconnected);activeRuns.delete(runId);if(!concurrentRuns)chatPending=false;",
+      "requires": [
+        "server-use-durable-run-id"
+      ]
+    },
+    {
+      "id": "server-explicit-recovery-handle",
+      "file": "intentgraph/server.cjs",
+      "before": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };",
+      "after": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution, reliability, recoverReliability, recoverAbandonedReliability };",
+      "requires": [
+        "server-ledger-and-default-single-flight"
+      ]
+    },
+    {
+      "id": "server-close-reliability-storage",
+      "file": "intentgraph/server.cjs",
+      "before": "  server.once('close', () => sandbox.close());",
+      "after": "  server.once('close', () => { try { reliability.recover({ authorized: true, ownerId: serverOwnerId }); } catch (error) { console.error('Reliable shutdown recovery failed', error.code || error.message); } sandbox.close(); reliabilityStorage.close?.(); });",
+      "requires": [
+        "server-ledger-and-default-single-flight"
+      ]
+    },
+    {
+      "id": "queue-resume-button-per-chat-capacity",
+      "file": "polished.js",
+      "before": "    const resume=byId('resume-queue');resume.hidden=!c.queuePaused;resume.disabled=chatRequests.size>0;resume.onclick=()=>resumeQueue(c);",
+      "after": "    const resume=byId('resume-queue');resume.hidden=!c.queuePaused;resume.disabled=globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0;resume.onclick=()=>resumeQueue(c);",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "queue-resume-per-chat-capacity",
+      "file": "polished.js",
+      "before": "    if(chatRequests.size){toast('Another conversation is receiving a reply. Try Resume after it finishes.');return;}",
+      "after": "    if((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)){toast(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?'This conversation is receiving a reply. Try Resume after it finishes.':'Another conversation is receiving a reply. Try Resume after it finishes.');return;}",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "dispatch-available-per-chat-capacity",
+      "file": "polished.js",
+      "before": "  function dispatchAvailableQueue(){\r\n    if(chatRequests.size)return false;const target=data.chats.find(chat=>Array.isArray(chat.pendingQueue)&&chat.pendingQueue.length&&!chat.queuePaused&&!chat.queueEditing);return target?dispatchNextQueued(target):false;\r\n  }",
+      "after": "  function dispatchAvailableQueue(){\r\n    const perChat=globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true;if(!perChat&&chatRequests.size)return false;const target=data.chats.find(chat=>Array.isArray(chat.pendingQueue)&&chat.pendingQueue.length&&!chat.queuePaused&&!chat.queueEditing&&!chatRequests.has(chat.id));return target?dispatchNextQueued(target):false;\r\n  }",
+      "requires": [
+        "create-browser-ledger",
+        "queue-claim-before-dispatch"
+      ]
+    },
+    {
+      "id": "update-send-per-chat-capacity",
+      "file": "polished.js",
+      "before": "    const modePicker=byId('chat-mode');if(modePicker){modePicker.value=modeFor(currentChat()?.mode);modePicker.disabled=chatRequests.size>0||!!currentChat()?.pendingQueue?.length;byId('mode-scope').textContent=modePicker.value==='plan'?'Plan: no tools. Proposals only.':'Inspect: allowlisted read-only diagnostics. Device health requires evidence.';}",
+      "after": "    const modePicker=byId('chat-mode');if(modePicker){modePicker.value=modeFor(currentChat()?.mode);const runBusy=globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(currentChat()?.id):chatRequests.size>0;modePicker.disabled=runBusy||!!currentChat()?.pendingQueue?.length;byId('mode-scope').textContent=modePicker.value==='plan'?'Plan: no tools. Proposals only.':'Inspect: allowlisted read-only diagnostics. Device health requires evidence.';}",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "update-send-queue-mode-per-chat-capacity",
+      "file": "polished.js",
+      "before": "    const c=currentChat();if(!c)return;const pending=chatRequests.get(c.id),draft=byId('draft').value.trim();const send=byId('send');const queueMode=Boolean(chatRequests.size||c.queuePaused||c.pendingQueue?.length);",
+      "after": "    const c=currentChat();if(!c)return;const pending=chatRequests.get(c.id),draft=byId('draft').value.trim();const send=byId('send');const queueMode=Boolean((globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(c.id):chatRequests.size>0)||c.queuePaused||c.pendingQueue?.length);",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "update-send-status-per-chat-capacity",
+      "file": "polished.js",
+      "before": "else if(chatRequests.size){const active=data.chats.find(x=>chatRequests.has(x.id));message='Waiting for '+(active?selectedAgents(active)[0]?.name||active.title:'another conversation')+' · one run at a time. Press Enter to queue here.';}",
+      "after": "else if(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns!==true&&chatRequests.size){const active=data.chats.find(x=>chatRequests.has(x.id));message='Waiting for '+(active?selectedAgents(active)[0]?.name||active.title:'another conversation')+' · one run at a time. Press Enter to queue here.';}",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "update-send-open-active-per-chat-capacity",
+      "file": "polished.js",
+      "before": "if(chatRequests.size&&!pending){const open=document.createElement('button');",
+      "after": "if(globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns!==true&&chatRequests.size&&!pending){const open=document.createElement('button');",
+      "requires": [
+        "create-browser-ledger"
+      ]
+    },
+    {
+      "id": "server-capabilities-concurrency",
+      "file": "intentgraph/server.cjs",
+      "before": "if (pathname === '/api/capabilities') { const current=execution ? await execution.status() : null; sendJson(res, 200, {ai:{connected:Boolean(current?.provider?.last?.ok),configured:Boolean(current?.provider?.credentialStored),provider:current?'opencode-go':null,model:current?'mimo-v2.5':null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)},execution:current}); return; }",
+      "after": "if (pathname === '/api/capabilities') { const origin=req.headers.origin;if(origin&&!chatOriginAllowed(origin,req)){sendError(res,403,new Error('Capabilities origin is not allowed'));return;}if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');} if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','GET');res.setHeader('Access-Control-Allow-Headers','X-Aven-Chat');res.writeHead(204);res.end();return;}if(req.method!=='GET'){sendError(res,405,new Error('Method not allowed'));return;} const current=execution ? await execution.status() : null; sendJson(res, 200, {ai:{connected:Boolean(current?.provider?.last?.ok),configured:Boolean(current?.provider?.credentialStored),provider:current?'opencode-go':null,model:current?'mimo-v2.5':null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available),allowConcurrentRuns:concurrentRuns,concurrency:concurrentRuns?'per-chat':'single'},execution:current}); return; }",
+      "requires": [
+        "server-ledger-and-default-single-flight"
+      ]
+    },
+    {
+      "id": "browser-capability-discovery-and-local-recovery",
+      "file": "polished.js",
+      "before": "  function finishInteractionWiring(){\r\n",
+      "after": "  let pendingLocalRecoveryRuns=[];\n  async function discoverRuntimeCapabilities(){try{const response=await fetch(CHAT_API.replace(/\\/api\\/chat$/,'/api/capabilities'),{headers:{'X-Aven-Chat':'text-only'},signal:AbortSignal.timeout(2000)});if(!response.ok)return;const result=await response.json();if(typeof result?.runtime?.allowConcurrentRuns==='boolean'){runtimeCapabilities.allowConcurrentRuns=result.runtime.allowConcurrentRuns;runtimeCapabilities.source='server-status';if(!reliabilityLedger?.activeRuns().length)configureReliabilityLedger();updateSend();}}catch{}}\n  async function reliabilityServerProbe(){const response=await fetch(`${CHAT_API}/recovery`,{method:'POST',headers:{'X-Aven-Chat':'text-only','Content-Type':'application/json'},body:JSON.stringify({authorized:true,probe:true}),signal:AbortSignal.timeout(3000)});if(!response.ok)throw Error('Local reliability status unavailable.');return response.json();}\n  function localReliabilityCandidates(){if(!reliabilityLedger)return[];let state;try{state=reliabilityLedger.snapshot();}catch{return[];}const live=liveReliabilityOwners();return Object.values(state.runs).filter(run=>['RUNNING','CANCELLING','WAITING'].includes(run.status)&&!live.has(run.ownerId));}\n  async function inspectLocalRecovery(){const candidates=localReliabilityCandidates();if(!candidates.length)return;let probe;try{probe=await reliabilityServerProbe();}catch{return;}const active=new Set(Array.isArray(probe.activeRequestIds)?probe.activeRequestIds:[]);pendingLocalRecoveryRuns=candidates.filter(run=>!active.has(run.requestId));if(!pendingLocalRecoveryRuns.length)return;for(const run of pendingLocalRecoveryRuns){const chat=data.chats.find(candidate=>candidate.id===run.chatId);if(chat){chat.localRecoveryPending=true;chat.captureWarning='A previous browser run needs review. Recovery checks active tabs and the local service before marking it UNKNOWN.';chat.queuePaused=true;}}if(!saveData()){for(const run of pendingLocalRecoveryRuns){const chat=data.chats.find(candidate=>candidate.id===run.chatId);if(chat)chat.captureWarning='A previous browser run needs review, but the warning could not be saved.';}}renderConversation();updateSend();}\n  async function recoverLocalReliability(options={}){if(options.authorized!==true)return{recovered:false,count:0,reason:'authorization_required'};const requested=new Set(Array.isArray(options.runIds)?options.runIds.map(String):[]);const candidates=localReliabilityCandidates().filter(run=>(!options.chatId||run.chatId===options.chatId)&&(!requested.size||requested.has(run.runId)));if(!candidates.length)return{recovered:false,count:0};let probe;try{probe=await reliabilityServerProbe();}catch{return{recovered:false,count:0,reason:'backend_unavailable'};}const active=new Set(Array.isArray(probe.activeRequestIds)?probe.activeRequestIds:[]);let count=0;for(const run of candidates)if(!active.has(run.requestId))count+=reliabilityLedger.recover({authorized:true,ownerId:run.ownerId,runId:run.runId}).count;pendingLocalRecoveryRuns=localReliabilityCandidates();for(const chat of data.chats.filter(candidate=>candidate.localRecoveryPending&&!pendingLocalRecoveryRuns.some(run=>run.chatId===candidate.id))){delete chat.localRecoveryPending;delete chat.captureWarning;chat.queuePaused=true;}if(!reliabilityLedger.activeRuns().length)configureReliabilityLedger();saveData();renderConversation();updateSend();return{recovered:count>0,count};}\n  async function startReliabilityRecovery(){await discoverRuntimeCapabilities();await inspectLocalRecovery();}\n  function finishInteractionWiring(){\r\n",
+      "requires": [
+        "create-browser-ledger",
+        "server-capabilities-concurrency"
+      ]
+    },
+    {
+      "id": "browser-start-runtime-recovery",
+      "file": "polished.js",
+      "before": "    hydrateConversationHistory();recoverInterruptedRuns();wireMessageLinks();",
+      "after": "    hydrateConversationHistory();recoverInterruptedRuns();void startReliabilityRecovery();wireMessageLinks();",
+      "requires": [
+        "browser-capability-discovery-and-local-recovery"
+      ]
+    },
+    {
+      "id": "server-capabilities-options",
+      "file": "intentgraph/server.cjs",
+      "before": "    if (req.method === 'GET') {",
+      "after": "    if (req.method === 'GET' || (req.method === 'OPTIONS' && pathname === '/api/capabilities')) {"
+    }
+  ]
+}

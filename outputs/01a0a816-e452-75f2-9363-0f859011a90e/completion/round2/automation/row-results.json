@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "candidate": "round2/automation/candidate",
+  "scope": "Round-2 incremental automation fixes against frozen automation module plus current assembled shell",
+  "externalCalls": false,
+  "liveProductFilesEdited": false,
+  "rows": [
+    {
+      "id": "UX-086",
+      "status": "round2-fixed-pure-tested",
+      "evidence": "The candidate keeps schedules app-open only through the selected local service and saved conversation, retains timezone-derived next-run values, excludes disabled schedules from due dispatch, records failures and exact workflow provenance. Pure tests assert next-run calculation, disabled due filtering, visible failure state and no adapter call for a stale procedure version.",
+      "limitation": "Root browser-lease execution is pending; no external scheduler, provider, device or background service is exercised."
+    },
+    {
+      "id": "UX-088",
+      "status": "round2-fixed-production-hook-pure-tested",
+      "evidence": "The production automation options expose a user-triggered local GET /api/capabilities adapter. Provider/model capability records map to available/unavailable, permissions and connection health; generic runtime presence cannot make OpenCode available and unavailable entries remain disabled. Pure tests cover missing status, endpoint-shaped connected/configured/model data and the actual server capability route shape without installation or connection calls. Browser fixture routes the local endpoint and asserts refresh output.",
+      "limitation": "No real provider/device/plugin installation, credential lookup or connection-health probe is exercised; browser evidence awaits the root fixture lease."
+    },
+    {
+      "id": "UX-089",
+      "status": "round2-fixed-production-hook-pure-tested",
+      "evidence": "Dispatch resolves the exact workflow ID/version, enforces required access, blocks stale versions before adapter invocation and records provenance. The production adapter passes the full versioned procedure contract, including purpose, inputs, required access, evidence requirements, instructions and tools-disabled plan mode, inside the validated saved-conversation message; the actual server receives only its approved numeric context metadata. Schedule/history UI and backup validation retain the exact version. Pure tests cover dispatch/access/version and the assembled server acceptance verifies the request schema; browser fixture asserts the message content.",
+      "limitation": "The workflow catalog remains the local static v1 registry and browser evidence awaits the root fixture lease."
+    }
+  ]
+}

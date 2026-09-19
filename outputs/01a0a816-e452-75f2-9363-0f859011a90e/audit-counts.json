@@ -1,0 +1,19 @@
+{
+  "total": 115,
+  "counts": {
+    "Partial": 67,
+    "Verified (scoped)": 19,
+    "Defect": 5,
+    "Unverified": 6,
+    "Missing": 14,
+    "Deferred": 4
+  },
+  "originalVerifiedNow": {
+    "Partial": 54,
+    "Verified (scoped)": 19,
+    "Defect": 3,
+    "Unverified": 4
+  },
+  "defectCount": 4,
+  "defectFeatureCount": 5
+}

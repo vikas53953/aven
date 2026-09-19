@@ -1,0 +1,14 @@
+{
+ "tests":[{"command":"node outputs/01a0a816-e452-75f2-9363-0f859011a90e/root-storage-audit.cjs","exitCode":0,"result":"Reproduced partial coworker persistence on storage failure, orphan survives reload and blocks same-name retry. Isolated browser only; all non-static requests blocked."}],
+ "defects":[{
+  "ids":["UX-058","UX-098"],"severity":"P2","title":"Failed coworker creation leaves a persisted orphan and blocks retry",
+  "repro":"In an isolated workspace, create a coworker while localStorage writes to aven-polished-chats-v1 fail after preferences save. Reload, then retry the same name.",
+  "expected":"A failed creation either rolls back all coworker/chat/document state or provides a recoverable partial operation. The same name remains retryable.",
+  "actual":"UI says Could not save this coworker locally. Preferences still contain the coworker, but its chat and documents are absent. After reload it is absent from the sidebar and same-name retry says Choose a different name.",
+  "evidence":"root-storage-evidence.json; root-storage-defect.png; polished.js:807"
+ }],
+ "overrides":[
+  {"id":"UX-058","verdict":"Defect","evidenceLevel":"Fresh isolated browser failure/reload test + live welcome inspection","finding":"Local welcome is correctly labeled, but failed creation persists an orphan coworker without its conversation/documents and blocks retry after reload.","evidence":"root-storage-evidence.json; root-storage-defect.png; polished.js:807","nextAction":"Make preferences/chat/doc creation transactional and add failure/reload/retry regression coverage.","limitation":"Failure injected in isolated localStorage; no user data or provider/device calls."},
+  {"id":"UX-098","verdict":"Defect","evidenceLevel":"Fresh isolated browser failure/reload test","finding":"At least one recovery flow fails: coworker creation reports storage failure yet leaves persisted partial state that prevents same-name retry.","evidence":"root-storage-evidence.json; polished.js:807","nextAction":"Fix transactional creation/retry, then cover offline, timeout, cancellation and provider failure independently.","limitation":"This finding proves a specific recoverability defect, not that all error paths fail."}
+ ]
+}

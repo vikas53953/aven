@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "configRequests": [
+    {
+      "providerId": "opencode",
+      "modelId": "mimo-v2.5",
+      "effort": "none",
+      "hasCredential": false
+    },
+    {
+      "providerId": "openrouter",
+      "modelId": "fixture/router",
+      "effort": "none",
+      "hasCredential": true
+    },
+    {
+      "providerId": "openrouter",
+      "modelId": "fixture/router",
+      "effort": "none",
+      "hasCredential": false
+    }
+  ],
+  "blocked": [],
+  "pageErrors": []
+}

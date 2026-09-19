@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "suite": "network-boundary-fix",
+  "command": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\network-boundary-fix\\network-boundary-fix.test.cjs",
+  "buildCommand": "C:\\Users\\vikasmit\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\network-boundary-fix\\build-candidate.cjs",
+  "results": [
+    {
+      "id": "exact-baseline-apply",
+      "status": "PASS",
+      "detail": "all runtime/UI replacements apply once in sequence with recorded SHA-256 before/after proofs"
+    },
+    {
+      "id": "original-runtime-regression",
+      "status": "PASS",
+      "detail": "frozen agent-runtime.test.cjs and chat-runtime.test.cjs passed against the candidate overlay"
+    },
+    {
+      "id": "normal-explanation",
+      "status": "PASS",
+      "detail": "normal explanation retained model response and did not create health metadata or network calls"
+    },
+    {
+      "id": "unknown-fails-closed",
+      "status": "PASS",
+      "detail": "UNKNOWN transport yields deterministic authoritative status; contradictory model prose is advisory only"
+    },
+    {
+      "id": "failure-fails-closed",
+      "status": "PASS",
+      "detail": "FAILURE transport yields deterministic authoritative status and hides contradictory model prose"
+    },
+    {
+      "id": "success-fault-output-health-unassessed",
+      "status": "PARTIAL",
+      "detail": "SUCCESS retains raw fault evidence and exposes healthAssessment=not_assessed; an adversarial model may still make an untrusted health claim",
+      "limitation": "A trusted raw-output health classifier is intentionally absent; command completion alone is never promoted to healthy."
+    },
+    {
+      "id": "success-interpretation-health-unassessed",
+      "status": "PASS",
+      "detail": "all-success diagnostic retains grounded model interpretation plus deterministic not_assessed metadata"
+    },
+    {
+      "id": "plan-zero-tools",
+      "status": "PASS",
+      "detail": "plan mode remains zero-tool and has no health metadata"
+    },
+    {
+      "id": "ui-execution-health-labels",
+      "status": "PASS",
+      "detail": "candidate UI labels execution status explicitly and surfaces health only as not assessed in optional run details"
+    }
+  ],
+  "acceptanceRows": {
+    "UX079": "PARTIAL",
+    "UX106": "PASS"
+  },
+  "sourceHashes": {
+    "liveAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "frozenAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "candidateAgentRuntime": "A9997E0D0D79DF141AA14BB1913551485E517E5819D19004D9B7B1C68B2BDFCD",
+    "latestMinimalUiCandidate": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD",
+    "candidateFrozenV8PolishedJs": "33ACF1B4D94AF51DDAFEF6A3383F097C543182E8365EC002C275B417F682D11A",
+    "preservedMinimalUiPolishedJs": "65D85ADE51321FC84139B3DABCACB44D30FECDDD38AD69B8A6A46E11B512561C",
+    "livePolishedJs": "560374B9C20BA04546EB238558D8E45ACD2353F8F69DF73824D8356E902DA17A"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "baseline": "F08-P3-independent",
+  "startedAt": "2026-09-11T04:01:08.335Z",
+  "sourceFiles": [
+    "polished.html",
+    "polished.css",
+    "polished.js",
+    "polished-avatars.js",
+    "prototype-review.html"
+  ],
+  "candidateStart": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a872ba3a08590f68dcd771164955b5c4af97e6bb10e7d865847be9e585d00b7d",
+    "polished.js": "3b1d3b6206a6786a3dda61c1041c91e539034211c090beca4eb5daec8a65950f",
+    "polished-avatars.js": "02d0dcf13d292ace6f37a355a54191f9a600ca5708505d74d92073c200a842ab",
+    "prototype-review.html": "21b2669507cb4c82bb9c64775a50201d84d78b9a9e2cf3768d8194ff9f9f4dfb"
+  },
+  "candidateEnd": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a872ba3a08590f68dcd771164955b5c4af97e6bb10e7d865847be9e585d00b7d",
+    "polished.js": "3b1d3b6206a6786a3dda61c1041c91e539034211c090beca4eb5daec8a65950f",
+    "polished-avatars.js": "02d0dcf13d292ace6f37a355a54191f9a600ca5708505d74d92073c200a842ab",
+    "prototype-review.html": "21b2669507cb4c82bb9c64775a50201d84d78b9a9e2cf3768d8194ff9f9f4dfb"
+  },
+  "candidateStable": true,
+  "checks": [
+    {
+      "name": "P3 profile edit isolation, right pane, dirty-close and identity attribution",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 network avatar choices, generate, local upload, reset, reload and Escape",
+      "status": "FAIL",
+      "detail": "Upload must be per-agent\n\nundefined !== ''\n",
+      "stack": "AssertionError [ERR_ASSERTION]: Upload must be per-agent\n\nundefined !== ''\n\n    at C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:182:68\n    at async withPage (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:82:16)\n    at async avatarJourney (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:149:3)\n    at async check (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:53:26)\n    at async main (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:244:5)"
+    },
+    {
+      "name": "P3 six account actions/icons and centered settings at small height",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 1440/390 visual captures and keyboard access",
+      "status": "FAIL",
+      "detail": "Expected values to be strictly equal:\n\nfalse !== true\n",
+      "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:235:52\n    at async withPage (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:82:16)\n    at async visualAndKeyboardJourney (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:224:3)\n    at async check (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:53:26)\n    at async main (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent.cjs:246:5)"
+    }
+  ],
+  "findings": [],
+  "captures": [
+    {
+      "label": "profile",
+      "path": ".intentgraph/p3-independent-profile.png"
+    },
+    {
+      "label": "network",
+      "path": ".intentgraph/p3-independent-network.png"
+    },
+    {
+      "label": "main-1440",
+      "path": ".intentgraph/p3-independent-main-1440.png"
+    },
+    {
+      "label": "main-390",
+      "path": ".intentgraph/p3-independent-main-390.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "dialogs": [
+    {
+      "type": "confirm",
+      "message": "Discard unsaved profile changes?",
+      "action": "dismiss"
+    },
+    {
+      "type": "confirm",
+      "message": "Discard unsaved profile changes?",
+      "action": "accept"
+    }
+  ],
+  "finishedAt": "2026-09-11T04:01:20.184Z"
+}

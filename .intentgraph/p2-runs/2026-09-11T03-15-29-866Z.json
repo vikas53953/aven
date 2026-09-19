@@ -1,0 +1,198 @@
+{
+  "baseline": "F07",
+  "startedAt": "2026-09-11T03:15:29.866Z",
+  "candidateStart": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "dd33f59c3bfb86bb1e05d2691a4f2b2bbfe9279d9e4630cef5afd92f70d7266e",
+    "polished.js": "555f6df0e409b10646c3e1bd1cf1b1bcd6ca45aa44cbde19d4d21a668493986f",
+    "prototype-review.html": "32292f5be9ed044e15cc07f9478a2857ffc7d4e5e0113d06fa64a20599eee186"
+  },
+  "checks": [
+    {
+      "name": "F07 preservation: idempotent migration and original storage backup",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-01/02/03: popup creation, immediate conversation and channel/project ownership",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-04: Enter sends, Shift+Enter newline, IME never sends",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-05/10: centered settings, theme, account actions and save/cancel",
+      "status": "PASS"
+    },
+    {
+      "name": "Preserved journeys: attachments, search, agent documents and tool states",
+      "status": "PASS"
+    },
+    {
+      "name": "F07 responsive: six widths, modal bounds, focus and reduced motion",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-07: sidebar pointer/keyboard resize, collapse restoration and group context",
+      "status": "PASS"
+    },
+    {
+      "name": "F07-06/09: context actions, profile settings, project/section move and recovery",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected wireframe unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "No page errors or external runtime calls",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "label": "create-agent",
+      "path": ".intentgraph/p2-create-agent.png"
+    },
+    {
+      "label": "create-channel",
+      "path": ".intentgraph/p2-create-channel.png"
+    },
+    {
+      "label": "organization",
+      "path": ".intentgraph/p2-organization.png"
+    },
+    {
+      "label": "settings",
+      "path": ".intentgraph/p2-settings.png"
+    },
+    {
+      "label": "light",
+      "path": ".intentgraph/p2-light.png"
+    },
+    {
+      "label": "dark",
+      "path": ".intentgraph/p2-dark.png"
+    },
+    {
+      "label": "account-menu",
+      "path": ".intentgraph/p2-account-menu.png"
+    },
+    {
+      "label": "1920",
+      "path": ".intentgraph/p2-1920.png"
+    },
+    {
+      "label": "1440",
+      "path": ".intentgraph/p2-1440.png"
+    },
+    {
+      "label": "1024",
+      "path": ".intentgraph/p2-1024.png"
+    },
+    {
+      "label": "768",
+      "path": ".intentgraph/p2-768.png"
+    },
+    {
+      "label": "390",
+      "path": ".intentgraph/p2-390.png"
+    },
+    {
+      "label": "320",
+      "path": ".intentgraph/p2-320.png"
+    },
+    {
+      "label": "resized-sidebar",
+      "path": ".intentgraph/p2-resized-sidebar.png"
+    },
+    {
+      "label": "context-menu",
+      "path": ".intentgraph/p2-context-menu.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "contrast": [
+    {
+      "theme": "light",
+      "fg": "text",
+      "bg": "bg",
+      "ratio": 16.30001240976405
+    },
+    {
+      "theme": "light",
+      "fg": "muted",
+      "bg": "surface",
+      "ratio": 7.226056749490168
+    },
+    {
+      "theme": "light",
+      "fg": "faint",
+      "bg": "surface",
+      "ratio": 4.952143998137194
+    },
+    {
+      "theme": "light",
+      "fg": "on-accent",
+      "bg": "accent",
+      "ratio": 18.883060964594996
+    },
+    {
+      "theme": "light",
+      "fg": "text",
+      "bg": "selected",
+      "ratio": 14.231935591755258
+    },
+    {
+      "theme": "light",
+      "fg": "focus",
+      "bg": "surface",
+      "ratio": 18.883060964594996
+    },
+    {
+      "theme": "dark",
+      "fg": "text",
+      "bg": "bg",
+      "ratio": 17.731337629749614
+    },
+    {
+      "theme": "dark",
+      "fg": "muted",
+      "bg": "surface",
+      "ratio": 7.221109100608668
+    },
+    {
+      "theme": "dark",
+      "fg": "faint",
+      "bg": "surface",
+      "ratio": 6.146358110870263
+    },
+    {
+      "theme": "dark",
+      "fg": "on-accent",
+      "bg": "accent",
+      "ratio": 16.56974426914681
+    },
+    {
+      "theme": "dark",
+      "fg": "text",
+      "bg": "selected",
+      "ratio": 13.398540840442575
+    },
+    {
+      "theme": "dark",
+      "fg": "focus",
+      "bg": "surface",
+      "ratio": 12.489430641260045
+    }
+  ],
+  "finishedAt": "2026-09-11T03:16:09.508Z",
+  "candidateEnd": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "dd33f59c3bfb86bb1e05d2691a4f2b2bbfe9279d9e4630cef5afd92f70d7266e",
+    "polished.js": "555f6df0e409b10646c3e1bd1cf1b1bcd6ca45aa44cbde19d4d21a668493986f",
+    "prototype-review.html": "32292f5be9ed044e15cc07f9478a2857ffc7d4e5e0113d06fa64a20599eee186"
+  },
+  "candidateStable": true
+}

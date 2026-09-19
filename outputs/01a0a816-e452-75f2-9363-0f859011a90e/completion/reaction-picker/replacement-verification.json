@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "schemaVersion": 1,
+  "results": [
+    {
+      "file": "polished.js",
+      "replacements": 5,
+      "exact": true,
+      "candidateSHA256": "FDDC94C9421C5139ED40B61869ED2D17B6655A046E392110674C6E827E385096"
+    },
+    {
+      "file": "polished.css",
+      "replacements": 1,
+      "exact": true,
+      "candidateSHA256": "F35F296124DB2CA5BE0AFEBE989C00E00EC073874215E32EFC16915476C4ADA7"
+    }
+  ],
+  "sourceFiles": {
+    "polished.js": {
+      "baselinePath": "completion/baseline/polished.js",
+      "candidatePath": "completion/reaction-picker/candidate/polished.js",
+      "baselineSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "candidateSHA256": "FDDC94C9421C5139ED40B61869ED2D17B6655A046E392110674C6E827E385096"
+    },
+    "polished.css": {
+      "baselinePath": "completion/baseline/polished.css",
+      "candidatePath": "completion/reaction-picker/candidate/polished.css",
+      "baselineSHA256": "D7DFBACD5B37D424FBCB86A6A51873D30A22867C553FF4AA453C4444CFEFCD93",
+      "candidateSHA256": "F35F296124DB2CA5BE0AFEBE989C00E00EC073874215E32EFC16915476C4ADA7"
+    }
+  }
+}

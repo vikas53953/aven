@@ -1,0 +1,11 @@
+{
+  "at": "2026-09-16T05:34:16.4452715Z",
+  "command": "node --test completion/root-backup/compat.test.cjs",
+  "exitCode": 0,
+  "tests": 6,
+  "passed": 6,
+  "failed": 0,
+  "externalCalls": 0,
+  "candidateSHA256": "3FCFAFEA52EABC9251E07F9564AB564DC3888B29ADFDADF315A9D0304A4F40AD",
+  "scope": "Narrow preference schema, historical-only restored workflow state, Add preservation and invalid import no mutation"
+}

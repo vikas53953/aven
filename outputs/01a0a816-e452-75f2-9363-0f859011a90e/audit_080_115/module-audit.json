@@ -1,0 +1,69 @@
+{
+  "at": "2026-09-16T03:18:00.174Z",
+  "scope": "pure module fixtures and ephemeral filesystem only",
+  "checks": [
+    {
+      "id": "UX-081",
+      "name": "compare fixture preserves target/time and missing-vs-empty output",
+      "status": "PASS",
+      "evidence": "polished-evidence-tools.js:46 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-083",
+      "name": "feed derives only metadata-bearing messages",
+      "status": "PASS",
+      "evidence": "polished-workspace-tools.js:545 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-084",
+      "name": "ideas support bounded local records",
+      "status": "PASS",
+      "evidence": "polished-workspace-tools.js:334 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-085",
+      "name": "goals enforce evidence references in implementation",
+      "status": "PASS",
+      "evidence": "polished-workspace-tools.js:390 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-107",
+      "name": "run state maps interruption to UNKNOWN and strips private controls",
+      "status": "PASS",
+      "evidence": "polished-run-state.js:34 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-115",
+      "name": "run state journals bounded durable-safe records",
+      "status": "PASS",
+      "evidence": "polished-run-state.js:12 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-101",
+      "name": "versioned backup round-trip rejects private keys",
+      "status": "PASS",
+      "evidence": "polished-backup.js:28 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-106",
+      "name": "allowlisted read-only exact target fixture",
+      "status": "PASS",
+      "evidence": "intentgraph/network-execution.cjs:19 + module-audit.json",
+      "limitation": ""
+    },
+    {
+      "id": "UX-115",
+      "name": "ephemeral run file list/read preserves provenance and strips controls",
+      "status": "PASS",
+      "evidence": "intentgraph/chat-read-api.cjs:30 + module-audit.json",
+      "limitation": ""
+    }
+  ]
+}

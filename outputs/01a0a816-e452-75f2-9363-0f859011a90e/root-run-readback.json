@@ -1,0 +1,31 @@
+{
+  "exitCode": 0,
+  "eventFieldNames": [
+    "at",
+    "elapsedMs",
+    "evidence",
+    "hostname",
+    "message",
+    "name",
+    "operation",
+    "reply",
+    "runId",
+    "status",
+    "toolId",
+    "type"
+  ],
+  "chatId": "89a98350-7404-446b-b9d5-0baeba72a9fd",
+  "runId": "4baf1725-32ab-4206-a95a-3e342b133f57",
+  "endpoint": "/api/chat/runs/4baf1725-32ab-4206-a95a-3e342b133f57?chatId=89a98350-7404-446b-b9d5-0baeba72a9fd",
+  "eventCount": 13,
+  "replyType": "PSCustomObject",
+  "method": "Read-only existing local record; no new execution",
+  "replyFieldNames": [
+    "text",
+    "source",
+    "model",
+    "evidence",
+    "runId"
+  ],
+  "serializedLength": 206172
+}

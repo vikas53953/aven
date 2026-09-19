@@ -1,0 +1,29 @@
+{
+  "at": "2026-09-15T03:27:33.542Z",
+  "results": [
+    {
+      "command": "show inventory",
+      "status": "SUCCESS",
+      "output": "show inventory\nNAME: \"Switch 1\", DESCR: \"Catalyst 9000 UADP 8 Port Virtual Switch\"\nPID: C9KV-UADP-8P      , VID: V01  , SN: CML12345UAD\n\nNAME: \"Switch 1\", DESCR: \"Catalyst 9000 UADP 8 Port Virtual Switch\"\nPID: C9KV-UADP-8P      , VID: V01  , SN: CML12345UAD\n\n\nsw1#",
+      "startedAt": "2026-09-15T03:27:16.060Z",
+      "elapsedMs": 4674,
+      "taskId": "01a0a318-7675-7e79-b1f0-445659265c8d"
+    },
+    {
+      "command": "show ip bgp summary",
+      "status": "FAILURE",
+      "output": "Error occurred while running the 'show ip bgp summary' command.\n% BGP not active",
+      "startedAt": "2026-09-15T03:27:20.738Z",
+      "elapsedMs": 4729,
+      "taskId": "01a0a318-8787-7018-b6f2-cc7496d6b481"
+    },
+    {
+      "command": "show clock",
+      "status": "SUCCESS",
+      "output": "show clock\n*03:28:36.480 UTC Tue Sep 15 2026\nsw1#",
+      "startedAt": "2026-09-15T03:27:25.468Z",
+      "elapsedMs": 8074,
+      "taskId": "01a0a318-a373-7717-bfba-7c8dddb35bfc"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "UX049-search",
+      "name": "More reactions exposes an accessible search and filters named reactions",
+      "passed": true,
+      "evidence": "PASS",
+      "limitation": "Local fixture only; search labels cover the built-in reaction set."
+    },
+    {
+      "id": "UX049-keyboard",
+      "name": "Picker arrow navigation stays inside and Escape returns focus in two steps",
+      "passed": true,
+      "evidence": "PASS",
+      "limitation": "Keyboard focus and dismissal are verified in Chromium; no screen-reader certification."
+    },
+    {
+      "id": "UX049-persistence",
+      "name": "Selected reaction remains attached to the correct message after reload",
+      "passed": true,
+      "evidence": "PASS",
+      "limitation": "LocalStorage persistence is checked per message; no multi-device synchronization."
+    },
+    {
+      "id": "UX049-responsive",
+      "name": "Picker remains contained at a compact touch-sized viewport",
+      "passed": true,
+      "evidence": "PASS",
+      "limitation": "Single compact viewport smoke check; visual reference comparison remains separate."
+    }
+  ],
+  "pageErrors": [],
+  "blockedRequests": [],
+  "apiCalls": [],
+  "candidate": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\reaction-picker\\candidate\\polished.js",
+  "screenshots": [
+    "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\reaction-picker\\candidate.png",
+    "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\reaction-picker\\candidate-picker.png"
+  ]
+}

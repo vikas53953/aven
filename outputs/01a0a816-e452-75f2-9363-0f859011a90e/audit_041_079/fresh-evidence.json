@@ -1,0 +1,358 @@
+{
+  "at": "2026-09-16T03:21:11.250Z",
+  "scope": "UX-041..UX-079",
+  "blockedPolicy": "Only http://127.0.0.1:8767 static shell allowed; backend chat/status/runs intercepted; all other requests aborted.",
+  "rows": [
+    {
+      "id": "UX-041",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Representative headings, lists, tables, emphasis, fenced code, and unsafe HTML fixtures rendered without executable elements.",
+      "evidence": "messages.json; polished.js:260-306",
+      "nextAction": "Keep the safe renderer covered as supported Markdown grows.",
+      "limitation": "This is an isolated fixture, not owner visual acceptance."
+    },
+    {
+      "id": "UX-042",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Raw CLI whitespace was copied byte-for-byte and the terminal rendered once in the isolated fixture.",
+      "evidence": "messages.json; polished.js:314-315",
+      "nextAction": "Retain exact-copy and single-render regression coverage.",
+      "limitation": "No live command/provider was used."
+    },
+    {
+      "id": "UX-043",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Question and answer copy returned the correct text; a denied clipboard write displayed Copy failed.",
+      "evidence": "messages.json; polished.js:306-318",
+      "nextAction": "Keep clipboard success and denial feedback covered.",
+      "limitation": "Clipboard was an isolated in-page stub."
+    },
+    {
+      "id": "UX-044",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Old/new dates produced separate date metadata and timestamps exposed focusable full date/time labels.",
+      "evidence": "messages.json; polished.js:488-496",
+      "nextAction": "Retain local-date and accessible-time regression coverage.",
+      "limitation": "Timezone/owner visual acceptance remains out of scope."
+    },
+    {
+      "id": "UX-045",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Rendering was exercised with a long history, but this run did not assert the near-bottom follow-latest threshold or keyboard Jump to latest behavior.",
+      "evidence": "messages.json; polished.js:688-713",
+      "nextAction": "Add a scroll-position fixture that proves older reading position is preserved and the latest control is keyboard usable.",
+      "limitation": "No follow-latest interaction was exercised; live streaming is unavailable."
+    },
+    {
+      "id": "UX-046",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Context-only revert removed the later message and Undo restored it; the run made no backend calls.",
+      "evidence": "messages.json; polished.js:417-446",
+      "nextAction": "Add an exact-history and busy-state fixture to broaden this check.",
+      "limitation": "This run checked presence/absence, not byte-for-byte history or queued protection."
+    },
+    {
+      "id": "UX-047",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Named fork retained the selected message prefix and origin link while the parent draft remained unchanged.",
+      "evidence": "messages.json; polished.js:377-390",
+      "nextAction": "Retain parent/fork provenance regression coverage.",
+      "limitation": "Fork revisit after reload was not separately exercised."
+    },
+    {
+      "id": "UX-048",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Copy link generated a chat/message-scoped URL, but exact opening plus missing and archived destination explanations were not exercised.",
+      "evidence": "messages.json; polished.js:404-415",
+      "nextAction": "Test opening copied links for existing, missing, and archived destinations.",
+      "limitation": "The isolated check only inspected the copied URL."
+    },
+    {
+      "id": "UX-049",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "The additional picker rendered ten choices and replacement/clearing worked, but search/navigation and close-without-message-movement were not tested.",
+      "evidence": "messages.json; polished.js:362-370",
+      "nextAction": "Exercise picker keyboard navigation, search, dismissal, and scroll stability.",
+      "limitation": "No search or keyboard-navigation assertion."
+    },
+    {
+      "id": "UX-050",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Archive hid the composer; restore persisted and reload reopened the original chat with its composer.",
+      "evidence": "history-settings.json; polished.js:843-879",
+      "nextAction": "Retain archive/restore reload coverage.",
+      "limitation": "This run did not inspect archived evidence content separately."
+    },
+    {
+      "id": "UX-051",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Workspace export downloaded valid Aven JSON containing the selected Main chat.",
+      "evidence": "history-settings.json; polished.js:843-879",
+      "nextAction": "Add a selected-conversation Markdown/evidence export assertion.",
+      "limitation": "Only workspace JSON export was exercised."
+    },
+    {
+      "id": "UX-052",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Invalid JSON import was rejected without opening a preview; valid restore merge and unrelated-work preservation were not exercised.",
+      "evidence": "history-settings.json; polished.js:843-879",
+      "nextAction": "Run valid Add and Replace imports with collision and unrelated-chat fixtures, including recovery.",
+      "limitation": "Only the invalid-input path was freshly tested."
+    },
+    {
+      "id": "UX-053",
+      "verdict": "Deferred",
+      "evidenceLevel": "register-decision",
+      "finding": "Cross-device history remains explicitly deferred pending identity and ownership contracts.",
+      "evidence": "source-register.json; current localStorage-only implementation",
+      "nextAction": "Revisit after account/customer isolation contract exists.",
+      "limitation": "No cross-device service exists in this build."
+    },
+    {
+      "id": "UX-054",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Avatar choices rendered and one selection saved, but migration compatibility and reload persistence were not asserted in this run.",
+      "evidence": "history-settings.json; polished.js:618-651",
+      "nextAction": "Exercise legacy avatar migration and reload every avatar choice.",
+      "limitation": "No migration/reload assertion in this child audit."
+    },
+    {
+      "id": "UX-055",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Profile rename updated the selected coworker, but long-name readability and selected-coworker isolation were not exercised.",
+      "evidence": "history-settings.json; polished.js:618-651",
+      "nextAction": "Test long labels and rename isolation across two coworkers.",
+      "limitation": "Only a short rename on the seeded coworker was tested."
+    },
+    {
+      "id": "UX-056",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "Local SOUL/MEMORY scope text and editor surface are present, but this audit did not connect saved content to a model request.",
+      "evidence": "history-settings.json; polished.js:632-651; polished.js:688-713",
+      "nextAction": "Trace a saved document through a mocked request and prove scope and exact content.",
+      "limitation": "Provider/model path intentionally unavailable."
+    },
+    {
+      "id": "UX-057",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "A notification preference control is present, but completion, waiting, and error delivery/link behavior was not exercised.",
+      "evidence": "fresh-evidence.json; polished.js:880-892",
+      "nextAction": "Exercise muted and enabled completion/waiting/error events and verify the linked message/run.",
+      "limitation": "No alert/event delivery assertion in this child audit."
+    },
+    {
+      "id": "UX-058",
+      "verdict": "Unverified",
+      "evidenceLevel": "code-review",
+      "finding": "Profile editing was exercised, while coworker creation and first-welcome delivery were not duplicated in this audit.",
+      "evidence": "history-settings.json; polished.js:795-807",
+      "nextAction": "Use the root-owned isolated creation failure evidence and add a transactional success/failure regression.",
+      "limitation": "Creation path intentionally left to root to avoid duplicate storage-failure mutation."
+    },
+    {
+      "id": "UX-059",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Compact density persisted and controls remained readable, but both light and dark themes were not exercised.",
+      "evidence": "history-settings.json; polished.js:843-879",
+      "nextAction": "Run both theme modes through save, cancel, reload, and storage failure.",
+      "limitation": "Only density/one appearance path was tested."
+    },
+    {
+      "id": "UX-060",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "Settings reports the fixed runtime and avoids cosmetic provider switching, but no provider setup/test path was exercised.",
+      "evidence": "network-semantics.json; polished-diagnostics.js:4-10; polished.js:843-879",
+      "nextAction": "Add explicit connected/tested/unavailable states with secure credential handling.",
+      "limitation": "Real provider calls and credentials are intentionally excluded."
+    },
+    {
+      "id": "UX-061",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "Local configuration/status snapshot code is present, while reachability and live provider/device refresh were not exercised.",
+      "evidence": "network-semantics.json; polished-diagnostics.js:4-10; polished.js:613-638",
+      "nextAction": "Verify disconnected, refresh, timestamp, and recovery states against adapters.",
+      "limitation": "Real provider/device health is intentionally unavailable."
+    },
+    {
+      "id": "UX-062",
+      "verdict": "Unverified",
+      "evidenceLevel": "code-review",
+      "finding": "Privacy/data copy exists in the settings implementation, but this child audit did not open the privacy category or verify scope text.",
+      "evidence": "fresh-evidence.json; polished.js:843-879",
+      "nextAction": "Open privacy controls and verify local/transmitted/export/reset scope and recovery claims.",
+      "limitation": "No fresh privacy UI assertion."
+    },
+    {
+      "id": "UX-063",
+      "verdict": "Deferred",
+      "evidenceLevel": "register-decision",
+      "finding": "Account/sign-out remains a local placeholder and is explicitly deferred.",
+      "evidence": "source-register.json; polished.js accountAction",
+      "nextAction": "Revisit with an authenticated account contract.",
+      "limitation": "No remote identity is connected."
+    },
+    {
+      "id": "UX-064",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Help opened keyboard/local-workspace guidance and feedback saved locally with explicit status.",
+      "evidence": "history-settings.json; polished.js:843-879",
+      "nextAction": "Retain help and local-feedback regression coverage.",
+      "limitation": "No network submission was attempted."
+    },
+    {
+      "id": "UX-065",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "The command palette opened and returned a search result, but Ctrl/Cmd+K and Ctrl/Cmd+F bindings and unavailable-action filtering were not asserted.",
+      "evidence": "history-settings.json; polished.js:860-892",
+      "nextAction": "Exercise the documented shortcut keys and verify command registry filtering.",
+      "limitation": "No direct keyboard shortcut assertions."
+    },
+    {
+      "id": "UX-066",
+      "verdict": "Defect",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Artifact library duplicates one raw output when the same diagnostic is present in both serialized events and evidence.",
+      "evidence": "artifact-duplicate-evidence.json; polished-workspace-tools.js:127-190",
+      "nextAction": "Deduplicate artifact outputs by stable provenance/content key across events and evidence.",
+      "limitation": "Reproduction uses a synthetic persisted run; no provider/device call."
+    },
+    {
+      "id": "UX-067",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Browser pane truthfully reported no connected browser session under the isolated blocked-provider policy.",
+      "evidence": "panes-evidence.json; polished.js:613-638",
+      "nextAction": "Connect a real bounded browser adapter before claiming live preview.",
+      "limitation": "Live browser content/navigation was unavailable by policy."
+    },
+    {
+      "id": "UX-068",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Computer pane truthfully reported no connected computer session under the isolated blocked-device policy.",
+      "evidence": "panes-evidence.json; polished.js:613-638",
+      "nextAction": "Connect an authorized computer adapter before claiming live control.",
+      "limitation": "Live screen/control was unavailable by policy."
+    },
+    {
+      "id": "UX-069",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Keyboard pane resize clamped to 320px and panes opened, but width persistence and close-focus restoration were not asserted.",
+      "evidence": "panes-evidence.json; polished.js:734-758",
+      "nextAction": "Resize, reload, reopen, and verify focus returns to the opener.",
+      "limitation": "Single-session resize/close coverage only."
+    },
+    {
+      "id": "UX-070",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "Session-scoped text file editor contains exact review/save/conflict checks; real OS picker and external disk scope remain unverified.",
+      "evidence": "fresh-evidence.json; polished-files.js:45-170,384-447",
+      "nextAction": "Exercise with a real user-selected folder under owner-controlled QA.",
+      "limitation": "No user disk writes were performed."
+    },
+    {
+      "id": "UX-071",
+      "verdict": "Missing",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Aven exposes retained raw diagnostic output but no general interactive terminal surface.",
+      "evidence": "panes-evidence.json; polished.js:639-646",
+      "nextAction": "Define authorized shell/session boundaries before adding terminal.",
+      "limitation": "Intentional scope gap."
+    },
+    {
+      "id": "UX-072",
+      "verdict": "Partial",
+      "evidenceLevel": "code-review",
+      "finding": "Local file review is implemented; network configuration impact/rollback and execution approval remain absent.",
+      "evidence": "fresh-evidence.json; polished-files.js:123-170; polished-evidence-tools.js:243-380",
+      "nextAction": "Integrate exact network target/diff/impact and approval receipt flow.",
+      "limitation": "No network configuration calls were made."
+    },
+    {
+      "id": "UX-073",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "An annotation saved with message evidence identity and persisted locally, but stale-result rejection, discard, and failed-save draft retention were not exercised.",
+      "evidence": "panes-evidence.json; polished-evidence-tools.js:243-380",
+      "nextAction": "Run stale, discard, and save-failure fixtures and verify append-only identity binding.",
+      "limitation": "Only the successful save path was freshly tested."
+    },
+    {
+      "id": "UX-074",
+      "verdict": "Missing",
+      "evidenceLevel": "code-review",
+      "finding": "Digest-bound approval adapters exist outside the Aven UI; no integrated general approval receipt control is exposed.",
+      "evidence": "fresh-evidence.json; intentgraph/adapters/index.cjs:462-503,570-598; polished.js:359-370",
+      "nextAction": "Integrate receipt UI only after future network write scope is defined.",
+      "limitation": "No execution or provider calls."
+    },
+    {
+      "id": "UX-075",
+      "verdict": "Missing",
+      "evidenceLevel": "code-review",
+      "finding": "No Git stage, commit, or PR control is present in the Aven shell.",
+      "evidence": "fresh-evidence.json; polished.html; polished.js; intentgraph/adapters/index.cjs:462-503,570-598",
+      "nextAction": "Defer until configuration-as-code becomes a primary workflow.",
+      "limitation": "No Git operation was attempted."
+    },
+    {
+      "id": "UX-076",
+      "verdict": "Partial",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Backend inventory and diagnostics pane are present, but the composer has no exact device selection control.",
+      "evidence": "network-semantics.json; polished.js:613-638",
+      "nextAction": "Expose selected device IDs/connection state before diagnostics.",
+      "limitation": "Inventory route was mocked and no device call was made."
+    },
+    {
+      "id": "UX-077",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Read-only and Plan scope text were visible; Plan exposed no tools and nested FAILURE remained a failure outcome.",
+      "evidence": "network-semantics.json; polished.js:613-638; polished-run-state.js",
+      "nextAction": "Keep scope labels tied to runtime capability state.",
+      "limitation": "No live device call or enforcement backend was used."
+    },
+    {
+      "id": "UX-078",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Raw diagnostic metadata rendered the command, target, result, and run provenance for an isolated FAILURE fixture.",
+      "evidence": "network-semantics.json; polished.js:319-370",
+      "nextAction": "Retain exact provenance regression coverage.",
+      "limitation": "No live device evidence."
+    },
+    {
+      "id": "UX-079",
+      "verdict": "Verified (scoped)",
+      "evidenceLevel": "fresh-browser",
+      "finding": "Nested diagnostic FAILURE overrode top-level SUCCESS and the UI stated that command completion does not establish device health.",
+      "evidence": "network-semantics.json; polished-run-state.js; polished.js:319-370",
+      "nextAction": "Retain outcome/health separation coverage.",
+      "limitation": "The device health conclusion is fixture-driven."
+    }
+  ]
+}

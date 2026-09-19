@@ -1,0 +1,18 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto');const dir=path.join(__dirname,'..');
+const read=p=>JSON.parse(fs.readFileSync(path.join(__dirname,p),'utf8').replace(/^\uFEFF/,''));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const tests=read('p2-test-results.json');
+const files=['polished.html','polished.css','polished.js','prototype-review.html'].map(p=>{const b=fs.readFileSync(path.join(dir,p));return{path:p,sha256:sha(b),bytes:b.length};});
+if(!tests.candidateStable||tests.checks.some(x=>x.status!=='PASS')||files.some(f=>tests.candidateEnd[f.path]!==f.sha256))throw Error('Current files lack passing stable root evidence');
+const candidate='P2-'+sha(JSON.stringify(files)).slice(0,12),capturedAt=new Date().toISOString();
+const manifest={candidateId:candidate,capturedAt,baseline:'F07 / feedback-07.md',sources:files,tests:'.intentgraph/p2-test-results.json',independentReview:'.intentgraph/p2-review-context-results.json',userApproval:'pending',scope:'Local frontend only. No live AI, uploads, authentication or browser/computer execution.'};
+fs.writeFileSync(path.join(__dirname,'polished-candidate.json'),JSON.stringify(manifest,null,2));
+let reviewer=null;try{reviewer=read('p2-review-context-results.json');}catch{}
+const independentPass=reviewer?.candidateStable&&reviewer.checks.every(x=>x.status==='PASS')&&files.slice(0,3).every(f=>reviewer.candidateEnd[f.path]===f.sha256);
+const evidence={candidate,capturedAt,scope:manifest.scope,checks:tests.checks.map(x=>({...x,detail:'Executed on this stable candidate; scoped local behavior only.',evidence:'.intentgraph/p2-test-results.json'})).concat([{name:'Independent context and experience review',status:independentPass?'PASS':'PENDING',detail:independentPass?'Separate review exercised context actions, organization, recovery and rendered desktop/narrow views.':'Awaiting final independent findings and matching candidate evidence.',evidence:'.intentgraph/p2-review-context-results.json'},{name:'Your visual decision',status:'PENDING',detail:'P2 demonstrates the requested changes. Styling and final experience await your feedback.',evidence:'.intentgraph/feedback-07.md'}]),captures:[{label:'Dark appearance',path:'.intentgraph/p2-dark.png'},{label:'Light appearance',path:'.intentgraph/p2-light.png'},{label:'Centered creation',path:'.intentgraph/p2-create-channel.png'},{label:'Settings',path:'.intentgraph/p2-settings.png'},{label:'Context menu',path:'.intentgraph/p2-context-menu.png'},{label:'Narrow screen',path:'.intentgraph/p2-320.png'},{label:'Candidate manifest',path:'.intentgraph/polished-candidate.json'}]};
+fs.writeFileSync(path.join(__dirname,'polished-evidence.json'),JSON.stringify(evidence,null,2));
+const index=read('code-index.json');index.capturedAt=capturedAt;index.baseline='F07 user-requested P2 revision; prior wireframes/P1 preserved';index.approval='P2 local checks passed; user visual decision pending';
+for(const n of index.nodes){if(n.path&&fs.existsSync(n.path)&&fs.statSync(n.path).isFile()){const b=fs.readFileSync(n.path);n.sha256=sha(b);n.bytes=b.length;}}
+for(const p of ['feedback-07.md','p2-plan.md','p2-test-results.json','p2-review-context-results.json']){const absolute=path.join(__dirname,p);if(!index.nodes.some(n=>n.path===absolute))index.nodes.push({id:p,type:'record',path:absolute,sha256:fs.existsSync(absolute)?sha(fs.readFileSync(absolute)):null});}
+index.coverage='Manual source and evidence index, updated for P2. Not a live code graph or agent telemetry.';fs.writeFileSync(path.join(__dirname,'code-index.json'),JSON.stringify(index,null,2));
+console.log(JSON.stringify({candidate,rootChecks:tests.checks.length,independentPass},null,2));

@@ -1,0 +1,11 @@
+{
+  "at": "2026-09-15T18:59:48.731Z",
+  "passed": true,
+  "checks": [
+    "real-shell Ideas save/reload and literal text",
+    "Feed opens exact saved message preserving draft",
+    "actual raw artifact download exact",
+    "320px bounds",
+    "no provider requests"
+  ]
+}

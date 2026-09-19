@@ -1,0 +1,60 @@
+{
+  "rows": [
+    {
+      "id": "UX-027",
+      "status": "implemented-candidate",
+      "evidence": "candidate/intentgraph/provider-selection.cjs; candidate/intentgraph/provider-adapter.cjs; candidate/provider-picker.js; 23/23 isolated provider/config tests cover explicit selection, model/effort request fields, response provenance, persistence/cancel, setup reload, endpoint/schema rejection, and unsupported combinations.",
+      "limitation": "Root must apply the exact polished/server/agent-runtime hunks; no live provider request was made."
+    },
+    {
+      "id": "UX-038",
+      "status": "implemented-candidate",
+      "evidence": "provider-selection.cjs normalizes usage to null when omitted and polished.js exposes bounded context metadata with retained/omitted/total counts; hunk-validation.json confirms the request and response hunks apply sequentially.",
+      "limitation": "The root UI agent owns context-preview rendering; no provider response was available to verify token totals."
+    },
+    {
+      "id": "UX-060",
+      "status": "implemented-candidate",
+      "evidence": "contract.md and agent-runtime replacement route selected provider/model/effort through the runtime; provider-agent-runtime.test.cjs proves configured OpenRouter and mixed-provider fallback via injected transport with no modelFactory; provider-server-config.test.cjs proves first-run Save with a mock key, OS-vault setter/getter boundary, persisted nonsecret config, and default transport dispatch through fresh server startup. test-compatibility-result.json records patched baseline agent-stream (1), chat (1), and steering (4) lifecycle tests passing with an explicit configured-default fixture.",
+      "limitation": "Credential values and external provider calls are intentionally absent from this run; the first real request still requires a named credential in the local vault and reports reachability only after the provider responds. Baseline lifecycle compatibility uses test-only capability fixtures; production still requires local provider configuration/vault setup."
+    },
+    {
+      "id": "UX-061",
+      "status": "implemented-candidate",
+      "evidence": "provider-selection.cjs distinguishes connected, configured, unavailable, and unknown; server capabilities derive from injected/persisted local records without inferring reachability from configuration; 23/23 provider/config tests and 1/1 persisted-startup flow pass.",
+      "limitation": "Refresh is limited to the host capability callback/local execution status; no external health probe was run."
+    },
+    {
+      "id": "UX-076",
+      "status": "reassigned",
+      "evidence": "Workspace owner combines device inventory selection with stable mentions/inventory UI; this provider package leaves those paths untouched.",
+      "limitation": "Device identity/state acceptance is outside this provider slice."
+    },
+    {
+      "id": "UX-100",
+      "status": "partial-candidate",
+      "evidence": "provider-picker.js renders all four first-class provider labels with truthful configured/connected/unavailable/unknown states and disables unsupported models/efforts; Settings exposes a first-run local setup form whose explicit Save sends a key only to the guarded localhost service, which stores it under a fixed provider vault reference and clears the field. settings-browser-result.json records a passed Playwright flow for missing-key rejection, password Save, key clearing/no browser persistence, existing-key Save without credential, and Cancel retention; blocked/page errors were empty.",
+      "limitation": "Root must merge the exact Settings/composer hunks and run its browser visual acceptance; this isolated behavior fixture used only mocked localhost responses and made no provider health probe or external request."
+    },
+    {
+      "id": "UX-102",
+      "status": "implemented-candidate",
+      "evidence": "server capabilities replacement reports adapter-reported status and null checkedAt when unverified; selection/provider tests cover unavailable and invalid paths; no fake percent or connection claim is generated.",
+      "limitation": "Release diagnostics still require root integration and local runtime verification."
+    },
+    {
+      "id": "UX-108",
+      "status": "implemented-candidate",
+      "evidence": "provider-selection contract defines windowMessages/windowCharacters/retainedMessages/retainedCharacters/omittedMessages/totalMessages; polished request hunk sends the same metadata used to build messages.",
+      "limitation": "UI disclosure and over-limit browser acceptance remain with the root UI agent."
+    },
+    {
+      "id": "UX-109",
+      "status": "preserved-regression",
+      "evidence": "The request hunk carries bounded chat messages/context and selected provenance only; local notes/preferences are not added to provider payloads. No note or provider call was performed.",
+      "limitation": "Root should capture a post-note-edit mock payload to close the remaining acceptance evidence."
+    }
+  ],
+  "liveProductFilesEdited": false,
+  "externalCalls": false
+}

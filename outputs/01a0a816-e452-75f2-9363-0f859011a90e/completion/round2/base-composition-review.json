@@ -1,0 +1,713 @@
+{
+  "at": "2026-09-17T04:19:32.921Z",
+  "pendingConflicts": [],
+  "resolved": [
+    {
+      "owner": "provider",
+      "index": 20,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing capability discovery/preflight/concurrency"
+    },
+    {
+      "owner": "workflows",
+      "index": 3,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap",
+      "resolution": "compose-runtime-seams exposes workflow and Git lifecycle"
+    },
+    {
+      "owner": "workflows",
+      "index": 4,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap",
+      "resolution": "compose-runtime-seams preserves selected provider responder options through workflow manager"
+    },
+    {
+      "owner": "workflows",
+      "index": 8,
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "overlap",
+      "resolution": "provider response metadata is internally observed; obsolete caller metadata argument is unnecessary"
+    },
+    {
+      "owner": "workflows",
+      "index": 9,
+      "file": "intentgraph/agent-runtime.cjs",
+      "reason": "overlap",
+      "resolution": "compose-runtime-seams plus final-seams capture model and tool clarification with provider provenance"
+    },
+    {
+      "owner": "workflows",
+      "index": 15,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "compose-workflow-ui handles waiting question alongside reliability/provider validation"
+    },
+    {
+      "owner": "workflows",
+      "index": 23,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing merges owned workflow/reliability shutdown"
+    },
+    {
+      "owner": "workspace",
+      "index": 1,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing removes duplicate attachment binder"
+    },
+    {
+      "owner": "automation",
+      "index": 4,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing merges controller declaration"
+    },
+    {
+      "owner": "automation",
+      "index": 9,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing preserves reply metadata and records notification after successful save"
+    },
+    {
+      "owner": "automation",
+      "index": 10,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing preserves automation pane during chat navigation"
+    },
+    {
+      "owner": "automation",
+      "index": 14,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing merges Settings categories"
+    },
+    {
+      "owner": "terminal",
+      "index": 2,
+      "file": "polished.html",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing preserves Agent/Plan plus menu and adds Terminal"
+    },
+    {
+      "owner": "git",
+      "index": 3,
+      "file": "polished.js",
+      "reason": "overlap",
+      "resolution": "round2/compose-existing merges Git Settings with provider configuration"
+    },
+    {
+      "owner": "git",
+      "index": 8,
+      "file": "intentgraph/server.cjs",
+      "reason": "overlap",
+      "resolution": "compose-runtime-seams exposes Git and workflow alongside reliability"
+    }
+  ],
+  "files": [
+    {
+      "source": "..\\..\\..\\polished-attachments.js",
+      "file": "polished-attachments.js",
+      "owner": "baseline-live-unchanged",
+      "sha256": "8b24d098a5b79fac933156e14cfbc7b385c79f2a4d20b8a412ad63e4b1dc0684"
+    },
+    {
+      "source": "automation\\candidate\\polished-automation.css",
+      "file": "polished-automation.css",
+      "owner": "automation",
+      "sha256": "996aeb3665d1e2f3cf5ea3fdbe752738049794fc0738c291ff705362d274d733"
+    },
+    {
+      "source": "automation\\candidate\\polished-automation.js",
+      "file": "polished-automation.js",
+      "owner": "automation",
+      "sha256": "e95cafbcf6770f24affbcc79bb5708d7e867fbc206b57f3d995792ba88958b02"
+    },
+    {
+      "source": "..\\..\\..\\polished-avatars.js",
+      "file": "polished-avatars.js",
+      "owner": "baseline-live-unchanged",
+      "sha256": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50"
+    },
+    {
+      "source": "root-backup\\polished-backup.js",
+      "file": "polished-backup.js",
+      "owner": "root-backup-compatibility",
+      "sha256": "b0bc2c8b231fd16ef757bb2ddf414b6bcda1b7de119fc7fd248c935f93f39765"
+    },
+    {
+      "source": "..\\..\\..\\polished-diagnostics.js",
+      "file": "polished-diagnostics.js",
+      "owner": "baseline-live-unchanged",
+      "sha256": "fa65d1878cb5fcb4f4bf95e309ebdb6303e3e4ecb6d70be4a29f7f2de8f9148c"
+    },
+    {
+      "source": "..\\..\\..\\polished-evidence-tools.css",
+      "file": "polished-evidence-tools.css",
+      "owner": "baseline-live-unchanged",
+      "sha256": "5f2e3162a9c43514a4b98ef078e1ece6a518c9c10cc80ba6526ea27aaca06a30"
+    },
+    {
+      "source": "..\\..\\..\\polished-evidence-tools.js",
+      "file": "polished-evidence-tools.js",
+      "owner": "baseline-live-unchanged",
+      "sha256": "0671ed61d80cd095ad39713bb0512a2719a58f28c2591ffeb1268421be3dc1dc"
+    },
+    {
+      "source": "..\\..\\..\\polished-files.css",
+      "file": "polished-files.css",
+      "owner": "baseline-live-unchanged",
+      "sha256": "924b7261768072bc5751330e738a2b70ca564694b0ee7e057ed5b394b1d09c17"
+    },
+    {
+      "source": "..\\..\\..\\polished-files.js",
+      "file": "polished-files.js",
+      "owner": "baseline-live-unchanged",
+      "sha256": "a4ee77e8596f7f18920eb193741d018766fdcb1ee59c09654361a524bb5b88a5"
+    },
+    {
+      "source": "root-stage\\polished-run-state.js",
+      "file": "polished-run-state.js",
+      "owner": "root-composition",
+      "sha256": "854a6dc56da0dedbb951c511c575bb4eef46a4b7e72535d5f4a0f3df3823e29e"
+    },
+    {
+      "source": "..\\..\\..\\polished-workspace-tools.css",
+      "file": "polished-workspace-tools.css",
+      "owner": "baseline-live-unchanged",
+      "sha256": "37c6297d959530e82bb7c806592c458df6f66133235c272254b360eee253de6a"
+    },
+    {
+      "source": "root-stage\\polished-workspace-tools.js",
+      "file": "polished-workspace-tools.js",
+      "owner": "root-composition",
+      "sha256": "7e27459cd2ad4a4eb0b35aec577ff7ad884485ccb3dce1315c717627818ce262"
+    },
+    {
+      "source": "root-stage\\polished.css",
+      "file": "polished.css",
+      "owner": "root-composition",
+      "sha256": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6"
+    },
+    {
+      "source": "root-stage\\polished.html",
+      "file": "polished.html",
+      "owner": "root-composition",
+      "sha256": "49864d2629d69fbf7ab06c8a620fc4432e81d140fe1245d1fb6d88fc393a883a"
+    },
+    {
+      "file": "polished.js",
+      "owner": "workspace-round2",
+      "source": "round2/integration-deltas.json",
+      "sha256": "813885043def3d8109fceea24451fee6b9e8c06c9565a32dac21ba11dda1b8a6"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\artwork.js",
+      "file": "avatar-system\\artwork.js",
+      "owner": "baseline-assets",
+      "sha256": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\avatar.css",
+      "file": "avatar-system\\avatar.css",
+      "owner": "baseline-assets",
+      "sha256": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\export.cjs",
+      "file": "avatar-system\\export.cjs",
+      "owner": "baseline-assets",
+      "sha256": "61e3f8a6b2ad03fb4046349e96df3e32b11c6210b88b95eefd670310a6b61032"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\four-preview.html",
+      "file": "avatar-system\\four-preview.html",
+      "owner": "baseline-assets",
+      "sha256": "fa629f0b096e1cd6fd5f5cec03203bfd8210076524772d387c46ffafbc963ec1"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\gallery.css",
+      "file": "avatar-system\\gallery.css",
+      "owner": "baseline-assets",
+      "sha256": "27ba6d0c4d21f94dc12ce534e0fc32cdc8cbda18ad7dc0ba6074b119924f146d"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\gallery.html",
+      "file": "avatar-system\\gallery.html",
+      "owner": "baseline-assets",
+      "sha256": "c6e067755638295be7744a46f86745a52a4c5fc554d745da150005fb95dfb9fb"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\preview.css",
+      "file": "avatar-system\\preview.css",
+      "owner": "baseline-assets",
+      "sha256": "86e9a9c65cc5ec971f6b760d526962c78af6a4203c2b0d2bd98a1535a62cdff7"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\preview.js",
+      "file": "avatar-system\\preview.js",
+      "owner": "baseline-assets",
+      "sha256": "04353c4c52c1b2214126c7844a05b9efd316a14d9ae7db5c6dd4f2da3e8b3fb8"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\cloud.svg",
+      "file": "avatar-system\\svg\\cloud.svg",
+      "owner": "baseline-assets",
+      "sha256": "fdd8b3c6e493aa1330001f8f6fef34a51fb2d9a04e9b9b92ca7fcb410c7a5b48"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\controller.svg",
+      "file": "avatar-system\\svg\\controller.svg",
+      "owner": "baseline-assets",
+      "sha256": "13c7996c22abdf20101cebb2686e7ad0d6e908708abe465b4755b8ce37cbcb76"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\dns-ddi.svg",
+      "file": "avatar-system\\svg\\dns-ddi.svg",
+      "owner": "baseline-assets",
+      "sha256": "215697bd27bbdc64ed5a6c29bfea1a275015a4b7c6a731a967abcc011a584ce8"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\firewall.svg",
+      "file": "avatar-system\\svg\\firewall.svg",
+      "owner": "baseline-assets",
+      "sha256": "6d3c0b6626f89cd8eef4a1da58df00ff73c97ec68963c74496cd4ad646659013"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\leaf.svg",
+      "file": "avatar-system\\svg\\leaf.svg",
+      "owner": "baseline-assets",
+      "sha256": "544ded1bdad1d34ddfe376c8199195dfeacfafe35b1f39640c8b4471df8ddac1"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\load-balancer.svg",
+      "file": "avatar-system\\svg\\load-balancer.svg",
+      "owner": "baseline-assets",
+      "sha256": "11fd5ddf00867344cf1030be625800e6d1ba1b4d8ee8edf531fcbe27687e1422"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\monitoring.svg",
+      "file": "avatar-system\\svg\\monitoring.svg",
+      "owner": "baseline-assets",
+      "sha256": "b6b25a82f5ea11778f22446656826b1ddc2aa8ce0177940a79eb031f156b2959"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\proxy.svg",
+      "file": "avatar-system\\svg\\proxy.svg",
+      "owner": "baseline-assets",
+      "sha256": "bcc39d73d9ff1b5e3288ce208a4054d3fb26f943f3e6b02192cb99ebe9a91845"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\router.svg",
+      "file": "avatar-system\\svg\\router.svg",
+      "owner": "baseline-assets",
+      "sha256": "51d07f09d66eb031847765aa9df65d1458e2ef12cc66f7690a56f040c3e7678b"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\sd-wan.svg",
+      "file": "avatar-system\\svg\\sd-wan.svg",
+      "owner": "baseline-assets",
+      "sha256": "e3beb09fe73eada003babeec0a7478f8328d462a296e31a7d6e6033c91d275da"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\server.svg",
+      "file": "avatar-system\\svg\\server.svg",
+      "owner": "baseline-assets",
+      "sha256": "370be92fe55fa2da3f3ed298ef91899e27c11f7f3646214e4f2106f3e6b9fcf9"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\spine.svg",
+      "file": "avatar-system\\svg\\spine.svg",
+      "owner": "baseline-assets",
+      "sha256": "2acfd46769f8b7565da3e0ef25ef3309d61bf64918d15b5c254b766bd05f5795"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\storage.svg",
+      "file": "avatar-system\\svg\\storage.svg",
+      "owner": "baseline-assets",
+      "sha256": "6aff404d324195890494020923bd2f738d6c749c003a4c8e0766c1660d219c7a"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\switch.svg",
+      "file": "avatar-system\\svg\\switch.svg",
+      "owner": "baseline-assets",
+      "sha256": "2204540c035d5f6913577480cd70b5ee2e37bd85e0f0bfa7401838df227e9eb2"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\vpn.svg",
+      "file": "avatar-system\\svg\\vpn.svg",
+      "owner": "baseline-assets",
+      "sha256": "2ec879bb7dd6e90be827ac46d3710bf422403ea5fb2b671821e943bb6d2354b6"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\svg\\wifi.svg",
+      "file": "avatar-system\\svg\\wifi.svg",
+      "owner": "baseline-assets",
+      "sha256": "cb2f23eda83c71cbdd54bb5e13d2d5209c56509720fa0256b36cb86c7bbadb55"
+    },
+    {
+      "source": "..\\..\\..\\avatar-system\\tokens.json",
+      "file": "avatar-system\\tokens.json",
+      "owner": "baseline-assets",
+      "sha256": "26c62def467962e9bd453c6dbdb727c82b91a9215599d6ea94ca2f0adf74b921"
+    },
+    {
+      "source": "baseline\\intentgraph\\adapters\\desktop.py",
+      "file": "intentgraph\\adapters\\desktop.py",
+      "owner": "frozen-baseline",
+      "sha256": "a4ab39aa2436a98df61369da2699591f5b4cd2c92cdb3ede7a72ac8bb110d6a5"
+    },
+    {
+      "source": "baseline\\intentgraph\\adapters\\index.cjs",
+      "file": "intentgraph\\adapters\\index.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "a07f0ddad0403f181f3da4dfaed43609ddf2a040e9e244e611e66cf030cebc5e"
+    },
+    {
+      "source": "baseline\\intentgraph\\adapters\\network.py",
+      "file": "intentgraph\\adapters\\network.py",
+      "owner": "frozen-baseline",
+      "sha256": "45f3d3388d54c946a573923137e752d2d1759984cacef02ffcd752583cf10773"
+    },
+    {
+      "source": "baseline\\intentgraph\\adapters\\test_network.py",
+      "file": "intentgraph\\adapters\\test_network.py",
+      "owner": "frozen-baseline",
+      "sha256": "16a69f99cf99de8ec1969313620a87e91f1fb43d7f63f267609814276d28deaf"
+    },
+    {
+      "source": "baseline\\intentgraph\\adapters.test.cjs",
+      "file": "intentgraph\\adapters.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "19acccae6f185be45b77957f0eb53575c9838329129fac0a41d657befe74e10f"
+    },
+    {
+      "source": "root-stage\\intentgraph\\agent-runtime.cjs",
+      "file": "intentgraph\\agent-runtime.cjs",
+      "owner": "root-composition",
+      "sha256": "182e1ea8e7dbc09b88ec102898d43bbb4b659c708fb5ba8c7a1a7f8c4d903b6c"
+    },
+    {
+      "source": "root-stage\\intentgraph\\agent-runtime.test.cjs",
+      "file": "intentgraph\\agent-runtime.test.cjs",
+      "owner": "root-composition",
+      "sha256": "2d29bbb96c5b0e1a71c9bc21c99973c03b9fda816c93c64de36b386a674f5b66"
+    },
+    {
+      "source": "baseline\\intentgraph\\agent-stream.test.cjs",
+      "file": "intentgraph\\agent-stream.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "223f1b61c985f5a1b06d28a433a9f2bcfed0e1b41f161f5f2209327afeafe364"
+    },
+    {
+      "source": "baseline\\intentgraph\\backend.test.cjs",
+      "file": "intentgraph\\backend.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "b195e208304494038d6e93b56567158b3273a61a647712b681cb384ddb2cea50"
+    },
+    {
+      "source": "baseline\\intentgraph\\catalyst.cjs",
+      "file": "intentgraph\\catalyst.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "885ac2b34b38d1863e9fbbc51bc90bedbab694d25bc6e65726fcd412771df237"
+    },
+    {
+      "source": "baseline\\intentgraph\\catalyst.test.cjs",
+      "file": "intentgraph\\catalyst.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "95fdb4f2f16a727a9336a31784cbab35fded632072559ea1c29b0b4577a05965"
+    },
+    {
+      "source": "baseline\\intentgraph\\chat-read-api.cjs",
+      "file": "intentgraph\\chat-read-api.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "3176cd71d8fd366a3b617c8586ba4816697b9b8eace3e1cac23cbf1d2465744d"
+    },
+    {
+      "source": "baseline\\intentgraph\\chat-runtime.cjs",
+      "file": "intentgraph\\chat-runtime.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "d87a38ea91dfc002703b4db6c3e6f4147736830ebb6ba95e15d5b1307956c1bf"
+    },
+    {
+      "source": "baseline\\intentgraph\\chat-runtime.test.cjs",
+      "file": "intentgraph\\chat-runtime.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "b8158a6c4660e17b7cb4bcf2dea9355b94e11621fea67cefcef3bd5ae545300a"
+    },
+    {
+      "source": "baseline\\intentgraph\\chat.test.cjs",
+      "file": "intentgraph\\chat.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "16417e606f10bb343a8d514186d456887191c1276e0f5a0cfc77c6d54168770e"
+    },
+    {
+      "source": "baseline\\intentgraph\\check-index.cjs",
+      "file": "intentgraph\\check-index.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "9e42249e639c22ef74b93ca85625bee2241ede129f00d503aa72eba7e489c5c2"
+    },
+    {
+      "source": "baseline\\intentgraph\\cli.cjs",
+      "file": "intentgraph\\cli.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "800864c8c5c0c7eec5b05beb41e9aa37b1f8376979b0cb7b36d6ce047bd34e2d"
+    },
+    {
+      "source": "baseline\\intentgraph\\coordination-schema.cjs",
+      "file": "intentgraph\\coordination-schema.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "3ea1ee3bbfb0d66941616c63185ca8233f24f036b33bea10e10ed705503a24c8"
+    },
+    {
+      "source": "baseline\\intentgraph\\coordination.test.cjs",
+      "file": "intentgraph\\coordination.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "2409601318f6eb9c0b5b61d86d5ac7c4d25c9b2f1092543e1574a6f5332fd670"
+    },
+    {
+      "source": "baseline\\intentgraph\\coordinator.cjs",
+      "file": "intentgraph\\coordinator.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "b8f23e8da707eb7ee499a267bb509ac90207600417fd4fa2194f21c096918f48"
+    },
+    {
+      "source": "baseline\\intentgraph\\delivery.cjs",
+      "file": "intentgraph\\delivery.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "6205e1756c6a9c9790e4a986188e64452a3312b8637e197b3f959a9739088536"
+    },
+    {
+      "source": "baseline\\intentgraph\\delivery.test.cjs",
+      "file": "intentgraph\\delivery.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "0f80bdae44a311e23f94a5325390364b57b29169f55fb4148e407c9a5e33f974"
+    },
+    {
+      "source": "baseline\\intentgraph\\engine.cjs",
+      "file": "intentgraph\\engine.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "0a77de8ec01bcd8b580bcfe1e7ffb44dce53d05a9d2e65cf52ebeb63a9456ecf"
+    },
+    {
+      "source": "baseline\\intentgraph\\execution-service.cjs",
+      "file": "intentgraph\\execution-service.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "02d59d4f205fd2af2d196b0fcfbdbbff66649b298b6255ec9fa052d7c06ddc14"
+    },
+    {
+      "source": "baseline\\intentgraph\\execution-service.test.cjs",
+      "file": "intentgraph\\execution-service.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "3802706b81249968e948153d09dc283d033106763ff67880737a212ba682c183"
+    },
+    {
+      "source": "baseline\\intentgraph\\indexer.cjs",
+      "file": "intentgraph\\indexer.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "f463ed1e6da57b8db241a7a3254d19018cae3b0424786b4b6a5479d19f01e3c5"
+    },
+    {
+      "source": "baseline\\intentgraph\\network-commands.json",
+      "file": "intentgraph\\network-commands.json",
+      "owner": "frozen-baseline",
+      "sha256": "cce70a8a23398e155063d9987b45951231b7a18b31ae87e9deeb98a41eb7a3a3"
+    },
+    {
+      "source": "baseline\\intentgraph\\network-execution.cjs",
+      "file": "intentgraph\\network-execution.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "cebf8916a17d5709eb772aa0b488339599879f6f6d65af3855e2ef507f38d721"
+    },
+    {
+      "source": "baseline\\intentgraph\\network-execution.test.cjs",
+      "file": "intentgraph\\network-execution.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "3cf9c35e033d47d997553302d489598dde2ae8bd82c76a94c69557f98d54a921"
+    },
+    {
+      "source": "baseline\\intentgraph\\package-lock.json",
+      "file": "intentgraph\\package-lock.json",
+      "owner": "frozen-baseline",
+      "sha256": "35d5201c2e4b3e916a62aaa0adbad68ae92fac06f41faaeeb2028a426ce16d44"
+    },
+    {
+      "source": "baseline\\intentgraph\\package.json",
+      "file": "intentgraph\\package.json",
+      "owner": "frozen-baseline",
+      "sha256": "a2a9e6e7ea8a6d1135a35c85855a7b5edbc5ae4a7880ebf6452d84b53411b902"
+    },
+    {
+      "source": "baseline\\intentgraph\\provider.cjs",
+      "file": "intentgraph\\provider.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "b57732ea0d587c1ccd9cdcf1eaace509901076a2932e7246302a91d45ede471d"
+    },
+    {
+      "source": "baseline\\intentgraph\\sandbox-routes.test.cjs",
+      "file": "intentgraph\\sandbox-routes.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "c33451450f03312bf7804792d4c9195f4fde4db04e4fa756650d6f3175d80ac8"
+    },
+    {
+      "source": "root-stage\\intentgraph\\server.cjs",
+      "file": "intentgraph\\server.cjs",
+      "owner": "root-composition",
+      "sha256": "9eb85c629c9e36ad1ce79360027f98689ca5d36365e8118429d3e19b5fb071c0"
+    },
+    {
+      "source": "baseline\\intentgraph\\steering.test.cjs",
+      "file": "intentgraph\\steering.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "d66e3ba4da5cc09ad9f8f5ccc1a76bc4d5d40cdc13ca0d8dac24d3ad98b59731"
+    },
+    {
+      "source": "baseline\\intentgraph\\trace.cjs",
+      "file": "intentgraph\\trace.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "ab3666fe07ec9d986a4ff2a65d18010b7d8d36f9b4076f4efe04f8bc96c5500e"
+    },
+    {
+      "source": "baseline\\intentgraph\\trace.test.cjs",
+      "file": "intentgraph\\trace.test.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "275a6f492446f485794bab991f51f9c43222450fafdd30129b386f18ce86b15b"
+    },
+    {
+      "source": "baseline\\intentgraph\\vault.cjs",
+      "file": "intentgraph\\vault.cjs",
+      "owner": "frozen-baseline",
+      "sha256": "1b58865229c50846dab73528bac2307a95ba9189c5d0bbffb672bd45c7b7eb2b"
+    },
+    {
+      "source": "reliability\\candidate\\polished-reliability.js",
+      "file": "polished-reliability.js",
+      "owner": "reliability",
+      "sha256": "87cba0b42f316b4151bdc74459a94901b904dbefeb4f94faf52468e2a8127c16"
+    },
+    {
+      "source": "reliability\\candidate\\intentgraph\\reliability.cjs",
+      "file": "intentgraph/reliability.cjs",
+      "owner": "reliability",
+      "sha256": "a2d4b03d61e3b2e1eacf6fec871584241ce77f44a94696f1206bf18bf06b9c8f"
+    },
+    {
+      "source": "reliability\\candidate\\intentgraph\\reliability-storage.cjs",
+      "file": "intentgraph/reliability-storage.cjs",
+      "owner": "reliability",
+      "sha256": "c9d97a445b012757756b01727a9e7d81a1211b7fbb6f3a1b31aa48f5c1512c5b"
+    },
+    {
+      "source": "provider\\candidate\\provider-picker.js",
+      "file": "provider-picker.js",
+      "owner": "provider",
+      "sha256": "5a9a1c9608c83a46647fd5045d0d0f8d607488dae924dda18f35b7f0b86c1901"
+    },
+    {
+      "file": "workspace-capabilities.js",
+      "owner": "workspace-round2",
+      "source": "round2/integration-deltas.json",
+      "sha256": "99b78d8dc2fed244bc100592a5a90339435a2bcf84217dc530eeaa0061659165"
+    },
+    {
+      "source": "workspace\\candidate\\workspace-capabilities.css",
+      "file": "workspace-capabilities.css",
+      "owner": "workspace",
+      "sha256": "b1ea121fbb95702f7ab7f8ecc2fba571785859c5078f12f9d0cfe7b9445ab20e"
+    },
+    {
+      "source": "workflows\\candidate\\polished-approval-workflow.js",
+      "file": "polished-approval-workflow.js",
+      "owner": "workflows",
+      "sha256": "88f05b07fc4738b04d805fabd184caaa153b60cd602fc6bb3de6b9ad40d2868e"
+    },
+    {
+      "source": "terminal\\candidate\\polished-terminal.js",
+      "file": "polished-terminal.js",
+      "owner": "terminal",
+      "sha256": "26f1bcf292ccddbce5beb2e6de560b951af56d4d681ede3e60efa14da4256d4f"
+    },
+    {
+      "source": "terminal\\candidate\\polished-terminal.css",
+      "file": "polished-terminal.css",
+      "owner": "terminal",
+      "sha256": "f3fc4706d729a2f223c87f3e7eb42a9775684d6730ad49d9e0880e48789b48c0"
+    },
+    {
+      "source": "git\\polished-git.js",
+      "file": "polished-git.js",
+      "owner": "git",
+      "sha256": "27898a8a885108fec9ca006d9870bea5675ea7118b139db3376831f21843d6d1"
+    },
+    {
+      "source": "git\\polished-git.css",
+      "file": "polished-git.css",
+      "owner": "git",
+      "sha256": "fd437031f3ec6949ec376df0c7f9ac00997066e10948d0a84d6adeeb13e62335"
+    },
+    {
+      "source": "git\\intentgraph\\git-workspace.cjs",
+      "file": "intentgraph/git-workspace.cjs",
+      "owner": "git",
+      "sha256": "9598e8ba01bf8d7a8372eb0edcc635f50ee0462ca58024c9276574dc8b57718e"
+    },
+    {
+      "source": "provider\\candidate\\intentgraph\\provider-selection.cjs",
+      "file": "intentgraph/provider-selection.cjs",
+      "owner": "provider",
+      "sha256": "fbb3ae222f24996effd52703e8466be3aa995a784b4737aed5376be9faf9ec8e"
+    },
+    {
+      "source": "provider\\candidate\\intentgraph\\provider-adapter.cjs",
+      "file": "intentgraph/provider-adapter.cjs",
+      "owner": "provider",
+      "sha256": "98770029b3f1eba5819fd6c8133e4783deae6ca6bc5a5625d61036d13c42e9f2"
+    },
+    {
+      "source": "provider\\candidate\\intentgraph\\provider-runtime-config.cjs",
+      "file": "intentgraph/provider-runtime-config.cjs",
+      "owner": "provider",
+      "sha256": "c156380e672c407fe4d0cc684af49beed8cba8be7372a30b0faceb077aea879e"
+    },
+    {
+      "source": "workflows\\candidate\\approval-workflow.cjs",
+      "file": "intentgraph/approval-workflow.cjs",
+      "owner": "workflows",
+      "sha256": "f75eddd2665a84b0e37e678bea740444056ff75a8317c24236e025d7d7b3649d"
+    },
+    {
+      "source": "workflows\\candidate\\clarification-runtime.cjs",
+      "file": "intentgraph/clarification-runtime.cjs",
+      "owner": "workflows",
+      "sha256": "ceef4ba90270eeda9af8336c926622ca485af7d5276c5727f7ac97801e4fa0ef"
+    },
+    {
+      "source": "workflows\\candidate\\clarification-server-adapter.cjs",
+      "file": "intentgraph/clarification-server-adapter.cjs",
+      "owner": "workflows",
+      "sha256": "f0abdc98d22cee2504a2f7d47fc0963b2706ab66dd636bc17b6029652c7e162c"
+    },
+    {
+      "source": "provider/test-replacements.json",
+      "file": "intentgraph/agent-stream.test.cjs",
+      "owner": "explicit-mock-provider-test-fixture",
+      "sha256": "ca39df6b9455b23456fbcb5fd6b2504a7c10082823d2959f54b461b35f2cbc62"
+    },
+    {
+      "source": "provider/test-replacements.json",
+      "file": "intentgraph/chat.test.cjs",
+      "owner": "explicit-mock-provider-test-fixture",
+      "sha256": "86564c56ada0a6ddb621a5b82fe5c7366f3bde8933f5e712e3cfdc7c7927d838"
+    },
+    {
+      "source": "provider/test-replacements.json",
+      "file": "intentgraph/steering.test.cjs",
+      "owner": "explicit-mock-provider-test-fixture",
+      "sha256": "ce515ccd0f513a23d45882a5907565d3fc4894d17664c82c9526b79212680eda"
+    }
+  ]
+}

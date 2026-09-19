@@ -1,0 +1,42 @@
+{
+  "schema": "backend-final",
+  "generatedAt": "2026-09-15T19:42:32.9351029Z",
+  "scope": "local isolated backend regression; no provider/device calls; no service restart",
+  "checks": [
+    {
+      "name": "node-checks",
+      "command": "node --check server.cjs; node --check agent-runtime.cjs; node --check chat-read-api.cjs; node --check verify-chat-read-api.cjs; node --check verify-chat-modes.cjs",
+      "exitCode": 0
+    },
+    {
+      "name": "coordination-test-isolated",
+      "command": "node --test intentgraph/coordination.test.cjs",
+      "exitCode": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "name": "intentgraph-test-suite-serial",
+      "command": "node --test --test-concurrency=1 intentgraph/*.test.cjs",
+      "exitCode": 0,
+      "tests": 58,
+      "passed": 58,
+      "failed": 0
+    },
+    {
+      "name": "verify-chat-read-api",
+      "command": "node .intentgraph/runtime/verify-chat-read-api.cjs",
+      "exitCode": 0,
+      "result": "passed; real symlink creation skipped by OS policy, deterministic symlink fixture passed"
+    },
+    {
+      "name": "verify-chat-modes",
+      "command": "node .intentgraph/runtime/verify-chat-modes.cjs",
+      "exitCode": 0,
+      "result": "passed"
+    }
+  ],
+  "note": "A default-concurrency 58-file run had one coordination fixture timeout; isolated coordination.test and serial 58-file run passed.",
+  "allPassed": true
+}

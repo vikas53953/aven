@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-13T16:24:36.302Z",
+  "model": "mimo-v2.5",
+  "liveReply": "Hello! I'm your Network companion, here to help with any questions or issues you might have about networking, connectivity, or related setup. What can I assist you with today?",
+  "usage": {
+    "inputTokens": 78,
+    "outputTokens": 164
+  },
+  "checks": [
+    "Enter sends actual provider request",
+    "Reply renders",
+    "Reply persists on reload",
+    "Mock failure exposes manual retry",
+    "Retry does not duplicate user message",
+    "Shift+Enter inserts newline"
+  ],
+  "errors": []
+}

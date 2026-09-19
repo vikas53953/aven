@@ -1,0 +1,155 @@
+{
+  "at": "2026-09-13T07:52:48.192Z",
+  "scope": "Bounded local execution integration",
+  "avatarOwnerAcceptance": true,
+  "sourceHashes": {
+    "intentgraph/server.cjs": "489f6bc358aeb64264c54a75efe86efafdcf93a080f14f6d4b3f26650e54c240",
+    "intentgraph/execution-service.cjs": "02d59d4f205fd2af2d196b0fcfbdbbff66649b298b6255ec9fa052d7c06ddc14",
+    "intentgraph/vault.cjs": "1b58865229c50846dab73528bac2307a95ba9189c5d0bbffb672bd45c7b7eb2b",
+    "intentgraph/provider.cjs": "286bf8dbe1e345f00a836993e4b3b2840d32e1788c4875d68e3209c5eebcab8c",
+    "intentgraph/coordinator.cjs": "b8f23e8da707eb7ee499a267bb509ac90207600417fd4fa2194f21c096918f48",
+    "intentgraph/coordination-schema.cjs": "3ea1ee3bbfb0d66941616c63185ca8233f24f036b33bea10e10ed705503a24c8",
+    "intentgraph/delivery.cjs": "82a25313fb90ec089e0b7400a224a0f1513be019cfe6c4b91c4155fa6b3c14a5",
+    "intentgraph/adapters/index.cjs": "9710bdfb11d267dfd1cffc50557bc47b356ba89fae7ac3e175278af10f0d5621",
+    "intentgraph/adapters/desktop.py": "a4ab39aa2436a98df61369da2699591f5b4cd2c92cdb3ede7a72ac8bb110d6a5",
+    "intentgraph/adapters/network.py": "aeb8e5b7dd90137cec4235ff7f45c3b53fed42700b2db9ab118cff4b7d2bef74",
+    "intentgraph/ui/execution.html": "7d746973aecf717f54054748a05411ae8e7899f61ca081612c4b63b7e45cd2e1",
+    "intentgraph/ui/execution.css": "be3aca21ff7d10b21e648cd61e30d2c68f2af2433d7077254ca042c905c49e1f",
+    "intentgraph/ui/execution.js": "8852348b8f76cb62ee5db33cbc28172d4b628f6567401c249a89cb06fd85fc22",
+    "intentgraph/ui/index.html": "274e2ee6b228b698e34a874e553384f39d677593c81f8c806b75753c44196d70"
+  },
+  "automatedTests": {
+    "command": "node --test intentgraph/backend.test.cjs intentgraph/trace.test.cjs intentgraph/adapters.test.cjs intentgraph/coordination.test.cjs intentgraph/delivery.test.cjs intentgraph/execution-service.test.cjs",
+    "passed": 22,
+    "failed": 0
+  },
+  "coordination": {
+    "passed": true,
+    "fixtureRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\runtime\\live-fixture-gRrmsn",
+    "runId": "run-mtzi7c38-5d59a0f38f1b",
+    "status": "awaiting-owner",
+    "actualProviderCalls": 5,
+    "usage": [
+      {
+        "inputTokens": 221,
+        "outputTokens": 772
+      },
+      {
+        "inputTokens": 329,
+        "outputTokens": 1037
+      },
+      {
+        "inputTokens": 414,
+        "outputTokens": 1193
+      },
+      {
+        "inputTokens": 414,
+        "outputTokens": 1968
+      },
+      {
+        "inputTokens": 413,
+        "outputTokens": 1429
+      }
+    ],
+    "appliedAfterExplicitReview": true,
+    "reviews": [
+      {
+        "role": "engineer",
+        "actorId": "reviewer",
+        "round": 0,
+        "outcome": "pass",
+        "criteria": [
+          "result"
+        ],
+        "findings": [
+          "The exported function in src/message.cjs already returns the exact string 'Ready' as required, preserving the CommonJS export structure."
+        ],
+        "at": "2026-09-13T07:40:57.275Z"
+      },
+      {
+        "role": "planner",
+        "actorId": "planner",
+        "round": 0,
+        "outcome": "pass",
+        "criteria": [
+          "result"
+        ],
+        "findings": [
+          "The exported function in src/message.cjs already returns the exact string 'Ready' as required by the original intent, preserving the CommonJS export structure."
+        ],
+        "at": "2026-09-13T07:41:27.216Z"
+      },
+      {
+        "role": "experience",
+        "actorId": "acceptance",
+        "round": 0,
+        "outcome": "pass",
+        "criteria": [
+          "result"
+        ],
+        "findings": [
+          "The exported function in src/message.cjs returns the exact string 'Ready', and the CommonJS export is preserved without any other changes, meeting the original intent and criteria."
+        ],
+        "at": "2026-09-13T07:41:53.251Z"
+      }
+    ],
+    "productionFilesChanged": false,
+    "reviewedFixtureExecuted": true,
+    "fixtureResult": "Ready",
+    "note": "Live provider fixture preceded final locking and gate-handoff hardening; the final coordinator passed eight deterministic regression tests."
+  },
+  "desktop": {
+    "passed": true,
+    "ownedWindow": true,
+    "fillExecuted": true,
+    "clickExecuted": true,
+    "replayDenied": true,
+    "screenshotPath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\runtime\\adapters\\desktop-mtzi53z6-293174a4c10f0709.png"
+  },
+  "ui": {
+    "passed": true,
+    "checks": [
+      "provider configured",
+      "adapters available",
+      "non-Git accurately blocked",
+      "CSRF denial",
+      "artifact confinement",
+      "real owned browser inspect and screenshot",
+      "390px no overflow",
+      "no JavaScript errors"
+    ],
+    "mainNavigationMobileAlsoVerified": true
+  },
+  "git": {
+    "passed": true,
+    "fixtureRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\runtime\\git-fixture-Ks46ch",
+    "realGitCommitPassed": true,
+    "realGitPushPassed": true,
+    "unreviewedCommitDenied": true,
+    "productionRepositoryTouched": false
+  },
+  "liveService": {
+    "providerConnected": true,
+    "model": "mimo-v2.5",
+    "lastConnection": {
+      "ok": true,
+      "at": "2026-09-13T07:52:00.610Z",
+      "usage": {
+        "inputTokens": 256,
+        "outputTokens": 128
+      }
+    },
+    "deliveryCatalogPinned": true,
+    "serviceReady": true,
+    "gitRepository": false,
+    "networkProfileCount": 0
+  },
+  "pending": [
+    "Cisco authenticated session: owner will share current access details; no password/hostkey guessed",
+    "Install gates in an actual project Git repository and configure remote protection",
+    "Autonomous model tool-calling loop: local tools are currently explicitly operated and approved through the Execution panel",
+    "Owner evaluation of the new execution workflow"
+  ],
+  "noProductionMerge": true,
+  "noDeviceCommandsExecuted": true
+}

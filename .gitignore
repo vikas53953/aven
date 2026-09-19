@@ -1,0 +1,19 @@
+.intentgraph/capture-profile/
+.intentgraph/runtime/
+node_modules/
+.env
+.env.*
+
+# Local credentials and runtime artifacts
+*.dpapi
+*.pem
+*.key
+*.pfx
+*.p12
+*.log
+*.pid
+*.tmp
+__pycache__/
+.venv/
+.no-mistakes/
+.intentgraph/evidence/runs/

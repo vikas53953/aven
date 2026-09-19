@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 1,
+  "project": "Aven",
+  "capturedAt": "2026-09-12T16:28:35.666Z",
+  "coverage": "Manual file and evidence index. No live code graph or agent telemetry.",
+  "baseline": "Owner-approved avatar four; sixteen-role expansion",
+  "approval": "First four approved; expanded family technically verified, owner visual review pending",
+  "nodes": [
+    {
+      "id": "index.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\index.html",
+      "sha256": "25a524a6b08c52f659f15603baf54e3ae8e51620f9fb049c9908538f9c7fbb5a",
+      "bytes": 13597
+    },
+    {
+      "id": "styles.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\styles.css",
+      "sha256": "1a4acd44e7f7435a63931b6499dbf467554b2d97e07cf3e6daf506acde34ba7e",
+      "bytes": 28600
+    },
+    {
+      "id": "app.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\app.js",
+      "sha256": "df8e9ae39a2b83b2464d81b00126506c31f821fc0c850479fd9d553f56d5d790",
+      "bytes": 27025
+    },
+    {
+      "id": "intent-map.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-map.html",
+      "sha256": "82456e45dc6486cee6323a7fbddb9f0ad35cb53f42d68b07e6af58a5950ac820",
+      "bytes": 14975
+    },
+    {
+      "id": "intent-map.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-map.css",
+      "sha256": "af571ddeca0f928cd20a5c478092963915bcd99bcbb55df650483b25e357dd85",
+      "bytes": 18368
+    },
+    {
+      "id": "intent-map.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-map.js",
+      "sha256": "0fc134cece9a8b7a85bf65d5145c349f0a1c19f130c7e8f4f260cf50743b19dc",
+      "bytes": 14620
+    },
+    {
+      "id": "intent-controls.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-controls.js",
+      "sha256": "fd5be963e624441b8514fa55d86de7caac0d4e86fb7ff6f766dfae5546a13e33",
+      "bytes": 13303
+    },
+    {
+      "id": "intent-conversations.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-conversations.js",
+      "sha256": "a1c70a10ad4c3feb13193d4ff973f98f6674a0d41b4aac1d6130d85db39e1db4",
+      "bytes": 13189
+    },
+    {
+      "id": "intent-entrypoints.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intent-entrypoints.js",
+      "sha256": "9f0961bf3d53c82a3b15c6a890fd126c2a32a75a2a0b4a96d67778f6606a84fc",
+      "bytes": 8476
+    },
+    {
+      "id": ".intentgraph/visual-map.json",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\visual-map.json",
+      "sha256": "d5013195e5a378fb5b4b1c371117c9a74d7d16ad93a32d75bd04c4be3ee5d3a1",
+      "bytes": 15289
+    },
+    {
+      "id": "polished.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished.html",
+      "sha256": "685d24454e8345d822466ae2ba16a0cd389b980ee7733ed9ab23fb76a7ea93fb",
+      "bytes": 11978
+    },
+    {
+      "id": "polished.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished.css",
+      "sha256": "45b48460ba60479d20aa595ae7f0e1a0bc65785338b5788168b8d057fa5f7445",
+      "bytes": 50460
+    },
+    {
+      "id": "polished.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished.js",
+      "sha256": "a4ba5412ae5ff309d55ed6b0c1c3eba165b27ee8a13c39ffd471438ba66497f0",
+      "bytes": 71324
+    },
+    {
+      "id": "prototype-review.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\prototype-review.html",
+      "sha256": "eaa645fc450d7c349076bb8ea71cac4a389ffe424a05e7802ba26334763a3c6e",
+      "bytes": 6742
+    },
+    {
+      "id": ".intentgraph/polished-evidence.json",
+      "type": "evidence",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\polished-evidence.json",
+      "sha256": "05ec4eb2935a1e279aed93aac74a70d05637354fc28ea5194128381246b8ce3b",
+      "bytes": 4829
+    },
+    {
+      "id": ".intentgraph/polished-candidate.json",
+      "type": "evidence",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\polished-candidate.json",
+      "sha256": "d7e5ab10917932b71df3cd72488f65d88d24dd98e4a2b470f08ea79d13a57162",
+      "bytes": 5110
+    },
+    {
+      "id": "feedback-07.md",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\feedback-07.md",
+      "sha256": "cc4dedc266c9e6454e1e71cc4c929a693b677e6b9a8ccf9a0fd6c383e0a47d75",
+      "bytes": 3906
+    },
+    {
+      "id": "p2-plan.md",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p2-plan.md",
+      "sha256": "0ad46f8072a7b9562084d2d1ee1d3a5699fd72bd57dbb81c283570b73d20a55f",
+      "bytes": 2148
+    },
+    {
+      "id": "p2-test-results.json",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p2-test-results.json",
+      "sha256": "5e58bf8aec709d85c5adcd1642438d72163a5d1602c2292ef6b9c73e1d6fc83f",
+      "bytes": 4814
+    },
+    {
+      "id": "p2-review-context-results.json",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p2-review-context-results.json",
+      "sha256": "c6fb885dcc8d81028763a9dafa5082bc10a3dd298fb1931eaa4338b081f65e39",
+      "bytes": 1367
+    },
+    {
+      "id": "polished-avatars.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished-avatars.js",
+      "sha256": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "bytes": 7904
+    },
+    {
+      "id": ".intentgraph/feedback-08-original.txt",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\feedback-08-original.txt",
+      "sha256": "f28aa6422d1136906cc6d0ad7d7a66668a86e8c91ff36f97581a83c3227ae4c8",
+      "bytes": 5051
+    },
+    {
+      "id": ".intentgraph/feedback-08.md",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\feedback-08.md",
+      "sha256": "0af00981f679352a9f74020edccd3f0254b5847df7fd846ba6e7934e793d3acc",
+      "bytes": 6190
+    },
+    {
+      "id": ".intentgraph/p3-test-results.json",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-test-results.json",
+      "sha256": "41ab2c1c4d32469db91b815c1742c3f8b84b40d80945d080a112ad884cb9f4c7",
+      "bytes": 5101
+    },
+    {
+      "id": ".intentgraph/p3-independent-results.json",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p3-independent-results.json",
+      "sha256": "c453cd7144098093a47c8b719bf02abcf95478a84ec7bf40d315454c3a25402a",
+      "bytes": 2468
+    },
+    {
+      "id": ".intentgraph/feedback-09.md",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\feedback-09.md",
+      "sha256": "8f24bcbcc63767c8600f024f0adca5068310033f285374fde59222e9c411fd5d",
+      "bytes": 2422
+    },
+    {
+      "id": ".intentgraph/p4-test-results.json",
+      "type": "record",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\p4-test-results.json",
+      "sha256": "c38e869a7b37c6bea7d84522628589dd9648a076b5ee172570c031b91c1d272a",
+      "bytes": 2982
+    },
+    {
+      "id": "avatar-system/artwork.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\artwork.js",
+      "sha256": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+      "bytes": 7376
+    },
+    {
+      "id": "avatar-system/avatar.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\avatar.css",
+      "sha256": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad",
+      "bytes": 2496
+    },
+    {
+      "id": "avatar-system/four-preview.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\four-preview.html",
+      "sha256": "fa629f0b096e1cd6fd5f5cec03203bfd8210076524772d387c46ffafbc963ec1",
+      "bytes": 3107
+    },
+    {
+      "id": "avatar-system/preview.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\preview.css",
+      "sha256": "86e9a9c65cc5ec971f6b760d526962c78af6a4203c2b0d2bd98a1535a62cdff7",
+      "bytes": 3844
+    },
+    {
+      "id": "avatar-system/preview.js",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\preview.js",
+      "sha256": "04353c4c52c1b2214126c7844a05b9efd316a14d9ae7db5c6dd4f2da3e8b3fb8",
+      "bytes": 3116
+    },
+    {
+      "id": "avatar-system/export.cjs",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\export.cjs",
+      "sha256": "61e3f8a6b2ad03fb4046349e96df3e32b11c6210b88b95eefd670310a6b61032",
+      "bytes": 1952
+    },
+    {
+      "id": "avatar-system/react/NetworkAvatar.tsx",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\react\\NetworkAvatar.tsx",
+      "sha256": "4a99d593a6c5c5b923c87fdeedc32d16d562101ff2cb8d97b5ad95613958127d",
+      "bytes": 43637
+    },
+    {
+      "id": "avatar-system/svg/cloud.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\cloud.svg",
+      "sha256": "fdd8b3c6e493aa1330001f8f6fef34a51fb2d9a04e9b9b92ca7fcb410c7a5b48",
+      "bytes": 1255
+    },
+    {
+      "id": "avatar-system/svg/router.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\router.svg",
+      "sha256": "51d07f09d66eb031847765aa9df65d1458e2ef12cc66f7690a56f040c3e7678b",
+      "bytes": 1436
+    },
+    {
+      "id": "avatar-system/svg/firewall.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\firewall.svg",
+      "sha256": "6d3c0b6626f89cd8eef4a1da58df00ff73c97ec68963c74496cd4ad646659013",
+      "bytes": 1280
+    },
+    {
+      "id": "avatar-system/svg/switch.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\switch.svg",
+      "sha256": "2204540c035d5f6913577480cd70b5ee2e37bd85e0f0bfa7401838df227e9eb2",
+      "bytes": 1516
+    },
+    {
+      "id": ".intentgraph/avatar-four-approval.md",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\avatar-four-approval.md",
+      "sha256": "9b58e472d4427f4ec1b026ef2fb6509a7c28857f24e36e1d6d5b22da2750ef15",
+      "bytes": 2973
+    },
+    {
+      "id": "avatar-system/gallery.html",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\gallery.html",
+      "sha256": "c6e067755638295be7744a46f86745a52a4c5fc554d745da150005fb95dfb9fb",
+      "bytes": 2977
+    },
+    {
+      "id": "avatar-system/gallery.css",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\gallery.css",
+      "sha256": "27ba6d0c4d21f94dc12ce534e0fc32cdc8cbda18ad7dc0ba6074b119924f146d",
+      "bytes": 1588
+    },
+    {
+      "id": "avatar-system/svg/controller.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\controller.svg",
+      "sha256": "13c7996c22abdf20101cebb2686e7ad0d6e908708abe465b4755b8ce37cbcb76",
+      "bytes": 1419
+    },
+    {
+      "id": "avatar-system/svg/dns-ddi.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\dns-ddi.svg",
+      "sha256": "215697bd27bbdc64ed5a6c29bfea1a275015a4b7c6a731a967abcc011a584ce8",
+      "bytes": 1312
+    },
+    {
+      "id": "avatar-system/svg/leaf.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\leaf.svg",
+      "sha256": "544ded1bdad1d34ddfe376c8199195dfeacfafe35b1f39640c8b4471df8ddac1",
+      "bytes": 1366
+    },
+    {
+      "id": "avatar-system/svg/load-balancer.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\load-balancer.svg",
+      "sha256": "11fd5ddf00867344cf1030be625800e6d1ba1b4d8ee8edf531fcbe27687e1422",
+      "bytes": 1320
+    },
+    {
+      "id": "avatar-system/svg/monitoring.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\monitoring.svg",
+      "sha256": "b6b25a82f5ea11778f22446656826b1ddc2aa8ce0177940a79eb031f156b2959",
+      "bytes": 1276
+    },
+    {
+      "id": "avatar-system/svg/proxy.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\proxy.svg",
+      "sha256": "bcc39d73d9ff1b5e3288ce208a4054d3fb26f943f3e6b02192cb99ebe9a91845",
+      "bytes": 1282
+    },
+    {
+      "id": "avatar-system/svg/sd-wan.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\sd-wan.svg",
+      "sha256": "e3beb09fe73eada003babeec0a7478f8328d462a296e31a7d6e6033c91d275da",
+      "bytes": 1305
+    },
+    {
+      "id": "avatar-system/svg/server.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\server.svg",
+      "sha256": "370be92fe55fa2da3f3ed298ef91899e27c11f7f3646214e4f2106f3e6b9fcf9",
+      "bytes": 1409
+    },
+    {
+      "id": "avatar-system/svg/spine.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\spine.svg",
+      "sha256": "2acfd46769f8b7565da3e0ef25ef3309d61bf64918d15b5c254b766bd05f5795",
+      "bytes": 1266
+    },
+    {
+      "id": "avatar-system/svg/storage.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\storage.svg",
+      "sha256": "6aff404d324195890494020923bd2f738d6c749c003a4c8e0766c1660d219c7a",
+      "bytes": 1338
+    },
+    {
+      "id": "avatar-system/svg/vpn.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\vpn.svg",
+      "sha256": "2ec879bb7dd6e90be827ac46d3710bf422403ea5fb2b671821e943bb6d2354b6",
+      "bytes": 1243
+    },
+    {
+      "id": "avatar-system/svg/wifi.svg",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\avatar-system\\svg\\wifi.svg",
+      "sha256": "cb2f23eda83c71cbdd54bb5e13d2d5209c56509720fa0256b36cb86c7bbadb55",
+      "bytes": 1236
+    },
+    {
+      "id": ".intentgraph/avatar-family.md",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\avatar-family.md",
+      "sha256": "c839007247a59f892c594eb80933f4f58cf962b00ba86ae2f5f1a599ec9e9671",
+      "bytes": 3918
+    },
+    {
+      "id": ".intentgraph/avatar-family-qa-results.json",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\avatar-family-qa-results.json",
+      "sha256": "fbd1f545b8dbcd6205c0f0eae953f6627fc537f01fba027446ba195d5aeeeeb2",
+      "bytes": 9233
+    },
+    {
+      "id": ".intentgraph/avatar-family-app-qa-results.json",
+      "type": "file",
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\avatar-family-app-qa-results.json",
+      "sha256": "c0a7f228e0b32e27138f0faba4fe1cdf29e938079d8061ec34b2455911fa8477",
+      "bytes": 4158
+    }
+  ],
+  "edges": [
+    {
+      "target": "styles.css",
+      "source": "index.html",
+      "relation": "loads-stylesheet"
+    },
+    {
+      "target": "app.js",
+      "source": "index.html",
+      "relation": "loads-script"
+    },
+    {
+      "target": "index.html",
+      "source": "app.js",
+      "relation": "updates-dom-defined-by"
+    },
+    {
+      "source": "intent-map.html",
+      "target": "intent-map.js",
+      "relation": "loads-script"
+    },
+    {
+      "source": "intent-map.js",
+      "target": ".intentgraph/visual-map.json",
+      "relation": "reads-shared-intent-records"
+    },
+    {
+      "source": "intent-map.html",
+      "target": "intent-map.css",
+      "relation": "loads-stylesheet"
+    },
+    {
+      "source": "intent-map.html",
+      "target": "intent-controls.js",
+      "relation": "loads-script"
+    },
+    {
+      "source": "intent-map.js",
+      "target": "intent-controls.js",
+      "relation": "calls-settings-agent-attachment-controls"
+    },
+    {
+      "source": "intent-map.html",
+      "target": "intent-conversations.js",
+      "relation": "loads-script"
+    },
+    {
+      "source": "intent-map.js",
+      "target": "intent-conversations.js",
+      "relation": "initializes-conversation-organization"
+    },
+    {
+      "source": "intent-conversations.js",
+      "target": "intent-controls.js",
+      "relation": "uses-agent-profiles-and-attachment-controls"
+    },
+    {
+      "source": "intent-map.html",
+      "target": "intent-entrypoints.js",
+      "relation": "loads-script"
+    },
+    {
+      "source": "intent-entrypoints.js",
+      "target": "intent-conversations.js",
+      "relation": "adapts-creation-and-search"
+    },
+    {
+      "source": "intent-entrypoints.js",
+      "target": "intent-controls.js",
+      "relation": "separates-agent-creation-from-settings"
+    },
+    {
+      "source": "polished.html",
+      "target": "polished.css",
+      "relation": "loads-stylesheet"
+    },
+    {
+      "source": "polished.html",
+      "target": "polished.js",
+      "relation": "loads-isolated-controller"
+    },
+    {
+      "source": "polished.html",
+      "target": "prototype-review.html",
+      "relation": "links-review-surface"
+    },
+    {
+      "source": "prototype-review.html",
+      "target": "intent-map.html",
+      "relation": "links-preserved-baseline"
+    },
+    {
+      "source": "prototype-review.html",
+      "target": ".intentgraph/polished-evidence.json",
+      "relation": "reads-candidate-evidence"
+    },
+    {
+      "source": "polished.html",
+      "target": "polished-avatars.js",
+      "relation": "loads-avatar-module"
+    },
+    {
+      "source": ".intentgraph/feedback-08.md",
+      "target": "polished.js",
+      "relation": "specifies-interactions"
+    },
+    {
+      "source": ".intentgraph/feedback-08.md",
+      "target": "polished.css",
+      "relation": "specifies-appearance"
+    },
+    {
+      "source": ".intentgraph/p3-test-results.json",
+      "target": "polished.html",
+      "relation": "checks-candidate"
+    },
+    {
+      "source": ".intentgraph/p3-independent-results.json",
+      "target": "polished.html",
+      "relation": "independently-reviews-candidate"
+    },
+    {
+      "source": ".intentgraph/feedback-09.md",
+      "target": "polished.js",
+      "relation": "specifies-interactions"
+    },
+    {
+      "source": ".intentgraph/feedback-09.md",
+      "target": "polished-avatars.js",
+      "relation": "specifies-avatar-motion"
+    },
+    {
+      "source": ".intentgraph/p4-test-results.json",
+      "target": "polished.html",
+      "relation": "checks-candidate"
+    },
+    {
+      "source": "avatar-system/artwork.js",
+      "target": "polished-avatars.js",
+      "relation": "provides-geometry"
+    },
+    {
+      "source": "avatar-system/artwork.js",
+      "target": "avatar-system/react/NetworkAvatar.tsx",
+      "relation": "generates"
+    },
+    {
+      "source": ".intentgraph/avatar-family.md",
+      "target": "avatar-system/gallery.html",
+      "relation": "acceptance-reference"
+    }
+  ],
+  "polishedCandidate": "AV2-ae8ad3e219bd",
+  "avatarCheckpoint": {
+    "id": "AV2-ae8ad3e219bd",
+    "status": "First four approved; expanded family technically verified, owner visual review pending",
+    "record": ".intentgraph/avatar-family.md",
+    "preview": "avatar-system/gallery.html"
+  }
+}

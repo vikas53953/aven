@@ -1,0 +1,192 @@
+{
+  "baseline": "F08-P3",
+  "startedAt": "2026-09-11T03:56:16.967Z",
+  "sourceFiles": [
+    "polished.html",
+    "polished.css",
+    "polished-avatars.js",
+    "prototype-review.html"
+  ],
+  "candidateStart": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a872ba3a08590f68dcd771164955b5c4af97e6bb10e7d865847be9e585d00b7d",
+    "polished-avatars.js": "02d0dcf13d292ace6f37a355a54191f9a600ca5708505d74d92073c200a842ab",
+    "prototype-review.html": "21b2669507cb4c82bb9c64775a50201d84d78b9a9e2cf3768d8194ff9f9f4dfb"
+  },
+  "runtimeStart": "5bab28fa0de8d0e9ac1b2d262dd845dbb0d0fccf7e8fc75db8ee1195feff0d28",
+  "checks": [
+    {
+      "name": "P3 preservation: migration backup, local records, drafts and idempotent reload",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 composer, title, search, attachments and quiet navigation affordances",
+      "status": "FAIL",
+      "detail": "Chevron must appear on hover",
+      "stack": "AssertionError [ERR_ASSERTION]: Chevron must appear on hover\n    at C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:266:9\n    at async withPage (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:105:12)\n    at async C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:241:7\n    at async check (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:127:5)\n    at async main (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:238:5)"
+    },
+    {
+      "name": "P3 creation: fields, ownership, channel membership and right-side profile entrypoint",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 profile and avatar journey: local styles, generate, invalid/valid upload, isolation and reload",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 context actions: pin, unread, section/project move, hide, delete and restore",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 agent details: SOUL/MEMORY, document isolation, files and deterministic tool states",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 account menu, honest local actions, feedback and staged Agent behavior settings",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 theme, contrast, responsive bounds, sidebar resize and group state preservation",
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#avatar')\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"avatar\" type=\"button\" aria-label=\"Open agent workspace\" class=\"agent-avatar-button header-avatar-button\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "stack": "locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#avatar')\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"avatar\" type=\"button\" aria-label=\"Open agent workspace\" class=\"agent-avatar-button header-avatar-button\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button type=\"button\" id=\"search-nav\" data-tip=\"Search\" class=\"nav-button\" data-icon=\"search\" data-destination=\"Search\">…</button> from <aside id=\"rail\" class=\"rail expanded\" aria-label=\"Primary navigation\">…</aside> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:625:39\n    at async withPage (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:105:12)\n    at C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\async C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:579:7\n    at async check (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:127:5)\n    at async main (C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\.intentgraph\\verify-p3.cjs:578:5)"
+    },
+    {
+      "name": "P3 protected wireframe sources and candidate stability",
+      "status": "PASS"
+    },
+    {
+      "name": "P3 no page errors or external runtime requests",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "label": "create-agent",
+      "path": ".intentgraph/p3-create-agent.png"
+    },
+    {
+      "label": "profile-entrypoint",
+      "path": ".intentgraph/p3-profile-entrypoint.png"
+    },
+    {
+      "label": "avatar-picker",
+      "path": ".intentgraph/p3-avatar-picker.png"
+    },
+    {
+      "label": "context-menu",
+      "path": ".intentgraph/p3-context-menu.png"
+    },
+    {
+      "label": "tool-browser-error",
+      "path": ".intentgraph/p3-tool-browser-error.png"
+    },
+    {
+      "label": "tool-plugins-error",
+      "path": ".intentgraph/p3-tool-plugins-error.png"
+    },
+    {
+      "label": "tool-computer-error",
+      "path": ".intentgraph/p3-tool-computer-error.png"
+    },
+    {
+      "label": "settings-behavior",
+      "path": ".intentgraph/p3-settings-behavior.png"
+    },
+    {
+      "label": "theme-light",
+      "path": ".intentgraph/p3-theme-light.png"
+    },
+    {
+      "label": "theme-dark",
+      "path": ".intentgraph/p3-theme-dark.png"
+    },
+    {
+      "label": "responsive-1920",
+      "path": ".intentgraph/p3-responsive-1920.png"
+    },
+    {
+      "label": "responsive-1440",
+      "path": ".intentgraph/p3-responsive-1440.png"
+    },
+    {
+      "label": "responsive-1024",
+      "path": ".intentgraph/p3-responsive-1024.png"
+    },
+    {
+      "label": "responsive-768",
+      "path": ".intentgraph/p3-responsive-768.png"
+    },
+    {
+      "label": "responsive-390",
+      "path": ".intentgraph/p3-responsive-390.png"
+    },
+    {
+      "label": "responsive-320",
+      "path": ".intentgraph/p3-responsive-320.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "contrast": [
+    {
+      "theme": "light",
+      "label": "text",
+      "ratio": 16.3
+    },
+    {
+      "theme": "light",
+      "label": "muted",
+      "ratio": 7.23
+    },
+    {
+      "theme": "light",
+      "label": "faint",
+      "ratio": 4.95
+    },
+    {
+      "theme": "light",
+      "label": "accent",
+      "ratio": 18.88
+    },
+    {
+      "theme": "light",
+      "label": "focus",
+      "ratio": 18.88
+    },
+    {
+      "theme": "dark",
+      "label": "text",
+      "ratio": 17.73
+    },
+    {
+      "theme": "dark",
+      "label": "muted",
+      "ratio": 7.22
+    },
+    {
+      "theme": "dark",
+      "label": "faint",
+      "ratio": 6.15
+    },
+    {
+      "theme": "dark",
+      "label": "accent",
+      "ratio": 16.57
+    },
+    {
+      "theme": "dark",
+      "label": "focus",
+      "ratio": 12.49
+    }
+  ],
+  "finishedAt": "2026-09-11T03:56:59.297Z",
+  "candidateEnd": {
+    "polished.html": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+    "polished.css": "a872ba3a08590f68dcd771164955b5c4af97e6bb10e7d865847be9e585d00b7d",
+    "polished-avatars.js": "02d0dcf13d292ace6f37a355a54191f9a600ca5708505d74d92073c200a842ab",
+    "prototype-review.html": "21b2669507cb4c82bb9c64775a50201d84d78b9a9e2cf3768d8194ff9f9f4dfb"
+  },
+  "runtimeEnd": "5bab28fa0de8d0e9ac1b2d262dd845dbb0d0fccf7e8fc75db8ee1195feff0d28",
+  "candidateStable": true
+}

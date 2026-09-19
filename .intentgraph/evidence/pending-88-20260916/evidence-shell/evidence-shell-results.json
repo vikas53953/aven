@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-09-15T19:50:04.196Z",
+  "url": "http://127.0.0.1:8767/polished.html",
+  "isolatedContext": true,
+  "checks": [
+    {
+      "name": "isolated secure browser context",
+      "status": "passed"
+    },
+    {
+      "name": "message actions open annotate evidence",
+      "status": "passed"
+    },
+    {
+      "name": "annotation save persists exact raw hash and fields",
+      "status": "passed"
+    },
+    {
+      "name": "reload preserves annotation and exact raw output",
+      "status": "passed"
+    },
+    {
+      "name": "save failure retains unsaved note and prior persisted state",
+      "status": "passed"
+    },
+    {
+      "name": "navigation cancel confirmation retains unsaved note",
+      "status": "passed"
+    },
+    {
+      "name": "close cancel confirmation retains unsaved note",
+      "status": "passed"
+    },
+    {
+      "name": "empty annotation is rejected before callback",
+      "status": "passed"
+    },
+    {
+      "name": "deferred hash cannot save after discard close",
+      "status": "passed"
+    },
+    {
+      "name": "compare action exposes full records and distinguishes missing from empty",
+      "status": "passed"
+    },
+    {
+      "name": "compare panes stack at 320px without shell overflow",
+      "status": "passed"
+    }
+  ],
+  "blockedRequests": [],
+  "pageErrors": [],
+  "screenshots": [
+    "evidence-shell-annotate-1440.png",
+    "evidence-shell-annotated-1440.png",
+    "evidence-shell-cancel-1440.png",
+    "evidence-shell-compare-1440.png",
+    "evidence-shell-compare-320.png"
+  ],
+  "observations": {
+    "persistedNote": {
+      "evidenceIndex": 0,
+      "sourceId": "evidence-raw",
+      "outputHash": "b72f0d40109b433ecf3b039c8bbf194af5d7ece93fa93b6cc5087b20a7cd8fee"
+    },
+    "navigationCancelDialog": "Discard unsaved changes in this pane?",
+    "closeCancelDialog": "Discard unsaved changes in this pane?",
+    "emptyAnnotation": {
+      "saveControlEnabled": true,
+      "rootStatus": "Enter an annotation before saving.",
+      "persistedAnnotationCount": 1
+    },
+    "deferredHashDiscard": {
+      "dialog": "Discard unsaved changes in this pane?",
+      "persistedAnnotationCount": 1
+    },
+    "responsive320": {
+      "columns": 1,
+      "bodyScrollWidth": 320,
+      "documentScrollWidth": 320,
+      "viewportWidth": 320,
+      "sideWidths": [
+        267,
+        267
+      ]
+    }
+  },
+  "integrationFinding": {
+    "kind": "resolved",
+    "detail": "The evidence tool now rejects blank annotation text before hashing or invoking the root callback, with the explicit status \"Enter an annotation before saving.\"."
+  },
+  "backendProviderTraffic": "No backend/provider request attempted.",
+  "completed": true
+}

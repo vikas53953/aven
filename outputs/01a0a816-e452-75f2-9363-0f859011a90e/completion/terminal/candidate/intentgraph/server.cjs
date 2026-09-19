@@ -1,0 +1,490 @@
+'use strict';
+
+const http = require('node:http');
+const fs = require('node:fs');
+const fsp = require('node:fs/promises');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const { IndexStore, isInside, normalizeRelative } = require('./indexer.cjs');
+const { IntentEngine } = require('./engine.cjs');
+const { createChatReadApi } = require('./chat-read-api.cjs');
+
+const DEFAULT_PORT = 8768;
+const DEFAULT_HOST = '127.0.0.1';
+const BODY_LIMIT = 2 * 1024 * 1024;
+const MAX_STEERING_MESSAGES = 8;
+const MAX_STEERING_MESSAGE_CHARS = 4000;
+const CHAT_MODES = Object.freeze(['inspect', 'plan']);
+const ALLOWED_STATIC_EXTENSIONS = new Set(['.html', '.css', '.js', '.cjs', '.mjs', '.json', '.svg', '.png', '.jpg', '.jpeg', '.webp', '.woff', '.woff2', '.ico']);
+
+function jsonHeaders() {
+  return { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' };
+}
+
+function sendJson(res, status, body) {
+  const data = JSON.stringify(body);
+  res.writeHead(status, { ...jsonHeaders(), 'Content-Length': Buffer.byteLength(data) });
+  res.end(data);
+}
+
+function sendError(res, status, error, reasons) {
+  const list = reasons || error.reasons || (error.message ? [error.message] : ['request failed']);
+  sendJson(res, status, { error: error.code || error.message || 'request failed', reasons: list });
+}
+
+function isLoopbackHost(hostHeader) {
+  if (!hostHeader) return false;
+  const raw = String(hostHeader).trim();
+  const host = raw.startsWith('[') ? raw.slice(1, raw.indexOf(']')) : raw.split(':')[0];
+  const normalized = host.toLowerCase();
+  return normalized === '127.0.0.1' || normalized === 'localhost' || normalized === '::1';
+}
+
+function originAllowed(origin, req) {
+  if (!origin) return false;
+  try {
+    const parsed = new URL(origin);
+    if (parsed.protocol !== 'http:') return false;
+    const host = parsed.hostname.toLowerCase();
+    if (!['127.0.0.1', 'localhost', '::1'].includes(host)) return false;
+    const requestHost = String(req.headers.host || '').trim();
+    const requestRaw = requestHost.startsWith('[') ? requestHost.slice(1, requestHost.indexOf(']')) : requestHost.split(':')[0];
+    if (host !== requestRaw.toLowerCase()) return false;
+    const port = parsed.port || '80';
+    const localPort = String(req.socket.localPort || DEFAULT_PORT);
+    return port === localPort;
+  } catch { return false; }
+}
+
+function chatOriginAllowed(origin, req) {
+  return origin === 'http://127.0.0.1:8767' || origin === `http://127.0.0.1:${req.socket.localPort}`;
+}
+
+function sameSecret(left, right) {
+  if (typeof left !== 'string' || typeof right !== 'string') return false;
+  const a = Buffer.from(left);
+  const b = Buffer.from(right);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+function createSteeringRun(runId, chatId, steeringToken) {
+  let phase = 'open';
+  let acceptedCount = 0;
+  const queue = [];
+  return {
+    runId,
+    chatId,
+    steeringToken,
+    get phase() { return phase; },
+    beginClosing() { if (phase === 'open') phase = 'closing'; },
+    drainSteering() {
+      if (phase !== 'open' || !queue.length) return [];
+      return queue.splice(0, queue.length);
+    },
+    close() {
+      if (phase === 'closed') return [];
+      phase = 'closed';
+      return queue.splice(0, queue.length);
+    },
+    accept(text) {
+      if (phase !== 'open') return { accepted: false, reason: 'closing' };
+      if (acceptedCount >= MAX_STEERING_MESSAGES) return { accepted: false, reason: 'full' };
+      const id = crypto.randomUUID();
+      acceptedCount += 1;
+      queue.push({ id, message: text });
+      return { accepted: true, id };
+    },
+    matchesToken(value) { return sameSecret(value, steeringToken); }
+  };
+}
+
+function mimeType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  return {
+    '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
+    '.cjs': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
+    '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
+    '.woff': 'font/woff', '.woff2': 'font/woff2', '.ico': 'image/x-icon'
+  }[ext] || 'application/octet-stream';
+}
+
+function parseBody(req) {
+  return new Promise((resolve, reject) => {
+    let total = 0;
+    const chunks = [];
+    req.on('data', (chunk) => {
+      total += chunk.length;
+      if (total > BODY_LIMIT) {
+        reject(Object.assign(new Error('request body exceeds size cap'), { statusCode: 413 }));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on('end', () => {
+      try {
+        const text = Buffer.concat(chunks).toString('utf8');
+        resolve(text ? JSON.parse(text) : {});
+      } catch (error) { reject(Object.assign(new Error('request body must be valid JSON'), { statusCode: 400, cause: error })); }
+    });
+    req.on('error', reject);
+  });
+}
+
+function createServer(options = {}) {
+  const root = fs.realpathSync(path.resolve(options.root || path.resolve(__dirname, '..')));
+  const runtimeDirectory = path.resolve(options.runtimeDirectory || path.join(root, '.intentgraph', 'runtime'));
+  fs.mkdirSync(runtimeDirectory, { recursive: true });
+  const hub = new Set();
+  const token = crypto.randomBytes(32).toString('base64url');
+  const indexer = new IndexStore(root, runtimeDirectory);
+  const engine = new IntentEngine(root, indexer, runtimeDirectory);
+  const ready = engine.initialize();
+  const sandbox = options.sandbox || require('./catalyst.cjs').createCatalystClient({runtimeDirectory});
+  const execution = options.execution === false ? null : require('./execution-service.cjs').createExecutionService({root,engine,runtimeDirectory,...(options.executionOptions||{})});
+  const networkExecution = execution?.adapters ? require('./network-execution.cjs').createNetworkExecution({catalyst:sandbox,adapters:execution.adapters}) : sandbox;
+  let watcher = null;
+  let periodic = null;
+  let debounce = null;
+  let chatPending = false;
+  const activeRuns = new Map();
+  const sandboxCommandRuns = new Map();
+  const chatReadApi = createChatReadApi({
+    root,
+    getExecutionStatus: () => execution ? execution.status() : null,
+    getActiveRuns: () => Array.from(activeRuns.values()),
+    chatOriginAllowed
+  });
+
+  const publish = (event) => {
+    const message = `data: ${JSON.stringify(event)}\n\n`;
+    for (const response of hub) {
+      try { response.write(message); } catch { hub.delete(response); }
+    }
+  };
+  engine.subscribe(publish);
+
+  function scheduleRefresh(reason) {
+    if (debounce) clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      debounce = null;
+      engine.refresh(reason).catch(() => undefined);
+    }, 250);
+  }
+
+  function startWatchers() {
+    if (watcher || periodic) return;
+    try {
+      watcher = fs.watch(root, { recursive: true }, (_eventType, filename) => {
+        if (!filename) return;
+        const normalized = normalizeRelative(String(filename));
+        if (normalized.startsWith('.intentgraph/runtime/')) return;
+        scheduleRefresh('watch');
+      });
+      watcher.on('error', () => { watcher = null; });
+    } catch { watcher = null; }
+    periodic = setInterval(() => scheduleRefresh('periodic-rescan'), Number(options.rescanMs || 5000));
+    periodic.unref?.();
+  }
+
+  function closeWatchers() {
+    if (debounce) clearTimeout(debounce);
+    if (watcher) { try { watcher.close(); } catch {} watcher = null; }
+    if (periodic) clearInterval(periodic);
+    periodic = null;
+    for (const response of hub) { try { response.end(); } catch {} }
+    hub.clear();
+  }
+
+  async function staticFile(res, requestPath) {
+    const uiRoot = path.join(__dirname, 'ui');
+    const relative = requestPath === '/' ? 'index.html' : requestPath.replace(/^\/+/, '');
+    if (requestPath.startsWith('/api/')) return false;
+    const candidate = path.resolve(uiRoot, relative);
+    if (!isInside(uiRoot, candidate) || !ALLOWED_STATIC_EXTENSIONS.has(path.extname(candidate).toLowerCase())) return false;
+    let real;
+    try { real = fs.realpathSync(candidate); } catch { return false; }
+    if (!isInside(uiRoot, real)) return false;
+    let data;
+    try { data = await fsp.readFile(real); } catch { return false; }
+    res.writeHead(200, { 'Content-Type': mimeType(real), 'Cache-Control': 'no-store', 'Content-Length': data.length });
+    res.end(data);
+    return true;
+  }
+
+  async function route(req, res) {
+    if (!isLoopbackHost(req.headers.host)) { sendError(res, 400, new Error('Host must be loopback')); return; }
+    const parsed = new URL(req.url, `http://${req.headers.host}`);
+    const pathname = parsed.pathname;
+    if (await chatReadApi.handle(req, res)) return;
+    if (pathname === '/api/chat/steer') {
+      const origin = req.headers.origin;
+      if (!chatOriginAllowed(origin, req)) { sendError(res, 403, new Error('Chat origin is not allowed')); return; }
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Vary', 'Origin');
+      if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Methods', 'POST');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Aven-Chat, Content-Type');
+        res.writeHead(204); res.end(); return;
+      }
+      if (req.method !== 'POST') { sendError(res, 405, new Error('Method not allowed')); return; }
+      if (req.headers['x-aven-chat'] !== 'text-only') { sendError(res, 403, new Error('Chat request header required')); return; }
+      let body;
+      try { body = await parseBody(req); } catch { sendError(res, 400, new Error('Invalid steering request')); return; }
+      if (!body || Object.keys(body).some((key) => !['runId', 'chatId', 'steeringToken', 'text'].includes(key)) || typeof body.runId !== 'string' || !/^[0-9a-f-]{36}$/i.test(body.runId) || typeof body.chatId !== 'string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.steeringToken !== 'string' || !body.steeringToken || typeof body.text !== 'string' || !body.text.trim() || body.text.length > MAX_STEERING_MESSAGE_CHARS) {
+        sendError(res, 400, new Error(`Steering requires a run, chat, token and text within ${MAX_STEERING_MESSAGE_CHARS} characters`)); return;
+      }
+      const run = activeRuns.get(body.runId);
+      if (!run || run.chatId !== body.chatId || run.phase !== 'open') { sendError(res, 409, new Error('The chat run is closing or unavailable')); return; }
+      if (!run.matchesToken(body.steeringToken)) { sendError(res, 403, new Error('Steering token is invalid')); return; }
+      const accepted = run.accept(body.text);
+      if (!accepted.accepted) { sendError(res, 409, new Error(accepted.reason === 'full' ? 'The steering queue is full' : 'The chat run is closing or unavailable')); return; }
+      run.emit?.({ type: 'steer_received', id: accepted.id });
+      sendJson(res, 200, { accepted: true, id: accepted.id });
+      return;
+    }
+    if (pathname === '/api/chat') {
+      const origin=req.headers.origin;
+      if(!chatOriginAllowed(origin, req)){sendError(res,403,new Error('Chat origin is not allowed'));return;}
+      res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');
+      if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','POST');res.setHeader('Access-Control-Allow-Headers','X-Aven-Chat, Content-Type');res.writeHead(204);res.end();return;}
+      if(req.method!=='POST'){sendError(res,405,new Error('Method not allowed'));return;}
+      if(req.headers['x-aven-chat']!=='text-only'){sendError(res,403,new Error('Chat request header required'));return;}
+      let body;
+      try{body=await parseBody(req);}catch{sendError(res,400,new Error('Invalid chat request'));return;}
+      const mode = body?.mode === undefined ? 'inspect' : body.mode;
+      if(!body || Object.keys(body).some(k=>!['chatId','agentName','messages','mode'].includes(k)) || !CHAT_MODES.includes(mode) || typeof body.chatId!=='string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.agentName!=='string' || body.agentName.length>80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length>24 || body.messages.some(m=>!m || Object.keys(m).some(k=>!['role','content'].includes(k)) || !['user','assistant'].includes(m.role) || typeof m.content!=='string' || !m.content.trim()) || body.messages.at(-1).role!=='user' || body.messages.reduce((n,m)=>n+m.content.length,0)>32000){sendError(res,400,new Error('Chat requires up to 24 text messages and mode plan or inspect'));return;}
+      if(!execution?.provider){sendError(res,503,new Error('Chat provider is unavailable'));return;}
+      if(chatPending){sendError(res,409,new Error('Another reply is in progress. Try again when it finishes.'));return;}
+      chatPending=true;
+      const controller=new AbortController();
+      const streaming=req.headers.accept==='application/x-ndjson';
+      const runId=crypto.randomUUID(),steeringToken=crypto.randomBytes(32).toString('base64url'),events=[];
+      const runState=createSteeringRun(runId,body.chatId,steeringToken);
+      activeRuns.set(runId,runState);
+      const disconnected=()=>{if(!res.writableEnded){runState.beginClosing();controller.abort();}};res.once('close',disconnected);
+      let completedReply=null;
+      const emit=(event)=>{
+        const safe={...event,runId,at:new Date().toISOString()};
+        const { steeringToken: _discardedToken, ...persisted } = safe;
+        if(events.length<100)events.push(persisted);
+        if(streaming&&!res.destroyed)res.write(JSON.stringify(safe)+'\n');
+      };
+      runState.emit=emit;
+      if(streaming){res.writeHead(200,{'Content-Type':'application/x-ndjson','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});}
+      emit({type:'start',message:'Starting network coworker investigation',mode,...(streaming?{steeringToken}: {})});
+      try{
+        const responder=options.chatResponder||require('./agent-runtime.cjs').respond;
+        const reply=await responder({provider:execution?.provider,sandbox:networkExecution,messages:body.messages,agentName:body.agentName,chatId:body.chatId,mode,signal:controller.signal,onEvent:emit,drainSteering:runState.drainSteering,onModelComplete:runState.beginClosing});
+        runState.beginClosing();
+        completedReply={...reply,runId,mode};
+        emit({type:'final',reply:completedReply});
+        if(!streaming&&!res.destroyed)sendJson(res,200,completedReply);
+      }catch(error){
+        runState.beginClosing();
+        const messages={provider_401:'OpenCode authentication failed.',provider_429:'OpenCode rate limit reached. Try again later.',provider_timeout:'OpenCode timed out. You can retry.',provider_key_unavailable:'OpenCode key is unavailable locally.'};
+        const message=controller.signal.aborted?'Run cancelled; any submitted remote command may still finish.':messages[error.code]||'The agent run could not finish. Review the activity; submitted commands were not automatically retried.';
+        emit({type:'failed',message});
+        if(!streaming&&!res.destroyed)sendError(res,502,new Error(message));
+      }finally{
+        for (const pending of runState.close()) emit({ type: 'steer_pending', id: pending.id, message: pending.message });
+        emit({type:'end'});
+        try{const dir=path.join(root,'.intentgraph','evidence','runs');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,runId+'.json'),JSON.stringify({runId,chatId:body.chatId,events,reply:completedReply},null,2),{flag:'wx'});}catch{ /* Evidence persistence failure does not repeat tools. */ }
+        if(streaming&&!res.destroyed)res.end();
+        res.removeListener('close',disconnected);activeRuns.delete(runId);chatPending=false;
+      }
+      return;
+    }
+    if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory' || pathname === '/api/sandbox/command') {
+      const origin = req.headers.origin;
+      if (origin !== 'http://127.0.0.1:8767' && origin !== `http://127.0.0.1:${req.socket.localPort}`) {
+        sendError(res, 403, new Error('Sandbox origin is not allowed')); return;
+      }
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Vary', 'Origin');
+      if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Aven-Sandbox, Content-Type');
+        res.writeHead(204); res.end(); return;
+      }
+      try {
+        if (pathname.endsWith('/status') && req.method === 'GET') { sendJson(res, 200, await sandbox.status()); return; }
+        if (pathname.endsWith('/inventory') && req.method === 'POST') {
+          if (req.headers['x-aven-sandbox'] !== 'read-only') { sendError(res, 403, new Error('Sandbox request header required')); return; }
+          const body = await parseBody(req);
+          if (!body || Array.isArray(body) || Object.keys(body).length) { sendError(res, 400, new Error('Inventory accepts no parameters')); return; }
+          sendJson(res, 200, await networkExecution.inventory()); return;
+        }
+        if (pathname.endsWith('/command') && req.method === 'POST') {
+          if (req.headers['x-aven-sandbox'] !== 'read-only') { sendError(res, 403, new Error('Sandbox request header required')); return; }
+          const body = await parseBody(req);
+          const keys = body && !Array.isArray(body) && typeof body === 'object' ? Object.keys(body) : [];
+          if (!body || Array.isArray(body) || keys.some(key => !['targetId', 'command', 'requestId'].includes(key)) || keys.length !== 3 ||
+            typeof body.targetId !== 'string' || !body.targetId.trim() || body.targetId.length > 200 ||
+            typeof body.command !== 'string' || !body.command.trim() || body.command.length > 200 ||
+            typeof body.requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.requestId)) {
+            sendError(res, 400, new Error('Read-only command requires an exact targetId, supported command and request identity')); return;
+          }
+          const sendOutcome = outcome => {
+            if (res.writableEnded || res.destroyed) return;
+            if (outcome.httpStatus === 200) sendJson(res, 200, outcome.payload);
+            else sendError(res, outcome.httpStatus, new Error(outcome.message));
+          };
+          const previousRun = sandboxCommandRuns.get(body.requestId);
+          if (previousRun) {
+            if (previousRun.targetId !== body.targetId || previousRun.command !== body.command) { sendError(res, 409, new Error('Request identity is already bound to another diagnostic')); return; }
+            sendOutcome(await previousRun.promise);
+            return;
+          }
+          const startedAt = new Date().toISOString();
+          const controller = new AbortController();
+          const disconnected = () => { if (!res.writableEnded) controller.abort(); };
+          const closeBeforeResponse = () => { if (!req.complete) disconnected(); };
+          req.once('aborted', disconnected);
+          req.once('close', closeBeforeResponse);
+          res.once('close', disconnected);
+          const entry = { targetId: body.targetId, command: body.command, active: true, promise: null };
+          let settle;
+          entry.promise = new Promise(resolve => { settle = resolve; });
+          sandboxCommandRuns.set(body.requestId, entry);
+          const execute = async () => {
+            let target = null;
+            const projectTarget = value => value ? { id: value.id, hostname: value.hostname || value.id, platform: value.platform || 'Unknown platform', transport: value.transport || 'network diagnostic', managementIp: value.managementIp || '' } : { id: body.targetId, hostname: body.targetId, platform: 'Unknown platform', transport: 'network diagnostic', managementIp: '' };
+            const unknownOutcome = () => ({ httpStatus: 200, payload: { runId: body.requestId, requestId: body.requestId, target: projectTarget(target), command: body.command, status: 'UNKNOWN', source: target?.transport || 'network diagnostic', startedAt, completedAt: new Date().toISOString(), elapsedMs: Math.max(0, Date.now() - Date.parse(startedAt)), output: '', outputTruncated: false } });
+            try {
+              const snapshot = await networkExecution.inventory({ signal: controller.signal });
+              const devices = Array.isArray(snapshot?.devices) ? snapshot.devices : [];
+              const ids = new Set();
+              if (devices.some(device => {
+                if (!device || typeof device.id !== 'string') return false;
+                if (ids.has(device.id)) return true;
+                ids.add(device.id); return false;
+              })) return { httpStatus: 409, message: 'Inventory contains duplicate target IDs' };
+              target = devices.find(device => device && typeof device.id === 'string' && device.id === body.targetId);
+              if (!target) return { httpStatus: 404, message: 'Target is not present in the current inventory' };
+              const targetCommands = Array.isArray(target.supportedCommands) ? target.supportedCommands : [];
+              const globalCommands = Array.isArray(networkExecution.supportedCommands) ? networkExecution.supportedCommands : null;
+              if (!targetCommands.includes(body.command) || (globalCommands && !globalCommands.includes(body.command))) return { httpStatus: 400, message: 'Command is not allowlisted for this target' };
+              if (controller.signal.aborted) return unknownOutcome();
+              const result = await networkExecution.runCommand({ deviceUuid: target.id, command: body.command, signal: controller.signal, timeoutMs: 60000 });
+              if (controller.signal.aborted) return unknownOutcome();
+              const completedAt = new Date().toISOString();
+              const status = ['SUCCESS', 'FAILURE', 'UNKNOWN', 'NOT_EXECUTED'].includes(result?.status) ? result.status : 'UNKNOWN';
+              const output = typeof result?.output === 'string' ? result.output : '';
+              const outputTruncated = output.length > 512 * 1024;
+              return { httpStatus: 200, payload: { runId: body.requestId, requestId: body.requestId, target: projectTarget(target), command: body.command, status, source: result?.source || target.transport || 'network diagnostic', startedAt: result?.startedAt || startedAt, completedAt, elapsedMs: Number.isFinite(result?.elapsedMs) ? result.elapsedMs : Math.max(0, Date.parse(completedAt) - Date.parse(startedAt)), output: outputTruncated ? output.slice(0, 512 * 1024) : output, outputTruncated } };
+            } catch (error) {
+              if (controller.signal.aborted || error?.submitted) return unknownOutcome();
+              return { httpStatus: 502, message: 'Network diagnostic service unavailable. Check the local connection and approved certificate.' };
+            } finally {
+              entry.active = false;
+              req.removeListener('aborted', disconnected); req.removeListener('close', closeBeforeResponse); res.removeListener('close', disconnected);
+            }
+          };
+          execute().then(settle, () => settle({ httpStatus: 502, message: 'Network diagnostic service unavailable. Check the local connection and approved certificate.' }));
+          const outcome = await entry.promise;
+          if (sandboxCommandRuns.size > 128) {
+            for (const [id, item] of sandboxCommandRuns) {
+              if (sandboxCommandRuns.size <= 128) break;
+              if (!item.active && id !== body.requestId) sandboxCommandRuns.delete(id);
+            }
+          }
+          sendOutcome(outcome);
+          return;
+        }
+        sendError(res, 405, new Error('Method not allowed')); return;
+      } catch (error) {
+        if (!res.writableEnded) sendError(res, error.statusCode || 502, error.statusCode ? error : new Error('Network diagnostic service unavailable. Check the local connection and approved certificate.'));
+        return;
+      }
+    }
+    if (req.method === 'GET') {
+      try {
+        await ready;
+        if (pathname === '/api/session') { sendJson(res, 200, { token, csrfToken: token }); return; }
+        if (pathname === '/api/capabilities') { const current=execution ? await execution.status() : null; sendJson(res, 200, {ai:{connected:Boolean(current?.provider?.last?.ok),configured:Boolean(current?.provider?.credentialStored),provider:current?'opencode-go':null,model:current?'mimo-v2.5':null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)},execution:current}); return; }
+        if (pathname === '/api/execution') { if(!execution)throw new Error('Execution is disabled for this service');sendJson(res,200,await execution.status());return; }
+        if (pathname === '/api/execution/artifact') {
+          const relative=parsed.searchParams.get('path')||'';
+          const artifactRoot=path.join(runtimeDirectory,'adapters');
+          const candidate=path.resolve(root,relative);
+          const real=await fsp.realpath(candidate);
+          if(!isInside(artifactRoot,real)||!['.png','.jpg','.jpeg','.webp'].includes(path.extname(real).toLowerCase()))throw Error('Artifact is not available');
+          const stat=await fsp.stat(real);if(!stat.isFile()||stat.size>10*1024*1024)throw Error('Artifact exceeds size limit');
+          const data=await fsp.readFile(real);res.writeHead(200,{'Content-Type':mimeType(real),'Cache-Control':'no-store','Content-Length':data.length});res.end(data);return;
+        }
+        if (pathname === '/api/index') { sendJson(res, 200, await engine.getIndex()); return; }
+        if (pathname === '/api/state') { sendJson(res, 200, await engine.getState()); return; }
+        if (pathname === '/api/source') { sendJson(res, 200, await engine.getSource(parsed.searchParams.get('path') || '')); return; }
+        if (pathname === '/api/diff') { sendJson(res, 200, await engine.getDiff(parsed.searchParams.get('path') || '')); return; }
+        if (pathname === '/api/gate') { sendJson(res, 200, await engine.getGate(parsed.searchParams.get('taskId') || '')); return; }
+        if (pathname === '/api/events') {
+          res.writeHead(200, { 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
+          res.write(': connected\n\n');
+          const state = await engine.getState();
+          for (const event of state.events.slice(-100)) res.write(`data: ${JSON.stringify(event)}\n\n`);
+          hub.add(res);
+          req.on('close', () => hub.delete(res));
+          return;
+        }
+        if (await staticFile(res, pathname)) return;
+        sendError(res, 404, new Error('route not found'));
+      } catch (error) { sendError(res, error.statusCode || 404, error); }
+      return;
+    }
+    if (req.method === 'POST') {
+      if (pathname !== '/api/action') { sendError(res, 404, new Error('route not found')); return; }
+      if (req.headers['x-intentgraph-token'] !== token) { sendError(res, 403, new Error('invalid intentgraph token')); return; }
+      if (!originAllowed(req.headers.origin, req)) { sendError(res, 403, new Error('Origin must be the local IntentGraph origin')); return; }
+      try {
+        await ready;
+        const body = await parseBody(req);
+        const result = String(body.type||'').startsWith('execution.') ? await execution?.action(body) : await engine.action(body);
+        if(String(body.type||'').startsWith('execution.')&&!execution)throw Error('Execution is disabled for this service');
+        sendJson(res, 200, { ok: true, result });
+      } catch (error) {
+        sendError(res, error.statusCode || (error.gate ? 409 : 400), error, error.reasons || (error.gate && error.gate.reasons));
+      }
+      return;
+    }
+    sendError(res, 405, new Error('method not allowed'));
+  }
+
+  const server = http.createServer((req, res) => { route(req, res).catch((error) => sendError(res, 500, error)); });
+  server.once('listening', startWatchers);
+  server.once('close', () => sandbox.close());
+  const originalClose = server.close.bind(server);
+  server.close = (callback) => { closeWatchers(); if(execution){Promise.resolve(execution.close()).catch(()=>{}).finally(()=>originalClose(callback));return server;}return originalClose(callback); };
+  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };
+  return server;
+}
+
+async function start(options = {}) {
+  const server = createServer(options);
+  await server.intentGraph.ready;
+  const port = Number(options.port ?? DEFAULT_PORT);
+  const host = options.host || DEFAULT_HOST;
+  await new Promise((resolve, reject) => {
+    const onError = (error) => { server.removeListener('listening', onListening); reject(error); };
+    const onListening = () => { server.removeListener('error', onError); resolve(); };
+    server.once('error', onError);
+    server.once('listening', onListening);
+    server.listen(port, host);
+  });
+  return server;
+}
+
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  const rootIndex = args.indexOf('--root');
+  const portIndex = args.indexOf('--port');
+  const root = rootIndex >= 0 ? args[rootIndex + 1] : path.resolve(__dirname, '..');
+  const port = portIndex >= 0 ? Number(args[portIndex + 1]) : DEFAULT_PORT;
+  start({ root, port }).then((server) => {
+    process.stdout.write(`IntentGraph listening at http://127.0.0.1:${server.address().port}\n`);
+  }).catch((error) => { process.stderr.write(`${error.stack || error}\n`); process.exitCode = 1; });
+}
+
+module.exports = { createServer, start, isLoopbackHost, originAllowed, chatOriginAllowed, CHAT_MODES, MAX_STEERING_MESSAGES, MAX_STEERING_MESSAGE_CHARS };
+
+

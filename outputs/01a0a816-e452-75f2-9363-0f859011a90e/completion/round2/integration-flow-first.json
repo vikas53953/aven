@@ -1,0 +1,136 @@
+{
+  "status": "FAIL",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\assembled-candidate",
+  "counts": {
+    "pass": 6,
+    "fail": 1,
+    "blocked": 0
+  },
+  "calls": {
+    "provider": 14,
+    "inventory": 3,
+    "command": 3,
+    "responder": 14,
+    "externalFetch": [],
+    "vault": 0
+  },
+  "records": [
+    {
+      "id": "UX-033",
+      "status": "PASS",
+      "evidence": [
+        "POST /api/chat/workflow/start returned status waiting-question",
+        "pending question question-3a318c5e-e5de-4774-a558-ec8f07bd98d2 carried an opaque token only in the live response",
+        "exact question token and question id resumed the same run",
+        "answerCount=1 and responder received the clarification context",
+        "terminal result retained command, target, status, source, and provider provenance",
+        "stale/repeated answer returned HTTP 409 and did not invoke the responder again",
+        "actual createServer HTTP stream emitted start -> pending_question and closed before answer",
+        "the exact question token resumed the same run through the workflow answer endpoint",
+        "final provenance matched the explicit provider selection",
+        "resumed result contained terminal source, command, target, status and no question token"
+      ],
+      "limitation": "No live provider, vault, browser, device, or approval executor is used; only the injected mock responder is exercised.",
+      "runId": "71795c0b-985e-443c-b7a1-4159fe56a1df",
+      "questionId": "question-3a318c5e-e5de-4774-a558-ec8f07bd98d2"
+    },
+    {
+      "id": "UX-040",
+      "status": "PASS",
+      "evidence": [
+        "waiting workflow state survived server recreation over the same temporary workflow store",
+        "recovered public state was restored-history without a question token",
+        "no provider/responder call occurred during recovery",
+        "recovery path completed without a provider or vault call"
+      ],
+      "limitation": "Restart is simulated by closing and recreating the HTTP server over the same temporary workflow store; packaged app process recovery remains separate.",
+      "runId": "7657b0d8-279d-4109-b830-851ba70f6eb4"
+    },
+    {
+      "id": "UX-031",
+      "status": "PASS",
+      "evidence": [
+        "answer created a fresh resumed segment",
+        "explicit stop canceled the resumed segment and its answer request resolved canceled",
+        "no automatic retry was issued",
+        "aborting the initial HTTP stream stopped the responder before any diagnostic tool event",
+        "persisted run had no terminal reply and no post-stop tool evidence"
+      ],
+      "limitation": "This is a service lifecycle fixture; queue editing controls and packaged reload are outside this backend harness.",
+      "runId": "01f27ef7-158d-4f2d-8382-1459918df9b3"
+    },
+    {
+      "id": "UX-030",
+      "status": "FAIL",
+      "evidence": [
+        "terminal run 71795c0b-985e-443c-b7a1-4159fe56a1df completed before queued-next was submitted",
+        "duplicate requestId/idempotencyKey returned 409 without a second responder call",
+        "queued-next dispatched exactly once and preserved inspect mode",
+        "AssertionError: Expected values to be strictly equal:\n\n409 !== 200\n"
+      ],
+      "limitation": "The harness enables the candidate's per-chat concurrency option and models the browser queue with ordered HTTP requests; it does not certify packaged UI persistence or a physical user gesture.",
+      "error": "AssertionError: Expected values to be strictly equal:\n\n409 !== 200\n"
+    },
+    {
+      "id": "UX-025",
+      "status": "PASS",
+      "evidence": [
+        "original run 0007b04c-e6e0-4760-9643-af75ac4f677a persisted one diagnostic evidence event",
+        "explicit edit created fresh run 0150ec2a-ea86-4745-851f-b028870df44c with edited prompt only",
+        "original evidence stayed byte-equivalent and command call count stayed at one",
+        "repeated edited transport id returned HTTP 409 without a third provider or device call"
+      ],
+      "limitation": "The backend fixture exercises the actual HTTP/provider/sandbox boundaries; the browser edit dialog and explicit resend gesture require the assembled UI rerun.",
+      "originalRunId": "0007b04c-e6e0-4760-9643-af75ac4f677a",
+      "editedRunId": "0150ec2a-ea86-4745-851f-b028870df44c"
+    },
+    {
+      "id": "UX-109",
+      "status": "PASS",
+      "evidence": [
+        "local MEMORY.md edit was retained in fixture-local state only",
+        "captured subsequent mock provider request and HTTP events contained no local note content",
+        "chat payload containing notes was rejected with HTTP 400 before provider dispatch"
+      ],
+      "limitation": "This backend fixture does not click the profile document editor; it captures the HTTP boundary and must be paired with the browser editor interaction in the integrated rerun."
+    },
+    {
+      "id": "UX-101",
+      "status": "PASS",
+      "evidence": [
+        "candidate workspace backup validate/serialize/parse and replace persisted chats, drafts, queues, avatars and revert history",
+        "reload comparison was exact for the normalized envelope and local coworker notes",
+        "new provider/model, section, connection, sidebar and pane preference fields survived with documented connection normalization",
+        "queued work remained present but paused for intentional review after restore"
+      ],
+      "limitation": "This is an isolated candidate backup/migration contract run using in-memory storage; packaged Electron localStorage startup migration still requires the assembled UI rerun.",
+      "storageKeys": [
+        "aven-polished-preferences-v1",
+        "aven-polished-chats-v1",
+        "aven-polished-docs-v1",
+        "aven-polished-direct-teams-migration-v4",
+        "aven-polished-local-reactions-v1"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "id": "UX-030",
+      "status": "FAIL",
+      "evidence": [
+        "terminal run 71795c0b-985e-443c-b7a1-4159fe56a1df completed before queued-next was submitted",
+        "duplicate requestId/idempotencyKey returned 409 without a second responder call",
+        "queued-next dispatched exactly once and preserved inspect mode",
+        "AssertionError: Expected values to be strictly equal:\n\n409 !== 200\n"
+      ],
+      "limitation": "The harness enables the candidate's per-chat concurrency option and models the browser queue with ordered HTTP requests; it does not certify packaged UI persistence or a physical user gesture.",
+      "error": "AssertionError: Expected values to be strictly equal:\n\n409 !== 200\n"
+    }
+  ],
+  "cleanupWarnings": [
+    {
+      "path": "C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-3pIXr4",
+      "error": "EPERM, Permission denied: \\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-3pIXr4 '\\\\?\\C:\\Users\\vikasmit\\AppData\\Local\\Temp\\aven-integration-flow-3pIXr4'"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    {
+      "id": "UX071",
+      "status": "PASS",
+      "result": "Plugins pane exposes a compact read-only diagnostic terminal backed by an exact target and per-target allowlist; raw output is retained as separate evidence with run metadata; cancel is recorded as UNKNOWN and sends no retry.",
+      "evidence": "server-evidence.json; browser-evidence.json; terminal.browser.test.cjs; replacement-verification.json (eight exact frozen-v8 hunks)",
+      "limitation": "Real device reachability and command success remain unverified; the terminal intentionally does not provide arbitrary OS shell access."
+    }
+  ],
+  "liveProductFilesEdited": false,
+  "externalCalls": false
+}

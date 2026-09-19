@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "sourceRows": 115,
+  "sourceCellsCompared": 1840,
+  "auditRows": 115,
+  "resolvedFeatureRows": 5,
+  "distinctDefects": 4,
+  "counts": {
+    "Partial": 69,
+    "Verified (scoped)": 22,
+    "Unverified": 6,
+    "Missing": 14,
+    "Deferred": 4
+  },
+  "formulasCachedCorrectly": true,
+  "originalWorkbooksUnchanged": true,
+  "sha256": "9a61c1058d239629cb238b25ac91af58155f0a95ad5b2a2d3905aa26392b76be",
+  "bytes": 69513
+}

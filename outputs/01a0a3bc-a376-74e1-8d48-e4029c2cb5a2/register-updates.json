@@ -1,0 +1,20 @@
+[
+  {
+    "id": "UX-070",
+    "cells": {
+      "D": "Present",
+      "N": "Verified",
+      "E": "Session-scoped user-selected folder lists bounded text files. Exact before/after review, explicit write permission, conflict detection, stale-review rejection, verified save and draft protection are implemented.",
+      "P": "2026-09-16: verify-local-files.cjs 34 checks; files-shell.json 26 checks with real Web Crypto and memory-only file handles. No user disk writes. Real OS picker and owner acceptance remain unverified."
+    }
+  },
+  {
+    "id": "UX-072",
+    "cells": {
+      "D": "Partial",
+      "N": "Implemented",
+      "E": "Local file review binds exact path, original hash/mtime/size and draft hash. Edits invalidate review and external changes prevent overwrite. Network-device impact/rollback and execution approval are still pending.",
+      "P": "2026-09-16: files-shell.json passed. Verified local file slice only; network configuration review is not claimed."
+    }
+  }
+]

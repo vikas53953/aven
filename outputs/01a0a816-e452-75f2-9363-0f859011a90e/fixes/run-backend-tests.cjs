@@ -1,0 +1,13 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
+const root=path.resolve(__dirname,'../../..');
+const files=fs.readdirSync(path.join(root,'intentgraph')).filter(f=>f.endsWith('.test.cjs')).sort().map(f=>'intentgraph/'+f);
+const args=['--test','--test-concurrency=1',...files];
+const startedAt=new Date().toISOString();
+const result=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',timeout:240000,windowsHide:true,maxBuffer:12*1024*1024});
+const output=(result.stdout||'')+(result.stderr||'');
+fs.writeFileSync(path.join(__dirname,'backend-tests.txt'),output);
+const summary={command:'node '+args.join(' '),startedAt,endedAt:new Date().toISOString(),exitCode:result.status,signal:result.signal,error:result.error?.message||null,files:files.length,summary:output.split(/\r?\n/).filter(l=>/^# (tests|pass|fail|cancelled|skipped|duration_ms)/.test(l))};
+fs.writeFileSync(path.join(__dirname,'backend-tests.json'),JSON.stringify(summary,null,2));
+console.log(JSON.stringify(summary,null,2));
+process.exitCode=result.status===0?0:1;

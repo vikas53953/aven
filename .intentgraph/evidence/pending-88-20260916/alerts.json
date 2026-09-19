@@ -1,0 +1,12 @@
+{
+  "at": "2026-09-15T19:10:34.956Z",
+  "passed": true,
+  "checks": [
+    "enabled background completion opens exact result",
+    "muted coworker stays quiet",
+    "reload does not duplicate toast",
+    "serial state names active coworker",
+    "independent draft retained"
+  ],
+  "scope": "Mocked successful run; system notifications not used"
+}

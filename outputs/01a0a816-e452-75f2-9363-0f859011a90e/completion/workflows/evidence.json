@@ -1,0 +1,82 @@
+{
+  "scope": "candidate-only clarification and approval state lifecycle",
+  "tests": [
+    {
+      "name": "candidate syntax",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --check completion/workflows/candidate/approval-workflow.cjs; clarification-runtime.cjs; clarification-server-adapter.cjs; polished-approval-workflow.js",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "candidate backend transition suite",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test completion/workflows/candidate/approval-workflow.test.cjs completion/workflows/candidate/clarification-runtime.test.cjs completion/workflows/candidate/clarification-server-adapter.test.cjs completion/workflows/candidate/normal-chat-workflow.fixture.test.cjs completion/workflows/candidate/agent-runtime-clarification.test.cjs",
+      "exitCode": 0,
+      "result": "PASS: 34 tests, 34 passed, 0 failed"
+    },
+    {
+      "name": "replacement exactness and syntax",
+      "command": "Node temporary fixture applies every replacements.json old/new pair to completion/baseline frozen sources and runs --check on server.cjs, agent-runtime.cjs, and polished.js",
+      "exitCode": 0,
+      "result": "PASS: 24 exact hunks against frozen baseline; all transformed JS syntax checks passed"
+    },
+    {
+      "name": "normal chat HTTP pending/resume fixture",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test completion/workflows/candidate/normal-chat-workflow.fixture.test.cjs",
+      "exitCode": 0,
+      "result": "PASS: 2 tests, 2 passed, 0 failed; normal /api/chat and /api/chat/workflow/answer preserve run/chat and provider selection, including first/resumed stop"
+    },
+    {
+      "name": "candidate browser workflow cards",
+      "command": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe --test completion/workflows/candidate/polished-approval-workflow.browser.test.cjs",
+      "exitCode": 0,
+      "result": "PASS: 1 browser test, 1 passed, 0 failed; pending Answer, expiry/restored-history guards, exact review, approved/mock callbacks, and resumed Stop state verified"
+    }
+  ],
+  "covered": [
+    "structured pending question and free-text/choice answer",
+    "stale question, cancel, and one-answer replay rejection",
+    "exact target/scope/diff/impact/rollback digests",
+    "persisted reload and immutable review receipt",
+    "tampered authoritative SQLite payload rejection",
+    "one-time approval decision and execution tokens",
+    "stale proposal/approval rejection",
+    "approval deny/cancel/expiry",
+    "plan mode tool prohibition",
+    "mock executor success and unknown completion",
+    "render/proposal no-action and zero executor calls",
+    "revision CAS against concurrent stale writer",
+    "duplicate approval rejection",
+    "credential-bearing input rejection",
+    "expired/stale/terminal non-actionable projections",
+    "clarification question binding and answer digest",
+    "reload invalidation of persisted authorization with review receipt preserved",
+    "persisted run/chat ownership index rejects cross-chat proposal and approval operations",
+    "database failure leaves local authorization unchanged before retry",
+    "fresh cancellation segment and full clarification prompt/choices on same-run resume",
+    "resumed responder events stay on the same run with auth-token fields sanitized",
+    "typed ask_clarification tool and validated JSON content envelope reach pending state",
+    "explicit refresh abandon releases the server WAITING run and permits a fresh same-chat request",
+    "normal model response metadata contract reaches agent-runtime pending state with provider provenance preserved",
+    "normal /api/chat pending response pauses queue and answer route resumes the same run",
+    "model/tool pending result to same-run answer resume",
+    "browser pending/review/approved mock cards and explicit callbacks",
+    "authoritative SQLite state survives mirror crash and exact reopen",
+    "answered clarification and review receipt survive repeated reloads",
+    "stale owners cannot approve or cross the mock executor twice",
+    "raw question and approval token absent from durable JSON and SQLite payloads",
+    "browser expiry guard disables stale question actions",
+    "browser restored waiting card offers explicit Start fresh request action",
+    "browser resumed waiting card exposes explicit Stop action",
+    "workflow adapter ignores unrelated routes before origin enforcement",
+    "pending response preserves whitelisted provider metadata without authorization",
+    "pending responder metadata is whitelisted before public exposure",
+    "owned workflow/server close lifecycle and durable reopen after cleanup"
+  ],
+  "blockedExternalCalls": [],
+  "limitations": [
+    "No credentials, browser mutations, provider calls, device calls, or network writes were performed.",
+    "Server/runtime/UI integration is supplied as 24 exact replacement hunks for root review/application; no live product file was edited.",
+    "The candidate API persists workflow state and receipts, while the browser keeps current one-time auth tokens only in an in-memory map; tokenless conversation state reloads as non-interactive history and requires fresh clarification or approval.",
+    "UX-075 remains Missing in this slice; Git controls require the parent-owned repo/diff-bound follow-up after scope selection."
+  ]
+}

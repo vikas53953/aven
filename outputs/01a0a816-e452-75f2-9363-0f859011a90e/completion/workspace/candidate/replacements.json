@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA": {
+    "file": "completion/baseline/polished.html",
+    "sha256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352"
+  },
+  "touchedFiles": [
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/workspace-capabilities.js",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/workspace-capabilities.css",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/workspace-capabilities.test.cjs",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/README.md",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/row-results.json",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/validation.json",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/replacements.json",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/workspace-capabilities.browser.test.cjs",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/workspace-capabilities.server.test.cjs",
+    "outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/workspace/candidate/agent-runtime.stable-id.test.cjs"
+  ],
+  "replacements": [
+    {
+      "file": "polished.js",
+      "old": "initialInit();finishInteractionWiring();",
+      "new": "initialInit();finishInteractionWiring();const capabilityApi=globalThis.AvenWorkspaceCapabilities;if(capabilityApi){globalThis.__avenWorkspaceCapabilityController?.destroy?.();const executionBridge=globalThis.AvenExecutionBridge||capabilityApi.createHttpExecutionBridge({authorization:globalThis.AvenExecutionAuthorization||(globalThis.AvenExecutionAuthorization={})});globalThis.__avenWorkspaceExecutionBridge=executionBridge;globalThis.__avenWorkspaceCapabilityController=capabilityApi.installWorkspaceCapabilities({pane:byId('pane-content'),executionBridge,attachments:{input:byId('file-picker'),composer:byId('composer'),readFiles:globalThis.AvenAttachments?.readFiles,getRecords:()=>{const chat=currentChat();return chat?(sessionAttachments.get(chat.id)||[]):[];},setRecords:(next)=>{const chat=currentChat();if(!chat)return;sessionAttachments.set(chat.id,next);chat.pendingAttachmentNames=next.map((item)=>item.name);if(!saveData())chat.attachmentWarning='Attachment changes could not be saved; the ready files remain in this page session.';},onChange:()=>{renderAttachments();updateSend();}},mentions:{input:byId('draft'),inventory:()=>({...(data.inventory||{}),devices:[...(data.inventory?.devices||[]),...(data.devices||[])],documents:[...(data.inventory?.documents||[]),...(data.documents||[])],evidence:(data.chats||[]).flatMap((chat)=>(chat.messages||[]).flatMap((message)=>[message,...(message.events||[]),...(message.evidence||[])]))})},dictation:{container:document.querySelector('.composer-actions'),draft:byId('draft')}});}",
+      "beforeSHA256": "EAAFA59A2713C65158519253E13A21AB1856397DC0A7CDD8FE29F81685934170",
+      "afterSHA256": "AF72990B52A3F4E5841B648323D03045CCEC89AACCFD624016790241F0BED61C"
+    },
+    {
+      "file": "polished.js",
+      "old": "    hydrateConversationHistory();recoverInterruptedRuns();wireMessageLinks();byId('file-picker').accept=AvenAttachments.accepts.join(',');const composer=byId('composer');composer.addEventListener('dragover',e=>{if([...e.dataTransfer.types].includes('Files'))e.preventDefault();});composer.addEventListener('drop',e=>{if(e.dataTransfer.files.length){e.preventDefault();addFiles(e.dataTransfer.files);}});composer.addEventListener('paste',e=>{const files=[...e.clipboardData.items].filter(x=>x.kind==='file').map(x=>x.getAsFile()).filter(Boolean);if(files.length){e.preventDefault();addFiles(files);}});",
+      "new": "    hydrateConversationHistory();recoverInterruptedRuns();wireMessageLinks();byId('file-picker').accept=AvenAttachments.accepts.join(',');",
+      "beforeSHA256": "696AEE7F9E702B7D1204180E5B7B0A22A7A62C0CB243DC290A5C41A6F6E50719",
+      "afterSHA256": "90B01D897DEDC35C837815CDDB5EA4BC642C98030A6B2A479E0ADAFECD45E15E"
+    },
+    {
+      "file": "polished.html",
+      "old": "  <link rel=\"stylesheet\" href=\"polished-workspace-tools.css?revision=ux-audit-fixes-v8\">",
+      "new": "  <link rel=\"stylesheet\" href=\"polished-workspace-tools.css?revision=ux-audit-fixes-v8\">\r\n  <link rel=\"stylesheet\" href=\"workspace-capabilities.css?revision=workspace-capabilities-v1\">",
+      "beforeSHA256": "CA02DCECA9834ED2813AC39AE20A1EFD85A4A109C5BFD397C0E90731FBB26AF5",
+      "afterSHA256": "D46DF019D2471D0A84DFCD8C6405BE6F2903DF4C1836AC6A19AF708F7F836A80"
+    },
+    {
+      "file": "polished.html",
+      "old": "  <script src=\"polished-workspace-tools.js?revision=ux-audit-fixes-v8\"></script>",
+      "new": "  <script src=\"polished-workspace-tools.js?revision=ux-audit-fixes-v8\"></script>\r\n  <script src=\"workspace-capabilities.js?revision=workspace-capabilities-v1\"></script>",
+      "beforeSHA256": "632F9AE1C763F29078E95B651F6A5E64D2D81D6DC6BBF44293ADF7EAC5C2856A",
+      "afterSHA256": "71E98E34B3E1B0B6D8C50796849EC562DE47E216377282C8576A426A2B113004"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "old": "      const outputs = reconcileArtifactOutputs(eventOutputs, evidenceOutputs);",
+      "new": "      const outputs = reconcileArtifactOutputs(eventOutputs, evidenceOutputs); const generatedFiles = [...(Array.isArray(message.generatedFiles) ? message.generatedFiles : []), ...(Array.isArray(message.files) ? message.files : []), ...(Array.isArray(message.artifacts) ? message.artifacts : [])]; const generatedSeen = new Set(); generatedFiles.forEach((file) => { if (!file || typeof file !== 'object' || typeof file.content !== 'string' || !nonEmpty(file.filename || file.name)) return; const generatedKey = String(chat.id) + ':' + String(message.id) + ':' + String(file.filename || file.name); if (generatedSeen.has(generatedKey)) return; generatedSeen.add(generatedKey); outputs.push({ item: { ...file, generatedFile: true, mime: nonEmpty(file.mime || file.type) }, value: file.content }); });",
+      "beforeSHA256": "147372FBF937E1CB035B7CE9C0440935DC09AD7DBA3EF071178F8791B784C118",
+      "afterSHA256": "0D6F96CA0C9F1ECD59F7DC274A886185CB87E9E50B4AC6488C74C5DF3A40CE89"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "old": "          filename: filename || `evidence-${safeKey(message.id)}-${index + 1}.txt`,",
+      "new": "          filename: filename || `evidence-${safeKey(message.id)}-${index + 1}.txt`, generatedFile: item.generatedFile === true, mime: nonEmpty(item.mime || item.type),",
+      "beforeSHA256": "C671BBE71F989513B1D7F4C428F0660302907071CDCE4CC82A3A9C75BA6D647E",
+      "afterSHA256": "275577554283AF439835E26292BC4670FD856C2B6D4D09EA376985F936564277"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "old": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', 'Raw output')); card.append(top);",
+      "new": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', artifact.generatedFile ? 'Generated file' : 'Raw output')); card.append(top);",
+      "beforeSHA256": "1F23E12417AB7EFA1B004DD009B94CC14B9AA2E169F74C177021F074FA971011",
+      "afterSHA256": "79C486A769C41B9183973FEABD8B63A3817F1C0BB0404B43522D91FC79B47768"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "old": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; card.append(pre);",
+      "new": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; card.append(pre); if (artifact.generatedFile && globalThis.AvenWorkspaceCapabilities) { const preview = button('Open sandbox preview', 'button-secondary', () => { const previous = card.querySelector('.aven-generated-file-preview'); previous?.remove(); const host = create('div', 'aven-generated-file-preview'); card.append(host); try { globalThis.AvenWorkspaceCapabilities.openGeneratedFile({ ...artifact, content: artifact.content }, { container: host, selectedChatId: opts.selectedChatId || artifact.chatId }); } catch (error) { host.textContent = `Preview unavailable: ${error?.message || 'unknown error'}`; } }); preview.dataset.avenFocusKey = `artifact-preview-${index}`; card.append(preview); }",
+      "beforeSHA256": "591401795476C17E6255C59FDF25668F3BDC0406B32BDFDA57D29E2873BDBE94",
+      "afterSHA256": "0D8D94B7E9BCE35869AF770F3726B841496FE45A47C072B3BA871A83004DDC1C"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "old": "  const token = crypto.randomBytes(32).toString('base64url');",
+      "new": "  const token = crypto.randomBytes(32).toString('base64url');\r\n  let workspaceToken = '';\r\n  let workspaceTokenExpiresAt = 0;\r\n  let workspaceTokenScope = '';",
+      "beforeSHA256": "E9F7EB8D590C8947D7779A78C180B37EBB2325E6C04826A3983F2C9B783527F0",
+      "afterSHA256": "2467B70739CF9F0D7C2DB6EE152A2ADCD9B510E61900BF4AE8A85CE8848E5AF6"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "old": "function chatOriginAllowed(origin, req) {\n  return origin === 'http://127.0.0.1:8767' || origin === `http://127.0.0.1:${req.socket.localPort}`;\n}",
+      "new": "function chatOriginAllowed(origin, req) {\n  return origin === 'http://127.0.0.1:8767' || origin === `http://127.0.0.1:${req.socket.localPort}`;\n}\nconst WORKSPACE_UI_ORIGIN='http://127.0.0.1:8767';\nconst WORKSPACE_READ_OPERATIONS=new Set(['browser.inspect','desktop.windows','desktop.select','desktop.inspect','network.profiles']);\nfunction workspaceOriginAllowed(origin,req){return origin===WORKSPACE_UI_ORIGIN||origin==='http://127.0.0.1:'+req.socket.localPort;}\nfunction workspaceCors(req,res){const origin=req.headers.origin;if(!workspaceOriginAllowed(origin,req)){sendError(res,403,new Error('Workspace origin is not allowed'));return false;}res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','GET, POST');res.setHeader('Access-Control-Allow-Headers','X-Aven-Workspace, X-Aven-Workspace-Token, Content-Type');res.writeHead(204);res.end();return false;}return true;}\nfunction workspaceConnectCors(req,res){const origin=req.headers.origin;if(origin!==WORKSPACE_UI_ORIGIN){sendError(res,403,new Error('Workspace connection origin is not allowed'));return false;}res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','POST');res.setHeader('Access-Control-Allow-Headers','X-Aven-Workspace, Content-Type');res.writeHead(204);res.end();return false;}return true;}\nfunction workspaceTokenAllowed(req,workspaceToken,expiresAt){return Number.isFinite(expiresAt)&&Date.now()<expiresAt&&sameSecret(req.headers['x-aven-workspace-token'],workspaceToken);}\nfunction workspaceScopeAllowed(scope,type){const needed=type.startsWith('browser.')?'browser':type.startsWith('desktop.')?'computer':'workspace';return scope==='workspace'||scope===needed;}",
+      "beforeSHA256": "ED9E9AAA2B5A23A275A83969F726E1EAACB66DBC4CB0B9F256815520782C2E0B",
+      "afterSHA256": "C8DD00B5D0A503D5D9E21FCDD169AC86D9ACBF5CA62069C111AFA3E0161DF420"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "old": "    if (await chatReadApi.handle(req, res)) return;",
+      "new": "    if (await chatReadApi.handle(req, res)) return;\r\n    if (pathname === '/api/workspace/connect') {\r\n      if (!workspaceConnectCors(req, res)) return;\r\n      if (req.method !== 'POST') { sendError(res, 405, new Error('Method not allowed')); return; }\r\n      if (req.headers['x-aven-workspace'] !== 'connect') { sendError(res, 403, new Error('Workspace connection header required')); return; }\r\n      let body;\r\n      try { body = await parseBody(req); } catch { sendError(res, 400, new Error('Workspace connection must be valid JSON')); return; }\r\n      const scope = body?.scope;\r\n      if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some((key) => key !== 'scope') || !['browser', 'computer', 'workspace'].includes(scope)) { sendError(res, 400, new Error('Workspace connection scope is not allowed')); return; }\r\n      workspaceToken = crypto.randomBytes(32).toString('base64url'); workspaceTokenExpiresAt = Date.now() + 900000; workspaceTokenScope = scope;\r\n      sendJson(res, 200, { ok: true, scope, token: workspaceToken, expiresIn: Math.max(0, Math.ceil((workspaceTokenExpiresAt - Date.now()) / 1000)) });\r\n      return;\r\n    }\r\n    if (pathname === '/api/workspace/status' || pathname === '/api/workspace/read') {\r\n      if (!workspaceCors(req, res)) return;\r\n      if (pathname.endsWith('/status')) {\r\n        if (req.method !== 'GET') { sendError(res, 405, new Error('Method not allowed')); return; }\r\n        await ready;\r\n        if (!execution) { sendError(res, 503, new Error('Execution is disabled for this service')); return; }\r\n        const current = await execution.status();\r\n        const adapters = current?.adapters || {};\r\n        sendJson(res, 200, { adapters: {\r\n          browser: { available: Boolean(adapters.browser?.available), connected: Boolean(adapters.browser?.connected), pages: Array.isArray(adapters.browser?.pages) ? adapters.browser.pages.map((page) => ({ pageId: page.pageId, url: page.url })) : [] },\r\n          desktop: { available: Boolean(adapters.desktop?.available), selectedWindow: adapters.desktop?.selectedWindow || null, mode: adapters.desktop?.mode || 'selected-window-only' },\r\n          network: { available: Boolean(adapters.network?.available), profileCount: Number(adapters.network?.profileCount) || 0, connectionStatus: adapters.network?.connectionStatus || 'status unavailable' },\r\n          terminal: { available: false, connected: false, reason: 'Interactive terminal adapter is not exposed by this service.' },\r\n        }, observedAt: new Date().toISOString() });\r\n        return;\r\n      }\r\n      if (req.method !== 'POST') { sendError(res, 405, new Error('Method not allowed')); return; }\r\n      if (req.headers['x-aven-workspace'] !== 'read-only') { sendError(res, 403, new Error('Workspace read-only header required')); return; }\r\n      if (!workspaceTokenAllowed(req, workspaceToken, workspaceTokenExpiresAt)) { sendError(res, 403, new Error('Invalid or expired workspace read-only token')); return; }\r\n      let body;\r\n      try { body = await parseBody(req); } catch { sendError(res, 400, new Error('Workspace request must be valid JSON')); return; }\r\n      const operation = body?.operation, type = operation?.type, keys = operation && typeof operation === 'object' && !Array.isArray(operation) ? Object.keys(operation) : [], allowedKeys = type === 'browser.inspect' ? ['type', 'pageId'] : type === 'desktop.select' ? ['type', 'window', 'hwnd', 'pid', 'processCreationTime', 'title', 'className'] : ['type'];\r\n      if (!operation || typeof operation !== 'object' || Array.isArray(operation) || Object.keys(body).some((key) => key !== 'operation') || !WORKSPACE_READ_OPERATIONS.has(type) || keys.some((key) => !allowedKeys.includes(key))) { sendError(res, 400, new Error('Workspace operation is not an allowed read-only adapter operation')); return; }\r\n      if (!workspaceScopeAllowed(workspaceTokenScope, type)) { sendError(res, 403, new Error('Workspace token scope does not permit this adapter')); return; }\r\n      if (type === 'browser.inspect' && (typeof operation.pageId !== 'string' || !operation.pageId.trim())) { sendError(res, 400, new Error('Browser inspection requires a page ID')); return; }\r\n      await ready;\r\n      if (!execution) { sendError(res, 503, new Error('Execution is disabled for this service')); return; }\r\n      const result = await execution.action({ type: 'execution.adapter', operation });\r\n      sendJson(res, 200, { ok: true, result });\r\n      return;\r\n    }",
+      "beforeSHA256": "5984DBF0EEBF13663E8E87A9FDEAAF32339A0BDB4D2D245185BAEE38451B3664",
+      "afterSHA256": "5F4685F57A90BE00F563A75CAEE3B1389641FB7CCAE7497C831E821E62236AAD"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "function clonePublicInventory(snapshot) {\n  if (!snapshot || typeof snapshot !== 'object' || !Array.isArray(snapshot.devices)) throw Error('Catalyst inventory response was malformed.');\n  const devices = Array.isArray(snapshot?.devices) ? snapshot.devices.slice(0, MAX_INVENTORY_DEVICES) : [];\n  return {\n    source: safeText(snapshot?.source,80)||'cisco-catalyst',\n    retrievedAt: safeText(snapshot?.retrievedAt, 80) || new Date().toISOString(),\n    ...(snapshot?.unavailable?.length?{unavailable:snapshot.unavailable}:{}),\n    devices: devices.map((device) => {\n      const result = {};\n      for (const field of INVENTORY_FIELDS) if(field!=='transport'||device?.transport) result[field] = safeText(device?.[field], 500);\n      if(Array.isArray(device?.supportedCommands))result.supportedCommands=device.supportedCommands;\n      return result;\n    })\n  };\n}",
+      "new": "function clonePublicInventory(snapshot) {\n  if (!snapshot || typeof snapshot !== 'object' || !Array.isArray(snapshot.devices)) throw Error('Catalyst inventory response was malformed.');\n  const devices = Array.isArray(snapshot?.devices) ? snapshot.devices.slice(0, MAX_INVENTORY_DEVICES) : [];\n  return {\n    source: safeText(snapshot?.source,80)||'cisco-catalyst',\n    retrievedAt: safeText(snapshot?.retrievedAt, 80) || new Date().toISOString(),\n    ...(snapshot?.unavailable?.length?{unavailable:snapshot.unavailable}:{}),\n    devices: devices.map((device) => {\n      const result = {};\n      const identity = safeText(device?.stableId || device?.id || device?.deviceId || device?.uuid, 128);\n      if (identity) result.id = identity;\n      for (const field of INVENTORY_FIELDS) if(field!=='transport'||device?.transport) result[field] = safeText(device?.[field], 500);\n      if(Array.isArray(device?.supportedCommands))result.supportedCommands=device.supportedCommands;\n      return result;\n    })\n  };\n}",
+      "beforeSHA256": "E62092F882B9AF7B432A9D6700332768DA2B1EC8410BE10EB7E92682B41A1B29",
+      "afterSHA256": "7CC6146D814F8B26280635B3D15B9F3665D6A678466688F84C2A634C4D4E205F"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "  emit({ type: 'tool_start', toolId: id, name, ...(name === 'run_diagnostic' ? { operation: safeText(args.operation, 80), hostname: safeText(args.hostname, 128) } : {}) });",
+      "new": "  emit({ type: 'tool_start', toolId: id, name, ...(name === 'run_diagnostic' ? { operation: safeText(args.operation, 80), hostname: safeText(args.hostname, 128), ...(safeText(args.deviceId, 128) ? { deviceId: safeText(args.deviceId, 128) } : {}) } : {}) });",
+      "beforeSHA256": "1759DC707BDF7107DF146A733EEBC95772E1DE4C539CAB3BC4183371BE460F52",
+      "afterSHA256": "0B0E20FFF712DE44BD5F1D7EE5121B718077B141C755D653EE6B5E739936F3A9"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    emit({ type: 'tool_result', toolId: record.id, name: record.name, status, ...(record.name === 'run_diagnostic' ? { operation: safeText(extra.operation, 80), hostname: safeText(extra.hostname, 128) } : {}), ...(extra.elapsedMs !== undefined ? { elapsedMs: extra.elapsedMs } : {}), ...(extra.evidence ? { evidence: extra.evidence } : {}) });",
+      "new": "    emit({ type: 'tool_result', toolId: record.id, name: record.name, status, ...(record.name === 'run_diagnostic' ? { operation: safeText(extra.operation, 80), hostname: safeText(extra.hostname, 128), ...(safeText(extra.deviceId, 128) ? { deviceId: safeText(extra.deviceId, 128) } : {}), ...(safeText(extra.targetId, 128) ? { targetId: safeText(extra.targetId, 128) } : {}) } : {}), ...(extra.elapsedMs !== undefined ? { elapsedMs: extra.elapsedMs } : {}), ...(extra.evidence ? { evidence: extra.evidence } : {}) });",
+      "beforeSHA256": "583FC67F822A2D596B8CA38C5C15756B3E4CDB83640D3624DFC5691B03B7B0B4",
+      "afterSHA256": "92388B87F1865AB6DC2AF0F2FDEC728536571A9A621604F3AE54254B769C71C3"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    const hostname = safeText(input.hostname, 128);",
+      "new": "    const hostname = safeText(input.hostname, 128);\n    const deviceId = safeText(input.deviceId, 128);",
+      "beforeSHA256": "1DD90D1E368FE0EC9BA873FEA3B2FCBC566E7F2B748B16207EA8A9C87619E0A6",
+      "afterSHA256": "F790918D9C4BE21E7002A23F0D077D9BAB064A22DB4658B0B0CCBF89BE2E27CF"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    const diagnosticKey = operation && hostname ? `${operation}\\u0000${hostname}` : '';",
+      "new": "    const diagnosticKey = operation && (hostname || deviceId) ? `${operation}\\u0000${deviceId}\\u0000${hostname}` : '';",
+      "beforeSHA256": "2A3002579A205C1448AEFBCED524BD153F20BCAC862B7587CED2FA27444CE7ED",
+      "afterSHA256": "270CF40EF1FFCF4BCFFD09CBDC4AD2AC4F604BEABD11EA1341AC879E50341F28"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    if (!operation || !hostname || !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(hostname)) {\n      const status = 'NOT_EXECUTED';\n      const output = 'No exact hostname and supported diagnostic operation were supplied; command not executed.';\n      evidence.push({ command: operation || safeText(input.operation, 80) || 'diagnostic', target: hostname || 'unknown', status, output, time: record.startedAt, startedAt: record.startedAt });\n      resultEvent(record, status, { operation: operation || input.operation, hostname });\n      return { ok: false, status, operation: operation || null, hostname, error: output, partial: true };\n    }\n",
+      "new": "    if (!operation || (!(hostname || deviceId)) || (hostname && !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(hostname)) || (deviceId && !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(deviceId))) {\n      const status = 'NOT_EXECUTED';\n      const output = 'No exact hostname or stable device ID and supported diagnostic operation were supplied; command not executed.';\n      const recordEvidence = { command: operation || safeText(input.operation, 80) || 'diagnostic', target: hostname || deviceId || 'unknown', ...(deviceId ? { targetId: deviceId } : {}), status, output, time: record.startedAt, startedAt: record.startedAt };\n      evidence.push(recordEvidence);\n      resultEvent(record, status, { operation: operation || input.operation, hostname, deviceId, targetId: deviceId, evidence: recordEvidence });\n      return { ok: false, status, operation: operation || null, hostname, ...(deviceId ? { deviceId } : {}), error: output, partial: true };\n    }\n",
+      "beforeSHA256": "175FD4DF8D3338913A5DA5E42AE1FF3EC8F25F1F45DF31C4A6ED5051B392E8AF",
+      "afterSHA256": "B2180FB8EB9123A057A28060C542BF229164B597EF21724BA98DA38867FA32BC"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      const rawSnapshot = await sandbox.inventory({ signal });\n      const rawDevices = Array.isArray(rawSnapshot?.devices) ? rawSnapshot.devices.slice(0, MAX_INVENTORY_DEVICES) : [];\n      const matches = rawDevices.filter((device) => device && device.hostname === hostname);\n      const device = matches.length === 1 ? matches[0] : null;\n",
+      "new": "      const rawSnapshot = await sandbox.inventory({ signal });\n      const rawDevices = Array.isArray(rawSnapshot?.devices) ? rawSnapshot.devices.slice(0, MAX_INVENTORY_DEVICES) : [];\n      const identityOf = (candidate) => safeText(candidate?.stableId || candidate?.id || candidate?.deviceId || candidate?.uuid, 128);\n      const idMatches = deviceId ? rawDevices.filter((candidate) => identityOf(candidate) === deviceId) : rawDevices;\n      const matches = idMatches.filter((candidate) => !hostname || candidate.hostname === hostname);\n      const hostnameMatches = hostname ? rawDevices.filter((candidate) => candidate && candidate.hostname === hostname) : [];\n      const device = matches.length === 1 ? matches[0] : null;\n      const targetId = device ? identityOf(device) : deviceId;\n      const target = safeText(device?.hostname, 128) || hostname || deviceId;\n",
+      "beforeSHA256": "522A047971C5BF9E3FEB5565E4A0E5580D385D97018AD6F4634DCDDF4841D86A",
+      "afterSHA256": "05170B0F19F4C00CDA0F42C5E5940002A6B689B128FEFA67FE97F2AF1524209B"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      if (!device || !(sandbox.isDeviceId ? sandbox.isDeviceId(device.id) : isUuid(device.id))) {\n        const status = 'NOT_EXECUTED';\n        const output = matches.length > 1\n          ? 'Hostname was ambiguous in the returned inventory; command not executed.'\n          : 'No exact hostname with a valid Catalyst device UUID was returned; command not executed.';\n        const recordEvidence = { command: operation, target: hostname, status, output, time: record.startedAt, startedAt: record.startedAt };\n        evidence.push(recordEvidence);\n        resultEvent(record, status, { operation, hostname, elapsedMs: Math.max(0, Date.now() - Date.parse(record.startedAt)), evidence: recordEvidence });\n        return { ok: false, status, operation, hostname, error: output, partial: true };\n      }\n",
+      "new": "      const idMismatch = deviceId && idMatches.length === 1 && hostname && !matches.length;\n      if (!device || !(sandbox.isDeviceId ? sandbox.isDeviceId(device.id) : isUuid(device.id))) {\n        const status = 'NOT_EXECUTED';\n        const output = matches.length > 1\n          ? 'Hostname was ambiguous in the returned inventory; supply the exact stable device ID; command not executed.'\n          : idMismatch\n            ? 'Stable device ID and hostname did not identify the same inventory record; command not executed.'\n            : deviceId\n              ? 'No exact stable device ID with a valid Catalyst device UUID was returned; command not executed.'\n              : 'No exact hostname with a valid Catalyst device UUID was returned; command not executed.';\n        const recordEvidence = { command: operation, target: target || 'unknown', ...(deviceId ? { targetId: targetId || deviceId } : {}), status, output, time: record.startedAt, startedAt: record.startedAt };\n        evidence.push(recordEvidence);\n        resultEvent(record, status, { operation, hostname, deviceId, targetId, elapsedMs: Math.max(0, Date.now() - Date.parse(record.startedAt)), evidence: recordEvidence });\n        return { ok: false, status, operation, hostname, ...(deviceId ? { deviceId: targetId || deviceId } : {}), error: output, partial: true };\n      }\n",
+      "beforeSHA256": "C84582B6817C5423D0FE9A7281BC28BA8BCFC49142A1ADDBCCEEF481BC12A13D",
+      "afterSHA256": "0DA0D5024AF7A3308FD23E5AFD47C274345BA3DEA00A46D1F1EB001E01F6EC48"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      const recordEvidence = { command: operation, target: hostname, status, ...(result.source?{source:result.source}:{}), output, time, startedAt: time, ...(Number.isFinite(Number(result?.elapsedMs)) ? { elapsedMs: Number(result.elapsedMs) } : {}), ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "new": "      const recordEvidence = { command: operation, target, targetId, status, ...(result.source?{source:result.source}:{}), output, time, startedAt: time, ...(Number.isFinite(Number(result?.elapsedMs)) ? { elapsedMs: Number(result.elapsedMs) } : {}), ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "beforeSHA256": "E2BB112A1C60EC6FCB08AD51F4819BF3D6CDE00C23CE8EC0A979CD12C7AD19BA",
+      "afterSHA256": "5E2833B11B16993F99FC7A2928D306BDBFCE4647DCD4D07C3E09BA6E999E59AB"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      const modelResult = { status, command: operation, target: hostname, output, ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "new": "      const modelResult = { status, command: operation, target, targetId, output, ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "beforeSHA256": "37E2C9AEF02DB93C33291F4F23BBCBD7355F81E75E01BFAB7E58772916954227",
+      "afterSHA256": "919174C43DAC1AC5CDEC425E336E08AA67347F20AAFAF7D9446FDD27CB54C84E"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      resultEvent(record, status, { operation, hostname, elapsedMs: Number(result?.elapsedMs) || Math.max(0, Date.now() - Date.parse(record.startedAt)), evidence: recordEvidence });",
+      "new": "      resultEvent(record, status, { operation, hostname: target, deviceId: targetId, targetId, elapsedMs: Number(result?.elapsedMs) || Math.max(0, Date.now() - Date.parse(record.startedAt)), evidence: recordEvidence });",
+      "beforeSHA256": "D288488AD8F4334F1C3E1B1146A8458D1B88BB1B450871BC15FA731D84058BF9",
+      "afterSHA256": "E883192FE919120B7B89BB0566183722C24F3B9E8EFEA029BA46866798E14EF3"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      return { ok: status === 'SUCCESS', status, operation, hostname, output: bounded.text, ...(bounded.truncated ? { truncation: '[truncated]' } : {}), ...(retained.truncated ? { outputTruncated: true } : {}), ...(status !== 'SUCCESS' ? { error: safeErrorMessage('diagnostic', null), partial: true } : {}) };",
+      "new": "      return { ok: status === 'SUCCESS', status, operation, hostname: target, deviceId: targetId, targetId, output: bounded.text, ...(bounded.truncated ? { truncation: '[truncated]' } : {}), ...(retained.truncated ? { outputTruncated: true } : {}), ...(status !== 'SUCCESS' ? { error: safeErrorMessage('diagnostic', null), partial: true } : {}) };",
+      "beforeSHA256": "6964F02BAAB759A31600FC20B14CBEF4223986E5E96F42EF90F8CFCEC48D8C52",
+      "afterSHA256": "40C9613D86E84368D04F1CFF513710803151A4DF60057F32B4AFF7EE45007D9A"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      const recordEvidence = { command: operation, target: hostname, status, output, time, startedAt: time, ...(Number.isFinite(Number(error?.elapsedMs)) ? { elapsedMs: Number(error.elapsedMs) } : {}), ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "new": "      const recordEvidence = { command: operation, target: hostname || deviceId || 'unknown', ...(deviceId ? { targetId: deviceId } : {}), status, output, time, startedAt: time, ...(Number.isFinite(Number(error?.elapsedMs)) ? { elapsedMs: Number(error.elapsedMs) } : {}), ...(retained.truncated ? { outputTruncated: true } : {}) };",
+      "beforeSHA256": "A96E6EF87C286507DC055B183708410033B338FA53AEFA67013C1BF313B0314B",
+      "afterSHA256": "B1109F68AEC3A0207B943FF321D6D4591E8011B58BCB11776133FEE26185DDF0"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "      return { ok: false, status, operation, hostname, error: safeErrorMessage('diagnostic', error), partial: true };",
+      "new": "      return { ok: false, status, operation, hostname: hostname || deviceId, ...(deviceId ? { deviceId, targetId: deviceId } : {}), error: safeErrorMessage('diagnostic', error), partial: true };",
+      "beforeSHA256": "A7DB0C74A7D2C46DF72600C3038565F49849B114C207EF2A83BC8E71FBDC94A6",
+      "afterSHA256": "1FB22A19B5297D4265938AEF9CA372E676172B2D6CB2286EDEB6D2548247A4D3"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    description: `Run a read-only network diagnostic on an exact inventory hostname/profile. Operations: ${operations.join(', ')}. Check inventory supportedCommands for the target transport. The server resolves the target; no automatic transport fallback.`,",
+      "new": "    description: `Run a read-only network diagnostic on an exact inventory hostname or stable device ID. Operations: ${operations.join(', ')}. Check inventory supportedCommands for the target transport. The server resolves the target and retains its stable ID; no automatic transport fallback.`,",
+      "beforeSHA256": "ADE46623FF7B30A44068C5359467A6BF809B5660E65D9AF09B0F8AC4199B905C",
+      "afterSHA256": "FAB817EF59A88FE49D9E2C049CB1A258402142C0E42E16373FCF3C49B6E8C391"
+    },
+    {
+      "file": "intentgraph/agent-runtime.cjs",
+      "old": "    schema: z.object({\n      operation: z.enum(operations),\n      hostname: z.string().min(1).max(128)\n    }).strict()\n",
+      "new": "    schema: z.object({\n      operation: z.enum(operations),\n      hostname: z.string().max(128).optional(),\n      deviceId: z.string().min(1).max(128).optional()\n    }).strict().refine((value) => Boolean(value.hostname || value.deviceId), { message: 'hostname or deviceId is required' })",
+      "beforeSHA256": "2E051F8FD9FEBC63D5F4784C5C5FC46BBB6AB2A98EDF6FA3AA8C79AC7872282F",
+      "afterSHA256": "7E80CA81E64E1FB7B0ECC8C87F0FD62E98C1E9D869ED9AE6B0E5D8EFB93F68AD"
+    },
+    {
+      "file": "intentgraph/agent-runtime.test.cjs",
+      "old": "    output: JSON.stringify({ source: 'cisco-catalyst', retrievedAt: SNAPSHOT.retrievedAt, devices: [{ hostname: 'sw1', managementIp: '192.0.2.9', platform: 'Cisco', softwareVersion: '17.1', reachability: 'Reachable' }] }),",
+      "new": "    output: JSON.stringify({ source: 'cisco-catalyst', retrievedAt: SNAPSHOT.retrievedAt, devices: [{ id: DEVICE_ID, hostname: 'sw1', managementIp: '192.0.2.9', platform: 'Cisco', softwareVersion: '17.1', reachability: 'Reachable' }] }),",
+      "beforeSHA256": "51CCF50992E626E708F612B8D8B26C7360029B4ABFA7EF9BF3A8C44B1155F8FB",
+      "afterSHA256": "F5E8A79E51B7F5DF1EBB71A2797D6E71BE9D7B533ADBE9D1EA2ACFDFD262BAF5"
+    }
+  ],
+  "sourceSHAByFile": {
+    "polished.html": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+    "polished.js": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+    "polished-workspace-tools.js": "350E57DFAB400803800577CACC19692456A23E87A296601EC6B819845FDD9850",
+    "intentgraph/server.cjs": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+    "intentgraph/agent-runtime.cjs": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "intentgraph/agent-runtime.test.cjs": "DD7159385E8C8CEED5DEF394DFD921BE7A1E8F9FF3377A6B5CBC1E2CAC731DEE"
+  },
+  "candidateSHAByFile": {
+    "intentgraph/agent-runtime.cjs": "FBEF7BF304F72C4E99CE1289FBC67CB662A4E36DBBAB86A64CA14037E1C90765",
+    "intentgraph/agent-runtime.test.cjs": "2D29BBB96C5B0E1A71C9BC21C99973C03B9FDA816C93C64DE36B386A674F5B66"
+  }
+}

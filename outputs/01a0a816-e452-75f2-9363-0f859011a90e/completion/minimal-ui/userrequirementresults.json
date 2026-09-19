@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "id": "UI-01",
+      "status": "implemented-candidate",
+      "evidence": "minimal-ui-check.cjs passes artifact detail cards closed by default, exact raw output/provenance on expansion, collapse, and preserved action controls.",
+      "limitation": "Fixture coverage uses one artifact record; parent should verify the full artifact inventory after integration."
+    },
+    {
+      "id": "UI-02",
+      "status": "implemented-candidate",
+      "evidence": "quality-evidence.json passes Evidence, Investigation activity and Run details off by default, independently toggleable, cancel-safe and removable; active streamed output/activity stay absent while Stop remains visible, also confirmed in root-ui-boundaries.json.",
+      "limitation": "No live user data or provider response was used."
+    },
+    {
+      "id": "UI-03",
+      "status": "partial-candidate",
+      "evidence": "Agent and Plan are concise composer plus-menu radio items with selected state and persisted chat mode; no provider picker or execution contract is changed.",
+      "limitation": "Backend Plan enforcement and queued live requests require parent/runtime verification."
+    },
+    {
+      "id": "UI-04",
+      "status": "implemented-candidate",
+      "evidence": "The compact context ring replaces the composer preview, has an unavailable-capacity tooltip, exposes local omitted/window counts, and emits no fabricated percentage; desktop and 320px checks pass.",
+      "limitation": "A real provider token limit was intentionally unavailable in the isolated fixture."
+    },
+    {
+      "id": "UI-05",
+      "status": "implemented-candidate",
+      "evidence": "Assistant explanation is rendered directly in the main message body, optional raw output/investigation/run details are hidden by default, command-only output receives a concise outcome summary, and quality-evidence.json confirms FAILURE with output retains a visible failure cue while raw details stay collapsed.",
+      "limitation": "Fixture coverage uses one successful assistant response; parent should retain failure and pending decision regression checks."
+    }
+  ],
+  "evidence": [
+    "minimal-ui/browser-evidence.json",
+    "minimal-ui/candidate.png",
+    "minimal-ui/candidate-mobile.png",
+    "minimal-ui/replacements.json"
+  ],
+  "liveProductFilesEdited": false,
+  "externalCalls": false
+}

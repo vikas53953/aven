@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "uniqueFeatures": 115,
+  "counts": {
+    "Partial": 67,
+    "Verified (scoped)": 19,
+    "Defect": 5,
+    "Unverified": 6,
+    "Missing": 14,
+    "Deferred": 4
+  },
+  "originalSnapshotCellsChecked": 1840,
+  "formulaCountsMatch": true,
+  "sourceWorkbookUnchanged": true,
+  "baselineFilesUnchanged": 17,
+  "outputBytes": 62940,
+  "workbookSha256": "3fc2940d99c2e99b3d8631c62b9ced8cd89cab0b3a56ca90e7c5925991686d99"
+}

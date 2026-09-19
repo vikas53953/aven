@@ -1,0 +1,5 @@
+# Pinned dependencies for the bundled IntentGraph network worker.
+nornir==3.3.0
+netmiko==4.7.0
+mypy-extensions==0.4.4
+typing-extensions==4.15.0

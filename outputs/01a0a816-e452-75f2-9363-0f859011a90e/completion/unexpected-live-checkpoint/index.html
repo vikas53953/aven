@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <meta
+      name="description"
+      content="Netrok Muse is a local, simulated network engineering conversation prototype."
+    />
+    <title>Netrok Muse · Local prototype</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path d="M5.7 18.1 4 20l.5-3.2A7.2 7.2 0 0 1 3 12c0-4.4 4-8 9-8s9 3.6 9 8-4 8-9 8a11 11 0 0 1-6.3-1.9Z" />
+        <path d="M8.3 12h.1M12 12h.1m3.6 0h.1" />
+      </symbol>
+      <symbol id="i-target" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7.5" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+      </symbol>
+      <symbol id="i-activity" viewBox="0 0 24 24">
+        <path d="M3 13h4l2-7 4 12 2-6h6" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
+        <path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a2 2 0 0 0-3.4 1.4v.2a1.8 1.8 0 1 1-3.6 0v-.2a2 2 0 0 0-3.4-1.4l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1A2 2 0 0 0 2.6 12a2 2 0 0 0 1.4-3.4l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1A2 2 0 0 0 10 4.6v-.2a1.8 1.8 0 1 1 3.6 0v.2A2 2 0 0 0 17 6l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1A2 2 0 0 0 20.9 12a2 2 0 0 0-1.5 3Z" />
+      </symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24">
+        <path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z" />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h13M13 6l6 6-6 6" />
+      </symbol>
+      <symbol id="i-close" viewBox="0 0 24 24">
+        <path d="m6 6 12 12M18 6 6 18" />
+      </symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </symbol>
+      <symbol id="i-book" viewBox="0 0 24 24">
+        <path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5v-17Z" />
+        <path d="M5 19.5A2.5 2.5 0 0 1 7.5 17H20M9 6h7M9 10h7" />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="m5 12 4.5 4.5L19 7" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M12 3v12M7 10l5 5 5-5M5 20h14" />
+      </symbol>
+      <symbol id="i-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" /><path d="M12 10.5v5M12 7.2v.1" />
+      </symbol>
+    </svg>
+
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><i></i>
+          </div>
+          <div class="brand-name"><span>NETROK</span><strong>Muse</strong></div>
+        </div>
+
+        <div class="prototype-chip"><span class="chip-dot"></span> Local prototype</div>
+
+        <div class="side-profile">
+          <div class="avatar avatar-small" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="presentation">
+              <defs><linearGradient id="avatar-gradient-side" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec6ff" /><stop offset="1" stop-color="#4b79eb" /></linearGradient></defs>
+              <circle cx="24" cy="24" r="24" fill="url(#avatar-gradient-side)" />
+              <path d="M14 18.5c1.8-6 6.5-8.8 11.4-8.8 5.8 0 9.5 3.8 9.9 8.6-3.8-1.2-7-2.8-10.9-3-3.5 2.5-6.8 3.4-10.4 3.2Z" fill="#f9fbff" opacity=".96" />
+              <path d="M15 29.5c1.7-4.6 5-6.9 9-6.9 4.4 0 7.4 2.2 9 6.9v7H15v-7Z" fill="#f3f7ff" />
+              <circle cx="20.2" cy="22.6" r="1.35" fill="#2f4d9f" /><circle cx="28.1" cy="22.6" r="1.35" fill="#2f4d9f" />
+              <path d="M21 27c1.5 1.1 3.3 1.1 4.9 0" fill="none" stroke="#2f4d9f" stroke-linecap="round" stroke-width="1.35" />
+            </svg>
+          </div>
+          <div class="side-profile-copy"><strong id="side-agent-name">Atlas</strong><span>Network companion</span></div>
+          <span class="online-dot" title="Local only"></span>
+        </div>
+
+        <nav class="nav-list" aria-label="Workspace">
+          <button class="nav-item is-active" type="button" data-view="conversation" aria-current="page">
+            <svg aria-hidden="true"><use href="#i-chat"></use></svg><span>Conversation</span>
+          </button>
+          <button class="nav-item" type="button" data-view="goals">
+            <svg aria-hidden="true"><use href="#i-target"></use></svg><span>Goals</span><em>3</em>
+          </button>
+          <button class="nav-item" type="button" data-view="activity">
+            <svg aria-hidden="true"><use href="#i-activity"></use></svg><span>Activity</span>
+          </button>
+          <button class="nav-item" type="button" data-view="settings">
+            <svg aria-hidden="true"><use href="#i-settings"></use></svg><span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-lower">
+          <button class="reference-link" type="button" id="open-feedback">
+            <svg aria-hidden="true"><use href="#i-book"></use></svg>
+            <span>Reference &amp; feedback</span>
+          </button>
+          <div class="user-row">
+            <div class="user-initials" aria-hidden="true">VM</div>
+            <div><strong>Vikas</strong><span>Private local session</span></div>
+            <span class="user-menu-dot" aria-hidden="true">···</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-pane">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" type="button" id="toggle-sidebar" aria-label="Open navigation" aria-expanded="false">
+            <svg aria-hidden="true"><use href="#i-menu"></use></svg>
+          </button>
+          <div class="topbar-heading">
+            <p class="eyebrow">CONVERSATION</p>
+            <h1 id="page-title">Your network, in good company.</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="status-pill"><span class="status-dot"></span>Local prototype</span>
+            <button class="icon-button" type="button" id="top-settings" aria-label="Open settings">
+              <svg aria-hidden="true"><use href="#i-settings"></use></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="view-container">
+          <section class="view conversation-view is-visible" id="view-conversation" aria-labelledby="conversation-heading">
+            <div class="conversation-inner">
+              <div class="conversation-intro">
+                <div>
+                  <h2 id="conversation-heading">Investigate with Atlas.</h2>
+                  <p class="intro-copy">Bring a network question. We will make the next step clear before anything could run.</p>
+                </div>
+                <span class="lab-label"><span></span> Sample lab · no devices connected</span>
+              </div>
+
+              <div class="chat-scroll" id="message-list" aria-live="polite"></div>
+
+              <div class="composer-zone">
+                <form class="composer" id="composer-form">
+                  <label class="sr-only" for="composer-input">Message Atlas</label>
+                  <textarea id="composer-input" rows="1" maxlength="2000" placeholder="Ask about a network question…" autocomplete="off"></textarea>
+                  <div class="composer-bottom">
+                    <span class="composer-hint">Shift + Enter for a new line</span>
+                    <button class="send-button" type="submit"><span>Send</span><svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+                  </div>
+                </form>
+                <p class="composer-footnote">Local drafts are saved on this device. A live agent is not connected.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="view page-view" id="view-goals" aria-labelledby="goals-heading" hidden>
+            <div class="page-inner">
+              <div class="page-hero">
+                <p class="eyebrow">A SMALL, VISIBLE NORTH STAR</p>
+                <h2 id="goals-heading">Goals for the lab.</h2>
+                <p>Keep the work grounded in what you want to understand. These are local sample goals, ready for your edit.</p>
+              </div>
+              <div class="sample-note"><svg aria-hidden="true"><use href="#i-info"></use></svg><span>Sample goals only. Checking one changes this prototype on your device; it does not start work.</span></div>
+              <div class="goals-list" id="goals-list"></div>
+            </div>
+          </section>
+
+          <section class="view page-view" id="view-activity" aria-labelledby="activity-heading" hidden>
+            <div class="page-inner">
+              <div class="page-hero">
+                <p class="eyebrow">A CLEAR LOCAL RECORD</p>
+                <h2 id="activity-heading">Activity history</h2>
+                <p>Only choices made in this prototype appear here. There are no background workers to imply progress.</p>
+              </div>
+              <div class="activity-list" id="activity-list"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <aside class="detail-drawer" id="detail-drawer" aria-hidden="true" inert aria-labelledby="drawer-title">
+        <div class="drawer-header">
+          <div><p class="eyebrow">CONTEXT</p><h2 id="drawer-title">Evidence &amp; plan</h2></div>
+          <button class="icon-button" type="button" id="close-drawer" aria-label="Close evidence and plan">
+            <svg aria-hidden="true"><use href="#i-close"></use></svg>
+          </button>
+        </div>
+        <div class="drawer-tabs" role="tablist" aria-label="Investigation context">
+          <button type="button" role="tab" aria-selected="true" data-drawer-tab="evidence">Evidence</button>
+          <button type="button" role="tab" aria-selected="false" data-drawer-tab="plan">Plan</button>
+        </div>
+        <div class="drawer-body" id="drawer-body"></div>
+      </aside>
+      <div class="drawer-scrim" id="drawer-scrim"></div>
+    </div>
+
+    <div class="modal-backdrop" id="settings-modal" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="modal-header"><div><p class="eyebrow">PERSONAL SPACE</p><h2 id="settings-title">Settings</h2></div><button class="icon-button" type="button" data-close-modal="settings-modal" aria-label="Close settings"><svg aria-hidden="true"><use href="#i-close"></use></svg></button></div>
+        <div class="settings-form">
+          <label class="field-label" for="agent-name">Agent display name</label>
+          <input class="text-input" id="agent-name" maxlength="32" value="Atlas" />
+          <p class="field-help">Used in the conversation heading and profile card. Saved locally.</p>
+          <fieldset class="theme-fieldset"><legend class="field-label">Appearance</legend><div class="theme-options">
+            <label class="theme-option"><input type="radio" name="theme" value="light" /><span><strong>Light</strong><small>Warm and airy</small></span></label>
+            <label class="theme-option"><input type="radio" name="theme" value="dark" /><span><strong>Dark</strong><small>Low-light contrast</small></span></label>
+            <label class="theme-option"><input type="radio" name="theme" value="system" /><span><strong>System</strong><small>Follow this device</small></span></label>
+          </div></fieldset>
+          <div class="modal-actions"><button class="button-secondary" type="button" data-close-modal="settings-modal">Cancel</button><button class="button-primary" type="button" id="save-settings">Save settings</button></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="feedback-modal" hidden>
+      <section class="modal feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+        <div class="modal-header"><div><p class="eyebrow">DESIGN REFERENCE</p><h2 id="feedback-title">Reference &amp; feedback</h2></div><button class="icon-button" type="button" data-close-modal="feedback-modal" aria-label="Close reference and feedback"><svg aria-hidden="true"><use href="#i-close"></use></svg></button></div>
+        <div class="feedback-copy"><p>This prototype preserves the conversation-led feel, personal avatar, transparent evidence, goals, and explicit decisions inspired by the reference.</p><p>It adapts those ideas to a network engineering sample and keeps the authenticated Muse desktop experience as an open question.</p><a href="https://introducing.muse.ai/" target="_blank" rel="noreferrer">View the official Muse reference <span aria-hidden="true">↗</span></a></div>
+        <label class="field-label" for="feedback-input">Your feedback</label>
+        <textarea class="feedback-input" id="feedback-input" rows="4" placeholder="What feels useful, unclear, or unlike your work?"></textarea>
+        <div class="feedback-actions"><span class="field-help" id="feedback-save-status">Saved locally as you type.</span><button class="button-secondary" type="button" id="download-feedback"><svg aria-hidden="true"><use href="#i-download"></use></svg> Download JSON</button></div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

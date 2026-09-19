@@ -1,0 +1,18 @@
+✔ workspace ideas, goal evidence and annotations survive export and Add (24.3127ms)
+✔ versioned local backup preserves evidence, notes and drafts; restored controls are paused (0.8957ms)
+✔ export protects private state and preserves raw evidence exactly (1.8038ms)
+✔ rejects malformed, oversized, unsupported and dangling records (23.7647ms)
+✔ backup before replacement and exact rollback of every key/flag after each write failure (8.9039ms)
+✔ successful replacement writes exact migration values and recovery envelope (0.8319ms)
+✔ Add remaps collisions and provenance while retaining unrelated current work (3.5481ms)
+✔ pending journal recovers every crash prefix, including marker before any data writes (1.9968ms)
+✔ failed recovery retains journal and snapshot instead of declaring success (0.8618ms)
+✔ serialized UTF-8 size boundary is restorable and oversized export is rejected (204.3571ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 494.0989

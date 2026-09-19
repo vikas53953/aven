@@ -1,0 +1,110 @@
+[
+  {
+    "id": "UX-019",
+    "status": "candidate-pass-scoped",
+    "evidence": "browser-overlay.test.cjs: browser overlay protects IME Enter... passed; synthetic compositionstart plus isComposing Enter produced zero requests, then one request after compositionend.",
+    "limitation": "The test uses Chromium keyboard events rather than a physical IME and does not certify every OS IME."
+  },
+  {
+    "id": "UX-020",
+    "status": "candidate-pass",
+    "evidence": "browser-overlay.test.cjs: keeps independent drafts across chat switching, reload, and 5k text passed; chat-a/chat-b drafts remained distinct and the 5,000-character draft reloaded exactly.",
+    "limitation": "Candidate overlay only; packaged app and cross-device sync were not tested."
+  },
+  {
+    "id": "UX-025",
+    "status": "partial",
+    "evidence": "Durable run and queue receipts retain prior evidence and reject a replay after a failed 502; browser-overlay.test.cjs dispatches queued messages FIFO and blocks unsafe retry after a 502.",
+    "limitation": "The prior-message edit/resend UI is existing code and no device-command edit path was invoked, so silent reversal/repetition of an edited device command remains unverified."
+  },
+  {
+    "id": "UX-028",
+    "status": "candidate-pass-scoped",
+    "evidence": "browser-overlay.test.cjs: protects IME Enter, deduplicates final NDJSON, and records elapsed time passed; two mock final events rendered one assistant message and one evidence panel without a duplicated final evidence line.",
+    "limitation": "The duplicate stream was an isolated local mock; provider reconnect and real transport failures were not exercised."
+  },
+  {
+    "id": "UX-029",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs: overlay parallel opt-in isolates independent chats and cancellation passed; stopping chat A left chat B successful and the cancelled run was durably UNKNOWN.",
+    "limitation": "Cancellation used an injected abort-aware responder and made no remote device call."
+  },
+  {
+    "id": "UX-030",
+    "status": "candidate-pass",
+    "evidence": "reliability.test.cjs queue claims are FIFO... and browser-overlay.test.cjs dispatches queued messages FIFO... passed; sequence order and mock request order were first queued then second queued with one request each.",
+    "limitation": "The provider was a local mock and the candidate awaits root sequential integration."
+  },
+  {
+    "id": "UX-031",
+    "status": "candidate-pass-scoped",
+    "evidence": "reliability.test.cjs queue claims are FIFO and explicit pause/requeue; browser-overlay.test.cjs FIFO resume plus structured waiting-question pause passed with the second item retained. WAITING can transition to terminal only through the same owner.",
+    "limitation": "The browser fixture did not crash a real packaged process between queue persistence and resume."
+  },
+  {
+    "id": "UX-032",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs: overlay steering is bound to the active run and applies before the mock next step passed; a valid run token accepted correction and the responder consumed it before final completion.",
+    "limitation": "This is an HTTP integration fixture; a physical device tool step and full Aven browser steering UI were not invoked."
+  },
+  {
+    "id": "UX-036",
+    "status": "candidate-pass-scoped",
+    "evidence": "browser-overlay.test.cjs: protects IME Enter, deduplicates final NDJSON, and records elapsed time passed with a visible Took duration; reliability.test.cjs waiting/terminal guards reject outcome overwrites.",
+    "limitation": "The mock delay was short and no packaged performance profile was taken."
+  },
+  {
+    "id": "UX-037",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs parallel opt-in isolates independent chats and cancellation passed A+B parallel dispatch, same-chat A conflict, A cancellation, B success, and two durable run evidence files; browser-overlay.test.cjs also passed independent per-chat Send/Queue feedback and eligible own-chat drain. The browser fixture now obtains capability through the mock /api/capabilities handshake rather than test-only global injection.",
+    "limitation": "Parallel mode defaults to the discovered per-chat runtime capability and has an explicit single-flight opt-out; no external provider/device isolation was proven."
+  },
+  {
+    "id": "UX-039",
+    "status": "candidate-pass-scoped",
+    "evidence": "browser-overlay.test.cjs: dispatches queued messages FIFO and blocks unsafe retry after a 502 passed; the retry click produced no third request and persisted the already-claimed warning. Unknown queue/run outcomes require explicit recovery/requeue in reliability.test.cjs.",
+    "limitation": "No completed device action was replayed, so retained-action review against a real device remains pending."
+  },
+  {
+    "id": "UX-040",
+    "status": "candidate-pass-scoped",
+    "evidence": "reliability.test.cjs restart recovery marks active runs UNKNOWN without issuing a retry; server-overlay.test.cjs exposed a user-reachable recovery POST that rejects unauthorized recovery, recovers only a dead service owner, and child-process restart verified RUNNING until explicit recovery then UNKNOWN. The graceful same-process restart test fences the old owner, and browser-overlay.test.cjs shows a reload warning plus authorized local recovery to UNKNOWN with zero dispatches. The live-other-tab browser fixture also preserved a RUNNING claim with an active lease and sent zero requests.",
+    "limitation": "The restart fixtures use the local candidate server and injected responder; packaged UI restart and real provider/device completion ambiguity remain unverified."
+  },
+  {
+    "id": "UX-098",
+    "status": "candidate-pass-scoped",
+    "evidence": "reliability.test.cjs malformed or failed storage recovery... passed fail-closed journal/write behavior; server-overlay.test.cjs storage unavailable... passed with zero responder calls, and browser 502 coverage distinguished a failed request from unsafe retry.",
+    "limitation": "No real provider offline/timeout was called; those transport classes remain mock-bound."
+  },
+  {
+    "id": "UX-099",
+    "status": "candidate-pass-scoped",
+    "evidence": "browser-overlay.test.cjs: renders a 500-message transcript after reload... passed with a scrollable conversation and all 500 message rows present.",
+    "limitation": "This is a bounded render/scroll check, not a full responsiveness benchmark or selection-anchor certification."
+  },
+  {
+    "id": "UX-101",
+    "status": "partial",
+    "evidence": "Reliability state uses strict version validation, journal rollback and unknown-field-preserving map storage; module tests cover malformed recovery and saved draft/queue/run state.",
+    "limitation": "Complete chats/preferences/avatar/revert-history migration comparison remains root/history-agent work; this slice does not rewrite saved-state migration."
+  },
+  {
+    "id": "UX-107",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs cancellation and reliability.test.cjs restart recovery passed UNKNOWN settlement with no automatic retry; browser-overlay.test.cjs failed 502 retry produced no second request after the durable claim.",
+    "limitation": "No remote device completion ambiguity was reproduced; evidence is injected local runtime behavior."
+  },
+  {
+    "id": "UX-113",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs parallel/same-chat guard passed independent A+B dispatch and same-chat conflict; browser-overlay.test.cjs passed second-chat Send label while A was active, own-chat Queue label, and post-completion FIFO drain without starving the active chat. The browser fixture obtains the runtime mode through the capability endpoint rather than an injected test global.",
+    "limitation": "The browser proof discovers per-chat capability from the local mock status endpoint and uses mock transport; provider/device isolation remains unverified."
+  },
+  {
+    "id": "UX-115",
+    "status": "candidate-pass-scoped",
+    "evidence": "server-overlay.test.cjs durable duplicate dispatch and explicit recovery passed; reliability.test.cjs FileStorage fresh-instance replay and SQLite two-process stale-lock CAS passed. Same idempotency key with a different body is rejected and duplicate responder calls stayed at one.",
+    "limitation": "No existing production records or cross-device store were touched; root integration must preserve prior evidence paths."
+  }
+]

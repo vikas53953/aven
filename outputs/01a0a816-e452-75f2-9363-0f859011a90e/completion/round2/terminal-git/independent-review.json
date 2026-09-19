@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "round2_terminal_git_executor",
+  "scope": "Frozen completion/git candidate plus round2 exact replacements; temporary repositories and mock remotes only.",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "findings": [
+    { "id": "GIT-01", "status": "CLOSED", "evidence": "_snapshot enumerates tracked/untracked names, rejects filter attributes, then calls status and diff; regression asserts check-attr precedes status and configure rejects the filter fixture without marker execution." },
+    { "id": "GIT-02", "status": "CLOSED", "evidence": "PR publish checks canonical current repository root and symbolic branch against the reviewed token before remote snapshot/publish." },
+    { "id": "GIT-03", "status": "CLOSED", "evidence": "PR publish rechecks remote head and base OIDs against the reviewed local OIDs before invoking gh; mismatch test proves ghCalls remains zero." },
+    { "id": "GIT-04", "status": "CLOSED", "evidence": "Index mode checks reject 120000/160000 and unsupported patch markers reject symlink/gitlink mode changes; selected symlink paths are rejected." },
+    { "id": "GIT-05", "status": "CLOSED", "evidence": "Git/SSH environment redirection is scrubbed; AVEN_GIT_PATH and AVEN_GH_PATH are ignored unless trusted host options inject executables; PR review rejects core SSH/proxy, scoped HTTP proxy/TLS/header, URL rewrite, upload-pack and receive-pack settings before remote probing." },
+    { "id": "GIT-06", "status": "CLOSED", "evidence": "Review/apply/commit payloads bind the SHA-256 of raw index bytes in addition to full worktree and staged patch digests." },
+    { "id": "GIT-07", "status": "CLOSED", "evidence": "Snapshot rejects both worktree and staged patches above the 2 MiB review limit, matching the request body/output bound." },
+    { "id": "GIT-08", "status": "CLOSED", "evidence": "CAS/update-ref uncertainty includes state, commitOid, orphanObject and retry=false; UI preserves HTTP metadata and reports unknown with no created claim or automatic retry." },
+    { "id": "GIT-09", "status": "CLOSED", "evidence": "Configure clears patch/commit/PR review state, hides panels, clears selections, and invalidates in-flight refresh sequence before applying the new repository." }
+  ],
+  "validation": {
+    "backend": "10 passed, 0 failed",
+    "browser": "1 passed, 0 failed",
+    "terminalAssembledServer": "5 passed, 0 failed after copying top-level polished-reliability.js into disposable fixture",
+    "replacementGuard": "2 source hashes and 6 exact replacements validated",
+    "syntax": "git-workspace.cjs, polished-git.js, verify-round2.cjs, validate-manifest.cjs passed node --check"
+  },
+  "limitations": [
+    "No user repository mutation, push, PR creation, provider credential, real remote, or arbitrary shell execution.",
+    "Browser test uses mocked API responses and headless Chrome.",
+    "Broad interactive OS terminal remains intentionally unsupported; UX071 is injected network diagnostics only."
+  ]
+}

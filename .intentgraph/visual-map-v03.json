@@ -1,0 +1,166 @@
+{
+  "version": "0.3",
+  "status": "User broadly supports direction; requested changes demonstrated, awaiting review",
+  "reference": "https://www.youtube.com/watch?v=Sfmtbxqtz7o",
+  "scope": "Interactive wireframe, not final visual styling. Right workspace is user-directed adaptation. Tool actions and artifact content are samples.",
+  "items": [
+    {
+      "id": "branding",
+      "title": "Application identity",
+      "time": null,
+      "timestamp": "User feedback",
+      "coverage": "User-directed addition; artwork pending",
+      "user": "Where will the name of the application be? Where will the name of this tool, or the logo, be?",
+      "observed": "The previous wireframe did not reserve a clear application identity position. The user now explicitly requests it.",
+      "mismatch": "Application branding and the agent avatar were not sufficiently distinguished.",
+      "proposal": "Place Netrok Muse in the top-left application header, next to a reserved logo slot. Keep the interactive agent avatar in the navigation rail. The outlined slot is not final logo artwork.",
+      "flow": [
+        "Open application",
+        "See product name in header",
+        "Select avatar → separate agent workspace"
+      ],
+      "unknown": "Final logo artwork, companion name and avatar appearance remain undecided.",
+      "check": "Product identity remains visible when the agent or artifact panel opens; it is not confused with the agent identity.",
+      "number": "01"
+    },
+    {
+      "id": "avatar",
+      "title": "Avatar & identity",
+      "number": "02",
+      "time": 341,
+      "timestamp": "5:41",
+      "coverage": "Appearance partly observed",
+      "user": "The Muse is an interactive avatar … I am not able to click on the agent itself.",
+      "observed": "The reference shows a small avatar in the rail and a larger avatar, name, status and controls in the agent panel.",
+      "mismatch": "The prototype substitutes a wordmark and an invented Atlas card for the agent identity and entry point.",
+      "proposal": "Keep the agent avatar separate from the application identity. Selecting it opens the agent workspace on the right, preserving the central conversation.",
+      "flow": [
+        "Select agent avatar",
+        "Open right agent workspace",
+        "Close panel → expand conversation"
+      ],
+      "unknown": "Exact opening transition, animation and whether the avatar is 3D remain unverified.",
+      "check": "Demonstrate the avatar at rest and on selection, then show where the user lands. Obtain visual agreement before choosing artwork."
+    },
+    {
+      "id": "navigation",
+      "title": "Icon-only navigation",
+      "number": "03",
+      "time": 115,
+      "timestamp": "1:55",
+      "coverage": "Collapsed rail observed",
+      "user": "The name should be in the form of icons only … chat: only the chat icons, search: only the search icons.",
+      "observed": "The Feed frame has a narrow icon rail, avatar and a toggle. The video and transcript establish Chat, Feed, Ideas and Goals; library is discussed later.",
+      "mismatch": "The prototype omits destinations and does not reproduce the collapse interaction the user expects.",
+      "proposal": "Recommend icons by default with labels on hover and keyboard focus. An optional label toggle helps discover unfamiliar icons; it is not the default.",
+      "flow": [
+        "Hover or focus an icon",
+        "See its label; select destination",
+        "Chat returns to the conversation"
+      ],
+      "unknown": "Icon-only navigation is the recommended response to this feedback. Exact final icon style and optional label toggle still await visual agreement.",
+      "check": "Show collapsed and expanded states beside their reference, including the active destination and return to chat."
+    },
+    {
+      "id": "workspace",
+      "title": "Agent & document workspace",
+      "number": "04",
+      "time": 341,
+      "timestamp": "5:41–5:49",
+      "coverage": "User-directed placement; reference panel contents partly observed",
+      "user": "Conversation will be in the center … agent appearance, motion … should open on the right-hand side.",
+      "observed": "An agent panel has avatar, status, tabs, Edit and SOUL/MEMORY cards. A larger adjacent workspace opens MEMORY.md or SOUL.md; the SOUL editor has Save and close controls.",
+      "mismatch": "A task evidence drawer was treated as if it also represented the agent's identity, memory and capabilities.",
+      "proposal": "Move the agent workspace to the right as explicitly requested, even though the inspected reference showed it on the left. Open SOUL.md and MEMORY.md inside that right workspace. Keep chat and its draft visible.",
+      "flow": [
+        "Open agent on the right",
+        "Select document or agent settings",
+        "Back to agent / close → retain chat"
+      ],
+      "unknown": "Browser/computer panel details, tab meanings and unsaved-edit handling still need evidence or an explicit design decision.",
+      "check": "Verify the agent, its documents and settings open to the right of chat at desktop width. Switching panels and closing them must preserve the draft."
+    },
+    {
+      "id": "artifacts",
+      "title": "Artifacts & right panel",
+      "time": 592,
+      "timestamp": "~9:52",
+      "coverage": "User request; library transcript support; proposed layout",
+      "user": "Where will the artifacts … documents or web artifacts … where will the right shell be?",
+      "observed": "The video transcript discusses outputs retained in a library. Exact desktop artifact preview layout has not been fully inspected.",
+      "mismatch": "The first map omitted a clear place for generated documents and web artifacts.",
+      "proposal": "Show output cards in the conversation and an Artifacts icon in navigation. Selecting an output opens its document or web preview on the right. Agent and artifact views share that panel but have distinct contents.",
+      "flow": [
+        "Select output card or Artifacts",
+        "Preview document / web output on right",
+        "Back to list / close → keep chat and draft"
+      ],
+      "unknown": "Expanded previews, export/edit actions and durable storage will need later design decisions. Displayed artifacts are wireframe samples.",
+      "check": "Open both document and web samples from chat and from the artifact list; switch to Agent and back without losing the conversation draft.",
+      "number": "05"
+    },
+    {
+      "id": "tools",
+      "title": "Browser & plugin requests",
+      "time": 414,
+      "timestamp": "~6:54",
+      "coverage": "User request; browser transcript support; proposed flow",
+      "user": "Inside the chat … do connect to this plugin or use the browser … that is also not visible.",
+      "observed": "The transcript describes browser tasks. The user explicitly asks for plugin connection and browser interactions to be visible in chat.",
+      "mismatch": "The first map skipped how a chat request leads to a capability workspace or connection review.",
+      "proposal": "Represent tool requests as chat cards with an entry into the right workspace. Browser shows task/result content; Plugins shows provider, requested access and connection state. Keep requests visible in the conversation.",
+      "flow": [
+        "Select browser or plugin request",
+        "Inspect its right-hand workspace",
+        "Review result / connection state → return to chat"
+      ],
+      "unknown": "Real provider selection, consent, credentials, execution, cancellation and failures remain to be specified. This wireframe performs no external operation.",
+      "check": "Open browser and plugin requests from chat. Preview a browser result and a connection state without implying a real execution or connection.",
+      "number": "06"
+    },
+    {
+      "id": "settings",
+      "title": "Settings & preferences",
+      "number": "07",
+      "time": null,
+      "timestamp": "Reference gap",
+      "coverage": "User requirement; reference incomplete",
+      "user": "The settings button is also just showing me … agent display name and the appearance. Nothing else.",
+      "observed": "The inspected frames do not establish the complete settings experience. No reference settings layout is claimed here.",
+      "mismatch": "A two-field dialog was presented without first identifying the reference's settings structure and contents.",
+      "proposal": "Separate app preferences from agent configuration. App settings remain a reference gap. Agent settings is now explicitly reachable from the right agent workspace.",
+      "flow": [
+        "Open settings",
+        "Inspect categories and controls",
+        "Apply change → return"
+      ],
+      "unknown": "Settings layout, full categories, defaults and save behavior are unresolved. Do not invent a finished settings screen.",
+      "check": "Review the settings reference or an explicitly proposed alternative. Theme saving already works in the prototype; the user corrected that complaint."
+    },
+    {
+      "id": "composer",
+      "title": "Conversation & composer",
+      "number": "08",
+      "time": 98,
+      "timestamp": "~1:38",
+      "coverage": "Chat structure partly observed",
+      "user": "This send button is not looking okay and is a bit off to me in the wireframe.",
+      "observed": "The main chat frame establishes the conversation area, narrow rail and separate activity area. Exact send-control states are not yet confirmed.",
+      "mismatch": "The prototype uses its own send treatment and visual spacing. Working submission does not establish reference fidelity.",
+      "proposal": "Use a compact rounded-square arrow control integrated into the composer, with muted empty and blue ready states. Show tool requests and artifact cards within the conversation.",
+      "flow": [
+        "Type into composer",
+        "Send arrow becomes available",
+        "Preview message appears in chat"
+      ],
+      "unknown": "This is a revised send-control proposal, not an approved reference match. Final spacing, colors and chat states need the next visual prototype.",
+      "check": "Compare empty and typed states. Check send proportions, central chat width and draft preservation while right-hand views change."
+    }
+  ],
+  "userDecision": {
+    "source": "User feedback in this conversation",
+    "supported": "Overall direction; sidebar, goals, ideas and feed broadly look okay",
+    "requested": "Refine send and icons; add branding and artifacts; move agent workspace right; show browser/plugin requests",
+    "notApproved": "Final styling, artwork, unseen settings, live integrations, full build"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-09-16T04:13:32.612Z",
+  "files": [
+    {
+      "file": "polished.js",
+      "baseline": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\baseline\\polished.js",
+      "candidate": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\header\\candidate\\polished.js",
+      "integrated": "polished.js"
+    }
+  ],
+  "replacementsPath": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\header\\replacements.json",
+  "tests": [
+    {
+      "name": "integrated UX011 focused browser suite",
+      "command": "node rename-header-test.cjs --integrated",
+      "mode": "integrated",
+      "passed": true,
+      "result": "PASS",
+      "checks": 13,
+      "failed": 0,
+      "app": "http://127.0.0.1:62416/polished.html"
+    },
+    {
+      "name": "integrated JavaScript syntax",
+      "command": "node --check polished.js",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "integrated": {
+      "mode": "integrated",
+      "app": "http://127.0.0.1:62416/polished.html",
+      "checks": [
+        {
+          "id": "UX-011-direct-header",
+          "passed": true,
+          "detail": "integrated: header after direct conversation rename is \"Firewall\""
+        },
+        {
+          "id": "UX-011-direct-title",
+          "passed": true,
+          "detail": "integrated: stored title is \"Renamed direct\""
+        },
+        {
+          "id": "UX-011-direct-coworker",
+          "passed": true,
+          "detail": "integrated: stored coworker is \"Firewall\""
+        },
+        {
+          "id": "UX-011-direct-preservation",
+          "passed": true,
+          "detail": "integrated: direct draft/history preserved"
+        },
+        {
+          "id": "UX-011-direct-switch",
+          "passed": true,
+          "detail": "integrated: switch back preserves coworker header, draft, and navigation history (direct-a,direct-b,direct-a)"
+        },
+        {
+          "id": "UX-011-direct-reload",
+          "passed": true,
+          "detail": "integrated: reload preserves header/title/draft/history"
+        },
+        {
+          "id": "UX-011-folder-header",
+          "passed": true,
+          "detail": "integrated: folder header/context is [\"Renamed folder\",\"Operations\"]"
+        },
+        {
+          "id": "UX-011-folder-preservation",
+          "passed": true,
+          "detail": "integrated: folder title/draft/history preserved"
+        },
+        {
+          "id": "UX-011-folder-reload",
+          "passed": true,
+          "detail": "integrated: folder reload preserves title/draft/history/context"
+        },
+        {
+          "id": "UX-011-coworker-header",
+          "passed": true,
+          "detail": "integrated: coworker rename updates direct header to \"Perimeter\""
+        },
+        {
+          "id": "UX-011-coworker-state",
+          "passed": true,
+          "detail": "integrated: coworker identity persists while conversation title remains \"Network review\""
+        },
+        {
+          "id": "UX-011-coworker-preservation",
+          "passed": true,
+          "detail": "integrated: coworker rename preserves draft/history"
+        },
+        {
+          "id": "UX-011-coworker-reload",
+          "passed": true,
+          "detail": "integrated: coworker/header/draft persist after switch and reload"
+        }
+      ],
+      "blockedRequests": [],
+      "pageErrors": [],
+      "apiCalls": []
+    }
+  },
+  "limitations": [
+    "Chromium used a local static app server and fresh browser contexts.",
+    "All non-loopback requests were blocked or locally fulfilled; no provider, device, credential, user storage, or external browser service was contacted.",
+    "Integrated mode serves the current live project files without modifying them."
+  ]
+}

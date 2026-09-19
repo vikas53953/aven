@@ -1,0 +1,17 @@
+{
+  "command": "node --test --test-concurrency=1 intentgraph/adapters.test.cjs intentgraph/agent-runtime.test.cjs intentgraph/agent-stream.test.cjs intentgraph/backend.test.cjs intentgraph/catalyst.test.cjs intentgraph/chat-runtime.test.cjs intentgraph/chat.test.cjs intentgraph/coordination.test.cjs intentgraph/delivery.test.cjs intentgraph/execution-service.test.cjs intentgraph/network-execution.test.cjs intentgraph/sandbox-routes.test.cjs intentgraph/steering.test.cjs intentgraph/trace.test.cjs",
+  "startedAt": "2026-09-16T03:49:22.546Z",
+  "endedAt": "2026-09-16T03:50:11.922Z",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "files": 14,
+  "summary": [
+    "ℹ tests 58",
+    "ℹ pass 58",
+    "ℹ fail 0",
+    "ℹ cancelled 0",
+    "ℹ skipped 0",
+    "ℹ duration_ms 48913.5077"
+  ]
+}

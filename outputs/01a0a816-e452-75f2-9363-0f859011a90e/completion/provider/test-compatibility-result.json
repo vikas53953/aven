@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "tests": [
+    { "file": "intentgraph/agent-stream.test.cjs", "passed": 1, "failed": 0, "exitCode": 0 },
+    { "file": "intentgraph/chat.test.cjs", "passed": 1, "failed": 0, "exitCode": 0 },
+    { "file": "intentgraph/steering.test.cjs", "passed": 4, "failed": 0, "exitCode": 0 }
+  ],
+  "fixture": "configured OpenCode/MiMo V2.5, connected false, efforts none",
+  "externalCalls": false,
+  "vaultAccess": false,
+  "credentials": false,
+  "liveProductFilesEdited": false
+}

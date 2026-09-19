@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "scope": "UX075 Git Settings pane and secure local stage, unstage, commit, and explicit PR controls; apply only to frozen completion/baseline v8 sources.",
+  "bytePolicy": "old/new strings are UTF-8 byte exact; each frozen-baseline anchor is unique and entries apply in sequence order; no newline normalization.",
+  "touchedFiles": [
+    "polished.html",
+    "polished.js",
+    "intentgraph/server.cjs"
+  ],
+  "sourceFiles": {
+    "polished.html": {
+      "baselinePath": "completion/baseline/polished.html",
+      "baselineSHA256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352"
+    },
+    "polished.js": {
+      "baselinePath": "completion/baseline/polished.js",
+      "baselineSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C"
+    },
+    "intentgraph/server.cjs": {
+      "baselinePath": "completion/baseline/intentgraph/server.cjs",
+      "baselineSHA256": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF"
+    }
+  },
+  "replacements": [
+    {
+      "file": "polished.html",
+      "sourceSHA": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "sequence": 1,
+      "label": "load Git pane styles",
+      "old": "  <link rel=\"stylesheet\" href=\"polished-files.css?revision=ux-audit-fixes-v8\">",
+      "new": "  <link rel=\"stylesheet\" href=\"polished-files.css?revision=ux-audit-fixes-v8\">\r\n  <link rel=\"stylesheet\" href=\"polished-git.css?revision=ux075-git-v1\">"
+    },
+    {
+      "file": "polished.html",
+      "sourceSHA": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "sequence": 2,
+      "label": "load Git pane controls",
+      "old": "  <script src=\"polished-files.js?revision=ux-audit-fixes-v8\"></script>",
+      "new": "  <script src=\"polished-files.js?revision=ux-audit-fixes-v8\"></script>\r\n  <script src=\"polished-git.js?revision=ux075-git-v1\"></script>"
+    },
+    {
+      "file": "polished.js",
+      "sourceSHA": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sequence": 3,
+      "label": "mount Git pane from Settings",
+      "old": "  function renderSettingsPage(){",
+      "new": "  function renderGitSettings(container){if(globalThis.AvenGitWorkspace?.mount){globalThis.AvenGitWorkspace.mount(container,{apiBase:'http://127.0.0.1:8768/api/git'});}else{container.innerHTML='<h2>Git workspace</h2><p>Git controls are unavailable until the local Git workspace module loads.</p>';}}\r\n  function renderSettingsPage(){"
+    },
+    {
+      "file": "polished.js",
+      "sourceSHA": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sequence": 4,
+      "label": "render Git pane for Git category",
+      "old": "if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);",
+      "new": "if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);if(settingsPage==='git')renderGitSettings(p);"
+    },
+    {
+      "file": "polished.js",
+      "sourceSHA": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sequence": 5,
+      "label": "add Git Settings category",
+      "old": "['archived','Archived chats']",
+      "new": "['archived','Archived chats'],['git','Git']"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "sourceSHA": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sequence": 6,
+      "label": "load Git backend",
+      "old": "const { createChatReadApi } = require('./chat-read-api.cjs');",
+      "new": "const { createChatReadApi } = require('./chat-read-api.cjs');\nconst { createGitWorkspace, createGitWorkspaceApi } = require('./git-workspace.cjs');"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "sourceSHA": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sequence": 7,
+      "label": "construct Git API beside chat API",
+      "old": "  const chatReadApi = createChatReadApi({\n    root,\n    getExecutionStatus: () => execution ? execution.status() : null,\n    getActiveRuns: () => Array.from(activeRuns.values()),\n    chatOriginAllowed\n  });",
+      "new": "  const chatReadApi = createChatReadApi({\n    root,\n    getExecutionStatus: () => execution ? execution.status() : null,\n    getActiveRuns: () => Array.from(activeRuns.values()),\n    chatOriginAllowed\n  });\n  const gitWorkspace = options.gitWorkspace || createGitWorkspace({ runtimeDirectory, ...(options.gitWorkspaceOptions || {}) });\n  const gitApi = createGitWorkspaceApi({ workspace: gitWorkspace });"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "sourceSHA": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sequence": 8,
+      "label": "route Git requests before chat",
+      "old": "    if (await chatReadApi.handle(req, res)) return;",
+      "new": "    if (await gitApi.handle(req, res)) return;\n    if (await chatReadApi.handle(req, res)) return;"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "sourceSHA": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sequence": 9,
+      "label": "expose Git workspace for injected tests",
+      "old": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };",
+      "new": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution, gitWorkspace, gitApi };"
+    }
+  ]
+}

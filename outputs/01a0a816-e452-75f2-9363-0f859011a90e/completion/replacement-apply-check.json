@@ -1,0 +1,110 @@
+{
+  "baseline": "completion/baseline/polished.js",
+  "sourceSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+  "replacements": "completion/replacements.json",
+  "applied": [
+    {
+      "index": 0,
+      "file": "polished.js",
+      "offset": 18732,
+      "oldBytes": 214,
+      "newBytes": 1253,
+      "oldSha256": "63E7177B561FB3CDFB463104A0CF346556FB21399F8FDC44C312D53E19C6EEE5",
+      "newSha256": "2812628EB1FCCB826296B39744F16339609A93F8CB8F6C5615C39B7ACBB16D02",
+      "matchCount": 1
+    },
+    {
+      "index": 1,
+      "file": "polished.js",
+      "offset": 24305,
+      "oldBytes": 722,
+      "newBytes": 726,
+      "oldSha256": "CA59BC100F9581895CE66DC130DB57DFC08BC2D0FF96E10B9066FEF3A2A667FC",
+      "newSha256": "631CB8E91EE7A8E4A3464B67497AB226115815F1BF8EE45186645748C5F6DB63",
+      "matchCount": 1
+    },
+    {
+      "index": 2,
+      "file": "polished.js",
+      "offset": 87398,
+      "oldBytes": 806,
+      "newBytes": 810,
+      "oldSha256": "57C69F1D753DCFD25A7EF977DB08596097A6E9689E98EEB115D03813D725DBC5",
+      "newSha256": "DA838C01AE356FB8C086D7929E0C1C10B94A6F565FCF47711AD0DA84BEF2B494",
+      "matchCount": 1
+    },
+    {
+      "index": 3,
+      "file": "polished.js",
+      "offset": 135714,
+      "oldBytes": 1676,
+      "newBytes": 1680,
+      "oldSha256": "26622A30D536EA889A46F476A2A65A1FC6B6B8B99C1C1DABD9F1AA9C08D47A23",
+      "newSha256": "31C3DD5C03FAECFF800E5B3CF6EF92A8627380F27FAF5BBF21986BB64CFF3C2B",
+      "matchCount": 1
+    },
+    {
+      "index": 4,
+      "file": "polished.js",
+      "offset": 141731,
+      "oldBytes": 767,
+      "newBytes": 771,
+      "oldSha256": "102764D05DDE8F9B3962097457DD45E9EFE12072CA9935BACA2B95EC91725AF4",
+      "newSha256": "70AD911A2B92D3CADE121A747C36A85756F61220710A12F00646DD8E309F913F",
+      "matchCount": 1
+    },
+    {
+      "index": 5,
+      "file": "polished.js",
+      "offset": 142502,
+      "oldBytes": 1740,
+      "newBytes": 1744,
+      "oldSha256": "A13AB03BBAF24894F630A6147C5FC4A4A59ED156800D06BB59B7CA88DCF11F4A",
+      "newSha256": "0E76558910AC147151AA674D768AA071B104CE920AE18AFE4E7AD1915638A8DE",
+      "matchCount": 1
+    },
+    {
+      "index": 6,
+      "file": "polished.js",
+      "offset": 144246,
+      "oldBytes": 4734,
+      "newBytes": 4694,
+      "oldSha256": "AB24EAD6210497C18E858914C0FF98690225DC28C079B2D024D5E5CD09AE44A1",
+      "newSha256": "57D250EF607D8B9FDB0CD8FE05A6F3BC8F320798B44B1BC874934C73206435E8",
+      "matchCount": 1
+    },
+    {
+      "index": 7,
+      "file": "polished.js",
+      "offset": 129709,
+      "oldBytes": 373,
+      "newBytes": 409,
+      "oldSha256": "6A5A6D47E3C861EE6739FDB12088D5F5E59C1119E92127C79A091351AEDF5CAE",
+      "newSha256": "CF7C11ECD22FEDF09F495FB05CA120FF85DBAF5B2A8959B37A94DDF6EC87E322",
+      "matchCount": 1
+    },
+    {
+      "index": 8,
+      "file": "polished.js",
+      "offset": 188837,
+      "oldBytes": 119,
+      "newBytes": 119,
+      "oldSha256": "3CF4FD65E9D06CA29131C007BA66675C8D4537F764E30D5B17380A7AF494B026",
+      "newSha256": "3CF4FD65E9D06CA29131C007BA66675C8D4537F764E30D5B17380A7AF494B026",
+      "matchCount": 1
+    }
+  ],
+  "replacementSequenceExact": true,
+  "candidateEquivalent": false,
+  "candidateSha256": "028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822",
+  "appliedSha256": "33A5360DC985F830960C5381362DF10CD7B7076AAE866828D93D733F8880A7B7",
+  "candidateDifference": {
+    "firstByte": 8,
+    "appliedBytes": 188956,
+    "candidateBytes": 190906,
+    "reason": "history-candidate/polished.js also contains shared-agent changes; package proof covers only owned replacement hunks"
+  },
+  "generatedCheckFile": "completion/history-patched-from-baseline.js",
+  "generatedCheckSha256": "33A5360DC985F830960C5381362DF10CD7B7076AAE866828D93D733F8880A7B7",
+  "syntax": "checked separately with primary Node runtime"
+}

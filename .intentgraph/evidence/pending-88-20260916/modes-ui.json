@@ -1,0 +1,13 @@
+{
+  "at": "2026-09-15T19:38:38.336Z",
+  "passed": true,
+  "checks": [
+    "malformed mode safely defaults",
+    "plan selection persists and request includes plan",
+    "queued mode retained even when chat mode changes",
+    "queued picker disabled",
+    "draft retained",
+    "320px"
+  ],
+  "scope": "Mocked backend; zero-tool enforcement covered by verify-chat-modes.cjs"
+}

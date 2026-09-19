@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "row": "UX075",
+  "title": "Git stage, unstage, commit, and explicit pull-request controls",
+  "status": "candidate-ready-for-root-composition",
+  "evidenceLevel": "implementation-and-disposable-repository-tests",
+  "scope": "Candidate files and frozen-baseline replacement manifest only; no live product or user repository was changed.",
+  "implemented": [
+    "Settings Git pane with absolute repository configuration, changed-file selection, complete patch review, explicit stage/unstage, complete staged-diff commit review, and separate PR review/publish controls.",
+    "Canonical ordinary-worktree identity checks, fixed-root bounded argv execution with shell:false, Git environment allowlisting, empty hooksPath, disabled fsmonitor/credential helper/external diff settings, and repository filter/transport-helper rejection.",
+    "Single-use expiring in-memory review tokens bound to repository, branch, HEAD, raw index bytes, worktree/staged digests, action, paths, patch, and commit/PR fields; restart invalidates tokens.",
+    "Private-index patch application and commit-tree/write-tree CAS branch update with app lock plus index.lock; worktree and live index remain unchanged for stage/unstage/commit.",
+    "PR publish is explicit, never pushes, rechecks configured HTTPS remote identity, local symbolic branch, local head/base, exact remote head/base OIDs, and invokes noninteractive gh only after review.",
+    "Cancellation or timeout reports unknown/no-retry; commit update conflicts disclose commit OID/orphan-object outcome."
+  ],
+  "unsupportedCases": [
+    "Linked worktrees, submodules/gitlinks, symlink repository paths, detached HEAD, unborn HEAD, bare/nonordinary repositories, and unsupported index modes 120000/160000.",
+    "Untracked/conflicted/rename/copy changes, binary patches, mode changes, filter attributes, unsafe leading-dash or noncanonical paths, and patches over the bounded safety limit.",
+    "Non-HTTPS or credentialed remote URLs, local SSH/proxy/helper/URL-rewrite transport configuration, missing remote/upstream/base, ahead/behind/diverged state, or exact remote head/base OID mismatch.",
+    "Automatic push, automatic PR creation, hooks, signing, credential-helper execution, and retry after a consumed/rejected/unknown action token."
+  ],
+  "validation": {
+    "backendCommand": "bundled node --test completion/git/intentgraph/git-workspace.test.cjs",
+    "browserCommand": "bundled node --test completion/git/git-ui.test.cjs",
+    "syntaxCommand": "bundled node --check on candidate CJS/JS and transformed frozen-baseline JS/CJS",
+    "replacementProof": "completion/git/replacement-apply-proof.json",
+    "sourceHashes": "completion/git/source-hashes.json",
+    "backendLog": "completion/git/git-test.log",
+    "browserLog": "completion/git/git-ui-test.log",
+    "backendResult": "9 passed, 0 failed",
+    "browserResult": "1 passed, 0 failed"
+  },
+  "rootIntegration": {
+    "manifest": "completion/git/replacements.json",
+    "sequentialByteApplication": true,
+    "architectureUpdate": "root-owned"
+  }
+}

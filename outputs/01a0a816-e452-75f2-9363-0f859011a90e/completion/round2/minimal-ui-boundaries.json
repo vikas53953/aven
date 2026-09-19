@@ -1,0 +1,26 @@
+{
+  "at": "2026-09-17T03:42:37.232Z",
+  "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\assembled-candidate",
+  "sourceHashes": {
+    "polished.html": "49864d2629d69fbf7ab06c8a620fc4432e81d140fe1245d1fb6d88fc393a883a",
+    "polished.js": "58d1f9ae9e4568017fc671f043777913f580a3c042562236c1af665049485fb2",
+    "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6"
+  },
+  "results": [
+    {
+      "name": "Failure with raw output stays visible when diagnostics are off",
+      "passed": true
+    },
+    {
+      "name": "Active raw output and investigation stay hidden while Stop remains visible",
+      "passed": true
+    },
+    {
+      "name": "Long generated code is folded without hiding the explanation or changing code",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "externalCalls": 0,
+  "passed": true
+}

@@ -1,0 +1,226 @@
+{
+  "generatedAt": "2026-09-16T07:42:54.109Z",
+  "build": "ux-minimal-ui-v9.1",
+  "root": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\ui-release\\candidate",
+  "sourceHashes": {
+    "polished.html": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+    "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+    "polished.js": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+    "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+    "polished-backup.js": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642"
+  },
+  "checks": [
+    {
+      "id": "UX-002",
+      "name": "desktop and narrow viewport matrix contains page/sidebar overflow",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Eight widths from 1440 to 320; exact CLI copy remains covered by prior evidence."
+    },
+    {
+      "id": "UX-005",
+      "name": "reaction row opens by keyboard and Escape returns to message actions",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Local DOM/keyboard check; no visual reference or assistive technology certification."
+    },
+    {
+      "id": "UX-046",
+      "name": "active run disables history revert control",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Held loopback request; no provider/device call."
+    },
+    {
+      "id": "UX-050",
+      "name": "archived restore preserves complete message and evidence payload",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Local archive/restore transaction; no packaged/cross-device behavior."
+    },
+    {
+      "id": "UX-051",
+      "name": "conversation export has selected scope timestamps raw output and no credentials",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Markdown export scoped to selected chat; loopback fixture only."
+    },
+    {
+      "id": "UX-055",
+      "name": "long coworker name persists after reload and remains selected-only",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "One local long profile fixture; no remote sync."
+    },
+    {
+      "id": "UX-059",
+      "name": "theme save persists across reload in light and dark modes",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Local preferences/reload; readability remains a separate visual check."
+    },
+    {
+      "id": "UX-064",
+      "name": "all help entries are useful and feedback storage failure is visible",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Feedback quota failure injected; no external/private-log request."
+    },
+    {
+      "id": "UX-065",
+      "name": "unavailable Find is omitted from help and Ctrl/Cmd+F opens find only in conversation",
+      "status": "FAIL",
+      "evidence": "AssertionError: The input was expected to not match the regular expression /Ctrl \\/ Cmd \\+ F/. Input:\n\n'Use + to create a coworker. Organize existing history under Conversations. Your drafts and chats stay in this browser.\\n' +\n  '\\n' +\n  'Ctrl / Cmd + K\\tOpen commands\\n' +\n  'Ctrl / Cmd + F\\tFind in conversation\\n' +\n  'Enter\\tSend or queue the composer message\\n' +\n  'Shift + Enter\\tAdd a new line in the composer\\n' +\n  'Enter / Shift + Enter\\tNext / previous match while finding\\n' +\n  'Escape\\tClose the current menu, find bar, or dialog\\n' +\n  '\\n' +\n  'Commands open local controls. Sending a message is a separate action. Shortcuts do not override an open settings or editing dialog.'\n",
+      "limitation": "Browser-local shortcut check; native browser find is not used when unavailable."
+    },
+    {
+      "id": "UX-069",
+      "name": "evidence pane is readable across resize endpoints and close restores focus",
+      "status": "FAIL",
+      "evidence": "Error: locator.click: Element is not visible\nCall log:\n\u001b[2m  - waiting for locator('[data-message-id=\"m-a1\"] [aria-label=\"Message actions\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"nav-icon\" title=\"Message actions\" aria-label=\"Message actions\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n",
+      "limitation": "Endpoint keyboard resize and local evidence content."
+    },
+    {
+      "id": "UX-073",
+      "name": "annotation draft closes without saving and cannot drift",
+      "status": "FAIL",
+      "evidence": "Error: locator.click: Element is not visible\nCall log:\n\u001b[2m  - waiting for locator('[data-message-id=\"m-a1\"] [aria-label=\"Message actions\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"nav-icon\" title=\"Message actions\" aria-label=\"Message actions\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n",
+      "limitation": "Discard path only; stale rerun/save-failure need separate runtime hook."
+    },
+    {
+      "id": "UX-083",
+      "name": "every populated Feed entry opens its exact saved message",
+      "status": "PASS",
+      "evidence": "PASS",
+      "limitation": "Populated local run/evidence entries; provider/device transport is not exercised."
+    }
+  ],
+  "rows": [
+    {
+      "id": "UX-002",
+      "status": "PASS",
+      "evidence": [
+        "desktop and narrow viewport matrix contains page/sidebar overflow: PASS"
+      ],
+      "limitations": [
+        "Eight widths from 1440 to 320; exact CLI copy remains covered by prior evidence."
+      ]
+    },
+    {
+      "id": "UX-005",
+      "status": "PASS",
+      "evidence": [
+        "reaction row opens by keyboard and Escape returns to message actions: PASS"
+      ],
+      "limitations": [
+        "Local DOM/keyboard check; no visual reference or assistive technology certification."
+      ]
+    },
+    {
+      "id": "UX-046",
+      "status": "PASS",
+      "evidence": [
+        "active run disables history revert control: PASS"
+      ],
+      "limitations": [
+        "Held loopback request; no provider/device call."
+      ]
+    },
+    {
+      "id": "UX-050",
+      "status": "PASS",
+      "evidence": [
+        "archived restore preserves complete message and evidence payload: PASS"
+      ],
+      "limitations": [
+        "Local archive/restore transaction; no packaged/cross-device behavior."
+      ]
+    },
+    {
+      "id": "UX-051",
+      "status": "PASS",
+      "evidence": [
+        "conversation export has selected scope timestamps raw output and no credentials: PASS"
+      ],
+      "limitations": [
+        "Markdown export scoped to selected chat; loopback fixture only."
+      ]
+    },
+    {
+      "id": "UX-055",
+      "status": "PASS",
+      "evidence": [
+        "long coworker name persists after reload and remains selected-only: PASS"
+      ],
+      "limitations": [
+        "One local long profile fixture; no remote sync."
+      ]
+    },
+    {
+      "id": "UX-059",
+      "status": "PASS",
+      "evidence": [
+        "theme save persists across reload in light and dark modes: PASS"
+      ],
+      "limitations": [
+        "Local preferences/reload; readability remains a separate visual check."
+      ]
+    },
+    {
+      "id": "UX-064",
+      "status": "PASS",
+      "evidence": [
+        "all help entries are useful and feedback storage failure is visible: PASS"
+      ],
+      "limitations": [
+        "Feedback quota failure injected; no external/private-log request."
+      ]
+    },
+    {
+      "id": "UX-065",
+      "status": "PARTIAL",
+      "evidence": [
+        "unavailable Find is omitted from help and Ctrl/Cmd+F opens find only in conversation: AssertionError: The input was expected to not match the regular expression /Ctrl \\/ Cmd \\+ F/. Input:\n\n'Use + to create a coworker. Organize existing history under Conversations. Your drafts and chats stay in this browser.\\n' +\n  '\\n' +\n  'Ctrl / Cmd + K\\tOpen commands\\n' +\n  'Ctrl / Cmd + F\\tFind in conversation\\n' +\n  'Enter\\tSend or queue the composer message\\n' +\n  'Shift + Enter\\tAdd a new line in the composer\\n' +\n  'Enter / Shift + Enter\\tNext / previous match while finding\\n' +\n  'Escape\\tClose the current menu, find bar, or dialog\\n' +\n  '\\n' +\n  'Commands open local controls. Sending a message is a separate action. Shortcuts do not override an open settings or editing dialog.'\n"
+      ],
+      "limitations": [
+        "Browser-local shortcut check; native browser find is not used when unavailable."
+      ]
+    },
+    {
+      "id": "UX-069",
+      "status": "PARTIAL",
+      "evidence": [
+        "evidence pane is readable across resize endpoints and close restores focus: Error: locator.click: Element is not visible\nCall log:\n\u001b[2m  - waiting for locator('[data-message-id=\"m-a1\"] [aria-label=\"Message actions\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"nav-icon\" title=\"Message actions\" aria-label=\"Message actions\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n"
+      ],
+      "limitations": [
+        "Endpoint keyboard resize and local evidence content."
+      ]
+    },
+    {
+      "id": "UX-073",
+      "status": "PARTIAL",
+      "evidence": [
+        "annotation draft closes without saving and cannot drift: Error: locator.click: Element is not visible\nCall log:\n\u001b[2m  - waiting for locator('[data-message-id=\"m-a1\"] [aria-label=\"Message actions\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"nav-icon\" title=\"Message actions\" aria-label=\"Message actions\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n"
+      ],
+      "limitations": [
+        "Discard path only; stale rerun/save-failure need separate runtime hook."
+      ]
+    },
+    {
+      "id": "UX-083",
+      "status": "PASS",
+      "evidence": [
+        "every populated Feed entry opens its exact saved message: PASS"
+      ],
+      "limitations": [
+        "Populated local run/evidence entries; provider/device transport is not exercised."
+      ]
+    }
+  ],
+  "blockedRequests": [],
+  "apiCalls": [
+    "http://127.0.0.1:8768/api/chat"
+  ],
+  "pageErrors": [],
+  "scope": "Isolated Chromium with local fixture storage and loopback API interception; no external calls or user data."
+}

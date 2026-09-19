@@ -1,0 +1,109 @@
+{
+  "candidate": "P2-612c88cacd5b",
+  "capturedAt": "2026-09-11T03:21:06.678Z",
+  "scope": "Local frontend only. No live AI, uploads, authentication or browser/computer execution.",
+  "checks": [
+    {
+      "name": "F07 preservation: idempotent migration and original storage backup",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07-01/02/03: popup creation, immediate conversation and channel/project ownership",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07-04: Enter sends, Shift+Enter newline, IME never sends",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07-05/10: centered settings, theme, account actions and save/cancel",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "Preserved journeys: attachments, search, agent documents and tool states",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07 responsive: six widths, modal bounds, focus and reduced motion",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07-07: sidebar pointer/keyboard resize, collapse restoration and group context",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "F07-06/09: context actions, profile settings, project/section move and recovery",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "Protected wireframe unchanged",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "No page errors or external runtime calls",
+      "status": "PASS",
+      "detail": "Executed on this stable candidate; scoped local behavior only.",
+      "evidence": ".intentgraph/p2-test-results.json"
+    },
+    {
+      "name": "Independent context and experience review",
+      "status": "PASS",
+      "detail": "Separate review exercised context actions, organization, recovery and rendered desktop/narrow views.",
+      "evidence": ".intentgraph/p2-review-context-results.json"
+    },
+    {
+      "name": "Your visual decision",
+      "status": "PENDING",
+      "detail": "P2 demonstrates the requested changes. Styling and final experience await your feedback.",
+      "evidence": ".intentgraph/feedback-07.md"
+    }
+  ],
+  "captures": [
+    {
+      "label": "Dark appearance",
+      "path": ".intentgraph/p2-dark.png"
+    },
+    {
+      "label": "Light appearance",
+      "path": ".intentgraph/p2-light.png"
+    },
+    {
+      "label": "Centered creation",
+      "path": ".intentgraph/p2-create-channel.png"
+    },
+    {
+      "label": "Settings",
+      "path": ".intentgraph/p2-settings.png"
+    },
+    {
+      "label": "Context menu",
+      "path": ".intentgraph/p2-context-menu.png"
+    },
+    {
+      "label": "Narrow screen",
+      "path": ".intentgraph/p2-320.png"
+    },
+    {
+      "label": "Candidate manifest",
+      "path": ".intentgraph/polished-candidate.json"
+    }
+  ]
+}

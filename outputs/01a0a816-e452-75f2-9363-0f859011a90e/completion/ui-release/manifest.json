@@ -1,0 +1,282 @@
+{
+  "at": "2026-09-16T06:38:13.738Z",
+  "scope": "Minimal UI, history and reactions; backend unchanged",
+  "composedFiles": [
+    {
+      "file": "polished.html",
+      "source": "ui-release/candidate/polished.html",
+      "baselineSha256": "77df7b2b393994751473b912bf3443b08c4850a555c7b48ef2633e207f8bb352",
+      "expectedCurrentSha256": "f343be26c0ac2944fa5ff42607bea2445248b9f4928f0d31db2041194a251741",
+      "sha256": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2"
+    },
+    {
+      "file": "polished.css",
+      "source": "ui-release/candidate/polished.css",
+      "baselineSha256": "d7dfbacd5b37d424fbcb86a6a51873d30a22867c553ff4aa453c4444cfefcd93",
+      "expectedCurrentSha256": "3ce122e6e7ebcffd7bc550204c735e592a4cd092f5992b71f5744a69e5f86694",
+      "sha256": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6"
+    },
+    {
+      "file": "polished.js",
+      "source": "ui-release/candidate/polished.js",
+      "baselineSha256": "ab3874915b3e7c87800640bf1692e6d2cdf0ded910f96357a1c4f74106cd700c",
+      "expectedCurrentSha256": "5e6c8b9922e11556a8699b827f24de84ec90162f53c6c0aacc234ea1e510e9c7",
+      "sha256": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a"
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "source": "ui-release/candidate/polished-workspace-tools.js",
+      "baselineSha256": "350e57dfab400803800577cacc19692456a23e87a296601ec6b819845fdd9850",
+      "expectedCurrentSha256": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "sha256": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75"
+    },
+    {
+      "file": "polished-backup.js",
+      "source": "ui-release/candidate/polished-backup.js",
+      "baselineSha256": "02da5654deeb94e0ca0403d5afddee97e09bf3cc7df398846e362fddc590a27d",
+      "expectedCurrentSha256": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "sha256": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642"
+    }
+  ],
+  "applied": [
+    {
+      "owner": "minimal-ui",
+      "file": "polished.html",
+      "oldSha256": "0c8b7614c6414e55803f20d1b4ab20b0c154d14cef2280a6eaede86d87efbe30",
+      "newSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.html",
+      "oldSha256": "068f31b41823e49e1872e4c933e6fc1fde84c74aaf2110df6a23ee92b52f3800",
+      "newSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.html",
+      "oldSha256": "2a228579b569745e73e09b1d8cf8cded06d6dbb1b243a8c541da748c7dac5cef",
+      "newSha256": "2390a41954b88ededc865459f1955a73ade323032cd9b18238d13b210c381f3c"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.html",
+      "oldSha256": "6a800394eb45559139f9124ce6429fa6a085271bbef45d977c18bc36c075e20d",
+      "newSha256": "86ce8ad405802ad2fb72129de598b7fa21e4a5163a70fecccab2ad913ef58b62"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.html",
+      "oldSha256": "0405102dc5f9142a6a86a39981cc98d548008593733b935dfcc134ced9cde268",
+      "newSha256": "69b83a3b522e956ab4082701d778a7ffc0e722c97e69fd75947ca0e263a8c107"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.css",
+      "oldSha256": "ab5822277b1465eff449d4a0b176f86d2a99f9616c1ac8a01547e3fd9ab1d1ea",
+      "newSha256": "5469022ec1ffc46b28012c674d8f2f6d6c2c2d7f2497d0b8ab7419b6b28d8a09"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "c72a63e919ea3242215f1fab4f05cae3d1519efe08081417f34a41a46c46c235",
+      "newSha256": "e05b70d220ffcf6436b5a49f16bf26b7335509088dee77ac44c355d6df82fe7e"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "d97bb64003908ffa3b88cd5d4420abc6463da329f3aa8a0800afcb7d7da91cec",
+      "newSha256": "8fc4609e5e1b6fe867fa982f516cd3c8358ca9668a6d284574356eb9839c99d6"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "efd022cc383306a5be252b78d88589b418844566358b258105d654c4de74f7a3",
+      "newSha256": "0689f3ff4bf61481e8006a78d47e408638b9feca144870915839e336a61a66b1"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "36323aca7a14434461c9d8309e7eb4d2d60d1941da70da99f80646b434193c71",
+      "newSha256": "95eac38ecbcc0bf6e1e5ae9374c14c7a831319a23759f2a595a97f7a88829c91"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "689cbc6cf6e56af8da9a35cf824feb1b1c37470e17c3463214f9f7871d24c99f",
+      "newSha256": "a2c58ce3076e6211cd93e35486256628c299452c2b9d54b42495fd8e1f6f7919"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "be74fda743f5dc3635fd6a5f6e2b87ee29d1c1a484a470be1d5b6bd77aedb6f5",
+      "newSha256": "0fc8cc67252b13b3284fcee382cb14a9497a38c69873edba3bf3af82c0abc939"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "b0e9e3f99d2f60a083ca7ae7c3f9853cf16675a6ceb9ed42a9314c43d1f8acf8",
+      "newSha256": "fa6c975e879871ea551db4682cfa3fbe197fbcfe1408659f3d9c291453f53728"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "435ebb4d1b8ea2fb570c54a7865e3ca35131290125384097f81c7e6a9760fd67",
+      "newSha256": "b4f0880b0f0bebd945d43b13bcd4c76ff54b9f148b1c6818230d6b23fe21d7ef"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "433af2486cb7194d91c9b3f63a79f75921589c46ec15e02032536e227bd8334f",
+      "newSha256": "61e7f69deb2fa90d1ce7f9c8370b2c8aa0d0486a21d1b01961fa7acbc76de0ea"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "dd75fc9d79a5687fc75a04fbc1bf69054f555c0e814cf1caa12cc78cadb633d0",
+      "newSha256": "ba8adb069d8f9a2e0b72a11d576bf8d6eaa0fd307c017605beaf51af02a22241"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "47413736d110b1779391de4a54d18cf4b3887061cca5846a895c1531e09c3c82",
+      "newSha256": "74dbb249d0042e814101aaf6b9321b42d24e6b61b76a79fac92a22dbf68ea1a4"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "3f146e09119ffbc4be75dc043f5209674507a61ba1df7e10b557bda12d394374",
+      "newSha256": "dbc6c95ea43536b82b8882e61c5eb9190cf698bff2e71b1ac560f0736630fa5d"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "523c24b43bf7a0dc6fc58000fc4a511d5dc9dde9219d7321aadd8e944bfe74fb",
+      "newSha256": "6e3899dcb5886901065670dc943a72974a4497f1285dd294184a7ced48045a92"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "5c12360cf06e446b7dcc2f4df44434189ab07f3d56f8c4db1c779de3722a2a28",
+      "newSha256": "3b73042854d32e6cbef6abd26dfee77ff60d1112ab16ace474c1393b8173adc0"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "45f7922bcccd70fceef7f4b8e16335039cefc55d81e92596d776b93b9e4eba17",
+      "newSha256": "484c92b0ac12f20f6ad7007b78e997a566615b7b9e971ecabfd62ff54b7b89dd"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "d162a821eddad599e54e580af956c32f24001f1bcc6df32417db0aef04544079",
+      "newSha256": "665cca840fc6626f074ddf5b071bba7e997061e43b60e17268f227bcae8120b3"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "6a5a6d47e3c861ee6739fdb12088d5f5e59c1119e92127c79a091351aedf5cae",
+      "newSha256": "f3bee61234623836b92278050fab7bd37a348de2f02da3a1500ee190905e8346"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished.js",
+      "oldSha256": "72e8ee07eb08e1825d768e5414d5317befdb3d289696f3fa91a6e3116bd3b3b4",
+      "newSha256": "6780df760e23a324e426f48552be1d4ff8c653b7ca2e6156ca21e8b048b659a5"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished-workspace-tools.js",
+      "oldSha256": "1bef4ce15b2ae6e4c5aa48e9622c6a24601de6ba42ea6911ea5962f459298bf1",
+      "newSha256": "9d6c05e751a0f62b4d07c2526b8140491c58aaa397f47e1c8382b1de4c423785"
+    },
+    {
+      "owner": "minimal-ui",
+      "file": "polished-workspace-tools.js",
+      "oldSha256": "1b7ced207e2431f4462ff5cb92ea3f184d8708cab1c21d1aa91b1d29488fbc08",
+      "newSha256": "8ed67d37c4a8af89d18b46c8236b750caf90bf68b2f8a1290b0bf56bc161c4fb"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "63e7177b561fb3cdfb463104a0cf346556fb21399f8fdc44c312d53e19c6eee5",
+      "newSha256": "2812628eb1fccb826296b39744f16339609a93f8cb8f6c5615c39b7acbb16d02"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "ca59bc100f9581895ce66dc130db57dfc08bc2d0ff96e10b9066fef3a2a667fc",
+      "newSha256": "631cb8e91ee7a8e4a3464b67497ab226115815f1bf8ee45186645748c5f6db63"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "57c69f1d753dcfd25a7ef977db08596097a6e9689e98eeb115d03813d725dbc5",
+      "newSha256": "da838c01ae356fb8c086d7929e0c1c10b94a6f565fcf47711ad0da84bef2b494"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "26622a30d536ea889a46f476a2a65a1fc6b6b8b99c1c1dabd9f1aa9c08d47a23",
+      "newSha256": "31c3dd5c03faecff800e5b3cf6ef92a8627380f27faf5bbf21986bb64cff3c2b"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "102764d05dde8f9b3962097457dd45e9efe12072ca9935baca2b95ec91725af4",
+      "newSha256": "70ad911a2b92d3cade121a747c36a85756f61220710a12f00646dd8e309f913f"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "a13ab03bbaf24894f630a6147c5fc4a4a59ed156800d06bb59b7ca88dcf11f4a",
+      "newSha256": "0e76558910ac147151aa674d768aa071b104ce920ae18afe4e7ad1915638a8de"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "oldSha256": "ab24ead6210497c18e858914c0ff98690225dc28c079b2d024d5e5cd09ae44a1",
+      "newSha256": "57d250ef607d8b9fdb0cd8fe05a6f3bc8f320798b44b1bc874934c73206435e8"
+    },
+    {
+      "owner": "history",
+      "file": "polished.js",
+      "resolution": "Equivalent guarded mode setter supplied by minimal UI"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.js",
+      "oldSha256": "59f6d76e98112019c73bf5a449a0d85265a9de4f9b02d7c4e0e93d3807b0ba60",
+      "newSha256": "aa0e406d66efc749916d05bf896913ac892e233f0ee17f1a127cccf9a322e424"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.js",
+      "oldSha256": "5941c9d32284f41f7d2226f16e1093ecf395d64409903bab571ce9c24a4a6ab6",
+      "newSha256": "48b8eb0affeec3786c5215e5ba5a3bd7f66d42110a7a49172a8b12c8f47f63c2"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.js",
+      "oldSha256": "8735a1f20e063de59f59446c68d30b77457283e2fb9bfbb161ad689111d1ba10",
+      "newSha256": "dda4d8ef1ce5b787088c2e71ec8ab3eac7d8c03180e5c2e5cbaf0ebf67df5552"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.js",
+      "oldSha256": "58422d222b6fd593fa787141c8cca1481f5d5d58a697842f7d24a7e2bf9c315d",
+      "newSha256": "97b44c41f6748cadc495604d8009e770f9cf1121b9fbee622a596e79bd7a6e13"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.js",
+      "oldSha256": "7c5838aa677b4a49dee11365e23ae788aa5999eb98ae88475135b0f4e8b45b75",
+      "newSha256": "9819ba95d7f0637c7f2d86717bc8a6ba78103197e1839d5c09fea7ecce13df7c"
+    },
+    {
+      "owner": "reaction-picker",
+      "file": "polished.css",
+      "oldSha256": "ab5822277b1465eff449d4a0b176f86d2a99f9616c1ac8a01547e3fd9ab1d1ea",
+      "newSha256": "f13440c9656643775450cb365618f9018ad864eddc001ad3e0b3124a6160bc77"
+    }
+  ]
+}

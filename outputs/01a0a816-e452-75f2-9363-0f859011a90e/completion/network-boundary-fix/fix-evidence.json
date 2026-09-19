@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "suite": "network-boundary-fix",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse",
+  "runtimePath": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\network-boundary-fix\\candidate\\intentgraph\\agent-runtime.cjs",
+  "testCount": 9,
+  "passCount": 8,
+  "partialCount": 1,
+  "failCount": 0,
+  "results": [
+    {
+      "id": "exact-baseline-apply",
+      "status": "PASS",
+      "detail": "all runtime/UI replacements apply once in sequence with recorded SHA-256 before/after proofs",
+      "hunkCount": 10,
+      "startedAt": "2026-09-16T06:50:51.814Z",
+      "finishedAt": "2026-09-16T06:50:51.844Z"
+    },
+    {
+      "id": "original-runtime-regression",
+      "status": "PASS",
+      "detail": "frozen agent-runtime.test.cjs and chat-runtime.test.cjs passed against the candidate overlay",
+      "outputTail": "ation to backend (77.6458ms)\n✔ malformed and unsupported model tool arguments never reach the device adapter (109.1543ms)\n✔ unknown submission is not repeated and completed evidence survives a later model failure (93.9802ms)\n✔ framework exposes SSH-specific BGP operation and retains Nornir provenance (51.6125ms)\n✔ semantic inventory selects only requested fields, one call, no fabricated values (99.8679ms)\n✔ run show version requires a valid inventory UUID before dispatch (3.8889ms)\n✔ unsupported and malformed actions cannot invoke tools (8.5211ms)\n✔ invented fields, hosts and prose from selection are rejected (6.5282ms)\n✔ disconnect suppresses late inventory and no second model call (305.725ms)\n✔ oversized snapshot is withheld and missing inventory never yields invented facts (35.5792ms)\n✔ exact latest-turn command dispatches once and returns raw SUCCESS output with metadata (4.651ms)\n✔ history, quotes, separators, writes, multiple targets, and unknown targets never dispatch (1.6479ms)\n✔ command failure buckets remain distinct and submitted abort is reported without retry (4.6705ms)\nℹ tests 17\nℹ suites 0\nℹ pass 17\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 5668.9578\n",
+      "startedAt": "2026-09-16T06:50:51.844Z",
+      "finishedAt": "2026-09-16T06:50:57.784Z"
+    },
+    {
+      "id": "normal-explanation",
+      "status": "PASS",
+      "detail": "normal explanation retained model response and did not create health metadata or network calls",
+      "startedAt": "2026-09-16T06:50:57.784Z",
+      "finishedAt": "2026-09-16T06:50:57.933Z"
+    },
+    {
+      "id": "unknown-fails-closed",
+      "status": "PASS",
+      "detail": "UNKNOWN transport yields deterministic authoritative status; contradictory model prose is advisory only",
+      "authoritativeText": "Observed check status: show version on sw1: UNKNOWN. Device health is not established by these checks.",
+      "advisoryText": "sw1 is healthy.",
+      "startedAt": "2026-09-16T06:50:57.933Z",
+      "finishedAt": "2026-09-16T06:50:58.009Z"
+    },
+    {
+      "id": "failure-fails-closed",
+      "status": "PASS",
+      "detail": "FAILURE transport yields deterministic authoritative status and hides contradictory model prose",
+      "authoritativeText": "Observed check status: show version on sw1: FAILURE. Device health is not established by these checks.",
+      "startedAt": "2026-09-16T06:50:58.009Z",
+      "finishedAt": "2026-09-16T06:50:58.061Z"
+    },
+    {
+      "id": "success-fault-output-health-unassessed",
+      "status": "PARTIAL",
+      "detail": "SUCCESS retains raw fault evidence and exposes healthAssessment=not_assessed; an adversarial model may still make an untrusted health claim",
+      "limitation": "A trusted raw-output health classifier is intentionally absent; command completion alone is never promoted to healthy.",
+      "startedAt": "2026-09-16T06:50:58.061Z",
+      "finishedAt": "2026-09-16T06:50:58.108Z"
+    },
+    {
+      "id": "success-interpretation-health-unassessed",
+      "status": "PASS",
+      "detail": "all-success diagnostic retains grounded model interpretation plus deterministic not_assessed metadata",
+      "startedAt": "2026-09-16T06:50:58.108Z",
+      "finishedAt": "2026-09-16T06:50:58.156Z"
+    },
+    {
+      "id": "plan-zero-tools",
+      "status": "PASS",
+      "detail": "plan mode remains zero-tool and has no health metadata",
+      "startedAt": "2026-09-16T06:50:58.156Z",
+      "finishedAt": "2026-09-16T06:50:58.171Z"
+    },
+    {
+      "id": "ui-execution-health-labels",
+      "status": "PASS",
+      "detail": "candidate UI labels execution status explicitly and surfaces health only as not assessed in optional run details",
+      "startedAt": "2026-09-16T06:50:58.171Z",
+      "finishedAt": "2026-09-16T06:50:58.173Z"
+    }
+  ],
+  "acceptanceRows": {
+    "UX079": "PARTIAL",
+    "UX106": "PASS"
+  },
+  "sourceHashes": {
+    "liveAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "frozenAgentRuntime": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C",
+    "candidateAgentRuntime": "A9997E0D0D79DF141AA14BB1913551485E517E5819D19004D9B7B1C68B2BDFCD",
+    "latestMinimalUiCandidate": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD",
+    "candidateFrozenV8PolishedJs": "33ACF1B4D94AF51DDAFEF6A3383F097C543182E8365EC002C275B417F682D11A",
+    "preservedMinimalUiPolishedJs": "65D85ADE51321FC84139B3DABCACB44D30FECDDD38AD69B8A6A46E11B512561C",
+    "livePolishedJs": "560374B9C20BA04546EB238558D8E45ACD2353F8F69DF73824D8356E902DA17A"
+  },
+  "noExternalCalls": true,
+  "noCredentials": true,
+  "limitation": "Unknown/failure outcomes are fail-closed deterministically. All-success raw output remains health-unassessed; without a trusted classifier, an adversarial model interpretation is advisory only by contract but can still be semantically wrong."
+}

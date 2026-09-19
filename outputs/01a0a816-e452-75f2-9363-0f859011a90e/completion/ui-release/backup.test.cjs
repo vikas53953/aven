@@ -1,0 +1,7 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const backup=require('./candidate/polished-backup.js');
+function fixture(){return {prefs:{theme:'dark',activeAgent:'a',agents:[{id:'a',name:'Network companion'}],sections:[],showEvidence:false,showInvestigation:true,showRunDetails:false},data:{activeChat:'c',chats:[{id:'c',title:'Existing',recipients:['a'],messages:[{id:'m',role:'user',text:'Keep this'}],pendingQueue:[]}],projects:[],channels:[]},docs:{}};}
+test('detail preferences round trip; raw messages remain unchanged',()=>{const s=fixture(),e=backup.envelope(s.prefs,s.data,s.docs,'ux-minimal-ui-v9'),restored=backup.parse(backup.serialize(e));for(const key of ['showEvidence','showInvestigation','showRunDetails'])assert.equal(restored.prefs[key],s.prefs[key]);assert.deepEqual(restored.data.chats[0].messages,s.data.chats[0].messages);});
+test('malformed detail preference is rejected',()=>{const s=fixture(),e=backup.envelope(s.prefs,s.data,s.docs,'test');e.prefs.showEvidence='false';assert.throws(()=>backup.validate(e),/Invalid detail preference/);});
+test('Add restore keeps current display preferences and original history',()=>{const s=fixture(),e=backup.envelope(s.prefs,s.data,s.docs,'test'),incoming=structuredClone(e);incoming.prefs.showEvidence=true;const merged=backup.mergeImported(e,incoming);assert.equal(merged.prefs.showEvidence,false);assert.deepEqual(merged.data.chats[0].messages,e.data.chats[0].messages);});

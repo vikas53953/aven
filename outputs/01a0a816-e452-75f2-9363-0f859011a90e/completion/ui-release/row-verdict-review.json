@@ -1,0 +1,902 @@
+{
+  "generatedAt": "2026-09-16T07:13:21.266Z",
+  "scope": "Original UX-001..UX-115 acceptances covered by the live UI/history evidence set only: navigation live sourceResults, history-candidate browser evidence, reaction-picker candidate evidence and UI quality checks. Backend/provider/workflow/workspace candidates outside this UI/history set retain baseline verdicts.",
+  "inputs": [
+    "../baseline-ledger.json",
+    "navigation/results.json",
+    "browser-evidence.json",
+    "quality-evidence.json",
+    "boundaries-v9.1.json",
+    "../history-settings-evidence.json",
+    "../history-handoff.json",
+    "../reaction-picker/browser-evidence.json",
+    "../reaction-picker/replacement-verification.json",
+    "integration-v9.json",
+    "integration.json"
+  ],
+  "policy": "Use only navigation sourceResults where source=live; ignore the baseline preflight missing avatar assets for current-live conclusions. PASS is promoted only where the original acceptance slice is exercised. Browser-local acceptance is not downgraded merely because it is not packaged; provider/device, owner visual and assistive-technology limits remain explicit. Backend candidates unintegrated here retain their frozen baseline verdicts.",
+  "sourceHashDistinction": {
+    "v9": {
+      "artifact": "integration-v9.json",
+      "files": {
+        "polished.html": "f343be26c0ac2944fa5ff42607bea2445248b9f4928f0d31db2041194a251741",
+        "polished.css": "3ce122e6e7ebcffd7bc550204c735e592a4cd092f5992b71f5744a69e5f86694",
+        "polished.js": "5e6c8b9922e11556a8699b827f24de84ec90162f53c6c0aacc234ea1e510e9c7",
+        "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+        "polished-backup.js": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642"
+      },
+      "scope": "Full UI/history composition used by navigation/results.json live sourceResults."
+    },
+    "v91": {
+      "artifact": "integration.json",
+      "files": {
+        "polished.html": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+        "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+        "polished.js": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+        "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+        "polished-backup.js": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642"
+      },
+      "scope": "Final v9.1 source; only boundaries-v9.1.json is a fresh v9.1 small-fold boundary run, so it must not be read as a full re-run of v9 rows."
+    },
+    "historyCandidate": {
+      "artifact": "../history-handoff.json",
+      "candidateSha256": "028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822",
+      "liveIntegrity": "Live polished.js remains AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C; liveFilesModified=[]",
+      "scope": "History candidate overlay browser evidence; no claim of provider/device or packaged cross-device behavior."
+    },
+    "reactionPickerCandidate": {
+      "artifact": "../reaction-picker/replacement-verification.json",
+      "polishedJs": "FDDC94C9421C5139ED40B61869ED2D17B6655A046E392110674C6E827E385096",
+      "polishedCss": "F35F296124DB2CA5BE0AFEBE989C00E00EC073874215E32EFC16915476C4ADA7",
+      "scope": "Isolated picker candidate evidence; local fixture only."
+    }
+  },
+  "rows": [
+    {
+      "id": "UX-001",
+      "feature": "Subtle scrollbars",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: mouse, keyboard, and idle scrollbar behavior: PASS; Chromium touch gesture scrolls the conversation surface: PASS. Limitation: Fixture verifies mouse wheel, PageDown, touch gesture, and idle scrollbar fade; no assistive-technology or owner visual certification.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: scroll surfaces wake and remain scrollable: PASS. Limitation: This fixture does not measure OS scrollbar fade timing or physical touch input."
+      ],
+      "remainingGap": "No substantive gap in the original browser interaction slice; assistive-technology and owner visual certification remain outside."
+    },
+    {
+      "id": "UX-002",
+      "feature": "Contain horizontal overflow",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: raw CLI line copy stays exact while page bounds remain contained: PASS. Limitation: Fixture verifies exact CLI text and clipboard whitespace plus 390px horizontal containment; no wider viewport matrix.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: page and sidebar stay within viewport while raw output remains exact: PASS. Limitation: OS clipboard integration is intercepted in the isolated browser."
+      ],
+      "remainingGap": "Agreed desktop-width matrix beyond 390px is untested, so full overflow coverage is incomplete."
+    },
+    {
+      "id": "UX-003",
+      "feature": "Account entry",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Caret absent; account menu remains keyboard reachable.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: account entry has no caret and returns focus after Escape: PASS. Limitation: Fixture verifies keyboard account entry/Escape focus and visible identity; browser caret and assistive-technology certification remain separate.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: account menu is keyboard reachable without a caret: PASS. Limitation: No assistive technology certification."
+      ],
+      "remainingGap": "No substantive gap in the original browser interaction slice; assistive-technology certification remains outside."
+    },
+    {
+      "id": "UX-004",
+      "feature": "Selected profile identity",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: profile rename updates selected header and leaves other coworker unchanged: PASS. Limitation: Fixture verifies profile rename/header synchronization and peer identity in local storage; no multi-user sync.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: profile rename synchronizes selected coworker header: PASS. Limitation: Scoped to selected profile and two local coworkers."
+      ],
+      "remainingGap": "The evidence does not open and edit every selected profile document after rename, so document accessibility is incomplete."
+    },
+    {
+      "id": "UX-005",
+      "feature": "Horizontal reaction panel",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Row matches reference structure; opens by mouse and keyboard without clipping.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: reaction row opens by keyboard and pointer without clipping: PASS. Limitation: Fixture verifies pointer/keyboard reaction row navigation and viewport bounds; no visual reference diff.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: reaction row opens and supports keyboard selection: PASS. Limitation: Narrow reference geometry is outside this scoped check."
+      ],
+      "remainingGap": "Pointer/keyboard operation and bounds pass, but row structure has no current/reference visual or structural comparison."
+    },
+    {
+      "id": "UX-006",
+      "feature": "One reaction per user",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: one reaction replaces, clears, survives reload, and preserves messages: PASS. Limitation: Fixture verifies single-reaction replacement, clear, reload persistence, and message retention; no concurrent-device sync.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: one reaction replaces, clears and survives reload: PASS. Limitation: Local browser storage only."
+      ],
+      "remainingGap": "No substantive gap in the original local interaction slice; concurrent-device synchronization remains outside."
+    },
+    {
+      "id": "UX-007",
+      "feature": "Coworker-first entry",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: coworker-first entry keeps direct chats, queue, grouped history, and avatar access reachable: PASS. Limitation: Fixture verifies direct/grouped history, queue, and avatar reachability; no user-study evidence.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: coworker-first direct entry leaves existing history reachable: PASS. Limitation: Bounded to the seeded coworker/history set."
+      ],
+      "remainingGap": "The seeded test proves direct/grouped history, queue and avatar reachability, but does not exercise a new-user named-conversation start path."
+    },
+    {
+      "id": "UX-008",
+      "feature": "Stable conversation header",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Short first message never replaces coworker identity.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: short sent message retains selected coworker header: PASS. Limitation: Fixture verifies local send preserves the selected header and request identity; provider execution is blocked.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: short saved conversation retains coworker header: PASS. Limitation: No live provider stream in this fixture."
+      ],
+      "remainingGap": "No substantive gap in the original UI identity slice; the provider stream is intentionally mocked/blocked."
+    },
+    {
+      "id": "UX-009",
+      "feature": "Sidebar previews",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: plain preview and full duplicate title remain accessible at narrow width: PASS. Limitation: Fixture verifies 390px previews, duplicate titles, and horizontal containment; no full responsive breakpoint matrix.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: sidebar preview is plain text and full title is accessible: PASS. Limitation: Extreme title matrix is outside this check."
+      ],
+      "remainingGap": "No substantive gap in the tested acceptance slice; only the seeded narrow width and title matrix were exercised."
+    },
+    {
+      "id": "UX-010",
+      "feature": "Pin important conversations",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Pinned items remain accessible and retain order after reload.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: multiple pinned conversations retain exact order and access after reload: PASS. Limitation: Fixture verifies two pinned rows retain exact order and access after reload; no cross-device sync.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: pinned chats stay grouped, legacy pins survive reload, and failed save is safe: PASS. Limitation: Canonical render ordering is checked in the DOM; the injected quota error verifies the previous pin state remains persisted."
+      ],
+      "remainingGap": "No substantive gap in the original local persistence slice; cross-device ordering remains outside."
+    },
+    {
+      "id": "UX-011",
+      "feature": "Rename conversations",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Renaming a conversation never renames its coworker unexpectedly.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: conversation rename leaves coworker identity unchanged through navigation: PASS. Limitation: Fixture verifies conversation rename keeps coworker identity through navigation; local fixture only.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: conversation rename leaves coworker identity unchanged: PASS. Limitation: Scoped to direct conversation rename."
+      ],
+      "remainingGap": "No substantive gap in the original direct-conversation slice; broader multi-user synchronization remains outside."
+    },
+    {
+      "id": "UX-012",
+      "feature": "Sections and ordering",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Grouping never implies coordinated agent execution or hides old histories.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: direct and grouped histories stay distinct and old grouped chat remains discoverable: PASS. Limitation: Fixture verifies direct/grouped histories remain distinct and old grouped rows remain reachable; no user interpretation study.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: direct chats and grouped conversations stay distinct: PASS. Limitation: No exhaustive implication study."
+      ],
+      "remainingGap": "DOM separation and old-row reachability pass, but the evidence does not assert labels/affordances cannot imply coordinated execution."
+    },
+    {
+      "id": "UX-013",
+      "feature": "Sidebar collapse and resize",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Collapse and resize leave active chat and composer usable.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: resize and collapse preserve active chat and composer usability: PASS. Limitation: Fixture verifies mouse resize, Home-key resize, collapse, and composer editing; no assistive-technology certification.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: collapsed rail leaves composer usable: PASS. Limitation: Pointer resize matrix is not included here."
+      ],
+      "remainingGap": "No substantive gap in the original browser slice; assistive-technology certification remains outside."
+    },
+    {
+      "id": "UX-014",
+      "feature": "Back and forward navigation",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Back returns to previous chat without dropping draft or executing a request.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: back and forward preserve drafts without sending or executing: PASS. Limitation: Fixture verifies back/forward draft restoration and zero chat API calls; local session history only.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: back and forward preserve chat drafts: PASS. Limitation: Single local navigation sequence."
+      ],
+      "remainingGap": "No substantive gap in the tested local session-history slice; cross-session/device history is outside."
+    },
+    {
+      "id": "UX-015",
+      "feature": "Workspace search",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Known saved phrase resolves to the correct conversation.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: known search result opens the exact conversation: PASS. Limitation: Fixture verifies a known phrase opens exact message m3 and focuses it; search index is local fixture data.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: search result keyboard activation opens exact message context: PASS. Limitation: Scoped to a unique saved phrase."
+      ],
+      "remainingGap": "No substantive gap for the seeded known phrase; search-index breadth beyond local fixture data is outside."
+    },
+    {
+      "id": "UX-016",
+      "feature": "Search filters and results",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Filter by coworker or conversation and open exact result context.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: coworker and conversation filters open exact duplicate-term context: PASS. Limitation: Fixture verifies coworker and conversation filters return exact result d1 and focus it; no external index.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: search coworker and conversation filters narrow results: PASS. Limitation: Duplicate-term disambiguation remains fixture-scoped."
+      ],
+      "remainingGap": "No substantive gap for the seeded duplicate-term filter result; broader external-index behavior is outside."
+    },
+    {
+      "id": "UX-017",
+      "feature": "Find within conversation",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Searching a repeated term visits every match without losing composer draft.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: find next and previous visit every match while preserving draft: PASS. Limitation: Fixture verifies four local matches cycle with next/previous while preserving the draft; no cross-conversation find scope.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: find visits repeated matches while preserving draft: PASS. Limitation: The fixture contains three repeated user terms and one saved evidence term."
+      ],
+      "remainingGap": "No substantive gap for the seeded repeated-term cycle; cross-conversation find scope is outside."
+    },
+    {
+      "id": "UX-018",
+      "feature": "Command palette",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Keyboard opens palette; selected action works in current chat; Escape restores focus.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: keyboard opens palette, runs current-chat action, and Escape restores focus: PASS. Limitation: Fixture verifies Ctrl+K, keyboard result navigation, action execution, and Escape focus restoration; no OS-level shortcut conflicts.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: command palette traverses with keyboard and Escape restores opener: PASS. Limitation: Unavailable-command filtering is limited to the current local registry."
+      ],
+      "remainingGap": "No substantive gap in the tested current-chat palette flow; OS-level shortcut conflicts remain outside."
+    },
+    {
+      "id": "UX-024",
+      "feature": "Reply to a message",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Reply identifies source message; cancel removes reference without deleting draft.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: reply identifies source and cancel keeps draft: PASS. Limitation: Fixture verifies reply source identification and cancel preserving the draft; local fixture only.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: reply identifies source and cancel retains draft: PASS. Limitation: Mouse path only."
+      ],
+      "remainingGap": "No substantive gap in the tested reply/cancel flow; the fixture used a mouse path only."
+    },
+    {
+      "id": "UX-041",
+      "feature": "Readable Markdown",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Representative network reports remain readable; untrusted HTML cannot execute.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: safe markdown is readable and unsafe HTML/schemes stay inert: PASS. Limitation: Fixture verifies table/code-fence readability and safe-link/unsafe-HTML inertness; no broader sanitizer fuzzing.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: markdown renders safe headings/lists/table/code: PASS. Limitation: Representative fixture only.",
+        "boundaries-v9.1.json [final v9.1 small-fold boundary]: long generated code folds with explanation visible and source unchanged; boundary scope does not re-run the full row acceptance."
+      ],
+      "remainingGap": "No substantive gap in the representative readability and inert-HTML slice; broader sanitizer fuzzing remains outside."
+    },
+    {
+      "id": "UX-042",
+      "feature": "Code blocks and exact copy",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Spaces, tabs and line breaks survive copy; no duplicate raw output.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: CLI output renders once and copy preserves whitespace: PASS. Limitation: Fixture verifies one CLI output render and exact whitespace clipboard content; clipboard is isolated in Chromium.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: raw CLI copy preserves tabs and newlines: PASS. Limitation: OS clipboard remains intercepted.",
+        "boundaries-v9.1.json [final v9.1 small-fold boundary]: long generated code folds with explanation visible and source unchanged; boundary scope does not re-run the full row acceptance."
+      ],
+      "remainingGap": "No substantive gap in the tested exact-copy and single-render slice; OS clipboard integration remains isolated."
+    },
+    {
+      "id": "UX-043",
+      "feature": "Copy messages",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Copy uses correct message and reports failure without claiming success.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: message copy selects the correct text and truthfully reports denial: PASS. Limitation: Fixture verifies correct message copy and denied-clipboard Copy failed feedback; clipboard is intercepted in isolated Chromium.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: copy failure reports failure: PASS. Limitation: Browser clipboard rejection is injected."
+      ],
+      "remainingGap": "No substantive gap in correct-copy and denied-clipboard feedback; OS clipboard integration remains isolated."
+    },
+    {
+      "id": "UX-044",
+      "feature": "Time grouping and metadata",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Old and new days are clear; full timestamp accessible on focus or hover.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: old/new date groups and accessible full timestamps are visible: PASS. Limitation: Fixture verifies old/new date groups and focused full timestamp labels; timezone presentation is limited to this environment.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: timestamps expose accessible labels: PASS. Limitation: Timezone matrix is not included."
+      ],
+      "remainingGap": "No substantive gap in old/new grouping and focused labels; timezone presentation matrix remains outside."
+    },
+    {
+      "id": "UX-045",
+      "feature": "Follow latest without jumping",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "New output does not pull user away from an older message; latest button is keyboard usable.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: new output keeps older reading position and latest control is keyboard usable: PASS. Limitation: Fixture verifies older reading position, new output, and keyboard latest control; local fixture run only.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: latest control appears after leaving bottom: PASS. Limitation: No live streaming output."
+      ],
+      "remainingGap": "No substantive gap in the injected new-output/reading-position slice; live provider streaming is outside."
+    },
+    {
+      "id": "UX-046",
+      "feature": "Conversation revert and undo",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Revert and undo restore exact message history; busy or queued state is protected.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: revert and undo restore byte-equivalent history and protect queued work: PASS. Limitation: Fixture verifies deep-equal revert/undo history and queued-work protection; no provider busy race.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: revert and undo restore saved history: PASS. Limitation: Busy/queued protection is separately bounded."
+      ],
+      "remainingGap": "The busy active-run protection branch is not exercised; queued-work protection alone does not close the full acceptance."
+    },
+    {
+      "id": "UX-047",
+      "feature": "Fork or side conversation",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Branch retains provenance and can be revisited without mutating parent history.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: fork preserves provenance, parent history, and reload revisit: PASS. Limitation: Fixture verifies fork provenance, parent immutability, and reload revisit; no cross-device history sync.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: fork retains provenance and survives revisit without mutating parent: PASS. Limitation: Reload and fork-origin target are exercised against the seeded local history."
+      ],
+      "remainingGap": "No substantive gap in fork provenance, parent immutability and reload revisit; cross-device sync remains outside."
+    },
+    {
+      "id": "UX-048",
+      "feature": "Direct links to evidence/messages",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Link opens correct conversation/message; missing or archived targets have a clear explanation.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: existing, missing, and archived message links explain their destination: PASS. Limitation: Fixture verifies existing, missing, and archived local hash links and explanations; local URL handling only.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: message link contains exact local chat and message: PASS. Limitation: Missing/archived destination messages are not exercised here."
+      ],
+      "remainingGap": "No substantive gap in the v9 live existing/missing/archived local-link slice; external URL handling remains outside."
+    },
+    {
+      "id": "UX-049",
+      "feature": "Reaction picker beyond defaults",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Picker supports search/navigation and closes without moving the message.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: more-reactions picker navigates, dismisses, and exposes search: PASS. Limitation: Fixture verifies ten picker buttons, ArrowRight behavior, Escape dismissal, and message layout. Current v8 leaves ArrowRight outside the picker and exposes no search control, so acceptance is partial.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: more-reactions picker opens without moving message: PASS. Limitation: Picker search is not part of this build.",
+        "../reaction-picker/browser-evidence.json [isolated candidate]: UX049-search, UX049-keyboard, UX049-persistence and UX049-responsive all PASS; blockedRequests=0, pageErrors=0, apiCalls=0.",
+        "../reaction-picker/replacement-verification.json: polished.js 5 exact replacements and polished.css 1 exact replacement; final candidate source is available at candidate/polished.js."
+      ],
+      "remainingGap": "The reaction candidate covers search, contained keyboard navigation, Escape focus return and persistence, but its isolated candidate browser run is not a fresh served v9.1 run; screen-reader, visual-reference and multi-device checks remain outside."
+    },
+    {
+      "id": "UX-111",
+      "feature": "Mark read or unread",
+      "priorVerdict": "Unverified",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Unread state persists correctly; opening a conversation never cancels work.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: unread state persists through reload, opening clears it, and active run remains intact: PASS. Limitation: Fixture verifies unread toggle/reload/open and held local run journal while switching chats; provider execution is blocked.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: opening another chat does not cancel active work and unread state still persists: PASS. Limitation: The held loopback NDJSON response proves the request completes after switching chats; no provider call is made."
+      ],
+      "remainingGap": "All exercised browser-local unread/reload/open and held local-run switching checks pass; provider execution and assistive-technology coverage remain outside this review."
+    },
+    {
+      "id": "UX-112",
+      "feature": "Language support disclosure",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Language choice never appears applied while labels remain unchanged.",
+      "evidence": [
+        "navigation/results.json [live sourceResults, v9]: unsupported language cannot appear applied and English fallback is explicit: PASS. Limitation: Fixture verifies the disabled unsupported option is skipped by keyboard (English then system); no translation coverage.",
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: unsupported language is disabled and cannot appear applied: PASS. Limitation: Additional translations are not implemented."
+      ],
+      "remainingGap": "English fallback and disabled unsupported-language disclosure pass; additional translation coverage remains outside this review."
+    },
+    {
+      "id": "UX-035",
+      "feature": "Detailed tool transcript",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Summary, tool input and actual result remain distinguishable.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: tool transcript distinguishes event and raw result: PASS. Limitation: Saved fixture only; no provider stream."
+      ],
+      "remainingGap": "No substantive gap in the saved transcript representation; provider-stream coverage remains outside."
+    },
+    {
+      "id": "UX-050",
+      "feature": "Archive and restore",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Archived chat is read-only until restored; messages and evidence survive.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: archive hides composer and restore preserves history: PASS. Limitation: Local history only."
+      ],
+      "remainingGap": "The archive/restore check confirms composer state and one message, but does not deep-compare the full message/evidence payload before and after restore."
+    },
+    {
+      "id": "UX-051",
+      "feature": "Export conversations and evidence",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Export contains correct selected scope, timestamps and exact evidence without credentials.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: workspace export includes history, exact evidence and pin metadata: PASS. Limitation: Workspace export is all-local scope; OS download path is temporary; pinnedAt is checked for a newly pinned and legacy pinned chat."
+      ],
+      "remainingGap": "Export checks format, selected chat presence, pin metadata and token exclusion, but does not assert exact selected scope, timestamps and raw evidence comprehensively."
+    },
+    {
+      "id": "UX-052",
+      "feature": "Import and backup recovery",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Invalid backup changes nothing. Valid restore preserves unrelated current work.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: invalid import is safe and valid add restore preserves unrelated work, pins and queues: PASS. Limitation: Invalid JSON and valid Add mode are exercised in one isolated browser; imported pinnedAt is checked after the migration/restore transaction."
+      ],
+      "remainingGap": "No substantive gap in invalid-JSON safety plus valid Add-mode preservation of unrelated work, pins and queues; the check is local-browser scoped."
+    },
+    {
+      "id": "UX-054",
+      "feature": "Avatar family and appearance",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Saved avatars remain the same after migration and reload.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: legacy avatar alias migrates visually and chosen avatar persists after reload: PASS. Limitation: Legacy mesh is normalized by the avatar adapter and the selected replacement is verified after reload."
+      ],
+      "remainingGap": "No substantive gap in legacy avatar normalization, chosen avatar persistence and reload; the check uses one legacy fixture."
+    },
+    {
+      "id": "UX-055",
+      "feature": "Name, label and description",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Long name remains readable; saved changes update selected coworker only.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: long coworker name remains selected-only: PASS. Limitation: Only one long label is exercised."
+      ],
+      "remainingGap": "The long label remains selected-only, but only one long name is exercised and persisted reload of the saved edit is not asserted."
+    },
+    {
+      "id": "UX-057",
+      "feature": "Notification preference",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Muted coworker stays quiet; enabled alerts link to the correct finished/waiting run.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: muted runs stay quiet and enabled finished runs link to the exact result: PASS. Limitation: The local NDJSON fixture injects finished run events; waiting/error alert event variants remain owned by the automation alert core."
+      ],
+      "remainingGap": "Finished enabled and muted paths pass, but waiting/error alert variants remain owned by the unintegrated automation alert core."
+    },
+    {
+      "id": "UX-059",
+      "feature": "Appearance and density",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Both themes preserve readable controls and evidence; settings persist.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: theme save/cancel preserves readable controls and evidence in both modes: PASS. Limitation: Light and dark computed foreground/background colors are captured for the conversation and saved evidence block."
+      ],
+      "remainingGap": "Both theme colors/readability and save/cancel pass, but persistence across a reload is not asserted."
+    },
+    {
+      "id": "UX-062",
+      "feature": "Privacy and data controls",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "User can identify what stays local and what a request sends; destructive actions are recoverable where promised.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: privacy page names local and sent data: PASS. Limitation: Destructive recovery paths are separately bounded."
+      ],
+      "remainingGap": "The privacy wording passes, while destructive reset/recovery behavior is not exercised."
+    },
+    {
+      "id": "UX-064",
+      "feature": "Help and feedback",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Every help entry opens useful information; feedback never silently sends private logs.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: help and feedback remain local: PASS. Limitation: Storage failure for feedback is not injected."
+      ],
+      "remainingGap": "Only one help entry and a successful local feedback save are checked; every-help coverage and feedback storage failure are absent."
+    },
+    {
+      "id": "UX-065",
+      "feature": "Shortcut reference",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Displayed shortcuts work and unavailable actions are not advertised.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: documented shortcuts match working palette controls: PASS. Limitation: Cmd modifier and unavailable command matrix are not repeated."
+      ],
+      "remainingGap": "Ctrl+K and displayed shortcut text pass, but Cmd/Ctrl+F behavior and unavailable-action filtering are not asserted."
+    },
+    {
+      "id": "UX-069",
+      "feature": "Resizable work panes",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Opening evidence preserves enough room to read and type; close returns focus.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: pane resize persists and close returns focus: PASS. Limitation: One keyboard resize step."
+      ],
+      "remainingGap": "One keyboard resize and focus return pass, but evidence-specific read/type room and a broader resize matrix are not asserted."
+    },
+    {
+      "id": "UX-073",
+      "feature": "Inline evidence annotations",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Comment cannot drift to a different result after rerun.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: annotation success binds to evidence identity: PASS. Limitation: Stale-result rejection, discard and save-failure are not generated here."
+      ],
+      "remainingGap": "A successful annotation is saved, but stale-result rejection, discard and save-failure paths are not exercised."
+    },
+    {
+      "id": "UX-083",
+      "feature": "Feed / activity inbox",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Every entry opens relevant run; empty view explains what will appear.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: feed entry opens relevant saved run: PASS. Limitation: Fixture has no provider/device run."
+      ],
+      "remainingGap": "Only the empty Feed explanation is exercised; populated entries opening their distinct saved runs are not."
+    },
+    {
+      "id": "UX-084",
+      "feature": "Ideas view",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "No dead-end primary navigation; saved user ideas remain recoverable.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: ideas can be created, saved, archived and recovered locally: PASS. Limitation: The fixture exercises the actual workspace-tools Add, Save, reload, Archive and Restore controls with local storage only."
+      ],
+      "remainingGap": "No substantive gap in local idea add/save/reload/archive/restore behavior; no remote persistence is exercised."
+    },
+    {
+      "id": "UX-087",
+      "feature": "Completion and attention alerts",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Alert opens correct task and respects mute; duplicate events do not spam.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: notification setting exposes the enabled state after a linked completion: PASS. Limitation: Muted and enabled delivery plus exact finished-result linking are exercised in UX-057; waiting/error variants remain owned by the automation alert core."
+      ],
+      "remainingGap": "The enabled preference and finished-result path are covered through UX-057, but waiting/error variants and duplicate visible-alert suppression are not."
+    },
+    {
+      "id": "UX-058",
+      "feature": "Simple creation and first welcome",
+      "priorVerdict": "Verified (scoped)",
+      "proposedCurrentVerdict": "Verified (scoped)",
+      "acceptance": "Welcome is visibly local and never sent as fabricated model history.",
+      "evidence": [
+        "../history-settings-evidence.json [history-candidate overlay 028F847F65FB358C0312B99B106B7CF8BA26798AB51BF3A8D9B71F940201C822]: new coworker shows a local welcome and persists its first chat: PASS. Limitation: Local-only creation fixture; no model request is made."
+      ],
+      "remainingGap": "No substantive gap in local welcome semantics and persisted first-chat behavior; no model/provider request or cross-device storage is exercised."
+    },
+    {
+      "id": "UX-091",
+      "feature": "Keyboard-only operation",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Visible focus, logical order, no traps; Escape returns focus correctly.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-091-plus-menu-keyboard and UX-091-settings-keyboard PASS."
+      ],
+      "remainingGap": "Plus/settings keyboard paths pass, but all visible controls, full logical order, trap detection and every Escape return are not covered."
+    },
+    {
+      "id": "UX-092",
+      "feature": "Accessible names and state",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Screen reader identifies each action, selected coworker and active run state correctly.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-092-accessible-names-and-state PASS."
+      ],
+      "remainingGap": "Representative ARIA roles/names and selected state pass, but there is no screen-reader run covering every action, coworker and active-run state."
+    },
+    {
+      "id": "UX-093",
+      "feature": "Contrast, text scaling and reflow",
+      "priorVerdict": "Unverified",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "At 200% text scale controls remain usable; contrast measured; narrow content reflows.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-093-contrast-and-text-stress PASS."
+      ],
+      "remainingGap": "One answer contrast measurement and 200% narrow overflow check pass, but all controls and a broader narrow/reflow matrix are not measured."
+    },
+    {
+      "id": "UX-094",
+      "feature": "Reduced motion",
+      "priorVerdict": "Unverified",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Motion-reduced mode preserves all state changes and cancels decorative animation.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-094-reduced-motion PASS."
+      ],
+      "remainingGap": "Decorative animation is disabled under reduced motion, but state-changing interactions under the preference are not exercised."
+    },
+    {
+      "id": "UX-095",
+      "feature": "Hover, focus and touch menus",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Menus stay within viewport, remain operable on hover, close predictably and restore focus.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-095-touch-targets PASS."
+      ],
+      "remainingGap": "Touch target sizes pass, but hover menu bounds, close behavior and focus restoration are not covered by this quality check."
+    },
+    {
+      "id": "UX-096",
+      "feature": "Responsive pane layout",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Desktop, narrow window and zoomed layouts retain controls; deliberate table scroll is contained.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-096-responsive-pane PASS."
+      ],
+      "remainingGap": "A 320px pane open/close and containment check passes, but desktop/zoomed controls and deliberate table scrolling are not covered."
+    },
+    {
+      "id": "UX-097",
+      "feature": "Empty and unavailable states",
+      "priorVerdict": "Partial",
+      "proposedCurrentVerdict": "Partial",
+      "acceptance": "Every visible action has a real result or an accurate reason it is unavailable.",
+      "evidence": [
+        "ui-release/quality-evidence.json [live UI release quality evidence, viewport 1440x900, 320x900, 200% root text stress]: UX-097-truthful-unavailable PASS."
+      ],
+      "remainingGap": "Unavailable context is truthful, but the evidence does not enumerate every visible action and its real result/unavailable explanation."
+    }
+  ],
+  "supplementalEvidence": [
+    {
+      "artifact": "browser-evidence.json",
+      "result": "PASS",
+      "checks": 23,
+      "scope": "Browser fixture request/load evidence; no additional one-to-one original acceptance rows beyond the row evidence above."
+    },
+    {
+      "artifact": "quality-evidence.json",
+      "result": "PASS",
+      "checks": [
+        "UX-091-plus-menu-keyboard",
+        "UX-091-settings-keyboard",
+        "UX-092-accessible-names-and-state",
+        "UX-093-contrast-and-text-stress",
+        "UX-094-reduced-motion",
+        "UX-095-touch-targets",
+        "UX-096-responsive-pane",
+        "UX-097-truthful-unavailable"
+      ],
+      "scope": "Seven original UX rows mapped; UI-02/UI-05 checks are product-level acceptance items outside the original 115-row ledger."
+    },
+    {
+      "artifact": "boundaries-v9.1.json",
+      "result": "PASS",
+      "checks": [
+        "Failure with raw output stays visible when diagnostics are off",
+        "Active raw output and investigation stay hidden while Stop remains visible",
+        "Long generated code is folded without hiding the explanation or changing code"
+      ],
+      "scope": "Small-fold/UI boundary evidence considered as supporting evidence; no unambiguous one-to-one original row mapping for all three names."
+    }
+  ],
+  "counts": {
+    "baselineAll": {
+      "Partial": 69,
+      "Verified (scoped)": 22,
+      "Unverified": 6,
+      "Missing": 14,
+      "Deferred": 4
+    },
+    "reviewedRows": 54,
+    "reviewedCurrent": {
+      "Verified (scoped)": 29,
+      "Partial": 25
+    },
+    "baselineVerifiedCount": 22,
+    "revisedBaselineVerifiedToPartial": [
+      "UX-064",
+      "UX-083"
+    ],
+    "retainedBaselineVerifiedCount": 20,
+    "newlyVerifiedBeyondBaseline": [
+      "UX-001",
+      "UX-008",
+      "UX-009",
+      "UX-010",
+      "UX-013",
+      "UX-014",
+      "UX-015",
+      "UX-016",
+      "UX-017",
+      "UX-018",
+      "UX-045",
+      "UX-047",
+      "UX-048",
+      "UX-049",
+      "UX-111",
+      "UX-052",
+      "UX-054"
+    ],
+    "verifiedUnionBaselineAndCurrent": {
+      "count": 37,
+      "ids": [
+        "UX-003",
+        "UX-006",
+        "UX-011",
+        "UX-024",
+        "UX-028",
+        "UX-029",
+        "UX-035",
+        "UX-040",
+        "UX-041",
+        "UX-042",
+        "UX-043",
+        "UX-044",
+        "UX-058",
+        "UX-077",
+        "UX-079",
+        "UX-084",
+        "UX-102",
+        "UX-106",
+        "UX-112",
+        "UX-115",
+        "UX-001",
+        "UX-008",
+        "UX-009",
+        "UX-010",
+        "UX-013",
+        "UX-014",
+        "UX-015",
+        "UX-016",
+        "UX-017",
+        "UX-018",
+        "UX-045",
+        "UX-047",
+        "UX-048",
+        "UX-049",
+        "UX-111",
+        "UX-052",
+        "UX-054"
+      ]
+    },
+    "effectiveAll115AfterApplyingReviewedRows": {
+      "Verified (scoped)": 37,
+      "Partial": 57,
+      "Unverified": 3,
+      "Missing": 14,
+      "Deferred": 4
+    },
+    "outsideUiHistoryScopeRetainedBaseline": {
+      "count": 61,
+      "byVerdict": {
+        "Partial": {
+          "count": 32,
+          "ids": [
+            "UX-019",
+            "UX-021",
+            "UX-022",
+            "UX-025",
+            "UX-030",
+            "UX-031",
+            "UX-032",
+            "UX-034",
+            "UX-036",
+            "UX-038",
+            "UX-039",
+            "UX-056",
+            "UX-060",
+            "UX-061",
+            "UX-066",
+            "UX-067",
+            "UX-068",
+            "UX-070",
+            "UX-072",
+            "UX-076",
+            "UX-078",
+            "UX-081",
+            "UX-085",
+            "UX-098",
+            "UX-100",
+            "UX-101",
+            "UX-103",
+            "UX-107",
+            "UX-108",
+            "UX-109",
+            "UX-110",
+            "UX-113"
+          ]
+        },
+        "Unverified": {
+          "count": 3,
+          "ids": [
+            "UX-020",
+            "UX-099",
+            "UX-105"
+          ]
+        },
+        "Missing": {
+          "count": 14,
+          "ids": [
+            "UX-023",
+            "UX-026",
+            "UX-027",
+            "UX-033",
+            "UX-037",
+            "UX-071",
+            "UX-074",
+            "UX-075",
+            "UX-080",
+            "UX-082",
+            "UX-086",
+            "UX-088",
+            "UX-089",
+            "UX-114"
+          ]
+        },
+        "Verified (scoped)": {
+          "count": 8,
+          "ids": [
+            "UX-028",
+            "UX-029",
+            "UX-040",
+            "UX-077",
+            "UX-079",
+            "UX-102",
+            "UX-106",
+            "UX-115"
+          ]
+        },
+        "Deferred": {
+          "count": 4,
+          "ids": [
+            "UX-053",
+            "UX-063",
+            "UX-090",
+            "UX-104"
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Navigation/results.json was captured against the v9 source hash; final v9.1 has a distinct hash and only the small-fold boundary run is fresh at v9.1.",
+    "History evidence is an isolated candidate overlay with liveIntegrity recorded as unchanged baseline; it does not establish packaged or cross-device behavior.",
+    "Reaction-picker evidence is an isolated candidate browser run; final served-build re-run and owner visual/screen-reader acceptance remain outside.",
+    "All browser checks use local fixtures and loopback interception; no provider, device, external network, credentials or user files were used."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "runtime": "C:/Users/vikasmit/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+  "command": "node --check polished-automation.js && node --check polished.js && node --check polished-backup.js && node --check polished-workspace-tools.js && node --check automation.test.cjs && node automation.test.cjs",
+  "exitCode": 0,
+  "result": {
+    "pure": "passed",
+    "backup": "preserved",
+    "browser": "passed",
+    "externalCalls": 0,
+    "disabledJobs": "not executed",
+    "replayDedup": "passed",
+    "failures": "visible",
+    "staleVersion": "blocked",
+    "unavailablePlugin": "disabled",
+    "schedulerRace": "in-flight disable/delete preserved; save failure persisted=false and no automatic retry",
+    "goalReload": "retained evidence completion persisted across reload",
+    "manualRun": "selected paused/future job only; disabled state preserved after history write",
+    "browserCleanup": "fixture closed through finally"
+  },
+  "browserScope": "Chromium candidate polished.html served from local fixture with no provider/device calls.",
+  "limitations": [
+    "External scheduling and provider/device adapters are intentionally not exercised.",
+    "Owner integration must apply replacements.json to its current polished.js/polished.html/polished-backup.js baseline."
+  ]
+}

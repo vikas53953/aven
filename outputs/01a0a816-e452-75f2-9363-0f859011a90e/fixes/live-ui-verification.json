@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "date": "2026-09-16",
+  "url": "http://127.0.0.1:8767/polished.html",
+  "method": "Direct Codex in-app browser UI control with accessibility observations and screenshot",
+  "build": "ux-audit-fixes-v8",
+  "observations": [
+    "About initially showed Unknown - local status not checked.",
+    "User-triggered Refresh local status updated About to OpenCode Go / mimo-v2.5 configured; reachability unverified.",
+    "Support report displayed build ux-audit-fixes-v8, configured true, lastChecked 2026-09-16T04:09:27.012Z, reachability unverified.",
+    "Artifacts for the existing selected conversation displayed 23 outputs; pre-fix audit observed 46. Screenshot confirmed the saved raw evidence view rendered."
+  ],
+  "scope": "Read-only UI inspection and local configuration GET only. No messages sent, new coworkers created, provider/device diagnostics executed, settings changed or raw evidence rewritten."
+}

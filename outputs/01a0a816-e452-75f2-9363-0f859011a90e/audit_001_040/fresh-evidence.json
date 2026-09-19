@@ -1,0 +1,310 @@
+{
+  "generatedAt": "2026-09-16T04:42:24.886Z",
+  "app": "http://127.0.0.1:50737/polished.html",
+  "checks": [
+    {
+      "id": "UX-001",
+      "passed": true,
+      "detail": "scrollable at 1440px"
+    },
+    {
+      "id": "UX-002",
+      "passed": true,
+      "detail": "no page overflow at 1440px"
+    },
+    {
+      "id": "UX-001",
+      "passed": true,
+      "detail": "scrollable at 1024px"
+    },
+    {
+      "id": "UX-002",
+      "passed": true,
+      "detail": "no page overflow at 1024px"
+    },
+    {
+      "id": "UX-001",
+      "passed": true,
+      "detail": "scrollable at 768px"
+    },
+    {
+      "id": "UX-002",
+      "passed": true,
+      "detail": "no page overflow at 768px"
+    },
+    {
+      "id": "UX-001",
+      "passed": true,
+      "detail": "scrollable at 390px"
+    },
+    {
+      "id": "UX-002",
+      "passed": true,
+      "detail": "no page overflow at 390px"
+    },
+    {
+      "id": "UX-003",
+      "passed": true,
+      "detail": "account menu keyboard reachable"
+    },
+    {
+      "id": "UX-004",
+      "passed": true,
+      "detail": "account identity rendered"
+    },
+    {
+      "id": "UX-005",
+      "passed": true,
+      "detail": "reaction row opened"
+    },
+    {
+      "id": "UX-006",
+      "passed": true,
+      "detail": "reaction selected"
+    },
+    {
+      "id": "UX-006",
+      "passed": true,
+      "detail": "second reaction replaces first"
+    },
+    {
+      "id": "UX-006",
+      "passed": true,
+      "detail": "reaction persists on reload"
+    },
+    {
+      "id": "UX-007",
+      "passed": true,
+      "detail": "coworker-first direct entry"
+    },
+    {
+      "id": "UX-008",
+      "passed": true,
+      "detail": "stable coworker header"
+    },
+    {
+      "id": "UX-009",
+      "passed": true,
+      "detail": "sidebar preview strips markdown"
+    },
+    {
+      "id": "UX-010",
+      "passed": true,
+      "detail": "pin action persists in DOM"
+    },
+    {
+      "id": "UX-010",
+      "passed": true,
+      "detail": "pin survives reload"
+    },
+    {
+      "id": "UX-011",
+      "passed": true,
+      "detail": "conversation rename leaves coworker identity"
+    },
+    {
+      "id": "UX-012",
+      "passed": true,
+      "detail": "direct/conversation grouping visible"
+    },
+    {
+      "id": "UX-013",
+      "passed": true,
+      "detail": "sidebar collapses"
+    },
+    {
+      "id": "UX-014",
+      "passed": true,
+      "detail": "back restores prior chat and draft"
+    },
+    {
+      "id": "UX-014",
+      "passed": true,
+      "detail": "forward history available"
+    },
+    {
+      "id": "UX-015",
+      "passed": true,
+      "detail": "saved phrase returns a result"
+    },
+    {
+      "id": "UX-016",
+      "passed": true,
+      "detail": "coworker filter changes results"
+    },
+    {
+      "id": "search-find-commands",
+      "passed": false,
+      "detail": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#commands-button')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"nav-icon\" id=\"commands-button\" title=\"Commands · Ctrl+K\" aria-label=\"Open commands\">⌘</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    51 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"search-dialog\" aria-labelledby=\"search-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "id": "UX-019",
+      "passed": true,
+      "detail": "empty send disabled"
+    },
+    {
+      "id": "UX-019",
+      "passed": true,
+      "detail": "multiline held until explicit send"
+    },
+    {
+      "id": "UX-024",
+      "passed": true,
+      "detail": "reply identifies source"
+    },
+    {
+      "id": "UX-024",
+      "passed": true,
+      "detail": "cancel keeps draft"
+    },
+    {
+      "id": "UX-021",
+      "passed": true,
+      "detail": "supported attachment labeled before send"
+    },
+    {
+      "id": "UX-022",
+      "passed": true,
+      "detail": "unsupported file labeled for recovery"
+    },
+    {
+      "id": "UX-022",
+      "passed": true,
+      "detail": "valid file selection remains usable"
+    },
+    {
+      "id": "UX-025",
+      "passed": true,
+      "detail": "edit dialog allows review"
+    },
+    {
+      "id": "UX-025",
+      "passed": true,
+      "detail": "edited text sent explicitly"
+    },
+    {
+      "id": "UX-028",
+      "passed": true,
+      "detail": "latest streamed run renders one evidence panel/terminal"
+    },
+    {
+      "id": "UX-035",
+      "passed": true,
+      "detail": "activity=Evidence & investigation activity\n\nstart\n\ntool_start · run_diagnostic · sw1 · show interfaces\n\ntool_result · run_diagnostic · sw1 · show interfaces · SUCCESS\n\ne; terminal=show interfaces · sw1"
+    },
+    {
+      "id": "UX-038",
+      "passed": true,
+      "detail": "model and usage provenance visible"
+    },
+    {
+      "id": "UX-029",
+      "passed": true,
+      "detail": "stop leaves truthful incomplete state"
+    },
+    {
+      "id": "UX-036",
+      "passed": true,
+      "detail": "stopped run is not success"
+    },
+    {
+      "id": "UX-030",
+      "passed": true,
+      "detail": "queue retained after reload"
+    },
+    {
+      "id": "UX-031",
+      "passed": true,
+      "detail": "queue edit targets selected item"
+    },
+    {
+      "id": "UX-031",
+      "passed": true,
+      "detail": "queue remove targets selected item"
+    },
+    {
+      "id": "modes-and-retry",
+      "passed": false,
+      "detail": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#chat-mode')\u001b[22m\n"
+    },
+    {
+      "id": "UX-040",
+      "passed": true,
+      "detail": "restart exposes recovery"
+    },
+    {
+      "id": "UX-040",
+      "passed": true,
+      "detail": "restart recovery does not duplicate execution"
+    },
+    {
+      "id": "recovery-and-context",
+      "passed": false,
+      "detail": "TimeoutError: locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#context-preview')\u001b[22m\n"
+    },
+    {
+      "id": "UX-023",
+      "passed": true,
+      "detail": "no file/device mention resolver in current polished.js"
+    },
+    {
+      "id": "UX-026",
+      "passed": true,
+      "detail": "no voice dictation implementation"
+    },
+    {
+      "id": "UX-027",
+      "passed": false,
+      "detail": "composer shows fixed provider/model text; no effort picker"
+    },
+    {
+      "id": "UX-032",
+      "passed": true,
+      "detail": "steering endpoint and event handling present in code"
+    },
+    {
+      "id": "UX-033",
+      "passed": true,
+      "detail": "run persistence present; no clarification card renderer"
+    },
+    {
+      "id": "UX-037",
+      "passed": true,
+      "detail": "global serial guard prevents independent parallel runs"
+    },
+    {
+      "id": "UX-039",
+      "passed": true,
+      "detail": "manual retry has no review receipt for completed actions"
+    },
+    {
+      "id": "UX-040",
+      "passed": true,
+      "detail": "restart recovery function present"
+    }
+  ],
+  "blockedRequests": [],
+  "pageErrors": [
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')",
+    "Cannot set properties of null (setting 'onchange')"
+  ],
+  "apiCalls": 0,
+  "scope": "isolated Chromium; local static app server; chat/sandbox fixtures; all other network blocked"
+}

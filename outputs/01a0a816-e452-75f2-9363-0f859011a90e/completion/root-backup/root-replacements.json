@@ -1,0 +1,27 @@
+[
+  {
+    "file": "polished-backup.js",
+    "old": "model browser computer sidebarWidth paneWidth sections agents",
+    "new": "model providerSelection providerSelectionExplicit showEvidence showInvestigation showRunDetails browser computer sidebarWidth paneWidth sections agents"
+  },
+  {
+    "file": "polished-backup.js",
+    "old": "token|steeringToken|accessToken",
+    "new": "token|questionToken|decisionToken|executionToken|approvalToken|reviewToken|workflowActions|steeringToken|accessToken"
+  },
+  {
+    "file": "polished-backup.js",
+    "old": "    fields(p,'theme accent language density displayName activeAgent provider model','preference');",
+    "new": "    fields(p,'theme accent language density displayName activeAgent provider model','preference');\n    for(const key of ['showEvidence','showInvestigation','showRunDetails','providerSelectionExplicit'])if(p[key]!==undefined)check(typeof p[key]==='boolean','Invalid '+key+' preference.');\n    if(p.providerSelection!==undefined&&p.providerSelection!==null){const selection=p.providerSelection;check(record(selection)&&Object.keys(selection).every(key=>['providerId','modelId','effort'].includes(key)),'Invalid provider selection.');check(['opencode','openrouter','anthropic','openai'].includes(selection.providerId),'Unsupported provider selection.');string(selection.modelId,'selected model',200);check(selection.modelId.trim().length>0,'Selected model is empty.');check(['none','low','medium','high','max'].includes(selection.effort),'Invalid selected effort.');}\n    if(p.providerSelectionExplicit===true)check(record(p.providerSelection),'Explicit provider selection is missing.');"
+  },
+  {
+    "file": "polished-backup.js",
+    "old": "      messages(c.messages,agents);reply(c.draftReplyTo);",
+    "new": "      if(c.workflowState!==undefined&&c.workflowState!==null){check(record(c.workflowState),'Invalid workflow history.');c.workflowState.status='restored-history';c.workflowState.interactive=false;c.workflowState.executionAllowed=false;c.workflowState.restoreNotice='Restored workflow history. Start a fresh request to continue.';if(record(c.workflowState.approval)&&['pending','approved'].includes(c.workflowState.approval.status))c.workflowState.approval.status='invalidated';}\n      delete c.workflowActions;\n      messages(c.messages,agents);reply(c.draftReplyTo);"
+  },
+  {
+    "file": "polished-backup.js",
+    "old": "Object.entries(value).filter(([key])=>!privateKey(key))",
+    "new": "Object.entries(value).filter(([key,v])=>!privateKey(key)&&typeof v!=='function'&&v!==undefined)"
+  }
+]

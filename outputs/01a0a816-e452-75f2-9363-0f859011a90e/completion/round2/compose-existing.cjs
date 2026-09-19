@@ -1,0 +1,23 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const out=path.resolve(__dirname,'..'),dir=path.join(out,'root-stage');
+const conflicts=JSON.parse(fs.readFileSync(path.join(out,'stage-conflicts.json'),'utf8')),resolved=[];
+function patch(file,old,next,reason){const p=path.join(dir,file),s=fs.readFileSync(p,'utf8');if(s.split(old).length!==2)throw Error('Missing/ambiguous '+reason);fs.writeFileSync(p,s.replace(old,next));resolved.push({file,reason});}
+const js='polished.js',server='intentgraph/server.cjs';
+const cap=conflicts.find(e=>e.owner==='provider'&&e.index===20);
+const capLine=fs.readFileSync(path.join(dir,server),'utf8').split('\n').find(line=>line.includes("if (pathname === '/api/capabilities')"));
+const preflight="if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','GET');res.setHeader('Access-Control-Allow-Headers','X-Aven-Chat');res.writeHead(204);res.end();return;}if(req.method!=='GET'){sendError(res,405,new Error('Method not allowed'));return;} ";
+patch(server,capLine,cap.new.replace('const current=execution',preflight+'const current=execution').replace('deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)','deviceAdapterAvailable:Boolean(current?.adapters?.network?.available),allowConcurrentRuns:concurrentRuns,concurrency:concurrentRuns?\'per-chat\':\'single\''),'Combine provider capability discovery and default per-chat/preflight contract');
+patch(server,"sandbox.close(); reliabilityStorage.close?.();","try { if(workflowManagerOwned) workflowManager.close?.(); } finally { sandbox.close(); reliabilityStorage.close?.(); }",'Close owned workflow storage alongside reliability');
+const workspace=conflicts.find(e=>e.owner==='workspace'&&e.index===1);
+const duplicate=workspace.old.slice(workspace.old.indexOf("const composer=byId('composer')"));
+patch(js,duplicate,'','Keep one attachment event binder after history/recovery hydration');
+patch(js,'activeDoc=null,composition=false,','activeDoc=null,composition=false,automationController=null,automationScheduler=null,','Retain automation controllers with provider state');
+patch(js,"runOutcome=status==='SUCCESS'?'success':'error';if(runOutcome===", "runOutcome=status==='SUCCESS'?'success':'error';recordAutomationNotification(runOutcome==='success'?'completion':'failure',c,c.messages.at(-1),status==='SUCCESS'?'The saved coworker result is ready.':'The saved coworker run completed with a failure.');if(runOutcome===",'Record saved terminal notification without replacing provider metadata');
+patch(js,"else if(['annotate','compare'].includes(paneView))closePane(true);","else if(paneView==='automation')renderAutomationPane();else if(['annotate','compare'].includes(paneView))closePane(true);",'Keep automation pane current when switching conversation');
+patch(js,"if(settingsPage==='coworkers')renderAgentsSettings();","if(settingsPage==='automation')renderAutomationSettings(p);if(settingsPage==='coworkers')renderAgentsSettings();",'Expose automation settings with selected provider settings');
+patch(js,"['coworkers','Coworkers'],['behavior','Coworker behavior']","['automation','Automation & procedures'],['coworkers','Coworkers'],['behavior','Coworker behavior']",'Add automation settings navigation');
+patch(js,"if(settingsPage==='data')renderDataSettings();","if(settingsPage==='git')renderGitSettings(p);if(settingsPage==='data')renderDataSettings();",'Expose Git settings without replacing model configuration');
+patch('polished.html','    <button type="button" data-add="plugins"','    <button type="button" data-add="terminal" data-icon="plug"><span>Terminal</span></button>\n    <button type="button" data-add="plugins"','Retain Agent/Plan and add Terminal beside Plugins');
+fs.writeFileSync(path.join(__dirname,'existing-composition.json'),JSON.stringify({at:new Date().toISOString(),resolved},null,2));
+console.log(JSON.stringify({resolved:resolved.length}));

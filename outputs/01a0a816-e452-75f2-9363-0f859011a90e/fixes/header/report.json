@@ -1,0 +1,194 @@
+{
+  "generatedAt": "2026-09-16T03:57:12.476Z",
+  "files": [
+    {
+      "file": "polished.js",
+      "baseline": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\baseline\\polished.js",
+      "candidate": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\header\\candidate\\polished.js"
+    }
+  ],
+  "replacementsPath": "outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\fixes\\header\\replacements.json",
+  "tests": [
+    {
+      "name": "baseline UX011 focused browser suite",
+      "command": "node rename-header-test.cjs",
+      "mode": "baseline",
+      "passed": true,
+      "result": "EXPECTED_FAIL",
+      "detail": "Baseline reproduces the direct conversation header mismatch.",
+      "checks": 13,
+      "failed": 1,
+      "app": "http://127.0.0.1:64032/polished.html"
+    },
+    {
+      "name": "candidate UX011 focused browser suite",
+      "command": "node rename-header-test.cjs",
+      "mode": "candidate",
+      "passed": true,
+      "result": "PASS",
+      "checks": 13,
+      "failed": 0,
+      "app": "http://127.0.0.1:59851/polished.html"
+    },
+    {
+      "name": "candidate JavaScript syntax",
+      "command": "node --check candidate/polished.js",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "baseline": {
+      "mode": "baseline",
+      "app": "http://127.0.0.1:64032/polished.html",
+      "checks": [
+        {
+          "id": "UX-011-direct-header",
+          "passed": false,
+          "detail": "baseline: header after direct conversation rename is \"Renamed direct\""
+        },
+        {
+          "id": "UX-011-direct-title",
+          "passed": true,
+          "detail": "baseline: stored title is \"Renamed direct\""
+        },
+        {
+          "id": "UX-011-direct-coworker",
+          "passed": true,
+          "detail": "baseline: stored coworker is \"Firewall\""
+        },
+        {
+          "id": "UX-011-direct-preservation",
+          "passed": true,
+          "detail": "baseline: direct draft/history preserved"
+        },
+        {
+          "id": "UX-011-direct-switch",
+          "passed": true,
+          "detail": "baseline: switch back preserves coworker header, draft, and navigation history (direct-a,direct-b,direct-a)"
+        },
+        {
+          "id": "UX-011-direct-reload",
+          "passed": true,
+          "detail": "baseline: reload preserves header/title/draft/history"
+        },
+        {
+          "id": "UX-011-folder-header",
+          "passed": true,
+          "detail": "baseline: folder header/context is [\"Renamed folder\",\"Operations\"]"
+        },
+        {
+          "id": "UX-011-folder-preservation",
+          "passed": true,
+          "detail": "baseline: folder title/draft/history preserved"
+        },
+        {
+          "id": "UX-011-folder-reload",
+          "passed": true,
+          "detail": "baseline: folder reload preserves title/draft/history/context"
+        },
+        {
+          "id": "UX-011-coworker-header",
+          "passed": true,
+          "detail": "baseline: coworker rename updates direct header to \"Perimeter\""
+        },
+        {
+          "id": "UX-011-coworker-state",
+          "passed": true,
+          "detail": "baseline: coworker identity persists while conversation title remains \"Network review\""
+        },
+        {
+          "id": "UX-011-coworker-preservation",
+          "passed": true,
+          "detail": "baseline: coworker rename preserves draft/history"
+        },
+        {
+          "id": "UX-011-coworker-reload",
+          "passed": true,
+          "detail": "baseline: coworker/header/draft persist after switch and reload"
+        }
+      ],
+      "blockedRequests": [],
+      "pageErrors": [],
+      "apiCalls": []
+    },
+    "candidate": {
+      "mode": "candidate",
+      "app": "http://127.0.0.1:59851/polished.html",
+      "checks": [
+        {
+          "id": "UX-011-direct-header",
+          "passed": true,
+          "detail": "candidate: header after direct conversation rename is \"Firewall\""
+        },
+        {
+          "id": "UX-011-direct-title",
+          "passed": true,
+          "detail": "candidate: stored title is \"Renamed direct\""
+        },
+        {
+          "id": "UX-011-direct-coworker",
+          "passed": true,
+          "detail": "candidate: stored coworker is \"Firewall\""
+        },
+        {
+          "id": "UX-011-direct-preservation",
+          "passed": true,
+          "detail": "candidate: direct draft/history preserved"
+        },
+        {
+          "id": "UX-011-direct-switch",
+          "passed": true,
+          "detail": "candidate: switch back preserves coworker header, draft, and navigation history (direct-a,direct-b,direct-a)"
+        },
+        {
+          "id": "UX-011-direct-reload",
+          "passed": true,
+          "detail": "candidate: reload preserves header/title/draft/history"
+        },
+        {
+          "id": "UX-011-folder-header",
+          "passed": true,
+          "detail": "candidate: folder header/context is [\"Renamed folder\",\"Operations\"]"
+        },
+        {
+          "id": "UX-011-folder-preservation",
+          "passed": true,
+          "detail": "candidate: folder title/draft/history preserved"
+        },
+        {
+          "id": "UX-011-folder-reload",
+          "passed": true,
+          "detail": "candidate: folder reload preserves title/draft/history/context"
+        },
+        {
+          "id": "UX-011-coworker-header",
+          "passed": true,
+          "detail": "candidate: coworker rename updates direct header to \"Perimeter\""
+        },
+        {
+          "id": "UX-011-coworker-state",
+          "passed": true,
+          "detail": "candidate: coworker identity persists while conversation title remains \"Network review\""
+        },
+        {
+          "id": "UX-011-coworker-preservation",
+          "passed": true,
+          "detail": "candidate: coworker rename preserves draft/history"
+        },
+        {
+          "id": "UX-011-coworker-reload",
+          "passed": true,
+          "detail": "candidate: coworker/header/draft persist after switch and reload"
+        }
+      ],
+      "blockedRequests": [],
+      "pageErrors": [],
+      "apiCalls": []
+    }
+  },
+  "limitations": [
+    "Chromium used a local static app server and fresh browser contexts.",
+    "All non-loopback requests were blocked or locally fulfilled; no provider, device, credential, user storage, or external browser service was contacted.",
+    "The candidate is an overlay artifact; the live product files were not edited or integrated."
+  ]
+}

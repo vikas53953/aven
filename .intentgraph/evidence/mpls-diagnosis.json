@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "elapsedMs": 16791,
+  "body": {
+    "text": "MPLS (Multi-Protocol Label Switching) is a networking technique that uses labels to efficiently route packets across networks, improving performance and scalability.",
+    "source": "AI explanation · no commands executed",
+    "model": "mimo-v2.5"
+  },
+  "at": "2026-09-13T17:34:23.393Z"
+}

@@ -1,0 +1,18 @@
+{
+  "scope": "Isolated Chromium context; real current frontend; simulated localStorage chat write failure; all non-static requests blocked",
+  "afterFailure": {
+    "status": "Could not save this coworker locally.",
+    "persistedCoworker": true,
+    "matchingChats": 0,
+    "matchingDocuments": false,
+    "dialogOpen": true
+  },
+  "afterReload": {
+    "persistedCoworker": true,
+    "matchingChats": 0,
+    "sidebarContainsCoworker": false
+  },
+  "retryMessage": "Choose a different name.",
+  "blockedRequests": [],
+  "defectReproduced": true
+}

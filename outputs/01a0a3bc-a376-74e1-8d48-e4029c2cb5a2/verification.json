@@ -1,0 +1,25 @@
+{
+  "file": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a3bc-a376-74e1-8d48-e4029c2cb5a2\\Aven-UI-UX-Feature-Register.xlsx",
+  "checks": "PASS",
+  "features": 115,
+  "states": {
+    "Present": 78,
+    "Missing": 10,
+    "Partial": 22,
+    "Placeholder": 2,
+    "Not verified": 3
+  },
+  "delivery": {
+    "Verified": 80,
+    "Not started": 21,
+    "Deferred": 4,
+    "Implemented": 10
+  },
+  "formula_errors": 0,
+  "filter_table": "A10:P125",
+  "frozen_rows": 10,
+  "frozen_columns": 3,
+  "worksheet_count": 1,
+  "reference_scope": "Grok/Codex live UI plus docs; Claude Code working session gated",
+  "export_process_note": "Artifact export reported success but process exited 1. Independent saved-file checks above passed."
+}

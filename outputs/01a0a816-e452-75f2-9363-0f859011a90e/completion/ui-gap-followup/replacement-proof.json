@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-09-16T07:45:40.554Z",
+  "source": "ui-release/candidate/polished.js",
+  "sourceSha256": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+  "candidateSha256": "2a9649792fb68b2e6d15f3c253e497a989c44d1b4e643b9ef09062622979fb15",
+  "replacements": [
+    {
+      "file": "polished.js",
+      "old": "const shortcuts=localActions().filter(a=>a.shortcut).map(a=>[a.shortcut,a.label]);",
+      "new": "const shortcuts=localActions().filter(a=>a.shortcut&&!a.reason).map(a=>[a.shortcut,a.label]);",
+      "acceptance": "UX-065",
+      "occurrences": 1
+    },
+    {
+      "file": "polished.js",
+      "old": "function openEvidencePane(kind,c,m){",
+      "new": "function openEvidencePane(kind,c,m,opener=null){",
+      "acceptance": "UX-069",
+      "occurrences": 1
+    },
+    {
+      "file": "polished.js",
+      "old": "\n    resetToolContext();if(byId('right-pane').hidden)paneOpener=document.activeElement;",
+      "new": "\n    resetToolContext();if(byId('right-pane').hidden)paneOpener=opener||document.activeElement;",
+      "acceptance": "UX-069",
+      "occurrences": 1
+    },
+    {
+      "file": "polished.js",
+      "old": "run:()=>openEvidencePane('annotate',c,m)}",
+      "new": "run:()=>openEvidencePane('annotate',c,m,opener)}",
+      "acceptance": "UX-069",
+      "occurrences": 1
+    },
+    {
+      "file": "polished.js",
+      "old": "run:()=>openEvidencePane('compare',c,m)}",
+      "new": "run:()=>openEvidencePane('compare',c,m,opener)}",
+      "acceptance": "UX-069",
+      "occurrences": 1
+    }
+  ],
+  "scope": "UX-065 unavailable shortcut advertising only; UX-069 evidence pane focus return; frozen v9.1 UI candidate copy"
+}

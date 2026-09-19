@@ -1,0 +1,5 @@
+{
+  "transpile": "pass",
+  "serverRenderGeometryParity": "96/96 pass",
+  "note": "All16 wrappers across6sizes transpiled and SSR checked, not a React app conversion"
+}

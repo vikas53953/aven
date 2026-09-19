@@ -1,0 +1,619 @@
+{
+  "generatedAt": "2026-09-16T06:21:06.071Z",
+  "scope": "Original UX-001..UX-115 completion claims, prioritized history/navigation, workspace, automation, provider, and approval candidates.",
+  "inputs": [
+    "baseline-ledger.json (frozen original acceptance and prior verdicts)",
+    "acceptance.txt (115 exact acceptance lines)",
+    "candidate-progress.json (current candidate claims and limitations)",
+    "row-results.json and owner row-results under automation, provider, workspace, workflows",
+    "history-settings-evidence.json, navigation-tests/results.json, automation/validation.json, provider/runtime-overlay-result.json",
+    "fixes/independent-review.json",
+    "fixes/creation/creation-evidence-candidate.json",
+    "fixes/connection/report-integrated.json",
+    "fixes/artifacts/report.json",
+    "completion/reaction-picker/browser-evidence.json",
+    "completion/reaction-picker/userrequirementresults.json",
+    "completion/reaction-picker/replacement-verification.json"
+  ],
+  "rule": "A PASS or Verified claim is proposed Verified (scoped) only when fresh evidence exercises the original acceptance for that slice. Candidate or integration status alone is not a missing gate; retain Partial only for a substantive original acceptance aspect still untested or absent. Local fixtures, unavailable providers/devices, and owner acceptance remain explicit limitations.",
+  "summary": {
+    "reviewedRows": 49,
+    "proposedPartial": 46,
+    "proposedVerified": 3,
+    "proposedDefect": 0,
+    "proposedMissing": 0,
+    "note": "Stale pre-fix UX-058 orphan and UX-066 duplication findings were removed from current conclusions. Current v8 integrated evidence scopes UX-058 and UX-102 as Verified (scoped); UX-049 uses the newest reaction-picker package. UX-066 remains Partial only for the substantive generated-file UI/opening and cross-chat scope beyond reconciliation."
+  },
+  "rows": [
+    {
+      "id": "UX-002",
+      "claim": "history row-results.json PASS; navigation-tests row-results PARTIAL/PASS",
+      "missingGate": "Agreed desktop-width matrix is not carried by the current navigation evidence; it proves exact CLI text and 390px containment but does not cover the wider desktop widths in the acceptance claim.",
+      "evidenceSeen": [
+        "row-results.json: page/sidebar bounds and raw output PASS",
+        "navigation-tests/results.json: raw CLI exact plus 390px containment PASS; limitation says no wider viewport matrix",
+        "audit_001_040/fresh-evidence.json: geometry-only prior evidence"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Run the long-line and page/sidebar overflow fixture at every agreed desktop width and retain the evidence filename."
+    },
+    {
+      "id": "UX-004",
+      "claim": "history row-results.json PASS; navigation-tests row-results PASS",
+      "missingGate": "The PASS evidence covers rename/header synchronization and peer identity, but does not show that Firewall opens the selected profile with editing and documents remaining accessible.",
+      "evidenceSeen": [
+        "row-results.json: profile rename synchronizes selected coworker header",
+        "navigation-tests/results.json: profile rename/header synchronization and peer identity",
+        "history-settings-evidence.json: profile editing fixture, no explicit document-access assertion"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Open the selected Firewall profile, edit it, open each document, and assert the selected identity remains the same."
+    },
+    {
+      "id": "UX-005",
+      "claim": "history row-results.json PASS; navigation-tests row-results PASS",
+      "missingGate": "Pointer/keyboard operation and viewport bounds are tested, while row structure fidelity against the reference is not evidenced by a visual or structural comparison.",
+      "evidenceSeen": [
+        "row-results.json: reaction row opens and supports keyboard selection",
+        "navigation-tests/results.json: pointer/keyboard reaction row and viewport bounds PASS; limitation says no visual reference diff",
+        "audit_001_040/fresh-evidence.json: prior geometry evidence"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Capture a current/reference structure or visual comparison at the accepted widths."
+    },
+    {
+      "id": "UX-012",
+      "claim": "history row-results.json PASS; navigation-tests row-results PASS",
+      "missingGate": "DOM separation of direct/grouped histories and old-row reachability does not establish that grouping never implies coordinated execution to users.",
+      "evidenceSeen": [
+        "row-results.json: direct chats and grouped conversations stay distinct",
+        "navigation-tests/results.json: old grouped row remains reachable; limitation says no user interpretation study"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Record owner review of grouping labels and execution wording, or add an explicit copy/affordance assertion that no coordination is implied."
+    },
+    {
+      "id": "UX-046",
+      "claim": "history row-results.json PASS; navigation-tests row-results PASS",
+      "missingGate": "Deep-equal revert/undo and queued-work protection are evidenced, but the busy active-run protection branch is not exercised.",
+      "evidenceSeen": [
+        "row-results.json: revert and undo restore saved history",
+        "navigation-tests/results.json: byte-equivalent history and queued-work protection PASS; limitation says no provider busy race",
+        "history-settings-evidence.json: revert/undo check"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Hold an active run and verify revert is unavailable or safe while busy."
+    },
+    {
+      "id": "UX-049",
+      "claim": "history row-results.json PASS; reaction-picker candidate fullshell4checks PASS",
+      "missingGate": "None within the original acceptance slice: the newest isolated picker package exercises named search, keyboard navigation contained in the picker, two-step Escape dismissal/focus return, and message-specific persistence without message movement. Screen-reader certification, visual reference comparison, and multi-device sync remain outside this scoped result.",
+      "evidenceSeen": [
+        "completion/reaction-picker/browser-evidence.json: four isolated Chromium checks PASS (search/filter, keyboard containment and Escape focus return, per-message reload persistence, compact viewport containment)",
+        "completion/reaction-picker/userrequirementresults.json: UX-049 PASS with original acceptance mapping",
+        "completion/reaction-picker/replacement-verification.json: five polished.js replacements and one CSS replacement matched the candidate package"
+      ],
+      "proposedScopedVerdict": "Verified (scoped)",
+      "nextAction": "Integrate the candidate into the current served shell and rerun the served-build hash; retain the explicit accessibility, visual-reference, and multi-device limits."
+    },
+    {
+      "id": "UX-050",
+      "claim": "history row-results.json PASS",
+      "missingGate": "Archive/read-only and restore/reload are shown, but the assertion only checks one message remains; exact raw evidence preservation is not compared before and after restore.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: archive hides composer, restores, reloads, and checks message presence",
+        "history-settings-audit.cjs: UX-050 assertion checks a-m1 count, not its evidence payload",
+        "row-results.json: limitation says local history only"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Hash or deep-compare the selected chat's complete messages/evidence before archive and after restore."
+    },
+    {
+      "id": "UX-051",
+      "claim": "history row-results.json PASS",
+      "missingGate": "Workspace JSON format, selected chat presence, pin metadata, and a token-string exclusion are tested; selected-scope export, timestamps/raw evidence, and complete credential exclusion are not independently asserted.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: UX-051 export fixture checks format, a1, pin metadata and JSON token absence",
+        "history-settings-audit.cjs: UX-051 implementation",
+        "baseline-ledger.json UX-051 acceptance: selected scope, timestamps, exact evidence, no credentials"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Export a selected conversation and assert exact timestamps/raw evidence plus a comprehensive private-field rejection fixture."
+    },
+    {
+      "id": "UX-057",
+      "claim": "history row-results.json PASS; automation row-results implemented-candidate",
+      "missingGate": "Finished completion linking and mute are exercised, but waiting/error notification UI delivery is delegated to the automation core and no live completion/failure stream is injected.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: UX-057 finished event, mute, and Open result",
+        "automation/row-results.json: notificationEvent covers completion/failure/input_required, pure mute/dedup tests",
+        "automation/validation.json: browser flow does not inject a live completion/failure stream"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Run waiting/error events through the integrated UI and assert exact destination plus duplicate suppression."
+    },
+    {
+      "id": "UX-058",
+      "claim": "history row-results.json PASS; current v8 integrated creation regression and independent review PASS",
+      "missingGate": "None within the original acceptance slice: the current v8 integrated focused regression covers local welcome semantics and confirms modelHistory=false, while persisted-state failure rollback, retry, and reload recovery pass.",
+      "evidenceSeen": [
+        "fixes/creation/creation-evidence-candidate.json: localWelcome=true and modelHistory=false; failure and retry scenarios preserve existing raw state",
+        "fixes/root-verification.json: current v8 integrated creation audit exitCode 0 with five failure/recovery scenarios",
+        "fixes/independent-review.json: creation-audit.cjs --integrated PASS, 5 cases, no blocked requests or page errors",
+        "fixes/integration.json: served patched build hashes"
+      ],
+      "proposedScopedVerdict": "Verified (scoped)",
+      "nextAction": "Retain the storage-failure, reload, retry, and welcome-exclusion regressions; keep cross-device and unsaved-in-memory limits visible."
+    },
+    {
+      "id": "UX-062",
+      "claim": "history row-results.json PASS",
+      "missingGate": "Privacy copy names local and sent data, but the owner evidence explicitly leaves destructive recovery separate; no reset/replace failure and recovery flow is behaviorally covered here.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: privacy page wording PASS",
+        "backup-schema-audit.json: transaction and private-key filters described, but audit says narrow schema extensions are still needed",
+        "row-results.json: limitation says destructive recovery is separately bounded"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Exercise the promised destructive/reset/recovery paths and verify unrelated state and private fields after interruption."
+    },
+    {
+      "id": "UX-064",
+      "claim": "history row-results.json PASS",
+      "missingGate": "One help dialog and local feedback save are tested; the claim says every help entry is useful and no feedback storage-failure path is covered.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: one help content match and local feedback status",
+        "history-settings-audit.cjs: UX-064 test",
+        "row-results.json: limitation says storage failure is not injected"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Enumerate all help entries and inject feedback storage failure while preserving truthful local status."
+    },
+    {
+      "id": "UX-065",
+      "claim": "history row-results.json PASS",
+      "missingGate": "Help text and Ctrl+K palette opening are tested; Cmd/Ctrl+F and unavailable-action filtering are not asserted.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: shortcut text and Control+K dialog PASS",
+        "history-settings-audit.cjs: UX-065 test",
+        "row-results.json: limitation says Cmd modifier and unavailable command matrix are not repeated"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Exercise each displayed shortcut in its current platform modifier and ensure unsupported commands are absent."
+    },
+    {
+      "id": "UX-083",
+      "claim": "history row-results.json PASS; complete_history candidate PASS",
+      "missingGate": "The current browser fixture checks the empty Feed explanation, but does not open every populated entry to its relevant run.",
+      "evidenceSeen": [
+        "history-settings-evidence.json: UX-083 checks Feed/empty-view wording only",
+        "row-results.json: limitation says fixture has no provider/device run",
+        "baseline-ledger.json UX-083 acceptance: every entry opens relevant run"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Seed multiple feed entries with distinct run IDs and open each exact destination."
+    },
+    {
+      "id": "UX-087",
+      "claim": "history row-results.json PASS; complete_automation row-results implemented-candidate",
+      "missingGate": "The candidate event model covers completion/failure/input_required and dedup in pure tests, while the integrated UI evidence only checks the preference and finished path; waiting/error UI and duplicate visible alerts remain open.",
+      "evidenceSeen": [
+        "automation/row-results.json: notificationEvent/recordNotification and pure mute/dedup semantics",
+        "automation/validation.json: live stream not injected",
+        "history-settings-evidence.json: UX-087 only checks enabled preference; UX-057 checks finished result"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Inject completion, waiting, failure, and duplicate events through the integrated alert UI and verify task/run links."
+    },
+    {
+      "id": "UX-021",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Attachment chips and bounded readers are tested, but unsupported pre-send labeling and supported-content inclusion in the actual model request are not end-to-end verified.",
+      "evidenceSeen": [
+        "workspace/row-results.json: normalizeAttachment/renderAttachmentChips/bindAttachmentSources",
+        "workspace/candidate/workspace-capabilities.test.cjs: candidate unit tests",
+        "workspace/row-results.json limitation: no live provider/device request"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Run supported and unsupported fixtures through the integrated composer and inspect the intercepted outgoing context."
+    },
+    {
+      "id": "UX-022",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Synthetic DOM/file verification covers one chip, but real paste/drop event paths and invalid-type recovery are not demonstrated together in the integrated shell.",
+      "evidenceSeen": [
+        "workspace/row-results.json: candidate picker/drop/paste binding",
+        "workspace/candidate/workspace-capabilities.browser.test.cjs: synthetic local File chip",
+        "workspace/row-results.json limitation: no user file read"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Exercise paste and drop with valid/invalid local fixtures and assert one removable attachment plus recovery."
+    },
+    {
+      "id": "UX-023",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Stable ID/mention normalization and an injected disconnected record are tested, but parent-runtime inventory integration and exact unavailable-device UI are not end-to-end verified.",
+      "evidenceSeen": [
+        "workspace/row-results.json: normalizeInventory/stableId/resolveMention and offline-1 fixture",
+        "workspace/candidate/workspace-capabilities.test.cjs",
+        "workspace/row-results.json limitation: inventory supplied by parent runtime"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Connect an intercepted inventory response to the shell and assert exact selected IDs and disconnected labels."
+    },
+    {
+      "id": "UX-026",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "The candidate controller models recording/cancel/edit states and unavailable adapter messaging, but no integrated recording interaction or editable transcript was exercised.",
+      "evidenceSeen": [
+        "workspace/row-results.json: createDictationController and disabled voice control",
+        "workspace/candidate/workspace-capabilities.browser.test.cjs",
+        "workspace/row-results.json limitation: no microphone/SpeechRecognition/transcription provider"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Use a fake injected dictation adapter in the integrated shell and verify indicator, cancel, edit, and send gating."
+    },
+    {
+      "id": "UX-056",
+      "claim": "workspace row-results partial-candidate",
+      "missingGate": "The disclosure and local scope are implemented, but saved document content is not captured in a subsequent model request.",
+      "evidenceSeen": [
+        "workspace/row-results.json: documentUseDisclosure stable ID/local scope/requestIncludes=false",
+        "history-settings-evidence.json: local document note wording only",
+        "workspace/row-results.json limitation: real next-request capture required"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Save a document, issue an intercepted chat request, and assert whether exact content is included or excluded."
+    },
+    {
+      "id": "UX-066",
+      "claim": "workspace row-results implemented-candidate; current v8 integrated artifact reconciliation PASS",
+      "missingGate": "A substantive original acceptance aspect remains: the integrated regression proves correct identity/content reconciliation for mirrored and distinct saved results, but does not assert an actual generated-file open/download in the UI or complete selected-chat isolation for the broader generated-file library.",
+      "evidenceSeen": [
+        "fixes/artifacts/report.json: candidate artifact reconciliation cases cover exact output, distinct result identity, provenance and ambiguous/repeated output preservation",
+        "fixes/independent-review.json: artifact-duplication.test.cjs --integrated PASS, 17 cases, no blocked requests or page errors",
+        "fixes/root-verification.json: current v8 Artifacts observed reduced mirrored entries from 46 to 23 outputs",
+        "fixes/integration.json: polished-workspace-tools.js served patched hash"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Add an integrated UI open/download assertion for a real saved artifact and verify a second chat cannot inherit it; retain dedup coverage."
+    },
+    {
+      "id": "UX-067",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Authorized page-state projection and truthful unavailable handling are mocked, but actual current browser content and a reachable integrated browser adapter are not tested.",
+      "evidenceSeen": [
+        "workspace/row-results.json: createExecutionBridge and authorized page snapshot mock",
+        "workspace/candidate/workspace-capabilities.browser.test.cjs",
+        "../audit_041_079/panes-evidence.json: current shell truthful no-session state"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Keep the truthful unavailable state and add a bounded injected browser session with current-content rendering."
+    },
+    {
+      "id": "UX-068",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Selected-window authorization and stale/unavailable state are mocked, but no actual desktop session or integrated authorized control is exercised.",
+      "evidenceSeen": [
+        "workspace/row-results.json: selected-window status projection and read-only CORS/token mock",
+        "workspace/candidate/workspace-capabilities.browser.test.cjs",
+        "../audit_041_079/panes-evidence.json: current shell truthful no-session state"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Add an injected authorized window fixture and verify controls remain scoped to that window."
+    },
+    {
+      "id": "UX-069",
+      "claim": "workspace row-results implemented-candidate; history row-results PASS",
+      "missingGate": "The candidate resizer persists through an injected storage object and the history fixture covers one reload/focus path, but packaged/current-shell reload and focus behavior are not jointly verified after candidate integration.",
+      "evidenceSeen": [
+        "workspace/row-results.json: bindPaneResizer uses injected storage; limitation says no packaged live reload/focus test",
+        "history-settings-evidence.json: one keyboard resize, close focus, reload width check",
+        "../audit_041_079/panes-evidence.json: current shell resize seam"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Run the candidate in the final shell, resize/reload/reopen, and assert opener focus and chat/composer minimum width."
+    },
+    {
+      "id": "UX-070",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Safe-path/file-tree/editor contracts and synthetic review payloads exist, but no OS picker or authorized user folder interaction proves the boundary.",
+      "evidenceSeen": [
+        "workspace/row-results.json: safeRelativePath/createFileTree/mountFileEditor",
+        "workspace/candidate/workspace-capabilities.test.cjs",
+        "workspace/row-results.json limitation: no OS folder picker/user disk write"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Owner-controlled QA should exercise a bounded selected folder, explicit diff/save/cancel, and path rejection."
+    },
+    {
+      "id": "UX-071",
+      "claim": "workspace row-results partial-candidate",
+      "missingGate": "The candidate truthfully labels interactive terminal unavailable and retains read-only evidence, but no interactive terminal capability exists to satisfy target/session/permission display for a real session.",
+      "evidenceSeen": [
+        "workspace/row-results.json: terminal unavailable state and narrow server status projection",
+        "../audit_041_079/panes-evidence.json: current shell has retained raw evidence but no general terminal",
+        "baseline-ledger.json UX-071 acceptance"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Keep unavailable wording until an explicitly authorized terminal session is integrated; then verify target/session/permission and separate raw evidence."
+    },
+    {
+      "id": "UX-078",
+      "claim": "workspace row-results implemented-candidate; baseline audit Partial",
+      "missingGate": "Evidence normalization preserves provenance fields, but parent-shell copy/export wiring and exact copied/exported run-command trace are not tested.",
+      "evidenceSeen": [
+        "workspace/row-results.json: normalizeEvidence/renderEvidenceProvenance",
+        "../audit_041_079/network-semantics.json: UI run-provenance fixture",
+        "workspace/row-results.json limitation: copy/export wiring remains parent-owned"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Copy and export a selected evidence item and verify exact run, target, command, status, and timestamp."
+    },
+    {
+      "id": "UX-081",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Deterministic compareDiagnosticRuns/renderRunComparison tests label target/time and missing output, but no integrated Aven comparison view or two-run persisted fixture is opened.",
+      "evidenceSeen": [
+        "workspace/row-results.json: compareDiagnosticRuns/renderRunComparison",
+        "workspace/candidate/workspace-capabilities.test.cjs",
+        "baseline-ledger.json UX-081 prior audit: comparison UI/timestamp labeling unexercised"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Open two persisted runs in the integrated shell and assert target/time labels and unknown missing output."
+    },
+    {
+      "id": "UX-082",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Topology normalization/rendering marks source/freshness/inferred links in pure fixtures, but no injected inventory reaches an integrated Aven topology view.",
+      "evidenceSeen": [
+        "workspace/row-results.json: normalizeTopology/renderTopology",
+        "workspace/candidate/workspace-capabilities.test.cjs",
+        "baseline-ledger.json UX-082: no topology data contract or renderer in Aven shell"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Integrate a bounded inventory fixture and verify node/link source, freshness, invalid endpoint filtering, and inferred labels."
+    },
+    {
+      "id": "UX-110",
+      "claim": "workspace row-results implemented-candidate",
+      "missingGate": "Safe HTTP links, inert unsafe schemes, unsupported-media labels, and raw text handling are candidate-renderer checks; complete inline-media and attachment-source behavior remains pending.",
+      "evidenceSeen": [
+        "workspace/row-results.json: renderSafeMessage and unsupported media labeling",
+        "workspace/candidate/workspace-capabilities.test.cjs",
+        "baseline-ledger.json UX-110: inline media and attachment reading pending"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Exercise link destination, unsupported attachment, inline local media, and raw CLI preservation through the integrated shell."
+    },
+    {
+      "id": "UX-085",
+      "claim": "automation row-results implemented-candidate",
+      "missingGate": "Evidence-bound goal completion is unit-tested, but the existing Aven workspace goal form and persisted user flow are not integrated and behaviorally verified.",
+      "evidenceSeen": [
+        "automation/row-results.json: goalCompletionCheck evidence-reference contract",
+        "automation/candidate/automation.test.cjs",
+        "automation/row-results.json limitation: existing workspace goal form is parent-owned"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Create/check a goal in the integrated workspace UI and verify completion links, persistence, and invalid-evidence rejection."
+    },
+    {
+      "id": "UX-086",
+      "claim": "automation row-results implemented-candidate",
+      "missingGate": "Local scheduler tests and browser save/enable flow cover disabled jobs, future weekly time, failures, and races, but execution is bounded to an open Aven page and no external scheduler is exercised.",
+      "evidenceSeen": [
+        "automation/validation.json: pure/browser pass, disabledJobs not executed in result summary, external scheduling excluded",
+        "automation/row-results.json: scheduler tests and browser smoke flow",
+        "automation/candidate/automation.test.cjs"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Keep local scheduling scoped and document/integrate the scheduler lifecycle before claiming standalone scheduled investigations."
+    },
+    {
+      "id": "UX-088",
+      "claim": "automation row-results implemented-candidate",
+      "missingGate": "The local registry exposes capability/access/availability and disables an unavailable plugin, but installation, credentials, and actual connection-health lifecycle are not tested.",
+      "evidenceSeen": [
+        "automation/row-results.json: PLUGIN_REGISTRY and selectPlugin contract",
+        "automation/validation.json: unavailable plugin disabled",
+        "baseline-ledger.json UX-088 acceptance"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Verify the integrated pane's selected plugin, permission summary, and disconnected/connected transitions with injected adapter state."
+    },
+    {
+      "id": "UX-089",
+      "claim": "automation row-results implemented-candidate",
+      "missingGate": "Static workflow registry/version and backup persistence tests do not prove a selected procedure runs with its required access and records the used version in the integrated UI.",
+      "evidenceSeen": [
+        "automation/row-results.json: WORKFLOW_REGISTRY and version persistence",
+        "automation/candidate/automation.test.cjs",
+        "automation/row-results.json limitation: local static v1 catalog"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Select a procedure in the integrated UI and capture required access, version, and run provenance."
+    },
+    {
+      "id": "UX-027",
+      "claim": "provider row-results implemented-candidate",
+      "missingGate": "Twenty provider unit tests cover selection/request fields/provenance and unsupported combinations, but the root server/agent-runtime hunk is pending and no integrated request/response path is proven.",
+      "evidenceSeen": [
+        "provider/row-results.json: provider-selection/provider-adapter tests 20/20",
+        "provider/runtime-overlay-result.json: injected OpenRouter transport tests pass",
+        "provider/row-results.json limitation: root must apply exact hunks; no live provider request"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Apply the candidate hunks to the final shell/server and intercept one request/response to verify selected model/effort and actual provenance."
+    },
+    {
+      "id": "UX-038",
+      "claim": "provider row-results implemented-candidate",
+      "missingGate": "Usage normalization and context metadata are code-tested, but no provider response verifies displayed model and token totals or the unknown-usage branch in the integrated UI.",
+      "evidenceSeen": [
+        "provider/row-results.json: usage normalization and bounded context metadata",
+        "provider/runtime-overlay-result.json: no usage-display browser evidence",
+        "provider/row-results.json limitation: root UI owns context preview; no provider response"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Intercept responses with known, absent, and malformed usage and compare UI totals/provenance."
+    },
+    {
+      "id": "UX-060",
+      "claim": "provider row-results implemented-candidate; baseline audit Partial",
+      "missingGate": "Injected OpenRouter routing and picker capability states are candidate-tested, but provider setup/readiness is not integrated with actual runtime selection and no credential-safe UI flow is exercised.",
+      "evidenceSeen": [
+        "provider/row-results.json: contract/agent-runtime replacement and injected OpenRouter test",
+        "provider/runtime-overlay-result.json: transport injected, no real provider",
+        "../audit_041_079/network-semantics.json: current shell blocks provider/device traffic"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Integrate selection through the final runtime and verify truthful configured/connected/unavailable states without exposing secrets."
+    },
+    {
+      "id": "UX-061",
+      "claim": "provider row-results implemented-candidate; baseline audit Partial",
+      "missingGate": "Connected/configured/unavailable/unknown state normalization is tested, but refresh still depends on a host callback/local status and no external health probe updates the UI.",
+      "evidenceSeen": [
+        "provider/row-results.json: provider-selection state distinctions",
+        "provider/runtime-overlay-result.json: no external health probe",
+        "../audit_041_079/network-semantics.json: blocked inventory route and truthful unavailable message"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Inject disconnected/connected adapter health transitions and verify check time, recovery, and no-ready inference from configuration."
+    },
+    {
+      "id": "UX-076",
+      "claim": "provider row-results reassigned; workspace ownership pending",
+      "missingGate": "The provider package explicitly leaves device selection to workspace; no final integrated exact selected-device/alias-to-evidence path is shown in the provider evidence.",
+      "evidenceSeen": [
+        "provider/row-results.json: UX-076 reassigned to workspace",
+        "workspace/row-results.json: normalizeInventory/stableId/resolveMention candidate",
+        "../audit_041_079/network-semantics.json: inventory route intentionally blocked"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Use the workspace/provider boundary fixture to show selected IDs, alias resolution, and evidence IDs in the final shell."
+    },
+    {
+      "id": "UX-100",
+      "claim": "provider row-results partial-candidate",
+      "missingGate": "Provider picker labels and disabled unsupported models are candidate-tested, but onboarding does not yet demonstrate required setup, selected device, and next safe action together.",
+      "evidenceSeen": [
+        "provider/row-results.json: provider-picker capability labels",
+        "provider/row-results.json limitation: onboarding/readiness presentation root-owned",
+        "baseline-ledger.json UX-100 acceptance"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Verify first-run setup/readiness, selected device, and safe next action in the integrated onboarding flow."
+    },
+    {
+      "id": "UX-102",
+      "claim": "provider row-results implemented-candidate; current v8 integrated About/support-report regression and independent review PASS",
+      "missingGate": "None within the original acceptance slice: the integrated report compares the support report build to the About build and checks that provider fixture secrets are absent from the report, About text, and copied report.",
+      "evidenceSeen": [
+        "fixes/connection/report-integrated.json: six integrated UX-102 cases PASS, including false/true/malformed/failure/stale and closed-About paths",
+        "fixes/connection/candidate/ux102-about-connection.test.cjs: report.build equals About build; secret excluded from rendered and copied support report",
+        "fixes/independent-review.json: ux102-about-connection.test.cjs --integrated PASS, 6 cases, no blocked requests or page errors",
+        "fixes/root-verification.json: current v8 served build and About verification PASS"
+      ],
+      "proposedScopedVerdict": "Verified (scoped)",
+      "nextAction": "Retain exact-build and key-exclusion regressions; keep live provider/device reachability outside this scoped verdict."
+    },
+    {
+      "id": "UX-108",
+      "claim": "provider row-results implemented-candidate; baseline audit Partial",
+      "missingGate": "Request metadata fields are defined and sent by a candidate hunk, but the integrated UI does not yet prove older-message omission disclosure with an over-limit fixture.",
+      "evidenceSeen": [
+        "provider/row-results.json: context truncation contract and request hunk",
+        "../audit_041_079/network-semantics.json: no over-limit context fixture",
+        "provider/row-results.json limitation: UI disclosure remains root-owned"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Send an over-limit seeded history through the integrated shell and verify omitted/retained counts and raw evidence availability."
+    },
+    {
+      "id": "UX-109",
+      "claim": "provider row-results preserved-regression",
+      "missingGate": "Candidate request construction excludes local notes/preferences, but no post-note-edit intercepted request proves the next model response did not use the note.",
+      "evidenceSeen": [
+        "provider/row-results.json: request hunk excludes local notes/preferences",
+        "provider/runtime-overlay-result.json: no note/provider call",
+        "history-settings-evidence.json: local document/notes wording only"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Edit a local note, submit through a mocked provider, and inspect the exact request payload and provenance."
+    },
+    {
+      "id": "UX-033",
+      "claim": "workflows row-results implemented-candidate",
+      "missingGate": "Typed pending-question, one-answer mapping, stale rejection, and persistence are candidate-tested, but the final mounted UI/server path has no live integrated provider/device flow.",
+      "evidenceSeen": [
+        "workflows/row-results.json: clarification runtime/server/unit fixtures",
+        "workflows/candidate/polished-approval-workflow.browser.test.cjs",
+        "workflows/row-results.json limitation: exact server mount is candidate replacement; no provider/device call"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Apply the candidate mount and run one integrated pending-question browser flow with stale/cancel cases."
+    },
+    {
+      "id": "UX-034",
+      "claim": "workflows row-results implemented-candidate; minimal-ui/workflows scope split",
+      "missingGate": "Plan-mode rejection and typed pending-question extraction are candidate-tested, but final combined provider capability validation and UI mode restrictions are not one end-to-end proof.",
+      "evidenceSeen": [
+        "workflows/row-results.json: plan mode marks execution unavailable",
+        "minimal-ui/row-results.json: mode controls/labels focused checks",
+        "coverage-report.json: UX-034 intentional presentation/backend scope split"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Verify Plan and Inspect through the integrated provider/server route and assert no state-changing capability can be approved in Plan."
+    },
+    {
+      "id": "UX-072",
+      "claim": "workflows row-results implemented-candidate; baseline audit Partial",
+      "missingGate": "Exact target/diff/impact/rollback and stale digest data are candidate-tested, but network configuration write/rollback and integrated review presentation are not exercised.",
+      "evidenceSeen": [
+        "workflows/row-results.json: approval-workflow tests and browser review card",
+        "completion/claim-review inputs baseline-ledger.json UX-072 acceptance",
+        "workflows/row-results.json limitation: no device write or rollback"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Keep the candidate preview scoped and verify final Aven review UI against an injected network proposal without invoking a write."
+    },
+    {
+      "id": "UX-074",
+      "claim": "workflows row-results implemented-candidate; baseline audit Missing",
+      "missingGate": "Digest-bound approval/decision tokens, one-time consume, deny/cancel, and mock receipt are tested, but the integrated Aven receipt UI and real execution boundary are not established.",
+      "evidenceSeen": [
+        "workflows/row-results.json: approval token and receipt tests",
+        "workflows/candidate/polished-approval-workflow.browser.test.cjs",
+        "workflows/row-results.json limitation: executor is mock-only"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Integrate the receipt card and verify target/command changes force a new digest before any future write adapter is enabled."
+    },
+    {
+      "id": "UX-080",
+      "claim": "workflows row-results implemented-candidate",
+      "missingGate": "Scope/impact/rollback preview data and no-chat-revert substitution are candidate-tested, but the final Aven review surface is not proven with a persisted proposed change.",
+      "evidenceSeen": [
+        "workflows/row-results.json: affected target/scope, impact, rollback limits",
+        "workflows/candidate/approval-workflow.browser.test.cjs",
+        "baseline-ledger.json UX-080 prior audit: no state-changing workflow present"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Open a persisted mock proposal in the final UI and verify exact affected targets, rollback limits, and approval boundary."
+    },
+    {
+      "id": "UX-114",
+      "claim": "workflows row-results implemented-candidate",
+      "missingGate": "Candidate ownership/receipt/scope digest flow and normal HTTP fixture are tested, but root must apply exact server/runtime/UI hunks and the executor remains mock-only.",
+      "evidenceSeen": [
+        "workflows/row-results.json: persisted ownership, receipt, shared scope/action digest, normal HTTP fixture",
+        "workflows/candidate/polished-approval-workflow.browser.test.cjs",
+        "workflows/row-results.json limitation: root integration pending; no live write success"
+      ],
+      "proposedScopedVerdict": "Partial",
+      "nextAction": "Verify the final integrated Aven preview and execution path share the same digest and one-time receipt under a mock-only write boundary."
+    }
+  ]
+}

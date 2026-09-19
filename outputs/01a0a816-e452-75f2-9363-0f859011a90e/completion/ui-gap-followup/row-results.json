@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-09-16T07:46:33.025Z",
+  "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\ui-gap-followup\\candidate",
+  "rows": [
+    {
+      "id": "UX-002",
+      "status": "PASS",
+      "evidence": [
+        "desktop and narrow viewport matrix contains page/sidebar overflow: PASS"
+      ],
+      "limitations": [
+        "Eight widths from 1440 to 320; exact CLI copy remains covered by prior evidence."
+      ]
+    },
+    {
+      "id": "UX-005",
+      "status": "PASS",
+      "evidence": [
+        "reaction row opens by keyboard and Escape returns to message actions: PASS"
+      ],
+      "limitations": [
+        "Local DOM/keyboard check; no visual reference or assistive technology certification."
+      ]
+    },
+    {
+      "id": "UX-046",
+      "status": "PASS",
+      "evidence": [
+        "active run disables history revert control: PASS"
+      ],
+      "limitations": [
+        "Held loopback request; no provider/device call."
+      ]
+    },
+    {
+      "id": "UX-050",
+      "status": "PASS",
+      "evidence": [
+        "archived restore preserves complete message and evidence payload: PASS"
+      ],
+      "limitations": [
+        "Local archive/restore transaction; no packaged/cross-device behavior."
+      ]
+    },
+    {
+      "id": "UX-051",
+      "status": "PASS",
+      "evidence": [
+        "conversation export has selected scope timestamps raw output and no credentials: PASS"
+      ],
+      "limitations": [
+        "Markdown export scoped to selected chat; loopback fixture only."
+      ]
+    },
+    {
+      "id": "UX-055",
+      "status": "PASS",
+      "evidence": [
+        "long coworker name persists after reload and remains selected-only: PASS"
+      ],
+      "limitations": [
+        "One local long profile fixture; no remote sync."
+      ]
+    },
+    {
+      "id": "UX-059",
+      "status": "PASS",
+      "evidence": [
+        "theme save persists across reload in light and dark modes: PASS"
+      ],
+      "limitations": [
+        "Local preferences/reload; readability remains a separate visual check."
+      ]
+    },
+    {
+      "id": "UX-064",
+      "status": "PASS",
+      "evidence": [
+        "all help entries are useful and feedback storage failure is visible: PASS"
+      ],
+      "limitations": [
+        "Feedback quota failure injected; no external/private-log request."
+      ]
+    },
+    {
+      "id": "UX-065",
+      "status": "PASS",
+      "evidence": [
+        "unavailable Find is omitted from help and Ctrl/Cmd+F opens find only in conversation: PASS"
+      ],
+      "limitations": [
+        "Browser-local shortcut check; native browser find is not used when unavailable."
+      ]
+    },
+    {
+      "id": "UX-069",
+      "status": "PASS",
+      "evidence": [
+        "evidence pane is readable across resize endpoints and close restores focus: PASS"
+      ],
+      "limitations": [
+        "Endpoint keyboard resize and local evidence content."
+      ]
+    },
+    {
+      "id": "UX-073",
+      "status": "PASS",
+      "evidence": [
+        "annotation draft closes without saving and cannot drift: PASS"
+      ],
+      "limitations": [
+        "Discard path only; stale rerun/save-failure need separate runtime hook."
+      ]
+    },
+    {
+      "id": "UX-083",
+      "status": "PASS",
+      "evidence": [
+        "every populated Feed entry opens its exact saved message: PASS"
+      ],
+      "limitations": [
+        "Populated local run/evidence entries; provider/device transport is not exercised."
+      ]
+    }
+  ]
+}

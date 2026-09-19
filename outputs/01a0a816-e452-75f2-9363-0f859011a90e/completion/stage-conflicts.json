@@ -1,0 +1,226 @@
+[
+  {
+    "owner": "reliability",
+    "index": 28,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "    const modePicker=byId('chat-mode');if(modePicker){modePicker.value=modeFor(currentChat()?.mode);modePicker.disabled=chatRequests.size>0||!!currentChat()?.pendingQueue?.length;byId('mode-scope').textContent=modePicker.value==='plan'?'Plan: no tools. Proposals only.':'Inspect: allowlisted read-only diagnostics. Device health requires evidence.';}",
+    "new": "    const modePicker=byId('chat-mode');if(modePicker){modePicker.value=modeFor(currentChat()?.mode);const runBusy=globalThis.AvenRuntimeCapabilities?.allowConcurrentRuns===true?chatRequests.has(currentChat()?.id):chatRequests.size>0;modePicker.disabled=runBusy||!!currentChat()?.pendingQueue?.length;byId('mode-scope').textContent=modePicker.value==='plan'?'Plan: no tools. Proposals only.':'Inspect: allowlisted read-only diagnostics. Device health requires evidence.';}"
+  },
+  {
+    "owner": "provider",
+    "index": 0,
+    "file": "polished.html",
+    "reason": "overlap",
+    "old": "                  <span class=\"composer-note\" id=\"composer-note\">OpenCode · MiMo V2.5</span>",
+    "new": "                  <button class=\"composer-provider-trigger\" id=\"composer-provider-trigger\" type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Choose provider, model and effort\" title=\"OpenCode · MiMo V2.5 · effort None\">MiMo V2.5</button>"
+  },
+  {
+    "owner": "provider",
+    "index": 2,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "const defaultPrefs={theme:'system',accent:'black',language:'system',density:'comfortable',displayName:'',activeAgent:'companion',provider:'Not connected',model:'',browser:true,computer:false,sections:[],agents:[{id:'companion',name:'Network companion',role:'Investigate branch networks and explain findings.',timezone:'Follow system',autoReview:false},{id:'topology',name:'Topology analyst',role:'Map dependencies and surface the next useful signal.',timezone:'Follow system',autoReview:false}]};",
+    "new": "const defaultPrefs={theme:'system',accent:'black',language:'system',density:'comfortable',displayName:'',activeAgent:'companion',provider:'Not connected',model:'',providerSelection:null,providerSelectionExplicit:false,browser:true,computer:false,sections:[],agents:[{id:'companion',name:'Network companion',role:'Investigate branch networks and explain findings.',timezone:'Follow system',autoReview:false},{id:'topology',name:'Topology analyst',role:'Map dependencies and surface the next useful signal.',timezone:'Follow system',autoReview:false}]};"
+  },
+  {
+    "owner": "provider",
+    "index": 20,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "if (pathname === '/api/capabilities') { const current=execution ? await execution.status() : null; sendJson(res, 200, {ai:{connected:Boolean(current?.provider?.last?.ok),configured:Boolean(current?.provider?.credentialStored),provider:current?'opencode-go':null,model:current?'mimo-v2.5':null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)},execution:current}); return; }\r",
+    "new": "if (pathname === '/api/capabilities') { const origin=req.headers.origin; if(origin&&!chatOriginAllowed(origin,req)){sendError(res,403,new Error('Capabilities origin is not allowed'));return;} if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');} const current=execution ? await execution.status() : null; const capabilities=await providerSelection.capabilities(); const defaultProvider=capabilities.providers.find(item=>item.id===DEFAULT_SELECTION.providerId); const defaultModel=defaultProvider?.models.find(item=>item.id===DEFAULT_SELECTION.modelId); sendJson(res,200,{schemaVersion:capabilities.schemaVersion,checkedAt:capabilities.checkedAt,providers:capabilities.providers,ai:{connected:defaultProvider?.connected===true,configured:defaultProvider?.configured===true,provider:defaultProvider?.id||null,model:defaultModel?.id||null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)},execution:current}); return; }"
+  },
+  {
+    "owner": "provider",
+    "index": 21,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "      const mode = body?.mode === undefined ? 'inspect' : body.mode;\n      if(!body || Object.keys(body).some(k=>!['chatId','agentName','messages','mode'].includes(k)) || !CHAT_MODES.includes(mode) || typeof body.chatId!=='string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.agentName!=='string' || body.agentName.length>80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length>24 || body.messages.some(m=>!m || Object.keys(m).some(k=>!['role','content'].includes(k)) || !['user','assistant'].includes(m.role) || typeof m.content!=='string' || !m.content.trim()) || body.messages.at(-1).role!=='user' || body.messages.reduce((n,m)=>n+m.content.length,0)>32000){sendError(res,400,new Error('Chat requires up to 24 text messages and mode plan or inspect'));return;}\n      if(!execution?.provider){sendError(res,503,new Error('Chat provider is unavailable'));return;}\r\n",
+    "new": "      const mode = body?.mode === undefined ? 'inspect' : body.mode;\n      if(!body || Object.keys(body).some(k=>!['chatId','agentName','messages','mode','selection','context'].includes(k)) || (Object.hasOwn(body,'selection') && (!body.selection || typeof body.selection!=='object' || Array.isArray(body.selection))) || (Object.hasOwn(body,'context') && body.context!==null && (typeof body.context!=='object' || Array.isArray(body.context) || Object.keys(body.context).some(k=>!['windowMessages','windowCharacters','retainedMessages','retainedCharacters','omittedMessages','totalMessages'].includes(k)) || Object.values(body.context).some(value=>value!==null&&(!Number.isSafeInteger(value)||value<0)))) || !CHAT_MODES.includes(mode) || typeof body.chatId!=='string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(body.chatId) || typeof body.agentName!=='string' || body.agentName.length>80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length>24 || body.messages.some(m=>!m || Object.keys(m).some(k=>!['role','content'].includes(k)) || !['user','assistant'].includes(m.role) || typeof m.content!=='string' || !m.content.trim()) || body.messages.at(-1).role!=='user' || body.messages.reduce((n,m)=>n+m.content.length,0)>32000){sendError(res,400,new Error('Chat requires up to 24 text messages, mode plan or inspect, and a safe optional provider selection'));return;}\n      const capabilities=await providerSelection.capabilities();\n      const selected=resolveSelection({selection:Object.hasOwn(body,'selection')?body.selection:undefined,capabilities,defaultSelection:DEFAULT_SELECTION});\n      if(!selected.ok){sendError(res,409,Object.assign(new Error(selected.reason),{code:selected.code}));return;}\n      if(!execution?.provider){sendError(res,503,new Error('Chat provider is unavailable'));return;}"
+  },
+  {
+    "owner": "provider",
+    "index": 24,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "    return {messages,characters,omitted:eligible.length-messages.length,total:eligible.length};\r",
+    "new": "    return {messages,characters,omitted:eligible.length-messages.length,total:eligible.length,metadata:{windowMessages:24,windowCharacters:32000,retainedMessages:messages.length,retainedCharacters:characters,omittedMessages:eligible.length-messages.length,totalMessages:eligible.length}};"
+  },
+  {
+    "owner": "provider",
+    "index": 26,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),agentId,mode:modeFor(requestMode),startedAt:now(),name:agent.name,started,controller,events:[],runId:null,steeringToken:null,steeringText:'',pendingSteerText:'',steeringStatus:'idle',steeringMessage:'Steering applies at the next step.',steeringEvents:new Map(),appliedSteerIds:new Set()};",
+    "new": "const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),agentId,mode:modeFor(requestMode),startedAt:now(),name:agent.name,started,controller,events:[],runId:null,steeringToken:null,steeringText:'',pendingSteerText:'',steeringStatus:'idle',steeringMessage:'Steering applies at the next step.',steeringEvents:new Map(),appliedSteerIds:new Set(),requestedSelection:selection,context,selectionExplicit};"
+  },
+  {
+    "owner": "provider",
+    "index": 27,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "body:JSON.stringify({chatId:c.id,agentName:agent.name.slice(0,80),messages,mode:modeFor(requestMode)})",
+    "new": "body:JSON.stringify({chatId:c.id,agentName:agent.name.slice(0,80),messages,mode:modeFor(requestMode),context,...(selectionExplicit?{selection}: {})})"
+  },
+  {
+    "owner": "workflows",
+    "index": 3,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };",
+    "new": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution, clarificationManager: workflowManager, workflowApi };"
+  },
+  {
+    "owner": "workflows",
+    "index": 4,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "        const responder=options.chatResponder||require('./agent-runtime.cjs').respond;\n        const reply=await responder({provider:execution?.provider,sandbox:networkExecution,messages:body.messages,agentName:body.agentName,chatId:body.chatId,mode,signal:controller.signal,onEvent:emit,drainSteering:runState.drainSteering,onModelComplete:runState.beginClosing});\n        runState.beginClosing();\n        completedReply={...reply,runId,mode};\n        emit({type:'final',reply:completedReply});\n        if(!streaming&&!res.destroyed)sendJson(res,200,completedReply);",
+    "new": "         const responder=options.chatResponder||require('./agent-runtime.cjs').respond;\n        const workflowRun=await workflowManager.start({runId,chatId:body.chatId,mode,messages:body.messages,selection:body.selection,responder,onEvent:(event)=>{if(event.type!=='start')emit(event);},responderOptions:{provider:execution?.provider,sandbox:networkExecution,agentName:body.agentName,signal:controller.signal,onEvent:emit,drainSteering:runState.drainSteering,onModelComplete:runState.beginClosing}});\n        runState.beginClosing();\n        if(workflowRun.status==='waiting-question'){\n          completedReply={...workflowRun,runId,mode};\n          const pendingResult=workflowRun.result||{};\n          emit({type:'pending_question',mode,question:workflowRun.pendingQuestion.question,questionToken:workflowRun.pendingQuestion.token,...(typeof pendingResult.model==='string'?{model:pendingResult.model}:{}),...(typeof pendingResult.source==='string'?{source:pendingResult.source}:{}),...(pendingResult.provenance?{provenance:pendingResult.provenance}:{})});\n        }else{\n          completedReply={...workflowRun.result,runId,mode,workflowRunId:workflowRun.runId};\n          emit({type:'final',reply:completedReply});\n        }\n        if(!streaming&&!res.destroyed)sendJson(res,200,completedReply);"
+  },
+  {
+    "owner": "workflows",
+    "index": 8,
+    "file": "intentgraph/agent-runtime.cjs",
+    "reason": "overlap",
+    "old": "async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode } = {})",
+    "new": "async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, responseMetadata } = {})"
+  },
+  {
+    "owner": "workflows",
+    "index": 9,
+    "file": "intentgraph/agent-runtime.cjs",
+    "reason": "overlap",
+    "old": "    let finalMessage = null;\n    const stream = agent.streamEvents({ messages: toMessages(messages) }, {\n      version: 'v2',\n      signal: deadline.signal,\n      recursionLimit: MAX_TOOL_CALLS * 4 + 8,\n      configurable: { thread_id: `intentgraph-${safeText(chatId, 100) || runId}` }\n    });\n    for await (const event of stream) {\n      if (event.event === 'on_chat_model_end') {\n        const output = event.data?.output;\n        if (AIMessage.isInstance(output) && (!output.tool_calls?.length || selectedMode === 'plan')) {\n          finalMessage = output;\n          try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n        }\n      }\n      if (event.event === 'on_tool_error') {\n        const args = eventArgs(event.data?.input);\n        emit({ type: 'tool_error', name: safeText(event.name, 64), ...(args.operation ? { operation: safeText(args.operation, 80) } : {}), ...(args.hostname ? { hostname: safeText(args.hostname, 128) } : {}), status: 'FAILURE', error: 'Tool invocation failed.' });\n      }\n    }\n",
+    "new": "    let finalMessage = null;\n    let pendingQuestion = null;\n    const stream = agent.streamEvents({ messages: toMessages(messages) }, {\n      version: 'v2',\n      signal: deadline.signal,\n      recursionLimit: MAX_TOOL_CALLS * 4 + 8,\n      configurable: { thread_id: `intentgraph-${safeText(chatId, 100) || runId}` }\n    });\n    for await (const event of stream) {\n      if (event.event === 'on_chat_model_end') {\n        const output = event.data?.output;\n        if (AIMessage.isInstance(output)) {\n          const structured = extractPendingQuestion(output);\n          if (structured) {\n            pendingQuestion = structured;\n            try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n            break;\n          }\n          if (!output.tool_calls?.length || selectedMode === 'plan') {\n            finalMessage = output;\n            try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n          }\n        }\n      }\n      if (event.event === 'on_tool_end') {\n        const structured = extractPendingQuestion(event.data?.output ?? event.data?.input ?? event.data);\n        if (structured) {\n          pendingQuestion = structured;\n          try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }\n          break;\n        }\n      }\n      if (event.event === 'on_tool_error') {\n        const args = eventArgs(event.data?.input);\n        emit({ type: 'tool_error', name: safeText(event.name, 64), ...(args.operation ? { operation: safeText(args.operation, 80) } : {}), ...(args.hostname ? { hostname: safeText(args.hostname, 128) } : {}), status: 'FAILURE', error: 'Tool invocation failed.' });\n      }\n    }\n    if (pendingQuestion) { const provenance = responseMetadata || null; return { pendingQuestion, source: provenance?.source || 'unavailable', model: provenance?.modelId || MODEL, mode: selectedMode, runId, ...(provenance ? { provenance: { providerId: provenance.providerId, modelId: provenance.modelId || MODEL, effort: provenance.effort, source: provenance.source } } : {}) }; }\n"
+  },
+  {
+    "owner": "workflows",
+    "index": 15,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "      if(!response.ok)throw Error(result.error||'Connection unavailable.');if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');",
+    "new": "      if(!response.ok)throw Error(result.error||'Connection unavailable.');if(result.status==='waiting-question'&&result.pendingQuestion){const question=result.pendingQuestion.question||result.pendingQuestion;const metadata=result.result||result;workflowTokens.set(c.id,{runId:result.runId,chatId:c.id,questionId:question.id,questionToken:result.pendingQuestion.token});c.workflowState={status:result.status,runId:result.runId,chatId:c.id,mode:result.mode,model:metadata.model,source:metadata.source,provenance:metadata.provenance,pendingQuestion:{question}};delete c.runJournal;delete c.queueDispatching;saveData();runOutcome='waiting';}else if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');"
+  },
+  {
+    "owner": "workflows",
+    "index": 19,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "if(chatRequests.size||c.queuePaused||c.pendingQueue?.length){",
+    "new": "if(chatRequests.size||c.queuePaused||c.pendingQueue?.length||['waiting-question','running'].includes(c.workflowState?.status)){"
+  },
+  {
+    "owner": "workflows",
+    "index": 20,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;",
+    "new": "if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||['waiting-question','running'].includes(c.workflowState?.status)||!c.pendingQueue?.length)return false;"
+  },
+  {
+    "owner": "workflows",
+    "index": 23,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "  server.once('close', () => sandbox.close());",
+    "new": "  server.once('close', () => { if (workflowManagerOwned) workflowManager.close?.(); sandbox.close(); });"
+  },
+  {
+    "owner": "workspace",
+    "index": 1,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "    hydrateConversationHistory();recoverInterruptedRuns();wireMessageLinks();byId('file-picker').accept=AvenAttachments.accepts.join(',');const composer=byId('composer');composer.addEventListener('dragover',e=>{if([...e.dataTransfer.types].includes('Files'))e.preventDefault();});composer.addEventListener('drop',e=>{if(e.dataTransfer.files.length){e.preventDefault();addFiles(e.dataTransfer.files);}});composer.addEventListener('paste',e=>{const files=[...e.clipboardData.items].filter(x=>x.kind==='file').map(x=>x.getAsFile()).filter(Boolean);if(files.length){e.preventDefault();addFiles(files);}});",
+    "new": "    hydrateConversationHistory();recoverInterruptedRuns();wireMessageLinks();byId('file-picker').accept=AvenAttachments.accepts.join(',');"
+  },
+  {
+    "owner": "workspace",
+    "index": 6,
+    "file": "polished-workspace-tools.js",
+    "reason": "overlap",
+    "old": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', 'Raw output')); card.append(top);",
+    "new": "      const top = create('div', 'aven-workspace-tools-card-top'); top.append(create('h3', '', artifact.filename)); top.append(create('span', 'aven-workspace-tools-badge is-muted', artifact.generatedFile ? 'Generated file' : 'Raw output')); card.append(top);"
+  },
+  {
+    "owner": "workspace",
+    "index": 7,
+    "file": "polished-workspace-tools.js",
+    "reason": "overlap",
+    "old": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; card.append(pre);",
+    "new": "      const pre = create('pre', 'aven-workspace-tools-raw', artifact.content); pre.tabIndex = 0; card.append(pre); if (artifact.generatedFile && globalThis.AvenWorkspaceCapabilities) { const preview = button('Open sandbox preview', 'button-secondary', () => { const previous = card.querySelector('.aven-generated-file-preview'); previous?.remove(); const host = create('div', 'aven-generated-file-preview'); card.append(host); try { globalThis.AvenWorkspaceCapabilities.openGeneratedFile({ ...artifact, content: artifact.content }, { container: host, selectedChatId: opts.selectedChatId || artifact.chatId }); } catch (error) { host.textContent = `Preview unavailable: ${error?.message || 'unknown error'}`; } }); preview.dataset.avenFocusKey = `artifact-preview-${index}`; card.append(preview); }"
+  },
+  {
+    "owner": "automation",
+    "index": 4,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "  let paneView='agent',paneOpener=null,settingsDraft=null,settingsPage='general',settingsOpener=null,searchOpener=null,createReturnChat=null,contextAgentId=null,contextChatId=null,activeDoc=null,composition=false;\r\n",
+    "new": "  let paneView='agent',paneOpener=null,settingsDraft=null,settingsPage='general',settingsOpener=null,searchOpener=null,createReturnChat=null,contextAgentId=null,contextChatId=null,activeDoc=null,composition=false,automationController=null,automationScheduler=null;\n"
+  },
+  {
+    "owner": "automation",
+    "index": 9,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "      if(data.chats.includes(c)){const status=AvenRunState.outcome(result,pending.events);c.messages.push({id:uid(),role:'assistant',agentId,text:result.text,model:result.model,mode:result.mode||'unavailable',status,usage:AvenRunState.usage(result.usage),journalId:pending.journalId,source:result.source||'',events:pending.events,evidence:AvenRunState.clean(result.evidence||[]),runId:result.runId||pending.runId,durationMs:Math.round(performance.now()-started),createdAt:now()});const journal=c.runJournal;if(currentChat()?.id!==c.id)c.unread=true;delete c.runJournal;delete c.queueDispatching;if(saveData()){runOutcome=status==='SUCCESS'?'success':'error';if(runOutcome==='success'&&agent.notifications!==false&&currentChat()?.id!==c.id){notifyRun(c,c.messages.at(-1),agent);}}else{c.runJournal=journal;c.captureWarning='The final result is visible but could not be saved. Export it or free browser storage before reloading.';}}\r\n",
+    "new": "      if(data.chats.includes(c)){const status=AvenRunState.outcome(result,pending.events);c.messages.push({id:uid(),role:'assistant',agentId,text:result.text,model:result.model,mode:result.mode||'unavailable',status,usage:AvenRunState.usage(result.usage),journalId:pending.journalId,source:result.source||'',events:pending.events,evidence:AvenRunState.clean(result.evidence||[]),runId:result.runId||pending.runId,durationMs:Math.round(performance.now()-started),createdAt:now()});const journal=c.runJournal;if(currentChat()?.id!==c.id)c.unread=true;delete c.runJournal;delete c.queueDispatching;if(saveData()){runOutcome=status==='SUCCESS'?'success':'error';recordAutomationNotification(runOutcome==='success'?'completion':'failure',c,c.messages.at(-1),status==='SUCCESS'?'The saved coworker result is ready.':'The saved coworker run completed with a failure.');if(runOutcome==='success'&&agent.notifications!==false&&currentChat()?.id!==c.id){notifyRun(c,c.messages.at(-1),agent);}}else{c.runJournal=journal;c.captureWarning='The final result is visible but could not be saved. Export it or free browser storage before reloading.';}}\n"
+  },
+  {
+    "owner": "automation",
+    "index": 10,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "  function showChat(id=data.activeChat,options={}){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;retainDraft();const c=data.chats.find(x=>x.id===id)||data.chats.find(x=>!x.archived)||data.chats[0];if(!c)return false;if(renderedChatId!==c.id){closeConversationFind(false);if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;resetToolContext();}recordConversationVisit(c,options);c.unread=false;if(isDirectConversation(c))directOwner(c).unread=false;data.activeChat=c.id;renderedChatId=c.id;currentView='conversation';if(c.recipients?.[0]&&prefs.agents.some(a=>a.id===c.recipients[0]))prefs.activeAgent=c.recipients[0];saveData();savePrefs();applyPrefs();clearCenter();byId('conversation').hidden=false;byId('composer-wrap').hidden=!!c.archived;const team=c.projectId?projectById(c.projectId):null;setSurface(isDirectConversation(c)?directOwner(c).name:c.title,team?.name||'');renderConversation();renderComposer();renderSidebar();if(!byId('right-pane').hidden){if(paneView==='agent'||paneView==='profile')renderAgentPane();else if(paneView==='artifacts')renderArtifactsPane();else if(['annotate','compare'].includes(paneView))closePane(true);else renderToolPane(paneView);}if(innerWidth<=760)closePane(true);requestAnimationFrame(()=>{if(currentView==='conversation'&&currentChat()?.id===c.id){const scroll=byId('center-content');scroll.scrollTop=Number.isFinite(options.scrollTop)?options.scrollTop:scroll.scrollHeight;updateLatestControl();}});return true;}\r\n",
+    "new": "  function showChat(id=data.activeChat,options={}){if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;retainDraft();const c=data.chats.find(x=>x.id===id)||data.chats.find(x=>!x.archived)||data.chats[0];if(!c)return false;if(renderedChatId!==c.id){closeConversationFind(false);if(hasUnsavedPaneChanges()&&!confirmDiscardDoc())return false;resetToolContext();}recordConversationVisit(c,options);c.unread=false;if(isDirectConversation(c))directOwner(c).unread=false;data.activeChat=c.id;renderedChatId=c.id;currentView='conversation';if(c.recipients?.[0]&&prefs.agents.some(a=>a.id===c.recipients[0]))prefs.activeAgent=c.recipients[0];saveData();savePrefs();applyPrefs();clearCenter();byId('conversation').hidden=false;byId('composer-wrap').hidden=!!c.archived;const team=c.projectId?projectById(c.projectId):null;setSurface(isDirectConversation(c)?directOwner(c).name:c.title,team?.name||'');renderConversation();renderComposer();renderSidebar();if(!byId('right-pane').hidden){if(paneView==='agent'||paneView==='profile')renderAgentPane();else if(paneView==='artifacts')renderArtifactsPane();else if(paneView==='automation')renderAutomationPane();else if(['annotate','compare'].includes(paneView))closePane(true);else renderToolPane(paneView);}if(innerWidth<=760)closePane(true);requestAnimationFrame(()=>{if(currentView==='conversation'&&currentChat()?.id===c.id){const scroll=byId('center-content');scroll.scrollTop=Number.isFinite(options.scrollTop)?options.scrollTop:scroll.scrollHeight;updateLatestControl();}});return true;}\n"
+  },
+  {
+    "owner": "automation",
+    "index": 13,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "  function renderSettingsPage(){all('[data-category]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.category===settingsPage)));const p=byId('settings-content');p.replaceChildren();if(settingsPage==='general')p.innerHTML='<h2>General</h2><p>Local workspace preferences. No account is connected.</p><label for=\"pref-display-name\">Display name</label><input id=\"pref-display-name\" data-pref=\"displayName\" maxlength=\"80\" placeholder=\"Vikas\">';if(settingsPage==='appearance')p.innerHTML='<h2>Appearance</h2><p>Choose the visual language for this workspace.</p><label for=\"pref-theme\">Theme</label><select id=\"pref-theme\" data-pref=\"theme\"><option value=\"system\">Follow System</option><option value=\"light\">Light</option><option value=\"dark\">Dark</option></select><label for=\"pref-accent\">Accent</label><select id=\"pref-accent\" data-pref=\"accent\"><option value=\"black\">Black</option><option value=\"blue\">Blue</option><option value=\"violet\">Violet</option><option value=\"green\">Green</option></select><label for=\"pref-density\">Density</label><select id=\"pref-density\" data-pref=\"density\"><option value=\"comfortable\">Comfortable</option><option value=\"compact\">Compact</option></select><label for=\"pref-language\">Language</label><select id=\"pref-language\" data-pref=\"language\"><option value=\"system\">English (system fallback)</option><option value=\"en\">English</option><option value=\"unsupported\" disabled>Other languages (not supported)</option></select>';if(settingsPage==='coworkers')renderAgentsSettings();if(settingsPage==='behavior')renderBehaviorSettings();if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);if(settingsPage==='data')renderDataSettings();if(settingsPage==='archived')renderArchivedSettings();all('#settings-content [data-pref]').forEach(n=>{if(n.type==='checkbox')n.checked=!!settingsDraft[n.dataset.pref];else n.value=settingsDraft[n.dataset.pref]??'';});}\r\n",
+    "new": "  function renderSettingsPage(){all('[data-category]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.category===settingsPage)));const p=byId('settings-content');p.replaceChildren();if(settingsPage==='general')p.innerHTML='<h2>General</h2><p>Local workspace preferences. No account is connected.</p><label for=\"pref-display-name\">Display name</label><input id=\"pref-display-name\" data-pref=\"displayName\" maxlength=\"80\" placeholder=\"Vikas\">';if(settingsPage==='appearance')p.innerHTML='<h2>Appearance</h2><p>Choose the visual language for this workspace.</p><label for=\"pref-theme\">Theme</label><select id=\"pref-theme\" data-pref=\"theme\"><option value=\"system\">Follow System</option><option value=\"light\">Light</option><option value=\"dark\">Dark</option></select><label for=\"pref-accent\">Accent</label><select id=\"pref-accent\" data-pref=\"accent\"><option value=\"black\">Black</option><option value=\"blue\">Blue</option><option value=\"violet\">Violet</option><option value=\"green\">Green</option></select><label for=\"pref-density\">Density</label><select id=\"pref-density\" data-pref=\"density\"><option value=\"comfortable\">Comfortable</option><option value=\"compact\">Compact</option></select><label for=\"pref-language\">Language</label><select id=\"pref-language\" data-pref=\"language\"><option value=\"system\">English (system fallback)</option><option value=\"en\">English</option><option value=\"unsupported\" disabled>Other languages (not supported)</option></select>';if(settingsPage==='automation')renderAutomationSettings(p);if(settingsPage==='coworkers')renderAgentsSettings();if(settingsPage==='behavior')renderBehaviorSettings();if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);if(settingsPage==='data')renderDataSettings();if(settingsPage==='archived')renderArchivedSettings();all('#settings-content [data-pref]').forEach(n=>{if(n.type==='checkbox')n.checked=!!settingsDraft[n.dataset.pref];else n.value=settingsDraft[n.dataset.pref]??'';});}\r\n"
+  },
+  {
+    "owner": "automation",
+    "index": 14,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "  function openSettings(page='general'){byId('settings-status').textContent='';settingsOpener=document.activeElement;settingsDraft=clone(prefs);settingsBehavior=new Map();behaviorAgentId=prefs.activeAgent;settingsPage=page==='agents'?'coworkers':page;const cats=[['general','General'],['appearance','Appearance'],['coworkers','Coworkers'],['behavior','Coworker behavior'],['models','Models & providers'],['connections','Connections'],['data','Privacy & data'],['archived','Archived chats']];byId('settings-nav').replaceChildren(...cats.map(([id,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.category=id;b.setAttribute('aria-current',String(id===settingsPage));b.onclick=()=>{captureSettings();settingsPage=id;renderSettingsPage();};return b;}));renderSettingsPage();byId('settings-dialog').showModal();}\r\n",
+    "new": "  function openSettings(page='general'){byId('settings-status').textContent='';settingsOpener=document.activeElement;settingsDraft=clone(prefs);settingsBehavior=new Map();behaviorAgentId=prefs.activeAgent;settingsPage=page==='agents'?'coworkers':page;const cats=[['general','General'],['appearance','Appearance'],['automation','Automation & procedures'],['coworkers','Coworkers'],['behavior','Coworker behavior'],['models','Models & providers'],['connections','Connections'],['data','Privacy & data'],['archived','Archived chats']];byId('settings-nav').replaceChildren(...cats.map(([id,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.category=id;b.setAttribute('aria-current',String(id===settingsPage));b.onclick=()=>{captureSettings();settingsPage=id;renderSettingsPage();};return b;}));renderSettingsPage();byId('settings-dialog').showModal();}\r\n"
+  },
+  {
+    "owner": "history",
+    "index": 7,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "    byId('chat-mode').onchange=e=>{const c=currentChat(),old=c.mode;c.mode=modeFor(e.target.value);if(!saveData()){c.mode=old;e.target.value=modeFor(old);toast('Could not save the mode. Previous mode remains selected.');}updateSend();};const rail=byId('rail'),resize=byId('sidebar-resize');byId('steer').onclick=steerCurrent;expandedWidth=Number(prefs.sidebarWidth)||260;\r\n",
+    "new": "    const chatMode=byId('chat-mode');if(chatMode)chatMode.onchange=e=>{const c=currentChat(),old=c.mode;c.mode=modeFor(e.target.value);if(!saveData()){c.mode=old;e.target.value=modeFor(old);toast('Could not save the mode. Previous mode remains selected.');}updateSend();};const rail=byId('rail'),resize=byId('sidebar-resize');byId('steer').onclick=steerCurrent;expandedWidth=Number(prefs.sidebarWidth)||260;\r\n"
+  },
+  {
+    "owner": "terminal",
+    "index": 2,
+    "file": "polished.html",
+    "reason": "overlap",
+    "old": "  <div class=\"popover\" id=\"add-menu\" hidden aria-label=\"Add to conversation\">\r\n    <button type=\"button\" data-add=\"localfiles\" data-icon=\"file\"><span>Open local folder</span></button>\r\n    <button type=\"button\" data-add=\"files\" data-icon=\"file\"><span>Attach files</span></button>\r\n    <button type=\"button\" data-add=\"images\" data-icon=\"image\"><span>Attach images</span></button>\r\n    <div class=\"menu-separator\"></div>\r\n    <button type=\"button\" data-add=\"browser\" data-icon=\"browser\"><span>Use browser preview</span></button>\r\n    <button type=\"button\" data-add=\"plugins\" data-icon=\"plug\"><span>Network sandbox</span></button>\r\n    <button type=\"button\" data-add=\"computer\" data-icon=\"computer\"><span>Use computer preview</span></button>\r\n  </div>\r\n",
+    "new": "  <div class=\"popover\" id=\"add-menu\" hidden aria-label=\"Add to conversation\">\r\n    <button type=\"button\" data-add=\"localfiles\" data-icon=\"file\"><span>Open local folder</span></button>\r\n    <button type=\"button\" data-add=\"files\" data-icon=\"file\"><span>Attach files</span></button>\r\n    <button type=\"button\" data-add=\"images\" data-icon=\"image\"><span>Attach images</span></button>\r\n    <div class=\"menu-separator\"></div>\r\n    <button type=\"button\" data-add=\"browser\" data-icon=\"browser\"><span>Use browser preview</span></button>\n    <button type=\"button\" data-add=\"terminal\" data-icon=\"plug\"><span>Terminal</span></button>\n    <button type=\"button\" data-add=\"plugins\" data-icon=\"plug\"><span>Network diagnostics</span></button>\n    <button type=\"button\" data-add=\"computer\" data-icon=\"computer\"><span>Use computer preview</span></button>\r\n  </div>\r\n"
+  },
+  {
+    "owner": "git",
+    "index": 3,
+    "file": "polished.js",
+    "reason": "overlap",
+    "old": "if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);",
+    "new": "if(settingsPage==='models'||settingsPage==='connections')renderLocalDiagnostics(p);if(settingsPage==='git')renderGitSettings(p);"
+  },
+  {
+    "owner": "git",
+    "index": 8,
+    "file": "intentgraph/server.cjs",
+    "reason": "overlap",
+    "old": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution };",
+    "new": "  server.intentGraph = { root, runtimeDirectory, token, engine, indexer, ready, startWatchers, closeWatchers, execution, gitWorkspace, gitApi };"
+  }
+]

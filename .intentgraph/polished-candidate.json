@@ -1,0 +1,154 @@
+{
+  "candidateId": "AV2-ae8ad3e219bd",
+  "capturedAt": "2026-09-12T16:28:35.666Z",
+  "baseline": "Owner-approved first four; avatar-family.md",
+  "sources": [
+    {
+      "path": "avatar-system/artwork.js",
+      "sha256": "c94a0eac051a816b53c7324aa3a260e55cc8bcb7cc56d0b86eeeb51bed966c19",
+      "bytes": 7376
+    },
+    {
+      "path": "avatar-system/avatar.css",
+      "sha256": "0c8d5eeb866d51b054833c24adc365c1d673276a5e081712d2454fe2a6d746ad",
+      "bytes": 2496
+    },
+    {
+      "path": "avatar-system/gallery.html",
+      "sha256": "c6e067755638295be7744a46f86745a52a4c5fc554d745da150005fb95dfb9fb",
+      "bytes": 2977
+    },
+    {
+      "path": "avatar-system/gallery.css",
+      "sha256": "27ba6d0c4d21f94dc12ce534e0fc32cdc8cbda18ad7dc0ba6074b119924f146d",
+      "bytes": 1588
+    },
+    {
+      "path": "avatar-system/preview.js",
+      "sha256": "04353c4c52c1b2214126c7844a05b9efd316a14d9ae7db5c6dd4f2da3e8b3fb8",
+      "bytes": 3116
+    },
+    {
+      "path": "avatar-system/export.cjs",
+      "sha256": "61e3f8a6b2ad03fb4046349e96df3e32b11c6210b88b95eefd670310a6b61032",
+      "bytes": 1952
+    },
+    {
+      "path": "avatar-system/react/NetworkAvatar.tsx",
+      "sha256": "4a99d593a6c5c5b923c87fdeedc32d16d562101ff2cb8d97b5ad95613958127d",
+      "bytes": 43637
+    },
+    {
+      "path": "avatar-system/svg/cloud.svg",
+      "sha256": "fdd8b3c6e493aa1330001f8f6fef34a51fb2d9a04e9b9b92ca7fcb410c7a5b48",
+      "bytes": 1255
+    },
+    {
+      "path": "avatar-system/svg/controller.svg",
+      "sha256": "13c7996c22abdf20101cebb2686e7ad0d6e908708abe465b4755b8ce37cbcb76",
+      "bytes": 1419
+    },
+    {
+      "path": "avatar-system/svg/dns-ddi.svg",
+      "sha256": "215697bd27bbdc64ed5a6c29bfea1a275015a4b7c6a731a967abcc011a584ce8",
+      "bytes": 1312
+    },
+    {
+      "path": "avatar-system/svg/firewall.svg",
+      "sha256": "6d3c0b6626f89cd8eef4a1da58df00ff73c97ec68963c74496cd4ad646659013",
+      "bytes": 1280
+    },
+    {
+      "path": "avatar-system/svg/leaf.svg",
+      "sha256": "544ded1bdad1d34ddfe376c8199195dfeacfafe35b1f39640c8b4471df8ddac1",
+      "bytes": 1366
+    },
+    {
+      "path": "avatar-system/svg/load-balancer.svg",
+      "sha256": "11fd5ddf00867344cf1030be625800e6d1ba1b4d8ee8edf531fcbe27687e1422",
+      "bytes": 1320
+    },
+    {
+      "path": "avatar-system/svg/monitoring.svg",
+      "sha256": "b6b25a82f5ea11778f22446656826b1ddc2aa8ce0177940a79eb031f156b2959",
+      "bytes": 1276
+    },
+    {
+      "path": "avatar-system/svg/proxy.svg",
+      "sha256": "bcc39d73d9ff1b5e3288ce208a4054d3fb26f943f3e6b02192cb99ebe9a91845",
+      "bytes": 1282
+    },
+    {
+      "path": "avatar-system/svg/router.svg",
+      "sha256": "51d07f09d66eb031847765aa9df65d1458e2ef12cc66f7690a56f040c3e7678b",
+      "bytes": 1436
+    },
+    {
+      "path": "avatar-system/svg/sd-wan.svg",
+      "sha256": "e3beb09fe73eada003babeec0a7478f8328d462a296e31a7d6e6033c91d275da",
+      "bytes": 1305
+    },
+    {
+      "path": "avatar-system/svg/server.svg",
+      "sha256": "370be92fe55fa2da3f3ed298ef91899e27c11f7f3646214e4f2106f3e6b9fcf9",
+      "bytes": 1409
+    },
+    {
+      "path": "avatar-system/svg/spine.svg",
+      "sha256": "2acfd46769f8b7565da3e0ef25ef3309d61bf64918d15b5c254b766bd05f5795",
+      "bytes": 1266
+    },
+    {
+      "path": "avatar-system/svg/storage.svg",
+      "sha256": "6aff404d324195890494020923bd2f738d6c749c003a4c8e0766c1660d219c7a",
+      "bytes": 1338
+    },
+    {
+      "path": "avatar-system/svg/switch.svg",
+      "sha256": "2204540c035d5f6913577480cd70b5ee2e37bd85e0f0bfa7401838df227e9eb2",
+      "bytes": 1516
+    },
+    {
+      "path": "avatar-system/svg/vpn.svg",
+      "sha256": "2ec879bb7dd6e90be827ac46d3710bf422403ea5fb2b671821e943bb6d2354b6",
+      "bytes": 1243
+    },
+    {
+      "path": "avatar-system/svg/wifi.svg",
+      "sha256": "cb2f23eda83c71cbdd54bb5e13d2d5209c56509720fa0256b36cb86c7bbadb55",
+      "bytes": 1236
+    },
+    {
+      "path": "polished.html",
+      "sha256": "685d24454e8345d822466ae2ba16a0cd389b980ee7733ed9ab23fb76a7ea93fb",
+      "bytes": 11978
+    },
+    {
+      "path": "polished.css",
+      "sha256": "45b48460ba60479d20aa595ae7f0e1a0bc65785338b5788168b8d057fa5f7445",
+      "bytes": 50460
+    },
+    {
+      "path": "polished.js",
+      "sha256": "a4ba5412ae5ff309d55ed6b0c1c3eba165b27ee8a13c39ffd471438ba66497f0",
+      "bytes": 71324
+    },
+    {
+      "path": "polished-avatars.js",
+      "sha256": "7aa2b00ed3d92951a7473183a7c89fd997c99d5817adbad2ac326ebc5ad39f50",
+      "bytes": 7904
+    },
+    {
+      "path": "prototype-review.html",
+      "sha256": "eaa645fc450d7c349076bb8ea71cac4a389ffe424a05e7802ba26334763a3c6e",
+      "bytes": 6742
+    }
+  ],
+  "tests": [
+    ".intentgraph/avatar-family-qa-results.json",
+    ".intentgraph/avatar-family-app-qa-results.json",
+    ".intentgraph/avatar-family-react-check.json"
+  ],
+  "userApproval": "First four approved; expanded-family appearance pending owner review",
+  "scope": "Local frontend: sixteen network coworkers, shared SVG/React geometry and picker integration. Real AI, network execution and live graph/team telemetry remain unconnected."
+}

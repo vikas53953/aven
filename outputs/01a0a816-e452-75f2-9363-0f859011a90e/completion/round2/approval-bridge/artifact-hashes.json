@@ -1,0 +1,12 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "API_CONTRACT.md": "a1d1fbc3ff3936dd2e5ca7be2c6e6b29fbda1a832271b4ce3c68124cf6bb289f",
+    "approval-bridge.cjs": "9b61c8fba1754444f2d0d2863f298c44496bc392710b9d4fbefd6e0343d2daa5",
+    "approval-bridge.test.cjs": "0d7520b7053ae04697d3b2d5c8bac2116f5ee86f041a682f8ecfe07c083c40bf",
+    "approval-bridge-ui.js": "a9bfac5146fda65421b2b4fce504081197935111178e50afbbeb177ffbfaf77a",
+    "approval-bridge-ui.css": "eb06643cf73c8ce1af2d4fb1014457dd5b561b22749ad6c319aa65b86c36b13d",
+    "root-hook-manifest.json": "a966c7c727469cfe84df8a87934692970a0c5742482cc3e6b03151575bb4c222",
+    "ROOT_HANDOFF.md": "3ef00739281154fa9081b90802db6d64c73e0ea03094bcb59026c8de1ebd92e4"
+  }
+}

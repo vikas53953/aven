@@ -1,0 +1,442 @@
+.aven-workspace-tools {
+  --aven-tools-gap: 14px;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  color: var(--text, #171717);
+  background: var(--surface, transparent);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong, #b9b9b9) transparent;
+}
+
+.aven-workspace-tools,
+.aven-workspace-tools * {
+  box-sizing: border-box;
+}
+
+.aven-workspace-tools-view {
+  display: grid;
+  gap: var(--aven-tools-gap);
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding: 20px clamp(14px, 3vw, 32px) 32px;
+}
+
+.aven-workspace-tools-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border, #d5d5d5);
+}
+
+.aven-workspace-tools-heading {
+  min-width: 0;
+}
+
+.aven-workspace-tools-eyebrow {
+  margin: 0 0 5px;
+  color: var(--faint, #707070);
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.aven-workspace-tools h2,
+.aven-workspace-tools h3,
+.aven-workspace-tools h4,
+.aven-workspace-tools p {
+  min-width: 0;
+}
+
+.aven-workspace-tools h2 {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.15;
+}
+
+.aven-workspace-tools h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.aven-workspace-tools h4 {
+  margin: 0;
+  font-size: 12px;
+}
+
+.aven-workspace-tools-description,
+.aven-workspace-tools-help,
+.aven-workspace-tools-meta,
+.aven-workspace-tools-scope,
+.aven-workspace-tools-status,
+.aven-workspace-tools-warning {
+  color: var(--muted, #575757);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.aven-workspace-tools-description {
+  max-width: 620px;
+  margin: 7px 0 0;
+}
+
+.aven-workspace-tools-count {
+  flex: none;
+  color: var(--faint, #707070);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.aven-workspace-tools-status {
+  min-height: 18px;
+  margin: 0;
+  padding: 0 clamp(14px, 3vw, 32px);
+  overflow-wrap: anywhere;
+}
+
+.aven-workspace-tools-toolbar,
+.aven-workspace-tools-card-actions,
+.aven-workspace-tools-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aven-workspace-tools-toolbar {
+  justify-content: flex-end;
+}
+
+.aven-workspace-tools button {
+  min-height: 32px;
+  max-width: 100%;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 7px;
+  padding: 7px 10px;
+  color: var(--text, #171717);
+  background: var(--surface-2, #f0f0f0);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.aven-workspace-tools button:hover:not(:disabled),
+.aven-workspace-tools button:focus-visible {
+  background: var(--surface-3, #e5e5e5);
+}
+
+.aven-workspace-tools button:focus-visible,
+.aven-workspace-tools input:focus-visible,
+.aven-workspace-tools textarea:focus-visible {
+  outline: 2px solid var(--focus, var(--text, #171717));
+  outline-offset: 2px;
+}
+
+.aven-workspace-tools button:disabled {
+  cursor: default;
+  opacity: .45;
+}
+
+.aven-workspace-tools .button-primary {
+  border-color: var(--accent, var(--text, #171717));
+  color: var(--on-accent, #fff);
+  background: var(--accent, var(--text, #171717));
+}
+
+.aven-workspace-tools .button-primary:hover:not(:disabled),
+.aven-workspace-tools .button-primary:focus-visible {
+  color: var(--on-accent, #fff);
+  background: var(--accent, var(--text, #171717));
+  filter: brightness(.92);
+}
+
+.aven-workspace-tools .button-quiet {
+  border-color: transparent;
+  color: var(--muted, #575757);
+  background: transparent;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.aven-workspace-tools-list,
+.aven-workspace-tools-feed-list,
+.aven-workspace-tools-artifact-list {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.aven-workspace-tools-section-title {
+  margin-top: 7px !important;
+  color: var(--faint, #707070);
+  font-size: 10px !important;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.aven-workspace-tools-card,
+.aven-workspace-tools-form,
+.aven-workspace-tools-evidence-picker {
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--border, #d5d5d5);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--surface-2, #f0f0f0);
+}
+
+.aven-workspace-tools-card {
+  display: grid;
+  gap: 10px;
+}
+
+.aven-workspace-tools-card-top,
+.aven-workspace-tools-subhead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.aven-workspace-tools-card-top h3 {
+  overflow-wrap: anywhere;
+}
+
+.aven-workspace-tools-body,
+.aven-workspace-tools-raw {
+  margin: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
+.aven-workspace-tools-meta,
+.aven-workspace-tools-scope,
+.aven-workspace-tools-warning {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.aven-workspace-tools-badge {
+  flex: none;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--text, #171717);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.aven-workspace-tools-badge.is-muted {
+  color: var(--muted, #575757);
+}
+
+.aven-workspace-tools-badge.is-success {
+  border-color: var(--success, #4b7657);
+  color: var(--success, #4b7657);
+}
+
+.aven-workspace-tools-badge.is-danger,
+.aven-workspace-tools-warning {
+  color: var(--danger, #9b3b3b);
+}
+
+.aven-workspace-tools-form {
+  display: grid;
+  gap: 8px;
+}
+
+.aven-workspace-tools-form h3 {
+  margin-bottom: 3px;
+}
+
+.aven-workspace-tools-label,
+.aven-workspace-label {
+  color: var(--muted, #575757);
+  font-size: 11px;
+}
+
+.aven-workspace-tools input[type="text"],
+.aven-workspace-tools input:not([type]),
+.aven-workspace-tools textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-strong, #b9b9b9);
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: var(--text, #171717);
+  background: var(--surface, #fff);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.aven-workspace-tools textarea {
+  resize: vertical;
+}
+
+.aven-workspace-tools-help {
+  margin: 0;
+}
+
+.aven-workspace-tools-form-actions {
+  justify-content: flex-end;
+  margin-top: 5px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border, #d5d5d5);
+}
+
+.aven-workspace-tools-step-editor,
+.aven-workspace-tools-checklist,
+.aven-workspace-tools-evidence-list {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aven-workspace-tools-step-row,
+.aven-workspace-tools-check-row,
+.aven-workspace-tools-evidence-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+}
+
+.aven-workspace-tools-step-row label {
+  flex: none;
+  width: 44px;
+  color: var(--muted, #575757);
+  font-size: 10px;
+}
+
+.aven-workspace-tools-step-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.aven-workspace-tools-check-row {
+  align-items: flex-start;
+}
+
+.aven-workspace-tools-check-row input {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: var(--accent, var(--text, #171717));
+}
+
+.aven-workspace-tools-check-row label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.aven-workspace-tools-evidence-picker {
+  display: grid;
+  gap: 10px;
+  border-color: var(--border-strong, #b9b9b9);
+}
+
+.aven-workspace-tools-evidence-copy {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 3px;
+}
+
+.aven-workspace-tools-evidence-copy span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted, #575757);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aven-workspace-tools-empty {
+  margin: 0;
+  padding: 16px 0;
+  color: var(--muted, #575757);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.aven-workspace-tools-raw {
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid var(--border, #d5d5d5);
+  border-radius: 7px;
+  padding: 10px;
+  background: var(--surface, #fff);
+  font: 11px/1.5 Consolas, "Cascadia Mono", "Courier New", monospace;
+}
+
+.aven-workspace-tools-provenance {
+  display: grid;
+  grid-template-columns: minmax(78px, auto) minmax(0, 1fr);
+  gap: 4px 10px;
+  min-width: 0;
+  margin: 0;
+  font-size: 10px;
+}
+
+.aven-workspace-tools-provenance dt {
+  color: var(--muted, #575757);
+}
+
+.aven-workspace-tools-provenance dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 540px) {
+  .aven-workspace-tools-view {
+    padding: 16px 12px 24px;
+  }
+
+  .aven-workspace-tools-status {
+    padding: 0 12px;
+  }
+
+  .aven-workspace-tools-card,
+  .aven-workspace-tools-form,
+  .aven-workspace-tools-evidence-picker {
+    padding: 12px;
+  }
+
+  .aven-workspace-tools-step-row {
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .aven-workspace-tools-step-row label {
+    width: auto;
+  }
+
+  .aven-workspace-tools-step-row input {
+    width: calc(100% - 86px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aven-workspace-tools * {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "at": "2026-09-16T07:04:30.022Z",
+  "build": "ux-minimal-ui-v9.1",
+  "files": [
+    {
+      "file": "polished.html",
+      "status": 200,
+      "disk": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "served": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "expected": "42c1417d125d2c727d343a33832f5348fd3c06117f24509c17933dfd524d54b2",
+      "pass": true
+    },
+    {
+      "file": "polished.css",
+      "status": 200,
+      "disk": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "served": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "expected": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "pass": true
+    },
+    {
+      "file": "polished.js",
+      "status": 200,
+      "disk": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "served": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "expected": "560374b9c20ba04546eb238558d8e45acd2353f8f69df73824d8356e902da17a",
+      "pass": true
+    },
+    {
+      "file": "polished-workspace-tools.js",
+      "status": 200,
+      "disk": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "served": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "expected": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75",
+      "pass": true
+    },
+    {
+      "file": "polished-backup.js",
+      "status": 200,
+      "disk": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "served": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "expected": "02ad8c730cf1c9818ae6fa6c2dad2a28661ffefa4a437c3cd34053cd9347b642",
+      "pass": true
+    }
+  ],
+  "passed": true,
+  "visual": "In-app browser after reload shows collapsed html block, 113 lines; no draft or selected attachment was present before reload.",
+  "architecture": "HLD17 current and target views loaded; walkthrough advanced to step2."
+}

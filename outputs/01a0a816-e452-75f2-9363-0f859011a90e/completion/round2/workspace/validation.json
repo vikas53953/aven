@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "scope": "round2 workspace UX023/UX026/UX082",
+  "tests": [
+    {
+      "command": "node --check round2/workspace/workspace-capabilities.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node round2/workspace/workspace-capabilities.test.cjs",
+      "exitCode": 0,
+      "result": { "passed": true, "cases": 59, "blockedRequests": 0, "externalCalls": 0 }
+    },
+    {
+      "command": "node round2/workspace/round2-validation.cjs",
+      "exitCode": 0,
+      "result": { "passed": true, "cases": 17, "externalCalls": 0, "baseInput": "58D1F9AE9E4568017FC671F043777913F580A3C042562236C1AF665049485FB2", "transformedSource": "AF6EF1F752499F567D090FE8ABBB1DE6C3C3EA34502F416CC197A692AD1FF858" }
+    },
+    {
+      "command": "node round2/workspace/assembled-ux023-026-082.browser.test.cjs",
+      "exitCode": 0,
+      "result": { "passed": true, "rows": ["UX-023", "UX-026", "UX-082"], "externalCalls": 0, "chatPayloadStableId": true, "topologyEvidence": true, "recognitionStarts": 2, "recognitionAborts": 1, "consoleErrors": [] }
+    }
+  ],
+  "baseInput": "completion/assembled-candidate",
+  "sourceHashes": {
+    "polished.js": "58D1F9AE9E4568017FC671F043777913F580A3C042562236C1AF665049485FB2",
+    "workspace-capabilities.js": "99B78D8DC2FED244BC100592A5A90339435A2BCF84217DC530EEAA0061659165",
+    "workspace-capabilities.css": "B1EA121FBB95702F7AB7F8ECC2FBA571785859C5078F12F9D0CFE7B9445AB20E"
+  },
+  "blockedPolicy": "Tests use copied frozen capability code, injected dictation/inventory fixtures and in-memory replacement application only. No provider, microphone, device, network, credential or user-state call was made.",
+  "pending": [
+    "Root integrated browser acceptance against the composed shell.",
+    "Owner acceptance and any real adapter/device authorization gate."
+  ]
+}

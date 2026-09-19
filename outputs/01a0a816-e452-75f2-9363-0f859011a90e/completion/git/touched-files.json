@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "scope": "UX075 Git candidate only; root owns composition into the live product.",
+  "candidateFiles": [
+    "completion/git/intentgraph/git-workspace.cjs",
+    "completion/git/polished-git.js",
+    "completion/git/polished-git.css",
+    "completion/git/intentgraph/git-workspace.test.cjs",
+    "completion/git/git-ui.test.cjs"
+  ],
+  "integrationManifest": "completion/git/replacements.json",
+  "frozenBaseline": "completion/baseline",
+  "liveProductEdited": false,
+  "architectureUpdate": "root-owned"
+}

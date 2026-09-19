@@ -1,0 +1,63 @@
+{
+  "files": [
+    {
+      "path": "candidate/polished.js",
+      "sha256": "c776568d684dc800fb732737c6f21653e795f80261b74bef3ca7201b8a5a8981",
+      "baselineSha256": "82666c61754b7e32ab13b78dcbf64018b68c2d28244b876f2d9b3f881f491b0a",
+      "scope": "Coworker creation transaction journal, exact raw-state recovery, startup/retry recovery gate"
+    },
+    {
+      "path": "creation-audit.cjs",
+      "sha256": "7b4e837197be8606196f8dab16b6430e5ea4f5eae4da716bf55024ba43d0e855",
+      "scope": "Isolated Chromium overlay harness; candidate default, --baseline and --integrated modes"
+    }
+  ],
+  "replacementsPath": "replacements.json",
+  "replacementsSha256": "ce9d6ab8aa7f3eab8d60986a405d708c245d89c1e6a37efd0c8f3ec37cb33009",
+  "tests": [
+    {
+      "command": "codex-primary-runtime node creation-audit.cjs --baseline",
+      "exitCode": 1,
+      "result": "Expected failing-before evidence: baseline leaves an orphan coworker after chat write failure and does not preserve raw state.",
+      "evidence": "creation-evidence-baseline.json"
+    },
+    {
+      "command": "codex-primary-runtime node creation-audit.cjs",
+      "exitCode": 0,
+      "result": "Five candidate scenarios passed: rich-state preservation on preferences/chat/docs failures, persistent rollback failure plus blocked retry and startup recovery, same-name retry, duplicate rejection, and local welcome checks.",
+      "evidence": "creation-evidence-candidate.json"
+    },
+    {
+      "command": "codex-primary-runtime node creation-audit.cjs --integrated",
+      "exitCode": 1,
+      "result": "Current live project is still baseline; integrated mode is intentionally an exact post-merge rerun path and currently reproduces the defect.",
+      "evidence": "creation-evidence-integrated.json"
+    },
+    {
+      "command": "node --check candidate/polished.js",
+      "exitCode": 0,
+      "result": "JavaScript syntax check passed."
+    },
+    {
+      "command": "node --check creation-audit.cjs",
+      "exitCode": 0,
+      "result": "Audit harness syntax check passed."
+    },
+    {
+      "command": "apply replacements.json to baseline polished.js",
+      "exitCode": 0,
+      "result": "Five replacements each matched exactly once during root integration; integration.json records all hashes."
+    }
+  ],
+  "evidence": [
+    "creation-evidence-baseline.json",
+    "creation-evidence-candidate.json",
+    "creation-evidence-integrated.json"
+  ],
+  "limitations": [
+    "The harness uses isolated Chromium, a static file overlay and blocked non-static requests; it does not exercise a real provider, device, credential or user-storage path.",
+    "The persistent rollback scenario uses a controlled failure on the rollback write; browser localStorage writes are synchronous and atomic per key, while cross-key recovery is journaled.",
+    "The live integrated project remains unchanged until the root agent applies the exact replacements.",
+    "Some UI handlers can mutate unsaved in-memory state while persistent writes are blocked. Verification covers saved-state preservation and recovery."
+  ]
+}

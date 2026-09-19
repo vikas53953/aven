@@ -1,0 +1,22 @@
+.approval-bridge-pane { color: var(--text, #e9edf5); background: var(--surface, #111722); border: 1px solid var(--border, #2a3343); border-radius: 12px; padding: 16px; max-width: 520px; }
+.approval-bridge-pane__header h2 { margin: 0; font-size: 18px; }
+.approval-bridge-pane__eyebrow { margin: 0 0 4px; color: var(--muted, #8d9ab0); font-size: 10px; letter-spacing: .12em; }
+.approval-bridge-pane__status, .approval-bridge-pane__note { color: var(--muted, #a6b1c3); font-size: 12px; line-height: 1.5; }
+.approval-bridge-pane__setup { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px; margin: 12px 0; }
+.approval-bridge-pane__target-status { grid-column: 1 / -1; margin: 0; color: var(--muted, #a6b1c3); font-size: 12px; }
+.approval-bridge-pane__setup input, .approval-bridge-pane__setup select, .approval-bridge-pane__setup button { min-width: 0; border: 1px solid var(--border-strong, #3c4a60); background: var(--surface-2, #1a2230); color: inherit; border-radius: 7px; padding: 7px 9px; font: inherit; font-size: 11px; }
+.approval-bridge-pane__setup button { cursor: pointer; }
+.approval-bridge-pane__setup select { grid-column: 1 / -1; }
+.approval-bridge-pane__network { margin: 14px 0; border-top: 1px solid var(--border, #2a3343); padding-top: 12px; }
+.approval-bridge-pane__network h3 { margin: 0 0 4px; font-size: 13px; }
+.approval-bridge-pane__network > select, .approval-bridge-pane__network > button { margin: 4px 4px 4px 0; border: 1px solid var(--border-strong, #3c4a60); background: var(--surface-2, #1a2230); color: inherit; border-radius: 7px; padding: 7px 9px; font: inherit; font-size: 11px; }
+.approval-bridge-pane__network > button:disabled { cursor: default; opacity: .45; }
+.approval-bridge-pane__network-devices { min-width: 180px; }
+.approval-bridge-pane__network-review { display: grid; gap: 8px; margin-top: 8px; }
+.approval-bridge-pane__review { display: grid; gap: 8px; margin: 14px 0; }
+.approval-bridge-pane__row { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; border-top: 1px solid var(--border, #2a3343); padding-top: 8px; }
+.approval-bridge-pane__row dt { color: var(--muted, #8d9ab0); font-size: 11px; }
+.approval-bridge-pane__row dd { margin: 0; overflow-wrap: anywhere; font-size: 12px; }
+.approval-bridge-pane__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.approval-bridge-pane__actions button { border: 1px solid var(--border-strong, #3c4a60); background: var(--surface-2, #1a2230); color: inherit; border-radius: 7px; padding: 8px 10px; cursor: pointer; }
+.approval-bridge-pane__actions button:disabled { cursor: default; opacity: .45; }

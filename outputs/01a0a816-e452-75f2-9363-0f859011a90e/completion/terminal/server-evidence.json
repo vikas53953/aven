@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "UX071 /api/sandbox/command route",
+  "tests": [
+    "actual createServer with injected network facade",
+    "same-origin and X-Aven-Sandbox read-only policy",
+    "exact inventory target resolution and per-target/global allowlist rejection before adapter dispatch",
+    "inventory and command routes share the injected network facade and duplicate target IDs are rejected",
+    "request rejects model-supplied host parameters",
+    "strict UUIDv4 request identity validation happens before inventory lookup",
+    "same request identity cannot be rebound to different diagnostic input",
+    "submitted adapter uncertainty returns UNKNOWN once without exposing adapter details",
+    "response disconnect after a complete POST aborts the injected facade signal",
+    "parallel identical request IDs reserve before delayed inventory and distinct request IDs each dispatch once",
+    "active request identities remain retained while other completions exceed the cache bound"
+  ],
+  "externalCalls": 0,
+  "credentialReads": 0,
+  "noRetry": true
+}

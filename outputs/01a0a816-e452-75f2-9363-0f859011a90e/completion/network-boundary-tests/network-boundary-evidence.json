@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "suite": "network-boundary-tests",
+  "productRoot": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse",
+  "startedAt": "2026-09-16T06:05:25.053Z",
+  "finishedAt": "2026-09-16T06:05:26.204Z",
+  "testCount": 7,
+  "passCount": 5,
+  "partialCount": 2,
+  "failCount": 0,
+  "acceptanceRows": {
+    "UX077": "PASS",
+    "UX079": "PARTIAL",
+    "UX106": "PARTIAL"
+  },
+  "results": [
+    {
+      "id": "UX077-scope-copy",
+      "status": "PASS",
+      "detail": "live v8 and minimal UI candidate expose matching read-only/plan scope labels; runtime prompt states evidence boundaries",
+      "sourceHashes": {
+        "liveHtml": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+        "candidateHtml": "BCDAE830AB5A6D594C70725672CA90C7E47ABA2762844895E95AD28FEDC7DC7E",
+        "candidateJs": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD"
+      },
+      "startedAt": "2026-09-16T06:05:25.055Z",
+      "finishedAt": "2026-09-16T06:05:25.068Z"
+    },
+    {
+      "id": "UX077-plan-zero-tools",
+      "status": "PASS",
+      "detail": "plan mode bound zero tools and produced no network evidence",
+      "modelTextIsClaim": false,
+      "startedAt": "2026-09-16T06:05:25.068Z",
+      "finishedAt": "2026-09-16T06:05:25.732Z"
+    },
+    {
+      "id": "UX077-invalid-operation-boundary",
+      "status": "PASS",
+      "detail": "reload produced no device-side effect; only inventory and run_diagnostic tools were bound",
+      "errorCode": null,
+      "eventCount": 0,
+      "startedAt": "2026-09-16T06:05:25.732Z",
+      "finishedAt": "2026-09-16T06:05:25.919Z"
+    },
+    {
+      "id": "UX106-supported-read-only-allowlist",
+      "status": "PASS",
+      "detail": "Catalyst and SSH paths reject reload; unsupported commands never reach the network facade",
+      "allowlistCount": 25,
+      "startedAt": "2026-09-16T06:05:25.919Z",
+      "finishedAt": "2026-09-16T06:05:25.922Z"
+    },
+    {
+      "id": "UX106-unknown-transport",
+      "status": "PARTIAL",
+      "detail": "transport submission was UNKNOWN and surfaced in deterministic evidence; scripted model could still say healthy",
+      "observedStatus": "UNKNOWN",
+      "limitation": "respond appends status evidence but does not mechanically reject contradictory model health prose",
+      "startedAt": "2026-09-16T06:05:25.922Z",
+      "finishedAt": "2026-09-16T06:05:26.058Z"
+    },
+    {
+      "id": "UX079-success-with-faulty-raw-output",
+      "status": "PARTIAL",
+      "detail": "raw output retained fault markers while transport status was SUCCESS; no deterministic health classifier is present",
+      "observedStatus": "SUCCESS",
+      "limitation": "UX079 requires UI/runtime interpretation to avoid treating command SUCCESS as device health; current respond contract exposes raw output but does not classify it",
+      "startedAt": "2026-09-16T06:05:26.058Z",
+      "finishedAt": "2026-09-16T06:05:26.120Z"
+    },
+    {
+      "id": "UX106-supported-command-success",
+      "status": "PASS",
+      "detail": "supported show version resolved the exact UUID and retained raw output",
+      "observedStatus": "SUCCESS",
+      "startedAt": "2026-09-16T06:05:26.120Z",
+      "finishedAt": "2026-09-16T06:05:26.197Z"
+    }
+  ],
+  "sourceHashes": {
+    "liveHtml": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished.html",
+      "sha256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352"
+    },
+    "liveJs": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\polished.js",
+      "sha256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C"
+    },
+    "candidateHtml": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\minimal-ui\\candidate\\polished.html",
+      "sha256": "BCDAE830AB5A6D594C70725672CA90C7E47ABA2762844895E95AD28FEDC7DC7E"
+    },
+    "candidateJs": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\minimal-ui\\candidate\\polished.js",
+      "sha256": "4BFCA6CC438F3A90FA01FCC8CE120AF791771A8BA969AFD6BB139EC5757568BD"
+    },
+    "agentRuntime": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intentgraph\\agent-runtime.cjs",
+      "sha256": "BE188A28902527BBA7242DDB75C18A8ACEEACF5CFC68964C19EC79048392C92C"
+    },
+    "networkExecution": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intentgraph\\network-execution.cjs",
+      "sha256": "CEBF8916A17D5709EB772AA0B488339599879F6F6D65AF3855E2EF507F38D721"
+    },
+    "catalyst": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intentgraph\\catalyst.cjs",
+      "sha256": "885AC2B34B38D1863E9FBBC51BC90BEDBAB694D25BC6E65726FCD412771DF237"
+    },
+    "networkCommands": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\intentgraph\\network-commands.json",
+      "sha256": "CCE70A8A23398E155063D9987B45951231B7A18B31AE87E9DEEB98A41EB7A3A3"
+    },
+    "acceptance": {
+      "path": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\acceptance.txt",
+      "sha256": "F05A06FDB92E75E4F7431066D96A07E92FD2F3E28BC04036F781935E1A5A69C9"
+    }
+  },
+  "noExternalCalls": true,
+  "noCredentials": true,
+  "deterministicBoundary": "Tool schemas, facade statuses, raw evidence, and allowlist assertions are deterministic; model prose is fixture input and is not treated as health truth."
+}

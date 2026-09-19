@@ -1,0 +1,48 @@
+{
+  "assignment": "approval-bridge",
+  "scope": ["UX-080", "UX-114"],
+  "frozenInput": "completion/round2/CONTRACT.md + completion/baseline-ledger.json + completion/workflows/candidate/approval-workflow.cjs (read-only)",
+  "liveProductFilesEdited": false,
+  "sharedIntegrationEdited": false,
+  "module": {
+    "require": "completion/round2/approval-bridge/approval-bridge.cjs",
+    "exports": ["ApprovalBridge", "ReviewLedger", "createApprovalBridgeHttpApi", "createAdapterStateProvider", "isDirectAdapterOperation", "assertNoDirectAdapterBypass"],
+    "productionFacade": "executionService.action({type:'execution.adapter', operation})",
+    "adapterState": "const adapterState=createAdapterStateProvider(execution.adapters); pass adapterState to new ApprovalBridge({executionFacade:execution, adapterState, ledger:new ReviewLedger({storagePath:path.join(runtimeDirectory,'approval-bridge.sqlite'), now})}); the provider calls the actual synchronous adapters.status(), fingerprints adapters.browserContextId, adapters.pages and adapters.selectedWindow, and advances generation on any context/page/window/connection/closed change.",
+    "ledger": "new ReviewLedger({storagePath:path.join(runtimeDirectory,'approval-bridge.sqlite'), now}) or pass an equivalent injected durable ledger",
+    "browserLease": "Root owns the browser fixture lease. The adapter owns a headless browser context; the UI must label it that way."
+  },
+  "serverHooks": [
+    {
+      "location": "intentgraph/server.cjs route before existing POST /api/action dispatch",
+      "code": "assertNoDirectAdapterBypass({pathname, body, headers:req.headers});",
+      "requiredBehavior": "Return 403 APPROVAL_BRIDGE_REQUIRED for execution.adapter operations browser.preview/browser.execute/desktop.preview/desktop.execute. Do not rely on the bridge-local handler to protect the generic route."
+    },
+    {
+      "location": "intentgraph/server.cjs route before generic action/static fallthrough",
+      "code": "const outcome=await approvalApi.handle({method:req.method,pathname,headers:req.headers,body});",
+      "requiredBehavior": "For /api/approval-bridge/* write JSON with outcome.status/outcome.headers/outcome.body and return. All preview/review/approve/execute calls carry exact Origin, X-Aven-Approval, scoped token, session, generation, connection and scope headers."
+    },
+    {
+      "location": "server close hook",
+      "code": "approvalBridge.close();",
+      "requiredBehavior": "Close the owned durable receipt ledger. Do not close or replace unrelated execution adapters."
+    }
+  ],
+  "uiHooks": {
+    "require": "completion/round2/approval-bridge/approval-bridge-ui.js (loads globalThis.AvenApprovalBridgeUI)",
+    "menu": "APPROVAL_BRIDGE_MENU_ACTION",
+    "mount": "const workspaceBridge=globalThis.__avenWorkspaceExecutionBridge; if(!workspaceBridge) throw new Error('The existing workspace execution bridge is unavailable.'); let workspaceKind=''; const workspaceCall=async(kind,operation,input={})=>{if(workspaceKind!==kind||!workspaceBridge.isConnected?.()){await workspaceBridge.connect(kind); workspaceKind=kind;} const response=await workspaceBridge.call(kind,operation,input); if(!response?.ok) throw new Error(response?.reason||'The authorized workspace adapter rejected the operation.'); return response.result;}; const client=createApprovalBridgeClient({basePath:'/api/approval-bridge',origin:window.location.origin,currentChatId,getMode,adapterClient:{openBrowser:(url)=>workspaceCall('browser','browser.open',{url}),inspectBrowser:(pageId)=>workspaceCall('browser','browser.inspect',{pageId}),listDesktopWindows:()=>workspaceCall('computer','desktop.windows'),selectDesktopWindow:(window)=>workspaceCall('computer','desktop.select',window),inspectDesktop:()=>workspaceCall('computer','desktop.inspect')}}); globalThis.AvenApprovalBridgeUI.mountApprovalBridgePane(existingWorkspacePane,client,{getScope:currentReviewScope,adapterIdentity:currentAdapterIdentity,getInventory:currentAdapterInventory})",
+    "clientRequirements": [
+      "Mount uses globalThis.__avenWorkspaceExecutionBridge.call(kind,operation,input) for existing browser.open/browser.inspect (root adds the scoped workspace open route) and desktop.windows/desktop.select/desktop.inspect; the pane exposes explicit Open and inspect browser URL, List desktop windows, Select and inspect desktop window, and Connect this target controls. Each target comes from the existing adapter; never invent pageId, window or control identifiers. Browser context is headless and adapter-owned.",
+      "Map chat Agent mode to inspect and chat Plan mode to plan; only an explicit write review flow may call preview/approve/execute.",
+      "Pass currentReviewScope, currentAdapterIdentity and currentAdapterInventory (already available read-only adapter inventory) into mountApprovalBridgePane; network/device writes stay unavailable until a separate recovery-plan seam exists.",
+      "Keep all scoped and approval tokens in the client request closure; never write them to localStorage, chat history, JSON or event payloads.",
+      "Show human action, adapter-selected target, bounded current value or unavailable, affected targets, impact limits and rollback unavailable; do not make digest/session/token the main pane output. Chat revert is not device/browser rollback."
+    ]
+  },
+  "deferredToRoot": [
+    "Apply the server and existing workspace pane hooks above.",
+    "Run composed HTTP/browser verification under the root-owned browser lease and keep integrated/live status distinct."
+  ]
+}

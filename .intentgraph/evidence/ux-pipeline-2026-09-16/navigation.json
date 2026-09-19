@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-15T18:40:00.742Z",
+  "passed": true,
+  "features": [
+    "UX-012",
+    "UX-014"
+  ],
+  "checks": [
+    "section order boundary/reload/failure atomicity/focus",
+    "back/forward preserves unsent drafts and scroll",
+    "same-chat reveal keeps forward history",
+    "new navigation truncates forward history",
+    "reload keeps valid session history",
+    "unsaved document guard retains navigation index",
+    "invalid history resets without changing saved work",
+    "1440/760/390/320 horizontal bounds",
+    "no page errors or provider calls"
+  ]
+}

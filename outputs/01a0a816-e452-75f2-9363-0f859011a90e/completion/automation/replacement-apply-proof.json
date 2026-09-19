@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "exact": true,
+  "frozenBaseline": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline",
+  "candidateDir": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\automation\\candidate",
+  "files": {
+    "polished.html": {
+      "source": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.html",
+      "sourceSHA256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\automation\\candidate\\polished.html",
+      "candidateSHA256": "C7D190FAB26DD8B0E751F30FA9ACBF7A0B08B24B066B4255844E97EFB27BF61E",
+      "replacementCount": 3,
+      "resultSHA256": "C7D190FAB26DD8B0E751F30FA9ACBF7A0B08B24B066B4255844E97EFB27BF61E",
+      "exact": true,
+      "operations": [
+        {
+          "file": "polished.html",
+          "description": "load local automation stylesheet",
+          "beforeBytes": 90,
+          "afterBytes": 169,
+          "beforeSHA256": "2EFF4EE52DD6BCEF9EFC6ED75F3F53E64D9275D8C2173257F57F4DEC5D898378",
+          "afterSHA256": "868A742A40653A487304B4638CB91F8F4C4D64E552C0F5D24349B2A740D2D8BC"
+        },
+        {
+          "file": "polished.html",
+          "description": "add reachable automation workspace tab",
+          "beforeBytes": 167,
+          "afterBytes": 341,
+          "beforeSHA256": "3BD4B5646191A92F60CA534CE451E57784F95FFAC4F4444110863BADC12493AE",
+          "afterSHA256": "586A7EF53BC0CC7D0DC068265991833DF8227E49BE965FAD154389F781DB61A0"
+        },
+        {
+          "file": "polished.html",
+          "description": "load local automation module",
+          "beforeBytes": 82,
+          "afterBytes": 153,
+          "beforeSHA256": "A51AF067F89A502818C971EE0702DF0C68E79AF981D14AFDA11710835EF58E19",
+          "afterSHA256": "06CD8AAFBAEE42D9FF4474F44AA28E7424E0324B8CFEAC2AF0D32AB53447075F"
+        }
+      ]
+    },
+    "polished.js": {
+      "source": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished.js",
+      "sourceSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\automation\\candidate\\polished.js",
+      "candidateSHA256": "2EA7BFFB2190367956189124E263FB96CFB73CEFE3423CAC2FFC88EC21135CB3",
+      "replacementCount": 13,
+      "resultSHA256": "2EA7BFFB2190367956189124E263FB96CFB73CEFE3423CAC2FFC88EC21135CB3",
+      "exact": true,
+      "operations": [
+        {
+          "file": "polished.js",
+          "description": "clock icon for automation tab",
+          "beforeBytes": 319,
+          "afterBytes": 384,
+          "beforeSHA256": "BF5853EA2E0E2205463E6F0C2F95DBD84DAC39A720C8FA1DEAE642DEF358C97A",
+          "afterSHA256": "FEA37C2E5C32B47F80320A3E05583B8BA38D38F5649AF7400E93167B8F1F0967"
+        },
+        {
+          "file": "polished.js",
+          "description": "automation controller state",
+          "beforeBytes": 215,
+          "afterBytes": 265,
+          "beforeSHA256": "DF258953D883DD521BD479DC8098F4CD8FA099A3DB6523FB9F8791A2B9B08136",
+          "afterSHA256": "1467325B4F0011E7E9F6D956A26B4BFEC44636D60490416412D116CC6376E08F"
+        },
+        {
+          "file": "polished.js",
+          "description": "route automation workspace tab",
+          "beforeBytes": 534,
+          "afterBytes": 584,
+          "beforeSHA256": "4AF567DA57F0362BB974A675DDC1B82A71EFE22D9AB1193F43E8D6E3608F1A12",
+          "afterSHA256": "A318134BBE05A1C23CAB35CF210DC51C962E130AB4EDBA9EB73B213FE04084F8"
+        },
+        {
+          "file": "polished.js",
+          "description": "automation adapter and pane renderer",
+          "beforeBytes": 151,
+          "afterBytes": 3846,
+          "beforeSHA256": "00857C0A54D41A0C93CCFAE181148764D9A3D85B89C449A61EB2F6A1BFEB7236",
+          "afterSHA256": "F7DA971C0A6E59F05159CF4739D6F8905710525C373B4CF5D0F15E5D0C7DA559"
+        },
+        {
+          "file": "polished.js",
+          "description": "destroy automation pane state on navigation",
+          "beforeBytes": 127,
+          "afterBytes": 184,
+          "beforeSHA256": "1FF4048AE4430F56E4E7F8B42D0C4F06AA693CF662FEFAA8A85ADB76D832098E",
+          "afterSHA256": "9BACB18EC1741680638D1A6C34C2536EC3DA57EB5D4B29DC359384554D190638"
+        },
+        {
+          "file": "polished.js",
+          "description": "record input-required notification events",
+          "beforeBytes": 142,
+          "afterBytes": 353,
+          "beforeSHA256": "86B878EBF712BE1CC37FA68B66C88B53709BD94DEBEB8CEBEC8D0E3FE5A8BAE7",
+          "afterSHA256": "90FBB278DE24EE37D3DD876E48A659F2D618600E236742211086B67E85352551"
+        },
+        {
+          "file": "polished.js",
+          "description": "record completion and failure notification events",
+          "beforeBytes": 932,
+          "afterBytes": 1135,
+          "beforeSHA256": "73C9D46AA748B2A80A6EAA86C5C2CEB8564B5CC37A04493E45DAFDE37914651A",
+          "afterSHA256": "6A0984C605FC91258B6D5BB7817B7B78D49DEEA4024C47E7F39055F037015CFD"
+        },
+        {
+          "file": "polished.js",
+          "description": "refresh automation pane on chat navigation",
+          "beforeBytes": 1486,
+          "afterBytes": 1540,
+          "beforeSHA256": "322549CF3465E1EFFEECC6199684E01ECB1B87E8D615137892E7AB1DE8D8E5B7",
+          "afterSHA256": "B1B363FA3E6B3561F07187C2CF5D1FD86EE2ECDA113AB8CEEE8CBD7D019CB7FC"
+        },
+        {
+          "file": "polished.js",
+          "description": "render automation settings and notification event helper",
+          "beforeBytes": 33,
+          "afterBytes": 1079,
+          "beforeSHA256": "942C63AA5085B9D438309CB2009D62B2404450514F7C1162B8BA8332E80A9C71",
+          "afterSHA256": "1B4ED8C513E5F90837075C456C181BA9EA9EEDCF9FEF7B6B4C98AF57462247F2"
+        },
+        {
+          "file": "polished.js",
+          "description": "honor automation mute state for transient alerts",
+          "beforeBytes": 649,
+          "afterBytes": 732,
+          "beforeSHA256": "88248DBD334ACC14F5F9F5C76BA03A5482EF0A345F9BDB4D683CF359790A93EE",
+          "afterSHA256": "7F4FE2DF073A30178DDDFE482394DF3C9AF6C211F8B039E9895C268D38876DE2"
+        },
+        {
+          "file": "polished.js",
+          "description": "expose automation settings category",
+          "beforeBytes": 1919,
+          "afterBytes": 1978,
+          "beforeSHA256": "4B74826210347C4E00CE785298F632F108E10F87A6D81D455CC1E97C8518EA44",
+          "afterSHA256": "3165699C3516E83BE5C960322998D27A24F7117741422FDEE070E9EFE473F4CC"
+        },
+        {
+          "file": "polished.js",
+          "description": "add automation settings navigation",
+          "beforeBytes": 856,
+          "afterBytes": 897,
+          "beforeSHA256": "AC9F9BF117E2B3284B5E24FF562B7EC502A75E0841AC037F77F10440DCA381C1",
+          "afterSHA256": "935CB3FA0DAD4A1494300031BDD6BF3EA02E0A47C0222143507606BA5B16A214"
+        },
+        {
+          "file": "polished.js",
+          "description": "start bounded scheduler after app initialization",
+          "beforeBytes": 102,
+          "afterBytes": 177,
+          "beforeSHA256": "C0A581E9800F678C7C805242E091CDA452FDFDA2D26BE4BB3593F194A41777D6",
+          "afterSHA256": "50C211B38C713E9F5950EB7F943175A383B4B0B44DF39ABBE204B1E34389FFAB"
+        }
+      ]
+    },
+    "polished-backup.js": {
+      "source": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished-backup.js",
+      "sourceSHA256": "02DA5654DEEB94E0CA0403D5AFDDEE97E09BF3CC7DF398846E362FDDC590A27D",
+      "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\automation\\candidate\\polished-backup.js",
+      "candidateSHA256": "58AC9C6CD2246D4F16356464583F4FB7D249188AB950C8E0B8DB619C4BF2601A",
+      "replacementCount": 7,
+      "resultSHA256": "58AC9C6CD2246D4F16356464583F4FB7D249188AB950C8E0B8DB619C4BF2601A",
+      "exact": true,
+      "operations": [
+        {
+          "file": "polished-backup.js",
+          "description": "validate automation backup state",
+          "beforeBytes": 29,
+          "afterBytes": 2400,
+          "beforeSHA256": "F58472773BED1C581CABFA561E12923B931C4EB6DF2A8F499984E13DB1BEE517",
+          "afterSHA256": "9C39842C673FB61456FCA4521937A4BFCDB8C9D855B6A32B153FFEABCF48448E"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "validate automation workspace state",
+          "beforeBytes": 526,
+          "afterBytes": 573,
+          "beforeSHA256": "20928223079E994E5E852EF2E91F19357D6B105FD043DCF284517E682E5DEB1B",
+          "afterSHA256": "651224D6AE6CE2F5CE32C8FEBDC60F62DA79160C6DDFEB20555268B9C483695D"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "pause imported automation schedules for review",
+          "beforeBytes": 349,
+          "afterBytes": 664,
+          "beforeSHA256": "CB3902EA5BCAB06A1DC2C4B2A842CEE6D57563965B844E26BA767C7374E9FCC3",
+          "afterSHA256": "EEDE361AAC803CEF284734699F1CFF6C452E5A9EFC6F9E8676D399EC548B80C9"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "pause schedules parsed from import",
+          "beforeBytes": 236,
+          "afterBytes": 260,
+          "beforeSHA256": "226F97364B2C20A16F353F6FF56413AF57E23DC3EF3E68C534E75FDB833A97C7",
+          "afterSHA256": "B6FAD71E026E021D3E3450FB4DE0A112D91BC01C1EF0B70F554867577E77F407"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "pause schedules added by merge",
+          "beforeBytes": 80,
+          "afterBytes": 105,
+          "beforeSHA256": "7B11CEB62F40DD540C3BDBD9181D31DF1982AACE0247E793236E68B695791F20",
+          "afterSHA256": "1A0AEDD324B594EE16234888A35A0327BBE4F28716B3C7F4CE0422CDA28119F3"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "remap schedule history notifications and imported controls",
+          "beforeBytes": 175,
+          "afterBytes": 1602,
+          "beforeSHA256": "C082A7E503FD26A8B08E11688BFA38EEDE3A682F7F38C51F288CBB775296EDC7",
+          "afterSHA256": "066483DB6FDA530860E10800189EA747E4CDF7C701BB5A45D445602DECF58FCF"
+        },
+        {
+          "file": "polished-backup.js",
+          "description": "pause schedules in replace imports",
+          "beforeBytes": 160,
+          "afterBytes": 184,
+          "beforeSHA256": "4F7BDEEBB30DD230B881BA78BEDB6D4A268772C62FEF9F9C27205703A9261B0C",
+          "afterSHA256": "A0E6E303C9DAADD30DB4549C42E659E3E5968BE3298DC41EA7A4C5F34C94BBD0"
+        }
+      ]
+    },
+    "polished-workspace-tools.js": {
+      "source": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\baseline\\polished-workspace-tools.js",
+      "sourceSHA256": "350E57DFAB400803800577CACC19692456A23E87A296601EC6B819845FDD9850",
+      "candidate": "C:\\Users\\vikasmit\\Downloads\\vikas problems\\netrok-muse\\outputs\\01a0a816-e452-75f2-9363-0f859011a90e\\completion\\automation\\candidate\\polished-workspace-tools.js",
+      "candidateSHA256": "9488B69A5C0395173147A75CFC5BE60A30563353B23BF7ADD37C58105201A26F",
+      "replacementCount": 3,
+      "resultSHA256": "9488B69A5C0395173147A75CFC5BE60A30563353B23BF7ADD37C58105201A26F",
+      "exact": true,
+      "operations": [
+        {
+          "file": "polished-workspace-tools.js",
+          "description": "bind goal completion to retained chat evidence",
+          "beforeBytes": 354,
+          "afterBytes": 732,
+          "beforeSHA256": "AEB396449E055A727C1DF8A0D9C358BDD2AB5543C8AF99E6A7F190491F5EEC20",
+          "afterSHA256": "ED8A2164ACE31CAC6FB8CEC1F8640470F4D20E91B00B74677A18C78581BB0816"
+        },
+        {
+          "file": "polished-workspace-tools.js",
+          "description": "pass retained evidence into goal completion",
+          "beforeBytes": 61,
+          "afterBytes": 68,
+          "beforeSHA256": "39F48F2055A98C7D48F85BBC2E1A9D3B3D90D43E0BF68A0F7D189E60C2BE56A1",
+          "afterSHA256": "7F91815CB557A70439D0A5BD32BE34F82BB94EC0B5E19D65669302306492C0D1"
+        },
+        {
+          "file": "polished-workspace-tools.js",
+          "description": "gate goal completion through goalCompletionCheck",
+          "beforeBytes": 1356,
+          "afterBytes": 1816,
+          "beforeSHA256": "F78C65669B1C8D152912DBA6650894CA646F85AECED4031808D37971B1BD515E",
+          "afterSHA256": "875F80C0DEA0FB8EDFF0ADA8236C45ACBABD2E381010F807EBF15E0441E4CCE4"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "version": "0.2",
+  "status": "Interpretation awaiting user review",
+  "reference": "https://www.youtube.com/watch?v=Sfmtbxqtz7o",
+  "scope": "Visual intent clarification. Schematics are interpretations, not reference screenshots or a redesigned app.",
+  "items": [
+    {
+      "id": "avatar",
+      "title": "Avatar & identity",
+      "number": "01",
+      "time": 341,
+      "timestamp": "5:41",
+      "coverage": "Appearance partly observed",
+      "user": "The Muse is an interactive avatar … I am not able to click on the agent itself.",
+      "observed": "The reference shows a small avatar in the rail and a larger avatar, name, status and controls in the agent panel.",
+      "mismatch": "The prototype substitutes a wordmark and an invented Atlas card for the agent identity and entry point.",
+      "proposal": "Use the avatar as an entry point to the agent workspace. Agree its appearance and motion separately; keep the companion name undecided.",
+      "flow": [
+        "Select avatar",
+        "Agent workspace opens",
+        "Close workspace → return to chat"
+      ],
+      "unknown": "Exact opening transition, animation and whether the avatar is 3D remain unverified.",
+      "check": "Demonstrate the avatar at rest and on selection, then show where the user lands. Obtain visual agreement before choosing artwork."
+    },
+    {
+      "id": "navigation",
+      "title": "Collapsible navigation",
+      "number": "02",
+      "time": 115,
+      "timestamp": "1:55",
+      "coverage": "Collapsed rail observed",
+      "user": "There is one collapsible sidebar … ideas, goals … search button and chat … feed.",
+      "observed": "The Feed frame has a narrow icon rail, avatar and a toggle. The video and transcript establish Chat, Feed, Ideas and Goals; library is discussed later.",
+      "mismatch": "The prototype omits destinations and does not reproduce the collapse interaction the user expects.",
+      "proposal": "Keep navigation distinct from agent details. Show an icon rail and a labelled expanded state; preserve the selected destination when toggling.",
+      "flow": [
+        "Toggle sidebar",
+        "Show or hide labels",
+        "Select destination → retain navigation"
+      ],
+      "unknown": "Expanded width, exact label order, icon artwork and transition need reference confirmation. This map's expanded rail is a proposal.",
+      "check": "Show collapsed and expanded states beside their reference, including the active destination and return to chat."
+    },
+    {
+      "id": "workspace",
+      "title": "Agent & document workspace",
+      "number": "03",
+      "time": 341,
+      "timestamp": "5:41–5:49",
+      "coverage": "Panel and editor observed",
+      "user": "It is not open for Atlas. It is just open for my work … memory or soul … browser … computer use.",
+      "observed": "An agent panel has avatar, status, tabs, Edit and SOUL/MEMORY cards. A larger adjacent workspace opens MEMORY.md or SOUL.md; the SOUL editor has Save and close controls.",
+      "mismatch": "A task evidence drawer was treated as if it also represented the agent's identity, memory and capabilities.",
+      "proposal": "Separate agent information, editable documents and task outputs. Browser/computer access must have their own demonstrated states before implementation.",
+      "flow": [
+        "Open agent",
+        "Select SOUL or MEMORY",
+        "Document workspace → save / close"
+      ],
+      "unknown": "Browser/computer panel details, tab meanings and unsaved-edit handling still need evidence or an explicit design decision.",
+      "check": "Demonstrate opening each document and returning without losing the conversation. Compare task outputs separately."
+    },
+    {
+      "id": "settings",
+      "title": "Settings & preferences",
+      "number": "04",
+      "time": null,
+      "timestamp": "Reference gap",
+      "coverage": "User requirement; reference incomplete",
+      "user": "The settings button is also just showing me … agent display name and the appearance. Nothing else.",
+      "observed": "The inspected frames do not establish the complete settings experience. No reference settings layout is claimed here.",
+      "mismatch": "A two-field dialog was presented without first identifying the reference's settings structure and contents.",
+      "proposal": "First capture settings entry, layout and categories. Consider app preferences and agent configuration separately; approve that distinction visually.",
+      "flow": [
+        "Open settings",
+        "Inspect categories and controls",
+        "Apply change → return"
+      ],
+      "unknown": "Settings layout, full categories, defaults and save behavior are unresolved. Do not invent a finished settings screen.",
+      "check": "Review the settings reference or an explicitly proposed alternative. Theme saving already works in the prototype; the user corrected that complaint."
+    },
+    {
+      "id": "composer",
+      "title": "Conversation & composer",
+      "number": "05",
+      "time": 98,
+      "timestamp": "~1:38",
+      "coverage": "Chat structure partly observed",
+      "user": "It looks similar, but not clean … rather than … a send button … the blue top to send it.",
+      "observed": "The main chat frame establishes the conversation area, narrow rail and separate activity area. Exact send-control states are not yet confirmed.",
+      "mismatch": "The prototype uses its own send treatment and visual spacing. Working submission does not establish reference fidelity.",
+      "proposal": "Compare composer proportions, spacing, message surfaces and send icon together. Demonstrate empty, typing and sending states at normal and wide windows.",
+      "flow": [
+        "Type a message",
+        "Send using arrow control",
+        "Show sending and resulting conversation"
+      ],
+      "unknown": "Exact icon, dimensions, attachment controls and sending states still require visual confirmation. The blue arrow in this sketch is proposed.",
+      "check": "Compare the same chat state and window size. Verify both the appearance and the available space when another panel is open."
+    }
+  ]
+}

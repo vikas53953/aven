@@ -1,0 +1,43 @@
+{
+  "startedAt": "2026-09-11T03:20:56.426Z",
+  "candidateStart": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "dd33f59c3bfb86bb1e05d2691a4f2b2bbfe9279d9e4630cef5afd92f70d7266e",
+    "polished.js": "515f8e30758b6d3b735b42ebc252d01b4a244480c26d5a5b9ae5f4e218c6c489"
+  },
+  "checks": [
+    {
+      "name": "fresh render at desktop and narrow widths",
+      "status": "PASS"
+    },
+    {
+      "name": "context menu pointer and keyboard lifecycle",
+      "status": "PASS"
+    },
+    {
+      "name": "project move excludes channel data and keeps local evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "section move, cancellation and stale state",
+      "status": "PASS"
+    },
+    {
+      "name": "soft-delete confirmation and recovery retain data",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    ".intentgraph/p2-review-fresh-1440.png",
+    ".intentgraph/p2-review-fresh-390.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "finishedAt": "2026-09-11T03:21:08.294Z",
+  "candidateEnd": {
+    "polished.html": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+    "polished.css": "dd33f59c3bfb86bb1e05d2691a4f2b2bbfe9279d9e4630cef5afd92f70d7266e",
+    "polished.js": "515f8e30758b6d3b735b42ebc252d01b4a244480c26d5a5b9ae5f4e218c6c489"
+  },
+  "candidateStable": true
+}

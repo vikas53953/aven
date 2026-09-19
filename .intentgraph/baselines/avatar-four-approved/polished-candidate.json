@@ -1,0 +1,35 @@
+{
+  "candidateId": "P4-cf9d42a81fb7",
+  "capturedAt": "2026-09-11T04:27:47.952Z",
+  "baseline": "F09 / feedback-09.md",
+  "sources": [
+    {
+      "path": "polished.html",
+      "sha256": "4ee265ff2b8f9fbdd32eecdffc1a6b14e0387e77d08175db828af5fc032babcc",
+      "bytes": 11869
+    },
+    {
+      "path": "polished.css",
+      "sha256": "a665c974bdb95112968a140d85e4f9207b14397cde25505a0147203cc78c705c",
+      "bytes": 51671
+    },
+    {
+      "path": "polished.js",
+      "sha256": "ce2665803e7982fdc1118664910b89a2bbb409705021180d57e2ec4fc06a942b",
+      "bytes": 71274
+    },
+    {
+      "path": "polished-avatars.js",
+      "sha256": "b4d0daff1007ff5f9fb5f99e5b6162d18b47952d371d6ec5d42a66e721d73188",
+      "bytes": 4446
+    },
+    {
+      "path": "prototype-review.html",
+      "sha256": "e30c5722870e61e286a04de734a297c58fd600a03c7b0fff585d3647726d1661",
+      "bytes": 6705
+    }
+  ],
+  "tests": ".intentgraph/p4-test-results.json",
+  "userApproval": "pending",
+  "scope": "Local frontend. Avatar selections save immediately; Generate is procedural, uploaded photos remain intact. Live AI/auth/browser/computer execution remain unconnected."
+}

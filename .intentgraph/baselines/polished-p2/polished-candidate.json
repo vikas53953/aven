@@ -1,0 +1,31 @@
+{
+  "candidateId": "P2-612c88cacd5b",
+  "capturedAt": "2026-09-11T03:21:06.678Z",
+  "baseline": "F07 / feedback-07.md",
+  "sources": [
+    {
+      "path": "polished.html",
+      "sha256": "3f373cce14c204b210c74c144866b373e2ddc1df2c7c49647ce365021e56017e",
+      "bytes": 12007
+    },
+    {
+      "path": "polished.css",
+      "sha256": "dd33f59c3bfb86bb1e05d2691a4f2b2bbfe9279d9e4630cef5afd92f70d7266e",
+      "bytes": 40995
+    },
+    {
+      "path": "polished.js",
+      "sha256": "515f8e30758b6d3b735b42ebc252d01b4a244480c26d5a5b9ae5f4e218c6c489",
+      "bytes": 57198
+    },
+    {
+      "path": "prototype-review.html",
+      "sha256": "32292f5be9ed044e15cc07f9478a2857ffc7d4e5e0113d06fa64a20599eee186",
+      "bytes": 6679
+    }
+  ],
+  "tests": ".intentgraph/p2-test-results.json",
+  "independentReview": ".intentgraph/p2-review-context-results.json",
+  "userApproval": "pending",
+  "scope": "Local frontend only. No live AI, uploads, authentication or browser/computer execution."
+}

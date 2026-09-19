@@ -1,0 +1,15 @@
+{
+  "at": "2026-09-15T19:34:00.407Z",
+  "passed": true,
+  "checks": [
+    "metadata secrets filtered while raw text exact",
+    "event/byte bounds",
+    "idempotent restart recovery",
+    "no automatic queued execution",
+    "draft preserved",
+    "valid and missing deep links",
+    "actual model usage metadata",
+    "start capture failure sends nothing"
+  ],
+  "scope": "Isolated browser with mocked provider; additional durability failure tests remain required"
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-09-15T19:43:17.760Z",
+  "passed": true,
+  "features": [
+    "UX-009",
+    "UX-018",
+    "UX-065"
+  ],
+  "checks": [
+    "plain previews with unchanged source",
+    "palette filter/empty/execute/disabled reason",
+    "Escape focus and draft retained",
+    "global shortcuts leave modal text fields alone",
+    "reference uses active shortcut registry",
+    "keyboard result navigation",
+    "390px dialog bounds",
+    "no page errors or external requests"
+  ]
+}

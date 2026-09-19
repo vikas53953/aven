@@ -1,0 +1,144 @@
+{
+  "startedAt": "2026-09-10T19:26:00.586Z",
+  "candidate": {
+    "polished.html": {
+      "sha256": "3B9FEEBB5D6E0ED96E0CE05FDBE1A35690FF53D16EBC7DC6D7CF6D0AC1BD4CCA",
+      "bytes": 9899
+    },
+    "polished.css": {
+      "sha256": "F57E60F37A5BD41526306C53EECB122F17538F567393E3EEE255E6D3086276CE",
+      "bytes": 30996
+    },
+    "polished.js": {
+      "sha256": "B063B6588BCC0CC03E6297A21103430B699AE7A1761F81D8802671747D4AE219",
+      "bytes": 54613
+    },
+    "prototype-review.html": {
+      "sha256": "E6E511BB36EB1116DF6C8F6CAD3B71F02DB2780D7AEB2CB7A275BCC10A97CBFE",
+      "bytes": 6574
+    }
+  },
+  "checks": [
+    {
+      "name": "P1 / J1 orientation and accepted placement",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-1440-orientation.png"
+      ]
+    },
+    {
+      "name": "P2 / J2 local conversation ownership, attachments and reload",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-conversation-reload.png"
+      ]
+    },
+    {
+      "name": "P3 / J3 organization creation and cancellation",
+      "status": "FAIL",
+      "detail": "The input did not match the regular expression /# Policies/. Input:\n\n'Branch network review'\n",
+      "evidence": []
+    },
+    {
+      "name": "P4 / J4 agent documents and profile ownership",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-agent-document.png"
+      ]
+    },
+    {
+      "name": "P5 / J5 settings categories, persistence and focus return",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-settings-light.png"
+      ]
+    },
+    {
+      "name": "P6 / J6 deterministic preview states and cancellation",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-tool-preview.png"
+      ]
+    },
+    {
+      "name": "P7 / J7 responsive geometry, keyboard and reduced motion",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": [
+        ".intentgraph/review-polished-1920.png",
+        ".intentgraph/review-polished-1440.png",
+        ".intentgraph/review-polished-1024.png",
+        ".intentgraph/review-polished-768.png",
+        ".intentgraph/review-polished-390.png",
+        ".intentgraph/review-polished-320.png"
+      ]
+    },
+    {
+      "name": "P8 / J8 reviewability links and evidence state",
+      "status": "PASS",
+      "detail": "Observed successfully.",
+      "evidence": []
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "1440-orientation",
+      "path": ".intentgraph/review-polished-1440-orientation.png"
+    },
+    {
+      "name": "conversation-reload",
+      "path": ".intentgraph/review-polished-conversation-reload.png"
+    },
+    {
+      "name": "agent-document",
+      "path": ".intentgraph/review-polished-agent-document.png"
+    },
+    {
+      "name": "settings-light",
+      "path": ".intentgraph/review-polished-settings-light.png"
+    },
+    {
+      "name": "tool-preview",
+      "path": ".intentgraph/review-polished-tool-preview.png"
+    },
+    {
+      "name": "1920",
+      "path": ".intentgraph/review-polished-1920.png"
+    },
+    {
+      "name": "1440",
+      "path": ".intentgraph/review-polished-1440.png"
+    },
+    {
+      "name": "1024",
+      "path": ".intentgraph/review-polished-1024.png"
+    },
+    {
+      "name": "768",
+      "path": ".intentgraph/review-polished-768.png"
+    },
+    {
+      "name": "390",
+      "path": ".intentgraph/review-polished-390.png"
+    },
+    {
+      "name": "320",
+      "path": ".intentgraph/review-polished-320.png"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "externalRequests": [],
+  "notes": [
+    "Review page polished-evidence.json fetch is absent at review time.",
+    "Accepted wireframe baseline hashes are checked in polished-baseline-hashes.json; current candidate hashes were captured at 2026-09-10T19:26:00.586Z."
+  ],
+  "finishedAt": "2026-09-10T19:26:30.920Z"
+}

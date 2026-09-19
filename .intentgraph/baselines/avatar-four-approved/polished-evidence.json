@@ -1,0 +1,85 @@
+{
+  "candidate": "P4-cf9d42a81fb7",
+  "capturedAt": "2026-09-11T04:27:47.952Z",
+  "scope": "Local frontend. Avatar selections save immediately; Generate is procedural, uploaded photos remain intact. Live AI/auth/browser/computer execution remain unconnected.",
+  "checks": [
+    {
+      "name": "P4 direct profile entry, per-agent immediate avatar persistence, autosave and identity split",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 upload token ordering, uploaded-image integrity and motion/reduced-motion behavior",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 avatar size and visible mascot coverage",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 custom section collapse persistence, hover/focus chevron and rename validation",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 composer add menu stays above and accessible across desktop and mobile viewports",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 accepted settings, keyboard and local preservation regressions",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 protected wireframe sources and candidate stability",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "P4 no page errors or external runtime requests",
+      "status": "PASS",
+      "detail": "Executed by a separate verification agent against these exact sources.",
+      "evidence": ".intentgraph/p4-test-results.json"
+    },
+    {
+      "name": "Root rendered inspection",
+      "status": "PASS",
+      "detail": "Profile, larger sidebar artwork and above-composer menu inspected in rendered screenshots.",
+      "evidence": ".intentgraph/p4-root-profile.png"
+    },
+    {
+      "name": "Your visual decision",
+      "status": "PENDING",
+      "detail": "Appearance and interaction acceptance remain your decision.",
+      "evidence": ".intentgraph/feedback-09.md"
+    }
+  ],
+  "captures": [
+    {
+      "label": "Direct avatar editing",
+      "path": ".intentgraph/p4-root-profile.png"
+    },
+    {
+      "label": "Menu above composer",
+      "path": ".intentgraph/p4-root-plus.png"
+    },
+    {
+      "label": "Feedback checklist",
+      "path": ".intentgraph/feedback-09.md"
+    },
+    {
+      "label": "Candidate manifest",
+      "path": ".intentgraph/polished-candidate.json"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "scope": "UX071 local read-only diagnostic terminal with exact target and command resolution, immutable run evidence, and cancel-as-UNKNOWN semantics.",
+  "touchedFiles": [
+    "completion/terminal/candidate/polished.html",
+    "completion/terminal/candidate/polished.js",
+    "completion/terminal/candidate/intentgraph/server.cjs",
+    "completion/terminal/candidate/polished-terminal.js",
+    "completion/terminal/candidate/polished-terminal.css"
+  ],
+  "sourceFiles": {
+    "polished.html": {
+      "baselinePath": "completion/baseline/polished.html",
+      "candidatePath": "completion/terminal/candidate/polished.html",
+      "baselineSHA256": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "candidateSHA256": "65CA8CF142744377887C0A353452EF5B80F077C1877AC25701FB9C7A8829499A"
+    },
+    "polished.js": {
+      "baselinePath": "completion/baseline/polished.js",
+      "candidatePath": "completion/terminal/candidate/polished.js",
+      "baselineSHA256": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "candidateSHA256": "6BB3F6C0546B4F577B839C5314BA7803D54EA82EA356D9BED2EFA8CA449D61F8"
+    },
+    "intentgraph/server.cjs": {
+      "baselinePath": "completion/baseline/intentgraph/server.cjs",
+      "candidatePath": "completion/terminal/candidate/intentgraph/server.cjs",
+      "baselineSHA256": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "candidateSHA256": "43E131522813328ED2F10CA3CB93E74C626445419857C3247E18AA0F74E35104"
+    }
+  },
+  "replacements": [
+    {
+      "file": "polished.html",
+      "beforeLine": 12,
+      "afterLine": 12,
+      "anchor": "  <link rel=\"stylesheet\" href=\"polished-files.css?revision=ux-audit-fixes-v8\">",
+      "anchorSHA256": "7CCD70D0904C919A39F2B58766C41029793D32DE436B70DE4670D1784F335963",
+      "old": "  <link rel=\"stylesheet\" href=\"polished-files.css?revision=ux-audit-fixes-v8\">\r\n",
+      "new": "  <link rel=\"stylesheet\" href=\"polished-files.css?revision=ux-audit-fixes-v8\">\r\n  <link rel=\"stylesheet\" href=\"polished-terminal.css?revision=ux071-read-only-diagnostic\">\r\n",
+      "sourceSHA256Before": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "sourceSHA256After": "65CA8CF142744377887C0A353452EF5B80F077C1877AC25701FB9C7A8829499A"
+    },
+    {
+      "file": "polished.html",
+      "beforeLine": 179,
+      "afterLine": 181,
+      "anchor": "  <script src=\"polished-files.js?revision=ux-audit-fixes-v8\"></script>",
+      "anchorSHA256": "3684AE703DEE90FD54C71689FBD111E129B20BF5A50FE6EA4394028B80DBD988",
+      "old": "  <script src=\"polished-files.js?revision=ux-audit-fixes-v8\"></script>\r\n",
+      "new": "  <script src=\"polished-files.js?revision=ux-audit-fixes-v8\"></script>\r\n  <script src=\"polished-terminal.js?revision=ux071-read-only-diagnostic\"></script>\r\n",
+      "sourceSHA256Before": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "sourceSHA256After": "65CA8CF142744377887C0A353452EF5B80F077C1877AC25701FB9C7A8829499A"
+    },
+    {
+      "file": "polished.html",
+      "beforeLine": 118,
+      "afterLine": 119,
+      "anchor": "div class=\"popover\" id=\"add-menu\"",
+      "anchorSHA256": "3A200B4406E2B85E2910835221678D60E2AC751EE3E83CAF6DA2A976CAAB65F4",
+      "old": "  <div class=\"popover\" id=\"add-menu\" hidden aria-label=\"Add to conversation\">\r\n    <button type=\"button\" data-add=\"localfiles\" data-icon=\"file\"><span>Open local folder</span></button>\r\n    <button type=\"button\" data-add=\"files\" data-icon=\"file\"><span>Attach files</span></button>\r\n    <button type=\"button\" data-add=\"images\" data-icon=\"image\"><span>Attach images</span></button>\r\n    <div class=\"menu-separator\"></div>\r\n    <button type=\"button\" data-add=\"browser\" data-icon=\"browser\"><span>Use browser preview</span></button>\r\n    <button type=\"button\" data-add=\"plugins\" data-icon=\"plug\"><span>Network sandbox</span></button>\r\n    <button type=\"button\" data-add=\"computer\" data-icon=\"computer\"><span>Use computer preview</span></button>\r\n  </div>\r\n",
+      "new": "  <div class=\"popover\" id=\"add-menu\" hidden aria-label=\"Add to conversation\">\r\n    <button type=\"button\" data-add=\"localfiles\" data-icon=\"file\"><span>Open local folder</span></button>\r\n    <button type=\"button\" data-add=\"files\" data-icon=\"file\"><span>Attach files</span></button>\r\n    <button type=\"button\" data-add=\"images\" data-icon=\"image\"><span>Attach images</span></button>\r\n    <div class=\"menu-separator\"></div>\r\n    <button type=\"button\" data-add=\"browser\" data-icon=\"browser\"><span>Use browser preview</span></button>\n    <button type=\"button\" data-add=\"terminal\" data-icon=\"plug\"><span>Terminal</span></button>\n    <button type=\"button\" data-add=\"plugins\" data-icon=\"plug\"><span>Network diagnostics</span></button>\n    <button type=\"button\" data-add=\"computer\" data-icon=\"computer\"><span>Use computer preview</span></button>\r\n  </div>\r\n",
+      "sourceSHA256Before": "77DF7B2B393994751473B912BF3443B08C4850A555C7B48EF2633E207F8BB352",
+      "sourceSHA256After": "65CA8CF142744377887C0A353452EF5B80F077C1877AC25701FB9C7A8829499A"
+    },
+    {
+      "file": "polished.js",
+      "beforeLine": 527,
+      "afterLine": 527,
+      "anchor": "Read Cisco inventory",
+      "anchorSHA256": "016897C60914143EBC3F57F26B4F4BBC36B4EA431D4DAFE3DB9BB1A35142F740",
+      "old": "[['browser','Inspect a browser result','browser'],['plugins','Read Cisco inventory','plug'],['computer','Inspect a sample desktop','computer']].forEach(([v,t,g])=>{const b=document.createElement('button');b.type='button';b.className='tool-request';b.dataset.toolRequest=v;b.innerHTML=`${icon(g)}<span><strong>${t}</strong><small>${v === 'plugins' ? 'Read live Cisco sandbox inventory' : 'Review this local capability preview'}</small></span>${icon('chevron')}`;b.addEventListener('click',()=>openPane(v));card.append(b);});box.append(card);}",
+      "new": "[['browser','Inspect a browser result','browser'],['plugins','Read network inventory','plug'],['computer','Inspect a sample desktop','computer']].forEach(([v,t,g])=>{const b=document.createElement('button');b.type='button';b.className='tool-request';b.dataset.toolRequest=v;b.innerHTML=`${icon(g)}<span><strong>${t}</strong><small>${v === 'plugins' ? 'Read current network inventory' : 'Review this local capability preview'}</small></span>${icon('chevron')}`;b.addEventListener('click',()=>openPane(v));card.append(b);});box.append(card);}",
+      "sourceSHA256Before": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sourceSHA256After": "6BB3F6C0546B4F577B839C5314BA7803D54EA82EA356D9BED2EFA8CA449D61F8"
+    },
+    {
+      "file": "polished.js",
+      "beforeLine": 730,
+      "afterLine": 740,
+      "anchor": "Run stopped. A command already submitted to Cisco",
+      "anchorSHA256": "24F2CF73E2724F23757EA5692E15CE95BA712424CB3C1C941F1FA3CB0A27197F",
+      "old": "controller.signal.aborted?'Run stopped. A command already submitted to Cisco may still finish.':",
+      "new": "controller.signal.aborted?'Run stopped. A submitted network diagnostic command may still finish.':",
+      "sourceSHA256Before": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sourceSHA256After": "6BB3F6C0546B4F577B839C5314BA7803D54EA82EA356D9BED2EFA8CA449D61F8"
+    },
+    {
+      "file": "polished.js",
+      "beforeLine": 643,
+      "afterLine": 643,
+      "anchor": "let sandboxResult = null, sandboxLoading = false, sandboxError = '';",
+      "anchorSHA256": "D823A3B0E59D042EB38E33795E2361685BE2F209B166126FF67A3BB88B2459AF",
+      "old": "  let sandboxResult = null, sandboxLoading = false, sandboxError = '';\r\n  function renderNetworkSandboxPane() {\r\n    const box = byId('pane-content');\r\n    box.innerHTML = `<section class=\"preview-card\"><h3>Cisco Catalyst Center</h3><p class=\"pane-note\">Read device inventory from Cisco’s shared sandbox.</p><button class=\"button-primary\" id=\"sandbox-load\" ${sandboxLoading?'disabled':''}>${sandboxLoading?'Reading inventory…':sandboxResult?'Refresh inventory':'Load inventory'}</button><p role=\"status\" class=\"pane-note\">${esc(sandboxError || (sandboxResult ? 'Retrieved '+new Date(sandboxResult.retrievedAt).toLocaleString() : 'Load a current inventory snapshot. No configuration changes.'))}</p></section>`;\r\n    if (sandboxResult) {\r\n      const results = document.createElement('section');\r\n      results.setAttribute('aria-label', 'Cisco device inventory');\r\n      results.innerHTML = `<p class=\"pane-note\">${sandboxResult.devices.length} devices · Cisco sandbox</p>`;\r\n      sandboxResult.devices.forEach(device => {\r\n        const card = document.createElement('article'); card.className='preview-card sandbox-device';\r\n        card.innerHTML = `<h3>${esc(device.hostname)}</h3><dl><dt>Platform</dt><dd>${esc(device.platform)}</dd><dt>Management IP</dt><dd>${esc(device.managementIp)}</dd><dt>Software</dt><dd>${esc(device.softwareVersion)}</dd><dt>Reported reachability</dt><dd>${esc(device.reachability)}</dd></dl>`;\r\n        results.append(card);\r\n      }); box.append(results);\r\n    }\r\n    byId('sandbox-load').onclick = async () => {\r\n      if(sandboxLoading)return;\r\n      sandboxLoading=true; sandboxError=''; renderNetworkSandboxPane();\r\n      try {\r\n        const response=await fetch('http://127.0.0.1:8768/api/sandbox/inventory',{method:'POST',headers:{'X-Aven-Sandbox':'read-only'},signal:AbortSignal.timeout(45000)});\r\n        if(!response.ok)throw Error('unavailable');\r\n        const result=await response.json();\r\n        if(!Array.isArray(result.devices))throw Error('invalid response');\r\n        sandboxResult=result;\r\n      } catch {sandboxError='Could not refresh Cisco inventory. Check that the local service is running. Any previous inventory below is an earlier snapshot.';}\r\n      finally {sandboxLoading=false; if(paneView==='plugins')renderNetworkSandboxPane();}\r\n    };\r\n  }\r\n  function renderToolPane(view) {\r\n    if(view==='files'){fileController=AvenFiles.render(byId('pane-content'),{onStatus:()=>{}});return;}\r\n    if(view==='plugins'){renderNetworkSandboxPane();return;}\r\n    const pane=byId('pane-content');pane.replaceChildren();\r\n    const title=document.createElement('h3');title.textContent=view==='browser'?'Browser unavailable':'Computer unavailable';\r\n    const note=document.createElement('p');note.textContent=view==='browser'?'No browser session is connected to Aven. Live page previews and browser actions are not available in this build.':'No computer session is connected to Aven. Screen previews and computer actions are not available in this build.';\r\n    const status=document.createElement('p');status.setAttribute('role','status');status.textContent='No external session or action is active.';pane.append(title,note,status);\r\n  }\r\n\r\n",
+      "new": "  let sandboxResult = null, sandboxLoading = false, sandboxError = '';\r\n  let terminalController = null;\r\n  function renderNetworkSandboxPane() {\r\n    const box = byId('pane-content');\r\n    terminalController?.destroy?.(); terminalController = null;\r\n    box.innerHTML = `<section class=\"preview-card\"><h3>Network diagnostics</h3><p class=\"pane-note\">Read the current inventory before running a read-only command.</p><button class=\"button-primary\" id=\"sandbox-load\" ${sandboxLoading?'disabled':''}>${sandboxLoading?'Reading inventory…':sandboxResult?'Refresh inventory':'Load inventory'}</button><p role=\"status\" class=\"pane-note\">${esc(sandboxError || (sandboxResult ? 'Retrieved '+new Date(sandboxResult.retrievedAt).toLocaleString() : 'Load a current inventory snapshot. No configuration changes.'))}</p></section><div id=\"sandbox-terminal\" class=\"sandbox-terminal-host\"></div>`;\n    if (sandboxResult) {\r\n      const results = document.createElement('section');\r\n      results.setAttribute('aria-label', 'Network device inventory');\n      results.innerHTML = `<p class=\"pane-note\">${sandboxResult.devices.length} devices · current inventory</p>`;\n      sandboxResult.devices.forEach(device => {\r\n        const card = document.createElement('article'); card.className='preview-card sandbox-device';\r\n        card.innerHTML = `<h3>${esc(device.hostname)}</h3><dl><dt>Platform</dt><dd>${esc(device.platform)}</dd><dt>Management IP</dt><dd>${esc(device.managementIp)}</dd><dt>Software</dt><dd>${esc(device.softwareVersion)}</dd><dt>Reported reachability</dt><dd>${esc(device.reachability)}</dd></dl>`;\r\n        results.append(card);\r\n      }); box.append(results);\r\n    }\r\n    const terminalHost = byId('sandbox-terminal');\r\n    if (terminalHost && globalThis.AvenTerminal) {\r\n      terminalController = globalThis.AvenTerminal.mount(terminalHost, {\r\n        inventory: sandboxResult || { devices: [] },\r\n        scopeKey: currentChat()?.id || 'workspace',\r\n        endpoint: 'http://127.0.0.1:8768/api/sandbox/command'\r\n      });\r\n    }\r\n    byId('sandbox-load').onclick = async () => {\r\n      if(sandboxLoading)return;\r\n      sandboxLoading=true; sandboxError=''; renderNetworkSandboxPane();\r\n      try {\r\n        const response=await fetch('http://127.0.0.1:8768/api/sandbox/inventory',{method:'POST',headers:{'X-Aven-Sandbox':'read-only'},signal:AbortSignal.timeout(45000)});\r\n        if(!response.ok)throw Error('unavailable');\r\n        const result=await response.json();\r\n        if(!Array.isArray(result.devices))throw Error('invalid response');\r\n        sandboxResult=result;\r\n      } catch {sandboxError='Could not refresh the network inventory. Check that the local service is running. Any previous inventory below is an earlier snapshot.';}\n      finally {sandboxLoading=false; if(paneView==='plugins'||paneView==='terminal')renderNetworkSandboxPane();}\n    };\r\n  }\r\n  function renderToolPane(view) {\r\n    if(view==='files'){fileController=AvenFiles.render(byId('pane-content'),{onStatus:()=>{}});return;}\r\n    if(view==='plugins'||view==='terminal'){renderNetworkSandboxPane();return;}\n    const pane=byId('pane-content');pane.replaceChildren();\r\n    const title=document.createElement('h3');title.textContent=view==='browser'?'Browser unavailable':'Computer unavailable';\r\n    const note=document.createElement('p');note.textContent=view==='browser'?'No browser session is connected to Aven. Live page previews and browser actions are not available in this build.':'No computer session is connected to Aven. Screen previews and computer actions are not available in this build.';\r\n    const status=document.createElement('p');status.setAttribute('role','status');status.textContent='No external session or action is active.';pane.append(title,note,status);\r\n  }\r\n\r\n",
+      "sourceSHA256Before": "AB3874915B3E7C87800640BF1692E6D2CDF0DED910F96357A1C4F74106CD700C",
+      "sourceSHA256After": "6BB3F6C0546B4F577B839C5314BA7803D54EA82EA356D9BED2EFA8CA449D61F8"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "beforeLine": 150,
+      "afterLine": 150,
+      "anchor": "  const activeRuns = new Map();",
+      "anchorSHA256": "84F1488D085F0825BFA64B0E08AE85A76A9A6342311050F6B50D78C0D4B20B14",
+      "old": "  const activeRuns = new Map();\n",
+      "new": "  const activeRuns = new Map();\n  const sandboxCommandRuns = new Map();\n",
+      "sourceSHA256Before": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sourceSHA256After": "43E131522813328ED2F10CA3CB93E74C626445419857C3247E18AA0F74E35104"
+    },
+    {
+      "file": "intentgraph/server.cjs",
+      "beforeLine": 297,
+      "afterLine": 298,
+      "anchor": "if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory') {",
+      "anchorSHA256": "7A21BB557822C50010C4F6E3469EE060F28AC3541807E6A435F5EB7F0021974C",
+      "old": "    if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory') {\r\n      const origin = req.headers.origin;\r\n      if (origin !== 'http://127.0.0.1:8767' && origin !== `http://127.0.0.1:${req.socket.localPort}`) {\r\n        sendError(res, 403, new Error('Sandbox origin is not allowed')); return;\r\n      }\r\n      res.setHeader('Access-Control-Allow-Origin', origin);\r\n      res.setHeader('Vary', 'Origin');\r\n      if (req.method === 'OPTIONS') {\r\n        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');\r\n        res.setHeader('Access-Control-Allow-Headers', 'X-Aven-Sandbox, Content-Type');\r\n        res.writeHead(204); res.end(); return;\r\n      }\r\n      try {\r\n        if (pathname.endsWith('/status') && req.method === 'GET') { sendJson(res, 200, await sandbox.status()); return; }\r\n        if (pathname.endsWith('/inventory') && req.method === 'POST') {\r\n          if (req.headers['x-aven-sandbox'] !== 'read-only') { sendError(res, 403, new Error('Sandbox request header required')); return; }\r\n          const body = await parseBody(req);\r\n          if (Object.keys(body).length) { sendError(res, 400, new Error('Inventory accepts no parameters')); return; }\r\n          sendJson(res, 200, await sandbox.inventory()); return;\r\n        }\r\n        sendError(res, 405, new Error('Method not allowed')); return;\r\n      } catch { sendError(res, 502, new Error('Cisco sandbox unavailable. Check the local connection and approved certificate.')); return; }\r\n    }\r\n",
+      "new": "    if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory' || pathname === '/api/sandbox/command') {\r\n      const origin = req.headers.origin;\r\n      if (origin !== 'http://127.0.0.1:8767' && origin !== `http://127.0.0.1:${req.socket.localPort}`) {\r\n        sendError(res, 403, new Error('Sandbox origin is not allowed')); return;\r\n      }\r\n      res.setHeader('Access-Control-Allow-Origin', origin);\r\n      res.setHeader('Vary', 'Origin');\r\n      if (req.method === 'OPTIONS') {\r\n        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');\r\n        res.setHeader('Access-Control-Allow-Headers', 'X-Aven-Sandbox, Content-Type');\r\n        res.writeHead(204); res.end(); return;\r\n      }\r\n      try {\r\n        if (pathname.endsWith('/status') && req.method === 'GET') { sendJson(res, 200, await sandbox.status()); return; }\r\n        if (pathname.endsWith('/inventory') && req.method === 'POST') {\r\n          if (req.headers['x-aven-sandbox'] !== 'read-only') { sendError(res, 403, new Error('Sandbox request header required')); return; }\r\n          const body = await parseBody(req);\r\n          if (!body || Array.isArray(body) || Object.keys(body).length) { sendError(res, 400, new Error('Inventory accepts no parameters')); return; }\r\n          sendJson(res, 200, await networkExecution.inventory()); return;\n        }\r\n        if (pathname.endsWith('/command') && req.method === 'POST') {\n          if (req.headers['x-aven-sandbox'] !== 'read-only') { sendError(res, 403, new Error('Sandbox request header required')); return; }\n          const body = await parseBody(req);\n          const keys = body && !Array.isArray(body) && typeof body === 'object' ? Object.keys(body) : [];\n          if (!body || Array.isArray(body) || keys.some(key => !['targetId', 'command', 'requestId'].includes(key)) || keys.length !== 3 ||\n            typeof body.targetId !== 'string' || !body.targetId.trim() || body.targetId.length > 200 ||\n            typeof body.command !== 'string' || !body.command.trim() || body.command.length > 200 ||\n            typeof body.requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.requestId)) {\n            sendError(res, 400, new Error('Read-only command requires an exact targetId, supported command and request identity')); return;\n          }\n          const sendOutcome = outcome => {\n            if (res.writableEnded || res.destroyed) return;\n            if (outcome.httpStatus === 200) sendJson(res, 200, outcome.payload);\n            else sendError(res, outcome.httpStatus, new Error(outcome.message));\n          };\n          const previousRun = sandboxCommandRuns.get(body.requestId);\n          if (previousRun) {\n            if (previousRun.targetId !== body.targetId || previousRun.command !== body.command) { sendError(res, 409, new Error('Request identity is already bound to another diagnostic')); return; }\n            sendOutcome(await previousRun.promise);\n            return;\n          }\n          const startedAt = new Date().toISOString();\n          const controller = new AbortController();\n          const disconnected = () => { if (!res.writableEnded) controller.abort(); };\n          const closeBeforeResponse = () => { if (!req.complete) disconnected(); };\n          req.once('aborted', disconnected);\n          req.once('close', closeBeforeResponse);\n          res.once('close', disconnected);\n          const entry = { targetId: body.targetId, command: body.command, active: true, promise: null };\n          let settle;\n          entry.promise = new Promise(resolve => { settle = resolve; });\n          sandboxCommandRuns.set(body.requestId, entry);\n          const execute = async () => {\n            let target = null;\n            const projectTarget = value => value ? { id: value.id, hostname: value.hostname || value.id, platform: value.platform || 'Unknown platform', transport: value.transport || 'network diagnostic', managementIp: value.managementIp || '' } : { id: body.targetId, hostname: body.targetId, platform: 'Unknown platform', transport: 'network diagnostic', managementIp: '' };\n            const unknownOutcome = () => ({ httpStatus: 200, payload: { runId: body.requestId, requestId: body.requestId, target: projectTarget(target), command: body.command, status: 'UNKNOWN', source: target?.transport || 'network diagnostic', startedAt, completedAt: new Date().toISOString(), elapsedMs: Math.max(0, Date.now() - Date.parse(startedAt)), output: '', outputTruncated: false } });\n            try {\n              const snapshot = await networkExecution.inventory({ signal: controller.signal });\n              const devices = Array.isArray(snapshot?.devices) ? snapshot.devices : [];\n              const ids = new Set();\n              if (devices.some(device => {\n                if (!device || typeof device.id !== 'string') return false;\n                if (ids.has(device.id)) return true;\n                ids.add(device.id); return false;\n              })) return { httpStatus: 409, message: 'Inventory contains duplicate target IDs' };\n              target = devices.find(device => device && typeof device.id === 'string' && device.id === body.targetId);\n              if (!target) return { httpStatus: 404, message: 'Target is not present in the current inventory' };\n              const targetCommands = Array.isArray(target.supportedCommands) ? target.supportedCommands : [];\n              const globalCommands = Array.isArray(networkExecution.supportedCommands) ? networkExecution.supportedCommands : null;\n              if (!targetCommands.includes(body.command) || (globalCommands && !globalCommands.includes(body.command))) return { httpStatus: 400, message: 'Command is not allowlisted for this target' };\n              if (controller.signal.aborted) return unknownOutcome();\n              const result = await networkExecution.runCommand({ deviceUuid: target.id, command: body.command, signal: controller.signal, timeoutMs: 60000 });\n              if (controller.signal.aborted) return unknownOutcome();\n              const completedAt = new Date().toISOString();\n              const status = ['SUCCESS', 'FAILURE', 'UNKNOWN', 'NOT_EXECUTED'].includes(result?.status) ? result.status : 'UNKNOWN';\n              const output = typeof result?.output === 'string' ? result.output : '';\n              const outputTruncated = output.length > 512 * 1024;\n              return { httpStatus: 200, payload: { runId: body.requestId, requestId: body.requestId, target: projectTarget(target), command: body.command, status, source: result?.source || target.transport || 'network diagnostic', startedAt: result?.startedAt || startedAt, completedAt, elapsedMs: Number.isFinite(result?.elapsedMs) ? result.elapsedMs : Math.max(0, Date.parse(completedAt) - Date.parse(startedAt)), output: outputTruncated ? output.slice(0, 512 * 1024) : output, outputTruncated } };\n            } catch (error) {\n              if (controller.signal.aborted || error?.submitted) return unknownOutcome();\n              return { httpStatus: 502, message: 'Network diagnostic service unavailable. Check the local connection and approved certificate.' };\n            } finally {\n              entry.active = false;\n              req.removeListener('aborted', disconnected); req.removeListener('close', closeBeforeResponse); res.removeListener('close', disconnected);\n            }\n          };\n          execute().then(settle, () => settle({ httpStatus: 502, message: 'Network diagnostic service unavailable. Check the local connection and approved certificate.' }));\n          const outcome = await entry.promise;\n          if (sandboxCommandRuns.size > 128) {\n            for (const [id, item] of sandboxCommandRuns) {\n              if (sandboxCommandRuns.size <= 128) break;\n              if (!item.active && id !== body.requestId) sandboxCommandRuns.delete(id);\n            }\n          }\n          sendOutcome(outcome);\n          return;\n        }\n        sendError(res, 405, new Error('Method not allowed')); return;\r\n      } catch (error) {\r\n        if (!res.writableEnded) sendError(res, error.statusCode || 502, error.statusCode ? error : new Error('Network diagnostic service unavailable. Check the local connection and approved certificate.'));\n        return;\r\n      }\r\n    }\r\n",
+      "sourceSHA256Before": "7CF27C81A5D81B199F83A0825A16BBCF74CFEB14AC833FD20E818F89CFF74CEF",
+      "sourceSHA256After": "43E131522813328ED2F10CA3CB93E74C626445419857C3247E18AA0F74E35104"
+    }
+  ],
+  "newFiles": [
+    {
+      "candidatePath": "completion/terminal/candidate/polished-terminal.js",
+      "candidateSHA256": "26F1BCF292CCDDBCE5BEB2E6DE560B951AF56D4D681EDE3E60EFA14DA4256D4F",
+      "bytes": 17180,
+      "purpose": "UX071 standalone read-only diagnostic terminal surface"
+    },
+    {
+      "candidatePath": "completion/terminal/candidate/polished-terminal.css",
+      "candidateSHA256": "F3FC4706D729A2F223C87F3E7EB42A9775684D6730AD49D9E0880E48789B48C0",
+      "bytes": 3309,
+      "purpose": "UX071 standalone read-only diagnostic terminal surface"
+    }
+  ]
+}
