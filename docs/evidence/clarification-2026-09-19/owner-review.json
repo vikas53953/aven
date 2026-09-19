@@ -1,6 +1,7 @@
 {
   "url": "http://127.0.0.1:8767/polished.html",
-  "fixture": "intentgraph/fixtures/admission-ui.cjs .audit/owner-review",
+  "fixture": "intentgraph/fixtures/admission-ui.cjs .audit/owner-review-corrections",
+  "reviewStage": "prepared for independent re-review before owner approval",
   "build": "ux-minimal-ui-v9.4-clarification",
   "viewport": {
     "width": 1440,

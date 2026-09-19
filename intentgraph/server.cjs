@@ -238,7 +238,7 @@ function createServer(options = {}) {
       let failure = null;
       try {
         const responder = context.responder;
-        const reply = await responder({ provider: context.provider, runId, segmentId: context.segmentId || null, clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages, agentName: body.agentName, chatId: body.chatId, mode, signal: controller.signal, onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing });
+        const reply = await responder({ provider: context.provider, runtimeContext: context.runtimeContext, runId, segmentId: context.segmentId || null, clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages, agentName: body.agentName, chatId: body.chatId, mode, signal: controller.signal, onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing });
         if (controller.signal.aborted) throw Error('Run stopped');
         const question = extractQuestion(reply);
         if (question) {
@@ -407,7 +407,7 @@ function createServer(options = {}) {
       catch (error) { sendError(res, error.statusCode || 503, error.statusCode ? error : new Error('Local receipt storage unavailable. No request was dispatched.')); return; }
       if (claim.duplicate) { sendJson(res, 200, { duplicate: true, receipt: admission.read(body.chatId, request.requestId) }); return; }
       const receipt = claim.receipt;
-      await dispatchChat(req, res, { request, receipt, provider: execution.provider, responder: options.chatResponder || require('./agent-runtime.cjs').respond, events: [] });
+      await dispatchChat(req, res, { request, receipt, provider: execution.provider, responder: options.chatResponder || require('./agent-runtime.cjs').respond, runtimeContext: {}, events: [] });
       return;
     }
     if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory') {

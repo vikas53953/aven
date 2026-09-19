@@ -802,22 +802,41 @@
     const c=currentChat(),p=chatRequests.get(c.id),q=m.question,view=receiptViews.get(c.id)||{};
     const live=!!(p?.waiting&&p.question?.id===q.id&&p.answerToken);
     return AvenClarification.card(q,{live,busy:live?p.questionBusy:!!view.busy,draft:live?p.answerDraft:(m.answerDraft||{}),note:live?p.questionNote:view.questionNote,
-      onDraft:draft=>{p.answerDraft=draft;},onAnswer:live?p.answerQuestion:null,
+      onDraft:draft=>{
+        if(!live||p.questionBusy)return p.questionNote;
+        const bounded=draft.choiceId?{choiceId:draft.choiceId}:{text:String(draft.text||'').slice(0,2000)};
+        p.answerDraft=bounded;m.answerDraft={...bounded};
+        p.questionNote=saveData()?'Answer draft saved. Nothing has been sent.':'Browser storage is unavailable. Your answer draft is kept for this page only; nothing was sent.';
+        return p.questionNote;
+      },onAnswer:live?p.answerQuestion:null,
       onCancel:!q.inert&&q.chatId===c.id&&q.requestId===c.pendingAdmission?()=>live?p.cancelQuestion():cancelSavedQuestion(c,q):null,
-      onRefresh:!q.inert&&q.chatId===c.id?()=>refreshQuestion(c,q):null});
+      onRefresh:!q.inert&&q.chatId===c.id?event=>refreshQuestion(c,q,event.currentTarget===document.activeElement):null});
   }
   async function readQuestion(q){
     const query=new URLSearchParams({chatId:q.chatId,requestId:q.requestId,runId:q.runId});
     const response=await fetch(CHAT_API+'/question?'+query,{headers:{'X-Aven-Chat':'text-only'},signal:AbortSignal.timeout(10000)}),value=await response.json();
     if(!response.ok)throw Error(value.reasons?.[0]||value.error||'Saved question is unavailable.');return value;
   }
-  async function refreshQuestion(c,q){
+  async function refreshQuestion(c,q,restoreFocus=false){
+    const active=chatRequests.get(c.id),p=active?.question?.id===q.id?active:null;let note;
     try{const value=await readQuestion(q),m=questionMessage(c,q);if(m)m.question=value.question;
-      const p=chatRequests.get(c.id);if(p?.waiting&&value.question.phase!=='waiting'){p.finishQuestion?.(null,Error(value.question.answer?'Your answer was recorded. Check the saved run; no continuation was retried.':'This question is no longer active. Check the saved run.'));}
-      else if(!p&&value.receipt.state!=='admitted')await reviewReceipt(c);
-      else receiptViews.set(c.id,{questionNote:value.question.phase==='waiting'?'Still waiting. Reloaded questions require cancellation and a fresh request.':'Saved state refreshed. No work was dispatched.'});
-    }catch(error){receiptViews.set(c.id,{questionNote:error.message});}
+      note=value.question.phase==='waiting'
+        ?p?.waiting?'Still waiting for your answer. No answer was sent by this refresh.':'Still waiting. Cancel this saved question, then send a fresh request.'
+        :'Saved state refreshed. No work was dispatched by this refresh.';
+      if(p?.waiting&&value.question.phase!=='waiting'){p.finishQuestion?.(null,Error(value.question.answer?'Your answer was recorded. Check the saved run; no continuation was retried.':'This question is no longer active. Check the saved run.'));}
+      else if(!p&&c.pendingAdmission===q.requestId&&value.receipt.state!=='admitted')await reviewReceipt(c);
+    }catch(error){note=error.message;}
+    if(p)p.questionNote=note;
+    receiptViews.set(c.id,{...receiptViews.get(c.id),questionNote:note});
     renderConversation();updateSend();
+    // Populate the mounted live region after rendering so refresh is announced.
+    const selector='.clarification-card[data-question-id="'+CSS.escape(q.id)+'"]';
+    const status=one(selector+' .clarification-note');if(status)status.textContent='';
+    requestAnimationFrame(()=>{
+      if(currentChat()?.id!==c.id)return;
+      const status=one(selector+' .clarification-note');if(status)status.textContent=note;
+      if(restoreFocus)one(selector+' [data-question-action="refresh"]')?.focus();
+    });
   }
   async function questionPost(q,action,extra={},signal){
     return fetch(CHAT_API+'/question/'+action,{method:'POST',headers:{'Content-Type':'application/json','X-Aven-Chat':'text-only','Accept':'application/x-ndjson'},body:JSON.stringify({...AvenClarification.scope(q),...extra}),signal:signal?AbortSignal.any([signal,AbortSignal.timeout(130000)]):AbortSignal.timeout(130000)});
@@ -853,7 +872,7 @@
       p.answerQuestion=async answer=>{
         if(p.questionBusy)return;p.questionBusy=true;p.questionNote='';renderConversation();
         try{
-          // Draft stays in memory through invalid input and denied submissions.
+          // Persist again before dispatch; edit-time storage failure never authorizes sending.
           const message=questionMessage(c,p.question);if(message)message.answerDraft={...answer};
           if(!saveData())throw Object.assign(Error('Browser storage is unavailable. Your answer draft is retained; nothing was sent.'),{status:400});
           p.controller=new AbortController();const response=await questionPost(p.question,'answer',{answer,answerToken:p.answerToken},p.controller.signal);

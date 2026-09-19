@@ -19,7 +19,7 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 20 identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
+- HLD 21 identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
   minimal UI/history/reaction behavior and adds durable, fenced chat admission.
   Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
   one structured clarification is integrated; provider/approval/automation/terminal/Git candidates remain separate.
@@ -136,3 +136,5 @@ Skills are optional workflow aids subject to explicit owner instructions; their
 presence does not authorize external actions or change project acceptance.
 
 The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity, native Windows uncertainty, and owner UI acceptance remain explicit limitations.
+
+Independent clarification review requested F1–F3 corrections: shared runtime context/budget/attempt history, edit-time answer-draft persistence, and Refresh focus/status. These are implemented on the same branch for independent re-review; owner UI approval is still pending. See the dated clarification evidence for exact validation results.

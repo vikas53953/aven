@@ -1,6 +1,6 @@
 {
   "date": "2026-09-19",
-  "scope": "Clarification-only local milestone; independent review and owner UI approval pending",
+  "scope": "Clarification-only milestone with independent-review corrections F1–F3; independent re-review and owner UI approval pending",
   "counts": {
     "Verified (scoped)": 37,
     "Partial": 58,
@@ -10,7 +10,7 @@
   },
   "requirementsPreserved": 115,
   "originalWorkbookSha256": "1d3070e0eb4a97772b219f11047aeeb2291cbbd2376ef5c2ba546dd2b5e0bef1",
-  "updatedWorkbookSha256": "ef863231e8157b98028ef60cf9724785d706e3dabd6dcc58e68928a7a48bcc1d",
+  "updatedWorkbookSha256": "811d2b7b2d264ff62ca3cdaf7275e113df1a03dce099a61a345ba4d8737976f6",
   "rows": [
     {
       "id": "UX-001",
@@ -337,9 +337,9 @@
       "feature": "Clarification and approval cards",
       "acceptance": "Answer maps to one pending question; stale cards cannot authorize later work.",
       "effectiveVerdict": "Partial",
-      "verdictBasis": "Clarification-only scoped implementation; technical checks do not establish independent review or owner approval.",
-      "freshEvidence": "One structured question, one bounded answer and one same-run read-only continuation implemented. Scoped API, state and mounted tests cover double-click, stale/cross-tab/cross-run answers, reload, cancellation, response loss and storage failure.",
-      "remainingGap": "General approval is absent. Independent review and owner UI approval remain pending; Windows and live provider/device behavior are unverified.",
+      "verdictBasis": "Clarification corrections only; technical checks do not establish independent re-review or owner approval.",
+      "freshEvidence": "F1–F3 corrections retain bounded live model/tool context, six-call budget and diagnostic attempts; persist drafts on edits before Continue and after rejection; restore Refresh focus and announce status. Actual LangChain/runtime and mounted reload/focus regressions pass.",
+      "remainingGap": "General approval is absent. Independent re-review of corrections and owner UI approval remain pending; Windows and live provider/device behavior are unverified.",
       "evidence": "docs/evidence/clarification-2026-09-19/verification.json"
     },
     {
@@ -347,9 +347,9 @@
       "feature": "Plan and inspect modes",
       "acceptance": "Plan mode cannot execute state-changing operations; current read-only scope stays explicit.",
       "effectiveVerdict": "Partial",
-      "verdictBasis": "Clarification-only scoped implementation; technical checks do not establish independent review or owner approval.",
-      "freshEvidence": "Injected-model Plan clarification and hostile continuation execute with zero tools; malicious tool-bearing output fails closed. Same-run mode/provider tests and existing Inspect allowlist regressions pass.",
-      "remainingGap": "No state-changing permission is added. Live provider/device and native Windows validation remain outside; this is not full-product acceptance.",
+      "verdictBasis": "Clarification corrections only; technical checks do not establish independent re-review or owner approval.",
+      "freshEvidence": "Both clarification segments share the original model, six-call budget and diagnostic-attempt set. An UNKNOWN diagnostic cannot be retried after clarification. Actual LangChain Plan continuation rejects hostile tool output with zero device calls.",
+      "remainingGap": "No state-changing permission or restart checkpoint is added. Live provider/device and native Windows validation remain outside; this is not full-product acceptance.",
       "evidence": "docs/evidence/clarification-2026-09-19/verification.json"
     },
     {
@@ -1163,6 +1163,11 @@
       "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
     }
   ],
-  "previousWorkbookSha256": "6c9bcb981cef3034242eb8e4bd39fee831621ea16091e91b6f6623cfe7c24966",
-  "originalColumnsAPUnchanged": true
+  "previousWorkbookSha256": "ef863231e8157b98028ef60cf9724785d706e3dabd6dcc58e68928a7a48bcc1d",
+  "originalColumnsAPUnchanged": true,
+  "reviewCorrections": [
+    "F1",
+    "F2",
+    "F3"
+  ]
 }

@@ -1,0 +1,14 @@
+✔ mounted narrow long question retains free-text through validation, browser storage failure and denied response (35776.057846ms)
+✔ mounted answer choice edits persist before Continue and reload inertly (15577.795173ms)
+✔ mounted answer choice edits persist before Continue and reload inertly after rejection (16519.365532ms)
+✔ mounted answer text edits persist before Continue and reload inertly (18892.846284ms)
+✔ mounted answer text edits persist before Continue and reload inertly after rejection (22182.807692ms)
+✔ mounted keyboard Refresh restores corresponding focus and announces live, failed and saved state (32469.949277ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142055.257163

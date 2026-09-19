@@ -221,7 +221,7 @@ test('mounted clarification holds serial slot, retains drafts/queue, keyboard an
 test('mounted narrow long question retains free-text through validation, browser storage failure and denied response', {skip:!enabled},()=>{
  const chat=makeChat('long clarification',false);seed([chat]);viewport(390,844);const spec={...clarificationSpec,prompt:'Which exact switch and interface should this read-only investigation cover? '+ 'Long target description '.repeat(14),reason:'This question supplies scope only. '+ 'Details remain readable on a narrow screen. '.repeat(8),choices:clarificationSpec.choices.map(c=>({...c,label:c.label+' — '+ 'Long choice detail '.repeat(7)}))};configure({question:spec,delayMs:30});const count=calls();send('clarification narrow request');questionReady();
  questionButton('Continue');waitFor(`document.querySelector('.clarification-note').textContent.includes('Choose one')`);assert.equal(calls()-count,1);
- evaluate('() => {const t=document.querySelector(".clarification-card textarea");t.value="branch-switch interface 1";t.dispatchEvent(new Event("input",{bubbles:true}));const original=Storage.prototype.setItem;window.restoreQuestionStorage=()=>Storage.prototype.setItem=original;Storage.prototype.setItem=function(k,v){if(k==="aven-polished-chats-v1")throw Error("fixture quota");return original.call(this,k,v);};return true;}');questionButton('Continue');
+ evaluate('() => {const t=document.querySelector(".clarification-card textarea");const original=Storage.prototype.setItem;window.restoreQuestionStorage=()=>Storage.prototype.setItem=original;Storage.prototype.setItem=function(k,v){if(k==="aven-polished-chats-v1")throw Error("fixture quota");return original.call(this,k,v);};t.value="branch-switch interface 1";t.dispatchEvent(new Event("input",{bubbles:true}));return true;}');assert.match(evaluate('() => document.querySelector(".clarification-note").textContent'),/kept for this page only/);questionButton('Continue');
  waitFor(`document.querySelector('.clarification-note').textContent.includes('storage')`);assert.equal(evaluate('() => document.querySelector(".clarification-card textarea").value'),'branch-switch interface 1');assert.equal(calls()-count,1);
  evaluate('() => {window.restoreQuestionStorage();const original=fetch;window.fetch=(u,o)=>String(u).endsWith("/question/answer")?Promise.resolve(new Response(JSON.stringify({error:"This tab cannot answer this question."}),{status:403,headers:{"Content-Type":"application/json"}})):original(u,o);window.restoreQuestionFetch=()=>window.fetch=original;return true;}');questionButton('Continue');waitFor(`document.querySelector('.clarification-note').textContent.includes('cannot answer')`);snapshotQuestion('clarification-denied-narrow');
  assert.equal(evaluate('() => document.documentElement.scrollWidth<=innerWidth'),true);assert.equal(evaluate('() => [...document.querySelectorAll(".clarification-card button")].every(b=>getComputedStyle(b).visibility!=="hidden"&&b.getBoundingClientRect().height>=44)'),true);
@@ -267,4 +267,39 @@ test('mounted compact 390px question has visible touch actions and cancels witho
  const chat=makeChat('compact narrow',false);seed([chat]);viewport(390,844);configure({question:clarificationSpec,delayMs:30});const count=calls();send('clarification compact request');questionReady();snapshotQuestion('clarification-narrow');
  assert.equal(evaluate('() => document.documentElement.scrollWidth<=innerWidth'),true);assert.equal(evaluate('() => [...document.querySelectorAll(".clarification-card button")].every(b=>getComputedStyle(b).visibility!=="hidden"&&b.getBoundingClientRect().height>=44)'),true);
  const snapshot=cli('snapshot'),match=snapshot.match(/uid=([^\s]+) button "Cancel request"/);assert.ok(match,snapshot);cli('click','@'+match[1]);waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);assert.equal(calls()-count,1);assert.equal(evaluate('() => document.activeElement.id'),'draft');results.push({check:'compact 390px touch-visible actions / explicit cancel',passed:true,responderCalls:1,viewport:[390,844]});viewport(1440,1000);
+});
+
+for(const kind of ['choice','text'])for(const rejected of [false,true])test(`mounted answer ${kind} edits persist before Continue and reload inertly${rejected?' after rejection':''}`,{skip:!enabled},()=>{
+ const chat=makeChat('draft '+kind+' '+rejected,false);seed([chat]);viewport(kind==='text'?390:1440,kind==='text'?844:1000);configure({question:clarificationSpec,delayMs:30});const count=calls();send('clarification draft edit request');questionReady();
+ evaluate('() => {window.answerPosts=0;const original=fetch;window.fetch=(u,o)=>{if(String(u).endsWith("/question/answer")){window.answerPosts++;return Promise.resolve(new Response(JSON.stringify({error:"Answer denied by fixture."}),{status:403,headers:{"Content-Type":"application/json"}}));}return original(u,o);};return true;}');
+ const edit=second=>evaluate(kind==='choice'?`()=>{document.querySelectorAll('.clarification-form input')[${second?1:0}].click();return true;}`:`()=>{const t=document.querySelector('.clarification-form textarea');t.value=${JSON.stringify(second?'Corrected switch interface 2':'Initial switch interface 1')};t.dispatchEvent(new Event('input',{bubbles:true}));return true;}`);
+ edit(false);
+ if(rejected){questionButton('Continue');waitFor(`document.querySelector('.clarification-note').textContent.includes('denied')`);edit(true);}
+ const expected=kind==='choice'?{choiceId:rejected?'access':'core'}:{text:rejected?'Corrected switch interface 2':'Initial switch interface 1'};
+ assert.deepEqual(evaluate(`()=>JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].messages.find(m=>m.question).answerDraft`),expected);
+ assert.equal(evaluate('()=>window.answerPosts'),rejected?1:0);assert.equal(calls()-count,1);
+ cli('open',url);waitFor(`!!document.querySelector('.clarification-card')`);
+ const card=evaluate(`()=>({text:document.querySelector('.clarification-card').textContent,inputs:document.querySelectorAll('.clarification-form input,.clarification-form textarea,.clarification-form button').length,tokens:/answerToken|steeringToken/.test(localStorage.getItem(${JSON.stringify(key)}))})`);
+ assert.match(card.text,/Answer draft \(delivery unconfirmed\)/);assert.ok(card.text.includes(expected.text||(rejected?'Access switch':'Core switch')));assert.equal(card.inputs,0);assert.equal(card.tokens,false);assert.equal(calls()-count,1);
+ snapshotQuestion('clarification-draft-'+kind+(rejected?'-rejected':''));
+ questionButton('Cancel waiting request');waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);assert.equal(calls()-count,1);
+ results.push({check:`${kind} draft edits / ${rejected?'rejected submission then edit':'reload before Continue'} / tokenless inert reload`,passed:true,responderCalls:1});viewport(1440,1000);
+});
+
+test('mounted keyboard Refresh restores corresponding focus and announces live, failed and saved state', {skip:!enabled},()=>{
+ const chat=makeChat('refresh focus',false);seed([chat]);configure({question:clarificationSpec,delayMs:30});const count=calls();send('clarification refresh status request');questionReady();
+ questionButton('Continue');waitFor(`document.querySelector('.clarification-note').textContent.includes('Choose one')`);
+ const refresh=expected=>{
+   evaluate('()=>{document.querySelector("[data-question-action=refresh]").focus();return true;}');cli('press','Enter');
+   waitFor(`document.querySelector('.clarification-note').textContent.includes(${JSON.stringify(expected)})`);
+   assert.equal(evaluate('()=>document.activeElement.dataset.questionAction'),'refresh');
+   assert.deepEqual(evaluate('()=>{const n=document.querySelector(".clarification-note");return {role:n.getAttribute("role"),atomic:n.getAttribute("aria-atomic"),stale:n.textContent.includes("Choose one")};}'),{role:'status',atomic:'true',stale:false});
+ };
+ refresh('Still waiting for your answer');
+ evaluate('()=>{const original=fetch;window.restoreRefresh=()=>window.fetch=original;window.fetch=(u,o)=>String(u).includes("/question?")?Promise.reject(Error("Saved question refresh unavailable.")):original(u,o);return true;}');
+ refresh('refresh unavailable');evaluate('()=>{window.restoreRefresh();return true;}');refresh('Still waiting for your answer');
+ assert.equal(calls()-count,1);snapshotQuestion('clarification-refresh-focus');
+ cli('open',url);waitFor(`!!document.querySelector('.clarification-card')`);refresh('Cancel this saved question');assert.equal(evaluate('()=>!!document.querySelector(".clarification-form input")'),false);
+ questionButton('Cancel waiting request');waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);refresh('Saved state refreshed');assert.equal(calls()-count,1);
+ results.push({check:'keyboard Refresh / focus restored / current live-region result / validation cleared / failed and tokenless saved state',passed:true,responderCalls:1});
 });

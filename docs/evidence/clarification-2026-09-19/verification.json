@@ -5,8 +5,8 @@
   "uiBuild": "ux-minimal-ui-v9.4-clarification",
   "node": {
     "version": "v24.16.0",
-    "tests": 103,
-    "passed": 102,
+    "tests": 112,
+    "passed": 111,
     "failed": 0,
     "skipped": 1,
     "skipReason": "Existing Playwright 1.49 adapter browser is not installed; separate Chrome fixture is not substituted."
@@ -20,8 +20,8 @@
     "warning": "Nornir 3.3.0 imports deprecated pkg_resources; disposable environment pins setuptools 80.9.0."
   },
   "mounted": {
-    "checks": 14,
-    "passed": 14,
+    "checks": 19,
+    "passed": 19,
     "tool": "chrome-devtools-axi",
     "actualViewports": [
       [
@@ -41,29 +41,30 @@
   "served": "served-hashes.json",
   "atlas": "atlas-checks.json",
   "sourceHashes": {
-    "intentgraph/server.cjs": "17f4486ab695a36ba1e11df283b8c84dc63c870af78595052975f8186e002804",
+    "intentgraph/server.cjs": "0862faa7ad3192a43c547eca56c5e3863a93baf657658f45f69e8094dd838f9c",
     "intentgraph/reliability.cjs": "c7843690e10924d62aea60f9529b18861b905ff3433c8304c2fce6235ac23e22",
     "intentgraph/reliability-storage.cjs": "a04c90c86ca1007961d089d4509a0eeda489c91ddf916543347250957c2ddfc0",
     "intentgraph/clarification-workflow.cjs": "d64d605fd700fc09aecaf038c5af1d9472f3adf3d0f88011e97c045003cb16a4",
-    "intentgraph/agent-runtime.cjs": "be36175f96933d53f09e1ec04bf237542d37a0d6550f1c93033dd00e623f9018",
+    "intentgraph/agent-runtime.cjs": "2a6c4d1dd14bef0d55f19931e46350924cf2200661d17405695d60d897a7cefd",
+    "intentgraph/agent-runtime.test.cjs": "73cfa38fb8ea3809f8b62e698c51152bcb1ff2d51e8b63ec5c497c38b282d975",
     "intentgraph/chat-read-api.cjs": "31ad0713e63b55b7c9232511a4772ca107ae4322a2dde555112d0e8c70f19c60",
     "intentgraph/fixtures/admission-ui.cjs": "8b773d26b5b019ac3680f2be77b7d5963002198956a9756e3ad5da1f0603fbcd",
-    "intentgraph/clarification.test.cjs": "3377b2c174e64c18af815c009ea39fc1ee389eed3aedda4edd45aa622aa5ecc4",
+    "intentgraph/clarification.test.cjs": "27a23e3685d1eca5e2c445c861cbb4bc3666d212e32850dba0a9ed930185b8f7",
     "intentgraph/browser-admission.test.cjs": "350d907e32c2ca50880cd585b4238412f89f0008dcadfab9612ad6cb5a5c544e",
-    "intentgraph/mounted-admission.test.cjs": "d75966f82fa7fc5fd15541f836b0b7bf3afbd1cf1b6b34ce830556147ce2a6b3",
+    "intentgraph/mounted-admission.test.cjs": "c4ba39b5f7983831723cd98a72709cee51754b789e3d670bf4d9d290980baee5",
     "polished.html": "507c7fd7ec731fa315d0cef9eb2a948ef5b9ea149debf7383cdf822b1284f33d",
-    "polished.js": "9a95fbf221cd5e92ed2e1f7399e92dd268814fdf89d9cdebf1c85815fc4751e9",
+    "polished.js": "9f11cb7c3e76ed160133a2bc9424334cc2ddd3144e71fc7357724509c96f8942",
     "polished.css": "d9736bbd90a0c6be75daf93290a1492806c11ab1ed3ad180a14ec23da8539a02",
     "polished-admission.js": "a018cc6eec2c38328a4e0b057e605e50de51bb3e7001c12c511bc122d9fa6548",
     "polished-run-state.js": "166358fc294a3c7ec62fc92796d98188548f48997a0f5e221a3a8698c6dd873e",
     "polished-backup.js": "fb70dbb47bd50c37cd461a5b603d750321d6209ea6fd10265a8de1122aa27f4b",
-    "polished-clarification.js": "700888b0701d663484eff5ff650ba5100638072c56c810d4876a36e36154157f",
-    "docs/architecture/architecture.json": "0321f6d97b214a68b9f02eeb349430bfe49485e4767b18cd0f9360a832a2a242",
+    "polished-clarification.js": "ee0aa8d447fa6f38f8f6a6f0819fde495dd85512a4729f5eeee902d3628c13d9",
+    "docs/architecture/architecture.json": "ac872a62c8e9c4d88b45ec7ad243223073a264598acce912eee08b6c317b9d77",
     "docs/architecture/index.html": "42347ea772c1598b0a6b75aa2145d9db2d129cb0a807b6044abbca4e50b6a4dd",
-    "docs/architecture/HLD.md": "ccaf8ba34ea8dd930bcf099b10cf987c3eb83a2935478f22d826ab2987fdb7b8"
+    "docs/architecture/HLD.md": "99c04438ec11e506dbe5f67e3f3ff1bb9e3567c9339711e420028223965784ea"
   },
   "review": {
-    "independent": "pending Firstmate review of this exact committed branch",
+    "independent": "F1–F3 corrections implemented; independent re-review of this exact committed branch pending",
     "ownerUI": "pending; screenshots and technical checks are not approval"
   },
   "limits": [
@@ -75,5 +76,6 @@
     "No approval/mock execution, scheduling, parallel runs, provider selection or real actions.",
     "No pipeline, push, merge, publication or deployment."
   ],
-  "register": "feature-verdicts.json"
+  "register": "feature-verdicts.json",
+  "reviewCorrections": "review-corrections.json"
 }

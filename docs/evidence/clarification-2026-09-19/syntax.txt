@@ -7,6 +7,7 @@ polished-clarification.js: PASS
 polished-admission.js: PASS
 polished-run-state.js: PASS
 polished-backup.js: PASS
+intentgraph/agent-runtime.test.cjs: PASS
 intentgraph/clarification.test.cjs: PASS
 intentgraph/mounted-admission.test.cjs: PASS
 intentgraph/fixtures/admission-ui.cjs: PASS

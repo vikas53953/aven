@@ -1,0 +1,32 @@
+[
+  {
+    "check": "390px long content / free text / validation / storage failure / denied / keyboard / folded code",
+    "passed": true,
+    "responderCalls": 2
+  },
+  {
+    "check": "choice draft edits / reload before Continue / tokenless inert reload",
+    "passed": true,
+    "responderCalls": 1
+  },
+  {
+    "check": "choice draft edits / rejected submission then edit / tokenless inert reload",
+    "passed": true,
+    "responderCalls": 1
+  },
+  {
+    "check": "text draft edits / reload before Continue / tokenless inert reload",
+    "passed": true,
+    "responderCalls": 1
+  },
+  {
+    "check": "text draft edits / rejected submission then edit / tokenless inert reload",
+    "passed": true,
+    "responderCalls": 1
+  },
+  {
+    "check": "keyboard Refresh / focus restored / current live-region result / validation cleared / failed and tokenless saved state",
+    "passed": true,
+    "responderCalls": 1
+  }
+]

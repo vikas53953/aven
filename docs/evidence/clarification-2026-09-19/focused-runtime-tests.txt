@@ -1,0 +1,31 @@
+✔ LangGraph agent uses the inventory tool for a natural language fact and returns bounded evidence (362.074712ms)
+✔ natural language diagnostic resolves hostname and UUID server-side and dispatches one allowed operation (116.202424ms)
+✔ general explanations do not invoke tools, and unknown host evidence is not success (170.275394ms)
+✔ tool budget bounds backend calls and reports partial evidence without retrying duplicate diagnostics (202.43547ms)
+✔ abort and timeout reject promptly and pass cancellation to backend (61.053329ms)
+✔ malformed and unsupported model tool arguments never reach the device adapter (134.52487ms)
+✔ unknown submission is not repeated and completed evidence survives a later model failure (101.501916ms)
+✔ framework exposes SSH-specific BGP operation and retains Nornir provenance (43.03043ms)
+✔ same-run continuation retains bounded model/tool context and refuses an UNKNOWN diagnostic retry (97.644184ms)
+✔ six-call tool budget spans both clarification segments and cannot be reset by a new context (142.410718ms)
+✔ oversized clarification runtime context fails closed instead of silently dropping tool history (44.806366ms)
+✔ Plan continuation retains its original zero-tool model boundary against hostile tool output (39.125073ms)
+✔ one atomic answer and segment, replay receipt, changed/stale/cross-scope rejection (1289.050292ms)
+✔ transaction failure and lost commit acknowledgement never create replay eligibility (1314.617825ms)
+✔ cancel is durable, scoped and dispatch-free; live foreign owner is never stolen (660.257175ms)
+✔ second process cannot answer or cancel live wait; dead owner needs explicit UNKNOWN recovery (775.143715ms)
+✔ migration retains an existing version-one receipt and idempotency identity (395.849048ms)
+✔ bounded structured content rejects malformed envelopes and unsafe fields (2.677518ms)
+✔ scoped API double-click dispatches once in original run, mode and provider (1173.529402ms)
+✔ API cancellation without an answer token supports reload and never continues (261.717513ms)
+✔ Plan structured clarification and hostile continuation expose zero tools (1120.33665ms)
+✔ lost answer HTTP response reads accepted state and cannot dispatch twice (1092.345995ms)
+✔ API storage failure after answer commit is recoverable and never dispatches (655.522251ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9201.677106
