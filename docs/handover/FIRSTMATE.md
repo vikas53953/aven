@@ -41,3 +41,7 @@ Firstmate backend were not verified.
 No credentials, login codes, private Firstmate state, or third-party Firstmate
 distribution files are included here. Review directory and hook trust prompts in
 the actual agent UI. Firstmate does not inherit the originating Codex conversation.
+
+## Local clarification handoff
+
+The `fm/aven-clarification` branch starts from the launch-specified reliability base `e176ad4989a9e8f5455223206f10227d58b837b6`. The branch is local-only and is prepared for Firstmate's independent review followed by owner UI approval. Use [the dated evidence and reproduction instructions](../evidence/clarification-2026-09-19/README.md). Approval cards and mock execution are not included. The branch does not resolve Windows uncertainty or the documented evidence-versus-receipt ambiguity.

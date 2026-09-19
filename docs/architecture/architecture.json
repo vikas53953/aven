@@ -1,6 +1,6 @@
 {
   "title": "Aven · Network harness",
-  "revision": "HLD 19",
+  "revision": "HLD 20",
   "updated": "2026-09-19",
   "focus": "ui",
   "summary": "A working local prototype, not yet a multi-customer service. Explore the actual call path, proposed production boundaries, and how user intent becomes an evidence-based investigation.",
@@ -12,8 +12,8 @@
       "status": "built",
       "tag": "Your workspace",
       "role": "Displays conversations, avatars, results, timestamps and copy controls. Sends your message to the backend.",
-      "current": "Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.3-recovery. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader provider, approval, automation, terminal and Git candidates remain unintegrated; only the bounded admission slice is now composed. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration. Each submitted turn saves stable identity and exact bounded outgoing context. Explicit receipt review reconciles interruption without redispatch; UNKNOWN pauses queued work. A second tab cannot clear an owned admission on reload. Local checks pass; Windows and owner visual approval remain unverified. Independent-review corrections allow each reloaded pending conversation to reconcile while unrelated captures remain unchanged. A Web Lock protects live browser writers; stale workspace snapshots still fail. Saved-request retry updates the original result identity and retains annotations and raw capture.",
-      "files": "polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js, polished-admission.js",
+      "current": "Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.4-clarification. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader provider, approval, automation, terminal and Git candidates remain unintegrated; the bounded admission and clarification slices are composed. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration. Each submitted turn saves stable identity and exact bounded outgoing context. Explicit receipt review reconciles interruption without redispatch; UNKNOWN pauses queued work. A second tab cannot clear an owned admission on reload. Local checks pass; Windows and owner visual approval remain unverified. Independent-review corrections allow each reloaded pending conversation to reconcile while unrelated captures remain unchanged. A Web Lock protects live browser writers; stale workspace snapshots still fail. Saved-request retry updates the original result identity and retains annotations and raw capture. One compact structured clarification can pause an existing Plan or Inspect request. Waiting retains the serial slot and browser writer lock. Choices/free text supply information, never action permission. Accepted answers remain in history. Reload retains tokenless history and requires explicit cancellation plus a fresh request; imported/copied question history is inert. Queued work pauses after cancellation or uncertainty. See docs/evidence/clarification-2026-09-19/ for dated checks; independent review and owner visual approval remain separate.",
+      "files": "polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js, polished-admission.js, polished-clarification.js",
       "lesson": "A screen is not an agent. It presents the work and your controls.",
       "technical": [
         "Entry: polished.html; index.html is the older prototype.",
@@ -29,8 +29,8 @@
       "status": "built",
       "tag": "The entry point",
       "role": "Accepts chat requests, validates the payload and calls the runtime. Returns the answer to the browser.",
-      "current": "Node.js 24.16+ CommonJS and node:http. POST /api/chat validates mode, bounded text and optional paired request identity. SQLite commits the full admission transition before dispatch and enforces one global admitted chat across processes sharing the store. Exact replay returns the same receipt without responder work; changed content conflicts. Chat-scoped receipt/readback and explicit recovery preserve UNKNOWN and never resume tools. Legacy identity-free clients remain accepted without cross-request replay guarantees. Provider/model behavior is unchanged; status does not establish reachability.",
-      "files": "intentgraph/server.cjs, intentgraph/chat-read-api.cjs, intentgraph/reliability.cjs, intentgraph/reliability-storage.cjs",
+      "current": "Node.js 24.16+ CommonJS and node:http. POST /api/chat validates mode, bounded text and optional paired request identity. SQLite commits the full admission transition before dispatch and enforces one global admitted chat across processes sharing the store. Exact replay returns the same receipt without responder work; changed content conflicts. Chat-scoped receipt/readback and explicit recovery preserve UNKNOWN and never resume tools. Legacy identity-free clients remain accepted without cross-request replay guarantees. Provider/model behavior is unchanged; status does not establish reachability. Clarification question, accepted answer and unique continuation segment share the receipt SQLite transaction boundary (workflow schema user_version 2; original admission schema remains version 1). Scoped question read, answer and cancel routes retain existing origin/header guards. A capability hash binds one bounded answer to an immutable question revision; exact repeats return the existing decision and never dispatch. Original mode/provider and context stay in memory for one continuation with a new controller. Accepted-before-dispatch interruption stays UNKNOWN, without replay. Waiting is nonterminal and cannot be recovered merely because time passed.",
+      "files": "intentgraph/server.cjs, intentgraph/chat-read-api.cjs, intentgraph/reliability.cjs, intentgraph/reliability-storage.cjs, intentgraph/clarification-workflow.cjs",
       "lesson": "The API delivers the request; it does not decide which network checks are useful.",
       "technical": [
         "Start-IntentGraph.ps1 launches node intentgraph/server.cjs.",
@@ -46,7 +46,7 @@
       "status": "partial",
       "tag": "First framework slice",
       "role": "LangChain createAgent coordinates model calls and typed tools. LangGraph manages the in-memory execution loop.",
-      "current": "Installed and connected to chat: LangChain 1.5.11, LangGraph 1.4.15 and the OpenCode adapter. Natural-language tool selection replaces the previous exact-command parser. Durable checkpoints are not configured. Plan mode uses an empty tool array and does not require a sandbox. Browser journal recovery is not backend execution resumption.",
+      "current": "Installed and connected to chat: LangChain 1.5.11, LangGraph 1.4.15 and the OpenCode adapter. Natural-language tool selection replaces the previous exact-command parser. Durable checkpoints are not configured. Plan mode uses an empty tool array and does not require a sandbox. Browser journal recovery is not backend execution resumption. A bounded JSON content envelope can ask one question without adding a tool. Plan remains zero-tools; hostile Plan tool output fails closed. Inspect keeps its existing read-only tools. A continuation cannot ask another structured question or authorize writes. Provider/model selection remains fixed and unchanged.",
       "files": "intentgraph/agent-runtime.cjs",
       "lesson": "The API, agent runtime and tools are modules inside the backend application, not nested servers. The LLM is hosted externally.",
       "technical": [
@@ -102,7 +102,7 @@
       "status": "partial",
       "tag": "Durable admission; checkpoints planned",
       "role": "A checkpoint store will save execution progress; conversation storage will retain sessions. Long-term memory is a separate design choice.",
-      "current": "Browser localStorage retains conversations and exact submitted request snapshots. A local SQLite receipt store commits identity, fingerprint, run ID and ownership before dispatch; a unique admitted row preserves serial execution. Stale owners cannot publish a second claim. Explicit recovery requires proof that the owner is gone, or no longer active in this service, and records UNKNOWN without replay. Evidence is flushed before settlement; failed persistence remains unresolved. This does not add LangGraph checkpoints, resumable external operations, tenant storage or cross-device transactions. Production/checkpoint database choice remains open. Browser admission writes require Web Locks; the browser lock spans active capture and explicit reconciliation, separate from SQLite authority. Unrelated pending captures are preserved during a scoped save.",
+      "current": "Browser localStorage retains conversations and exact submitted request snapshots. A local SQLite receipt store commits identity, fingerprint, run ID and ownership before dispatch; a unique admitted row preserves serial execution. Stale owners cannot publish a second claim. Explicit recovery requires proof that the owner is gone, or no longer active in this service, and records UNKNOWN without replay. Evidence is flushed before settlement; failed persistence remains unresolved. This does not add LangGraph checkpoints, resumable external operations, tenant storage or cross-device transactions. Production/checkpoint database choice remains open. Browser admission writes require Web Locks; the browser lock spans active capture and explicit reconciliation, separate from SQLite authority. Unrelated pending captures are preserved during a scoped save. Clarification records use the same local receipt database. History is durable; provider continuation state and answer capabilities are not restored after restart. Existing receipts and idempotency identities survive migration.",
       "files": "intentgraph/reliability-storage.cjs, intentgraph/reliability.cjs, polished-admission.js; .intentgraph/runtime/chat-admission.sqlite and initialization marker; .intentgraph/evidence/runs",
       "lesson": "A database is a supporting branch, not the final step of every answer."
     },
@@ -179,11 +179,11 @@
   "decisions": [
     [
       "Implemented",
-      "LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained. Local durable request admission and explicit UNKNOWN recovery are implemented separately from checkpoints."
+      "LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained. Local durable request admission and explicit UNKNOWN recovery are implemented separately from checkpoints. One structured clarification and one same-run read-only continuation are integrated; approval remains unimplemented."
     ],
     [
       "Next checkpoint",
-      "Independent review of local admission and its fresh fixture evidence, then native Windows validation. The separate approval/clarification proposal needs product decisions; real SSH lab work requires separate authorization."
+      "Independent review of this local clarification branch, then owner review in the running existing shell. Native Windows validation remains outstanding. The four recommended proposal choices were authorized in the 19 September launch brief; the eventual mock-only approval direction does not authorize a mock implementation now."
     ],
     [
       "Still open",
@@ -191,10 +191,15 @@
     ],
     [
       "Verification",
-      "83 current WSL tests: 82 pass, 0 fail, 1 existing Playwright skip. Seven mounted chrome-devtools-axi regressions cover multi-chat recovery, same-request retry, live ownership, stale snapshots and FIFO; actual desktop/narrow dimensions and source hashes verified. See docs/evidence/admission-2026-09-19/review-fixes/. Windows and owner acceptance remain unverified."
+      "Dated local clarification tests, mounted chrome-devtools-axi regressions, served-source hashes and desktop/390px screenshots are recorded in docs/evidence/clarification-2026-09-19/verification.json. Read that record for actual counts and exclusions. Independent review, owner approval, native Windows and live provider/device acceptance are separate and not established by automated checks."
     ]
   ],
   "changes": [
+    [
+      "2026-09-19",
+      "One bounded clarification in a serial read-only run",
+      "Implemented on reliability base e176ad4989a9e8f5455223206f10227d58b837b6. One durable question/answer/segment protocol, scoped routes and compact accessible card preserve the v9.1 shell and recovery fixes. At most one same-run continuation retains Plan/Inspect and provider; reload/import never restore answer authority. Cancellation does not dispatch and queue resumption remains explicit after cancellation or uncertainty. No approvals, mock execution, scheduler, parallel work or durable continuation after restart. Evidence: docs/evidence/clarification-2026-09-19/verification.json; independent review and owner UI approval remain pending. Existing evidence-versus-receipt ambiguity and Windows uncertainty remain documented. Long evidence paths wrap in atlas rows at narrow widths."
+    ],
     [
       "2026-09-19",
       "Independent-review recovery corrections",
@@ -382,6 +387,10 @@
     [
       "Independent-review recovery evidence (2026-09-19)",
       "../evidence/admission-2026-09-19/review-fixes/README.md"
+    ],
+    [
+      "Clarification verification (2026-09-19)",
+      "../evidence/clarification-2026-09-19/README.md"
     ]
   ],
   "sections": [

@@ -65,3 +65,15 @@ node --test intentgraph/backend.test.cjs intentgraph/trace.test.cjs
 ```
 
 Test fixture approvals are isolated from project state. They establish mechanical behavior, not owner acceptance of this interface.
+
+## Bounded clarification (local milestone, 19 September 2026)
+
+An initial Plan or Inspect response may return a single validated JSON content envelope with `type: "clarification"` and `question: {prompt, reason?, choices: [{id,label}], allowFreeText}`. Limits: prompt/reason 500 characters, 2–4 distinct choices (or zero with free text), labels 200, IDs 40, free-text answer 2,000. Unrecognized fields and malformed envelopes fail closed. No clarification tool is registered. Plan binds zero tools; Inspect retains the existing read-only allowlist. An answer supplies scope only.
+
+`GET /api/chat/question?chatId=…&requestId=…&runId=…` reads tokenless state. `POST /api/chat/question/answer` requires those identities plus `questionId`, immutable `revision`, the memory-only `answerToken`, and exactly one `{choiceId}` or `{text}` answer. `POST /api/chat/question/cancel` requires the same scope without answer/token; it can cancel only a waiting question. Existing loopback origin and `X-Aven-Chat: text-only` guards apply. These are local capability controls, not authenticated human identity.
+
+The question and accepted answer/segment are committed in the existing receipt SQLite database. SQLite `user_version=2` adds the clarification table without changing version-one receipt identities. The answer transaction consumes the decision before a separately fenced dispatch; a crash between them leaves unresolved accepted state and never replays. Exact duplicate answers return the existing decision. A continuation retains original mode, provider and context, has a new controller/segment identity, and cannot ask a second question. Waiting holds the global admitted row and browser writer lock. Time cannot transfer live ownership. Dead-owner recovery records UNKNOWN.
+
+Reload loses answer capability and continuation custody. Readback is inert; explicit cancellation and a fresh request are required. Backup/import keeps inert question history, never pending ownership or capabilities. Queues remain paused after cancellation/uncertainty until explicit Resume. Existing receipts, recovery, evidence, code folding and v9.1 shell remain in place. This does not add approval, execution, provider selection, parallel runs, scheduling or resumable checkpoints.
+
+Run `node --test --test-concurrency=1 intentgraph/*.test.cjs` and `npm run check --prefix intentgraph`. Mounted browser checks require an isolated `AVEN_BROWSER_TOOL` pointing to chrome-devtools-axi; see [dated fixture instructions](../docs/evidence/clarification-2026-09-19/README.md). Native Windows and owner UI approval remain unverified; evidence can still exist without a settled receipt, so read-model completion is not proof of successful admission settlement.

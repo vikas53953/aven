@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:8767/polished.html",
+  "fixture": "intentgraph/fixtures/admission-ui.cjs .audit/owner-review",
+  "build": "ux-minimal-ui-v9.4-clarification",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "waiting": true,
+  "stats": {
+    "calls": 1,
+    "providerCalls": 0,
+    "deviceCalls": 0
+  },
+  "console": "console:\nEmulating viewport: {\"deviceScaleFactor\":1,\"isMobile\":false,\"hasTouch\":false,\"isLandscape\":false,\"width\":1440,\"height\":1000}\n## Console messages\n<no console messages found>\nhelp[2]:\n  Run `chrome-devtools-axi console-get <id>` to see a specific message\n  Run `chrome-devtools-axi console --type error` to filter by type\n",
+  "ownerApproval": false
+}

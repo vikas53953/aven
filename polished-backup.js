@@ -6,7 +6,7 @@
   const BACKUP='aven-polished-before-import-v1';
   const PENDING='aven-polished-import-pending-v1';
   const PREF_FIELDS=new Set('theme accent language density displayName activeAgent provider model showEvidence showInvestigation showRunDetails browser computer sidebarWidth paneWidth sections agents'.split(' '));
-  const privateKey=key=>/^(?:proto|prototype|constructor|token|steeringToken|accessToken|refreshToken|bearerToken|apiKey|password|credential|credentials|controller|authorization|permission|permissions|secret|clientSecret)$/i.test(key.replace(/[_-]/g,''));
+  const privateKey=key=>/^(?:proto|prototype|constructor|token|steeringToken|answerToken|accessToken|refreshToken|bearerToken|apiKey|password|credential|credentials|controller|authorization|permission|permissions|secret|clientSecret)$/i.test(key.replace(/[_-]/g,''));
   const record=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
   const check=(ok,message)=>{if(!ok)throw Error(message);};
   function graph(v,depth=0){
@@ -44,6 +44,7 @@
     for(const channel of d.channels){fields(channel,'name projectId','channel');if(channel.projectId)check(projects.has(channel.projectId),'Unknown channel folder.');if(channel.members!==undefined)refs(channel.members,agents,'channel members');}
     for(const c of d.chats){
       string(c.title,'conversation name');fields(c,'draft projectId channelId queuePauseReason replyError','conversation');refs(c.recipients,agents,'conversation coworkers');check(c.recipients.length>0,'Conversation needs a coworker.');if(c.projectId)check(projects.has(c.projectId),'Unknown conversation folder.');if(c.channelId)check(channels.has(c.channelId),'Unknown conversation channel.');
+      if(c.messages?.some(m=>m.question)){delete c.pendingAdmission;delete c.runJournal;for(const m of c.messages){delete m.submission;if(m.question)m.question={...m.question,phase:'imported',inert:true};}}
       messages(c.messages,agents);reply(c.draftReplyTo);if(c.pendingAttachmentNames!==undefined)list(c.pendingAttachmentNames,'attachment names').forEach(v=>string(v,'attachment name'));
       const queue=c.pendingQueue||[];records(queue,'queue');check(queue.length<=8,'Queue exceeds eight messages.');c.pendingQueue=queue.map(item=>{string(item.text,'queued text',4000);check(item.text.trim(),'Queued text cannot be empty.');reply(item.replyTo);fields(item,'createdAt','queue');return {id:item.id,text:item.text,createdAt:item.createdAt,replyTo:item.replyTo||null,...(item.mode!==undefined?{mode:item.mode==='plan'?'plan':'inspect'}:{})};});
       c.queuePaused=!!queue.length;c.queuePauseReason=queue.length?'Restored queue is paused. Review it before resuming.':'';delete c.queueDispatching;c.queueEditing=false;
@@ -75,7 +76,7 @@
     for(const p of incoming.data.projects){p.id=ref('projects',p.id);p.members=(p.members||[]).map(id=>ref('agents',id));}
     for(const c of incoming.data.channels){c.id=ref('channels',c.id);c.projectId=ref('projects',c.projectId);c.members=(c.members||[]).map(id=>ref('agents',id));}
     const remapMessages=rows=>rows.forEach(m=>{if(m.agentId)m.agentId=ref('agents',m.agentId);if(Array.isArray(m.recipients))m.recipients=m.recipients.map(id=>ref('agents',id));});
-    for(const c of incoming.data.chats){delete c.pendingAdmission;c.id=ref('chats',c.id);c.projectId=ref('projects',c.projectId);c.channelId=ref('channels',c.channelId);c.recipients=c.recipients.map(id=>ref('agents',id));remapMessages(c.messages);if(c.recoveredFrom)c.recoveredFrom=ref('chats',c.recoveredFrom);if(c.forkedFrom)c.forkedFrom.chatId=ref('chats',c.forkedFrom.chatId);for(const snapshot of c.rewindHistory||[]){remapMessages(snapshot.messages);if(snapshot.recoveryChatId)snapshot.recoveryChatId=ref('chats',snapshot.recoveryChatId);}}
+    for(const c of incoming.data.chats){delete c.pendingAdmission;delete c.runJournal;delete c.queueDispatching;for(const m of c.messages){delete m.submission;if(m.question)m.question={...m.question,phase:'imported',inert:true};}c.id=ref('chats',c.id);c.projectId=ref('projects',c.projectId);c.channelId=ref('channels',c.channelId);c.recipients=c.recipients.map(id=>ref('agents',id));remapMessages(c.messages);if(c.recoveredFrom)c.recoveredFrom=ref('chats',c.recoveredFrom);if(c.forkedFrom)c.forkedFrom.chatId=ref('chats',c.forkedFrom.chatId);for(const snapshot of c.rewindHistory||[]){remapMessages(snapshot.messages);if(snapshot.recoveryChatId)snapshot.recoveryChatId=ref('chats',snapshot.recoveryChatId);}}
     result.prefs.agents.push(...incoming.prefs.agents);result.prefs.sections.push(...incoming.prefs.sections);
     result.data.chats.push(...incoming.data.chats);result.data.projects.push(...incoming.data.projects);result.data.channels.push(...incoming.data.channels);
     for(const [id,notes]of Object.entries(incoming.docs))result.docs[ref('agents',id)]=notes;

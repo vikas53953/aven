@@ -9,6 +9,7 @@ const { IndexStore, isInside, normalizeRelative } = require('./indexer.cjs');
 const { IntentEngine } = require('./engine.cjs');
 const { createChatReadApi } = require('./chat-read-api.cjs');
 const { createAdmission, validIdentity, replyOutcome } = require('./reliability.cjs');
+const { extractQuestion } = require('./clarification-workflow.cjs');
 
 const DEFAULT_PORT = 8768;
 const DEFAULT_HOST = '127.0.0.1';
@@ -78,6 +79,7 @@ function createSteeringRun(runId, chatId, steeringToken) {
     steeringToken,
     get phase() { return phase; },
     beginClosing() { if (phase === 'open') phase = 'closing'; },
+    wait() { phase = 'waiting-question'; },
     drainSteering() {
       if (phase !== 'open' || !queue.length) return [];
       return queue.splice(0, queue.length);
@@ -149,6 +151,7 @@ function createServer(options = {}) {
   let periodic = null;
   let debounce = null;
   const activeRuns = new Map();
+  const waitingRuns = new Map();
   const chatReadApi = createChatReadApi({
     root,
     getExecutionStatus: () => execution ? execution.status() : null,
@@ -213,11 +216,137 @@ function createServer(options = {}) {
     return true;
   }
 
+  async function dispatchChat(req, res, context) {
+    const { request: body, receipt } = context, request = body, mode = body.mode;
+      const controller = new AbortController();
+      const streaming = req.headers.accept === 'application/x-ndjson';
+      const runId = receipt.runId, steeringToken = crypto.randomBytes(32).toString('base64url'), events = context.events;
+      const runState = createSteeringRun(runId, body.chatId, steeringToken);
+      activeRuns.set(runId, runState);
+      const disconnected = () => { if (!res.writableEnded) { runState.beginClosing(); controller.abort(); } }; res.once('close', disconnected);
+      let completedReply = null, waiting = false;
+      const emit = (event) => {
+        const safe = { ...event, runId, at: new Date().toISOString() };
+        const { steeringToken: _discardedToken, answerToken: _answerToken, ...persisted } = safe;
+        if (events.length < 100) events.push(persisted);
+        if (streaming && !res.destroyed) res.write(JSON.stringify(safe) + '\n');
+      };
+      runState.emit = emit;
+      if (streaming) res.writeHead(200, { 'Content-Type': 'application/x-ndjson', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+      emit({ type: 'start', segmentId: context.segmentId || null, message: 'Starting network coworker investigation', mode, requestId: request.requestId, receipt, ...(streaming ? { steeringToken } : {}) });
+      if (context.segmentId) emit({ type: 'question_answered', question: admission.workflow.read(body.chatId, request.requestId, runId) });
+      let failure = null;
+      try {
+        const responder = context.responder;
+        const reply = await responder({ provider: context.provider, runId, segmentId: context.segmentId || null, clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages, agentName: body.agentName, chatId: body.chatId, mode, signal: controller.signal, onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing });
+        if (controller.signal.aborted) throw Error('Run stopped');
+        const question = extractQuestion(reply);
+        if (question) {
+          if (context.segmentId) throw Error('Only one clarification is supported per request');
+          const pending = admission.workflow.waiting(receipt, question, mode, reply.model);
+          context.question = pending.question;
+          waitingRuns.set(runId, context);
+          for (const queued of runState.close()) emit({ type: 'steer_pending', id: queued.id, message: queued.message });
+          runState.wait(); waiting = true;
+          emit({ type: 'question', ...pending, receipt });
+          if (!streaming && !res.destroyed) sendJson(res, 200, { waiting: true, ...pending, receipt, runId, mode });
+        } else completedReply = { ...reply, runId, mode, requestId: request.requestId, status: replyOutcome(reply, events, controller.signal.aborted) };
+      } catch (error) {
+        const messages = { provider_401: 'OpenCode authentication failed.', provider_429: 'OpenCode rate limit reached.', provider_timeout: 'OpenCode timed out.', provider_key_unavailable: 'OpenCode key is unavailable locally.' };
+        failure = controller.signal.aborted ? 'Run cancelled; any submitted remote command may still finish.' : messages[error.code] || 'The agent run could not finish. Review the activity; submitted commands were not automatically retried.';
+        emit({ type: 'failed', message: failure, status: 'UNKNOWN' });
+      } finally {
+        if (waiting) {
+          // Ending this transport does not settle the run or release ownership.
+          if (streaming && !res.destroyed) res.end();
+          res.removeListener('close', disconnected);
+        } else {
+        runState.beginClosing();
+        for (const pending of runState.close()) emit({ type: 'steer_pending', id: pending.id, message: pending.message });
+        let settled;
+        try {
+          const dir = path.join(root, '.intentgraph', 'evidence', 'runs');
+          fs.mkdirSync(dir, { recursive: true });
+          const finalEvents = [...events, ...(completedReply ? [{ type: 'final', runId, at: new Date().toISOString(), reply: completedReply }] : []), { type: 'end', runId, at: new Date().toISOString() }];
+          const record = { runId, chatId: body.chatId, requestId: request.requestId, events: finalEvents, reply: completedReply };
+          if (options.persistChatEvidence) options.persistChatEvidence(record);
+          else {
+            const fd = fs.openSync(path.join(dir, runId + '.json'), 'wx', 0o600);
+            try { fs.writeFileSync(fd, JSON.stringify(record, null, 2)); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
+          }
+          settled = admission.settle(receipt, completedReply?.status || 'UNKNOWN', true);
+        } catch {
+          failure = 'Run completion could not be saved. Remote completion is unknown. Check the saved receipt before continuing; no request was retried.';
+          emit({ type: 'failed', message: failure, status: 'UNKNOWN' });
+        }
+        if (settled && completedReply) {
+          completedReply.receipt = settled;
+          const question = admission.workflow.read(body.chatId, request.requestId, runId);
+          if (question) completedReply.question = question;
+          emit({ type: 'final', reply: completedReply });
+          if (!streaming && !res.destroyed) sendJson(res, 200, completedReply);
+        } else if (!streaming && !res.destroyed) sendJson(res, 502, { error: failure, receipt: settled || receipt });
+        emit({ type: 'end', receipt: settled || receipt });
+        if (streaming && !res.destroyed) res.end();
+        res.removeListener('close', disconnected); activeRuns.delete(runId); waitingRuns.delete(runId); admission.release(runId);
+      }
+      }
+  }
+
   async function route(req, res) {
     if (!isLoopbackHost(req.headers.host)) { sendError(res, 400, new Error('Host must be loopback')); return; }
     const parsed = new URL(req.url, `http://${req.headers.host}`);
     const pathname = parsed.pathname;
     if (await chatReadApi.handle(req, res)) return;
+    if (['/api/chat/question', '/api/chat/question/answer', '/api/chat/question/cancel'].includes(pathname)) {
+      const origin = req.headers.origin;
+      if (!chatOriginAllowed(origin, req)) { sendError(res, 403, new Error('Chat origin is not allowed')); return; }
+      res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin');
+      const reading = pathname === '/api/chat/question';
+      if (req.method === 'OPTIONS') { res.setHeader('Access-Control-Allow-Methods', reading ? 'GET' : 'POST'); res.setHeader('Access-Control-Allow-Headers', 'X-Aven-Chat, Content-Type'); res.writeHead(204); res.end(); return; }
+      if (req.method !== (reading ? 'GET' : 'POST')) { sendError(res, 405, new Error('Method not allowed')); return; }
+      if (req.headers['x-aven-chat'] !== 'text-only') { sendError(res, 403, new Error('Chat request header required')); return; }
+      try {
+        const body = reading ? Object.fromEntries(parsed.searchParams) : await parseBody(req);
+        const allowed = reading ? ['chatId','requestId','runId'] : ['chatId','requestId','runId','questionId','revision', ...(pathname.endsWith('/answer') ? ['answerToken','answer'] : [])];
+        if (!body || Object.keys(body).some(k => !allowed.includes(k)) || reading && [...parsed.searchParams.keys()].length !== Object.keys(body).length || !validIdentity(body.chatId) || !validIdentity(body.requestId) || typeof body.runId !== 'string' || !/^[0-9a-f-]{36}$/i.test(body.runId) || !reading && (!validIdentity(body.questionId) || typeof body.revision !== 'string' || !/^[0-9a-f]{64}$/.test(body.revision))) { sendError(res, 400, new Error('The exact question and request scope is required')); return; }
+        if (reading) {
+          const question = admission.workflow.read(body.chatId, body.requestId, body.runId);
+          if (!question) { sendError(res, 404, new Error('Question not found')); return; }
+          sendJson(res, 200, { question, receipt: admission.read(body.chatId, body.requestId) }); return;
+        }
+        if (pathname.endsWith('/cancel')) {
+          const question = admission.workflow.cancel(body);
+          waitingRuns.delete(body.runId); activeRuns.delete(body.runId); admission.release(body.runId);
+          sendJson(res, 200, { question, receipt: admission.read(body.chatId, body.requestId) }); return;
+        }
+        const context = waitingRuns.get(body.runId);
+        let decision;
+        try { decision = admission.workflow.answer(body, Boolean(context && !context.segmentId)); }
+        catch (error) {
+          // A commit may have succeeded even when its acknowledgement was lost.
+          // Make accepted-but-undispatched state explicitly recoverable, not replayable.
+          let saved;
+          try { saved = admission.workflow.read(body.chatId, body.requestId, body.runId); } catch {}
+          if (saved?.phase === 'answered' && context && !context.segmentId) {
+            waitingRuns.delete(body.runId); activeRuns.delete(body.runId); admission.release(body.runId);
+          }
+          throw error;
+        }
+        if (decision.duplicate) { sendJson(res, 200, { ...decision, receipt: admission.read(body.chatId, body.requestId) }); return; }
+        // No await between durable consume, in-memory invalidation and dispatch
+        // fence. A lost response or second process can read but never replay.
+        context.segmentId = decision.question.segmentId;
+        waitingRuns.delete(body.runId);
+        try { admission.workflow.dispatch(body); }
+        catch (error) { activeRuns.delete(body.runId); admission.release(body.runId); throw error; }
+        context.request = { ...context.request, messages: [...context.request.messages,
+          { role: 'assistant', content: 'Clarification: ' + decision.question.prompt },
+          { role: 'user', content: decision.question.answer.text }] };
+        await dispatchChat(req, res, context);
+      } catch (error) { if (!res.headersSent) sendError(res, error.statusCode || 503, error.statusCode ? error : new Error('Local question storage unavailable. Check saved state; no continuation was retried.')); else res.end(); }
+      return;
+    }
     if (pathname === '/api/chat/steer') {
       const origin = req.headers.origin;
       if (!chatOriginAllowed(origin, req)) { sendError(res, 403, new Error('Chat origin is not allowed')); return; }
@@ -278,59 +407,7 @@ function createServer(options = {}) {
       catch (error) { sendError(res, error.statusCode || 503, error.statusCode ? error : new Error('Local receipt storage unavailable. No request was dispatched.')); return; }
       if (claim.duplicate) { sendJson(res, 200, { duplicate: true, receipt: admission.read(body.chatId, request.requestId) }); return; }
       const receipt = claim.receipt;
-      const controller = new AbortController();
-      const streaming = req.headers.accept === 'application/x-ndjson';
-      const runId = receipt.runId, steeringToken = crypto.randomBytes(32).toString('base64url'), events = [];
-      const runState = createSteeringRun(runId, body.chatId, steeringToken);
-      activeRuns.set(runId, runState);
-      const disconnected = () => { if (!res.writableEnded) { runState.beginClosing(); controller.abort(); } }; res.once('close', disconnected);
-      let completedReply = null;
-      const emit = (event) => {
-        const safe = { ...event, runId, at: new Date().toISOString() };
-        const { steeringToken: _discardedToken, ...persisted } = safe;
-        if (events.length < 100) events.push(persisted);
-        if (streaming && !res.destroyed) res.write(JSON.stringify(safe) + '\n');
-      };
-      runState.emit = emit;
-      if (streaming) res.writeHead(200, { 'Content-Type': 'application/x-ndjson', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
-      emit({ type: 'start', message: 'Starting network coworker investigation', mode, requestId: request.requestId, receipt, ...(streaming ? { steeringToken } : {}) });
-      let failure = null;
-      try {
-        const responder = options.chatResponder || require('./agent-runtime.cjs').respond;
-        const reply = await responder({ provider: execution.provider, sandbox: networkExecution, messages: body.messages, agentName: body.agentName, chatId: body.chatId, mode, signal: controller.signal, onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing });
-        completedReply = { ...reply, runId, mode, requestId: request.requestId, status: replyOutcome(reply, events, controller.signal.aborted) };
-      } catch (error) {
-        const messages = { provider_401: 'OpenCode authentication failed.', provider_429: 'OpenCode rate limit reached.', provider_timeout: 'OpenCode timed out.', provider_key_unavailable: 'OpenCode key is unavailable locally.' };
-        failure = controller.signal.aborted ? 'Run cancelled; any submitted remote command may still finish.' : messages[error.code] || 'The agent run could not finish. Review the activity; submitted commands were not automatically retried.';
-        emit({ type: 'failed', message: failure, status: 'UNKNOWN' });
-      } finally {
-        runState.beginClosing();
-        for (const pending of runState.close()) emit({ type: 'steer_pending', id: pending.id, message: pending.message });
-        let settled;
-        try {
-          const dir = path.join(root, '.intentgraph', 'evidence', 'runs');
-          fs.mkdirSync(dir, { recursive: true });
-          const finalEvents = [...events, ...(completedReply ? [{ type: 'final', runId, at: new Date().toISOString(), reply: completedReply }] : []), { type: 'end', runId, at: new Date().toISOString() }];
-          const record = { runId, chatId: body.chatId, requestId: request.requestId, events: finalEvents, reply: completedReply };
-          if (options.persistChatEvidence) options.persistChatEvidence(record);
-          else {
-            const fd = fs.openSync(path.join(dir, runId + '.json'), 'wx', 0o600);
-            try { fs.writeFileSync(fd, JSON.stringify(record, null, 2)); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
-          }
-          settled = admission.settle(receipt, completedReply?.status || 'UNKNOWN', true);
-        } catch {
-          failure = 'Run completion could not be saved. Remote completion is unknown. Check the saved receipt before continuing; no request was retried.';
-          emit({ type: 'failed', message: failure, status: 'UNKNOWN' });
-        }
-        if (settled && completedReply) {
-          completedReply.receipt = settled;
-          emit({ type: 'final', reply: completedReply });
-          if (!streaming && !res.destroyed) sendJson(res, 200, completedReply);
-        } else if (!streaming && !res.destroyed) sendJson(res, 502, { error: failure, receipt: settled || receipt });
-        emit({ type: 'end', receipt: settled || receipt });
-        if (streaming && !res.destroyed) res.end();
-        res.removeListener('close', disconnected); activeRuns.delete(runId); admission.release(runId);
-      }
+      await dispatchChat(req, res, { request, receipt, provider: execution.provider, responder: options.chatResponder || require('./agent-runtime.cjs').respond, events: [] });
       return;
     }
     if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory') {

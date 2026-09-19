@@ -49,7 +49,7 @@
   const setIcons = (root = document) => all('[data-icon]', root).forEach(node => { if (!node.querySelector('.icon')) node.prepend(document.createRange().createContextualFragment(icon(node.dataset.icon))); });
 
   const PREF_KEY='aven-polished-preferences-v1', CHAT_KEY='aven-polished-chats-v1', DOC_KEY='aven-polished-docs-v1', BACKUP_KEY='aven-polished-p1-raw-backup-v1', MIGRATION_KEY='aven-polished-direct-teams-migration-v4', MIGRATION_BACKUP_KEY='aven-polished-direct-teams-raw-backup-v1', REACTION_BACKUP_KEY='aven-polished-local-reactions-raw-backup-v1', REACTION_MIGRATION_KEY='aven-polished-local-reactions-v1';
-  const UI_BUILD='ux-minimal-ui-v9.3-recovery',UI_BUILD_DATE='2026-09-19';
+  const UI_BUILD='ux-minimal-ui-v9.4-clarification',UI_BUILD_DATE='2026-09-19';
   const CHAT_API='http://127.0.0.1:8768/api/chat';
   const MAX_QUEUE_ITEMS=8, MAX_QUEUE_TEXT=4000, MAX_RAW_OUTPUT=512*1024, MAX_STREAM_BYTES=8*1024*1024;
   const defaultPrefs={theme:'system',accent:'black',language:'system',density:'comfortable',displayName:'',activeAgent:'companion',provider:'Not connected',model:'',browser:true,computer:false,showEvidence:false,showInvestigation:false,showRunDetails:false,sections:[],agents:[{id:'companion',name:'Network companion',role:'Investigate branch networks and explain findings.',timezone:'Follow system',autoReview:false},{id:'topology',name:'Topology analyst',role:'Map dependencies and surface the next useful signal.',timezone:'Follow system',autoReview:false}]};
@@ -161,6 +161,7 @@
   const setPinned=(item,value)=>{item.pinned=Boolean(value);if(item.pinned){const existing=[...data.chats,...data.projects,...prefs.agents].map(x=>Number(x?.pinnedAt)).filter(Number.isFinite);pinSequence=Math.max(pinSequence,...existing)+1;item.pinnedAt=pinSequence;}else delete item.pinnedAt;};
   const directPinTimestamp=chat=>{const owner=directOwner(chat);return Math.min(pinTimestamp(chat),pinTimestamp(owner));};
   const directPinComparator=(left,right)=>Number(!(left?.pinned===true||directOwner(left)?.pinned===true))-Number(!(right?.pinned===true||directOwner(right)?.pinned===true))||directPinTimestamp(left)-directPinTimestamp(right);
+  function savedWaitingChat(){return data.chats.find(c=>c.pendingAdmission&&c.messages.some(m=>m.requestId===c.pendingAdmission&&m.question?.phase==='waiting'&&!m.question.inert));}
   function chatBusy(c){return !!c.pendingAdmission||chatRequests.has(c.id)||(c.pendingQueue||[]).length>0;}
   let navMenuCleanup=null;
   function closeNavMenu(restore=true){const active=byId('nav-menu'),opener=active?._opener;active?.remove();navMenuCleanup?.();navMenuCleanup=null;if(restore&&opener?.isConnected)opener.focus();}
@@ -525,6 +526,7 @@
   function appendMessage(m){
     const row=document.createElement('article');row.className=`message ${m.role==='assistant'?'assistant':'user'}`;
     const label=document.createElement('span');label.className='message-label';label.textContent=m.role==='assistant'?agentById(m.agentId||'companion').name:(m.recipientNames?.length?`To ${m.recipientNames.join(', ')}`:'You');row.append(label);if(m.welcome){const local=document.createElement('span');local.className='local-welcome-label';local.textContent='Local welcome · not a model response';row.append(local);}appendReplyQuote(row,m);
+    if(m.question)row.append(renderQuestion(m));
     const raw=m.role==='assistant'?evidenceItems(m.events,m.evidence):[];
     const body=document.createElement('div');body.className='message-body';
     if(raw.length){
@@ -545,6 +547,7 @@
   }
   function renderReceiptReview(c){
     const pending=AvenAdmission.pending(c),view=receiptViews.get(c.id)||{};
+    if(!view.note&&c.messages.some(m=>m.question?.phase==='waiting'&&m.requestId===c.pendingAdmission))return;
     const row=document.createElement('article');row.className='message assistant reply-error';row.setAttribute('role','status');
     const note=document.createElement('p');note.textContent=view.note||c.replyError||'A previous request needs review. Check its saved result before sending again. No work will be retried automatically.';row.append(note);
     if(!pending){note.textContent='Saved request identity is unavailable. Keep your workspace backup before continuing.';byId('conversation').append(row);return;}
@@ -564,6 +567,7 @@
       if(response.status===404&&!recover){receiptViews.set(c.id,{notFound:true,note:'No receipt is available for this saved request. Retry only this saved request if you want to submit it; its original identity will be reused.'});return;}
       if(!response.ok)throw Error(value.error||'Saved run is unavailable.');
       const receipt=value.receipt;
+      if(receipt.question){const m=c.messages.find(m=>m.requestId===receipt.requestId&&m.role==='assistant');if(m)m.question=receipt.question;}
       if(receipt.state==='admitted'){receiptViews.set(c.id,{receipt,note:receipt.recoverable?'The original run is no longer owned. Recover it as unknown to review the interruption; this does not retry work.':'The local service still owns this request. Check again after it finishes; its saved capture has been left intact.'});return;}
       let record;
       if(receipt.evidenceSaved){const saved=await fetch(CHAT_API+'/runs/'+encodeURIComponent(receipt.runId)+'?chatId='+encodeURIComponent(c.id),{headers,signal});if(!saved.ok)throw Error('The receipt is saved, but its evidence is unavailable. Keep the captured result and check again.');record=await saved.json();}
@@ -578,6 +582,7 @@
   }
   function renderWorking(chat){
     const pending=chatRequests.get(chat.id);if(!pending){if(chat.pendingAdmission){renderReceiptReview(chat);return;}const error=chatErrors.get(chat.id)||chat.replyError;if(error){const row=document.createElement('article');row.className='message assistant reply-error';row.setAttribute('role','alert');const text=document.createElement('p');text.textContent='Reply failed: '+error;row.append(text);const retry=document.createElement('button');retry.type='button';retry.className='chat-retry';retry.textContent='Retry reply';retry.disabled=chatRequests.size>0;retry.onclick=()=>requestChatReply(chat);row.append(retry);byId('conversation').append(row);}return;}
+    if(pending.waiting)return;
     const row=document.createElement('article');row.className='message assistant working-message';row.dataset.workingChat=chat.id;
     const text=document.createElement('span');text.textContent=pending.name+' is working…';text.setAttribute('role','status');row.append(text);
     const dots=document.createElement('span');dots.className='working-dots';dots.setAttribute('aria-hidden','true');dots.innerHTML='<i></i><i></i><i></i>';row.append(dots);
@@ -657,14 +662,14 @@
   }
   function pauseQueue(c,reason){if(!c?.pendingQueue?.length)return;c.queuePaused=true;c.queuePauseReason=reason||'Queue paused. Resume to continue one message at a time.';saveData();if(currentChat()?.id===c.id){renderPendingQueue(c);updateSend();}}
   function resumeQueue(c=currentChat()){
-    if(c?.pendingAdmission){toast('Check the saved run before resuming queued work.');return;}
+    if(c?.pendingAdmission||savedWaitingChat()){toast('Cancel or answer the waiting request before resuming queued work.');return;}
     if(!c?.pendingQueue?.length){if(c){c.queuePaused=false;c.queuePauseReason='';saveData();}renderPendingQueue(c);updateSend();return;}
     if(chatRequests.size){toast('Another conversation is receiving a reply. Try Resume after it finishes.');return;}
     c.queueEditing=false;c.queuePaused=false;c.queuePauseReason='';dispatchNextQueued(c);renderPendingQueue(c);updateSend();
   }
   function dispatchNextQueued(c){
     if(c?.pendingAdmission){toast('Check the saved run before resuming queued work.');return false;}
-    if(!c||c.archived||chatRequests.size||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;
+    if(!c||c.archived||chatRequests.size||savedWaitingChat()||c.queuePaused||c.queueEditing||!c.pendingQueue?.length)return false;
     const before=clone(c);const item=c.pendingQueue.shift();const text=item.text;c.messages.push({id:uid(),role:'user',text,recipients:c.recipients,recipientNames:selectedAgents(c).map(a=>a.name),createdAt:now(),mode:modeFor(item.mode),queuedFrom:item.id,replyTo:normalizeReply(item.replyTo)});c.queueDispatching=item.id;if(!saveData()){Object.keys(c).forEach(k=>delete c[k]);Object.assign(c,before);c.queuePaused=true;c.queuePauseReason='Could not save queue dispatch. Resume after browser storage is available.';renderPendingQueue(c);toast(c.queuePauseReason);return false;}if(currentChat()?.id===c.id){renderConversation();renderPendingQueue(c);updateSend();}requestChatReply(c,modeFor(item.mode));return true;
   }
   function dispatchAvailableQueue(){
@@ -674,9 +679,9 @@
   function updateSend(){
     updateContextIndicator();
     const modePicker=byId('chat-mode');if(modePicker){modePicker.value=modeFor(currentChat()?.mode);modePicker.disabled=chatRequests.size>0||!!currentChat()?.pendingQueue?.length;}
-    const c=currentChat();if(!c)return;const pending=chatRequests.get(c.id),draft=byId('draft').value.trim();const send=byId('send');const queueMode=Boolean(chatRequests.size||c.queuePaused||c.pendingQueue?.length);send.disabled=!!c.pendingAdmission&&!pending||(!draft&&!(sessionAttachments.get(c.id)||[]).length)||attachmentJobs.has(c.id);send.setAttribute('aria-label',queueMode?'Queue message':'Send message');send.title=queueMode?'Queue message':'Send message';
+    const c=currentChat();if(!c)return;const pending=chatRequests.get(c.id),draft=byId('draft').value.trim();const send=byId('send');const savedWait=!chatRequests.size?savedWaitingChat():null;const queueMode=Boolean(chatRequests.size||c.queuePaused||c.pendingQueue?.length);send.disabled=!!savedWait||!!c.pendingAdmission&&!pending||(!draft&&!(sessionAttachments.get(c.id)||[]).length)||attachmentJobs.has(c.id);send.setAttribute('aria-label',queueMode?'Queue message':'Send message');send.title=queueMode?'Queue message':'Send message';
     const steer=byId('steer');if(steer){const steeringInFlight=['sending','received','accepted','pending'].includes(pending?.steeringStatus);const ready=Boolean(pending?.runId&&pending?.steeringToken);steer.hidden=!ready;steer.disabled=!draft||steeringInFlight||!!c.draftReplyTo;steer.title=c.draftReplyTo?'Send or queue this reply; steering does not include quotes.':steeringInFlight?'Waiting for the current steering request to resolve.':ready?'Send guidance to apply at the next step.':'Steering is available after the run starts.';}
-    const status=byId('chat-status');status.replaceChildren();const error=chatErrors.get(c.id)||c.replyError;let message='';if(pending)message=pending.steeringMessage||'Thinking…';else if(chatRequests.size){const active=data.chats.find(x=>chatRequests.has(x.id));message='Waiting for '+(active?selectedAgents(active)[0]?.name||active.title:'another conversation')+' · one run at a time. Press Enter to queue here.';}else if(c.queuePaused)message='Queue paused. Resume when you are ready.';else if(error)message='Reply failed: '+error;if(c.captureWarning||message)status.append(document.createTextNode(c.captureWarning||message));if(chatRequests.size&&!pending){const open=document.createElement('button');open.type='button';open.textContent='Open active conversation';open.onclick=()=>showChat([...chatRequests.keys()][0]);status.append(open);}all('[data-mode]').forEach(button=>{const selected=modeFor(button.dataset.mode)===modeFor(c.mode);button.setAttribute('aria-checked',String(selected));button.classList.toggle('is-selected',selected);});renderPendingQueue(c);
+    const status=byId('chat-status');status.replaceChildren();const error=chatErrors.get(c.id)||c.replyError;let message='';if(savedWait)message='Waiting for your answer in '+savedWait.title+'. Cancel the saved wait before a fresh request.';else if(pending)message=pending.waiting?'Waiting for your answer':pending.steeringMessage||'Thinking…';else if(chatRequests.size){const active=data.chats.find(x=>chatRequests.has(x.id));message=chatRequests.get(active?.id)?.waiting?'Waiting for your answer in '+active.title+'. Your draft is kept here.':'Waiting for '+(active?selectedAgents(active)[0]?.name||active.title:'another conversation')+' · one run at a time. Press Enter to queue here.';}else if(c.queuePaused)message='Queue paused. Resume when you are ready.';else if(error)message='Reply failed: '+error;if(c.captureWarning||message)status.append(document.createTextNode(c.captureWarning||message));if((chatRequests.size&&!pending)||(savedWait&&savedWait.id!==c.id)){const open=document.createElement('button');open.type='button';open.textContent='Open active conversation';open.onclick=()=>showChat(savedWait?.id||[...chatRequests.keys()][0]);status.append(open);}all('[data-mode]').forEach(button=>{const selected=modeFor(button.dataset.mode)===modeFor(c.mode);button.setAttribute('aria-checked',String(selected));button.classList.toggle('is-selected',selected);});renderPendingQueue(c);
   }
   
   function openPopover(id,anchor){closePopovers();const menu=byId(id),r=anchor.getBoundingClientRect();menu.hidden=false;menu.style.maxHeight='';menu.style.maxWidth='calc(100vw - 16px)';menu.style.overflowY='auto';if(id==='add-menu'){const top=byId('composer').getBoundingClientRect().top;menu.style.maxHeight=Math.max(24,top-16)+'px';menu.style.top=Math.max(8,top-menu.offsetHeight-8)+'px';}else menu.style.top=Math.max(8,Math.min(innerHeight-menu.offsetHeight-8,r.bottom+7))+'px';menu.style.left=Math.max(8,Math.min(r.left,innerWidth-menu.offsetWidth-8))+'px';anchor.setAttribute('aria-expanded','true');one('button',menu)?.focus();}
@@ -792,9 +797,87 @@
     if(added){p.steeringConverted=true;p.steeringStatus='pending';p.steeringMessage=message||'Steering was not applied; it is queued and paused.';}
     return added;
   }
+  function questionMessage(c,q){return c.messages.find(m=>m.question?.id===q.id);}
+  function renderQuestion(m){
+    const c=currentChat(),p=chatRequests.get(c.id),q=m.question,view=receiptViews.get(c.id)||{};
+    const live=!!(p?.waiting&&p.question?.id===q.id&&p.answerToken);
+    return AvenClarification.card(q,{live,busy:live?p.questionBusy:!!view.busy,draft:live?p.answerDraft:(m.answerDraft||{}),note:live?p.questionNote:view.questionNote,
+      onDraft:draft=>{p.answerDraft=draft;},onAnswer:live?p.answerQuestion:null,
+      onCancel:!q.inert&&q.chatId===c.id&&q.requestId===c.pendingAdmission?()=>live?p.cancelQuestion():cancelSavedQuestion(c,q):null,
+      onRefresh:!q.inert&&q.chatId===c.id?()=>refreshQuestion(c,q):null});
+  }
+  async function readQuestion(q){
+    const query=new URLSearchParams({chatId:q.chatId,requestId:q.requestId,runId:q.runId});
+    const response=await fetch(CHAT_API+'/question?'+query,{headers:{'X-Aven-Chat':'text-only'},signal:AbortSignal.timeout(10000)}),value=await response.json();
+    if(!response.ok)throw Error(value.reasons?.[0]||value.error||'Saved question is unavailable.');return value;
+  }
+  async function refreshQuestion(c,q){
+    try{const value=await readQuestion(q),m=questionMessage(c,q);if(m)m.question=value.question;
+      const p=chatRequests.get(c.id);if(p?.waiting&&value.question.phase!=='waiting'){p.finishQuestion?.(null,Error(value.question.answer?'Your answer was recorded. Check the saved run; no continuation was retried.':'This question is no longer active. Check the saved run.'));}
+      else if(!p&&value.receipt.state!=='admitted')await reviewReceipt(c);
+      else receiptViews.set(c.id,{questionNote:value.question.phase==='waiting'?'Still waiting. Reloaded questions require cancellation and a fresh request.':'Saved state refreshed. No work was dispatched.'});
+    }catch(error){receiptViews.set(c.id,{questionNote:error.message});}
+    renderConversation();updateSend();
+  }
+  async function questionPost(q,action,extra={},signal){
+    return fetch(CHAT_API+'/question/'+action,{method:'POST',headers:{'Content-Type':'application/json','X-Aven-Chat':'text-only','Accept':'application/x-ndjson'},body:JSON.stringify({...AvenClarification.scope(q),...extra}),signal:signal?AbortSignal.any([signal,AbortSignal.timeout(130000)]):AbortSignal.timeout(130000)});
+  }
+  async function cancelSavedQuestion(c,q){
+    if(chatRequests.size)return;
+    receiptViews.set(c.id,{busy:true});renderConversation();
+    try{await withAdmissionWriter(c.id,async()=>{
+      // Refuse a stale workspace before even cancelling; do not touch a live tab.
+      if(localStorage.getItem(CHAT_KEY)!==savedWorkspace)throw Error('Workspace changed in another tab. Keep your draft and reload.');
+      const response=await questionPost(q,'cancel'),value=await response.json();if(!response.ok)throw Error(value.reasons?.[0]||value.error);
+      const pending=AvenAdmission.pending(c);if(!pending)throw Error('Saved request is unavailable.');
+      const before=clone(c);AvenAdmission.applyReceipt(c,pending.submission,value.receipt,null);const m=questionMessage(c,q);if(m){m.question=value.question;m.text=value.receipt.outcome==='UNKNOWN'?'The original service stopped. Completion is unknown; no continuation was dispatched by this cancellation.':'Request cancelled. Send a fresh request when ready.';}
+      receiptSavePermit=q.requestId;const saved=saveData();receiptSavePermit=null;if(!saved){Object.keys(c).forEach(k=>delete c[k]);Object.assign(c,before);throw Error('Cancellation is saved by the service, but browser storage failed. Refresh saved state.');}
+    });receiptViews.delete(c.id);}
+    catch(error){receiptViews.set(c.id,{questionNote:error.message});}
+    renderConversation();updateSend();requestAnimationFrame(()=>byId('draft').focus());
+  }
+  async function readChatResponse(c,p,response){
+    p.responseRejected=!response.ok;
+    if(!response.headers.get('content-type')?.includes('application/x-ndjson')){const value=await response.json();if(!response.ok)throw Object.assign(Error(value.reasons?.[0]||value.error||'Connection unavailable.'),{status:response.status});return value;}
+    const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',bytes=0,result,failure;
+    const consume=line=>{if(!line.trim())return;const event=JSON.parse(line);processChatEvent(c,p,event);if(event.type==='final')result=event.reply;if(event.type==='question')result={waiting:true,...event};if(event.type==='failed')failure=event.message;};
+    while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>MAX_STREAM_BYTES){p.controller.abort();throw Error('Run output exceeded display limit.');}buffer+=decoder.decode(value,{stream:true});let pos;while((pos=buffer.indexOf('\n'))>=0){consume(buffer.slice(0,pos));buffer=buffer.slice(pos+1);}}
+    buffer+=decoder.decode();if(buffer.trim())consume(buffer);if(failure)throw Error(failure);if(!result)throw Error('Run ended without a saved answer.');return result;
+  }
+  async function waitForAnswer(c,p,value){
+    p.waiting=true;p.question=value.question;p.answerToken=value.answerToken;p.answerDraft={};p.steeringToken=null;
+    AvenAdmission.reconcileResult(c,{id:uid(),role:'assistant',agentId:p.agentId,requestId:p.requestId,runId:p.runId,question:value.question,events:AvenRunState.clean(p.events),evidence:AvenRunState.clean(p.events.flatMap(e=>Array.isArray(e.evidence)?e.evidence:e.evidence?[e.evidence]:[])),status:'WAITING',text:'',mode:p.mode,createdAt:now()});
+    if(!saveData())throw Error('Question could not be saved in this browser. No answer was sent.');
+    const result=new Promise((resolve,reject)=>{
+      p.finishQuestion=(value,error)=>{p.answerToken=null;p.waiting=false;error?reject(error):resolve(value);};
+      p.answerQuestion=async answer=>{
+        if(p.questionBusy)return;p.questionBusy=true;p.questionNote='';renderConversation();
+        try{
+          // Draft stays in memory through invalid input and denied submissions.
+          const message=questionMessage(c,p.question);if(message)message.answerDraft={...answer};
+          if(!saveData())throw Object.assign(Error('Browser storage is unavailable. Your answer draft is retained; nothing was sent.'),{status:400});
+          p.controller=new AbortController();const response=await questionPost(p.question,'answer',{answer,answerToken:p.answerToken},p.controller.signal);
+          const result=await readChatResponse(c,p,response);
+          p.finishQuestion(result);
+        }catch(error){
+          if(error.status===400||error.status===403||error.status===409){p.questionNote=error.message;p.questionBusy=false;renderConversation();requestAnimationFrame(()=>one('.clarification-card textarea, .clarification-card input, .clarification-card button')?.focus());return;}
+          try{const saved=await readQuestion(p.question),m=questionMessage(c,p.question);if(m){m.question=saved.question;if(saved.question.answer)delete m.answerDraft;}saveData();}catch{}
+          p.finishQuestion(null,Error('Answer delivery is uncertain. Check saved state; no answer or continuation will be retried automatically.'));
+        }
+      };
+      p.cancelQuestion=async()=>{
+        if(p.questionBusy)return;p.questionBusy=true;renderConversation();
+        try{const response=await questionPost(p.question,'cancel'),result=await response.json();if(!response.ok)throw Error(result.reasons?.[0]||result.error);p.finishQuestion({...result,cancelled:true});}
+        catch(error){p.questionBusy=false;p.questionNote=error.message;renderConversation();}
+      };
+    });
+    renderConversation();updateSend();requestAnimationFrame(()=>{if(currentChat()?.id===c.id)one('.clarification-card input, .clarification-card textarea, .clarification-card button')?.focus();});return result;
+  }
   function processChatEvent(c,p,event){
     if(!event||typeof event!=='object')return;
     if(event.receipt&&p.submission)p.submission.receipt=event.receipt;
+    if(event.type==='question_answered'){const m=questionMessage(c,event.question);if(m){m.question=event.question;delete m.answerDraft;}if(currentChat()?.id===c.id)renderConversation();}
+    if(event.type==='start'&&event.segmentId){p.waiting=false;p.steeringMessage='Working';renderConversation();}
     if(event.type==='start'){if(event.runId)p.runId=String(event.runId);if(event.steeringToken)p.steeringToken=String(event.steeringToken);}
     const safeEvent=AvenRunState.clean(event);if(event.type!=='final'){const previousEvents=p.events;p.events=[...p.events,safeEvent];try{const previous=c.runJournal;c.runJournal=AvenRunState.journal(p);if(!saveData()){c.runJournal=previous;throw Error('Browser storage is full or unavailable.');}}catch(error){p.events=previousEvents;p.captureError='Run capture incomplete: '+error.message+' Remote completion is unknown.';c.captureWarning=p.captureError;p.controller.abort();throw error;}}
     if(event.type==='steer_received'||event.type==='steer_applied'||event.type==='steer_pending'){
@@ -806,7 +889,7 @@
     if(currentChat()?.id===c.id){updateRunActivity(c.id);updateSend();}
   }
   async function steerCurrent(){
-    const c=currentChat(),p=chatRequests.get(c?.id),text=byId('draft').value.trim();if(!c||!p?.runId||!p?.steeringToken||!text)return;
+    const c=currentChat(),p=chatRequests.get(c?.id),text=byId('draft').value.trim();if(p?.waiting)return;if(!c||!p?.runId||!p?.steeringToken||!text)return;
     if(text.length>MAX_QUEUE_TEXT){toast(`Steering text must be ${MAX_QUEUE_TEXT.toLocaleString()} characters or fewer.`);return;}
     if((c.pendingQueue||[]).length>=MAX_QUEUE_ITEMS){toast('Queue is full. Remove a queued message before steering.');return;}
     const draftAtSend=byId('draft').value;p.steeringText=text;p.pendingSteerText='';p.pendingSteerEvent=null;p.steeringConverted=false;p.steeringStatus='sending';p.steeringMessage='Sending guidance…';updateSend();
@@ -840,16 +923,21 @@
     const started=performance.now(),controller=new AbortController(),pending={journalId:uid(),requestId:requestBody.requestId,submission,agentId,mode:requestBody.mode,startedAt:now(),name:agent.name,started,controller,events:[],runId:null,steeringToken:null,steeringText:'',pendingSteerText:'',steeringStatus:'idle',steeringMessage:'Steering applies at the next step.',steeringEvents:new Map(),appliedSteerIds:new Set()};let timer,result,runOutcome='error';chatErrors.delete(c.id);delete c.replyError;c.runJournal=AvenRunState.journal(pending);if(retrySaved)receiptSavePermit=requestBody.requestId;const preparedSaved=saveData();receiptSavePermit=null;if(!preparedSaved){Object.keys(c).forEach(k=>delete c[k]);Object.assign(c,beforePrepare);c.replyError='Could not save run capture. No request was sent.';renderConversation();return;}chatRequests.set(c.id,pending);renderSidebar();renderConversation();updateSend();
     timer=setInterval(()=>{const elapsed=one('.working-elapsed');if(elapsed&&currentChat()?.id===c.id)elapsed.textContent=durationLabel(performance.now()-started);},1000);
     try{
-      pending.dispatched=true;const response=await fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json','X-Aven-Chat':'text-only','Accept':'application/x-ndjson'},body:JSON.stringify(requestBody),signal:AbortSignal.any([controller.signal,AbortSignal.timeout(130000)])});
-      pending.responseRejected=!response.ok;if(response.headers.get('content-type')?.includes('application/x-ndjson')){const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',bytes=0,failure;const consume=line=>{if(!line.trim())return;const event=JSON.parse(line);processChatEvent(c,pending,event);if(event.type==='final')result=event.reply;if(event.type==='failed')failure=event.message;};while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>MAX_STREAM_BYTES){controller.abort();throw Error('Run output exceeded display limit.');}buffer+=decoder.decode(value,{stream:true});let pos;while((pos=buffer.indexOf('\n'))>=0){consume(buffer.slice(0,pos));buffer=buffer.slice(pos+1);}}buffer+=decoder.decode();if(buffer.trim())consume(buffer);if(failure)throw Error(failure);if(!result)throw Error('Run ended without a final answer.');}else result=await response.json();
-      if(result.receipt)submission.receipt=result.receipt;if(!response.ok)throw Error(result.error||'Connection unavailable.');if(result.duplicate){submission.state='unknown';receiptViews.set(c.id,{receipt:result.receipt,note:'This request was already accepted. Check its saved result; no new work was started.'});delete c.runJournal;saveData();return;}if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');
+      pending.dispatched=true;
+      result=await readChatResponse(c,pending,await fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json','X-Aven-Chat':'text-only','Accept':'application/x-ndjson'},body:JSON.stringify(requestBody),signal:AbortSignal.any([controller.signal,AbortSignal.timeout(130000)])}));
+      if(result.waiting)result=await waitForAnswer(c,pending,result);
+      if(result.receipt)submission.receipt=result.receipt;
+      if(result.question){const m=c.messages.find(m=>m.question?.id===result.question.id);if(m)m.question=result.question;}
+      if(result.cancelled){submission.state='settled';delete c.pendingAdmission;delete c.runJournal;delete c.queueDispatching;const m=c.messages.find(m=>m.question?.id===result.question.id);if(m){m.question=result.question;m.status='NOT_EXECUTED';m.text='Request cancelled. No continuation was dispatched.';}if(!saveData()){c.pendingAdmission=requestBody.requestId;throw Error('Cancellation could not be saved in this browser. Check saved state.');}runOutcome='cancelled';return runOutcome;}
+      if(result.duplicate){submission.state='unknown';receiptViews.set(c.id,{receipt:result.receipt,note:'This request was already accepted. Check its saved result; no new work was started.'});delete c.runJournal;saveData();return;}
+      if(typeof result.text!=='string'||!result.text.trim())throw Error('The provider returned an empty reply.');
       if(data.chats.includes(c)){const status=AvenRunState.outcome(result,pending.events),completed=AvenAdmission.reconcileResult(c,{id:uid(),role:'assistant',agentId,requestId:requestBody.requestId,text:result.text,model:result.model,mode:result.mode||'unavailable',status,usage:AvenRunState.usage(result.usage),journalId:pending.journalId,source:result.source||'',events:pending.events,evidence:AvenRunState.clean(result.evidence||[]),runId:result.runId||pending.runId,durationMs:Math.round(performance.now()-started),createdAt:now()});const journal=c.runJournal;if(currentChat()?.id!==c.id)c.unread=true;delete c.runJournal;delete c.queueDispatching;delete c.pendingAdmission;submission.state='settled';submission.receipt=result.receipt;if(saveData()){runOutcome=status==='SUCCESS'?'success':'error';if(runOutcome==='success'&&agent.notifications!==false&&currentChat()?.id!==c.id){notifyRun(c,completed,agent);}}else{c.runJournal=journal;c.pendingAdmission=requestBody.requestId;submission.state='unknown';c.captureWarning='The final result is visible but could not be saved. Export it or free browser storage before reloading.';}}
-    }catch(error){submission.state='unknown';const message=pending.captureError|| (controller.signal.aborted?'Run stopped. A command already submitted to Cisco may still finish.':error.name==='TimeoutError'?'The request timed out.':error instanceof TypeError?'Local chat service is unavailable.':error.message);const events=pending.events||[];if(['received','accepted','pending'].includes(pending.steeringStatus)&&!pending.steeringConverted)convertPendingSteerToQueue(c,pending,'Steering was accepted but was not applied. Resume to send it as the next message.');if(events.some(e=>e.type==='tool_start')||pending.dispatched&&!pending.responseRejected){delete c.replyError;chatErrors.delete(c.id);AvenAdmission.reconcileResult(c,{id:uid(),role:'assistant',agentId,requestId:requestBody.requestId,text:message,source:'Coworker run incomplete · no automatic retry',journalId:pending.journalId,runId:pending.runId,status:'UNKNOWN',durationMs:Math.round(performance.now()-started),events:AvenRunState.clean(events),evidence:events.map(e=>e.evidence).filter(Boolean),createdAt:now()});}else{chatErrors.set(c.id,message);c.replyError=message;}const journal=c.runJournal;delete c.runJournal;delete c.queueDispatching;if(!saveData()){c.runJournal=journal;c.captureWarning='Could not save the interrupted result. Previously captured evidence is retained; remote completion is unknown.';}}
-    finally{clearInterval(timer);const scroll=byId('center-content'),following=scroll.scrollHeight-scroll.scrollTop-scroll.clientHeight<160;if(['received','accepted','pending'].includes(pending.steeringStatus)&&!pending.steeringConverted)convertPendingSteerToQueue(c,pending,'Steering was accepted but was not applied. Resume to send it as the next message.');if(runOutcome!=='success')pauseQueue(c,controller.signal.aborted?'Queue paused after stopping this run.':'Queue paused after this run failed.');chatRequests.delete(c.id);renderSidebar();if(currentChat()?.id===c.id&&currentView==='conversation'){renderConversation();if(following)requestAnimationFrame(()=>byId('conversation').lastElementChild?.scrollIntoView({block:'end'}));}updateSend();}
+    }catch(error){submission.state='unknown';const message=pending.captureError|| (pending.controller.signal.aborted?'Run stopped. A command already submitted to Cisco may still finish.':error.name==='TimeoutError'?'The request timed out.':error instanceof TypeError?'Local chat service is unavailable.':error.message);const events=pending.events||[];if(['received','accepted','pending'].includes(pending.steeringStatus)&&!pending.steeringConverted)convertPendingSteerToQueue(c,pending,'Steering was accepted but was not applied. Resume to send it as the next message.');if(events.some(e=>e.type==='tool_start')||pending.dispatched&&!pending.responseRejected){delete c.replyError;chatErrors.delete(c.id);AvenAdmission.reconcileResult(c,{id:uid(),role:'assistant',agentId,requestId:requestBody.requestId,text:message,source:'Coworker run incomplete · no automatic retry',journalId:pending.journalId,runId:pending.runId,status:'UNKNOWN',durationMs:Math.round(performance.now()-started),events:AvenRunState.clean(events),evidence:events.map(e=>e.evidence).filter(Boolean),createdAt:now()});}else{chatErrors.set(c.id,message);c.replyError=message;}const journal=c.runJournal;delete c.runJournal;delete c.queueDispatching;if(!saveData()){c.runJournal=journal;c.captureWarning='Could not save the interrupted result. Previously captured evidence is retained; remote completion is unknown.';}}
+    finally{clearInterval(timer);const scroll=byId('center-content'),following=scroll.scrollHeight-scroll.scrollTop-scroll.clientHeight<160;if(['received','accepted','pending'].includes(pending.steeringStatus)&&!pending.steeringConverted)convertPendingSteerToQueue(c,pending,'Steering was accepted but was not applied. Resume to send it as the next message.');if(runOutcome!=='success')for(const queuedChat of data.chats)pauseQueue(queuedChat,runOutcome==='cancelled'?'Queue paused after cancellation. Resume when ready.':pending.controller.signal.aborted?'Queue paused after stopping this run.':'Queue paused after an uncertain or failed run.');chatRequests.delete(c.id);renderSidebar();if(currentChat()?.id===c.id&&currentView==='conversation'){renderConversation();if(following)requestAnimationFrame(()=>byId('conversation').lastElementChild?.scrollIntoView({block:'end'}));}updateSend();if(pending.question&&currentChat()?.id===c.id)requestAnimationFrame(()=>byId('draft').focus());}
     return runOutcome;
   }
   function sendMessage(event){
-    event?.preventDefault();const c=currentChat();if(c.pendingAdmission&&!chatRequests.has(c.id)){toast('Check the saved run before sending again. Your draft is retained.');return;}const items=sessionAttachments.get(c.id)||[];if(attachmentJobs.has(c.id)){toast('Wait for local file reading to finish.');return;}if(!items.length&&c.pendingAttachmentNames?.length){toast('Reattach or clear previous-session files before sending.');return;}let text;try{text=AvenAttachments.compose(byId('draft').value.trim(),items).text;}catch(error){toast(error.message);return;}if(!text.trim())return;
+    event?.preventDefault();const c=currentChat();if(!chatRequests.size&&savedWaitingChat()){toast('A saved question is waiting in '+savedWaitingChat().title+'. Your draft is retained.');return;}if(c.pendingAdmission&&!chatRequests.has(c.id)){toast('Check the saved run before sending again. Your draft is retained.');return;}const items=sessionAttachments.get(c.id)||[];if(attachmentJobs.has(c.id)){toast('Wait for local file reading to finish.');return;}if(!items.length&&c.pendingAttachmentNames?.length){toast('Reattach or clear previous-session files before sending.');return;}let text;try{text=AvenAttachments.compose(byId('draft').value.trim(),items).text;}catch(error){toast(error.message);return;}if(!text.trim())return;
     if(chatRequests.size||c.queuePaused||c.pendingQueue?.length){if(queueMessage(c,text,{replyTo:c.draftReplyTo,clearComposer:true})){sessionAttachments.delete(c.id);delete c.attachmentWarning;byId('draft').value='';renderComposer();}return;}
     if(contextMessage({text,replyTo:c.draftReplyTo}).length>32000){toast('Message and quoted context exceed 32,000 characters. Shorten the message or cancel the reply. Your draft is retained.');return;}const replyTo=normalizeReply(c.draftReplyTo),oldDraft=c.draft,oldNames=c.pendingAttachmentNames;c.pendingAttachmentNames=[];c.messages.push({id:uid(),role:'user',text,mode:modeFor(c.mode),attachments:items.map(x=>x.name),replyTo,recipients:c.recipients,recipientNames:selectedAgents(c).map(a=>a.name),createdAt:now()});c.draft='';delete c.draftReplyTo;if(!saveData()){c.messages.pop();c.draft=oldDraft;c.pendingAttachmentNames=oldNames;c.draftReplyTo=replyTo;toast('Could not save the message. Your draft is retained.');return;}sessionAttachments.delete(c.id);delete c.attachmentWarning;byId('draft').value='';renderConversation();renderComposer();renderSidebar();requestChatReply(c);
   }

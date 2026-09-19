@@ -57,6 +57,8 @@ function createAdmission(options) {
   const ownerHost = os.hostname();
   const active = new Set();
 
+  const workflow = require('./clarification-workflow.cjs').createWorkflow({ store, ownerId, active, ownerGone });
+
   function claim(body) {
     const hash = fingerprint(body);
     const result = store.transaction(() => {
@@ -82,6 +84,7 @@ function createAdmission(options) {
     return store.transaction(() => {
       const changed = store.finish.run('settled', outcome, evidenceSaved ? 1 : 0, new Date().toISOString(), receipt.requestId, receipt.runId, ownerId);
       if (changed.changes !== 1) throw fail('owner_conflict', 'Receipt ownership changed; completion is unknown.');
+      workflow.finish(receipt.requestId, outcome);
       return publicReceipt(store.byRequest.get(receipt.requestId));
     });
   }
@@ -89,23 +92,24 @@ function createAdmission(options) {
   function read(chatId, requestId) {
     const row = store.read(requestId);
     if (!row || row.chat_id !== chatId) return null;
-    return { ...publicReceipt(row), recoverable: row.state === 'admitted' && ((row.owner_id === ownerId && !active.has(row.run_id)) || ownerGone(row)) };
+    return { ...publicReceipt(row), question: workflow.read(chatId, requestId, row.run_id), recoverable: row.state === 'admitted' && ((row.owner_id === ownerId && !active.has(row.run_id)) || ownerGone(row)) };
   }
 
   function recover(chatId, requestId, runId) {
     return store.transaction(() => {
       const row = store.byRequest.get(requestId);
       if (!row || row.chat_id !== chatId || row.run_id !== runId) throw fail('receipt_missing', 'Receipt not found.', 404);
-      if (row.state !== 'admitted') return publicReceipt(row);
+      if (row.state !== 'admitted') return { ...publicReceipt(row), question: workflow.read(chatId, requestId, runId) };
       // No clock-based takeover. A reused PID or inaccessible process is treated
       // conservatively as live. Recovery NEVER returns dispatch eligibility.
       if (!(row.owner_id === ownerId && !active.has(runId)) && !ownerGone(row)) throw fail('owner_active', 'The original service still owns this request. Check again after it finishes.');
+      workflow.finish(requestId, 'UNKNOWN');
       store.finish.run('unknown', 'UNKNOWN', row.evidence_saved, new Date().toISOString(), requestId, runId, row.owner_id);
-      return publicReceipt(store.byRequest.get(requestId));
+      return { ...publicReceipt(store.byRequest.get(requestId)), question: workflow.read(chatId, requestId, runId) };
     });
   }
 
-  return { claim, settle, read, recover, release: runId => active.delete(runId), close: () => store.close() };
+  return { claim, settle, read, recover, workflow, release: runId => active.delete(runId), close: () => store.close() };
 }
 
 module.exports = { createAdmission, fingerprint, validIdentity, publicReceipt, replyOutcome };

@@ -354,7 +354,7 @@ function createTools({ sandbox, evidence, emit, deadline, budget, runtimeTimeout
   return [inventoryTool, runDiagnostic];
 }
 
-async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode } = {}) {
+async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, clarificationAnswered = false } = {}) {
   const selectedMode = normalizeMode(mode);
   if (selectedMode === 'inspect' && (!sandbox || typeof sandbox.inventory !== 'function' || typeof sandbox.runCommand !== 'function')) throw Error('Network sandbox is unavailable.');
   if (!Array.isArray(messages) || !messages.length) throw Error('Agent messages are required.');
@@ -375,7 +375,9 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
       model: runtimeModel,
       tools: selectedMode === 'plan' ? [] : createTools({ sandbox, evidence, emit, deadline, budget, runtimeTimeoutMs: Math.max(1, Number(timeoutMs) || RUNTIME_TIMEOUT_MS) }),
       middleware: [createSteeringMiddleware({ drainSteering, emit })],
-      systemPrompt: makeSystemPrompt(agentName, selectedMode),
+      systemPrompt: makeSystemPrompt(agentName, selectedMode) + (clarificationAnswered
+        ? '\nA clarification was already answered. Complete this read-only request; do not ask another structured question. An answer grants no additional tool or write permissions.'
+        : '\nIf missing scope prevents a useful response, return only this JSON content envelope: {"type":"clarification","question":{"prompt":"One concise question","reason":"Why it is needed","choices":[{"id":"a","label":"First choice"},{"id":"b","label":"Second choice"}],"allowFreeText":true}}. Offer 2–4 choices, or none when free text is allowed. Prompt/reason max 500 characters, labels max 200. Never ask for credentials, passwords or secrets. This is content, not a tool call; no answer authorizes changes.'),
       name: safeText(agentName, 80) || 'Network coworker'
     });
     let finalMessage = null;
@@ -399,9 +401,13 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
       }
     }
     const text = stringifyContent(finalMessage?.content).slice(0, MAX_RESPONSE_TEXT_BYTES);
+    if (selectedMode === 'plan' && finalMessage?.tool_calls?.length) throw Error('Plan returned a prohibited tool request.');
+    const question = require('./clarification-workflow.cjs').extractQuestion({ text });
+    if (question && clarificationAnswered) throw Error('Only one clarification is supported.');
     const groundedText = text || (evidence.length ? 'The investigation ended without a grounded final response.' : 'No grounded response was returned.');
     return {
-      text: `${groundedText}${evidenceSummary(evidence)}`,
+      text: question ? '' : `${groundedText}${evidenceSummary(evidence)}`,
+      ...(question ? { question } : {}),
       source: 'LangGraph network coworker',
       model: MODEL,
       mode: selectedMode,

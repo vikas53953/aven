@@ -1,0 +1,14 @@
+{
+  "origin": "http://127.0.0.1:8767",
+  "verified": true,
+  "files": {
+    "polished.html": "507c7fd7ec731fa315d0cef9eb2a948ef5b9ea149debf7383cdf822b1284f33d",
+    "polished.js": "9a95fbf221cd5e92ed2e1f7399e92dd268814fdf89d9cdebf1c85815fc4751e9",
+    "polished-admission.js": "a018cc6eec2c38328a4e0b057e605e50de51bb3e7001c12c511bc122d9fa6548",
+    "polished-run-state.js": "166358fc294a3c7ec62fc92796d98188548f48997a0f5e221a3a8698c6dd873e",
+    "polished-clarification.js": "700888b0701d663484eff5ff650ba5100638072c56c810d4876a36e36154157f",
+    "polished-backup.js": "fb70dbb47bd50c37cd461a5b603d750321d6209ea6fd10265a8de1122aa27f4b",
+    "polished.css": "d9736bbd90a0c6be75daf93290a1492806c11ab1ed3ad180a14ec23da8539a02",
+    "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75"
+  }
+}

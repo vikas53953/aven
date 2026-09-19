@@ -2,7 +2,7 @@
 (function(root){
   'use strict';
   const MAX_BYTES=1024*1024,MAX_EVENTS=100;
-  const privateKey=k=>/^(?:proto|prototype|constructor|token|steeringToken|accessToken|refreshToken|bearerToken|apiKey|password|credential|credentials|controller|authorization|permission|permissions|secret|clientSecret)$/i.test(k.replace(/[_-]/g,''));
+  const privateKey=k=>/^(?:proto|prototype|constructor|token|steeringToken|answerToken|accessToken|refreshToken|bearerToken|apiKey|password|credential|credentials|controller|authorization|permission|permissions|secret|clientSecret)$/i.test(k.replace(/[_-]/g,''));
   function clean(value,depth=0){
     if(depth>32)throw Error('Run metadata is too deeply nested.');
     if(value===null||typeof value!=='object')return value;

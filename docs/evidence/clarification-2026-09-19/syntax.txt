@@ -1,0 +1,12 @@
+
+> netrok-muse-intentgraph@0.1.0 check
+> node --check indexer.cjs && node --check engine.cjs && node --check server.cjs && node --check cli.cjs && node --check agent-runtime.cjs && node --check reliability-storage.cjs && node --check reliability.cjs && node --check chat-read-api.cjs && node --check clarification-workflow.cjs
+
+polished.js: PASS
+polished-clarification.js: PASS
+polished-admission.js: PASS
+polished-run-state.js: PASS
+polished-backup.js: PASS
+intentgraph/clarification.test.cjs: PASS
+intentgraph/mounted-admission.test.cjs: PASS
+intentgraph/fixtures/admission-ui.cjs: PASS

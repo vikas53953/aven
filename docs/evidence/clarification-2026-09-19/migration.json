@@ -1,0 +1,31 @@
+{
+  "base": "e176ad4989a9e8f5455223206f10227d58b837b6",
+  "createdBy": "Executed unchanged base receipt implementation in a disposable directory",
+  "workflowVersion": 2,
+  "rows": [
+    {
+      "state": "settled",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    },
+    {
+      "state": "unknown",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    },
+    {
+      "state": "admitted",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    }
+  ]
+}

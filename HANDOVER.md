@@ -19,10 +19,10 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 19 identifies UI build `ux-minimal-ui-v9.3-recovery`. It preserves the v9.1
+- HLD 20 identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
   minimal UI/history/reaction behavior and adds durable, fenced chat admission.
   Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
-  broader provider/workflow/automation/terminal/Git candidates remain separate.
+  one structured clarification is integrated; provider/approval/automation/terminal/Git candidates remain separate.
 - A central 115-feature comparison register, independent audit, post-fix review and
   candidate evidence preserve implementation and acceptance history.
 - Firstmate was installed separately using Windows PowerShell → Ubuntu WSL → tmux →
@@ -33,10 +33,10 @@ Netrok Muse still appears in filenames.
 ## What we are doing now
 
 The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
-The current milestone is a **local-only** reliability change, ready for independent
+The current milestone is a **local-only** clarification change, ready for independent
 review after its branch is committed. It has not been pushed, merged, published or
 deployed. The older non-Git folder remains untouched. See the
-[latest recovery evidence](docs/evidence/admission-2026-09-19/review-fixes/README.md).
+[latest clarification evidence](docs/evidence/clarification-2026-09-19/README.md).
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
@@ -44,8 +44,7 @@ runtime state automatically. Reconcile any newer local changes first.
 
 ## Current evidence and pending work
 
-The dated UI/history verdict review records **37 Verified (scoped), 57 Partial,
-3 Unverified, 14 Missing and 4 Deferred** across 115 features. These are the
+The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement changes only UX-033 to Partial: **37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing and 4 Deferred** across 115 features. These are the
 16 September evidence verdicts, not a fresh full-product audit. Older README and
 workbook snapshots contain different counts; preserve their dates and scope.
 
@@ -59,10 +58,9 @@ Authoritative references:
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
 
-Review the bounded admission integration before advancing. The remaining provider,
+Independently review the bounded clarification integration before owner UI acceptance. The remaining provider,
 approval/workflow, automation, terminal and Git candidates need independent integration.
-An [approval/clarification proposal](docs/proposals/approval-clarification.md) is planning
-only and contains open product decisions; its implementation has not begun. Files under `outputs/`
+The [approval/clarification proposal](docs/proposals/approval-clarification.md) now records the launch authorization for all four recommended choices. Only clarification is implemented: one question, one same-run read-only continuation, serial waiting and explicit cancellation after reload. Approval, mock execution and durable continuation after restart remain excluded. Files under `outputs/`
 are archived candidates or evidence, not automatically the live application. Do
 not bulk-copy an assembled candidate over the root application.
 
@@ -136,3 +134,5 @@ was inspected from this repository.
 
 Skills are optional workflow aids subject to explicit owner instructions; their
 presence does not authorize external actions or change project acceptance.
+
+The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity, native Windows uncertainty, and owner UI acceptance remain explicit limitations.

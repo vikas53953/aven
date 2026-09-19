@@ -41,6 +41,24 @@ class ReceiptStore {
           COMMIT;`);
       }
       if (this.db.prepare('SELECT version FROM admission_schema').get()?.version !== 1) throw new Error('Unsupported chat admission schema.');
+      const workflowVersion = this.db.prepare('PRAGMA user_version').get().user_version;
+      if (![0, 2].includes(workflowVersion)) throw new Error('Unsupported clarification schema.');
+      if (workflowVersion === 0) {
+        this.db.exec(`BEGIN IMMEDIATE;
+          CREATE TABLE clarifications (
+            request_id TEXT PRIMARY KEY REFERENCES receipts(request_id), chat_id TEXT NOT NULL,
+            run_id TEXT NOT NULL UNIQUE, question_id TEXT NOT NULL UNIQUE, revision TEXT NOT NULL,
+            spec TEXT NOT NULL, token_hash TEXT NOT NULL,
+            phase TEXT NOT NULL CHECK(phase IN ('waiting','answered','cancelled','unknown','completed')),
+            mode TEXT NOT NULL CHECK(mode IN ('plan','inspect')), model TEXT NOT NULL,
+            answer_json TEXT, answer_hash TEXT, segment_id TEXT UNIQUE,
+            segment_state TEXT CHECK(segment_state IN ('accepted','dispatched','completed','unknown')),
+            created_at TEXT NOT NULL, updated_at TEXT NOT NULL
+          );
+          PRAGMA user_version=2;
+          COMMIT;`);
+      }
+      this.db.prepare('SELECT * FROM clarifications WHERE request_id=?');
       // Preparing these also rejects missing/invalid tables in existing storage.
       this.byIdentity = this.db.prepare('SELECT * FROM receipts WHERE request_id=? OR idem_key=?');
       this.byRequest = this.db.prepare('SELECT * FROM receipts WHERE request_id=?');

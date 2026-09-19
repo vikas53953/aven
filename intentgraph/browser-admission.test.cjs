@@ -89,3 +89,19 @@ test('same-request results retain identity, annotations and distinct captured ev
   admission.reconcileResult(chat, { ...success, id: 'other', requestId: 'different-request' });
   assert.equal(chat.messages.length, 3, 'different request identity cannot overwrite the captured result');
 });
+
+test('clarification backup is tokenless inert history in both replace and add imports',()=>{
+ const backup=require('../polished-backup.js'),{chat,submission}=fixture();Object.assign(chat,{title:'Question history',recipients:['agent-a']});
+ chat.messages.push({id:'question-result',role:'assistant',agentId:'agent-a',requestId:submission.body.requestId,text:'',question:{id:'q',chatId:chat.id,requestId:submission.body.requestId,runId:'run-a',revision:'digest',prompt:'Choose a switch',choices:[{id:'a',label:'A'},{id:'b',label:'B'}],allowFreeText:true,phase:'waiting',answerToken:'do-not-export'}});
+ const prefs={activeAgent:'agent-a',agents:[{id:'agent-a',name:'A'}],sections:[]},data={activeChat:chat.id,chats:[chat],projects:[],channels:[]};const exported=backup.envelope(prefs,data,{},'clarification-test');assert.doesNotMatch(JSON.stringify(exported),/answerToken|do-not-export/);
+ const restored=backup.parse(backup.serialize(exported)),copy=restored.data.chats[0];assert.equal(copy.pendingAdmission,undefined);assert.equal(copy.messages[0].submission,undefined);assert.equal(copy.messages[1].question.inert,true);assert.equal(copy.messages[1].question.phase,'imported');assert.equal(copy.pendingQueue.length,1);assert.equal(copy.queuePaused,true);
+ const merged=backup.mergeImported(exported,restored);assert.equal(merged.data.chats[1].messages[1].question.inert,true);assert.notEqual(merged.data.chats[1].id,chat.id);
+ const saved=journal({journalId:'j',agentId:'a',startedAt:'2026-09-19T00:00:00Z',events:[{type:'question',question:{prompt:'safe'},answerToken:'secret'}]});assert.doesNotMatch(JSON.stringify(saved),/answerToken|secret/);
+});
+
+test('cancelled question receipt replaces uncertainty with the authoritative cancellation history',()=>{
+ const {chat,submission}=fixture(),question={id:'q',phase:'cancelled',prompt:'Which target?',answer:null};
+ chat.messages.push({id:'captured',role:'assistant',requestId:submission.body.requestId,status:'UNKNOWN',text:'delivery uncertain',question:{...question,phase:'waiting'}});
+ const result=admission.applyReceipt(chat,submission,{chatId:chat.id,requestId:submission.body.requestId,runId:'run-a',state:'settled',outcome:'NOT_EXECUTED',question,updatedAt:'2026-09-19T00:00:00Z'});
+ assert.equal(result.id,'captured');assert.equal(result.question.phase,'cancelled');assert.equal(result.text,'Request cancelled. No continuation was dispatched.');assert.equal(result.status,'NOT_EXECUTED');assert.equal(chat.pendingAdmission,undefined);assert.equal(chat.queuePaused,true);
+});

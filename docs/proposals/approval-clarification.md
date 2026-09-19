@@ -1,6 +1,6 @@
 # Clarification and approval flow proposal
 
-19 September 2026. **Planning only; no implementation authorization or owner visual acceptance.** Prepared after the local durable-admission milestone (`eb02372`, `ff9f0f0`, `e373be3`). The current application does not mount the workflow candidate. Its effective feature verdicts remain unchanged.
+19 September 2026. **Historical proposal; the subsequent launch brief authorized all four recommended choices and the clarification-only slice. Owner visual acceptance remains pending.** Prepared after the local durable-admission milestone (`eb02372`, `ff9f0f0`, `e373be3`). The archived workflow candidate remains unmounted. The active narrow implementation and current limits are recorded in [clarification evidence](../evidence/clarification-2026-09-19/README.md); the proposal below preserves the original planning context. Approval and mock execution remain excluded.
 
 Recommend one next implementation slice, subject to the decisions below: **answer one structured clarification within an existing serial, read-only chat run**. Retain the original run identity and mode, reject stale answers, preserve a visible waiting state, and support explicit cancellation and recovery. This is the earliest workflow boundary: general action approval depends on reliable waiting and continuation. Include no action approval or executor in that first slice.
 

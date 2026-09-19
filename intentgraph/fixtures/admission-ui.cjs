@@ -20,18 +20,22 @@ const raw = Array.from({ length: 15 }, (_, i) => 'fixture line ' + (i + 1)).join
 const staticServer = http.createServer((req, res) => {
   const pathname = new URL(req.url, 'http://127.0.0.1:8767').pathname;
   if (pathname === '/fixture-stats') { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify({ calls, providerCalls: 0, deviceCalls: 0 })); return; }
-  const relative = pathname === '/' ? 'polished.html' : pathname.slice(1);
+  const relative = pathname === '/' ? 'polished.html' : pathname === '/docs/architecture/' ? 'docs/architecture/index.html' : pathname.slice(1);
   const file = path.resolve(project, relative);
   if (relative.split('/').includes('..') || !file.startsWith(project + path.sep) || !/^(?:polished[^/]*\.(?:js|css|html)|avatar-system\/[^.][^]*|docs\/architecture\/[^.][^]*)$/.test(relative) || !/\.(?:js|css|html|json|svg|png)$/.test(file)) { res.writeHead(404); res.end(); return; }
   try { const data = fs.readFileSync(file); res.setHeader('Content-Type', ({ '.js': 'text/javascript', '.css': 'text/css', '.html': 'text/html', '.svg': 'image/svg+xml', '.json': 'application/json' })[path.extname(file)] || 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(data); } catch { res.writeHead(404); res.end(); }
 });
-start({ root, port: 8768, sandbox: { close() {}, status: () => ({}), inventory: blocked, runCommand: blocked }, executionOptions,
+const receiptStore = new (require('../reliability-storage.cjs').ReceiptStore)(path.join(root,'.intentgraph/runtime'));
+const transact = receiptStore.transaction.bind(receiptStore);
+receiptStore.transaction = work => { if(settings().failDatabase)throw Error('Injected database failure');return transact(work); };
+const admission = require('../reliability.cjs').createAdmission({store:receiptStore});
+start({ root, admission, port: 8768, sandbox: { close() {}, status: () => ({}), inventory: blocked, runCommand: blocked }, executionOptions,
   persistChatEvidence: record => {
     if (settings().failPersistence) throw Error('Injected disk failure');
     const dir = path.join(root, '.intentgraph/evidence/runs'); fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, record.runId + '.json'), JSON.stringify(record));
   },
-  chatResponder: async ({ mode, signal }) => {
+  chatResponder: async ({ mode, signal, clarificationAnswered, messages, onEvent }) => {
     calls++; stats();
     await new Promise(resolve => {
       const deadline = Date.now() + (settings().delayMs ?? 500);
@@ -41,6 +45,8 @@ start({ root, port: 8768, sandbox: { close() {}, status: () => ({}), inventory: 
       signal.addEventListener('abort', finish, { once: true }); check();
     });
     if (signal.aborted) throw Error('fixture cancelled');
+    if (settings().questionEvidence && !clarificationAnswered) onEvent({type:'tool_result',name:'inventory',status:'SUCCESS',evidence:{command:'inventory',target:'fixture',status:'SUCCESS',output:'retained before question\r\n'}});
+    if (settings().question && !clarificationAnswered && messages.at(-1).content.includes('clarification')) return { question: settings().question, mode, model: 'fixture' };
     return { text: 'Local admission fixture response.\n\n```text\n' + raw + '\n```', mode, model: 'fixture', evidence: [] };
   }
 }).then(server => {

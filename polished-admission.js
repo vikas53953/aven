@@ -43,7 +43,7 @@
     if(record&&(record.chatId!==chat.id||record.runId!==receipt.runId||record.requestId!==receipt.requestId))throw Error('Saved run does not match this request.');
     const existing=resultFor(chat,receipt);
     const reply=record?.reply;
-    const result={id:existing?.id||crypto.randomUUID(),role:'assistant',agentId:submission.agentId,requestId:receipt.requestId,runId:receipt.runId,status:receipt.outcome,mode:submission.body.mode,text:reply?.text||'Remote completion is unknown. Review captured evidence before continuing. No request was retried.',source:reply?.source||'Saved local run',model:reply?.model,usage:reply?.usage,events:record?.events||existing?.events||[],evidence:reply?.evidence||existing?.evidence||[],createdAt:existing?.createdAt||receipt.updatedAt};
+    const result={...(receipt.question?{question:receipt.question}:{}),id:existing?.id||crypto.randomUUID(),role:'assistant',agentId:submission.agentId,requestId:receipt.requestId,runId:receipt.runId,status:receipt.outcome,mode:submission.body.mode,text:reply?.text||(receipt.question?.phase==='cancelled'?'Request cancelled. No continuation was dispatched.':'Remote completion is unknown. Review captured evidence before continuing. No request was retried.'),source:reply?.source||'Saved local run',model:reply?.model,usage:reply?.usage,events:record?.events||existing?.events||[],evidence:reply?.evidence||existing?.evidence||[],createdAt:existing?.createdAt||receipt.updatedAt};
     const reconciled=reconcileResult(chat,result);
     submission.state='settled';submission.receipt=receipt;
     delete chat.pendingAdmission;delete chat.runJournal;delete chat.queueDispatching;delete chat.replyError;delete chat.captureWarning;

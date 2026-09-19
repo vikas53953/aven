@@ -1,0 +1,136 @@
+[
+  {
+    "check": "two pending settled/settled",
+    "passed": true,
+    "responderCalls": 0,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": false
+  },
+  {
+    "check": "two pending missing/missing",
+    "passed": true,
+    "responderCalls": 2,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": false
+  },
+  {
+    "check": "two pending settled/missing",
+    "passed": true,
+    "responderCalls": 1,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": true
+  },
+  {
+    "check": "outage / missing / successful retry",
+    "passed": true,
+    "statuses": [
+      "SUCCESS"
+    ],
+    "id": true,
+    "createdAt": true,
+    "annotations": true,
+    "raw": true,
+    "events": true,
+    "rendered": 1,
+    "responderCalls": 1
+  },
+  {
+    "check": "live other-tab ownership",
+    "passed": true,
+    "workspaceUnchangedDuringForeignReview": true,
+    "ownerFinishedSuccessfully": true
+  },
+  {
+    "check": "stale snapshot",
+    "passed": true,
+    "newerWorkspacePreserved": true,
+    "responderCalls": 0
+  },
+  {
+    "check": "FIFO and visual regressions",
+    "passed": true,
+    "texts": [
+      "FIFO first",
+      "FIFO second",
+      "FIFO third"
+    ],
+    "identities": 3,
+    "queue": 0,
+    "draft": "Keep unrelated draft",
+    "pending": false,
+    "responderCalls": 3,
+    "exactCollapsedCodeBlocks": 3,
+    "desktop": [
+      1440,
+      1000
+    ],
+    "narrow": [
+      390,
+      844
+    ],
+    "servedHashes": {
+      "polished.html": "507c7fd7ec731fa315d0cef9eb2a948ef5b9ea149debf7383cdf822b1284f33d",
+      "polished.js": "9a95fbf221cd5e92ed2e1f7399e92dd268814fdf89d9cdebf1c85815fc4751e9",
+      "polished-admission.js": "a018cc6eec2c38328a4e0b057e605e50de51bb3e7001c12c511bc122d9fa6548",
+      "polished-run-state.js": "166358fc294a3c7ec62fc92796d98188548f48997a0f5e221a3a8698c6dd873e",
+      "polished-clarification.js": "700888b0701d663484eff5ff650ba5100638072c56c810d4876a36e36154157f",
+      "polished-backup.js": "fb70dbb47bd50c37cd461a5b603d750321d6209ea6fd10265a8de1122aa27f4b",
+      "polished.css": "d9736bbd90a0c6be75daf93290a1492806c11ab1ed3ad180a14ec23da8539a02",
+      "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75"
+    },
+    "console": "console:\nEmulating viewport: {\"deviceScaleFactor\":1,\"isMobile\":true,\"hasTouch\":true,\"isLandscape\":false,\"width\":390,\"height\":844}\n## Console messages\n<no console messages found>\nhelp[2]:\n  Run `chrome-devtools-axi console-get <id>` to see a specific message\n  Run `chrome-devtools-axi console --type error` to filter by type\n"
+  },
+  {
+    "check": "clarification serial / keyboard / double-click / queued follow-up",
+    "passed": true,
+    "responderCalls": 3,
+    "reducedMotion": true,
+    "phase": "completed",
+    "answer": "Core switch",
+    "questionRun": "f0eef3d1-028d-442b-a082-45c0165b1251",
+    "resultRun": "f0eef3d1-028d-442b-a082-45c0165b1251",
+    "mode": "plan",
+    "draft": "Keep unrelated clarification draft",
+    "queue": 0,
+    "questionMessages": 1
+  },
+  {
+    "check": "390px long content / free text / validation / storage failure / denied / keyboard / folded code",
+    "passed": true,
+    "responderCalls": 2
+  },
+  {
+    "check": "two tabs / reload / tokenless cancel / explicit queue resume",
+    "passed": true,
+    "responderCalls": 2
+  },
+  {
+    "check": "lost answer response / authoritative readback / single result",
+    "passed": true,
+    "responderCalls": 2
+  },
+  {
+    "check": "stale question / database failure / no dispatch / explicit cancellation",
+    "passed": true,
+    "responderCalls": 2
+  },
+  {
+    "check": "Inspect evidence through wait / continuation Stop / UNKNOWN queue pause",
+    "passed": true,
+    "responderCalls": 2,
+    "status": "UNKNOWN",
+    "mode": "inspect",
+    "raw": "retained before question\r\n",
+    "queue": 1,
+    "paused": true
+  },
+  {
+    "check": "compact 390px touch-visible actions / explicit cancel",
+    "passed": true,
+    "responderCalls": 1,
+    "viewport": [
+      390,
+      844
+    ]
+  }
+]

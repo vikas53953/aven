@@ -1,0 +1,61 @@
+# Clarification-only milestone — 19 September 2026
+
+Implemented locally on `fm/aven-clarification`, starting from the exact reliability base `e176ad4989a9e8f5455223206f10227d58b837b6`. The Firstmate launch brief identifies that base as independently approved and authorizes all four recommended choices in the historical proposal: clarification only, retain serial ownership while waiting, cancel/fresh request after reload, and keep any eventual approval demonstration mock-only. No approval demonstration is implemented here.
+
+The existing v9.1 shell and admission/recovery fixes remain. Build `ux-minimal-ui-v9.4-clarification` adds a compact “Waiting for your answer” card inside the originating conversation. It offers bounded choices and optional free text, no preselection, Continue, Cancel request and read-only Refresh saved state. No spinner runs while waiting. A valid answer continues the same request/run at most once, with its original mode/provider and a new segment/cancellation handle. Plan has no tools; Inspect's existing read-only allowlist is unchanged. A question answer cannot authorize state-changing work.
+
+Waiting retains both the global SQLite serial slot and browser writer lock. Other conversations retain drafts and link to the waiting conversation. Queued messages are never interpreted as answers. Cancel and uncertainty pause queues; Resume is explicit. Reload keeps tokenless question history and offers explicit cancellation followed by a fresh request. Imported/copied history has no answer authority. Unconfirmed answer drafts are retained where browser storage permits.
+
+The authoritative transaction is in the existing receipt database, not a second independent store. Question identity/specification/revision and the accepted answer/unique segment are durable. Only a capability hash is stored. Readback has no capability or dispatch side effect. Exact duplicate answer submissions return the recorded decision; changed, cross-run, cross-chat, stale-revision and foreign-capability requests cannot dispatch. A separately fenced dispatch follows the answer commit. A crash or lost acknowledgement between acceptance and dispatch is unresolved and never replayed. Time never steals a live owner; dead-owner recovery is explicit UNKNOWN.
+
+## Current verification
+
+Final frozen application source: **103 Node tests, 102 passed, 0 failed, 1 existing Playwright adapter skip; all 14 mounted checks enabled and passed. Four mocked Python adapter tests passed.** Syntax, version-one receipt migration, eight HTTP-served application hashes and four atlas hashes pass. The atlas current/target views and guided walkthrough pass at desktop; its 390×844 view has no horizontal overflow after long evidence paths were made wrappable. This final documentation-only wrapping correction was checked through the served atlas after the application suite.
+
+See [verification.json](verification.json) for the final counts and hashes, [Node output](node-tests.txt), [Python output](python-tests.txt), [mounted checks](browser-checks.json), [migration](migration.json), [served hashes](served-hashes.json), and [syntax](syntax.txt). The full current Node suite includes the existing mounted admission/recovery checks and the new clarification checks, all executed through individual chrome-devtools-axi commands. The separate Python suite mocks connections. No test calls a real provider, secret vault or network device.
+
+The migration evidence executes the **unchanged base implementation** to create version-one admitted, settled and UNKNOWN receipts, then opens them with active source. Run/request identities, outcomes, evidence flags and idempotency replay remain intact. The workflow migration is SQLite `user_version=2`; the original admission schema remains version 1.
+
+Mounted scenarios include desktop 1440×1000, mobile/touch 390×844, keyboard and focus, long content, visible touch actions, choices/free text, double-click, another conversation, queued follow-ups, two tabs, cancellation, reload, denied/stale answers, browser/database failure, response loss, accepted answer readback, retained evidence, Stop during continuation, exact collapsed code and reduced motion. Backend tests additionally cover two processes, dead/stale owners, malformed envelopes, hostile Plan tool requests, answer/segment commit ambiguity and one-time dispatch. The inherited browser-adapter Playwright skip is not counted as passed by the separate Chrome fixture.
+
+The existing feature workbook preserves original columns A–P and all 115 acceptance requirements. Only UX-033 advances from Missing to **Partial**; the clarification part is implemented, general approval is absent, independent review and owner UI approval are pending. UX-034 remains Partial and UX-037 remains Missing. Approval rows UX-074, UX-080 and UX-114 remain Missing. Counts: 37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing, 4 Deferred. [Reconciliation](feature-verdicts.json) includes workbook hashes and the original-column comparison.
+
+## Review artifacts and reproduction
+
+The [live-review desktop](owner-review-desktop.png) and [fixture record](owner-review.json) are prepared for Firstmate to present at `http://127.0.0.1:8767/polished.html`. The remaining review images are [desktop waiting](clarification-desktop.png), [390px waiting](clarification-narrow.png), [another conversation](another-conversation.png), [long/denied narrow](clarification-denied-narrow.png), [answer and folded code](clarification-answer-narrow.png), [tokenless reload](clarification-reload.png), [response uncertainty](clarification-response-unknown.png), and [stale answer](clarification-stale.png). These are actual served-source fixtures, not approved design references. Architecture current/target views and guided walkthrough are checked separately in [atlas checks](atlas-checks.json).
+
+Use an isolated browser profile and task-local chrome-devtools-axi session. The tests seed localStorage, so do not point them at an owner's profile. With ports 8767/8768 free:
+
+```sh
+AVEN_BROWSER_TOOL=/absolute/path/to/isolated/chrome-devtools-axi \
+AVEN_UI_EVIDENCE="$PWD/.audit/browser-checks.json" \
+AVEN_UI_SCREENSHOTS="$PWD/.audit/screenshots" \
+TMPDIR="$PWD/.audit/tmp" \
+node --test --test-concurrency=1 intentgraph/*.test.cjs
+npm run check --prefix intentgraph
+python -m unittest discover -s intentgraph/adapters -p test_network.py
+```
+
+When TMPDIR is inside a checkout, the existing non-Git-workspace test requires the documented temporary Git-discovery boundary (`.audit/tmp/.git` containing `gitdir: ./absent-audit-git`). Python dependencies are the pinned `intentgraph/adapters/requirements-network.txt`; this run also installed `setuptools==80.9.0` in a disposable venv because Nornir 3.3.0 imports `pkg_resources`. No project dependency or shared environment was changed. That dependency emits a deprecation warning. Node 24.16 and Chrome 148.0.7778.96 were used in WSL. The Chrome fixture is separate from the missing pinned Playwright browser.
+
+For interactive owner review, run `node intentgraph/fixtures/admission-ui.cjs .audit/owner-review` and open `http://127.0.0.1:8767/polished.html`. Its disposable `fixture.json` can contain:
+
+```json
+{"delayMs":100,"question":{"prompt":"Which switch should I inspect?","reason":"Choose the exact target for this read-only request.","choices":[{"id":"core","label":"Core switch"},{"id":"access","label":"Access switch"}],"allowFreeText":true}}
+```
+
+Send a message containing `clarification` to trigger the deterministic question. The fixture reports responder counts and zero provider/device calls at `/fixture-stats`. `hold`, `failDatabase`, `failPersistence` and `questionEvidence` enable focused local failure cases. Fixture controls are not production routes. The worker's task-local browser launcher confines bridge state/profile files to `.audit/` and retains MCP page-ID routing; only owned browser processes are managed. Effective viewport dimensions are asserted with `emulate --viewport` because the existing `resize` command does not change this MCP/Chrome viewport.
+
+## Review state and preserved limits
+
+**Independent review is pending. Owner UI approval is pending.** This implementation worker is prohibited from delegation and the launch contract calls for a branch suitable for subsequent independent review. Technical tests and screenshots do not substitute for either review. Firstmate must arrange review of this exact committed branch and present the running shell/evidence to the owner. No pipeline, push, merge, publication or deployment occurred.
+
+The inherited **evidence-versus-receipt ambiguity remains**: evidence can be saved before receipt settlement fails; recovery then reports UNKNOWN while saved evidence may contain a completed reply. Evidence-file presence and a read-model completion label do not prove settled admission or remote success. This slice does not redesign that read model. Cancellation means no continuation was dispatched; any prior read-only diagnostic and retained evidence are not rolled back.
+
+Native Windows PowerShell, DPAPI, SQLite/process liveness, clipboard/IME/UI Automation, packaged restart and physical assistive technology remain unverified from WSL. A live, inaccessible, reused PID or different host conservatively prevents takeover. No authenticated actor/tenant isolation, cross-device history, production power-loss durability, live provider/device acceptance or durable same-run continuation after restart is established. Deleting all receipt data loses replay protection; legacy identity-free clients still create independent requests. Browser snapshot/Web Lock coordination is not a general transactional history database. Approval cards, mock/real execution, scheduling, parallel runs, provider/model selection and generalized checkpoints remain excluded. Historical candidate archives were read for bounded contracts and not applied as overlays.
+
+Development checks caught a missing explicit choice-ID type check, and a backup change was narrowed to keep existing non-clarification admission restore behavior. Early mounted fixture IDs contained spaces and were rejected correctly; the fixture now normalizes its IDs. A database-failure test was corrected to expect the tokenless cancellation card rather than an unrelated generic receipt button. These fixture corrections are not product successes or independent review findings.
+
+Final source review also preserved two recovery details: cancellation after a confirmed dead owner reconciles UNKNOWN rather than declaring the old run unexecuted, and receipt recovery carries the authoritative question phase into the saved card. Prior Inspect evidence survives a wait, cancellation and Stop; a stopped continuation uses its own controller. Other conversations show a restored wait and retain their saved drafts without attempting a new dispatch.
+
+Changing this Chrome session into mobile emulation reloads the page. The mounted tests therefore set their viewport before starting a question; desktop and narrow live-answer journeys use separate requests. A mid-wait emulation change correctly produced a tokenless reloaded card and initially invalidated a fixture's live-input assumption. Test cleanup now explicitly cancels leftover fixture waits so an assertion failure cannot block subsequent cases through the global serial slot.
