@@ -1,0 +1,26 @@
+agent: codex
+no_ci: true
+commands:
+  prepare: npm ci --ignore-scripts --no-audit --no-fund --prefix intentgraph
+  test: node --test --test-concurrency=1 intentgraph/*.test.cjs
+  lint: npm run check --prefix intentgraph
+auto_fix:
+  review: 0
+  test: 0
+  lint: 0
+  document: 0
+  rebase: 0
+  ci: 0
+ignore_patterns:
+  - outputs/**
+  - .intentgraph/**
+document:
+  instructions: |
+    This is initial archival publication, not implementation work. Preserve source
+    and dated evidence. HANDOVER.md and docs/handover own current publication status.
+    Historical candidate outputs are unintegrated unless explicitly documented.
+test:
+  instructions: |
+    Use existing fixture tests. Do not access credentials, external model providers,
+    devices or private runtime state. Visual and live-infrastructure acceptance are
+    explicitly out of scope for the publication snapshot.
