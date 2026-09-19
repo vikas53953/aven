@@ -1,7 +1,7 @@
 {
   "title": "Aven · Network harness",
-  "revision": "HLD 17",
-  "updated": "2026-09-16",
+  "revision": "HLD 18",
+  "updated": "2026-09-19",
   "focus": "ui",
   "summary": "A working local prototype, not yet a multi-customer service. Explore the actual call path, proposed production boundaries, and how user intent becomes an evidence-based investigation.",
   "layers": [
@@ -12,8 +12,8 @@
       "status": "built",
       "tag": "Your workspace",
       "role": "Displays conversations, avatars, results, timestamps and copy controls. Sends your message to the backend.",
-      "current": "Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.1. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader reliability, provider, approval, automation, terminal and Git candidates remain unintegrated. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration.",
-      "files": "polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js",
+      "current": "Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.2-admission. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader provider, approval, automation, terminal and Git candidates remain unintegrated; only the bounded admission slice is now composed. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration. Each submitted turn saves stable identity and exact bounded outgoing context. Explicit receipt review reconciles interruption without redispatch; UNKNOWN pauses queued work. A second tab cannot clear an owned admission on reload. Local checks pass; Windows and owner visual approval remain unverified.",
+      "files": "polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js, polished-admission.js",
       "lesson": "A screen is not an agent. It presents the work and your controls.",
       "technical": [
         "Entry: polished.html; index.html is the older prototype.",
@@ -29,13 +29,13 @@
       "status": "built",
       "tag": "The entry point",
       "role": "Accepts chat requests, validates the payload and calls the runtime. Returns the answer to the browser.",
-      "current": "JavaScript CommonJS (.cjs) running on Node.js with built-in node:http, not Express or Python. POST /api/chat on port 8768. One global chatPending flag allows only one in-flight chat in this process. GET /api/chat/status and chat-scoped /api/chat/runs routes provide sanitized local snapshots and persisted run evidence. The status route does not contact the provider or devices; reachability remains unverified. Mode validation precedes responder work.",
-      "files": "intentgraph/server.cjs, intentgraph/chat-read-api.cjs",
+      "current": "Node.js 24.16+ CommonJS and node:http. POST /api/chat validates mode, bounded text and optional paired request identity. SQLite commits the full admission transition before dispatch and enforces one global admitted chat across processes sharing the store. Exact replay returns the same receipt without responder work; changed content conflicts. Chat-scoped receipt/readback and explicit recovery preserve UNKNOWN and never resume tools. Legacy identity-free clients remain accepted without cross-request replay guarantees. Provider/model behavior is unchanged; status does not establish reachability.",
+      "files": "intentgraph/server.cjs, intentgraph/chat-read-api.cjs, intentgraph/reliability.cjs, intentgraph/reliability-storage.cjs",
       "lesson": "The API delivers the request; it does not decide which network checks are useful.",
       "technical": [
         "Start-IntentGraph.ps1 launches node intentgraph/server.cjs.",
         "Main module → start() → createServer() → node:http.createServer() → server.listen().",
-        "Incoming request → route(req,res) → /api/chat validation → agent-runtime.respond() → NDJSON events.",
+        "route() → validate → atomic durable admission → agent-runtime.respond() → flush evidence → settle receipt → final NDJSON. Expiring leases do not authorize takeover.",
         "Localhost/origin restrictions are not customer authentication or tenant isolation."
       ]
     },
@@ -99,11 +99,11 @@
       "id": "storage",
       "n": "07",
       "name": "Persistence",
-      "status": "planned",
-      "tag": "Remember and resume",
+      "status": "partial",
+      "tag": "Durable admission; checkpoints planned",
       "role": "A checkpoint store will save execution progress; conversation storage will retain sessions. Long-term memory is a separate design choice.",
-      "current": "Browser localStorage and local evidence files exist. Coworker creation journals exact prior preferences, chats and documents before writing; failed writes roll back, and pending recovery is handled before startup migration. This local recovery mechanism does not provide cross-device transactions. No durable LangGraph checkpoint database is integrated. Database choice remains open.",
-      "files": "polished.js (coworker creation journal), polished-backup.js (import recovery), browser storage + .intentgraph/evidence; checkpoint adapter TBD",
+      "current": "Browser localStorage retains conversations and exact submitted request snapshots. A local SQLite receipt store commits identity, fingerprint, run ID and ownership before dispatch; a unique admitted row preserves serial execution. Stale owners cannot publish a second claim. Explicit recovery requires proof that the owner is gone, or no longer active in this service, and records UNKNOWN without replay. Evidence is flushed before settlement; failed persistence remains unresolved. This does not add LangGraph checkpoints, resumable external operations, tenant storage or cross-device transactions. Production/checkpoint database choice remains open.",
+      "files": "intentgraph/reliability-storage.cjs, intentgraph/reliability.cjs, polished-admission.js; .intentgraph/runtime/chat-admission.sqlite and initialization marker; .intentgraph/evidence/runs",
       "lesson": "A database is a supporting branch, not the final step of every answer."
     },
     {
@@ -113,7 +113,7 @@
       "status": "partial",
       "tag": "See what happened",
       "role": "Streams tool start, result, error and final answer events to chat.",
-      "current": "Tool activity, Stop, queued follow-ups, steering acknowledgements and applied/pending states. Raw non-inventory CLI output is displayed in a terminal block with copy, preserving whitespace; the model explanation is separate. Artifacts reconciles matching event/evidence representations conservatively, preserving distinct diagnostic results and exact raw output; a full generated-file library remains partial.",
+      "current": "Tool activity, Stop, queued follow-ups, steering acknowledgements and applied/pending states. Raw non-inventory CLI output is displayed in a terminal block with copy, preserving whitespace; the model explanation is separate. Artifacts reconciles matching event/evidence representations conservatively, preserving distinct diagnostic results and exact raw output; a full generated-file library remains partial. Final delivery follows evidence persistence and receipt settlement. Receipt-save failure remains UNKNOWN and blocks further admission until explicit safe recovery. Receipt state is distinct from raw evidence availability.",
       "files": "polished.js + .intentgraph/evidence",
       "lesson": "An animated teaching diagram is not a live execution trace."
     },
@@ -137,8 +137,8 @@
     ],
     [
       "api",
-      "The backend starts a run.",
-      "A session identifies this conversation and its execution."
+      "The backend records admission before starting a run.",
+      "Stable identity admits one responder call; replay returns the existing receipt. The global serial limit remains."
     ],
     [
       "agent",
@@ -179,11 +179,11 @@
   "decisions": [
     [
       "Implemented",
-      "LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained."
+      "LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained. Local durable request admission and explicit UNKNOWN recovery are implemented separately from checkpoints."
     ],
     [
       "Next checkpoint",
-      "Configure and verify a real SSH lab target through Nornir/Netmiko; then evaluate diagnostic conclusions and durable investigations."
+      "Independent review of local admission and its fresh fixture evidence, then native Windows validation. The separate approval/clarification proposal needs product decisions; real SSH lab work requires separate authorization."
     ],
     [
       "Still open",
@@ -191,10 +191,15 @@
     ],
     [
       "Verification",
-      "See the dated first-slice evidence. Broader domain accuracy, durable recovery and customer isolation are not established by this test."
+      "75 current WSL tests: 74 pass, 0 fail, 1 existing Playwright skip; current desktop/narrow browser fixtures use chrome-devtools-axi. See docs/evidence/admission-2026-09-19/. Windows, owner UI acceptance, live provider/device and enterprise durability remain unverified."
     ]
   ],
   "changes": [
+    [
+      "2026-09-19",
+      "Durable, fenced chat request admission",
+      "Composed a narrow backend receipt and browser identity/recovery slice on the v9.1 UI, now build ux-minimal-ui-v9.2-admission. The deterministic suspended-owner test fails against archived candidate hashes and passes against active SQLite transitions. Current suite: 74 pass, zero fail, one existing browser-adapter skip (75 tests); loopback desktop/narrow, Stop, duplicate retry, reload, keyboard recovery and queue fixtures pass. Evidence: docs/evidence/admission-2026-09-19/verification.json and browser-checks.json. No live devices/providers, secrets, Windows validation or owner approval. Historical candidate packages and evidence remain unchanged."
+    ],
     [
       "2026-09-16",
       "Minimal UI v9.1 code folding",
@@ -364,6 +369,10 @@
     [
       "Project/thread interaction checkpoint",
       "../../.intentgraph/feedback-project-navigation.md"
+    ],
+    [
+      "Local admission verification (2026-09-19)",
+      "../evidence/admission-2026-09-19/README.md"
     ]
   ],
   "sections": [
@@ -394,7 +403,7 @@
         ],
         [
           "Storage and identity",
-          "Browser localStorage holds preferences/messages; local files hold evidence; a Windows-protected vault holds credentials. This is not a customer account system, tenant database or durable agent checkpoint store."
+          "Browser localStorage holds conversations and request snapshots; local SQLite holds durable admission receipts; local files hold raw evidence; the Windows vault remains separate. Admission is not a customer identity system or resumable LangGraph checkpoint."
         ]
       ]
     },
@@ -417,7 +426,7 @@
         ],
         [
           "4. requestChatReply(chat)",
-          "Collects up to 24 messages within the character limit, then fetches POST http://127.0.0.1:8768/api/chat. The browser does not hold the provider key."
+          "Persists a stable request identity and exact bounded context, then posts to the local chat API. Receipt review and recovery are explicit. Retrying transport preserves identity; a deliberate new turn receives a new one. Provider keys stay outside the browser."
         ],
         [
           "5. route(req,res)",
@@ -777,8 +786,8 @@
       ],
       [
         "3 · Durable investigations",
-        "planned",
-        "Checkpoint store, context/runbooks, resumable runs and task evaluations."
+        "partial",
+        "Local durable admission receipts and explicit unknown recovery are implemented. LangGraph checkpoint storage, context/runbooks, resumable runs and domain task evaluations remain planned."
       ],
       [
         "4 · Customer pilot",

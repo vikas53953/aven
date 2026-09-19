@@ -1,6 +1,6 @@
 # Pending features
 
-Dated 16 September 2026 verdicts; candidate implementation is not acceptance. Fresh publication tests did not re-audit these 14 features.
+The 19 September admission supplement retains these dated 16 September verdicts; candidate implementation is not acceptance. Fresh publication tests did not re-audit these 14 features.
 
 | ID | Feature | Original next action |
 | --- | --- | --- |
@@ -20,3 +20,9 @@ Dated 16 September 2026 verdicts; candidate implementation is not acceptance. Fr
 | UX-114 | Existing approval tooling integration | Reuse proven backing contracts; design Aven-facing review without exposing engineering internals. |
 
 The remaining 57 Partial and 3 Unverified features also need work. Use the linked effective verdict review and central register for their original acceptance requirements. Four Deferred entries remain explicit scope exclusions, not completed features.
+
+## Admission milestone: implemented locally, review pending
+
+Stable identity, durable serial receipts, stale-owner fencing and explicit UNKNOWN recovery are implemented. Current evidence: [admission verification](../evidence/admission-2026-09-19/README.md). This does not complete full draft/queue migration, resumable tools or LangGraph checkpoints. Native Windows behavior and independent/owner reviews remain pending.
+
+The [approval/clarification proposal](../proposals/approval-clarification.md) describes a possible next flow and its unresolved product decisions. It is not implementation authorization. UX-033, UX-074, UX-080 and UX-114 remain Missing; UX-037 remains Missing because global serial execution is intentionally retained. No approval or clarification candidate has been loaded into the active application.

@@ -1,4 +1,6 @@
-# Publication snapshot verification
+# Verification history
+
+## Initial publication snapshot
 
 Date: 2026-09-19. Scope: current application snapshot, not archived candidate suites.
 
@@ -22,3 +24,9 @@ The complete local regression output remains with the publication preparation fi
 Publication is the owner's authorized initial source/document archive, with the
 above limitation recorded. It is not a validated product release. Before later
 feature delivery, update the gate's Codex runtime and run the full pipeline again.
+
+## Local admission integration — 19 September 2026
+
+Current WSL evidence supersedes the initial snapshot only for this changed slice: **75 tests, 74 passes, zero failures, one existing Playwright skip**; syntax checks pass. Twelve storage/API and five browser-state/backup tests are included. The deterministic suspended-owner regression fails against the archived candidate and passes against active source. Current desktop/narrow browser fixtures verify replay, Stop, queue FIFO, explicit recovery, another-tab preservation, draft retention and reload result reconciliation. Source hashes and fixture screenshots are in [the admission evidence](../evidence/admission-2026-09-19/README.md).
+
+The ship contract is local-only: no pipeline, push, merge, publish or deploy was authorized or performed. The historical pipeline limitation above was not repaired or retried. Windows/DPAPI/native adapter behavior remains unverified from WSL. No live provider/device, credential access or owner visual approval occurred. Independent review remains pending.

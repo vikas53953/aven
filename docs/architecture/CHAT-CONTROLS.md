@@ -1,11 +1,11 @@
 # Chat control and CLI evidence
 
-Implemented checkpoint: 2026-09-15.
+Original implemented checkpoint: 2026-09-15. Admission addendum: 2026-09-19.
 
 ## Where the behavior lives
 
 - Frontend (`polished.js`): follow-up queue, editing/removal, explicit Resume, steering control and raw CLI terminal rendering.
-- Backend API (`intentgraph/server.cjs`): binds steering to an active run and chat, acknowledges receipt, closes admission when the final model response is produced.
+- Backend API (`intentgraph/server.cjs`): binds steering to an active run and chat, acknowledges receipt, closes steering when the final model response is produced. Durable request admission is settled separately after evidence persistence.
 - Agent runtime (`intentgraph/agent-runtime.cjs`): LangChain middleware adds accepted guidance before the next model step. An already-issued device command cannot be recalled by steering.
 - Execution (`intentgraph/network-commands.json`): one 25-command Cisco read-only catalog shared by Catalyst Center and Nornir/Netmiko. Device/controller support is checked by execution results, not inferred from the catalog.
 
@@ -29,3 +29,9 @@ The terminal displays the returned CLI string using a text node and preserved wh
 - The live browser queued `show clock` after `show ip interface brief`, displayed both raw terminals, and copied the output successfully. Evidence: `.intentgraph/evidence/chat-controls-live-ui.json` and `.png`.
 
 This does not certify every catalog command on every device. Direct SSH still requires a configured reachable lab profile. Durable server-side conversation queues and multi-customer scheduling remain future work.
+
+## Durable admission addendum — 19 September 2026
+
+`polished-admission.js` retains request identity and exact submitted context. The API uses a local SQLite receipt before dispatch; duplicate transport submissions return the same run without responder work. “Check saved run” is read-only. “Recover interrupted run” explicitly records UNKNOWN and releases only a stranded owner-safe slot, without replay. Another tab cannot clear a live admission on reload. Queued work remains paused after interruption/reconciliation and needs explicit Resume.
+
+Current evidence: [75-test WSL run and loopback browser checks](../evidence/admission-2026-09-19/README.md). The historical live observations above remain dated; they were not rerun. Windows behavior and owner approval remain unverified. These receipts do not make external commands resumable, and they do not introduce parallel execution or durable server-side conversation queues.

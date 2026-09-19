@@ -3,8 +3,8 @@
 ## Start here
 
 Aven is an existing local network-engineering assistant prototype. This repository
-is a publication snapshot of the active `netrok-muse` folder, not a new implementation
-and not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
+began as a publication snapshot of the active `netrok-muse` folder. The Git checkout
+now includes the local admission milestone; it is not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
 [architecture/HLD.md](docs/architecture/HLD.md). The historical folder/product name
 Netrok Muse still appears in filenames.
 
@@ -19,8 +19,10 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 17 identifies UI build `ux-minimal-ui-v9.1`. It records integrated minimal-UI,
-  history and reaction-picker changes, while broader candidate work remains separate.
+- HLD 18 identifies UI build `ux-minimal-ui-v9.2-admission`. It preserves the v9.1
+  minimal UI/history/reaction behavior and adds durable, fenced chat admission.
+  Stable request identity, explicit receipt recovery and serial execution are integrated;
+  broader provider/workflow/automation/terminal/Git candidates remain separate.
 - A central 115-feature comparison register, independent audit, post-fix review and
   candidate evidence preserve implementation and acceptance history.
 - Firstmate was installed separately using Windows PowerShell → Ubuntu WSL → tmux →
@@ -30,11 +32,11 @@ Netrok Muse still appears in filenames.
 
 ## What we are doing now
 
-Publishing a screened snapshot and reusable handover to the public repository
-https://github.com/vikas53953/aven, as authorized by the owner. No product
-features were changed by the publication preparation. The original source folder
-was not a Git repository; its files were preserved. This snapshot is a separate
-copy so Firstmate and other tasks must not edit both copies independently.
+The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
+The current milestone is a **local-only** reliability change, ready for independent
+review after its branch is committed. It has not been pushed, merged, published or
+deployed. The older non-Git folder remains untouched. See the
+[dated admission evidence](docs/evidence/admission-2026-09-19/README.md).
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
@@ -52,12 +54,15 @@ Authoritative references:
 - [Central feature register](outputs/01a0a3bc-a376-74e1-8d48-e4029c2cb5a2/Aven-UI-UX-Feature-Register.xlsx)
 - [Independent audit](outputs/01a0a816-e452-75f2-9363-0f859011a90e/Aven-Independent-Audit.xlsx)
 - [Post-fix review](outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/report/Aven-Post-Fix-Review.xlsx)
-- [Effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
+- [19 September admission supplement](docs/evidence/admission-2026-09-19/feature-verdicts.json)
+- [16 September effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
 
-Prioritize validating and composing the unintegrated reliability, provider,
-approval/workflow, automation, terminal and Git candidates. Files under `outputs/`
+Review the bounded admission integration before advancing. The remaining provider,
+approval/workflow, automation, terminal and Git candidates need independent integration.
+An [approval/clarification proposal](docs/proposals/approval-clarification.md) is planning
+only and contains open product decisions; its implementation has not begun. Files under `outputs/`
 are archived candidates or evidence, not automatically the live application. Do
 not bulk-copy an assembled candidate over the root application.
 
@@ -88,8 +93,9 @@ from local fixture tests.
 
 ## Run and validate
 
-Use Node.js 20 or newer for the active backend (some archived candidates use newer
-Node features such as `node:sqlite`). From the root:
+Use Node.js **24.16 or newer** for the active backend and its local `node:sqlite`
+admission store. Unsupported runtimes fail before chat dispatch; no runtime upgrade
+is performed automatically. From the root:
 
 ```powershell
 npm ci --prefix intentgraph
@@ -105,9 +111,11 @@ Firstmate's WSL installation does not prove that every Aven function runs on Lin
 Do not configure secrets in committed files. A source checkout starts without the
 original user's browser storage, runtime profiles or credentials.
 
-Fresh snapshot checks on 19 September: **58 backend tests passed, zero failed or
-skipped**, and the existing syntax check passed. Tests use local fixtures/mocks;
-this is not a fresh visual or live-infrastructure acceptance run. See
+Historical publication checks on 19 September reported 58 passes with no skips.
+After admission integration, the current WSL suite reports **75 tests: 74 passed,
+zero failed, one existing Playwright adapter skip**. Syntax and current loopback
+desktop/narrow browser checks pass. These tests use local fixtures/mocks and confer
+no Windows, live-infrastructure or owner visual acceptance. See
 [verification](docs/handover/VERIFICATION.md).
 
 ## Publication boundaries

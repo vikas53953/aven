@@ -1,6 +1,6 @@
 # Aven · Network harness — High-level design
 
-HLD 17 · Updated 2026-09-16
+HLD 18 · Updated 2026-09-19
 
 ## Purpose
 
@@ -29,9 +29,9 @@ The LLM does not directly access devices or storage. LangChain is inside the bac
 
 Displays conversations, avatars, results, timestamps and copy controls. Sends your message to the backend.
 
-Current: Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.1. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader reliability, provider, approval, automation, terminal and Git candidates remain unintegrated. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration.
+Current: Plain HTML, CSS and browser JavaScript on localhost:8767; UI build ux-minimal-ui-v9.2-admission. The local workspace now includes validated text attachments, Ideas and Goals, a derived activity feed, raw-evidence artifacts, exact-evidence annotations and run comparison. Browser run journals preserve bounded evidence through interruption; uncertain completion is UNKNOWN and queues remain paused until explicit resume. The composer plus menu offers Agent and Plan; Agent maps to the existing inspect backend mode and its read-only allowlist, while Plan binds zero tools. Local file access is session-scoped to a user-selected folder, with before/after review, conflict checks and verified writes; network configuration approval is separate and pending. Backup/restore includes workspace notes and annotations with rollback. The independent 115-row audit separates scoped verification, partial capability, missing work and unverified behavior. Four confirmed defects are repaired in this build: recoverable coworker creation, truthful About connection status, mirrored artifact deduplication and direct-conversation header identity. The post-fix workbook retains prior verdicts and evidence; tests are distinct from owner acceptance. Browser/computer panes truthfully report unavailable sessions. Cross-device history, accounts/customer isolation and remote handoff are deferred by user choice. Conversation evidence, investigation and run details are off by default and independently enabled in Settings. Raw artifact and CLI bodies start collapsed. The context ring beside Send reports the bounded local request window without inventing provider token usage. History fixes retain legacy pins and failed-save rollback; the reaction picker supports search and contained keyboard navigation. These UI changes are integrated in v9.1; the broader provider, approval, automation, terminal and Git candidates remain unintegrated; only the bounded admission slice is now composed. Long generated code blocks start collapsed while surrounding explanation stays visible; opening a block reveals the retained source without alteration. Each submitted turn saves stable identity and exact bounded outgoing context. Explicit receipt review reconciles interruption without redispatch; UNKNOWN pauses queued work. A second tab cannot clear an owned admission on reload. Local checks pass; Windows and owner visual approval remain unverified.
 
-Code / location: polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js
+Code / location: polished.html, polished.js, polished.css, polished-backup.js, polished-run-state.js, polished-attachments.js, polished-workspace-tools.js/css, polished-evidence-tools.js/css, polished-files.js/css, polished-diagnostics.js, polished-admission.js
 
 Concept: A screen is not an agent. It presents the work and your controls.
 
@@ -39,9 +39,9 @@ Concept: A screen is not an agent. It presents the work and your controls.
 
 Accepts chat requests, validates the payload and calls the runtime. Returns the answer to the browser.
 
-Current: JavaScript CommonJS (.cjs) running on Node.js with built-in node:http, not Express or Python. POST /api/chat on port 8768. One global chatPending flag allows only one in-flight chat in this process. GET /api/chat/status and chat-scoped /api/chat/runs routes provide sanitized local snapshots and persisted run evidence. The status route does not contact the provider or devices; reachability remains unverified. Mode validation precedes responder work.
+Current: Node.js 24.16+ CommonJS and node:http. POST /api/chat validates mode, bounded text and optional paired request identity. SQLite commits the full admission transition before dispatch and enforces one global admitted chat across processes sharing the store. Exact replay returns the same receipt without responder work; changed content conflicts. Chat-scoped receipt/readback and explicit recovery preserve UNKNOWN and never resume tools. Legacy identity-free clients remain accepted without cross-request replay guarantees. Provider/model behavior is unchanged; status does not establish reachability.
 
-Code / location: intentgraph/server.cjs, intentgraph/chat-read-api.cjs
+Code / location: intentgraph/server.cjs, intentgraph/chat-read-api.cjs, intentgraph/reliability.cjs, intentgraph/reliability-storage.cjs
 
 Concept: The API delivers the request; it does not decide which network checks are useful.
 
@@ -85,13 +85,13 @@ Code / location: sandboxdnac.cisco.com · sw1 and inventory devices
 
 Concept: An inventory IP does not prove your PC can SSH directly to that device.
 
-### 07. Persistence — planned
+### 07. Persistence — partial
 
 A checkpoint store will save execution progress; conversation storage will retain sessions. Long-term memory is a separate design choice.
 
-Current: Browser localStorage and local evidence files exist. Coworker creation journals exact prior preferences, chats and documents before writing; failed writes roll back, and pending recovery is handled before startup migration. This local recovery mechanism does not provide cross-device transactions. No durable LangGraph checkpoint database is integrated. Database choice remains open.
+Current: Browser localStorage retains conversations and exact submitted request snapshots. A local SQLite receipt store commits identity, fingerprint, run ID and ownership before dispatch; a unique admitted row preserves serial execution. Stale owners cannot publish a second claim. Explicit recovery requires proof that the owner is gone, or no longer active in this service, and records UNKNOWN without replay. Evidence is flushed before settlement; failed persistence remains unresolved. This does not add LangGraph checkpoints, resumable external operations, tenant storage or cross-device transactions. Production/checkpoint database choice remains open.
 
-Code / location: polished.js (coworker creation journal), polished-backup.js (import recovery), browser storage + .intentgraph/evidence; checkpoint adapter TBD
+Code / location: intentgraph/reliability-storage.cjs, intentgraph/reliability.cjs, polished-admission.js; .intentgraph/runtime/chat-admission.sqlite and initialization marker; .intentgraph/evidence/runs
 
 Concept: A database is a supporting branch, not the final step of every answer.
 
@@ -99,7 +99,7 @@ Concept: A database is a supporting branch, not the final step of every answer.
 
 Streams tool start, result, error and final answer events to chat.
 
-Current: Tool activity, Stop, queued follow-ups, steering acknowledgements and applied/pending states. Raw non-inventory CLI output is displayed in a terminal block with copy, preserving whitespace; the model explanation is separate. Artifacts reconciles matching event/evidence representations conservatively, preserving distinct diagnostic results and exact raw output; a full generated-file library remains partial.
+Current: Tool activity, Stop, queued follow-ups, steering acknowledgements and applied/pending states. Raw non-inventory CLI output is displayed in a terminal block with copy, preserving whitespace; the model explanation is separate. Artifacts reconciles matching event/evidence representations conservatively, preserving distinct diagnostic results and exact raw output; a full generated-file library remains partial. Final delivery follows evidence persistence and receipt settlement. Receipt-save failure remains UNKNOWN and blocks further admission until explicit safe recovery. Receipt state is distinct from raw evidence availability.
 
 Code / location: polished.js + .intentgraph/evidence
 
@@ -117,15 +117,15 @@ Concept: The code dependency graph, agent-team view and LangGraph execution grap
 
 ## Decisions and outstanding work
 
-- **Implemented:** LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained.
-- **Next checkpoint:** Configure and verify a real SSH lab target through Nornir/Netmiko; then evaluate diagnostic conclusions and durable investigations.
+- **Implemented:** LangChain createAgent on LangGraph with OpenCode and typed Catalyst tools; existing UI retained. Local durable request admission and explicit UNKNOWN recovery are implemented separately from checkpoints.
+- **Next checkpoint:** Independent review of local admission and its fresh fixture evidence, then native Windows validation. The separate approval/clarification proposal needs product decisions; real SSH lab work requires separate authorization.
 - **Still open:** SSH lab access, checkpoint database, customer permissions, long-term memory and tenant deployment.
-- **Verification:** See the dated first-slice evidence. Broader domain accuracy, durable recovery and customer isolation are not established by this test.
+- **Verification:** 75 current WSL tests: 74 pass, 0 fail, 1 existing Playwright skip; current desktop/narrow browser fixtures use chrome-devtools-axi. See docs/evidence/admission-2026-09-19/. Windows, owner UI acceptance, live provider/device and enterprise durability remain unverified.
 
 ## Target walkthrough
 
 1. You ask: “Investigate sw1’s interfaces.” The frontend sends your ordinary-language request.
-2. The backend starts a run. A session identifies this conversation and its execution.
+2. The backend records admission before starting a run. Stable identity admits one responder call; replay returns the existing receipt. The global serial limit remains.
 3. The runtime coordinates the investigation. LangChain supplies the agent loop; LangGraph underpins execution.
 4. The LLM chooses a useful check. It requests a tool with structured inputs, rather than inventing device facts.
 5. A network tool executes the check. The adapter resolves sw1 and calls Cisco Command Runner.
@@ -138,7 +138,7 @@ Concept: The code dependency graph, agent-team view and LangGraph execution grap
 
 - Existing connector uses the approved certificate pin and locally protected credentials. No secrets belong in this document or browser.
 - Inventory observations and actual CLI execution remain visibly distinct.
-- The model selects tools from ordinary language. The existing six-command read-only subset remains a capability limit; broader diagnostics are the next automation slice.
+- The model selects tools from ordinary language. The existing 25-command read-only catalog remains a capability limit; broader diagnostics are the next automation slice.
 - Configuration execution and its permission policy are not decided by this HLD. Cisco Command Runner itself is read-only.
 - Timeouts after submission must preserve unknown outcome; do not silently repeat requests.
 - Checkpointing does not automatically make external operations safe to replay. Tool execution and resume behavior need explicit tests.
@@ -150,6 +150,7 @@ Ask “Investigate sw1’s interfaces.” The agent must select tools without ex
 
 ## Change history
 
+- 2026-09-19 — **Durable, fenced chat request admission:** Composed a narrow backend receipt and browser identity/recovery slice on the v9.1 UI, now build ux-minimal-ui-v9.2-admission. The deterministic suspended-owner test fails against archived candidate hashes and passes against active SQLite transitions. Current suite: 74 pass, zero fail, one existing browser-adapter skip (75 tests); loopback desktop/narrow, Stop, duplicate retry, reload, keyboard recovery and queue fixtures pass. Evidence: docs/evidence/admission-2026-09-19/verification.json and browser-checks.json. No live devices/providers, secrets, Windows validation or owner approval. Historical candidate packages and evidence remain unchanged.
 - 2026-09-16 — **Minimal UI v9.1 code folding:** Long generated code starts collapsed. Three root browser boundary checks passed: final failures stay visible with raw output hidden; active Stop remains available; long code is collapsed with exact source retained. Evidence: completion/ui-release/boundaries-v9.1.json and integration.json. The live browser shows a collapsed 113-line HTML block. Backend integration remains pending.
 - 2026-09-16 — **Minimal UI v9 and history release:** Integrated only the reviewed UI/history/reaction changes. Evidence: completion/ui-release/navigation/results.json (31 checks pass), browser-evidence.json (23 checks pass), quality-evidence.json (10 checks pass), backup.test.cjs (3 pass), integration.json (5 exact source files, verified hashes). Fixed duplicate fenced CLI output caused by Markdown boundary newlines without modifying retained output bytes. Backend behavior and remaining 115-row completion verdicts are unchanged; owner visual acceptance and full backend integration remain separate.
 - 2026-09-16 — **HLD 16 · Independent audit fixes:** Build ux-audit-fixes-v8 repairs four confirmed defects affecting UX-011, UX-058, UX-066, UX-098 and UX-102. Independent review and isolated integrated browser regressions cover creation failure/recovery/retry, status truthfulness, artifact preservation and rename identity. Evidence: outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/independent-review.json and root-verification.json. Backend regression: 58 passed, zero failed. Original feature register and audit workbook remain unchanged; post-fix workbook preserves prior verdicts. These repairs do not complete the remaining feature backlog or assert live provider/device reachability, real filesystem verification or owner acceptance.
@@ -194,6 +195,7 @@ Edit architecture.json as part of each relevant implementation checkpoint, add d
 - [Chat controls and CLI evidence](./CHAT-CONTROLS.md)
 - [Chat presentation acceptance](../../.intentgraph/feedback-chat-polish.md)
 - [Project/thread interaction checkpoint](../../.intentgraph/feedback-project-navigation.md)
+- [Local admission verification (2026-09-19)](../evidence/admission-2026-09-19/README.md)
 
 
 ## Technical and production architecture workshop
@@ -224,7 +226,7 @@ LangChain/LangGraph run in Node. The execution facade routes Catalyst targets to
 
 #### Storage and identity
 
-Browser localStorage holds preferences/messages; local files hold evidence; a Windows-protected vault holds credentials. This is not a customer account system, tenant database or durable agent checkpoint store.
+Browser localStorage holds conversations and request snapshots; local SQLite holds durable admission receipts; local files hold raw evidence; the Windows vault remains separate. Admission is not a customer identity system or resumable LangGraph checkpoint.
 
 ### 02 / Follow the real function path
 
@@ -244,7 +246,7 @@ Enter/submit validates the draft, adds the user message, saves state and renders
 
 #### 4. requestChatReply(chat)
 
-Collects up to 24 messages within the character limit, then fetches POST http://127.0.0.1:8768/api/chat. The browser does not hold the provider key.
+Persists a stable request identity and exact bounded context, then posts to the local chat API. Receipt review and recovery are explicit. Retrying transport preserves identity; a deliberate new turn receives a new one. Provider keys stay outside the browser.
 
 #### 5. route(req,res)
 
@@ -458,6 +460,6 @@ Choose supported checkpoint storage, evidence store and identity services after 
 
 - **1 · Intelligence slice (implemented · local slice):** Framework loop, existing model, inventory/diagnostics and visible tool evidence. Broader operations and durable recovery are later slices.
 - **2 · Network execution (partial):** Nornir/Netmiko worker and routing implemented. Next checkpoint: real SSH lab verification.
-- **3 · Durable investigations (planned):** Checkpoint store, context/runbooks, resumable runs and task evaluations.
+- **3 · Durable investigations (partial):** Local durable admission receipts and explicit unknown recovery are implemented. LangGraph checkpoint storage, context/runbooks, resumable runs and domain task evaluations remain planned.
 - **4 · Customer pilot (planned):** Identity, tenant boundaries, private connector, metering and recovery validation.
 - **5 · Enterprise expansion (planned):** Integrations, topology, specialist models and proactive workflows based on evidence.
