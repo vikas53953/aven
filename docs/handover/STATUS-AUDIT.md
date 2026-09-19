@@ -35,5 +35,10 @@ Key candidate blockers are recorded in [`root-candidate-findings.json`](../../ou
 4. Address the 14 Missing rows in dependency order, with UX-114 (approval-tooling integration) requiring a server-owned scoped connection/approval boundary. Configure and verify a real SSH lab profile separately; persistence/checkpoint storage, tenant/customer isolation, accounts, remote handoff, topology, scheduling, plugin/skills management and Git publication remain future work.
 5. Require explicit owner visual/product acceptance and, where relevant, assistive-technology, packaged-app, provider, device and cross-device evidence. Existing tests and ledgers do not supply that approval.
 
-This audit describes the original folder. The separate publication snapshot now has local Git history; see VERIFICATION.md for the fresh 19 September regression results. For GitHub handover, the destination repository/organization still needs to be selected. This audit found no local Git repository or proof of a current remote. Publish the preserved `netrok-muse` tree plus this status draft and the dated ledgers; label all candidate overlays as unintegrated until a fresh source-based integration review passes.
+This audit describes the original folder before publication. The separate snapshot
+now has Git history and the owner selected the public repository
+https://github.com/vikas53953/aven as the source and documentation home. See
+[VERIFICATION.md](VERIFICATION.md) for the fresh 19 September regression results and
+the automated-gate limitation. Candidate overlays remain unintegrated until a fresh
+source-based integration review passes.
 

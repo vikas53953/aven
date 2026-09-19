@@ -26,6 +26,7 @@ Netrok Muse still appears in filenames.
 - Firstmate was installed separately using Windows PowerShell → Ubuntu WSL → tmux →
   Codex CLI. Its software and GitHub/Codex authentication checks passed. Credentials,
   Firstmate private state and the Firstmate distribution itself are not part of Aven.
+  See [Firstmate setup and continuation](docs/handover/FIRSTMATE.md).
 
 ## What we are doing now
 
