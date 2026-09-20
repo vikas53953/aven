@@ -16,11 +16,13 @@ ignore_patterns:
   - .intentgraph/**
 document:
   instructions: |
-    This is initial archival publication, not implementation work. Preserve source
-    and dated evidence. HANDOVER.md and docs/handover own current publication status.
+    This repository now receives implementation changes after its initial archival
+    publication. Preserve dated evidence. HANDOVER.md and docs/handover own current
+    publication status. Update the architecture JSON and generated HLD when needed.
     Historical candidate outputs are unintegrated unless explicitly documented.
 test:
   instructions: |
     Use existing fixture tests. Do not access credentials, external model providers,
     devices or private runtime state. Visual and live-infrastructure acceptance are
-    explicitly out of scope for the publication snapshot.
+    separate from automated results. Use running offline UI evidence when supplied;
+    do not claim unavailable mounted checks passed or demand live-provider access.

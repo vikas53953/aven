@@ -2,16 +2,18 @@
 (function(root){
   'use strict';
   const id=value=>typeof value==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(value);
+  function validSelection(value){return value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).length===3&&['opencode','openrouter','anthropic','openai'].includes(value.providerId)&&typeof value.modelId==='string'&&value.modelId.trim()===value.modelId&&value.modelId.length>0&&value.modelId.length<=200&&['none','low','medium','high','max'].includes(value.effort);}
   function valid(value,chatId){
     const b=value?.body;
-    return b&&b.chatId===chatId&&id(b.chatId)&&id(b.requestId)&&id(b.idempotencyKey)&&typeof b.agentName==='string'&&b.agentName.length<=80&&['inspect','plan'].includes(b.mode)&&Array.isArray(b.messages)&&b.messages.length>0&&b.messages.length<=24&&b.messages.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string'&&m.content.trim())&&b.messages.at(-1).role==='user'&&b.messages.reduce((n,m)=>n+m.content.length,0)<=32000;
+    return b&&b.chatId===chatId&&(b.selection===undefined||validSelection(b.selection))&&id(b.chatId)&&id(b.requestId)&&id(b.idempotencyKey)&&typeof b.agentName==='string'&&b.agentName.length<=80&&['inspect','plan'].includes(b.mode)&&Array.isArray(b.messages)&&b.messages.length>0&&b.messages.length<=24&&b.messages.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string'&&m.content.trim())&&b.messages.at(-1).role==='user'&&b.messages.reduce((n,m)=>n+m.content.length,0)<=32000;
   }
-  function prepare(chat,message,{agentId,agentName,mode,messages},uuid=()=>crypto.randomUUID()){
+  function prepare(chat,message,{agentId,agentName,mode,messages,selection},uuid=()=>crypto.randomUUID()){
     if(message.submission?.body?.chatId===chat.id){
       if(!valid(message.submission,chat.id))throw Error('Saved request is invalid. Keep your workspace backup before continuing.');
       return message.submission;
     }
     const submission={agentId,state:'prepared',body:{chatId:chat.id,requestId:uuid(),idempotencyKey:uuid(),agentName:agentName.slice(0,80),mode:mode==='plan'?'plan':'inspect',messages:messages.map(({role,content})=>({role,content}))}};
+    if(selection)submission.body.selection={providerId:selection.providerId,modelId:selection.modelId,effort:selection.effort};
     if(!valid(submission,chat.id))throw Error('The saved request exceeds the local chat limits.');
     return submission;
   }
@@ -44,12 +46,14 @@
     const existing=resultFor(chat,receipt);
     const reply=record?.reply;
     const result={...(receipt.question?{question:receipt.question}:{}),id:existing?.id||crypto.randomUUID(),role:'assistant',agentId:submission.agentId,requestId:receipt.requestId,runId:receipt.runId,status:receipt.outcome,mode:submission.body.mode,text:reply?.text||(receipt.question?.phase==='cancelled'?'Request cancelled. No continuation was dispatched.':'Remote completion is unknown. Review captured evidence before continuing. No request was retried.'),source:reply?.source||'Saved local run',model:reply?.model,usage:reply?.usage,events:record?.events||existing?.events||[],evidence:reply?.evidence||existing?.evidence||[],createdAt:existing?.createdAt||receipt.updatedAt};
+    if(reply?.requestedSelection)result.requestedSelection=reply.requestedSelection;
+    if(reply?.provenance)result.provenance=reply.provenance;
     const reconciled=reconcileResult(chat,result);
     submission.state='settled';submission.receipt=receipt;
     delete chat.pendingAdmission;delete chat.runJournal;delete chat.queueDispatching;delete chat.replyError;delete chat.captureWarning;
     chat.queuePaused=!!chat.pendingQueue?.length;chat.queuePauseReason=chat.queuePaused?'Saved run reviewed. Resume queued work explicitly.':'';
     return reconciled;
   }
-  const api={valid,prepare,pending,applyReceipt,reconcileResult};
+  const api={valid,validSelection,prepare,pending,applyReceipt,reconcileResult};
   if(typeof module!=='undefined')module.exports=api;else root.AvenAdmission=api;
 })(typeof window!=='undefined'?window:globalThis);

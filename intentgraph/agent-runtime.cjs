@@ -7,6 +7,7 @@ const { HumanMessage, AIMessage, ToolMessage } = require('@langchain/core/messag
 const { z } = require('zod');
 const { SUPPORTED_COMMANDS, isUuid } = require('./catalyst.cjs');
 const { getSecret } = require('./vault.cjs');
+const { DEFAULT_SELECTION, normalizeSelection, resolveSelection, responseProvenance } = require('./provider-selection.cjs');
 
 const ENDPOINT = 'https://opencode.ai/zen/go/v1';
 const MODEL = 'mimo-v2.5';
@@ -148,20 +149,29 @@ function restrictedFetch(input, init = {}) {
   return fetch(input, { ...init, redirect: 'error' });
 }
 
-async function createDefaultModel({ getKey = () => getSecret('opencode-go'), modelFactory, signal, chatId } = {}) {
-  if (typeof getKey !== 'function') throw Object.assign(Error('OpenCode provider key is unavailable.'), { code: 'provider_key_unavailable' });
+async function createDefaultModel({ getKey = () => getSecret('opencode-go'), modelFactory, signal, chatId, selection = DEFAULT_SELECTION } = {}) {
+  const chosen = normalizeSelection(selection) || DEFAULT_SELECTION;
+  const providerId = chosen.providerId;
+  const hasModelFactory = typeof modelFactory === 'function' && (typeof modelFactory.supportsProvider !== 'function' || modelFactory.supportsProvider(providerId) === true);
+  if (providerId !== DEFAULT_SELECTION.providerId && !hasModelFactory) {
+    throw Object.assign(Error('The selected provider has no executable adapter.'), { code: 'provider_adapter_unavailable' });
+  }
+  if (typeof getKey !== 'function') throw Object.assign(Error('The selected provider key is unavailable.'), { code: 'provider_key_unavailable' });
   if (signal?.aborted) throw signal.reason || abortError('agent_aborted', 'Network coworker run was cancelled.');
   let key;
-  try { key = await getKey(); } catch (error) { throw Object.assign(Error('OpenCode provider key is unavailable.'), { code: 'provider_key_unavailable', cause: error }); }
-  if (typeof key !== 'string' || !key.trim()) throw Object.assign(Error('OpenCode provider key is unavailable.'), { code: 'provider_key_unavailable' });
+  try { key = await getKey(providerId); } catch (error) { throw Object.assign(Error('The selected provider key is unavailable.'), { code: 'provider_key_unavailable', cause: error }); }
+  if (typeof key !== 'string' || !key.trim()) throw Object.assign(Error('The selected provider key is unavailable.'), { code: 'provider_key_unavailable' });
   const fields = {
     apiKey: key.trim(),
-    model: MODEL,
+    model: chosen.modelId,
     timeout: MODEL_TIMEOUT_MS,
     maxTokens: 2048,
     maxRetries: 0,
     streaming: false,
-    modelKwargs: { thinking: { type: 'disabled' } },
+    modelKwargs: { thinking: { type: chosen.effort === 'none' ? 'disabled' : 'enabled' } },
+    providerId,
+    effort: chosen.effort,
+    selection: chosen,
     configuration: {
       baseURL: ENDPOINT,
       maxRetries: 0,
@@ -170,9 +180,12 @@ async function createDefaultModel({ getKey = () => getSecret('opencode-go'), mod
     }
   };
   try {
-    return typeof modelFactory === 'function'
-      ? await modelFactory({ ...fields, endpoint: ENDPOINT, modelName: MODEL, apiKey: key.trim() })
-      : new ChatOpenAI(fields);
+    if (hasModelFactory) {
+      const custom = await modelFactory({ ...fields, endpoint: ENDPOINT, modelName: chosen.modelId, apiKey: key.trim() });
+      if (custom) return custom;
+      if (providerId !== DEFAULT_SELECTION.providerId) throw Object.assign(Error('The selected provider adapter returned no model.'), { code: 'provider_adapter_unavailable' });
+    }
+    return new ChatOpenAI(fields);
   } finally {
     key = '';
   }
@@ -372,19 +385,24 @@ function continuationMessages(messages) {
   return retained;
 }
 
-async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, clarificationAnswered = false, runtimeContext = {}, runId: originalRunId } = {}) {
+async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, clarificationAnswered = false, runtimeContext = {}, runId: originalRunId, selection, providerCapabilities } = {}) {
   const selectedMode = normalizeMode(mode);
   if (selectedMode === 'inspect' && (!sandbox || typeof sandbox.inventory !== 'function' || typeof sandbox.runCommand !== 'function')) throw Error('Network sandbox is unavailable.');
   if (!Array.isArray(messages) || !messages.length) throw Error('Agent messages are required.');
   let context = runtimeContexts.get(runtimeContext);
   if (clarificationAnswered) {
     if (!context || context.phase !== 'waiting' || context.mode !== selectedMode || context.chatId !== chatId || context.originalRunId !== originalRunId) throw Error('Live clarification runtime context is unavailable.');
+    const continued = normalizeSelection(selection);
+    if (continued && JSON.stringify(continued) !== JSON.stringify(context.selection)) throw Object.assign(Error('Provider selection cannot change during clarification continuation.'), { code: 'selection_conflict' });
   } else {
     if (context) throw Error('Runtime context was already used.');
+    const resolved = resolveSelection({ selection, capabilities: providerCapabilities, defaultSelection: DEFAULT_SELECTION });
+    if (!resolved.ok) throw Object.assign(Error(resolved.reason), { code: resolved.code });
     context = { phase: 'new', mode: selectedMode, chatId, originalRunId, runId: originalRunId || crypto.randomUUID(),
-      model: null, messages: null, evidence: [], budget: { calls: 0, diagnostics: new Set(), exhausted: false } };
+      model: null, messages: null, evidence: [], selection: resolved.selection, budget: { calls: 0, diagnostics: new Set(), exhausted: false } };
     runtimeContexts.set(runtimeContext, context);
   }
+  const selected = context.selection || normalizeSelection(selection) || DEFAULT_SELECTION;
   context.phase = 'running';
   const runId = context.runId;
   const deadline = makeDeadline(signal, Math.max(1, Number(timeoutMs) || RUNTIME_TIMEOUT_MS));
@@ -397,7 +415,7 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
     } catch { /* event consumers cannot change the run result */ }
   };
   const execution = (async () => {
-    const runtimeModel = context.model || model || await createDefaultModel({ getKey, modelFactory, signal: deadline.signal, chatId });
+    const runtimeModel = context.model || model || await createDefaultModel({ getKey, modelFactory, signal: deadline.signal, chatId, selection: selected });
     context.model = runtimeModel;
     const agent = createAgent({
       model: runtimeModel,
@@ -417,6 +435,7 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
       name: safeText(agentName, 80) || 'Network coworker'
     });
     let finalMessage = null;
+    let responseMetadata = { providerId: null, modelId: null, effort: null, usage: null };
     const stream = agent.streamEvents({ messages: clarificationAnswered
       ? [...context.messages, new HumanMessage({ content: messages.at(-1).content })]
       : toMessages(messages) }, {
@@ -430,6 +449,14 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
         const output = event.data?.output;
         if (AIMessage.isInstance(output) && (!output.tool_calls?.length || selectedMode === 'plan')) {
           finalMessage = output;
+          const metadata = output?.response_metadata && typeof output.response_metadata === 'object' ? output.response_metadata : {};
+          const usage = output?.usage_metadata && typeof output.usage_metadata === 'object' ? output.usage_metadata : metadata.usage;
+          responseMetadata = {
+            providerId: safeText(metadata.providerId || metadata.provider_id || metadata.provider, 80) || responseMetadata.providerId,
+            modelId: safeText(metadata.modelId || metadata.model_name || metadata.model, 200) || responseMetadata.modelId,
+            effort: safeText(metadata.effort || metadata.reasoning_effort, 32) || responseMetadata.effort,
+            usage: usage || responseMetadata.usage
+          };
           try { onModelComplete?.(); } catch { /* lifecycle observers cannot change the run result */ }
         }
       }
@@ -446,11 +473,16 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
     context.phase = question ? 'waiting' : 'closed';
     if (!question) { context.messages = null; context.model = null; }
     const groundedText = text || (evidence.length ? 'The investigation ended without a grounded final response.' : 'No grounded response was returned.');
+    const provenance = responseProvenance({ requested: selected, response: responseMetadata });
     return {
       text: question ? '' : `${groundedText}${evidenceSummary(evidence)}`,
       ...(question ? { question } : {}),
       source: 'LangGraph network coworker',
-      model: MODEL,
+      providerId: selected.providerId,
+      model: selected.modelId,
+      effort: selected.effort,
+      requestedSelection: selected,
+      provenance,
       mode: selectedMode,
       evidence: evidence.map((item) => ({ ...item })),
       runId,

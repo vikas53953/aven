@@ -22,7 +22,7 @@ Netrok Muse still appears in filenames.
 - The [architecture record](docs/architecture/architecture.json) identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
   minimal UI/history/reaction behavior and adds durable, fenced chat admission.
   Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
-  one structured clarification is integrated; provider/approval/automation/terminal/Git candidates remain separate.
+  one structured clarification is integrated. The bounded provider-picker slice adds optional request selection and provenance; provider onboarding, action approval, automation, terminal and Git candidates remain separate.
 - A central 115-feature comparison register, independent audit, post-fix review and
   candidate evidence preserve implementation and acceptance history.
 - Firstmate was installed separately using Windows PowerShell → Ubuntu WSL → tmux →
@@ -33,12 +33,13 @@ Netrok Muse still appears in filenames.
 ## What we are doing now
 
 The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
-As of 20 September, `ui/compact-answered-clarification` adds the owner-requested
-compact answered row to the clarification and review/test corrections. See the
-[usage guide](README.md#run-the-current-application) for disclosure behavior. Its ancestry includes reliability base
-`e176ad4989a9e8f5455223206f10227d58b837b6`. The active no-mistakes run owns
-validation and repository delivery; this documentation checkpoint does not establish
-push, PR, required-check or merge completion.
+As of 20 September, clarification [PR #1](https://github.com/vikas53953/aven/pull/1)
+and compact answered-row [PR #2](https://github.com/vikas53953/aven/pull/2) are merged.
+The compact-row merge is `8c74be304ff5643a2b41aab769bcce96fcdd7922`.
+The next branch adds a bounded conversation model picker and native Windows launcher
+fixes. See [scope and evidence](docs/evidence/provider-picker-2026-09-20/README.md).
+Its validation gate owns further delivery; this checkpoint does not claim that
+the provider branch is already pushed or merged.
 
 Task-branch push and PR are authorized; root owns merge after applicable checks
 pass and substantive findings are resolved. The owner approved the initial
@@ -54,8 +55,8 @@ runtime state automatically. Reconcile any newer local changes first.
 
 ## Current evidence and pending work
 
-The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement changes only UX-033 to Partial: **37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing and 4 Deferred** across 115 features. These combine the
-16 September verdicts with the scoped 19 September clarification supplement, not a fresh full-product audit. Older README and
+The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement advances UX-033 to Partial; the bounded provider-picker supplement advances UX-027 to Partial: **37 Verified (scoped), 59 Partial, 3 Unverified, 12 Missing and 4 Deferred** across 115 features. These combine the
+16 September verdicts with scoped clarification and provider supplements, not a fresh full-product audit. Older README and
 workbook snapshots contain different counts; preserve their dates and scope.
 
 Authoritative references:
@@ -68,8 +69,8 @@ Authoritative references:
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
 
-Independent review of the bounded clarification integration remains part of delivery. The remaining provider,
-approval/workflow, automation, terminal and Git candidates need independent integration.
+Owner UI acceptance remains distinct from independent review. Provider onboarding and production adapters,
+approval/workflow, automation, terminal and Git candidates still need integration.
 The [approval/clarification proposal](docs/proposals/approval-clarification.md) now records the launch authorization for all four recommended choices. Only clarification is implemented: one question, one same-run read-only continuation, serial waiting and explicit cancellation after reload. Approval, mock execution and durable continuation after restart remain excluded. Files under `outputs/`
 are archived candidates or evidence, not automatically the live application. Do
 not bulk-copy an assembled candidate over the root application.

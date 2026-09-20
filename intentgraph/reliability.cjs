@@ -11,7 +11,10 @@ const fail = (code, message, statusCode = 409) => Object.assign(new Error(messag
 function fingerprint(body) {
   return crypto.createHash('sha256').update(JSON.stringify({
     chatId: body.chatId, agentName: body.agentName, mode: body.mode || 'inspect',
-    messages: body.messages.map(({ role, content }) => ({ role, content }))
+    messages: body.messages.map(({ role, content }) => ({ role, content })),
+    // A request identity is bound to the provider/model choice as well as the
+    // conversation. This prevents replaying one id with a changed adapter.
+    ...(body.selection === undefined ? {} : { selection: body.selection })
   })).digest('hex');
 }
 

@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-20",
+  "scope": "Bounded provider picker and Windows launcher validation",
+  "priorLedger": "../clarification-2026-09-19/feature-verdicts.json",
+  "changes": [
+    {
+      "id": "UX-027",
+      "previous": "Missing",
+      "current": "Partial",
+      "implemented": "Conversation-scoped configured provider/model/effort choice, frozen request identity and clarification continuation, requested/reported provenance.",
+      "remaining": "Production provider onboarding/adapters, connected-provider acceptance, full packaged Windows validation and owner visual acceptance. Configured-local fixture results do not close these requirements."
+    }
+  ],
+  "effectiveTotals": { "verifiedScoped": 37, "partial": 59, "unverified": 3, "missing": 12, "deferred": 4, "total": 115 },
+  "fullProductReaudit": false
+}

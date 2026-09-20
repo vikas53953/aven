@@ -614,6 +614,10 @@ html[data-theme=light] .cli-terminal { background: #050505; color: #eee; }
 .clarification-answered summary{padding:12px 16px;min-height:44px;box-sizing:border-box;cursor:pointer;font-weight:500;overflow-wrap:anywhere;border-radius:12px}
 .clarification-answered summary:hover{background:var(--hover,rgba(127,127,127,.08))}
 .clarification-details{padding:0 16px 16px}
+.model-picker-trigger{background:transparent;border:0;color:var(--muted,#777);font:inherit;font-size:.8rem;padding:8px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.model-picker-trigger:disabled{opacity:.55;cursor:default}
+.provider-picker-fields{display:grid;gap:12px}.provider-picker-fields label{display:grid;gap:6px}.provider-picker-fields select{width:100%;min-width:0;min-height:40px;font:inherit;color:inherit;background:var(--panel,var(--bg,#fff));border:1px solid var(--border,#bbb);border-radius:6px;padding:8px}
+.provider-picker-actions{display:flex;gap:8px;margin:12px 0}.provider-picker-status,.provider-picker-note{font-size:.85rem;line-height:1.5;overflow-wrap:anywhere}
 .clarification-reason,.clarification-note{font-size:.85rem;line-height:1.5;color:var(--muted,#777)}
 .clarification-form fieldset{border:0;padding:0;margin:12px 0;min-width:0}
 .clarification-form legend{font-size:.85rem;margin-bottom:6px}

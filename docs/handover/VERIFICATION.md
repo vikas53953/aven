@@ -4,6 +4,12 @@ Current delivery and acceptance status belongs to [HANDOVER.md](../../HANDOVER.m
 The dated sections below preserve each check's scope; historical full-suite totals
 do not describe every subsequent source correction.
 
+## Provider picker and native Windows — 20 September 2026
+
+Native Node 24.19.0: `node --test --test-reporter=tap --test-timeout=60000 --test-concurrency=1 intentgraph/*.test.cjs` completed with **102 passed, 0 failed, 23 skipped** (125 total). Skips retain existing optional mounted-browser/adapter requirements; they are not passes. The Windows test harness now closes SQLite handles before cleanup and verifies Windows refusal to rename an open database before testing file loss after shutdown.
+
+The actual Windows launch scripts passed startup, existing-service reuse, restart and occupied-port preservation checks. Running loopback UI checks covered saved model/effort, disabled unavailable providers, immutable clarification selection, restored chats, compact answer refresh/focus and a 390px picker. The architecture atlas loaded HLD 26. See [scope, earlier failed attempts and limitations](../evidence/provider-picker-2026-09-20/README.md). No live provider/device calls or credentials were used; independent review and owner visual acceptance remain separate.
+
 ## Focused pending-workspace corrections — 20 September 2026
 
 [T1 verification](../evidence/clarification-2026-09-19/t1-verification.md) records mounted verification covering active-writer completion, abandoned pending drafts,

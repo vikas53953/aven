@@ -5,8 +5,18 @@ Start with [HANDOVER.md](HANDOVER.md) for completed/current/pending work, workfl
 ## Run the current application
 
 Use Node 24.16 or newer, run `npm ci --prefix intentgraph`, then
-`./Start-IntentGraph.ps1` and open http://127.0.0.1:8768/polished.html.
+`./Start-IntentGraph.ps1` and `./Start-NetrokMuse.ps1`. The frontend opens
+http://127.0.0.1:8767/polished.html. If Windows finds an older Node first, pass
+`-NodePath 'C:\path\to\supported\node.exe'` to the backend launcher. Both launchers
+accept `-NoBrowser` for terminal-only startup and leave occupied foreign ports alone.
 See the [runtime reference](intentgraph/README.md) for admission, backup and recovery contracts.
+
+Use **Model: default** in the composer to open **Models & providers**. **Use this model**
+saves the provider/model/effort choice for that conversation immediately. Only advertised
+configured choices are available; configuration alone does not verify connectivity.
+Active/queued requests lock changes, and retries/clarification retain their original
+selection. **Use service default** restores the existing OpenCode default. This slice
+does not add credential setup or new production provider adapters.
 
 Plan or Inspect can ask one clarification in the conversation. Select a choice or
 enter an allowed answer and use **Continue**, or **Cancel request**. Waiting keeps

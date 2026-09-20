@@ -50,6 +50,12 @@ test('storage corruption, deletion, write denial and unsupported runtimes fail c
   assert.throws(() => a.claim(body));
   store.db.exec('PRAGMA query_only=OFF');
   assert.equal(a.read(body.chatId, body.requestId), null);
+  if (process.platform === 'win32') {
+    // Windows protects an open SQLite file from removal. Verify that boundary,
+    // then simulate file loss while the service is stopped for the reopen check.
+    assert.throws(() => fs.renameSync(store.file, store.file + '.removed'), error => ['EBUSY', 'EPERM', 'EACCES'].includes(error.code));
+    a.close();
+  }
   fs.renameSync(store.file, store.file + '.removed');
   assert.throws(() => a.claim(body)); a.close();
   assert.throws(() => new ReceiptStore(root), /missing/);
