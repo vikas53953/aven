@@ -10,7 +10,13 @@ See the [runtime reference](intentgraph/README.md) for admission, backup and rec
 
 Plan or Inspect can ask one clarification in the conversation. Select a choice or
 enter an allowed answer and use **Continue**, or **Cancel request**. Waiting keeps
-execution serial. After reload, the saved question cannot continue: cancel it and
+execution serial. Accepted answers collapse into a small **Answered: Core switch**
+row (using your answer). Click the row, or focus it and press Enter or Space, to
+expand or collapse the original question, answer and **Refresh saved state** control.
+Expansion is retained through refresh and conversation navigation in the same page;
+reloading returns answered rows to their collapsed default.
+
+After reload, a saved waiting question cannot continue: cancel it and
 send a fresh request. A draft warning means edits are held only in that tab; copy
 them before reloading. Clarification supplies scope and grants no execution approval.
 

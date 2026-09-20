@@ -2,7 +2,7 @@
 (function(root){
   'use strict';
   function scope(q){return {chatId:q.chatId,requestId:q.requestId,runId:q.runId,questionId:q.id,revision:q.revision};}
-  function card(q,{live=false,busy=false,draft={},note='',onDraft,onAnswer,onCancel,onRefresh}={}){
+  function card(q,{expanded=false,live=false,busy=false,draft={},note='',onDraft,onAnswer,onCancel,onRefresh}={}){
     const box=document.createElement('section');box.className='clarification-card';box.dataset.questionId=q.id;
     const heading=document.createElement('h3');heading.id='question-'+q.id;
     heading.textContent=q.phase==='waiting'?'Waiting for your answer':q.phase==='cancelled'?'Request cancelled':q.answer?'Answer recorded':'Question no longer active';
@@ -26,7 +26,15 @@
     const actions=document.createElement('div');actions.className='clarification-actions';
     function button(label,fn){if(!fn)return;const b=document.createElement('button');b.type='button';b.className='button-secondary';b.textContent=label;b.disabled=busy;b.onclick=fn;if(label==='Refresh saved state')b.dataset.questionAction='refresh';actions.append(b);}
     if(q.phase==='waiting')button(live?'Cancel request':'Cancel waiting request',onCancel);
-    button('Refresh saved state',onRefresh);box.append(actions);return box;
+    button('Refresh saved state',onRefresh);box.append(actions);
+    if(q.answer){
+      const details=document.createElement('details');details.open=expanded;
+      const summary=document.createElement('summary');summary.textContent='Answered: '+q.answer.text;
+      const content=document.createElement('div');content.className='clarification-details';
+      while(box.firstChild)content.append(box.firstChild);
+      details.append(summary,content);box.append(details);box.classList.add('clarification-answered');
+    }
+    return box;
   }
   const api={scope,card};if(typeof module!=='undefined')module.exports=api;else root.AvenClarification=api;
 })(typeof window!=='undefined'?window:globalThis);

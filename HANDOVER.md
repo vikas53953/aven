@@ -33,16 +33,19 @@ Netrok Muse still appears in filenames.
 ## What we are doing now
 
 The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
-As of 20 September, `fm/aven-clarification-delivery` includes clarification and the
-subsequent review/test corrections. Its ancestry includes reliability base
+As of 20 September, `ui/compact-answered-clarification` adds the owner-requested
+compact answered row to the clarification and review/test corrections. See the
+[usage guide](README.md#run-the-current-application) for disclosure behavior. Its ancestry includes reliability base
 `e176ad4989a9e8f5455223206f10227d58b837b6`. The active no-mistakes run owns
 validation and repository delivery; this documentation checkpoint does not establish
 push, PR, required-check or merge completion.
 
-The owner authorizes task-branch push, PR, independent review and merge after required
-checks pass and substantive findings are resolved, including merge before visual
-approval. Owner visual acceptance remains pending; deployment and customer release
-remain unauthorized. Record any delivery blocker instead of treating authorization
+Task-branch push and PR are authorized; root owns merge after applicable checks
+pass and substantive findings are resolved. The owner approved the initial
+clarification card and explicitly requested the compact answered row. That approval
+does not establish acceptance of the full application or the subsequent refresh
+correction; local fixtures do not establish customer or visual acceptance.
+Deployment and customer release remain unauthorized. Record any delivery blocker instead of treating authorization
 as completion. The older non-Git folder remains untouched.
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
@@ -65,7 +68,7 @@ Authoritative references:
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
 
-Independently review the bounded clarification integration before owner UI acceptance. The remaining provider,
+Independent review of the bounded clarification integration remains part of delivery. The remaining provider,
 approval/workflow, automation, terminal and Git candidates need independent integration.
 The [approval/clarification proposal](docs/proposals/approval-clarification.md) now records the launch authorization for all four recommended choices. Only clarification is implemented: one question, one same-run read-only continuation, serial waiting and explicit cancellation after reload. Approval, mock execution and durable continuation after restart remain excluded. Files under `outputs/`
 are archived candidates or evidence, not automatically the live application. Do
@@ -137,7 +140,7 @@ was inspected from this repository.
 Skills are optional workflow aids subject to explicit owner instructions; their
 presence does not authorize external actions or change project acceptance.
 
-The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity, native Windows uncertainty, and owner UI acceptance remain explicit limitations.
+The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity and native Windows uncertainty remain explicit limitations. Current acceptance scope is recorded under “What we are doing now” above.
 
 Review and test corrections are implemented on this branch. Their dated validation
 and remaining evidence limits are indexed in [verification history](docs/handover/VERIFICATION.md).
