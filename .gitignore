@@ -17,3 +17,6 @@ __pycache__/
 .venv/
 .no-mistakes/
 .intentgraph/evidence/runs/
+
+# Disposable local validation tools, fixtures and browser profiles
+.audit/

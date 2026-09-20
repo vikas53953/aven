@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-19T19:30:30.944Z",
+  "base": "e176ad4989a9e8f5455223206f10227d58b837b6",
+  "createdBy": "Executed unchanged base receipt implementation in a fresh disposable directory; rerun after F1–F3 corrections",
+  "workflowVersion": 2,
+  "baseSourceHashes": {
+    "reliability.cjs": "f36743b3f7644eccea38311f7fbe71a4158d254c8b94f3c2d01755f10b8a20ed",
+    "reliability-storage.cjs": "daeb81030398e0d58407a2db4bce4681197906c9aeb3ba89c081a6e450be5726"
+  },
+  "currentStorageSha256": "a04c90c86ca1007961d089d4509a0eeda489c91ddf916543347250957c2ddfc0",
+  "rows": [
+    {
+      "state": "settled",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    },
+    {
+      "state": "unknown",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    },
+    {
+      "state": "admitted",
+      "identityPreserved": true,
+      "outcomePreserved": true,
+      "evidenceFlagPreserved": true,
+      "exactReplayDuplicate": true,
+      "question": null
+    }
+  ]
+}

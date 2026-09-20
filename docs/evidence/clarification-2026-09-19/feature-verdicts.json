@@ -1,0 +1,1173 @@
+{
+  "date": "2026-09-19",
+  "scope": "Clarification-only milestone with independent-review corrections F1–F3; independent re-review and owner UI approval pending",
+  "counts": {
+    "Verified (scoped)": 37,
+    "Partial": 58,
+    "Unverified": 3,
+    "Missing": 13,
+    "Deferred": 4
+  },
+  "requirementsPreserved": 115,
+  "originalWorkbookSha256": "1d3070e0eb4a97772b219f11047aeeb2291cbbd2376ef5c2ba546dd2b5e0bef1",
+  "updatedWorkbookSha256": "811d2b7b2d264ff62ca3cdaf7275e113df1a03dce099a61a345ba4d8737976f6",
+  "rows": [
+    {
+      "id": "UX-001",
+      "feature": "Subtle scrollbars",
+      "acceptance": "Mouse, keyboard and touch scrolling work. Idle bars fade. CLI whitespace stays exact.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original browser interaction slice; assistive-technology and owner visual certification remain outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-002",
+      "feature": "Contain horizontal overflow",
+      "acceptance": "No horizontal sidebar or page scroll at agreed desktop widths. Long CLI lines remain copy-exact.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Agreed desktop-width matrix beyond 390px is untested, so full overflow coverage is incomplete.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-003",
+      "feature": "Account entry",
+      "acceptance": "Caret absent; account menu remains keyboard reachable.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original browser interaction slice; assistive-technology certification remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-004",
+      "feature": "Selected profile identity",
+      "acceptance": "Firewall opens firewall profile. Rename synchronizes header. Editing and documents remain accessible.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The evidence does not open and edit every selected profile document after rename, so document accessibility is incomplete.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-005",
+      "feature": "Horizontal reaction panel",
+      "acceptance": "Row matches reference structure; opens by mouse and keyboard without clipping.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Pointer/keyboard operation and bounds pass, but row structure has no current/reference visual or structural comparison.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-006",
+      "feature": "One reaction per user",
+      "acceptance": "Select A then B leaves only B. Selecting B clears it. Reload preserves result without losing messages.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original local interaction slice; concurrent-device synchronization remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-007",
+      "feature": "Coworker-first entry",
+      "acceptance": "New user can start a named conversation without understanding teams. Existing chats, drafts, queues and avatars remain accessible.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The seeded test proves direct/grouped history, queue and avatar reachability, but does not exercise a new-user named-conversation start path.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-008",
+      "feature": "Stable conversation header",
+      "acceptance": "Short first message never replaces coworker identity.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original UI identity slice; the provider stream is intentionally mocked/blocked.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-009",
+      "feature": "Sidebar previews",
+      "acceptance": "Markdown table syntax and code fences do not overwhelm the row. Full title remains accessible.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the tested acceptance slice; only the seeded narrow width and title matrix were exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-010",
+      "feature": "Pin important conversations",
+      "acceptance": "Pinned items remain accessible and retain order after reload.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original local persistence slice; cross-device ordering remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-011",
+      "feature": "Rename conversations",
+      "acceptance": "Renaming a conversation never renames its coworker unexpectedly.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original direct-conversation slice; broader multi-user synchronization remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-012",
+      "feature": "Sections and ordering",
+      "acceptance": "Grouping never implies coordinated agent execution or hides old histories.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "DOM separation and old-row reachability pass, but the evidence does not assert labels/affordances cannot imply coordinated execution.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-013",
+      "feature": "Sidebar collapse and resize",
+      "acceptance": "Collapse and resize leave active chat and composer usable.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the original browser slice; assistive-technology certification remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-014",
+      "feature": "Back and forward navigation",
+      "acceptance": "Back returns to previous chat without dropping draft or executing a request.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the tested local session-history slice; cross-session/device history is outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-015",
+      "feature": "Workspace search",
+      "acceptance": "Known saved phrase resolves to the correct conversation.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap for the seeded known phrase; search-index breadth beyond local fixture data is outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-016",
+      "feature": "Search filters and results",
+      "acceptance": "Filter by coworker or conversation and open exact result context.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap for the seeded duplicate-term filter result; broader external-index behavior is outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-017",
+      "feature": "Find within conversation",
+      "acceptance": "Searching a repeated term visits every match without losing composer draft.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap for the seeded repeated-term cycle; cross-conversation find scope is outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-018",
+      "feature": "Command palette",
+      "acceptance": "Keyboard opens palette; selected action works in current chat; Escape restores focus.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the tested current-chat palette flow; OS-level shortcut conflicts remain outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-019",
+      "feature": "Multiline input and send",
+      "acceptance": "Empty send disabled. Multiline text and IME composition do not send accidentally.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "IME composition was not simulated.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-020",
+      "feature": "Draft preservation",
+      "acceptance": "Two chats retain different unsent drafts after switching and reload.",
+      "effectiveVerdict": "Unverified",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No fresh end-to-end evidence for independent drafts.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-021",
+      "feature": "Attachment selection and removal",
+      "acceptance": "Unsupported attachments are labeled before send; supported contents reach model context.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Fresh check did not inspect request context or unsupported-file pre-send behavior.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-022",
+      "feature": "Drag-drop and clipboard files",
+      "acceptance": "Paste/drop valid file creates one usable attachment. Invalid type shows recovery.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Drag/drop and clipboard paths were not exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-023",
+      "feature": "File or device mentions",
+      "acceptance": "Mention resolves to a stable ID; unavailable devices cannot appear connected.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No provider, device, or credential calls were made by this audit.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-024",
+      "feature": "Reply to a message",
+      "acceptance": "Reply identifies source message; cancel removes reference without deleting draft.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the tested reply/cancel flow; the fixture used a mouse path only.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-025",
+      "feature": "Edit and resend a prompt",
+      "acceptance": "User can review edited prompt before send; earlier device commands are never reversed or repeated silently.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No device command execution was permitted or tested.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-026",
+      "feature": "Voice dictation",
+      "acceptance": "Recording indicator and cancel work; transcript is editable before sending.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Microphone/device APIs were intentionally not called.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-027",
+      "feature": "Model and effort picker",
+      "acceptance": "Picker change is reflected in the next request and response provenance.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No real provider call was attempted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-028",
+      "feature": "Streamed response and activity",
+      "acceptance": "No duplicate final text or evidence when a stream finishes.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current API and browser reconcile one final result after lost response/reload; exact 15-line code remains collapsed and intact.",
+      "remainingGap": "The stream was locally fulfilled; provider behavior and reconnects were not tested.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-029",
+      "feature": "Stop a running request",
+      "acceptance": "Stop state is truthful; cancellation does not claim a completed device command was undone.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current Stop fixture preserves UNKNOWN and pauses queued work. Remote cancellation is not asserted.",
+      "remainingGap": "No real remote request or device command was stopped.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-030",
+      "feature": "Queue follow-up messages",
+      "acceptance": "Queued messages stay ordered and are never submitted twice.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Stable saved identities and backend duplicate suppression; current browser FIFO and explicit paused-queue checks. Broader crash-at-every-queue-boundary coverage remains partial. Mounted three-turn FIFO dispatches once per identity after writer-lock release; paused queues survive independent pending-chat recovery.",
+      "remainingGap": "Order and duplicate-submission behavior were not freshly exercised.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-031",
+      "feature": "Queue edit, remove and resume",
+      "acceptance": "Reload retains queue; resume is intentional; editing changes only selected item.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current queue survives Stop/review and resumes explicitly; this milestone does not freshly exercise every edit/remove/reorder variant.",
+      "remainingGap": "Resume and exactly-once dispatch were not tested.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-032",
+      "feature": "Steer the next step",
+      "acceptance": "Correction applies before next tool step and does not silently create a duplicate run.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Existing active steering tests pass unchanged; receipt identity does not replace steering tokens or authorize new work.",
+      "remainingGap": "Unit coverage does not prove the browser UI flow.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-033",
+      "feature": "Clarification and approval cards",
+      "acceptance": "Answer maps to one pending question; stale cards cannot authorize later work.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Clarification corrections only; technical checks do not establish independent re-review or owner approval.",
+      "freshEvidence": "F1–F3 corrections retain bounded live model/tool context, six-call budget and diagnostic attempts; persist drafts on edits before Continue and after rejection; restore Refresh focus and announce status. Actual LangChain/runtime and mounted reload/focus regressions pass.",
+      "remainingGap": "General approval is absent. Independent re-review of corrections and owner UI approval remain pending; Windows and live provider/device behavior are unverified.",
+      "evidence": "docs/evidence/clarification-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-034",
+      "feature": "Plan and inspect modes",
+      "acceptance": "Plan mode cannot execute state-changing operations; current read-only scope stays explicit.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Clarification corrections only; technical checks do not establish independent re-review or owner approval.",
+      "freshEvidence": "Both clarification segments share the original model, six-call budget and diagnostic-attempt set. An UNKNOWN diagnostic cannot be retried after clarification. Actual LangChain Plan continuation rejects hostile tool output with zero device calls.",
+      "remainingGap": "No state-changing permission or restart checkpoint is added. Live provider/device and native Windows validation remain outside; this is not full-product acceptance.",
+      "evidence": "docs/evidence/clarification-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-035",
+      "feature": "Detailed tool transcript",
+      "acceptance": "Summary, tool input and actual result remain distinguishable.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the saved transcript representation; provider-stream coverage remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-036",
+      "feature": "Run state and elapsed time",
+      "acceptance": "A failed or interrupted run cannot display completed success; elapsed time stops correctly.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Unknown/cancellation/persistence failures cannot be promoted to success; elapsed UI behavior retains existing implementation.",
+      "remainingGap": "Elapsed timing itself was not asserted by the fresh harness.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-037",
+      "feature": "Parallel work visibility",
+      "acceptance": "Two runs remain isolated, individually stoppable and recoverable.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Clarification-only scoped implementation; technical checks do not establish independent review or owner approval.",
+      "freshEvidence": "Waiting explicitly retains the global serial slot; another conversation keeps its draft and links to the waiting conversation.",
+      "remainingGap": "Parallel execution remains excluded and unimplemented.",
+      "evidence": "docs/evidence/clarification-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-038",
+      "feature": "Context and usage visibility",
+      "acceptance": "Unknown usage displays unavailable; displayed model and token totals match actual response data.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Unknown-usage branch and model-mismatch case were not tested.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-039",
+      "feature": "Retry with retained evidence",
+      "acceptance": "Retry does not repeat completed device actions silently; partial evidence remains inspectable.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current storage/API/browser replay uses the same receipt and never dispatches automatically. Partial: no live device or checkpoint resumption validation. Outage -> missing receipt -> successful Retry saved request updates one original message and retains timestamp, annotations and raw capture; no contradictory UNKNOWN/SUCCESS pair.",
+      "remainingGap": "No unsafe repeated device operation was reproduced. This is an implementation gap, not a confirmed execution defect.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-040",
+      "feature": "Resume after app restart",
+      "acceptance": "Restart during work preserves transcript and exposes recovery without duplicate execution.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current lost-response/reload and explicit owner-safe receipt recovery pass in WSL Chrome. Native Windows packaged restart remains unverified. Mounted reload checks cover two settled, two missing and mixed receipts with independent reconciliation and unchanged unrelated pending journals.",
+      "remainingGap": "This was an isolated browser/journal simulation, not a process crash of the packaged app.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-041",
+      "feature": "Readable Markdown",
+      "acceptance": "Representative network reports remain readable; untrusted HTML cannot execute.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the representative readability and inert-HTML slice; broader sanitizer fuzzing remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-042",
+      "feature": "Code blocks and exact copy",
+      "acceptance": "Spaces, tabs and line breaks survive copy; no duplicate raw output.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the tested exact-copy and single-render slice; OS clipboard integration remains isolated.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-043",
+      "feature": "Copy messages",
+      "acceptance": "Copy uses correct message and reports failure without claiming success.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in correct-copy and denied-clipboard feedback; OS clipboard integration remains isolated.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-044",
+      "feature": "Time grouping and metadata",
+      "acceptance": "Old and new days are clear; full timestamp accessible on focus or hover.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in old/new grouping and focused labels; timezone presentation matrix remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-045",
+      "feature": "Follow latest without jumping",
+      "acceptance": "New output does not pull user away from an older message; latest button is keyboard usable.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the injected new-output/reading-position slice; live provider streaming is outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-046",
+      "feature": "Conversation revert and undo",
+      "acceptance": "Revert and undo restore exact message history; busy or queued state is protected.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The busy active-run protection branch is not exercised; queued-work protection alone does not close the full acceptance.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-047",
+      "feature": "Fork or side conversation",
+      "acceptance": "Branch retains provenance and can be revisited without mutating parent history.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in fork provenance, parent immutability and reload revisit; cross-device sync remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-048",
+      "feature": "Direct links to evidence/messages",
+      "acceptance": "Link opens correct conversation/message; missing or archived targets have a clear explanation.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in the v9 live existing/missing/archived local-link slice; external URL handling remains outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-049",
+      "feature": "Reaction picker beyond defaults",
+      "acceptance": "Picker supports search/navigation and closes without moving the message.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The reaction candidate covers search, contained keyboard navigation, Escape focus return and persistence, but its isolated candidate browser run is not a fresh served v9.1 run; screen-reader, visual-reference and multi-device checks remain outside.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-050",
+      "feature": "Archive and restore",
+      "acceptance": "Archived chat is read-only until restored; messages and evidence survive.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The archive/restore check confirms composer state and one message, but does not deep-compare the full message/evidence payload before and after restore.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-051",
+      "feature": "Export conversations and evidence",
+      "acceptance": "Export contains correct selected scope, timestamps and exact evidence without credentials.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Export checks format, selected chat presence, pin metadata and token exclusion, but does not assert exact selected scope, timestamps and raw evidence comprehensively.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-052",
+      "feature": "Import and backup recovery",
+      "acceptance": "Invalid backup changes nothing. Valid restore preserves unrelated current work.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in invalid-JSON safety plus valid Add-mode preservation of unrelated work, pins and queues; the check is local-browser scoped.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-053",
+      "feature": "Durable cross-device histories",
+      "acceptance": "Two devices show consistent authorized history with explicit conflict handling.",
+      "effectiveVerdict": "Deferred",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No cross-device service exists in this build.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-054",
+      "feature": "Avatar family and appearance",
+      "acceptance": "Saved avatars remain the same after migration and reload.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in legacy avatar normalization, chosen avatar persistence and reload; the check uses one legacy fixture.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-055",
+      "feature": "Name, label and description",
+      "acceptance": "Long name remains readable; saved changes update selected coworker only.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The long label remains selected-only, but only one long name is exercised and persisted reload of the saved edit is not asserted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-056",
+      "feature": "Behavior and document access",
+      "acceptance": "Editing document explains effect and scope; saved content is the content actually used.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Saving and consuming the same document in a real model request were not demonstrated.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-057",
+      "feature": "Notification preference",
+      "acceptance": "Muted coworker stays quiet; enabled alerts link to the correct finished/waiting run.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Finished enabled and muted paths pass, but waiting/error alert variants remain owned by the unintegrated automation alert core.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-058",
+      "feature": "Simple creation and first welcome",
+      "acceptance": "Welcome is visibly local and never sent as fabricated model history.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in local welcome semantics and persisted first-chat behavior; no model/provider request or cross-device storage is exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-059",
+      "feature": "Appearance and density",
+      "acceptance": "Both themes preserve readable controls and evidence; settings persist.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Both theme colors/readability and save/cancel pass, but persistence across a reload is not asserted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-060",
+      "feature": "Live provider setup",
+      "acceptance": "Changing provider cannot silently leave a different runtime active. No secrets in UI output.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local configured status is not proof of provider reachability; no credentials or provider requests were used.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-061",
+      "feature": "Connections health",
+      "acceptance": "Disconnected adapter cannot look ready; refresh updates from real state.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No remote adapter health check or inventory load was performed.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-062",
+      "feature": "Privacy and data controls",
+      "acceptance": "User can identify what stays local and what a request sends; destructive actions are recoverable where promised.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The privacy wording passes, while destructive reset/recovery behavior is not exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-063",
+      "feature": "Real account and sign-out",
+      "acceptance": "No control suggests remote sign-in or sign-out succeeded when it only changes local display.",
+      "effectiveVerdict": "Deferred",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No remote identity is connected.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-064",
+      "feature": "Help and feedback",
+      "acceptance": "Every help entry opens useful information; feedback never silently sends private logs.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Only one help entry and a successful local feedback save are checked; every-help coverage and feedback storage failure are absent.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-065",
+      "feature": "Shortcut reference",
+      "acceptance": "Displayed shortcuts work and unavailable actions are not advertised.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Ctrl+K and displayed shortcut text pass, but Cmd/Ctrl+F behavior and unavailable-action filtering are not asserted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-066",
+      "feature": "Artifact library for real chats",
+      "acceptance": "Real chat artifact opens correct file; another chat never inherits sample output.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Deduplication fix verified for unambiguous mirrored results; broader artifact-file capability remains partial.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-067",
+      "feature": "Browser preview",
+      "acceptance": "Preview shows actual current content and truthful unavailable states.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Unavailable state passed; live browsing capability remains absent.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-068",
+      "feature": "Computer preview and control",
+      "acceptance": "Stale or unavailable screen is labeled; controls apply only to authorized session.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Unavailable state passed; live computer control remains absent.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-069",
+      "feature": "Resizable work panes",
+      "acceptance": "Opening evidence preserves enough room to read and type; close returns focus.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "One keyboard resize and focus return pass, but evidence-specific read/type room and a broader resize matrix are not asserted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-070",
+      "feature": "File tree and editor",
+      "acceptance": "Only authorized files are shown and edits have explicit save/diff behavior.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No user disk writes were performed.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-071",
+      "feature": "Interactive terminal",
+      "acceptance": "User sees target/session and permissions; raw evidence remains separately retained.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Intentional scope gap.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-072",
+      "feature": "Before/after change review",
+      "acceptance": "Proposal shows exact diff and target; edits invalidate prior approval.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No network configuration calls were made.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-073",
+      "feature": "Inline evidence annotations",
+      "acceptance": "Comment cannot drift to a different result after rerun.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Original message ID and annotation payload remain attached to the exact retained raw evidence through same-request retry. Annotation feature verdict remains scoped/partial.",
+      "remainingGap": "A successful annotation is saved, but stale-result rejection, discard and save-failure paths are not exercised.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-074",
+      "feature": "Execution approval receipt",
+      "acceptance": "Target or command changes require new review; old approval cannot authorize new work.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No execution or provider calls.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-075",
+      "feature": "Git stage, commit and PR controls",
+      "acceptance": "Git operations have clear repository and diff scope; no hidden publish.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No Git operation was attempted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-076",
+      "feature": "Device inventory selection",
+      "acceptance": "User can see exact selected devices; aliases resolve consistently to evidence IDs.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Inventory route was mocked and no device call was made.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-077",
+      "feature": "Read-only scope visibility",
+      "acceptance": "Read-only label agrees with enforced tool set; no confusing change/run action is offered.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No live device call or enforcement backend was used.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-078",
+      "feature": "Evidence provenance and timestamps",
+      "acceptance": "Copied/exported evidence traces to exact run and command; generated narrative is distinguishable.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Exact copied/exported evidence provenance across all timestamps and commands was not asserted.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-079",
+      "feature": "Success versus healthy status",
+      "acceptance": "Successful command on faulty device cannot appear as healthy solely from exit status.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The device health conclusion is fixture-driven.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-080",
+      "feature": "Scope, impact and rollback preview",
+      "acceptance": "Review displays affected devices and rollback limits; chat revert never substitutes for device rollback.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No state-changing workflow is present to exercise.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-081",
+      "feature": "Comparison of diagnostic runs",
+      "acceptance": "Different devices/times are labeled; missing results are not represented as zero change.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The comparison UI and timestamp labeling across different runs were not exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-082",
+      "feature": "Topology and visual evidence",
+      "acceptance": "Nodes/links identify source and freshness; inferred links are labeled.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No topology data contract or renderer in Aven shell.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-083",
+      "feature": "Feed / activity inbox",
+      "acceptance": "Every entry opens relevant run; empty view explains what will appear.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Only the empty Feed explanation is exercised; populated entries opening their distinct saved runs are not.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-084",
+      "feature": "Ideas view",
+      "acceptance": "No dead-end primary navigation; saved user ideas remain recoverable.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No substantive gap in local idea add/save/reload/archive/restore behavior; no remote persistence is exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-085",
+      "feature": "Goals and task checklist",
+      "acceptance": "Completed step links to evidence; manual checklist state is not agent execution proof.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The child module check only inspected source text. Completion, persistence and invalid-evidence rejection were not behaviorally tested.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-086",
+      "feature": "Scheduled investigations",
+      "acceptance": "Disabled schedule does not run; next-run time is correct; failures are visible.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "No scheduler surface exists.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-087",
+      "feature": "Completion and attention alerts",
+      "acceptance": "Alert opens correct task and respects mute; duplicate events do not spam.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The enabled preference and finished-result path are covered through UX-057, but waiting/error variants and duplicate visible-alert suppression are not.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-088",
+      "feature": "Plugin discovery and management",
+      "acceptance": "Unavailable tool cannot be selected; permissions and connection health are visible.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local fixtures only; no provider/device calls.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-089",
+      "feature": "Skills and reusable workflows",
+      "acceptance": "Selected procedure identifies required access; version used is traceable.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local documents exist, but the requested reusable workflow capability is absent.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-090",
+      "feature": "Mobile or remote handoff",
+      "acceptance": "Handoff preserves context and permissions without concurrent duplicate execution.",
+      "effectiveVerdict": "Deferred",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Deferred by user decision.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-091",
+      "feature": "Keyboard-only operation",
+      "acceptance": "Visible focus, logical order, no traps; Escape returns focus correctly.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Plus/settings keyboard paths pass, but all visible controls, full logical order, trap detection and every Escape return are not covered.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-092",
+      "feature": "Accessible names and state",
+      "acceptance": "Screen reader identifies each action, selected coworker and active run state correctly.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Representative ARIA roles/names and selected state pass, but there is no screen-reader run covering every action, coworker and active-run state.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-093",
+      "feature": "Contrast, text scaling and reflow",
+      "acceptance": "At 200% text scale controls remain usable; contrast measured; narrow content reflows.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "One answer contrast measurement and 200% narrow overflow check pass, but all controls and a broader narrow/reflow matrix are not measured.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-094",
+      "feature": "Reduced motion",
+      "acceptance": "Motion-reduced mode preserves all state changes and cancels decorative animation.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Decorative animation is disabled under reduced motion, but state-changing interactions under the preference are not exercised.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-095",
+      "feature": "Hover, focus and touch menus",
+      "acceptance": "Menus stay within viewport, remain operable on hover, close predictably and restore focus.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Touch target sizes pass, but hover menu bounds, close behavior and focus restoration are not covered by this quality check.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-096",
+      "feature": "Responsive pane layout",
+      "acceptance": "Desktop, narrow window and zoomed layouts retain controls; deliberate table scroll is contained.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "A 320px pane open/close and containment check passes, but desktop/zoomed controls and deliberate table scrolling are not covered.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-097",
+      "feature": "Empty and unavailable states",
+      "acceptance": "Every visible action has a real result or an accurate reason it is unavailable.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Unavailable context is truthful, but the evidence does not enumerate every visible action and its real result/unavailable explanation.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-098",
+      "feature": "Recoverable errors",
+      "acceptance": "Offline, timeout, cancellation and provider failure are distinct and recoverable.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current local storage, response-loss, cancellation and persistence-failure fixtures preserve draft/evidence and explicit review. Provider-specific errors remain mocked; no live reachability proof. Stale snapshot is rejected without overwriting the newer draft. Explicit multi-chat recovery no longer locks out both conversations.",
+      "remainingGap": "Only the creation transaction/reload/retry path was fixed and tested in this batch.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-099",
+      "feature": "Long transcript performance",
+      "acceptance": "Long chat stays responsive and scrolling does not lose selection or anchors.",
+      "effectiveVerdict": "Unverified",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "A browser-control timeout occurred on the live artifact view; cause was not isolated and is not counted as a product defect.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-100",
+      "feature": "First-run onboarding",
+      "acceptance": "A new user understands required setup, selected device and next safe action.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Provider/device readiness and selected device are not part of onboarding.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-101",
+      "feature": "Saved state and migration integrity",
+      "acceptance": "Chats, drafts, queued work, avatars and revert history survive migration exactly.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "It did not prove exact migration preservation of all chats, drafts, queues, avatars and revert history.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-102",
+      "feature": "Release identity and diagnostics",
+      "acceptance": "Support report identifies exact build and contains no provider keys.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local status fixtures and served build identity only; no live provider/device reachability claim.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-103",
+      "feature": "Consistent terminology and icon system",
+      "acceptance": "Same object keeps same name across sidebar, profile, Settings and composer.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "The known rename inconsistency is resolved; complete terminology and icon acceptance is not yet verified.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-104",
+      "feature": "Multiple customer isolation UX",
+      "acceptance": "Wrong-customer data is inaccessible; workspace/access context is explicit.",
+      "effectiveVerdict": "Deferred",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Deferred by user decision.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-105",
+      "feature": "Professional finish acceptance",
+      "acceptance": "Code check, rendered behavior and owner acceptance have separate recorded outcomes.",
+      "effectiveVerdict": "Unverified",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Owner acceptance unavailable.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-106",
+      "feature": "Live inventory and read-only diagnostics",
+      "acceptance": "Only supported read-only commands execute; failed transport cannot be shown as healthy.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local fixtures only; no provider/device calls.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-107",
+      "feature": "Remote command cancellation limits",
+      "acceptance": "Stop records UNKNOWN when remote completion cannot be established; no automatic duplicate retry.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Cancellation and dead-owner recovery remain UNKNOWN; replay and recovery cause no duplicate fixture responder invocation. No claim of stopping a remote device command.",
+      "remainingGap": "Stop UX and duplicate-retry prevention were not freshly exercised; no provider/device calls.",
+      "evidence": "docs/evidence/admission-2026-09-19/verification.json"
+    },
+    {
+      "id": "UX-108",
+      "feature": "Context truncation disclosure",
+      "acceptance": "User can tell when older messages are omitted; raw historical evidence stays available.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "A fresh over-limit request/omission-count comparison was not completed.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-109",
+      "feature": "Local notes versus model memory",
+      "acceptance": "Editing local note never implies the next model response used it unless request evidence proves inclusion.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "This audit did not save a note and inspect the next model request to verify exclusion.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-110",
+      "feature": "Safe links and inline media",
+      "acceptance": "Links open correct source; unsupported media remains a labeled file; raw CLI remains unchanged.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Inline media and attachment reading remain pending.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-111",
+      "feature": "Mark read or unread",
+      "acceptance": "Unread state persists correctly; opening a conversation never cancels work.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "All exercised browser-local unread/reload/open and held local-run switching checks pass; provider execution and assistive-technology coverage remain outside this review.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-112",
+      "feature": "Language support disclosure",
+      "acceptance": "Language choice never appears applied while labels remain unchanged.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "English fallback and disabled unsupported-language disclosure pass; additional translation coverage remains outside this review.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-113",
+      "feature": "Serial capacity feedback",
+      "acceptance": "Second conversation shows why it waits and identifies active work without losing its draft.",
+      "effectiveVerdict": "Partial",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Active API enforces serial capacity; current browser waiting/draft fixture and queue checks supplement prior evidence. A genuinely live other-tab writer retains its Web Lock and completes successfully; foreign review is read-only until it finishes. Global backend serial admission remains.",
+      "remainingGap": "Full serial multi-conversation queue UI was not exercised in this bounded run.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    },
+    {
+      "id": "UX-114",
+      "feature": "Existing approval tooling integration",
+      "acceptance": "Aven preview and executed action share the same digest, scope and one-time approval.",
+      "effectiveVerdict": "Missing",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": null,
+      "remainingGap": "Local fixtures only; no provider/device calls.",
+      "evidence": "completion/ui-release/row-verdict-review.json + completion/baseline-ledger.json (dated history)"
+    },
+    {
+      "id": "UX-115",
+      "feature": "Durable raw run records",
+      "acceptance": "A saved run record is retrievable with original provenance after UI reload.",
+      "effectiveVerdict": "Verified (scoped)",
+      "verdictBasis": "Inherited 2026-09-16 effective verdict; no automatic promotion in this milestone.",
+      "freshEvidence": "Current scoped receipt and raw-run readback preserve original run/request/chat provenance and exact output. Evidence and admission settlement are distinct. Captured event/evidence payloads survive reconciliation; repeated identical capture entries are deduplicated. Evidence-versus-receipt ambiguity remains a nonblocking limitation.",
+      "remainingGap": "Existing local records only; no new provider/device run, service restart or cross-device durability test.",
+      "evidence": "docs/evidence/admission-2026-09-19/review-fixes/verification.json"
+    }
+  ],
+  "previousWorkbookSha256": "ef863231e8157b98028ef60cf9724785d706e3dabd6dcc58e68928a7a48bcc1d",
+  "originalColumnsAPUnchanged": true,
+  "reviewCorrections": [
+    "F1",
+    "F2",
+    "F3"
+  ]
+}

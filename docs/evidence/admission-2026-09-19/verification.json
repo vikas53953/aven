@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-19",
+  "scope": "Local durable chat admission only; review pending; no owner UI approval",
+  "base": "1ea8abf6e220354114fbba57d7d938aab008ca61",
+  "backendCommit": "eb0237235e90777e2b1f00248d367dc63363df5f",
+  "browserCommit": "ff9f0f041260e19376b4cf2c7ac90c2ae27904f4",
+  "environment": {
+    "os": "WSL2 Linux 6.6.87.2-microsoft-standard-WSL2",
+    "node": "24.16.0",
+    "npm": "11.13.0",
+    "chrome": "148.0.7778.96"
+  },
+  "tests": {
+    "command": "TMPDIR=\"$PWD/.audit/tmp\" node --test --test-concurrency=1 intentgraph/*.test.cjs",
+    "total": 75,
+    "passed": 74,
+    "failed": 0,
+    "skipped": 1,
+    "skip": "Existing Playwright 1.49 adapter test: matching browser executable is not installed. Separate Chrome used with chrome-devtools-axi.",
+    "focused": "12 storage/protocol tests and 5 browser-state/backup tests pass within the full suite.",
+    "syntax": "npm run check --prefix intentgraph and node --check for polished.js, polished-admission.js, polished-run-state.js, polished-backup.js pass."
+  },
+  "regressionOracle": {
+    "command": "TMPDIR=\"$PWD/.audit/tmp\" AVEN_ADMISSION_TEST_CANDIDATE=1 node --test --test-name-pattern=\"suspended owner\" intentgraph/reliability.test.cjs",
+    "expectedFailure": true,
+    "result": "One failed assertion: archived candidate admits owner B while owner A is suspended after reading state; active implementation passes before/after commit schedules.",
+    "candidateStorageSha256": "c9d97a445b012757756b01727a9e7d81a1211b7fbb6f3a1b31aa48f5c1512c5b",
+    "candidateLedgerSha256": "87cba0b42f316b4151bdc74459a94901b904dbefeb4f94faf52468e2a8127c16"
+  },
+  "providerCalls": 0,
+  "deviceCalls": 0,
+  "secretReads": 0,
+  "sourceHashes": {
+    "intentgraph/server.cjs": "5171079449c56deafe8ad7bbe6246bd608c8a58db1e5ce5e5972c85bb2f3d64a",
+    "intentgraph/chat-read-api.cjs": "31ad0713e63b55b7c9232511a4772ca107ae4322a2dde555112d0e8c70f19c60",
+    "intentgraph/reliability-storage.cjs": "daeb81030398e0d58407a2db4bce4681197906c9aeb3ba89c081a6e450be5726",
+    "intentgraph/reliability.cjs": "f36743b3f7644eccea38311f7fbe71a4158d254c8b94f3c2d01755f10b8a20ed",
+    "intentgraph/reliability.test.cjs": "c754ff84f08286959a6eff52162f7d6039ee48bfc375a8d7c79c1b116e483afd",
+    "intentgraph/chat-reliability.test.cjs": "d6cbb9ad1d9286ed044317862a64cedddf17462f36f02379253d5afc10c118c3",
+    "intentgraph/browser-admission.test.cjs": "c36dfd8bc39ec0a91c835be6c4b41f3b16417be5af61be6af98a7f3bc247d995",
+    "intentgraph/fixtures/admission-ui.cjs": "9ba5afe13fb958f208c602dd74169ee953a37ecbf5c88a7bd96a4dd9d813103d",
+    "intentgraph/package.json": "99438ef5d67f6e38ed25a6b81e6b8cf195211d2e226c621ca84028a9442634d9",
+    "Start-IntentGraph.ps1": "9521d92990e149989adce44a10ae1ee6347eb5cb515ff1da89ab1684006c0744",
+    "polished.html": "6ea98467fcdc62c81f2701cb554dd81b286f493957e625b32c965143231f4ae3",
+    "polished.js": "78651def7438382ac16556a3ed8d3f3d6857029b7a0879d7bd1fbbd399fd00d0",
+    "polished-admission.js": "38d71aa2d4ba835aaaf8872b797a5876e363d042485a65094fb22c074cd9f390",
+    "polished-run-state.js": "dd0bc508049a2b0eb390354f5cab13ba33f05bf3dc6bd217125a00329e083f7d",
+    "polished-backup.js": "48fc5e74fa1590bab6858ec2a4d4068e846f8ef4bffd6b494d4a159b8bda7b2f",
+    "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6"
+  },
+  "limitations": [
+    "Windows launchers, DPAPI, native SQLite/process-liveness behavior and packaged restart unverified from WSL.",
+    "PID reuse, inaccessible processes or a changed host identity conservatively block recovery; elapsed time never overrides ownership.",
+    "No live provider/device, power-loss certification, tenant authentication, cross-device state, LangGraph checkpoint or resumable-tool proof.",
+    "Browser localStorage guard detects stale snapshots and foreign pending ownership; it is not a general transactional multi-tab database.",
+    "Original excluded raster references remain unavailable. Current fixtures are not owner-approved design references.",
+    "chrome-devtools-axi run failed twice; resolved by Firstmate-directed individual commands. New-page creation required explicit page selection; large serialized eval output was avoided by comparing hashes.",
+    "Local-only delivery; no pipeline, push, merge, publication or deployment. Independent review remains pending."
+  ],
+  "registerValidation": {
+    "requirementsPreserved": 115,
+    "historicalFeatureCellsPreserved": 1840,
+    "zipAndAllXmlValid": true
+  },
+  "architectureValidation": {
+    "revision": "HLD 18",
+    "url": "http://127.0.0.1:8767/docs/architecture/index.html",
+    "tool": "chrome-devtools-axi individual commands",
+    "currentAndTargetViews": true,
+    "guidedWalkthrough": "Step 2 displays admission before starting a run; target/current selection updates aria-pressed.",
+    "narrowViewport": {
+      "width": 390,
+      "height": 844,
+      "documentScrollWidth": 375
+    },
+    "consoleErrors": 0
+  }
+}

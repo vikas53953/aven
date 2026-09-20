@@ -41,3 +41,10 @@ Firstmate backend were not verified.
 No credentials, login codes, private Firstmate state, or third-party Firstmate
 distribution files are included here. Review directory and hook trust prompts in
 the actual agent UI. Firstmate does not inherit the originating Codex conversation.
+
+## Clarification handoff
+
+Use [HANDOVER.md](../../HANDOVER.md#what-we-are-doing-now) for current branch,
+delivery authorization and acceptance status, and [verification history](VERIFICATION.md)
+for dated checks. The original `fm/aven-clarification` launch and reproduction fixture
+are preserved in [the 19 September evidence](../evidence/clarification-2026-09-19/README.md).

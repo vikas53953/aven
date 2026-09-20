@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-19T19:38:54.729Z",
+  "branch": "fm/aven-clarification",
+  "reviewedImplementation": "eafa5486c10803154613ce4a85c44aed79e832d3",
+  "instruction": "Firstmate inbox 001, 2026-09-19T19:19:05Z; acknowledged and implemented on the existing branch",
+  "findings": [
+    {
+      "id": "F1",
+      "finding": "Continuation reset model/tool context, six-call budget and diagnostic attempts.",
+      "correction": "Same server-owned runtime handle retains the original model instance, up to 96 messages / 256 KiB of model/tool snapshot, cumulative evidence and shared tool budget/diagnostic set in memory; no restart checkpoint.",
+      "validation": [
+        "Actual LangChain UNKNOWN diagnostic repeated after clarification is refused; one backend dispatch.",
+        "Three diagnostics before and three after clarification exhaust the six-call total; seventh refused.",
+        "Same original model factory invoked once; previous tool call/result and UNKNOWN retained.",
+        "Missing, consumed, cross-run and cross-mode contexts denied; message and byte limits fail closed.",
+        "Hostile Plan continuation executes zero inventory/device calls."
+      ]
+    },
+    {
+      "id": "F2",
+      "finding": "Unsubmitted answer edits existed only in memory until Continue.",
+      "correction": "Choice/text edits save bounded draft immediately, including after rejection. Continue repeats storage preflight. No answer token is serialized.",
+      "validation": [
+        "Mounted choice and text reloads before Continue show latest inert draft with no answer controls.",
+        "Mounted rejected answer followed by changed choice/text and reload retains the newer edit.",
+        "Quota failure on edit warns page-only retention; Continue dispatches nothing until successful save.",
+        "Each draft-reload case has one initial responder call and cancellation without continuation."
+      ]
+    },
+    {
+      "id": "F3",
+      "finding": "Refresh lost keyboard focus and live waiting cards retained stale validation status.",
+      "correction": "Write current refresh result to live/saved card status and restore corresponding Refresh focus after rendering; historical refresh does not finish another active question.",
+      "validation": [
+        "Mounted keyboard refresh clears validation and retains button focus.",
+        "Failed read, recovered live state, tokenless reload and cancelled history update role=status with aria-atomic=true.",
+        "Refresh causes zero continuation dispatches."
+      ]
+    }
+  ],
+  "validation": {
+    "fullNode": {
+      "version": "v24.16.0",
+      "tests": 112,
+      "passed": 111,
+      "failed": 0,
+      "skipped": 1,
+      "skipReason": "Existing Playwright 1.49 adapter browser is not installed; separate Chrome fixture is not substituted."
+    },
+    "mounted": {
+      "checks": 19,
+      "passed": 19,
+      "tool": "chrome-devtools-axi",
+      "actualViewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "reducedMotion": true,
+      "evidence": "browser-checks.json"
+    },
+    "focusedRuntimeAPI": {
+      "passed": 23,
+      "failed": 0
+    },
+    "focusedMounted": {
+      "passed": 6,
+      "failed": 0
+    },
+    "python": {
+      "tests": 4,
+      "passed": 4,
+      "failed": 0,
+      "mockedConnections": true,
+      "environment": "python-environment.txt",
+      "warning": "Nornir 3.3.0 imports deprecated pkg_resources; disposable environment pins setuptools 80.9.0."
+    },
+    "migration": "migration.json",
+    "syntax": "syntax.txt",
+    "servedApplication": "served-hashes.json",
+    "servedAtlas": "atlas-checks.json",
+    "featureRegister": "No verdict changes; exactly four UX-033/UX-034 evidence/limitations cells updated; original A–P and all 115 requirements preserved."
+  },
+  "review": {
+    "independent": "Corrections implemented and locally verified; exact committed branch requires independent re-review by Firstmate.",
+    "ownerUI": "Pending after independent re-review; technical screenshots are not approval."
+  },
+  "preservedLimits": [
+    "Evidence-versus-receipt ambiguity remains unresolved.",
+    "Native Windows, DPAPI, process liveness and packaged restart unverified from WSL.",
+    "No provider/device execution or credentials used by tests.",
+    "Local capabilities do not authenticate an actor or tenant.",
+    "No durable same-run continuation after restart.",
+    "No approval/mock execution, scheduling, parallel runs, provider selection or real actions.",
+    "No pipeline, push, merge, publication or deployment."
+  ],
+  "ui": "owner-review.json",
+  "git": {
+    "localOnly": true,
+    "pushed": false,
+    "merged": false,
+    "published": false,
+    "pipeline": false
+  },
+  "deliverySteering": "Firstmate inbox 002, 2026-09-19T19:39:02Z: finish this local-only correction/validation/commit step; report exact commit for a separately recorded repository delivery step. Do not push prematurely. Deployment/customer release, visual acceptance and Windows validation remain separate."
+}

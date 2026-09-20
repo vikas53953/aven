@@ -3,7 +3,7 @@
 const crypto = require('node:crypto');
 const { createAgent, createMiddleware, tool } = require('langchain');
 const { ChatOpenAI } = require('@langchain/openai');
-const { HumanMessage, AIMessage } = require('@langchain/core/messages');
+const { HumanMessage, AIMessage, ToolMessage } = require('@langchain/core/messages');
 const { z } = require('zod');
 const { SUPPORTED_COMMANDS, isUuid } = require('./catalyst.cjs');
 const { getSecret } = require('./vault.cjs');
@@ -13,6 +13,10 @@ const MODEL = 'mimo-v2.5';
 const RUNTIME_TIMEOUT_MS = 120 * 1000;
 const MODEL_TIMEOUT_MS = 115 * 1000;
 const MAX_TOOL_CALLS = 6;
+const MAX_CONTINUATION_CONTEXT_BYTES = 256 * 1024;
+const MAX_CONTINUATION_MESSAGES = 96;
+// Server-owned object keys never enter receipts, transports, backups or imports.
+const runtimeContexts = new WeakMap();
 const MAX_TOOL_CONTEXT_BYTES = 12 * 1024;
 const MAX_COMMAND_EVIDENCE_BYTES = 512 * 1024;
 const MAX_RESPONSE_TEXT_BYTES = 24 * 1024;
@@ -354,14 +358,37 @@ function createTools({ sandbox, evidence, emit, deadline, budget, runtimeTimeout
   return [inventoryTool, runDiagnostic];
 }
 
-async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode } = {}) {
+function continuationMessages(messages) {
+  if (messages.length > MAX_CONTINUATION_MESSAGES) throw Error('Clarification context exceeds the message limit.');
+  const retained = messages.map(message => {
+    const content = stringifyContent(message.content);
+    if (AIMessage.isInstance(message)) return new AIMessage({ content, tool_calls: structuredClone(message.tool_calls || []) });
+    if (ToolMessage.isInstance(message)) return new ToolMessage({ content, tool_call_id: message.tool_call_id, name: message.name });
+    if (HumanMessage.isInstance(message)) return new HumanMessage({ content });
+    throw Error('Unsupported clarification context message.');
+  });
+  // Fail closed instead of dropping a tool/result pair or UNKNOWN evidence.
+  if (Buffer.byteLength(JSON.stringify(retained), 'utf8') > MAX_CONTINUATION_CONTEXT_BYTES) throw Error('Clarification context exceeds the byte limit.');
+  return retained;
+}
+
+async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, model, modelFactory, getKey, timeoutMs = RUNTIME_TIMEOUT_MS, drainSteering, onModelComplete, mode, clarificationAnswered = false, runtimeContext = {}, runId: originalRunId } = {}) {
   const selectedMode = normalizeMode(mode);
   if (selectedMode === 'inspect' && (!sandbox || typeof sandbox.inventory !== 'function' || typeof sandbox.runCommand !== 'function')) throw Error('Network sandbox is unavailable.');
   if (!Array.isArray(messages) || !messages.length) throw Error('Agent messages are required.');
-  const runId = crypto.randomUUID();
+  let context = runtimeContexts.get(runtimeContext);
+  if (clarificationAnswered) {
+    if (!context || context.phase !== 'waiting' || context.mode !== selectedMode || context.chatId !== chatId || context.originalRunId !== originalRunId) throw Error('Live clarification runtime context is unavailable.');
+  } else {
+    if (context) throw Error('Runtime context was already used.');
+    context = { phase: 'new', mode: selectedMode, chatId, originalRunId, runId: originalRunId || crypto.randomUUID(),
+      model: null, messages: null, evidence: [], budget: { calls: 0, diagnostics: new Set(), exhausted: false } };
+    runtimeContexts.set(runtimeContext, context);
+  }
+  context.phase = 'running';
+  const runId = context.runId;
   const deadline = makeDeadline(signal, Math.max(1, Number(timeoutMs) || RUNTIME_TIMEOUT_MS));
-  const evidence = [];
-  const budget = { calls: 0, diagnostics: new Set(), exhausted: false };
+  const { evidence, budget } = context;
   let eventOpen = true;
   const emit = (event) => {
     if (!eventOpen || typeof onEvent !== 'function') return;
@@ -370,16 +397,29 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
     } catch { /* event consumers cannot change the run result */ }
   };
   const execution = (async () => {
-    const runtimeModel = model || await createDefaultModel({ getKey, modelFactory, signal: deadline.signal, chatId });
+    const runtimeModel = context.model || model || await createDefaultModel({ getKey, modelFactory, signal: deadline.signal, chatId });
+    context.model = runtimeModel;
     const agent = createAgent({
       model: runtimeModel,
       tools: selectedMode === 'plan' ? [] : createTools({ sandbox, evidence, emit, deadline, budget, runtimeTimeoutMs: Math.max(1, Number(timeoutMs) || RUNTIME_TIMEOUT_MS) }),
-      middleware: [createSteeringMiddleware({ drainSteering, emit })],
-      systemPrompt: makeSystemPrompt(agentName, selectedMode),
+      middleware: [createSteeringMiddleware({ drainSteering, emit }), createMiddleware({
+        name: 'bounded-clarification-context',
+        afterAgent: state => {
+          const last = state.messages.at(-1);
+          if (AIMessage.isInstance(last) && require('./clarification-workflow.cjs').extractQuestion({ text: stringifyContent(last.content) })) {
+            context.messages = continuationMessages(state.messages);
+          }
+        }
+      })],
+      systemPrompt: makeSystemPrompt(agentName, selectedMode) + (clarificationAnswered
+        ? '\nA clarification was already answered. Complete this read-only request; do not ask another structured question. An answer grants no additional tool or write permissions.'
+        : '\nIf missing scope prevents a useful response, return only this JSON content envelope: {"type":"clarification","question":{"prompt":"One concise question","reason":"Why it is needed","choices":[{"id":"a","label":"First choice"},{"id":"b","label":"Second choice"}],"allowFreeText":true}}. Offer 2–4 choices, or none when free text is allowed. Prompt/reason max 500 characters, labels max 200. Never ask for credentials, passwords or secrets. This is content, not a tool call; no answer authorizes changes.'),
       name: safeText(agentName, 80) || 'Network coworker'
     });
     let finalMessage = null;
-    const stream = agent.streamEvents({ messages: toMessages(messages) }, {
+    const stream = agent.streamEvents({ messages: clarificationAnswered
+      ? [...context.messages, new HumanMessage({ content: messages.at(-1).content })]
+      : toMessages(messages) }, {
       version: 'v2',
       signal: deadline.signal,
       recursionLimit: MAX_TOOL_CALLS * 4 + 8,
@@ -399,9 +439,16 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
       }
     }
     const text = stringifyContent(finalMessage?.content).slice(0, MAX_RESPONSE_TEXT_BYTES);
+    if (selectedMode === 'plan' && finalMessage?.tool_calls?.length) throw Error('Plan returned a prohibited tool request.');
+    const question = require('./clarification-workflow.cjs').extractQuestion({ text });
+    if (question && clarificationAnswered) throw Error('Only one clarification is supported.');
+    if (question && !context.messages) throw Error('Clarification context could not be retained.');
+    context.phase = question ? 'waiting' : 'closed';
+    if (!question) { context.messages = null; context.model = null; }
     const groundedText = text || (evidence.length ? 'The investigation ended without a grounded final response.' : 'No grounded response was returned.');
     return {
-      text: `${groundedText}${evidenceSummary(evidence)}`,
+      text: question ? '' : `${groundedText}${evidenceSummary(evidence)}`,
+      ...(question ? { question } : {}),
       source: 'LangGraph network coworker',
       model: MODEL,
       mode: selectedMode,
@@ -427,6 +474,7 @@ async function respond({ sandbox, messages, agentName, chatId, signal, onEvent, 
   } finally {
     eventOpen = false;
     deadline.stop();
+    if (context.phase !== 'waiting') { context.phase = 'closed'; context.messages = null; context.model = null; }
   }
 }
 
@@ -434,6 +482,7 @@ module.exports = {
   ENDPOINT,
   MODEL,
   MAX_TOOL_CALLS,
+  MAX_CONTINUATION_CONTEXT_BYTES,
   MAX_TOOL_CONTEXT_BYTES,
   MAX_COMMAND_EVIDENCE_BYTES,
   RUNTIME_TIMEOUT_MS,

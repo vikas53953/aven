@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-19",
+  "scope": "Independent-review corrections only; local branch awaiting re-review",
+  "reviewBase": "a4baf4ddef7e03c89d7271f09cb5d3b5918523c6",
+  "build": "ux-minimal-ui-v9.3-recovery",
+  "environment": {
+    "os": "WSL2 Linux 6.6.87.2-microsoft-standard-WSL2",
+    "node": "24.16.0",
+    "npm": "11.13.0",
+    "chrome": "148.0.7778.96",
+    "chromeDevtoolsMcp": "1.9.0",
+    "browserOperations": "Individual chrome-devtools-axi commands; no run helper; isolated loopback profile"
+  },
+  "tests": {
+    "command": "AVEN_BROWSER_TOOL=\"$PWD/.audit/browser-tool\" AVEN_UI_EVIDENCE=\"$PWD/.audit/mounted-final.json\" AVEN_UI_SCREENSHOTS=\"$PWD/.audit/browser/final-screenshots\" TMPDIR=\"$PWD/.audit/tmp\" node --test --test-concurrency=1 intentgraph/*.test.cjs",
+    "total": 83,
+    "passed": 82,
+    "failed": 0,
+    "skipped": 1,
+    "durationMs": 129005.858468,
+    "skip": "Existing Playwright 1.49 adapter test: matching browser executable unavailable. Seven opt-in mounted browser regressions were enabled and passed.",
+    "browserStateTests": 6,
+    "mountedBrowserTests": 7,
+    "syntax": "npm run check --prefix intentgraph and node --check for changed browser/fixture/test modules pass.",
+    "beforeFix": "All three two-pending-chat cases fail to reconcile; client outage/retry renders UNKNOWN and SUCCESS for one request. See reproduced-before.txt and mixed-reproduced-before.txt."
+  },
+  "visual": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "narrow": [
+      390,
+      844
+    ],
+    "actualViewportDimensionsAsserted": true,
+    "screenshotDimensionsAsserted": true,
+    "narrowKeyboardRetry": true,
+    "humanAgentScreenshotInspection": true,
+    "ownerApproval": false,
+    "console": "No JavaScript exception; existing form-field id/name issue recorded."
+  },
+  "sourceHashes": {
+    "polished.html": "ae9035a1873e4ba7c92a8961c5f02c224b8d229b2cd07e2ba07871656a29e28c",
+    "polished.js": "9da8c65d59625d4d9897b82f5d5e94448ad4aeacfaf1a515540ef061502bbe9f",
+    "polished-admission.js": "05891a42d36a0114f184989797f5fe5a13ab02bc1c364bcda717831de0538328",
+    "polished-run-state.js": "dd0bc508049a2b0eb390354f5cab13ba33f05bf3dc6bd217125a00329e083f7d",
+    "polished-backup.js": "48fc5e74fa1590bab6858ec2a4d4068e846f8ef4bffd6b494d4a159b8bda7b2f",
+    "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+    "intentgraph/server.cjs": "5171079449c56deafe8ad7bbe6246bd608c8a58db1e5ce5e5972c85bb2f3d64a",
+    "intentgraph/reliability.cjs": "f36743b3f7644eccea38311f7fbe71a4158d254c8b94f3c2d01755f10b8a20ed",
+    "intentgraph/reliability-storage.cjs": "daeb81030398e0d58407a2db4bce4681197906c9aeb3ba89c081a6e450be5726",
+    "intentgraph/browser-admission.test.cjs": "613c22a26b97508e21841d132346930f9dc64af35d06f9ef9864e14bd54cfc09",
+    "intentgraph/mounted-admission.test.cjs": "3b780b1e357dc36f2471c6ff1fde368ed587e30de97dd4af4c1289b60facd3da",
+    "intentgraph/fixtures/admission-ui.cjs": "4d5511ce30deecbdb495a2246287215292029c6e28eedf06ac6afffeaa125337",
+    "docs/architecture/architecture.json": "3ecd7891b20e50815cdb0fc3f4837e4b510addb78d130c4232517ee8bbf78f7b",
+    "docs/architecture/HLD.md": "4cd626722bb523faf5b3615b5d48331336072c084c1a6d0a3e882bd53b792dc7"
+  },
+  "backendChanged": false,
+  "providerCalls": 0,
+  "deviceCalls": 0,
+  "secretReads": 0,
+  "register": {
+    "originalRequirementsPreserved": 115,
+    "historicalFeatureCellsPreserved": 1840,
+    "effectiveVerdictsPromoted": 0,
+    "zipAndXmlValid": true,
+    "freshRows": [
+      "UX-030",
+      "UX-039",
+      "UX-040",
+      "UX-073",
+      "UX-098",
+      "UX-113",
+      "UX-115"
+    ]
+  },
+  "limitations": [
+    "Evidence may contain a completed reply while terminal receipt settlement remains UNKNOWN; this pre-existing ambiguity is nonblocking and not changed.",
+    "Web Locks are required for browser admission writes; localStorage remains outside a general multi-tab transaction protocol.",
+    "Native Windows, DPAPI, SQLite/PID behavior, clipboard/IME, UI Automation and packaged restart unverified from WSL.",
+    "No owner UI approval, independent re-review, production durability, customer identity, resumable tools or live device/provider evidence.",
+    "No pipeline, push, merge, publication or deployment. Proposal decisions remain open."
+  ],
+  "toolingCorrections": [
+    "Firstmate 006/007 resolved task-local page-routing configuration after explicit process ownership checks.",
+    "Tab creation can succeed before an implicit snapshot reports no selection; the harness verifies and selects the new page and restores selection after closing it.",
+    "resize reported success without changing the viewport; final checks use emulate and assert actual dimensions.",
+    "Test pre-seeding HTTP requests use Connection: close to avoid a stale pooled test socket between blocking CLI operations."
+  ],
+  "architectureValidation": {
+    "current": {
+      "current": "true",
+      "revision": true,
+      "build": true,
+      "webLock": true
+    },
+    "target": {
+      "target": "true",
+      "step": true
+    },
+    "narrow": {
+      "width": 390,
+      "height": 844,
+      "scroll": 390,
+      "current": "true"
+    },
+    "servedJsonSha256": "3ecd7891b20e50815cdb0fc3f4837e4b510addb78d130c4232517ee8bbf78f7b",
+    "console": "console:\nEmulating viewport: {\"deviceScaleFactor\":1,\"isMobile\":true,\"hasTouch\":true,\"isLandscape\":false,\"width\":390,\"height\":844}\n## Console messages\n<no console messages found>\nhelp[2]:\n  Run `chrome-devtools-axi console-get <id>` to see a specific message\n  Run `chrome-devtools-axi console --type error` to filter by type\n"
+  }
+}

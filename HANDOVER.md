@@ -3,8 +3,8 @@
 ## Start here
 
 Aven is an existing local network-engineering assistant prototype. This repository
-is a publication snapshot of the active `netrok-muse` folder, not a new implementation
-and not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
+began as a publication snapshot of the active `netrok-muse` folder. The Git checkout
+now includes local admission and bounded clarification; it is not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
 [architecture/HLD.md](docs/architecture/HLD.md). The historical folder/product name
 Netrok Muse still appears in filenames.
 
@@ -19,8 +19,10 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 17 identifies UI build `ux-minimal-ui-v9.1`. It records integrated minimal-UI,
-  history and reaction-picker changes, while broader candidate work remains separate.
+- The [architecture record](docs/architecture/architecture.json) identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
+  minimal UI/history/reaction behavior and adds durable, fenced chat admission.
+  Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
+  one structured clarification is integrated; provider/approval/automation/terminal/Git candidates remain separate.
 - A central 115-feature comparison register, independent audit, post-fix review and
   candidate evidence preserve implementation and acceptance history.
 - Firstmate was installed separately using Windows PowerShell → Ubuntu WSL → tmux →
@@ -30,11 +32,18 @@ Netrok Muse still appears in filenames.
 
 ## What we are doing now
 
-Publishing a screened snapshot and reusable handover to the public repository
-https://github.com/vikas53953/aven, as authorized by the owner. No product
-features were changed by the publication preparation. The original source folder
-was not a Git repository; its files were preserved. This snapshot is a separate
-copy so Firstmate and other tasks must not edit both copies independently.
+The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
+As of 20 September, `fm/aven-clarification-delivery` includes clarification and the
+subsequent review/test corrections. Its ancestry includes reliability base
+`e176ad4989a9e8f5455223206f10227d58b837b6`. The active no-mistakes run owns
+validation and repository delivery; this documentation checkpoint does not establish
+push, PR, required-check or merge completion.
+
+The owner authorizes task-branch push, PR, independent review and merge after required
+checks pass and substantive findings are resolved, including merge before visual
+approval. Owner visual acceptance remains pending; deployment and customer release
+remain unauthorized. Record any delivery blocker instead of treating authorization
+as completion. The older non-Git folder remains untouched.
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
@@ -42,9 +51,8 @@ runtime state automatically. Reconcile any newer local changes first.
 
 ## Current evidence and pending work
 
-The dated UI/history verdict review records **37 Verified (scoped), 57 Partial,
-3 Unverified, 14 Missing and 4 Deferred** across 115 features. These are the
-16 September evidence verdicts, not a fresh full-product audit. Older README and
+The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement changes only UX-033 to Partial: **37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing and 4 Deferred** across 115 features. These combine the
+16 September verdicts with the scoped 19 September clarification supplement, not a fresh full-product audit. Older README and
 workbook snapshots contain different counts; preserve their dates and scope.
 
 Authoritative references:
@@ -52,12 +60,14 @@ Authoritative references:
 - [Central feature register](outputs/01a0a3bc-a376-74e1-8d48-e4029c2cb5a2/Aven-UI-UX-Feature-Register.xlsx)
 - [Independent audit](outputs/01a0a816-e452-75f2-9363-0f859011a90e/Aven-Independent-Audit.xlsx)
 - [Post-fix review](outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/report/Aven-Post-Fix-Review.xlsx)
-- [Effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
+- [19 September clarification supplement](docs/evidence/clarification-2026-09-19/feature-verdicts.json)
+- [16 September effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
 
-Prioritize validating and composing the unintegrated reliability, provider,
-approval/workflow, automation, terminal and Git candidates. Files under `outputs/`
+Independently review the bounded clarification integration before owner UI acceptance. The remaining provider,
+approval/workflow, automation, terminal and Git candidates need independent integration.
+The [approval/clarification proposal](docs/proposals/approval-clarification.md) now records the launch authorization for all four recommended choices. Only clarification is implemented: one question, one same-run read-only continuation, serial waiting and explicit cancellation after reload. Approval, mock execution and durable continuation after restart remain excluded. Files under `outputs/`
 are archived candidates or evidence, not automatically the live application. Do
 not bulk-copy an assembled candidate over the root application.
 
@@ -88,8 +98,7 @@ from local fixture tests.
 
 ## Run and validate
 
-Use Node.js 20 or newer for the active backend (some archived candidates use newer
-Node features such as `node:sqlite`). From the root:
+Follow the [runtime prerequisites](intentgraph/README.md) for the active backend. From the root:
 
 ```powershell
 npm ci --prefix intentgraph
@@ -105,10 +114,9 @@ Firstmate's WSL installation does not prove that every Aven function runs on Lin
 Do not configure secrets in committed files. A source checkout starts without the
 original user's browser storage, runtime profiles or credentials.
 
-Fresh snapshot checks on 19 September: **58 backend tests passed, zero failed or
-skipped**, and the existing syntax check passed. Tests use local fixtures/mocks;
-this is not a fresh visual or live-infrastructure acceptance run. See
-[verification](docs/handover/VERIFICATION.md).
+See [verification history](docs/handover/VERIFICATION.md) for dated full-suite results
+and subsequent focused regression evidence. Those fixture checks do not establish
+Windows, live-infrastructure or owner visual acceptance.
 
 ## Publication boundaries
 
@@ -128,3 +136,8 @@ was inspected from this repository.
 
 Skills are optional workflow aids subject to explicit owner instructions; their
 presence does not authorize external actions or change project acceptance.
+
+The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity, native Windows uncertainty, and owner UI acceptance remain explicit limitations.
+
+Review and test corrections are implemented on this branch. Their dated validation
+and remaining evidence limits are indexed in [verification history](docs/handover/VERIFICATION.md).

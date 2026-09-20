@@ -1,0 +1,99 @@
+✖ mounted reload reconciles two pending chats independently: settled/settled (9105.284881ms)
+✖ mounted reload reconciles two pending chats independently: missing/missing (12094.773896ms)
+✖ mounted reload reconciles two pending chats independently: settled/missing (31.12846ms)
+✖ mounted outage then missing-receipt retry updates the existing UNKNOWN result (10447.519312ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31852.100788
+
+✖ failing tests:
+
+test at intentgraph/mounted-admission.test.cjs:96:3
+✖ mounted reload reconciles two pending chats independently: settled/settled (9105.284881ms)
+  AssertionError [ERR_ASSERTION]: journal: {"draft":true,"queue":true,"paused":true,"identity":true,"annotations":true,"raw":true,"journal":false,"statuses":["UNKNOWN"]}
+  
+  false !== true
+  
+      at preserved (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:65:87)
+      at finish (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:71:3)
+      at TestContext.<anonymous> (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:100:5)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at intentgraph/mounted-admission.test.cjs:96:3
+✖ mounted reload reconciles two pending chats independently: missing/missing (12094.773896ms)
+  AssertionError [ERR_ASSERTION]: !JSON.parse(localStorage.getItem("aven-polished-chats-v1")).chats.find(c=>c.id==="fixture-first-95a5014e-8331-4652-9c1e-4606c3114b3f").pendingAdmission
+  
+  false !== true
+  
+      at waitFor (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:27:10)
+      at finish (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:70:59)
+      at TestContext.<anonymous> (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:100:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at intentgraph/mounted-admission.test.cjs:96:3
+✖ mounted reload reconciles two pending chats independently: settled/missing (31.12846ms)
+  [TypeError: fetch failed] {
+    [cause]: Error [SocketError]: other side closed
+        at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7718:26)
+        at Socket.emit (node:events:521:24)
+        at endReadableNT (node:internal/streams/readable:1735:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+      code: 'UND_ERR_SOCKET',
+      socket: { localAddress: '127.0.0.1', localPort: 44950, remoteAddress: undefined, remotePort: undefined, remoteFamily: undefined, timeout: undefined, bytesWritten: 1152, bytesRead: 1040 }
+    }
+  }
+
+test at intentgraph/mounted-admission.test.cjs:106:1
+✖ mounted outage then missing-receipt retry updates the existing UNKNOWN result (10447.519312ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      annotations: true,
+      createdAt: true,
+      events: true,
+      id: true,
+      raw: true,
+  +   rendered: 2,
+  -   rendered: 1,
+      statuses: [
+  +     'UNKNOWN',
+        'SUCCESS'
+      ]
+    }
+  
+      at TestContext.<anonymous> (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:114:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { statuses: [ 'UNKNOWN', 'SUCCESS' ], id: true, createdAt: true, annotations: true, raw: true, events: true, rendered: 2 },
+    expected: { statuses: [ 'SUCCESS' ], id: true, createdAt: true, annotations: true, raw: true, events: true, rendered: 1 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,31 @@
+✖ mounted reload reconciles two pending chats independently: settled/missing (8069.898038ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8253.637716
+
+✖ failing tests:
+
+test at intentgraph/mounted-admission.test.cjs:96:3
+✖ mounted reload reconciles two pending chats independently: settled/missing (8069.898038ms)
+  AssertionError [ERR_ASSERTION]: journal: {"draft":true,"queue":true,"paused":true,"identity":true,"annotations":true,"raw":true,"journal":false,"statuses":["UNKNOWN"]}
+  
+  false !== true
+  
+      at preserved (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:65:87)
+      at finish (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:71:3)
+      at TestContext.<anonymous> (/home/vikasmit/.treehouse/aven-0b4bd8/1/aven/intentgraph/mounted-admission.test.cjs:100:5)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1313:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

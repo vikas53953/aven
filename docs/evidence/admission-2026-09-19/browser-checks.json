@@ -1,0 +1,202 @@
+[
+  {
+    "check": "second tab does not rewrite live journal",
+    "result": "214,237,44,51,10,10,210,152,71,30,15,140,109,125,219,209,129,92,40,173,15,44,100,196,116,69,185,170,128,159,69,161"
+  },
+  {
+    "check": "second tab read preserves owner",
+    "result": {
+      "raw": "214,237,44,51,10,10,210,152,71,30,15,140,109,125,219,209,129,92,40,173,15,44,100,196,116,69,185,170,128,159,69,161",
+      "buttons": [
+        "Check saved run"
+      ]
+    }
+  },
+  {
+    "check": "queue accepted during run",
+    "result": 1
+  },
+  {
+    "check": "Stop retains unknown and pauses queue",
+    "result": {
+      "status": "UNKNOWN",
+      "paused": true,
+      "queued": 1,
+      "pending": true
+    }
+  },
+  {
+    "check": "review keeps queue paused",
+    "result": {
+      "paused": true,
+      "count": 1,
+      "status": "UNKNOWN"
+    }
+  },
+  {
+    "check": "explicit Resume submits one queued follow-up",
+    "result": {
+      "last": "SUCCESS",
+      "stats": {
+        "calls": 2,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "duplicate retry never dispatches",
+    "result": {
+      "note": "This request was already accepted. Check its saved result; no new work was started.\n\nCheck saved runRecover interrupted run",
+      "stats": {
+        "calls": 2,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "narrow recovery controls fit",
+    "result": {
+      "width": 390,
+      "scroll": 390,
+      "buttons": [
+        {
+          "text": "Check saved run",
+          "left": 93,
+          "right": 217.765625,
+          "disabled": false
+        },
+        {
+          "text": "Recover interrupted run",
+          "left": 93,
+          "right": 264.921875,
+          "disabled": false
+        }
+      ]
+    }
+  },
+  {
+    "check": "dead owner recovery is explicit and unknown",
+    "result": {
+      "pending": false,
+      "status": "UNKNOWN",
+      "results": 1,
+      "focus": "draft",
+      "stats": {
+        "calls": 2,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "intentional same-text turn has fresh identity",
+    "result": {
+      "ids": [
+        "b2a238dc-6e05-40d0-ba47-d32e40f5a9f1",
+        "c3f6c9e7-ece3-4cee-8222-0d31f58b42a6"
+      ],
+      "stats": {
+        "calls": 3,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "failed browser save preserves draft and does not dispatch",
+    "result": {
+      "draft": "Keep this unsaved draft",
+      "notice": "Could not save the message. Your draft is retained.",
+      "stats": {
+        "calls": 3,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "recovery control is keyboard reachable",
+    "result": "Recover interrupted run"
+  },
+  {
+    "check": "completion-save failure stays unknown after keyboard recovery",
+    "result": {
+      "status": "UNKNOWN",
+      "pending": false,
+      "focus": "draft",
+      "stats": {
+        "calls": 4,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "reload retains pending identity without dispatch",
+    "result": {
+      "pending": "cd051bb1-be8f-4d21-9e58-b1f35f9ab7c3",
+      "stats": {
+        "calls": 5,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      }
+    }
+  },
+  {
+    "check": "reload reconciliation keeps one saved final result",
+    "result": {
+      "count": 1,
+      "last": "SUCCESS",
+      "stats": {
+        "calls": 5,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      },
+      "code": [
+        {
+          "open": false,
+          "lines": 15
+        },
+        {
+          "open": false,
+          "lines": 15
+        }
+      ]
+    }
+  },
+  {
+    "check": "second conversation explains serial wait and retains draft",
+    "result": {
+      "draft": "Keep second-chat draft",
+      "notice": "Waiting for Network companion \u00b7 one run at a time. Press Enter to queue here.Open active conversation",
+      "activeButton": true
+    }
+  },
+  {
+    "check": "two follow-ups dispatch FIFO once each",
+    "result": {
+      "sent": [
+        {
+          "id": "7878df73-88c0-4500-a1f5-22b87bdae700",
+          "text": "FIFO first fixture"
+        },
+        {
+          "id": "89388b84-9ea6-495b-84ed-4e520141ad18",
+          "text": "FIFO queued one"
+        },
+        {
+          "id": "6e4820da-527e-4a2a-840b-0fece2005592",
+          "text": "FIFO queued two"
+        }
+      ],
+      "stats": {
+        "calls": 8,
+        "providerCalls": 0,
+        "deviceCalls": 0
+      },
+      "otherDraft": "Keep second-chat draft"
+    }
+  }
+]

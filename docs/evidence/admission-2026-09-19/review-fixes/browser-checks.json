@@ -1,0 +1,82 @@
+[
+  {
+    "check": "two pending settled/settled",
+    "passed": true,
+    "responderCalls": 0,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": false
+  },
+  {
+    "check": "two pending missing/missing",
+    "passed": true,
+    "responderCalls": 2,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": false
+  },
+  {
+    "check": "two pending settled/missing",
+    "passed": true,
+    "responderCalls": 1,
+    "unrelatedJournalDraftQueueAndIdentityPreserved": true,
+    "narrowKeyboardRetry": true
+  },
+  {
+    "check": "outage / missing / successful retry",
+    "passed": true,
+    "statuses": [
+      "SUCCESS"
+    ],
+    "id": true,
+    "createdAt": true,
+    "annotations": true,
+    "raw": true,
+    "events": true,
+    "rendered": 1,
+    "responderCalls": 1
+  },
+  {
+    "check": "live other-tab ownership",
+    "passed": true,
+    "workspaceUnchangedDuringForeignReview": true,
+    "ownerFinishedSuccessfully": true
+  },
+  {
+    "check": "stale snapshot",
+    "passed": true,
+    "newerWorkspacePreserved": true,
+    "responderCalls": 0
+  },
+  {
+    "check": "FIFO and visual regressions",
+    "passed": true,
+    "texts": [
+      "FIFO first",
+      "FIFO second",
+      "FIFO third"
+    ],
+    "identities": 3,
+    "queue": 0,
+    "draft": "Keep unrelated draft",
+    "pending": false,
+    "responderCalls": 3,
+    "exactCollapsedCodeBlocks": 3,
+    "desktop": [
+      1440,
+      1000
+    ],
+    "narrow": [
+      390,
+      844
+    ],
+    "servedHashes": {
+      "polished.html": "ae9035a1873e4ba7c92a8961c5f02c224b8d229b2cd07e2ba07871656a29e28c",
+      "polished.js": "9da8c65d59625d4d9897b82f5d5e94448ad4aeacfaf1a515540ef061502bbe9f",
+      "polished-admission.js": "05891a42d36a0114f184989797f5fe5a13ab02bc1c364bcda717831de0538328",
+      "polished-run-state.js": "dd0bc508049a2b0eb390354f5cab13ba33f05bf3dc6bd217125a00329e083f7d",
+      "polished-backup.js": "48fc5e74fa1590bab6858ec2a4d4068e846f8ef4bffd6b494d4a159b8bda7b2f",
+      "polished.css": "1c7fb82b4508db74683bbfe28ade3c323b6919861de3f01b3befd457e0ef53d6",
+      "polished-workspace-tools.js": "8e1af276bc9e93b2bb3a94178ad05984f7bf1eb5b2dadeb64a6e52f6c6bc5d75"
+    },
+    "console": "console:\nEmulating viewport: {\"deviceScaleFactor\":1,\"isMobile\":true,\"hasTouch\":true,\"isLandscape\":false,\"width\":390,\"height\":844}\n## Console messages\n<no console messages found>\nhelp[2]:\n  Run `chrome-devtools-axi console-get <id>` to see a specific message\n  Run `chrome-devtools-axi console --type error` to filter by type\n"
+  }
+]
