@@ -303,3 +303,59 @@ test('mounted keyboard Refresh restores corresponding focus and announces live, 
  questionButton('Cancel waiting request');waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);refresh('Saved state refreshed');assert.equal(calls()-count,1);
  results.push({check:'keyboard Refresh / focus restored / current live-region result / validation cleared / failed and tokenless saved state',passed:true,responderCalls:1});
 });
+
+test('mounted pending reload preserves unrelated draft and navigation saves', { skip: !enabled }, () => {
+  const pending = makeChat('pending-draft'), other = makeChat('editable-draft', false);
+  seed([pending, other]);
+  openChat(other.id);
+  evaluate('() => { const d=document.querySelector("#draft");d.value="Edited after pending reload";d.dispatchEvent(new Event("input",{bubbles:true}));return true; }');
+  preserved(pending);
+  cli('open', url);
+  assert.equal(evaluate('() => document.querySelector("#draft").value'), 'Edited after pending reload');
+  assert.equal(evaluate(`() => JSON.parse(localStorage.getItem(${JSON.stringify(key)})).activeChat`), other.id);
+  preserved(pending);
+  evaluate(`() => {const d=JSON.parse(localStorage.getItem(${JSON.stringify(key)}));d.chats[0].title="External change";localStorage.setItem(${JSON.stringify(key)},JSON.stringify(d));return true;}`);
+  const hash = storageHash();
+  evaluate('() => {const d=document.querySelector("#draft");d.value="Stale edit";d.dispatchEvent(new Event("input",{bubbles:true}));return true;}');
+  assert.equal(storageHash(), hash);
+});
+
+for (const mode of ['add', 'replace']) {
+  test('mounted ' + mode + ' restore rejects live writers and stale workspace', { skip: !enabled }, () => {
+    seed([makeChat('restore-source', false)]);
+    const first = cli('pages').match(/^\s*(\d+),[^\n]+,true$/m)[1];
+    const pages = new Set([...cli('pages').matchAll(/^\s*(\d+),/gm)].map(m => m[1]));
+    try { cli('newpage', url); } catch (error) { if (!String(error.stdout).includes('No page is currently selected')) throw error; }
+    const second = [...cli('pages').matchAll(/^\s*(\d+),/gm)].map(m => m[1]).find(id => !pages.has(id));
+    try {
+      cli('selectpage', second);
+      evaluate(`async () => {
+        document.querySelector('#settings').click();
+        [...document.querySelectorAll('#settings-nav button')].find(b=>b.textContent==='Privacy & data').click();
+        const backup=AvenWorkspaceBackup.envelope(JSON.parse(localStorage.getItem('aven-polished-preferences-v1')),JSON.parse(localStorage.getItem(${JSON.stringify(key)})),{},'fixture');
+        const file=new File([AvenWorkspaceBackup.serialize(backup)],'fixture.json',{type:'application/json'});
+        await document.querySelector('#import-workspace').onchange({target:{files:[file]}});return true;
+      }`);
+      waitFor(`!document.querySelector('#import-preview').hidden`);
+      cli('selectpage', first);
+      configure({ delayMs: 30, hold: true });
+      send('Hold request during restore');
+      waitFor(`!!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);
+      cli('selectpage', second);
+      const button = mode === 'add' ? '#add-import' : '#confirm-import';
+      const held = storageHash();
+      evaluate(`async () => {await document.querySelector(${JSON.stringify(button)}).onclick();return true;}`);
+      assert.match(evaluate('() => document.querySelector("#backup-status").textContent'), /Another tab/);
+      assert.equal(storageHash(), held);
+      configure({ delayMs: 30 });
+      waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);
+      const settled = storageHash();
+      evaluate(`async () => {await document.querySelector(${JSON.stringify(button)}).onclick();return true;}`);
+      assert.match(evaluate('() => document.querySelector("#backup-status").textContent'), /Workspace changed/);
+      assert.equal(storageHash(), settled);
+    } finally {
+      configure({ delayMs: 30 });
+      cli('closepage', second);cli('selectpage', first);
+    }
+  });
+}

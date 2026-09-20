@@ -126,12 +126,9 @@
         if(!previous.pendingAdmission||AvenAdmission.pending(previous)?.submission.ownerSession===browserSession)continue;
         if(previous.id===admissionWriter&&previous.pendingAdmission===receiptSavePermit)continue;
         const current=data.chats.find(c=>c.id===previous.id);
-        if(!admissionWriter||!current||savedCapture(current)!==savedChatSnapshots.get(previous.id)){
+        if(!current||savedCapture(current)!==savedChatSnapshots.get(previous.id)){
           toast('Another session has a saved request. Check its result before changing captured work.');return false;
         }
-        // Only this explicitly reviewed request may change. Preserve every
-        // unrelated pending capture byte-for-byte, including its old journal.
-        // Draft and navigation changes remain independent of run ownership.
         const protectedChat={...current};for(const key of captureKeys){if(Object.hasOwn(previous,key))protectedChat[key]=previous[key];else delete protectedChat[key];}
         protectedChats.set(previous.id,protectedChat);
       }
@@ -1132,9 +1129,15 @@
       try{if(file.size>AvenWorkspaceBackup.MAX_BYTES)throw Error('Backup exceeds the 10 MiB import limit.');const value=AvenWorkspaceBackup.parse(await file.text());if(ticket!==selection||!status.isConnected)return;pending=value;byId('import-summary').textContent=file.name+' · '+value.prefs.agents.length+' coworkers · '+value.data.chats.length+' conversations · '+value.data.chats.reduce((n,c)=>n+c.messages.length,0)+' messages';preview.hidden=false;}catch(error){if(ticket===selection)status.textContent=error.message;}
     };
     byId('cancel-import').onclick=()=>{selection++;pending=null;preview.hidden=true;byId('import-workspace').value='';status.textContent='Import cancelled. Your workspace is unchanged.';};
-    const restore=mode=>{
-      if(!pending)return;const pendingRecovery=recoverPendingCoworkerCreate(localStorage);if(!pendingRecovery.ok){coworkerCreationRecoveryBlocked=true;status.textContent='An unfinished coworker creation is pending recovery. Reload after browser storage is available before restoring a workspace.';return;}coworkerCreationRecoveryBlocked=false;if(busy()){status.textContent='Finish active runs and save or close profile editors before importing.';return;}
-      try{AvenWorkspaceBackup.replace(localStorage,pending,workspaceEnvelope(),mode);status.textContent='Workspace restored. Reloading…';location.reload();}
+    const restore=async mode=>{
+      if(!pending)return;
+      try{await withAdmissionWriter(null,()=>{
+        if(localStorage.getItem(CHAT_KEY)!==savedWorkspace)throw Error('Workspace changed in another tab. Reload before restoring a workspace.');
+        const pendingRecovery=recoverPendingCoworkerCreate(localStorage);if(!pendingRecovery.ok){coworkerCreationRecoveryBlocked=true;throw Error('An unfinished coworker creation is pending recovery. Reload after browser storage is available before restoring a workspace.');}coworkerCreationRecoveryBlocked=false;
+        if(localStorage.getItem(CHAT_KEY)!==savedWorkspace)throw Error('Workspace changed during recovery. Reload before restoring a workspace.');
+        if(!pending||busy())throw Error('Finish active runs and save or close profile editors before importing.');
+        AvenWorkspaceBackup.replace(localStorage,pending,workspaceEnvelope(),mode);status.textContent='Workspace restored. Reloading…';location.reload();
+      });}
       catch(error){status.textContent=error.message;byId('download-recovery').disabled=!localStorage.getItem(AvenWorkspaceBackup.BACKUP);}
     };
     byId('add-import').onclick=()=>restore('add');byId('confirm-import').onclick=()=>restore('replace');
