@@ -95,6 +95,21 @@ test('HTTP rejects an unconfigured provider before the injected key getter runs'
   assert.equal(keyReads, 0);
 });
 
+test('HTTP rejects the unsupported chat context field before dispatch', async (t) => {
+  const root = tempRoot();
+  let dispatches = 0;
+  const server = await start(baseOptions(root, {
+    chatResponder: async () => { dispatches += 1; return { text: 'fixture answer' }; }
+  }));
+  t.after(async () => { await new Promise((resolve) => server.close(resolve)); fs.rmSync(root, { recursive: true, force: true }); });
+  for (const context of [null, {}, { windowMessages: 1, windowCharacters: 1, retainedMessages: 1, retainedCharacters: 1, omittedMessages: 0, totalMessages: 1 }]) {
+    const result = await post(server, { chatId: 'unsupported-context', agentName: 'Fixture', mode: 'plan', selection: selectedRouter, messages: [{ role: 'user', content: 'x' }], context });
+    const body = await result.json();
+    assert.equal(result.status, 400, JSON.stringify(body));
+  }
+  assert.equal(dispatches, 0);
+});
+
 test('configured injected model dispatch returns requested selection and request provenance', async (t) => {
   const root = tempRoot();
   const server = await start(baseOptions(root));

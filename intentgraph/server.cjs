@@ -141,15 +141,13 @@ function providerFactorySupports(factory, providerId) {
   catch { return false; }
 }
 
-function capabilityWithAdapterBoundaries(snapshot, { modelFactory, providerRuntime } = {}) {
+function capabilityWithAdapterBoundaries(snapshot, modelFactory) {
   const normalized = normalizeCapabilities(snapshot);
   return {
     ...normalized,
     providers: normalized.providers.map((provider) => {
       if (provider.id === DEFAULT_SELECTION.providerId || provider.status === 'unknown' || provider.status === 'unavailable') return provider;
-      const runtimeFactory = providerRuntime?.modelFactory;
-      const supported = providerFactorySupports(modelFactory, provider.id) || providerFactorySupports(runtimeFactory, provider.id);
-      if (supported) return provider;
+      if (providerFactorySupports(modelFactory, provider.id)) return provider;
       return {
         ...provider,
         status: 'unavailable', configured: false, connected: false,
@@ -174,11 +172,9 @@ function createServer(options = {}) {
   const execution = options.execution === false ? null : require('./execution-service.cjs').createExecutionService({root,engine,runtimeDirectory,...(options.executionOptions||{})});
   const networkExecution = execution?.adapters ? require('./network-execution.cjs').createNetworkExecution({catalyst:sandbox,adapters:execution.adapters}) : sandbox;
   const providerFactory = options.providerModelFactory;
-  const providerRuntime = options.providerRuntime || null;
   async function providerCapabilities() {
     let snapshot;
     if (typeof options.getProviderCapabilities === 'function') snapshot = await options.getProviderCapabilities();
-    else if (providerRuntime && typeof providerRuntime.capabilities === 'function') snapshot = await providerRuntime.capabilities();
     else if (options.providerCapabilities && typeof options.providerCapabilities === 'object') snapshot = options.providerCapabilities;
     else {
       let current = null;
@@ -200,7 +196,7 @@ function createServer(options = {}) {
         }]
       };
     }
-    return capabilityWithAdapterBoundaries(snapshot, { modelFactory: providerFactory, providerRuntime });
+    return capabilityWithAdapterBoundaries(snapshot, providerFactory);
   }
   const resolveProviderSelection = async (selection) => {
     const capabilities = await providerCapabilities();
@@ -302,7 +298,7 @@ function createServer(options = {}) {
           clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages,
           agentName: body.agentName, chatId: body.chatId, mode, selection: context.selection,
           providerCapabilities: context.capabilities, getKey: context.getKey, modelFactory: context.modelFactory,
-          providerFetch: context.providerFetch, context: body.context || null, signal: controller.signal,
+          signal: controller.signal,
           onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing
         });
         const reply = rawReply && typeof rawReply === 'object'
@@ -474,9 +470,8 @@ function createServer(options = {}) {
       try { body = await parseBody(req); } catch { sendError(res, 400, new Error('Invalid chat request')); return; }
       const mode = body?.mode === undefined ? 'inspect' : body.mode;
       const hasIdentity = body?.requestId !== undefined || body?.idempotencyKey !== undefined;
-      if (!body || Object.keys(body).some(k => !['chatId', 'agentName', 'messages', 'mode', 'requestId', 'idempotencyKey', 'selection', 'context'].includes(k)) ||
+      if (!body || Object.keys(body).some(k => !['chatId', 'agentName', 'messages', 'mode', 'requestId', 'idempotencyKey', 'selection'].includes(k)) ||
         Object.hasOwn(body, 'selection') && (!body.selection || typeof body.selection !== 'object' || Array.isArray(body.selection)) ||
-        Object.hasOwn(body, 'context') && body.context !== null && (typeof body.context !== 'object' || Array.isArray(body.context) || Object.keys(body.context).some(k => !['windowMessages', 'windowCharacters', 'retainedMessages', 'retainedCharacters', 'omittedMessages', 'totalMessages'].includes(k)) || Object.values(body.context).some(value => value !== null && (!Number.isSafeInteger(value) || value < 0))) ||
         !CHAT_MODES.includes(mode) || !validIdentity(body.chatId) || typeof body.agentName !== 'string' || body.agentName.length > 80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length > 24 || body.messages.some(m => !m || Object.keys(m).some(k => !['role', 'content'].includes(k)) || !['user', 'assistant'].includes(m.role) || typeof m.content !== 'string' || !m.content.trim()) || body.messages.at(-1).role !== 'user' || body.messages.reduce((n, m) => n + m.content.length, 0) > 32000 || hasIdentity && (!validIdentity(body.requestId) || !validIdentity(body.idempotencyKey))) {
         sendError(res, 400, new Error('Chat requires up to 24 text messages, mode plan or inspect, and a valid optional provider selection')); return;
       }
@@ -507,9 +502,8 @@ function createServer(options = {}) {
       const receipt = claim.receipt;
       await dispatchChat(req, res, {
         request, receipt, selection: selected.selection, capabilities, provider: execution.provider,
-        getKey: providerRuntime?.getKey || options.getProviderKey,
-        modelFactory: providerRuntime?.modelFactory || options.providerModelFactory,
-        providerFetch: providerRuntime?.fetch ? ((input, init) => providerRuntime.fetch(selected.selection.providerId, input, init)) : options.providerFetch,
+        getKey: options.getProviderKey,
+        modelFactory: providerFactory,
         responder: options.chatResponder || require('./agent-runtime.cjs').respond, runtimeContext: {}, events: []
       });
       return;
