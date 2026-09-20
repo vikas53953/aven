@@ -30,12 +30,17 @@ const transact = receiptStore.transaction.bind(receiptStore);
 receiptStore.transaction = work => { if(settings().failDatabase)throw Error('Injected database failure');return transact(work); };
 const admission = require('../reliability.cjs').createAdmission({store:receiptStore});
 start({ root, admission, port: 8768, sandbox: { close() {}, status: () => ({}), inventory: blocked, runCommand: blocked }, executionOptions,
+  providerCapabilities: { providers: [{ id: 'opencode', status: 'configured', configured: true, reason: 'Offline test fixture only; no provider connection.', models: [
+    { id: 'mimo-v2.5', label: 'Default fixture', status: 'configured', efforts: ['none'] },
+    { id: 'fixture-alternate', label: 'Alternate fixture', status: 'configured', efforts: ['none', 'low'] }
+  ] }] },
+  providerModelFactory: () => { throw Error('Fixture prohibits model transport'); },
   persistChatEvidence: record => {
     if (settings().failPersistence) throw Error('Injected disk failure');
     const dir = path.join(root, '.intentgraph/evidence/runs'); fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, record.runId + '.json'), JSON.stringify(record));
   },
-  chatResponder: async ({ mode, signal, clarificationAnswered, messages, onEvent }) => {
+  chatResponder: async ({ mode, signal, clarificationAnswered, messages, onEvent, selection }) => {
     calls++; stats();
     await new Promise(resolve => {
       const deadline = Date.now() + (settings().delayMs ?? 500);
@@ -47,7 +52,7 @@ start({ root, admission, port: 8768, sandbox: { close() {}, status: () => ({}), 
     if (signal.aborted) throw Error('fixture cancelled');
     if (settings().questionEvidence && !clarificationAnswered) onEvent({type:'tool_result',name:'inventory',status:'SUCCESS',evidence:{command:'inventory',target:'fixture',status:'SUCCESS',output:'retained before question\r\n'}});
     if (settings().question && !clarificationAnswered && messages.at(-1).content.includes('clarification')) return { question: settings().question, mode, model: 'fixture' };
-    return { text: 'Local admission fixture response.\n\n```text\n' + raw + '\n```', mode, model: 'fixture', evidence: [] };
+    return { text: 'Local admission fixture response.\n\n```text\n' + raw + '\n```', mode, providerId: selection?.providerId, model: selection?.modelId || 'fixture', effort: selection?.effort, evidence: [] };
   }
 }).then(server => {
   staticServer.listen(8767, '127.0.0.1', () => console.log('Admission fixture: http://127.0.0.1:8767/polished.html'));

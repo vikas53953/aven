@@ -13,9 +13,10 @@ const question = { prompt: 'Which switch?', reason: 'An exact target is needed.'
 const request = {chatId:'chat-a',requestId:'request-a',idempotencyKey:'key-a',mode:'plan',agentName:'Fixture',messages:[{role:'user',content:'Investigate switch'}]};
 const scope = q => ({chatId:q.chatId,requestId:q.requestId,runId:q.runId,questionId:q.id,revision:q.revision});
 const headers = {Origin:'http://127.0.0.1:8767','X-Aven-Chat':'text-only','Content-Type':'application/json',Connection:'close'};
-function directory(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aven-clarify-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;}
-function local(t){const dir=directory(t),store=new ReceiptStore(dir),admission=createAdmission({store});t.after(()=>admission.close());const receipt=admission.claim(request).receipt;return {dir,store,admission,receipt};}
-async function api(t,options={}){const root=directory(t),calls=[];const provider={status:()=>({})};const server=await start({root,port:0,sandbox:{close(){}},executionOptions:{provider,coordinator:{close(){}},adapters:{close(){}},delivery:{}},chatResponder:async args=>{calls.push(args);return args.clarificationAnswered?{text:'Completed',mode:args.mode,model:'fixture'}:{question,model:'fixture'};},...options});t.after(()=>new Promise(r=>server.close(r)));const base='http://127.0.0.1:'+server.address().port+'/api/chat';return {root,server,calls,provider,post:(body=request,suffix='')=>fetch(base+suffix,{method:'POST',headers,body:JSON.stringify(body)}),read:q=>fetch(base+'/question?'+new URLSearchParams({chatId:q.chatId,requestId:q.requestId,runId:q.runId}),{headers})};}
+function directory(){return fs.mkdtempSync(path.join(os.tmpdir(),'aven-clarify-'));}
+function cleanup(t,dir){t.after(()=>{try{fs.rmSync(dir,{recursive:true,force:true,maxRetries:20,retryDelay:25});}catch(error){if(error?.code!=='EPERM')throw error;setTimeout(()=>{try{fs.rmSync(dir,{recursive:true,force:true,maxRetries:20,retryDelay:25});}catch{}},0);}});}
+function local(t){const dir=directory(),store=new ReceiptStore(dir),admission=createAdmission({store});t.after(()=>admission.close());cleanup(t,dir);const receipt=admission.claim(request).receipt;return {dir,store,admission,receipt};}
+async function api(t,options={}){const root=options.root||directory(),calls=[];const provider={status:()=>({})};const server=await start({root,port:0,sandbox:{close(){}},executionOptions:{provider,coordinator:{close(){}},adapters:{close(){}},delivery:{}},chatResponder:async args=>{calls.push(args);return args.clarificationAnswered?{text:'Completed',mode:args.mode,model:'fixture'}:{question,model:'fixture'};},...options});t.after(()=>new Promise(r=>server.close(r)));cleanup(t,root);const base='http://127.0.0.1:'+server.address().port+'/api/chat';return {root,server,calls,provider,post:(body=request,suffix='')=>fetch(base+suffix,{method:'POST',headers,body:JSON.stringify(body)}),read:q=>fetch(base+'/question?'+new URLSearchParams({chatId:q.chatId,requestId:q.requestId,runId:q.runId}),{headers})};}
 
 test('one atomic answer and segment, replay receipt, changed/stale/cross-scope rejection',t=>{
  const {admission:a,receipt}=local(t),pending=a.workflow.waiting(receipt,question,'plan','fixture'),q=pending.question;
@@ -62,7 +63,7 @@ test('second process cannot answer or cancel live wait; dead owner needs explici
 });
 
 test('migration retains an existing version-one receipt and idempotency identity',t=>{
- const dir=directory(t),{DatabaseSync}=require('node:sqlite');let a=createAdmission({directory:dir});const receipt=a.claim(request).receipt;a.settle(receipt,'SUCCESS',true);a.close();
+ const dir=directory(),{DatabaseSync}=require('node:sqlite');let a=createAdmission({directory:dir});const receipt=a.claim(request).receipt;a.settle(receipt,'SUCCESS',true);a.close();cleanup(t,dir);
  const db=new DatabaseSync(path.join(dir,'chat-admission.sqlite'));db.exec('DROP TABLE clarifications; PRAGMA user_version=0;');db.close();
  a=createAdmission({directory:dir});t.after(()=>a.close());assert.equal(a.claim(request).duplicate,true);assert.equal(a.read(request.chatId,request.requestId).runId,receipt.runId);assert.equal(a.read(request.chatId,request.requestId).outcome,'SUCCESS');
 });
@@ -110,7 +111,7 @@ test('lost answer HTTP response reads accepted state and cannot dispatch twice',
 });
 
 test('API storage failure after answer commit is recoverable and never dispatches',async t=>{
- const root=directory(t),store=new ReceiptStore(path.join(root,'.intentgraph/runtime')),admission=createAdmission({store});
+ const root=directory(),store=new ReceiptStore(path.join(root,'.intentgraph/runtime')),admission=createAdmission({store});
  const f=await api(t,{root,admission});const first=await(await f.post()).json(),input={...scope(first.question),answerToken:first.answerToken,answer:{choiceId:'a'}};
  const transaction=store.transaction.bind(store);store.transaction=fn=>{const value=transaction(fn);if(value?.question?.segmentState==='accepted'&&!value.duplicate)throw Error('lost commit acknowledgement');return value;};
  assert.equal((await f.post(input,'/question/answer')).status,503);assert.equal(f.calls.length,1);const state=await(await f.read(first.question)).json();assert.equal(state.question.segmentState,'accepted');assert.equal(state.receipt.recoverable,true);

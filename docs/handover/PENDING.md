@@ -1,12 +1,12 @@
 # Pending features
 
-These 14 originally missing features retain their 16 September requirements. The 19 September clarification supplement advances only UX-033 to Partial; candidate implementation is not acceptance.
+These 14 originally missing features retain their 16 September requirements. The 19 September clarification supplement advances UX-033 to Partial. The 20 September provider-picker slice advances UX-027 to Partial; scoped implementation and fixture tests are not full acceptance.
 
 | ID | Feature | Original next action |
 | --- | --- | --- |
 | UX-023 | File or device mentions | Add @device and @document chips that identify exact scope. |
 | UX-026 | Voice dictation | Defer until microphone, transcript review and provider privacy are defined. |
-| UX-027 | Model and effort picker | Show actual model; enable selection only for connected supported providers. |
+| UX-027 — now Partial | Model and effort picker | Picker and frozen request selection implemented for advertised locally configured models, with connectivity explicitly unverified. Production onboarding/adapters, connected-provider evidence and owner acceptance remain pending. See [scope and evidence](../evidence/provider-picker-2026-09-20/README.md). |
 | UX-033 — now Partial | Clarification and approval cards | Clarification implemented; general approval remains missing. Acceptance status: [handover](../../HANDOVER.md). |
 | UX-037 | Parallel work visibility | Show current serial limit honestly; add independent work only with backend support. |
 | UX-071 | Interactive terminal | Keep read-only evidence primary; add terminal only for defined authorized workflows. |
@@ -19,7 +19,7 @@ These 14 originally missing features retain their 16 September requirements. The
 | UX-089 | Skills and reusable workflows | Add saved diagnostic procedures with purpose, inputs and evidence requirements. |
 | UX-114 | Existing approval tooling integration | Reuse proven backing contracts; design Aven-facing review without exposing engineering internals. |
 
-The current 58 Partial and 3 Unverified features also need work. Use the linked effective verdict review and central register for their original acceptance requirements. Four Deferred entries remain explicit scope exclusions, not completed features.
+The current 59 Partial and 3 Unverified features also need work. Use the linked effective verdict review and central register for their original acceptance requirements. Four Deferred entries remain explicit scope exclusions, not completed features. These are scoped supplements to the dated audit, not a new full-product audit.
 
 ## Integration and acceptance status
 

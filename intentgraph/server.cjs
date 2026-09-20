@@ -10,6 +10,7 @@ const { IntentEngine } = require('./engine.cjs');
 const { createChatReadApi } = require('./chat-read-api.cjs');
 const { createAdmission, validIdentity, replyOutcome } = require('./reliability.cjs');
 const { extractQuestion } = require('./clarification-workflow.cjs');
+const { DEFAULT_SELECTION, normalizeCapabilities, resolveSelection, responseProvenance } = require('./provider-selection.cjs');
 
 const DEFAULT_PORT = 8768;
 const DEFAULT_HOST = '127.0.0.1';
@@ -134,6 +135,29 @@ function parseBody(req) {
   });
 }
 
+function providerFactorySupports(factory, providerId) {
+  if (typeof factory !== 'function') return false;
+  try { return typeof factory.supportsProvider === 'function' ? factory.supportsProvider(providerId) === true : true; }
+  catch { return false; }
+}
+
+function capabilityWithAdapterBoundaries(snapshot, modelFactory) {
+  const normalized = normalizeCapabilities(snapshot);
+  return {
+    ...normalized,
+    providers: normalized.providers.map((provider) => {
+      if (provider.id === DEFAULT_SELECTION.providerId || provider.status === 'unknown' || provider.status === 'unavailable') return provider;
+      if (providerFactorySupports(modelFactory, provider.id)) return provider;
+      return {
+        ...provider,
+        status: 'unavailable', configured: false, connected: false,
+        reason: 'No executable adapter is configured for this provider.',
+        models: provider.models.map((model) => ({ ...model, status: 'unavailable', reason: 'No executable adapter is configured for this provider.' }))
+      };
+    })
+  };
+}
+
 function createServer(options = {}) {
   const root = fs.realpathSync(path.resolve(options.root || path.resolve(__dirname, '..')));
   const runtimeDirectory = path.resolve(options.runtimeDirectory || path.join(root, '.intentgraph', 'runtime'));
@@ -147,6 +171,37 @@ function createServer(options = {}) {
   const sandbox = options.sandbox || require('./catalyst.cjs').createCatalystClient({runtimeDirectory});
   const execution = options.execution === false ? null : require('./execution-service.cjs').createExecutionService({root,engine,runtimeDirectory,...(options.executionOptions||{})});
   const networkExecution = execution?.adapters ? require('./network-execution.cjs').createNetworkExecution({catalyst:sandbox,adapters:execution.adapters}) : sandbox;
+  const providerFactory = options.providerModelFactory;
+  async function providerCapabilities() {
+    let snapshot;
+    if (typeof options.getProviderCapabilities === 'function') snapshot = await options.getProviderCapabilities();
+    else if (options.providerCapabilities && typeof options.providerCapabilities === 'object') snapshot = options.providerCapabilities;
+    else {
+      let current = null;
+      try { current = execution ? await execution.status() : null; }
+      catch {
+        // Small injected test/host execution seams may only expose a provider
+        // status. Capability discovery remains read-only in that case.
+        try { current = execution?.provider?.status ? { provider: await execution.provider.status() } : null; } catch { current = null; }
+      }
+      const state = current?.provider || {};
+      const connected = state.connected === true || state.last?.ok === true;
+      const configured = state.credentialStored === true || state.configured === true;
+      snapshot = {
+        checkedAt: connected || configured ? new Date().toISOString() : null,
+        providers: [{
+          id: 'opencode', status: connected ? 'connected' : configured ? 'configured' : 'unknown', connected, configured,
+          reason: connected ? '' : configured ? 'Configured locally; connection has not been verified.' : 'OpenCode provider is not configured.',
+          models: [{ id: 'mimo-v2.5', status: connected ? 'connected' : configured ? 'configured' : 'unknown', efforts: ['none'] }]
+        }]
+      };
+    }
+    return capabilityWithAdapterBoundaries(snapshot, providerFactory);
+  }
+  const resolveProviderSelection = async (selection) => {
+    const capabilities = await providerCapabilities();
+    return { capabilities, selected: resolveSelection({ selection, capabilities, defaultSelection: DEFAULT_SELECTION }) };
+  };
   let watcher = null;
   let periodic = null;
   let debounce = null;
@@ -238,7 +293,24 @@ function createServer(options = {}) {
       let failure = null;
       try {
         const responder = context.responder;
-        const reply = await responder({ provider: context.provider, runtimeContext: context.runtimeContext, runId, segmentId: context.segmentId || null, clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages, agentName: body.agentName, chatId: body.chatId, mode, signal: controller.signal, onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing });
+        const rawReply = await responder({
+          provider: context.provider, runtimeContext: context.runtimeContext, runId, segmentId: context.segmentId || null,
+          clarificationAnswered: Boolean(context.segmentId), sandbox: networkExecution, messages: body.messages,
+          agentName: body.agentName, chatId: body.chatId, mode, selection: context.selection,
+          providerCapabilities: context.capabilities, getKey: context.getKey, modelFactory: context.modelFactory,
+          signal: controller.signal,
+          onEvent: emit, drainSteering: runState.drainSteering, onModelComplete: runState.beginClosing
+        });
+        const reply = rawReply && typeof rawReply === 'object'
+          ? {
+            ...rawReply,
+            requestedSelection: rawReply.requestedSelection || context.selection,
+            provenance: rawReply.provenance || responseProvenance({
+              requested: context.selection,
+              response: { providerId: rawReply.providerId, modelId: rawReply.modelId || rawReply.model, effort: rawReply.effort, usage: rawReply.usage }
+            })
+          }
+          : rawReply;
         if (controller.signal.aborted) throw Error('Run stopped');
         const question = extractQuestion(reply);
         if (question) {
@@ -398,16 +470,42 @@ function createServer(options = {}) {
       try { body = await parseBody(req); } catch { sendError(res, 400, new Error('Invalid chat request')); return; }
       const mode = body?.mode === undefined ? 'inspect' : body.mode;
       const hasIdentity = body?.requestId !== undefined || body?.idempotencyKey !== undefined;
-      if (!body || Object.keys(body).some(k => !['chatId', 'agentName', 'messages', 'mode', 'requestId', 'idempotencyKey'].includes(k)) || !CHAT_MODES.includes(mode) || !validIdentity(body.chatId) || typeof body.agentName !== 'string' || body.agentName.length > 80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length > 24 || body.messages.some(m => !m || Object.keys(m).some(k => !['role', 'content'].includes(k)) || !['user', 'assistant'].includes(m.role) || typeof m.content !== 'string' || !m.content.trim()) || body.messages.at(-1).role !== 'user' || body.messages.reduce((n, m) => n + m.content.length, 0) > 32000 || hasIdentity && (!validIdentity(body.requestId) || !validIdentity(body.idempotencyKey))) { sendError(res, 400, new Error('Chat requires up to 24 text messages, mode plan or inspect, and both request identity fields when supplied')); return; }
+      if (!body || Object.keys(body).some(k => !['chatId', 'agentName', 'messages', 'mode', 'requestId', 'idempotencyKey', 'selection'].includes(k)) ||
+        Object.hasOwn(body, 'selection') && (!body.selection || typeof body.selection !== 'object' || Array.isArray(body.selection)) ||
+        !CHAT_MODES.includes(mode) || !validIdentity(body.chatId) || typeof body.agentName !== 'string' || body.agentName.length > 80 || !Array.isArray(body.messages) || !body.messages.length || body.messages.length > 24 || body.messages.some(m => !m || Object.keys(m).some(k => !['role', 'content'].includes(k)) || !['user', 'assistant'].includes(m.role) || typeof m.content !== 'string' || !m.content.trim()) || body.messages.at(-1).role !== 'user' || body.messages.reduce((n, m) => n + m.content.length, 0) > 32000 || hasIdentity && (!validIdentity(body.requestId) || !validIdentity(body.idempotencyKey))) {
+        sendError(res, 400, new Error('Chat requires up to 24 text messages, mode plan or inspect, and a valid optional provider selection')); return;
+      }
+      let capabilities, selected;
+      try {
+        ({ capabilities, selected } = await resolveProviderSelection(Object.hasOwn(body, 'selection') ? body.selection : undefined));
+      } catch { sendError(res, 503, new Error('Provider capability status is unavailable')); return; }
+      // Test/host responders are already the executable seam and do not use
+      // the built-in provider. Preserve their legacy no-selection contract;
+      // real dispatchers still require the configured default below.
+      if (!selected.ok && !Object.hasOwn(body, 'selection') && typeof options.chatResponder === 'function') {
+        selected = { ok: true, selection: DEFAULT_SELECTION, legacy: true, source: 'configured-default' };
+      }
+      if (!selected.ok) { sendError(res, 409, Object.assign(new Error(selected.reason), { code: selected.code })); return; }
       if (!execution?.provider) { sendError(res, 503, new Error('Chat provider is unavailable')); return; }
       // Legacy clients remain accepted, but cannot claim replay protection.
-      const request = { ...body, mode, requestId: hasIdentity ? body.requestId : crypto.randomUUID(), idempotencyKey: hasIdentity ? body.idempotencyKey : crypto.randomUUID() };
+      const request = {
+        ...body, mode,
+        requestId: hasIdentity ? body.requestId : crypto.randomUUID(), idempotencyKey: hasIdentity ? body.idempotencyKey : crypto.randomUUID()
+      };
+      // Keep the pre-selection fingerprint stable for legacy clients. The
+      // validated default still travels in the dispatch context below.
+      if (Object.hasOwn(body, 'selection')) request.selection = selected.selection;
       let claim;
       try { claim = admission.claim(request); }
       catch (error) { sendError(res, error.statusCode || 503, error.statusCode ? error : new Error('Local receipt storage unavailable. No request was dispatched.')); return; }
       if (claim.duplicate) { sendJson(res, 200, { duplicate: true, receipt: admission.read(body.chatId, request.requestId) }); return; }
       const receipt = claim.receipt;
-      await dispatchChat(req, res, { request, receipt, provider: execution.provider, responder: options.chatResponder || require('./agent-runtime.cjs').respond, runtimeContext: {}, events: [] });
+      await dispatchChat(req, res, {
+        request, receipt, selection: selected.selection, capabilities, provider: execution.provider,
+        getKey: options.getProviderKey,
+        modelFactory: providerFactory,
+        responder: options.chatResponder || require('./agent-runtime.cjs').respond, runtimeContext: {}, events: []
+      });
       return;
     }
     if (pathname === '/api/sandbox/status' || pathname === '/api/sandbox/inventory') {
@@ -437,7 +535,23 @@ function createServer(options = {}) {
       try {
         await ready;
         if (pathname === '/api/session') { sendJson(res, 200, { token, csrfToken: token }); return; }
-        if (pathname === '/api/capabilities') { const current=execution ? await execution.status() : null; sendJson(res, 200, {ai:{connected:Boolean(current?.provider?.last?.ok),configured:Boolean(current?.provider?.credentialStored),provider:current?'opencode-go':null,model:current?'mimo-v2.5':null},runtime:{dispatch:Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok),dispatchAvailable:Boolean(current),shell:false,device:false,deviceAdapterAvailable:Boolean(current?.adapters?.network?.available)},execution:current}); return; }
+        if (pathname === '/api/health') { sendJson(res, 200, { service: 'aven-intentgraph', rootLabel: path.basename(root), ready: true }); return; }
+        if (pathname === '/api/capabilities') {
+          const origin = req.headers.origin;
+          if (origin && !chatOriginAllowed(origin, req)) { sendError(res, 403, new Error('Capabilities origin is not allowed')); return; }
+          if (origin) { res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin'); }
+          const current = execution ? await execution.status() : null;
+          const capabilities = await providerCapabilities();
+          const defaultProvider = capabilities.providers.find((item) => item.id === DEFAULT_SELECTION.providerId);
+          const defaultModel = defaultProvider?.models.find((item) => item.id === DEFAULT_SELECTION.modelId);
+          sendJson(res, 200, {
+            schemaVersion: capabilities.schemaVersion, checkedAt: capabilities.checkedAt, providers: capabilities.providers,
+            ai: { connected: defaultProvider?.connected === true, configured: defaultProvider?.configured === true, provider: defaultProvider?.id || null, model: defaultModel?.id || null },
+            runtime: { dispatch: Boolean(current?.provider?.credentialStored && current?.provider?.last?.ok), dispatchAvailable: Boolean(current), shell: false, device: false, deviceAdapterAvailable: Boolean(current?.adapters?.network?.available) },
+            execution: current
+          });
+          return;
+        }
         if (pathname === '/api/execution') { if(!execution)throw new Error('Execution is disabled for this service');sendJson(res,200,await execution.status());return; }
         if (pathname === '/api/execution/artifact') {
           const relative=parsed.searchParams.get('path')||'';
