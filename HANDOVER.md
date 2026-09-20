@@ -4,7 +4,7 @@
 
 Aven is an existing local network-engineering assistant prototype. This repository
 began as a publication snapshot of the active `netrok-muse` folder. The Git checkout
-now includes the local admission milestone; it is not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
+now includes local admission and bounded clarification; it is not a claim of production readiness. Read [AGENTS.md](AGENTS.md), then
 [architecture/HLD.md](docs/architecture/HLD.md). The historical folder/product name
 Netrok Muse still appears in filenames.
 
@@ -19,7 +19,7 @@ Netrok Muse still appears in filenames.
 - Workspace/history UI includes attachments, ideas/goals, activity and evidence
   presentation, interruption state, reviewed local file editing and backup/restore.
   The architecture record explains partial and unavailable capabilities.
-- HLD 21 identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
+- The [architecture record](docs/architecture/architecture.json) identifies UI build `ux-minimal-ui-v9.4-clarification`. It preserves the v9.1
   minimal UI/history/reaction behavior and adds durable, fenced chat admission.
   Stable request identity, independent multi-chat receipt recovery, same-request result reconciliation and serial execution are integrated;
   one structured clarification is integrated; provider/approval/automation/terminal/Git candidates remain separate.
@@ -33,10 +33,17 @@ Netrok Muse still appears in filenames.
 ## What we are doing now
 
 The screened initial snapshot is the shared source in https://github.com/vikas53953/aven.
-The current milestone is a **local-only** clarification change, ready for independent
-review after its branch is committed. It has not been pushed, merged, published or
-deployed. The older non-Git folder remains untouched. See the
-[latest clarification evidence](docs/evidence/clarification-2026-09-19/README.md).
+As of 20 September, `fm/aven-clarification-delivery` includes clarification and the
+subsequent review/test corrections. Its ancestry includes reliability base
+`e176ad4989a9e8f5455223206f10227d58b837b6`. The active no-mistakes run owns
+validation and repository delivery; this documentation checkpoint does not establish
+push, PR, required-check or merge completion.
+
+The owner authorizes task-branch push, PR, independent review and merge after required
+checks pass and substantive findings are resolved, including merge before visual
+approval. Owner visual acceptance remains pending; deployment and customer release
+remain unauthorized. Record any delivery blocker instead of treating authorization
+as completion. The older non-Git folder remains untouched.
 
 Use this repository as the shared source and documentation home. Designate one Git checkout as the working source and register that
 checkout with Firstmate. Do not overwrite the original folder or import private
@@ -44,8 +51,8 @@ runtime state automatically. Reconcile any newer local changes first.
 
 ## Current evidence and pending work
 
-The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement changes only UX-033 to Partial: **37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing and 4 Deferred** across 115 features. These are the
-16 September evidence verdicts, not a fresh full-product audit. Older README and
+The dated UI/history review recorded **37 Verified (scoped), 57 Partial, 3 Unverified, 14 Missing and 4 Deferred**. The clarification supplement changes only UX-033 to Partial: **37 Verified (scoped), 58 Partial, 3 Unverified, 13 Missing and 4 Deferred** across 115 features. These combine the
+16 September verdicts with the scoped 19 September clarification supplement, not a fresh full-product audit. Older README and
 workbook snapshots contain different counts; preserve their dates and scope.
 
 Authoritative references:
@@ -53,7 +60,7 @@ Authoritative references:
 - [Central feature register](outputs/01a0a3bc-a376-74e1-8d48-e4029c2cb5a2/Aven-UI-UX-Feature-Register.xlsx)
 - [Independent audit](outputs/01a0a816-e452-75f2-9363-0f859011a90e/Aven-Independent-Audit.xlsx)
 - [Post-fix review](outputs/01a0a816-e452-75f2-9363-0f859011a90e/fixes/report/Aven-Post-Fix-Review.xlsx)
-- [19 September recovery supplement](docs/evidence/admission-2026-09-19/review-fixes/feature-verdicts.json)
+- [19 September clarification supplement](docs/evidence/clarification-2026-09-19/feature-verdicts.json)
 - [16 September effective verdicts and limits](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/ui-release/row-verdict-review.json)
 - [Original completion plan](outputs/01a0a816-e452-75f2-9363-0f859011a90e/completion/PLAN.md)
 - [Pending feature IDs](docs/handover/PENDING.md)
@@ -91,9 +98,7 @@ from local fixture tests.
 
 ## Run and validate
 
-Use Node.js **24.16 or newer** for the active backend and its local `node:sqlite`
-admission store. Unsupported runtimes fail before chat dispatch; no runtime upgrade
-is performed automatically. From the root:
+Follow the [runtime prerequisites](intentgraph/README.md) for the active backend. From the root:
 
 ```powershell
 npm ci --prefix intentgraph
@@ -109,12 +114,9 @@ Firstmate's WSL installation does not prove that every Aven function runs on Lin
 Do not configure secrets in committed files. A source checkout starts without the
 original user's browser storage, runtime profiles or credentials.
 
-Historical publication checks on 19 September reported 58 passes with no skips.
-After admission integration, the current WSL suite reports **83 tests: 82 passed,
-zero failed, one existing Playwright adapter skip**, including seven mounted browser regressions. Syntax and current loopback
-desktop/narrow browser checks pass. These tests use local fixtures/mocks and confer
-no Windows, live-infrastructure or owner visual acceptance. See
-[verification](docs/handover/VERIFICATION.md).
+See [verification history](docs/handover/VERIFICATION.md) for dated full-suite results
+and subsequent focused regression evidence. Those fixture checks do not establish
+Windows, live-infrastructure or owner visual acceptance.
 
 ## Publication boundaries
 
@@ -137,4 +139,5 @@ presence does not authorize external actions or change project acceptance.
 
 The preserved reliability base is `e176ad4989a9e8f5455223206f10227d58b837b6`, identified as independently approved by the Firstmate launch brief. This worker does not claim independent approval of its own clarification changes. Evidence-versus-receipt ambiguity, native Windows uncertainty, and owner UI acceptance remain explicit limitations.
 
-Independent clarification review requested F1–F3 corrections: shared runtime context/budget/attempt history, edit-time answer-draft persistence, and Refresh focus/status. These are implemented on the same branch for independent re-review; owner UI approval is still pending. See the dated clarification evidence for exact validation results.
+Review and test corrections are implemented on this branch. Their dated validation
+and remaining evidence limits are indexed in [verification history](docs/handover/VERIFICATION.md).

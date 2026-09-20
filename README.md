@@ -2,6 +2,18 @@
 
 Start with [HANDOVER.md](HANDOVER.md) for completed/current/pending work, workflow, verification and publication limits. [vikas53953/aven](https://github.com/vikas53953/aven) is the shared source and documentation home. This is the 19 September 2026 source snapshot. The sections below preserve historical project documentation; their dated status counts are not the current acceptance ledger.
 
+## Run the current application
+
+Use Node 24.16 or newer, run `npm ci --prefix intentgraph`, then
+`./Start-IntentGraph.ps1` and open http://127.0.0.1:8768/polished.html.
+See the [runtime reference](intentgraph/README.md) for admission, backup and recovery contracts.
+
+Plan or Inspect can ask one clarification in the conversation. Select a choice or
+enter an allowed answer and use **Continue**, or **Cancel request**. Waiting keeps
+execution serial. After reload, the saved question cannot continue: cancel it and
+send a fresh request. A draft warning means edits are held only in that tab; copy
+them before reloading. Clarification supplies scope and grants no execution approval.
+
 # Netrok Muse â€” local visual prototype
 
 An independent network-engineering interpretation of Meta Muse, built as IntentGraph trial 01. This is a browser-based local prototype, not Meta's product or a packaged Windows executable.

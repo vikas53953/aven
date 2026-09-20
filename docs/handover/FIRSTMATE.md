@@ -42,10 +42,9 @@ No credentials, login codes, private Firstmate state, or third-party Firstmate
 distribution files are included here. Review directory and hook trust prompts in
 the actual agent UI. Firstmate does not inherit the originating Codex conversation.
 
-## Local clarification handoff
+## Clarification handoff
 
-The `fm/aven-clarification` branch starts from the launch-specified reliability base `e176ad4989a9e8f5455223206f10227d58b837b6`. The branch is local-only and is prepared for Firstmate's independent review followed by owner UI approval. Use [the dated evidence and reproduction instructions](../evidence/clarification-2026-09-19/README.md). Approval cards and mock execution are not included. The branch does not resolve Windows uncertainty or the documented evidence-versus-receipt ambiguity.
-
-19 September independent-review follow-up: F1–F3 corrections retain the live runtime context and six-call budget, persist bounded answer drafts on edits, and restore Refresh focus/status. Independent re-review of the corrected commit must precede owner UI review. Existing reliability and Windows limitations, UX-033 Partial and missing approval rows remain unchanged. Exact technical results: [clarification evidence](../evidence/clarification-2026-09-19/verification.json).
-
-The 19 September follow-up delivery instruction authorizes a separately recorded repository delivery step after this worker reports the corrected commit. This launched step remains local-only: no push, merge, publication or deployment is performed here. Preserve reliability ancestry and resolve substantive independent-review findings before the later merge. Deployment/customer release, owner visual acceptance and Windows validation remain separate gates.
+Use [HANDOVER.md](../../HANDOVER.md#what-we-are-doing-now) for current branch,
+delivery authorization and acceptance status, and [verification history](VERIFICATION.md)
+for dated checks. The original `fm/aven-clarification` launch and reproduction fixture
+are preserved in [the 19 September evidence](../evidence/clarification-2026-09-19/README.md).

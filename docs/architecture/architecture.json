@@ -1,6 +1,6 @@
 {
   "title": "Aven · Network harness",
-  "revision": "HLD 24",
+  "revision": "HLD 25",
   "updated": "2026-09-20",
   "focus": "ui",
   "summary": "A working local prototype, not yet a multi-customer service. Explore the actual call path, proposed production boundaries, and how user intent becomes an evidence-based investigation.",
@@ -195,6 +195,11 @@
     ]
   ],
   "changes": [
+    [
+      "2026-09-20",
+      "Documentation reconciled with durable admission",
+      "Corrected the function walkthrough to reference durable admission instead of the removed process-local in-flight flag. Current delivery status is owned by HANDOVER.md; dated validation is indexed in docs/handover/VERIFICATION.md. No implementation or acceptance state changed."
+    ],
     [
       "2026-09-20",
       "Same-tab unrelated saves serialized",
@@ -468,7 +473,7 @@
         ],
         [
           "5. route(req,res)",
-          "server.cjs validates origin/payload, checks the global in-flight flag, and calls agent-runtime.respond(). The single in-flight flag remains a multi-user limitation."
+          "server.cjs validates origin and payload, then admits the request through reliability.cjs before calling agent-runtime.respond(). See the Backend API layer for durable serial admission and clarification transitions; a process-local in-flight flag is no longer the admission authority."
         ],
         [
           "6. Framework loop",

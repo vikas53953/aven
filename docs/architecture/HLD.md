@@ -1,6 +1,6 @@
 # Aven · Network harness — High-level design
 
-HLD 24 · Updated 2026-09-20
+HLD 25 · Updated 2026-09-20
 
 ## Purpose
 
@@ -150,6 +150,7 @@ Ask “Investigate sw1’s interfaces.” The agent must select tools without ex
 
 ## Change history
 
+- 2026-09-20 — **Documentation reconciled with durable admission:** Corrected the function walkthrough to reference durable admission instead of the removed process-local in-flight flag. Current delivery status is owned by HANDOVER.md; dated validation is indexed in docs/handover/VERIFICATION.md. No implementation or acceptance state changed.
 - 2026-09-20 — **Same-tab unrelated saves serialized:** Implemented T2 in polished.js by serializing unrelated-save Web Lock requests within the tab. Navigation and rapid draft edits retain waiting guidance and the latest persisted draft after reload. Focused mounted reproduction and verification: docs/evidence/clarification-2026-09-19/t2-verification.md. Foreign writers remain excluded and stale workspace checks are unchanged. Pipeline re-review and CI remain with the outer executor; Windows, live providers/devices, owner visual acceptance and release approval are not established.
 - 2026-09-20 — **Live writer completion protected from foreign navigation:** Implemented T1 in polished.js. Unrelated draft/navigation saves acquire the admission Web Lock before checking fresh storage and unchanged protected capture. A live foreign writer rejects persistence while retaining the visible draft and warning; abandoned pending requests still allow unrelated saves. Focused mounted reproduction and verification are recorded in docs/evidence/clarification-2026-09-19/t1-verification.md. Pipeline re-review and remote CI belong to the outer executor; Windows, live providers/devices, owner visual acceptance and customer release remain unverified or unauthorized.
 - 2026-09-20 — **Pending capture persistence and guarded workspace restore:** Implemented R1/R2 corrections in polished.js with focused mounted regressions in intentgraph/mounted-admission.test.cjs. Verification is limited to the review fix round; no new owner visual acceptance, Windows validation, live provider/device check or release approval is claimed. Existing evidence-versus-receipt ambiguity and continuation limits remain unchanged. Focused mounted verification was attempted with chrome-devtools-axi on 2026-09-20 but all three selected cases were blocked in setup because Google Chrome stable was unavailable at /opt/google/chrome/chrome; no regression assertions ran. Atlas visual verification was likewise unavailable. The HLD was regenerated; authoritative test/lint and delivery phases remain with the outer executor.
@@ -258,7 +259,7 @@ Persists a stable request identity and exact bounded context, then posts to the 
 
 #### 5. route(req,res)
 
-server.cjs validates origin/payload, checks the global in-flight flag, and calls agent-runtime.respond(). The single in-flight flag remains a multi-user limitation.
+server.cjs validates origin and payload, then admits the request through reliability.cjs before calling agent-runtime.respond(). See the Backend API layer for durable serial admission and clarification transitions; a process-local in-flight flag is no longer the admission authority.
 
 #### 6. Framework loop
 

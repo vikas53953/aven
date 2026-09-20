@@ -1,5 +1,19 @@
 # Verification history
 
+Current delivery and acceptance status belongs to [HANDOVER.md](../../HANDOVER.md).
+The dated sections below preserve each check's scope; historical full-suite totals
+do not describe every subsequent source correction.
+
+## Focused pending-workspace corrections — 20 September 2026
+
+[T1 verification](../evidence/clarification-2026-09-19/t1-verification.md) records mounted verification covering active-writer completion, abandoned pending drafts,
+stale saves and both restore modes. [T2 verification](../evidence/clarification-2026-09-19/t2-verification.md)
+records affected mounted verification after same-tab save serialization, including
+waiting guidance and rapid draft edits across reload. Both used isolated cached
+Chromium through chrome-devtools-axi with synthetic local fixtures. Exact commands,
+scope and unavailable checks remain in those records. Neither establishes a new
+full-suite or remote CI result.
+
 ## Initial publication snapshot
 
 Date: 2026-09-19. Scope: current application snapshot, not archived candidate suites.
@@ -33,7 +47,7 @@ The ship contract is local-only: no pipeline, push, merge, publish or deploy was
 
 ## Independent-review corrections — 19 September 2026
 
-Current full suite with mounted browser checks enabled: **83 tests, 82 passed, zero failed, one existing Playwright adapter skip**. Seven mounted chrome-devtools-axi cases and six browser-state tests pass; syntax, seven served-source hashes, actual 1440×1000 / 390×844 viewports and narrow keyboard retry are checked. The two review findings were reproduced before correction. See [latest recovery evidence](../evidence/admission-2026-09-19/review-fixes/README.md). Backend fencing is unchanged. Evidence-versus-receipt ambiguity is documented as nonblocking; Windows and owner UI acceptance remain unverified. Independent re-review is required; no self-approval or remote delivery occurred.
+At this checkpoint, the full suite with mounted browser checks enabled: **83 tests, 82 passed, zero failed, one existing Playwright adapter skip**. Seven mounted chrome-devtools-axi cases and six browser-state tests pass; syntax, seven served-source hashes, actual 1440×1000 / 390×844 viewports and narrow keyboard retry are checked. The two review findings were reproduced before correction. See [latest recovery evidence](../evidence/admission-2026-09-19/review-fixes/README.md). Backend fencing is unchanged. Evidence-versus-receipt ambiguity is documented as nonblocking; Windows and owner UI acceptance remain unverified. Independent re-review is required; no self-approval or remote delivery occurred.
 
 ## Clarification-only local milestone — 19 September 2026
 

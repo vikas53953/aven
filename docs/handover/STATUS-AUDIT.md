@@ -1,12 +1,14 @@
 # Aven status audit
 
+Current publication and acceptance status is maintained in [HANDOVER.md](../../HANDOVER.md). The checkpoints below are historical.
+
 ## Git baseline and local admission addendum — 19 September 2026
 
 The historical audit below describes the original non-Git folder. The isolated Git audit established `1ea8abf6e220354114fbba57d7d938aab008ca61` as the active snapshot. Fresh gh-axi metadata reads identified `main` as the remote default, with both main and initial-import at that commit; cached tracking refs were stale. The five v9.1 integrated UI hashes and all 97 final unique assembled-provenance paths matched. Later round2 composition evidence resolves the earlier 15 pending overlaps, but candidate composition was not active integration.
 
 A fresh two-process probe reproduced a stale-owner duplicate claim in the archived reliability candidate, despite its passing scoped tests. The active implementation now uses whole-transaction SQLite admission, stable browser identity and explicit UNKNOWN recovery, preserving serial execution and the approved reference boundaries. HLD 18 records that initial slice; the correction addendum below describes HLD 19. See [current implementation evidence](../evidence/admission-2026-09-19/README.md) and [all-115 verdict reconciliation](../evidence/admission-2026-09-19/feature-verdicts.json). No archived candidate was bulk-overlaid or modified. No owner approval is inferred.
 
-The current local branch is for independent review, not an approved release. Remaining approval/clarification work is a [proposal](../proposals/approval-clarification.md), with no runtime integration. The original 37 scoped Verified / 57 Partial / 3 Unverified / 14 Missing / 4 Deferred effective totals remain unchanged.
+At this admission checkpoint, the local branch was for independent review, not an approved release. Remaining approval/clarification work was a [proposal](../proposals/approval-clarification.md), with no clarification runtime integration at that checkpoint. The original 37 scoped Verified / 57 Partial / 3 Unverified / 14 Missing / 4 Deferred effective totals remain unchanged.
 
 ## Independent-review corrections — 19 September 2026
 
