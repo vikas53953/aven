@@ -154,8 +154,15 @@ test('mounted recovery cannot interrupt a genuinely live writer in another tab',
     assert.match(evaluate('() => document.querySelector(".reply-error").textContent'), /still owns this request/);
     assert.equal(evaluate('() => [...document.querySelectorAll(".reply-error button")].some(b=>b.textContent.includes("Recover"))'), false);
     assert.equal(storageHash(), beforeHash);
+    openChat(chats[0].id);
+    evaluate('() => {const d=document.querySelector("#draft");d.value="Foreign draft retained in this tab";d.dispatchEvent(new Event("input",{bubbles:true}));return true;}');
+    assert.equal(storageHash(), beforeHash, 'foreign navigation and draft must not invalidate the writer');
+    assert.match(evaluate('() => document.querySelector("#chat-status").textContent'), /draft is kept in this tab only/);
     configure({ delayMs: 30 }); cli('selectpage', first);
     waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[1].pendingAdmission`);
+    cli('selectpage', second);
+    assert.equal(evaluate('() => document.querySelector("#draft").value'), 'Foreign draft retained in this tab');
+    cli('selectpage', first);
     preserved(chats[1], true); preserved(chats[0]); assert.equal(calls(), count);
     results.push({ check: 'live other-tab ownership', passed: true, workspaceUnchangedDuringForeignReview: true, ownerFinishedSuccessfully: true });
   } finally { configure({ delayMs: 30 }); cli('closepage', second); cli('selectpage', first); }
