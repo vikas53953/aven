@@ -16,7 +16,9 @@ saves the provider/model/effort choice for that conversation immediately. Only a
 configured choices are available; configuration alone does not verify connectivity.
 Active/queued requests lock changes, and retries/clarification retain their original
 selection. **Use service default** restores the existing OpenCode default. This slice
-does not add credential setup or new production provider adapters.
+does not add credential setup or new production provider adapters. Enable **Show run details**
+in Settings to see requested and provider-reported selections separately; missing
+reported fields appear as unavailable.
 
 Plan or Inspect can ask one clarification in the conversation. Select a choice or
 enter an allowed answer and use **Continue**, or **Cancel request**. Waiting keeps
