@@ -610,6 +610,10 @@ html[data-theme=light] .cli-terminal { background: #050505; color: #eee; }
 /* Clarification stays inside the existing message column. */
 .clarification-card{max-width:38rem;border:1px solid var(--border,#d5d5d5);border-radius:12px;padding:16px;margin:8px 0;overflow-wrap:anywhere}
 .clarification-card h3{font-size:1rem;margin:0 0 10px}.clarification-card p{margin:8px 0}
+.clarification-card.clarification-answered{padding:0}
+.clarification-answered summary{padding:12px 16px;min-height:44px;box-sizing:border-box;cursor:pointer;font-weight:500;overflow-wrap:anywhere;border-radius:12px}
+.clarification-answered summary:hover{background:var(--hover,rgba(127,127,127,.08))}
+.clarification-details{padding:0 16px 16px}
 .clarification-reason,.clarification-note{font-size:.85rem;line-height:1.5;color:var(--muted,#777)}
 .clarification-form fieldset{border:0;padding:0;margin:12px 0;min-width:0}
 .clarification-form legend{font-size:.85rem;margin-bottom:6px}

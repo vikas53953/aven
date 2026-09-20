@@ -197,6 +197,11 @@
   "changes": [
     [
       "2026-09-20",
+      "Answered clarification collapses into a compact row",
+      "Owner requested an expandable Answered: <answer> row after previewing the clarification UI. Answered cards now default to a native details/summary disclosure; expanding retains the question, answer and saved-state refresh. Waiting and cancellation behavior are unchanged. This is a local presentation change; full Windows application acceptance remains separate."
+    ],
+    [
+      "2026-09-20",
       "Documentation reconciled with durable admission",
       "Corrected the function walkthrough to reference durable admission instead of the removed process-local in-flight flag. Current delivery status is owned by HANDOVER.md; dated validation is indexed in docs/handover/VERIFICATION.md. No implementation or acceptance state changed."
     ],

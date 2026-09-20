@@ -26,7 +26,15 @@
     const actions=document.createElement('div');actions.className='clarification-actions';
     function button(label,fn){if(!fn)return;const b=document.createElement('button');b.type='button';b.className='button-secondary';b.textContent=label;b.disabled=busy;b.onclick=fn;if(label==='Refresh saved state')b.dataset.questionAction='refresh';actions.append(b);}
     if(q.phase==='waiting')button(live?'Cancel request':'Cancel waiting request',onCancel);
-    button('Refresh saved state',onRefresh);box.append(actions);return box;
+    button('Refresh saved state',onRefresh);box.append(actions);
+    if(q.answer){
+      const details=document.createElement('details');
+      const summary=document.createElement('summary');summary.textContent='Answered: '+q.answer.text;
+      const content=document.createElement('div');content.className='clarification-details';
+      while(box.firstChild)content.append(box.firstChild);
+      details.append(summary,content);box.append(details);box.classList.add('clarification-answered');
+    }
+    return box;
   }
   const api={scope,card};if(typeof module!=='undefined')module.exports=api;else root.AvenClarification=api;
 })(typeof window!=='undefined'?window:globalThis);
