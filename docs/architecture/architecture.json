@@ -197,6 +197,11 @@
   "changes": [
     [
       "2026-09-20",
+      "Answered disclosure state survives in-session refresh",
+      "Implemented in-memory disclosure state keyed by question in polished.js, independent of answer authority. Conversation re-renders preserve expanded or collapsed state; newly displayed answers and page reloads default collapsed. Added a focused mounted fixture regression for refresh success/error feedback visibility, keyboard focus, navigation and reload; verification remains separate from customer acceptance."
+    ],
+    [
+      "2026-09-20",
       "Answered clarification collapses into a compact row",
       "Owner requested an expandable Answered: <answer> row after previewing the clarification UI. Answered cards now default to a native details/summary disclosure; expanding retains the question, answer and saved-state refresh. Waiting and cancellation behavior are unchanged. This is a local presentation change; full Windows application acceptance remains separate."
     ],

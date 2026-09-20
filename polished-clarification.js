@@ -2,7 +2,7 @@
 (function(root){
   'use strict';
   function scope(q){return {chatId:q.chatId,requestId:q.requestId,runId:q.runId,questionId:q.id,revision:q.revision};}
-  function card(q,{live=false,busy=false,draft={},note='',onDraft,onAnswer,onCancel,onRefresh}={}){
+  function card(q,{expanded=false,live=false,busy=false,draft={},note='',onDraft,onAnswer,onCancel,onRefresh}={}){
     const box=document.createElement('section');box.className='clarification-card';box.dataset.questionId=q.id;
     const heading=document.createElement('h3');heading.id='question-'+q.id;
     heading.textContent=q.phase==='waiting'?'Waiting for your answer':q.phase==='cancelled'?'Request cancelled':q.answer?'Answer recorded':'Question no longer active';
@@ -28,7 +28,7 @@
     if(q.phase==='waiting')button(live?'Cancel request':'Cancel waiting request',onCancel);
     button('Refresh saved state',onRefresh);box.append(actions);
     if(q.answer){
-      const details=document.createElement('details');
+      const details=document.createElement('details');details.open=expanded;
       const summary=document.createElement('summary');summary.textContent='Answered: '+q.answer.text;
       const content=document.createElement('div');content.className='clarification-details';
       while(box.firstChild)content.append(box.firstChild);

@@ -321,6 +321,35 @@ test('mounted keyboard Refresh restores corresponding focus and announces live, 
  results.push({check:'keyboard Refresh / focus restored / current live-region result / validation cleared / failed and tokenless saved state',passed:true,responderCalls:1});
 });
 
+test('mounted answered disclosure retains expansion, refresh feedback and keyboard focus', {skip:!enabled},()=>{
+ const chat=makeChat('answered refresh',false),other=makeChat('answered other',false);seed([chat,other]);
+ configure({question:clarificationSpec,delayMs:30});const count=calls();send('clarification answered refresh request');questionReady();
+ evaluate('()=>{document.querySelector(".clarification-form input").click();return true;}');questionButton('Continue');
+ waitFor(`!JSON.parse(localStorage.getItem(${JSON.stringify(key)})).chats[0].pendingAdmission`);
+ const isOpen=()=>evaluate('()=>document.querySelector(".clarification-card details").open');
+ assert.equal(isOpen(),false);
+ evaluate('()=>{document.querySelector(".clarification-card summary").focus();return true;}');cli('press','Enter');
+ waitFor('document.querySelector(".clarification-card details").open');
+ const refresh=expected=>{
+   evaluate('()=>{document.querySelector("[data-question-action=refresh]").focus();return true;}');cli('press','Enter');
+   waitFor(`document.querySelector('.clarification-note').textContent.includes(${JSON.stringify(expected)})`);
+   assert.equal(isOpen(),true);
+   assert.equal(evaluate('()=>document.activeElement.dataset.questionAction'),'refresh');
+   assert.equal(evaluate('()=>document.querySelector(".clarification-note").checkVisibility()'),true);
+ };
+ refresh('Saved state refreshed');
+ evaluate('()=>{const original=fetch;window.restoreRefresh=()=>window.fetch=original;window.fetch=(u,o)=>String(u).includes("/question?")?Promise.reject(Error("Saved question refresh unavailable.")):original(u,o);return true;}');
+ refresh('refresh unavailable');evaluate('()=>{window.restoreRefresh();return true;}');
+ openChat(other.id);openChat(chat.id);assert.equal(isOpen(),true);
+ evaluate('()=>{document.querySelector(".clarification-card summary").focus();return true;}');cli('press','Enter');
+ waitFor('!document.querySelector(".clarification-card details").open');
+ openChat(other.id);openChat(chat.id);assert.equal(isOpen(),false);
+ evaluate('()=>{document.querySelector(".clarification-card summary").click();return true;}');
+ waitFor('document.querySelector(".clarification-card details").open');
+ cli('open',url);waitFor('!!document.querySelector(".clarification-card details")');assert.equal(isOpen(),false);
+ assert.equal(calls()-count,2);
+});
+
 test('mounted pending reload preserves unrelated draft and navigation saves', { skip: !enabled }, () => {
   const pending = makeChat('pending-draft'), other = makeChat('editable-draft', false);
   seed([pending, other]);
