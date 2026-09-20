@@ -137,15 +137,17 @@
       savedWorkspace=localStorage.getItem(CHAT_KEY);savedChatSnapshots=new Map(data.chats.map(c=>[c.id,savedCapture(c)]));return true;
     }catch{return false;}
   }
+  let unrelatedSave=Promise.resolve();
   function saveUnrelatedData(){
     if(admissionWriter||!data.chats.some(c=>c.pendingAdmission&&AvenAdmission.pending(c)?.submission.ownerSession!==browserSession))return saveData();
     // Navigation and drafts may outlive a writer, but must not invalidate a live
     // writer's snapshot. Recheck storage and capture inside the same Web Lock.
     if(!navigator.locks?.request){toast('This browser cannot coordinate saved runs. Your draft is kept in this tab only.');return;}
-    void navigator.locks.request('aven-polished-admission-writer-v1',{ifAvailable:true},lock=>{
+    // Serialize this tab's saves so they cannot contend with one another.
+    unrelatedSave=unrelatedSave.then(()=>navigator.locks.request('aven-polished-admission-writer-v1',{ifAvailable:true},lock=>{
       if(!lock){toast('Another tab is still saving a run. Your draft is kept in this tab only; copy it before reloading.');return;}
       saveWorkspace(true);
-    }).catch(()=>toast('Could not save this change. Your draft is kept in this tab only.'));
+    })).catch(()=>toast('Could not save this change. Your draft is kept in this tab only.'));
   }
   function toast(text){byId('chat-status').textContent=text;}
   let profileDraft=null,profileAgentId=null,profileOriginal='',profileGeneration=0,profileAvatarBusy=false,avatarTab='styles',settingsBehavior=new Map(),behaviorAgentId=null;
